@@ -17,11 +17,10 @@ gcc -o game main.c `sdl2-config --cflags --libs`
 ```
 
 ### Links
-http://wiki.libsdl.org/Installation#Linux.2FUnix
-
-http://jeux.developpez.com/tutoriels/sdl-2/guide-migration/
-
-http://www.meruvia.fr/index.php/big-tuto-sdl-1/179-big-tuto-sdl-1-2-chapitre-31-conversion-de-projet-vers-la-sdl-2
+ * http://wiki.libsdl.org/Installation#Linux.2FUnix
+ * http://jeux.developpez.com/tutoriels/sdl-2/guide-migration/
+ * http://www.meruvia.fr/index.php/big-tuto-sdl-1/179-big-tuto-sdl-1-2-chapitre-31-conversion-de-projet-vers-la-sdl-2
+ * http://alexandre-laurent.developpez.com/tutoriels/sdl-2/afficher-sprites-sdl-2/
 
 ### Color code :
 ```
