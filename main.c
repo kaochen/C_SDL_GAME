@@ -39,6 +39,9 @@ int main(int argc, char *argv[])
 	  }
 	    fprintf(stderr, "SDL initialization ok\n");
 
+
+
+
 	//Create the window game
  	SDL_Window *window = SDL_CreateWindow(GAME_NAME,
                           SDL_WINDOWPOS_UNDEFINED,
@@ -46,6 +49,9 @@ int main(int argc, char *argv[])
                           w_width,
 			  w_height,
                           SDL_WINDOW_OPENGL);
+    	//set an window icon
+	SDL_SetWindowIcon(window, SDL_LoadBMP("img/icon.bmp"));
+
   	//Create a surface form the window
   	SDL_Surface *screen = NULL;
   	screen = SDL_GetWindowSurface(window);
@@ -57,6 +63,19 @@ int main(int argc, char *argv[])
 	    exit(EXIT_FAILURE);
     	}
 	    fprintf(stderr, "Creating the main window succeed\n");
+
+
+	//add a background image
+	SDL_Surface *background = NULL;
+  	SDL_Rect backgroundPos;
+	//load image
+	background = SDL_LoadBMP("img/background.bmp");
+  	backgroundPos.x = 0;
+  	backgroundPos.y = 0;
+	SDL_BlitSurface(background, NULL, screen, &backgroundPos);
+
+
+
 	//initiate surface one
 	SDL_Surface *s = NULL;
   	SDL_Rect position;
