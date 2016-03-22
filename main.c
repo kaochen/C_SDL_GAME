@@ -76,10 +76,38 @@ int main(int argc, char *argv[])
 	/* Creating the surface two. */
 	s2 = SDL_CreateRGBSurface(0, 200, 160, 32, 0, 255, 0, 0);
 	/* Filling the surface with red color. */
-	SDL_FillRect(s2, NULL, SDL_MapRGB(s->format,255, 67, 0 ));
+	SDL_FillRect(s2, NULL, SDL_MapRGB(s2->format,255, 67, 0 ));
   	position2.x = 20;
   	position2.y = 20;
 	SDL_BlitSurface(s2, NULL, screen, &position2);
+
+
+  	//a gradient
+	SDL_Surface *gradient = NULL;
+  	SDL_Rect gradientPos;
+  	gradientPos.x = 200;
+  	gradientPos.y = 220;
+  	//generate a simple ligne
+	int i = 1;
+  	int red = 255;
+	int green = 0;
+	int blue = 0;
+  	for(i = 0; i <= 62 ; i++)
+	  {
+  		gradient = SDL_CreateRGBSurface(0, 1, 125, 32, 0, 255, 0, 0);
+	    	SDL_FillRect(gradient, NULL, SDL_MapRGB(gradient->format,red, (green + i*2), (blue + i*2) ));
+	    	gradientPos.x++;
+	    	SDL_BlitSurface(gradient, NULL, screen, &gradientPos);
+	 }
+
+    	for(i = 63; i <= 125 ; i++)
+	  {
+  		gradient = SDL_CreateRGBSurface(0, 1, 125, 32, 0, 255, 0, 0);
+	    	SDL_FillRect(gradient, NULL, SDL_MapRGB(gradient->format,red, (green - i*2), (blue - i*2) ));
+	    	gradientPos.x++;
+	    	SDL_BlitSurface(gradient, NULL, screen, &gradientPos);
+	 }
+
 
 	//refresh the window
   	SDL_UpdateWindowSurface(window);
