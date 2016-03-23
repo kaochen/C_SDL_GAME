@@ -20,6 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <stdio.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #define GAME_NAME "My Game"
 int w_width = 640;
@@ -139,9 +140,27 @@ int main(int argc, char *argv[])
     	SDL_SetSurfaceAlphaMod(image_bmp,128);
   	image_bmpPos.x = (w_width/2);
   	image_bmpPos.y = (w_height/2);
-
-
 	SDL_BlitSurface(image_bmp, NULL, screen, &image_bmpPos);
+
+
+  	int flags=IMG_INIT_JPG|IMG_INIT_PNG;
+	int initted=IMG_Init(flags);
+
+	//add image.bmp
+	SDL_Surface *logo_png = NULL;
+  	SDL_Rect logo_pngPos;
+	//load image
+	logo_png =  IMG_Load("img/Logo.png");
+  	//Check if image is loaded*/
+  	if ( logo_png == NULL )
+   	{
+      	    fprintf(stderr, "Loading logo_png failed: %s\n", SDL_GetError());
+	    exit(EXIT_FAILURE);
+    	}
+	    fprintf(stderr, "Loading logo_png succeed\n");
+    	logo_pngPos.x = 450;
+  	logo_pngPos.y = 400;
+  	SDL_BlitSurface(logo_png, NULL, screen, &logo_pngPos);
 
 
 
@@ -151,6 +170,11 @@ int main(int argc, char *argv[])
 	//wait for quit event
   	pause();
   	//clean
+	SDL_FreeSurface(s);
+  	SDL_FreeSurface(s2);
+	SDL_FreeSurface(gradient);
+	SDL_FreeSurface(image_bmp);
+	SDL_FreeSurface(logo_png);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
   	return EXIT_SUCCESS;
