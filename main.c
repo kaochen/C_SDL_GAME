@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
                           w_width,
 			  w_height,
                           SDL_WINDOW_OPENGL);
-    	//set an window icon
+    	//set a window icon
 	SDL_SetWindowIcon(window, SDL_LoadBMP("img/icon.bmp"));
 
   	//Create a surface form the window
@@ -126,6 +126,23 @@ int main(int argc, char *argv[])
 	    	gradientPos.x++;
 	    	SDL_BlitSurface(gradient, NULL, screen, &gradientPos);
 	 }
+
+
+	//add image.bmp
+	SDL_Surface *image_bmp = NULL;
+  	SDL_Rect image_bmpPos;
+	//load image
+	image_bmp = SDL_LoadBMP("img/image.bmp");
+  	//set key color
+  	SDL_SetColorKey(image_bmp, SDL_TRUE, SDL_MapRGB(image_bmp->format,0,0,255));
+  	//set alpha
+    	SDL_SetSurfaceAlphaMod(image_bmp,128);
+  	image_bmpPos.x = (w_width/2);
+  	image_bmpPos.y = (w_height/2);
+
+
+	SDL_BlitSurface(image_bmp, NULL, screen, &image_bmpPos);
+
 
 
 	//refresh the window
