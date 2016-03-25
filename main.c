@@ -22,11 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#define GAME_NAME "My Game"
-int w_width = 640;
-int w_height = 480;
-
-void pause();
+#include "const.h"
 
 
 int main(int argc, char *argv[])
@@ -40,20 +36,18 @@ int main(int argc, char *argv[])
 	  }
 	    fprintf(stderr, "SDL initialization ok\n");
 
-
-
-
 	//Create the window game
  	SDL_Window *window = SDL_CreateWindow(GAME_NAME,
                           SDL_WINDOWPOS_UNDEFINED,
                           SDL_WINDOWPOS_UNDEFINED,
                           w_width,
 			  w_height,
-                          SDL_WINDOW_OPENGL);
+                          SDL_WINDOW_MOUSE_FOCUS|SDL_WINDOW_MOUSE_CAPTURE);
+
     	//set a window icon
 	SDL_SetWindowIcon(window, SDL_LoadBMP("img/icon.bmp"));
 
-  	//Create a surface form the window
+  	//Create a surface from the window
   	SDL_Surface *screen = NULL;
   	screen = SDL_GetWindowSurface(window);
 
@@ -73,7 +67,24 @@ int main(int argc, char *argv[])
 	background = SDL_LoadBMP("img/background.bmp");
   	backgroundPos.x = 0;
   	backgroundPos.y = 0;
-	SDL_BlitSurface(background, NULL, screen, &backgroundPos);
+	int i = 0;
+
+  	for(i = 0; i <= 2 ; i++)
+	  {
+		int x =0;
+	  	for(x = 0; x <= 2 ; x++)
+		  {
+		    	background = SDL_LoadBMP("img/background.bmp");
+			SDL_BlitSurface(background, NULL, screen, &backgroundPos);
+				backgroundPos.x += 240;
+		  }
+		    	backgroundPos.x = 0; //weird
+		  	backgroundPos.y = 240;
+	}
+
+
+
+
 
 
 
@@ -108,7 +119,7 @@ int main(int argc, char *argv[])
   	gradientPos.x = 200;
   	gradientPos.y = 220;
   	//generate a simple ligne
-	int i = 1;
+	i = 1;
   	int red = 255;
 	int green = 0;
 	int blue = 0;
@@ -143,8 +154,8 @@ int main(int argc, char *argv[])
 	SDL_BlitSurface(image_bmp, NULL, screen, &image_bmpPos);
 
 
-  	int flags=IMG_INIT_JPG|IMG_INIT_PNG;
-	int initted=IMG_Init(flags);
+/*  	int flags=IMG_INIT_JPG|IMG_INIT_PNG;
+	int initted=IMG_Init(flags);*/
 
 	//add image.bmp
 	SDL_Surface *logo_png = NULL;
@@ -168,7 +179,41 @@ int main(int argc, char *argv[])
   	SDL_UpdateWindowSurface(window);
 
 	//wait for quit event
-  	pause();
+  int carryOn = 1;
+  SDL_Event event;
+  while(carryOn)
+    {
+      SDL_WaitEvent(&event);
+      switch(event.type)
+	{
+	case SDL_QUIT:
+	  carryOn = 0;
+	  break;
+	case SDL_KEYDOWN:
+	  switch(event.key.keysym.sym)
+	    {
+	    case SDLK_RIGHT:
+          	logo_pngPos.x++;
+	      break;
+	    case SDLK_LEFT:
+          	logo_pngPos.x--;
+	      break;
+	    case SDLK_UP:
+          	logo_pngPos.y--;
+	      break;
+	    case SDLK_DOWN:
+          	logo_pngPos.y++;
+	      break;
+	    case SDL_MOUSEBUTTONUP:
+	      	logo_pngPos.x = event.button.x;
+	      	logo_pngPos.y = event.button.y;
+	      break;
+	    }
+	        SDL_BlitSurface(logo_png, NULL, screen, &logo_pngPos);
+	        SDL_UpdateWindowSurface(window);
+	}
+    }
+  	//pause();
   	//clean
 	SDL_FreeSurface(s);
   	SDL_FreeSurface(s2);
@@ -180,19 +225,4 @@ int main(int argc, char *argv[])
   	return EXIT_SUCCESS;
 }
 
-
-void pause()
-{
-  int carryOn = 1;
-  SDL_Event event;
-  while(carryOn)
-    {
-      SDL_WaitEvent(&event);
-      switch(event.type)
-	{
-	case SDL_QUIT:
-	  carryOn = 0;
-	}
-    }
-}
 
