@@ -21,7 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define CONST_H
 
 #define GAME_NAME "My Game"
-int w_width = 1024;
-int w_height = 680;
 
+int w_width = 1024;
+int w_height = 720;
+#define BACKGROUND_SIZE 240
+#define BOX_SIZE 40
 #endif

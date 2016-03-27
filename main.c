@@ -24,7 +24,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "const.h"
 
-
 int main(int argc, char *argv[])
 {
 
@@ -60,119 +59,51 @@ int main(int argc, char *argv[])
 	    fprintf(stderr, "Creating the main window succeed\n");
 
 
-	//add a background image
+
+
+  	//add a background image
 	SDL_Surface *background = NULL;
   	SDL_Rect backgroundPos;
 	//load image
 	background = SDL_LoadBMP("img/background.bmp");
   	backgroundPos.x = 0;
   	backgroundPos.y = 0;
-	int i = 0;
-
-  	for(i = 0; i <= 2 ; i++)
+	//fill the background with the minimun number of background image needed
+	int h = (w_height/BACKGROUND_SIZE+1);
+  	int w = (w_width/BACKGROUND_SIZE);
+  	fprintf(stderr, "h %d, w %d\n", h,w);
+	//first do a line and multiply it
+		int i = 0;
+  	for(i = 0; i <= h ; i++)
 	  {
-		int x =0;
-	  	for(x = 0; x <= 2 ; x++)
+		int x = 0;
+	  	for(x = 0; x <= w ; x++)
 		  {
 		    	background = SDL_LoadBMP("img/background.bmp");
 			SDL_BlitSurface(background, NULL, screen, &backgroundPos);
-				backgroundPos.x += 240;
+				backgroundPos.x += BACKGROUND_SIZE;
 		  }
 		    	backgroundPos.x = 0; //weird
-		  	backgroundPos.y = 240;
+		  	backgroundPos.y += 240;
 	}
 
 
 
 
-
-
-
-	//initiate surface one
-	SDL_Surface *s = NULL;
-  	SDL_Rect position;
-
-	/* Creating the surface. */
-	s = SDL_CreateRGBSurface(0, 220, 180, 32, 0, 255, 0, 0);
-	/* Filling the surface with red color. */
-	SDL_FillRect(s, NULL, SDL_MapRGB(s->format,127,36,4));
-  	position.x = 10;
-  	position.y = 10;
-	SDL_BlitSurface(s, NULL, screen, &position);
-
-	//initiate surface two
-  	SDL_Surface *s2 = NULL;
-  	SDL_Rect position2;
-
-	/* Creating the surface two. */
-	s2 = SDL_CreateRGBSurface(0, 200, 160, 32, 0, 255, 0, 0);
-	/* Filling the surface with red color. */
-	SDL_FillRect(s2, NULL, SDL_MapRGB(s2->format,255, 67, 0 ));
-  	position2.x = 20;
-  	position2.y = 20;
-	SDL_BlitSurface(s2, NULL, screen, &position2);
-
-
-  	//a gradient
-	SDL_Surface *gradient = NULL;
-  	SDL_Rect gradientPos;
-  	gradientPos.x = 200;
-  	gradientPos.y = 220;
-  	//generate a simple ligne
-	i = 1;
-  	int red = 255;
-	int green = 0;
-	int blue = 0;
-  	for(i = 0; i <= 62 ; i++)
-	  {
-  		gradient = SDL_CreateRGBSurface(0, 1, 125, 32, 0, 255, 0, 0);
-	    	SDL_FillRect(gradient, NULL, SDL_MapRGB(gradient->format,red, (green + i*2), (blue + i*2) ));
-	    	gradientPos.x++;
-	    	SDL_BlitSurface(gradient, NULL, screen, &gradientPos);
-	 }
-
-    	for(i = 63; i <= 125 ; i++)
-	  {
-  		gradient = SDL_CreateRGBSurface(0, 1, 125, 32, 0, 255, 0, 0);
-	    	SDL_FillRect(gradient, NULL, SDL_MapRGB(gradient->format,red, (green - i*2), (blue - i*2) ));
-	    	gradientPos.x++;
-	    	SDL_BlitSurface(gradient, NULL, screen, &gradientPos);
-	 }
-
-
-	//add image.bmp
-	SDL_Surface *image_bmp = NULL;
-  	SDL_Rect image_bmpPos;
-	//load image
-	image_bmp = SDL_LoadBMP("img/image.bmp");
-  	//set key color
-  	SDL_SetColorKey(image_bmp, SDL_TRUE, SDL_MapRGB(image_bmp->format,0,0,255));
-  	//set alpha
-    	SDL_SetSurfaceAlphaMod(image_bmp,128);
-  	image_bmpPos.x = (w_width/2);
-  	image_bmpPos.y = (w_height/2);
-	SDL_BlitSurface(image_bmp, NULL, screen, &image_bmpPos);
-
-
-/*  	int flags=IMG_INIT_JPG|IMG_INIT_PNG;
-	int initted=IMG_Init(flags);*/
-
-	//add image.bmp
-	SDL_Surface *logo_png = NULL;
-  	SDL_Rect logo_pngPos;
-	//load image
-	logo_png =  IMG_Load("img/Logo.png");
+	//load wall image
+	SDL_Surface *wall_bmp = NULL;
+  	SDL_Rect wall_bmpPos;
+	wall_bmp =  IMG_Load("img/box.bmp");
   	//Check if image is loaded*/
-  	if ( logo_png == NULL )
+  	if ( wall_bmp == NULL )
    	{
-      	    fprintf(stderr, "Loading logo_png failed: %s\n", SDL_GetError());
+      	    fprintf(stderr, "Loading wall_bmp image failed: %s\n", SDL_GetError());
 	    exit(EXIT_FAILURE);
     	}
-	    fprintf(stderr, "Loading logo_png succeed\n");
-    	logo_pngPos.x = 450;
-  	logo_pngPos.y = 400;
-  	SDL_BlitSurface(logo_png, NULL, screen, &logo_pngPos);
-
+	    fprintf(stderr, "Loading wall_bmp succeed\n");
+    	wall_bmpPos.x = 0;
+  	wall_bmpPos.y = 0;
+  	SDL_BlitSurface(wall_bmp, NULL, screen, &wall_bmpPos);
 
 
 	//refresh the window
@@ -193,36 +124,31 @@ int main(int argc, char *argv[])
 	  switch(event.key.keysym.sym)
 	    {
 	    case SDLK_RIGHT:
-          	logo_pngPos.x++;
+          	wall_bmpPos.x++;
 	      break;
 	    case SDLK_LEFT:
-          	logo_pngPos.x--;
+          	wall_bmpPos.x--;
 	      break;
 	    case SDLK_UP:
-          	logo_pngPos.y--;
+          	wall_bmpPos.y--;
 	      break;
 	    case SDLK_DOWN:
-          	logo_pngPos.y++;
+          	wall_bmpPos.y++;
 	      break;
 	    case SDL_MOUSEBUTTONUP:
-	      	logo_pngPos.x = event.button.x;
-	      	logo_pngPos.y = event.button.y;
+	      	wall_bmpPos.x = event.button.x;
+	      	wall_bmpPos.y = event.button.y;
 	      break;
 	    }
-	        SDL_BlitSurface(logo_png, NULL, screen, &logo_pngPos);
+	        SDL_BlitSurface(wall_bmp, NULL, screen, &wall_bmpPos);
 	        SDL_UpdateWindowSurface(window);
 	}
     }
   	//pause();
   	//clean
-	SDL_FreeSurface(s);
-  	SDL_FreeSurface(s2);
-	SDL_FreeSurface(gradient);
-	SDL_FreeSurface(image_bmp);
-	SDL_FreeSurface(logo_png);
+	SDL_FreeSurface(wall_bmp);
+	SDL_FreeSurface(background);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
   	return EXIT_SUCCESS;
 }
-
-
