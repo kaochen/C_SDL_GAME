@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL_image.h>
 
 #include "const.h"
+#include "game.h"
 
 int main(int argc, char *argv[])
 {
@@ -39,8 +40,8 @@ int main(int argc, char *argv[])
  	SDL_Window *window = SDL_CreateWindow(GAME_NAME,
                           SDL_WINDOWPOS_UNDEFINED,
                           SDL_WINDOWPOS_UNDEFINED,
-                          w_width,
-			  w_height,
+                          W_WIDTH,
+			  W_HEIGHT,
                           SDL_WINDOW_MOUSE_FOCUS|SDL_WINDOW_MOUSE_CAPTURE);
 
     	//set a window icon
@@ -58,52 +59,55 @@ int main(int argc, char *argv[])
     	}
 	    fprintf(stderr, "Creating the main window succeed\n");
 
+	//create a map
+  	int map[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
+  	map[1][12] = WOODEN_CASE;
+	map[9][9] = WOODEN_CASE;
+  	map[5][7] = WOODEN_CASE;
+    	map[5][8] = WALL;
+      	map[4][9] = WALL;
 
-
-
-  	//add a background image
-	SDL_Surface *background = NULL;
-  	SDL_Rect backgroundPos;
+	//create a ground surface
+	SDL_Surface *ground = NULL;
+  	SDL_Rect groundPos;
 	//load image
-	background = SDL_LoadBMP("img/background.bmp");
-  	backgroundPos.x = 0;
-  	backgroundPos.y = 0;
-	//fill the background with the minimun number of background image needed
-	int h = (w_height/BACKGROUND_SIZE+1);
-  	int w = (w_width/BACKGROUND_SIZE);
-  	fprintf(stderr, "h %d, w %d\n", h,w);
-	//first do a line and multiply it
-		int i = 0;
-  	for(i = 0; i <= h ; i++)
+	ground = SDL_LoadBMP("img/background.bmp");
+	//create a wall surface
+  	SDL_Surface *wall = NULL;
+  	SDL_Rect wallPos;
+	//load image
+	wall = SDL_LoadBMP("img/wall.bmp");
+	//create a woode case surface
+  	SDL_Surface *woodenCase = NULL;
+  	SDL_Rect woodenCasePos;
+	//load image
+	woodenCase = SDL_LoadBMP("img/box.bmp");
+
+	int i = 0, j = 0;
+  	for (i = 0; i < NBR_OF_BLOCKS; i++)
 	  {
-		int x = 0;
-	  	for(x = 0; x <= w ; x++)
+		for (j = 0; j < NBR_OF_BLOCKS; j++)
 		  {
-		    	background = SDL_LoadBMP("img/background.bmp");
-			SDL_BlitSurface(background, NULL, screen, &backgroundPos);
-				backgroundPos.x += BACKGROUND_SIZE;
+		    switch(map[i][j])
+		      {
+		      case GROUND :
+				groundPos.x = i * BOX_SIZE;
+				groundPos.y = j * BOX_SIZE;
+				SDL_BlitSurface(ground, NULL, screen, &groundPos);
+			break;
+		      case WOODEN_CASE :
+		      		woodenCasePos.x = i * BOX_SIZE;
+				woodenCasePos.y = j * BOX_SIZE;
+				SDL_BlitSurface(woodenCase, NULL, screen, &woodenCasePos);
+			break;
+		       case WALL :
+		      		wallPos.x = i * BOX_SIZE;
+				wallPos.y = j * BOX_SIZE;
+				SDL_BlitSurface(wall, NULL, screen, &wallPos);
+			break;
+			}
 		  }
-		    	backgroundPos.x = 0; //weird
-		  	backgroundPos.y += 240;
-	}
-
-
-
-
-	//load wall image
-	SDL_Surface *wall_bmp = NULL;
-  	SDL_Rect wall_bmpPos;
-	wall_bmp =  IMG_Load("img/box.bmp");
-  	//Check if image is loaded*/
-  	if ( wall_bmp == NULL )
-   	{
-      	    fprintf(stderr, "Loading wall_bmp image failed: %s\n", SDL_GetError());
-	    exit(EXIT_FAILURE);
-    	}
-	    fprintf(stderr, "Loading wall_bmp succeed\n");
-    	wall_bmpPos.x = 0;
-  	wall_bmpPos.y = 0;
-  	SDL_BlitSurface(wall_bmp, NULL, screen, &wall_bmpPos);
+	  }
 
 
 	//refresh the window
@@ -124,30 +128,31 @@ int main(int argc, char *argv[])
 	  switch(event.key.keysym.sym)
 	    {
 	    case SDLK_RIGHT:
-          	wall_bmpPos.x++;
+          	//wall_bmpPos.x++;
 	      break;
 	    case SDLK_LEFT:
-          	wall_bmpPos.x--;
+          	//wall_bmpPos.x--;
 	      break;
 	    case SDLK_UP:
-          	wall_bmpPos.y--;
+          	//wall_bmpPos.y--;
 	      break;
 	    case SDLK_DOWN:
-          	wall_bmpPos.y++;
+          	//wall_bmpPos.y++;
 	      break;
 	    case SDL_MOUSEBUTTONUP:
-	      	wall_bmpPos.x = event.button.x;
-	      	wall_bmpPos.y = event.button.y;
+	      	//wall_bmpPos.x = event.button.x;
+	      	//wall_bmpPos.y = event.button.y;
 	      break;
 	    }
-	        SDL_BlitSurface(wall_bmp, NULL, screen, &wall_bmpPos);
+	        //SDL_BlitSurface(wall_bmp, NULL, screen, &wall_bmpPos);
 	        SDL_UpdateWindowSurface(window);
 	}
     }
-  	//pause();
+
   	//clean
-	SDL_FreeSurface(wall_bmp);
-	SDL_FreeSurface(background);
+	SDL_FreeSurface(wall);
+	SDL_FreeSurface(ground);
+  	SDL_FreeSurface(woodenCase);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
   	return EXIT_SUCCESS;

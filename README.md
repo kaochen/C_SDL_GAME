@@ -12,7 +12,8 @@ git remote set-url origin git@github.com:kaochen/C_SDL_GAME.git
 ### Compile
 ```
 sudo apt install libsdl2-2.0-0 libsdl2-dev libsdl2-image-dev
-gcc -o game main.c `sdl2-config --cflags --libs`-lSDL2main -lSDL2_image -lSDL2
+gcc -o game -g *.c *.h `sdl2-config --cflags --libs`-lSDL2main -lSDL2_image -lSDL2
+
 ./game
 ```
 

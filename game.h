@@ -17,17 +17,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef CONST_H
-#define CONST_H
+#ifndef GAME_H
+#define GAME_H
 
-#define GAME_NAME "My Game"
+#include <SDL2/SDL.h>
 
-#define W_WIDTH  1024
-#define W_HEIGHT 720
-#define BACKGROUND_SIZE 40
-#define BOX_SIZE 40
-#define NBR_OF_BLOCKS 14
-
-enum {GROUND , WALL , WOODEN_CASE};
+//create the background from an image
+void displayBackground(SDL_Surface *screen, SDL_Surface *background);
 
 #endif
