@@ -66,22 +66,32 @@ int main(int argc, char *argv[])
   	map[5][7] = WOODEN_CASE;
     	map[5][8] = WALL;
       	map[4][9] = WALL;
+  	map[5][3] = BALL;
 
 	//create a ground surface
 	SDL_Surface *ground = NULL;
   	SDL_Rect groundPos;
 	//load image
 	ground = SDL_LoadBMP("img/background.bmp");
+
 	//create a wall surface
   	SDL_Surface *wall = NULL;
   	SDL_Rect wallPos;
 	//load image
 	wall = SDL_LoadBMP("img/wall.bmp");
-	//create a woode case surface
+
+	//create a wooden case surface
   	SDL_Surface *woodenCase = NULL;
   	SDL_Rect woodenCasePos;
 	//load image
 	woodenCase = SDL_LoadBMP("img/box.bmp");
+
+  	//create a ball
+  	SDL_Surface *ball = NULL;
+  	SDL_Rect ballPos;
+	//load image
+	ball = IMG_Load("img/ball.png");
+
 
 	int i = 0, j = 0;
   	for (i = 0; i < NBR_OF_BLOCKS; i++)
@@ -104,6 +114,14 @@ int main(int argc, char *argv[])
 		      		wallPos.x = i * BOX_SIZE;
 				wallPos.y = j * BOX_SIZE;
 				SDL_BlitSurface(wall, NULL, screen, &wallPos);
+			break;
+			case BALL :
+				groundPos.x = i * BOX_SIZE;
+				groundPos.y = j * BOX_SIZE;
+				SDL_BlitSurface(ground, NULL, screen, &groundPos);
+		      		ballPos.x = i * BOX_SIZE;
+				ballPos.y = j * BOX_SIZE;
+				SDL_BlitSurface(ball, NULL, screen, &ballPos);
 			break;
 			}
 		  }
