@@ -67,6 +67,7 @@ int main(int argc, char *argv[])
     	map[5][8] = WALL;
       	map[4][9] = WALL;
   	map[5][3] = BALL;
+    	map[6][4] = PLAYER;
 
 	//create a ground surface
 	SDL_Surface *ground = NULL;
@@ -91,6 +92,25 @@ int main(int argc, char *argv[])
   	SDL_Rect ballPos;
 	//load image
 	ball = IMG_Load("img/ball.png");
+
+  	//player surface
+	//front face
+		SDL_Surface *playerFront = NULL;
+		playerFront = IMG_Load("img/front.png");
+  	//back face
+		SDL_Surface *playerBack = NULL;
+		playerBack = IMG_Load("img/back.png");
+    	//left face
+		SDL_Surface *playerLeft = NULL;
+		playerLeft = IMG_Load("img/left.png");
+      	//rigth face
+		SDL_Surface *playerRight = NULL;
+		playerRight = IMG_Load("img/right.png");
+	//a player position :
+  		SDL_Rect playerPos;
+  		playerPos.x = 40;
+    		playerPos.y = 40;
+
 
 
 	int i = 0, j = 0;
@@ -123,6 +143,15 @@ int main(int argc, char *argv[])
 				ballPos.y = j * BOX_SIZE;
 				SDL_BlitSurface(ball, NULL, screen, &ballPos);
 			break;
+			case PLAYER :
+				groundPos.x = i * BOX_SIZE;
+				groundPos.y = j * BOX_SIZE;
+				SDL_BlitSurface(ground, NULL, screen, &groundPos);
+		      		playerPos.x = i * BOX_SIZE;
+				playerPos.y = j * BOX_SIZE;
+				SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
+			break;
+
 			}
 		  }
 	  }
@@ -143,26 +172,37 @@ int main(int argc, char *argv[])
 	  carryOn = 0;
 	  break;
 	case SDL_KEYDOWN:
+	//clean position
+	 SDL_BlitSurface(ground, NULL, screen, &playerPos);
 	  switch(event.key.keysym.sym)
 	    {
 	    case SDLK_RIGHT:
-          	//wall_bmpPos.x++;
+		playerPos.x  += BOX_SIZE;
+	      	SDL_BlitSurface(ground, NULL, screen, &playerPos);
+		SDL_BlitSurface(playerRight, NULL, screen, &playerPos);
 	      break;
 	    case SDLK_LEFT:
-          	//wall_bmpPos.x--;
+		playerPos.x  -= BOX_SIZE;
+	      	SDL_BlitSurface(ground, NULL, screen, &playerPos);
+		SDL_BlitSurface(playerLeft, NULL, screen, &playerPos);
 	      break;
 	    case SDLK_UP:
-          	//wall_bmpPos.y--;
+		playerPos.y  -= BOX_SIZE;
+	      	SDL_BlitSurface(ground, NULL, screen, &playerPos);
+		SDL_BlitSurface(playerBack, NULL, screen, &playerPos);
 	      break;
 	    case SDLK_DOWN:
-          	//wall_bmpPos.y++;
+		playerPos.y += BOX_SIZE;
+	      	SDL_BlitSurface(ground, NULL, screen, &playerPos);
+		SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
 	      break;
 	    case SDL_MOUSEBUTTONUP:
 	      	//wall_bmpPos.x = event.button.x;
 	      	//wall_bmpPos.y = event.button.y;
 	      break;
 	    }
-	        //SDL_BlitSurface(wall_bmp, NULL, screen, &wall_bmpPos);
+
+
 	        SDL_UpdateWindowSurface(window);
 	}
     }
