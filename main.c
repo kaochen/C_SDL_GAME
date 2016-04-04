@@ -60,7 +60,7 @@ int main(int argc, char *argv[])
 	    fprintf(stderr, "Creating the main window succeed\n");
 
 	//create a map
-  	int map[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
+  	int map[NBR_OF_BLOCKS+1][NBR_OF_BLOCKS+1] = {0}; //+1 to avoid segfault
   	map[1][12] = WOODEN_CASE;
 	map[9][9] = WOODEN_CASE;
   	map[5][7] = WOODEN_CASE;
@@ -165,6 +165,8 @@ int main(int argc, char *argv[])
   SDL_Event event;
   SDL_Surface *nextSurface = NULL;
   nextSurface = IMG_Load("img/front.png");
+  int xPlayer = 0;
+  int yPlayer = 0;
   while(carryOn)
     {
       SDL_WaitEvent(&event);
@@ -174,46 +176,46 @@ int main(int argc, char *argv[])
 	  carryOn = 0;
 	  break;
 	case SDL_KEYDOWN:
-	//clean position
-	 SDL_BlitSurface(ground, NULL, screen, &playerPos);
-	//find player position :
-	    int xPlayer = playerPos.x/BOX_SIZE;
-	    int yPlayer = playerPos.y/BOX_SIZE;
+	 //get actual position
+	  xPlayer = playerPos.x/BOX_SIZE;
+	  yPlayer = playerPos.y/BOX_SIZE;
+	//listen keyboard:
 	switch(event.key.keysym.sym)
 	    {
 	    case SDLK_RIGHT:
+	      	//test what coming next
 		//test if border
-		if (xPlayer + 1 >= NBR_OF_BLOCKS)
-		  break;
-		//test what coming next
-		switch(map[xPlayer+1][yPlayer])
-			{
-			 case WALL:
-			  break;
-			 case WOODEN_CASE:
-			      	//test if it's possible to move a Wooden Case
-			      	if (map[xPlayer+1][yPlayer] == WOODEN_CASE && map[xPlayer+2][yPlayer] != WALL && xPlayer + 2 < NBR_OF_BLOCKS)
-				{
-				  		//move the wooden Case
-				  		woodenCasePos.x = (xPlayer +2) * BOX_SIZE;
-						woodenCasePos.y = yPlayer * BOX_SIZE;
-						SDL_BlitSurface(woodenCase, NULL, screen, &woodenCasePos);
+		if (xPlayer + 1 > NBR_OF_BLOCKS)
+			break;
+		//test if border
+		if(map[xPlayer+1][yPlayer]== WALL)
+			break;
+		//test if woodenCase
+		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && xPlayer + 2 > NBR_OF_BLOCKS || map[xPlayer+2][yPlayer]== WALL || map[xPlayer+2][yPlayer]== WOODEN_CASE)
+			break;
+		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && map[xPlayer+2][yPlayer]== GROUND)
+		{
+	      	//move the wooden Case
+			woodenCasePos.x = (xPlayer +2) * BOX_SIZE;
+			woodenCasePos.y = yPlayer * BOX_SIZE;
+			SDL_BlitSurface(woodenCase, NULL, screen, &woodenCasePos);
 
-				  		//move the player
-				  		playerPos.x  += BOX_SIZE;
-				  		SDL_BlitSurface(ground, NULL, screen, &playerPos);
-						SDL_BlitSurface(playerRight, NULL, screen, &playerPos);
+			//move the player
+			SDL_BlitSurface(ground, NULL, screen, &playerPos);
+			playerPos.x  += BOX_SIZE;
+			SDL_BlitSurface(ground, NULL, screen, &playerPos);
+			SDL_BlitSurface(playerRight, NULL, screen, &playerPos);
 
-						//update status
-				  		map[xPlayer+2][yPlayer] = WOODEN_CASE;
-				  		map[xPlayer][yPlayer] = GROUND;
-		      				map[xPlayer+1][yPlayer] = PLAYER;
-				}
-				break;
-			case GROUND:
-				if (map[xPlayer+1][yPlayer] != WALL && xPlayer +1 < NBR_OF_BLOCKS)
-			      	{
+			//update status
+			map[xPlayer+2][yPlayer] = WOODEN_CASE;
+			map[xPlayer][yPlayer] = GROUND;
+		      	map[xPlayer+1][yPlayer] = PLAYER;
+			break;
+		}
+		if (map[xPlayer+1][yPlayer]== GROUND)
+		{
 					//move the player
+					SDL_BlitSurface(ground, NULL, screen, &playerPos);
 				      	playerPos.x  += BOX_SIZE;
 				      	SDL_BlitSurface(ground, NULL, screen, &playerPos);
 					SDL_BlitSurface(playerRight, NULL, screen, &playerPos);
@@ -221,13 +223,12 @@ int main(int argc, char *argv[])
 				       	//update status
 				      	map[xPlayer][yPlayer] = GROUND;
 				      	map[xPlayer+1][yPlayer] = PLAYER;
-				}
-				break;
-			}
+		}
+
 	      break;
 	    case SDLK_LEFT:
 		//test if border
-		if (xPlayer - 1 <= 0)
+		if (xPlayer - 1 < 0)
 		  break;
 
 		//test what coming next
@@ -237,7 +238,7 @@ int main(int argc, char *argv[])
 			  break;
 			 case WOODEN_CASE:
 			      	//test if it's possible to move a Wooden Case
-			      	if (map[xPlayer-1][yPlayer] == WOODEN_CASE && map[xPlayer-2][yPlayer] != WALL && xPlayer - 2 > 0)
+			      	if (map[xPlayer-2][yPlayer] != WALL || map[xPlayer-2][yPlayer] != WOODEN_CASE || xPlayer - 2 > 0)
 				{
 				  		//move the wooden Case
 				  		woodenCasePos.x = (xPlayer -2) * BOX_SIZE;
@@ -245,6 +246,7 @@ int main(int argc, char *argv[])
 						SDL_BlitSurface(woodenCase, NULL, screen, &woodenCasePos);
 
 				  		//move the player
+						SDL_BlitSurface(ground, NULL, screen, &playerPos);
 				  		playerPos.x  -= BOX_SIZE;
 				  		SDL_BlitSurface(ground, NULL, screen, &playerPos);
 						SDL_BlitSurface(playerLeft, NULL, screen, &playerPos);
@@ -259,6 +261,7 @@ int main(int argc, char *argv[])
 				if (map[xPlayer-1][yPlayer] != WALL && xPlayer -1 >= 0)
 			      	{
 					//move the player
+					SDL_BlitSurface(ground, NULL, screen, &playerPos);
 				      	playerPos.x  -= BOX_SIZE;
 				      	SDL_BlitSurface(ground, NULL, screen, &playerPos);
 					SDL_BlitSurface(playerLeft, NULL, screen, &playerPos);
@@ -286,6 +289,7 @@ int main(int argc, char *argv[])
 						SDL_BlitSurface(woodenCase, NULL, screen, &woodenCasePos);
 
 				  		//move the player
+						SDL_BlitSurface(ground, NULL, screen, &playerPos);
 				  		playerPos.y  -= BOX_SIZE;
 				  		SDL_BlitSurface(ground, NULL, screen, &playerPos);
 						SDL_BlitSurface(playerBack, NULL, screen, &playerPos);
@@ -300,6 +304,7 @@ int main(int argc, char *argv[])
 				if (map[xPlayer][yPlayer-1] != WALL && yPlayer - 1 >= 0)
 			      	{
 					//move player
+					SDL_BlitSurface(ground, NULL, screen, &playerPos);
 				      	playerPos.y  -= BOX_SIZE;
 				      	SDL_BlitSurface(ground, NULL, screen, &playerPos);
 					SDL_BlitSurface(playerBack, NULL, screen, &playerPos);
@@ -327,6 +332,7 @@ int main(int argc, char *argv[])
 						SDL_BlitSurface(woodenCase, NULL, screen, &woodenCasePos);
 
 				  		//move the player
+						SDL_BlitSurface(ground, NULL, screen, &playerPos);
 				  		playerPos.y  += BOX_SIZE;
 				  		SDL_BlitSurface(ground, NULL, screen, &playerPos);
 						SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
@@ -341,6 +347,7 @@ int main(int argc, char *argv[])
 				if (map[xPlayer][yPlayer+1] != WALL && yPlayer +1 < NBR_OF_BLOCKS)
 			      	{
 					//move the player
+					SDL_BlitSurface(ground, NULL, screen, &playerPos);
 				      	playerPos.y  += BOX_SIZE;
 				      	SDL_BlitSurface(ground, NULL, screen, &playerPos);
 					SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
