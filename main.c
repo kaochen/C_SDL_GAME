@@ -110,6 +110,8 @@ int main(int argc, char *argv[])
   		SDL_Rect playerPos;
   		playerPos.x = 40;
     		playerPos.y = 40;
+    		int xPlayer = playerPos.x/NBR_OF_BLOCKS;
+ 		int yPlayer = playerPos.y/NBR_OF_BLOCKS;
 
 
 
@@ -144,12 +146,9 @@ int main(int argc, char *argv[])
 				SDL_BlitSurface(ball, NULL, screen, &ballPos);
 			break;
 		      case PLAYER :
-				groundPos.x = i * BOX_SIZE;
-				groundPos.y = j * BOX_SIZE;
-				SDL_BlitSurface(ground, NULL, screen, &groundPos);
 		      		playerPos.x = i * BOX_SIZE;
 				playerPos.y = j * BOX_SIZE;
-				SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
+				movePlayer(i,j, STILL , screen);
 
 			break;
 
@@ -164,10 +163,7 @@ int main(int argc, char *argv[])
 	//wait for quit event
   int carryOn = 1;
   SDL_Event event;
-  SDL_Surface *nextSurface = NULL;
-  nextSurface = IMG_Load("img/front.png");
-  int xPlayer = 0;
-  int yPlayer = 0;
+
   while(carryOn)
     {
       SDL_WaitEvent(&event);
@@ -192,7 +188,7 @@ int main(int argc, char *argv[])
 		if(map[xPlayer+1][yPlayer]== WALL)
 			break;
 		//test if woodenCase
-		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && xPlayer + 2 > NBR_OF_BLOCKS &&  map[xPlayer+2][yPlayer]== WOODEN_CASE|| map[xPlayer+2][yPlayer]== WALL )
+		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && xPlayer + 2 > NBR_OF_BLOCKS && map[xPlayer+2][yPlayer]== WOODEN_CASE || map[xPlayer+2][yPlayer]== WALL)
 			break;
 		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && map[xPlayer+2][yPlayer]== GROUND)
 		{
@@ -221,6 +217,7 @@ int main(int argc, char *argv[])
 				       	//update status
 				      	map[xPlayer][yPlayer] = GROUND;
 				      	map[xPlayer+1][yPlayer] = PLAYER;
+		  			break;
 		}
 
 	      break;
