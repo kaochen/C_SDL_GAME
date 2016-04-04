@@ -150,6 +150,7 @@ int main(int argc, char *argv[])
 		      		playerPos.x = i * BOX_SIZE;
 				playerPos.y = j * BOX_SIZE;
 				SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
+
 			break;
 
 			}
@@ -191,7 +192,7 @@ int main(int argc, char *argv[])
 		if(map[xPlayer+1][yPlayer]== WALL)
 			break;
 		//test if woodenCase
-		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && xPlayer + 2 > NBR_OF_BLOCKS || map[xPlayer+2][yPlayer]== WALL || map[xPlayer+2][yPlayer]== WOODEN_CASE)
+		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && xPlayer + 2 > NBR_OF_BLOCKS &&  map[xPlayer+2][yPlayer]== WOODEN_CASE|| map[xPlayer+2][yPlayer]== WALL )
 			break;
 		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && map[xPlayer+2][yPlayer]== GROUND)
 		{
@@ -201,10 +202,9 @@ int main(int argc, char *argv[])
 			SDL_BlitSurface(woodenCase, NULL, screen, &woodenCasePos);
 
 			//move the player
-			SDL_BlitSurface(ground, NULL, screen, &playerPos);
-			playerPos.x  += BOX_SIZE;
-			SDL_BlitSurface(ground, NULL, screen, &playerPos);
-			SDL_BlitSurface(playerRight, NULL, screen, &playerPos);
+		  	movePlayer(xPlayer,yPlayer, RIGHT , screen);
+		  	//update new player position
+		  	playerPos.x  += BOX_SIZE;
 
 			//update status
 			map[xPlayer+2][yPlayer] = WOODEN_CASE;
@@ -215,11 +215,9 @@ int main(int argc, char *argv[])
 		if (map[xPlayer+1][yPlayer]== GROUND)
 		{
 					//move the player
-					SDL_BlitSurface(ground, NULL, screen, &playerPos);
-				      	playerPos.x  += BOX_SIZE;
-				      	SDL_BlitSurface(ground, NULL, screen, &playerPos);
-					SDL_BlitSurface(playerRight, NULL, screen, &playerPos);
-
+		  			movePlayer(xPlayer,yPlayer, RIGHT , screen);
+		  		  	//update new player position
+		  			playerPos.x  += BOX_SIZE;
 				       	//update status
 				      	map[xPlayer][yPlayer] = GROUND;
 				      	map[xPlayer+1][yPlayer] = PLAYER;

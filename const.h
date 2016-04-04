@@ -29,5 +29,5 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define NBR_OF_BLOCKS 14
 
 enum {GROUND , WALL , WOODEN_CASE , BALL, PLAYER  };
-
+enum {UP , DOWN, RIGHT, LEFT, STILL };
 #endif

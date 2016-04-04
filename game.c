@@ -27,36 +27,76 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "const.h"
 
-//create a background
-void displayBackground(SDL_Surface *screen, SDL_Surface *background)
-{
-  	//add a background image
+//move the player
 
-  	SDL_Rect backgroundPos;
-	//load image
-	background = SDL_LoadBMP("img/background.bmp");
-  	backgroundPos.x = 0;
-  	backgroundPos.y = 0;
-	//fill the background with the minimun number of background image needed
-	int h = (W_HEIGHT/BACKGROUND_SIZE+1);
-  	int w = (W_WIDTH/BACKGROUND_SIZE);
-  	fprintf(stderr, "h %d, w %d\n", h,w);
-	//first do a line and multiply it
-		int i = 0;
-  	for(i = 0; i <= h ; i++)
-	  {
-		//build a line by repeating the background
-	    	int x = 0;
-	  	for(x = 0; x <= w ; x++)
-		  {
-		    	background = SDL_LoadBMP("img/background.bmp");
-			SDL_BlitSurface(background, NULL, screen, &backgroundPos);
-				backgroundPos.x += BACKGROUND_SIZE;
-		  }
-		    	backgroundPos.x = 0; //restart left
-		  	backgroundPos.y += BACKGROUND_SIZE; //jump to next line position
+void movePlayer(int xPlayer, int yPlayer, int direction , SDL_Surface *screen)
+	{
+	//create a ground surface
+		SDL_Surface *ground = NULL;
+  		SDL_Rect groundPos;
+		ground = SDL_LoadBMP("img/background.bmp");
+	//front face
+		SDL_Surface *playerFront = NULL;
+		playerFront = IMG_Load("img/front.png");
+	//back face
+		SDL_Surface *playerBack = NULL;
+		playerBack = IMG_Load("img/back.png");
+	 //left face
+		SDL_Surface *playerLeft = NULL;
+		playerLeft = IMG_Load("img/left.png");
+      	//rigth face
+		SDL_Surface *playerRight = NULL;
+		playerRight = IMG_Load("img/right.png");
+
+	//player position
+	    	SDL_Rect playerPos;
+	  	playerPos.x = xPlayer * BOX_SIZE;
+	  	playerPos.y = yPlayer * BOX_SIZE;
+
+
+	//first clean is place
+  		SDL_BlitSurface(ground, NULL, screen, &playerPos);
+	switch(direction)
+	    {
+	    case UP:
+			playerPos.y  -= BOX_SIZE;
+			SDL_BlitSurface(ground, NULL, screen, &playerPos);
+			SDL_BlitSurface(playerBack, NULL, screen, &playerPos);
+			break;
+	    case DOWN:
+			playerPos.y  += BOX_SIZE;
+			SDL_BlitSurface(ground, NULL, screen, &playerPos);
+			SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
+			break;
+	    case RIGHT:
+			playerPos.x  += BOX_SIZE;
+			SDL_BlitSurface(ground, NULL, screen, &playerPos);
+			SDL_BlitSurface(playerRight, NULL, screen, &playerPos);
+			break;
+	    case LEFT:
+			playerPos.x  -= BOX_SIZE;
+			SDL_BlitSurface(ground, NULL, screen, &playerPos);
+			SDL_BlitSurface(playerLeft, NULL, screen, &playerPos);
+			break;
+	    case STILL:
+	      		SDL_BlitSurface(ground, NULL, screen, &playerPos);
+			SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
+			break;
+	    }
+	//update status
+	/*	map[xPlayer+2][yPlayer] = WOODEN_CASE;
+		//map[xPlayer][yPlayer] = GROUND;
+		map[xPlayer+1][yPlayer] = PLAYER;*/
+
 	}
 
-}
+
+
+
+
+
+
+
+
 
 #endif

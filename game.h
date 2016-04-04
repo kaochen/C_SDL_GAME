@@ -23,6 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL.h>
 
 //create the background from an image
-void displayBackground(SDL_Surface *screen, SDL_Surface *background);
+void movePlayer(int xPlayer, int yPlayer, int direction , SDL_Surface *screen);
 
 #endif
