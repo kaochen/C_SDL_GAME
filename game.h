@@ -22,7 +22,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <SDL2/SDL.h>
 
-//create the background from an image
+//move player
 void movePlayer(int xPlayer, int yPlayer, int direction , SDL_Surface *screen);
+//move a case
+void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen);
 
 #endif

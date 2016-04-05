@@ -83,14 +83,52 @@ void movePlayer(int xPlayer, int yPlayer, int direction , SDL_Surface *screen)
 			SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
 			break;
 	    }
-	//update status
-	/*	map[xPlayer+2][yPlayer] = WOODEN_CASE;
-		//map[xPlayer][yPlayer] = GROUND;
-		map[xPlayer+1][yPlayer] = PLAYER;*/
-
 	}
 
+//move a case
+void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen)
+	{
 
+	//create a wooden case surface
+	  	SDL_Surface *woodenCase = NULL;
+	//load image
+		woodenCase = SDL_LoadBMP("img/box.bmp");
+
+	//case position
+	    	SDL_Rect casePos;
+	  	casePos.x = xPlayer * BOX_SIZE;
+	  	casePos.y = yPlayer * BOX_SIZE;
+
+	//first clean is place
+	switch(direction)
+	    {
+	    case UP:
+			casePos.x = xPlayer * BOX_SIZE;
+			casePos.y = (yPlayer -2) * BOX_SIZE;
+			SDL_BlitSurface(woodenCase, NULL, screen, &casePos);
+			break;
+	    case DOWN:
+			casePos.x = xPlayer * BOX_SIZE;
+			casePos.y = (yPlayer +2) * BOX_SIZE;
+			SDL_BlitSurface(woodenCase, NULL, screen, &casePos);
+			break;
+	    case RIGHT:
+			casePos.x = (xPlayer +2) * BOX_SIZE;
+			casePos.y = yPlayer * BOX_SIZE;
+			SDL_BlitSurface(woodenCase, NULL, screen, &casePos);
+			break;
+	    case LEFT:
+			casePos.x = (xPlayer -2) * BOX_SIZE;
+			casePos.y = yPlayer * BOX_SIZE;
+			SDL_BlitSurface(woodenCase, NULL, screen, &casePos);
+			break;
+	    case STILL:
+			casePos.x = xPlayer * BOX_SIZE;
+			casePos.y = yPlayer * BOX_SIZE;
+			SDL_BlitSurface(woodenCase, NULL, screen, &casePos);
+			break;
+	    }
+	}
 
 
 
