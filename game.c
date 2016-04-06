@@ -24,8 +24,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <time.h>
 
 #include "const.h"
+#include "game.h"
 
 //move the player
 
@@ -33,7 +35,6 @@ void movePlayer(int xPlayer, int yPlayer, int direction , SDL_Surface *screen)
 	{
 	//create a ground surface
 		SDL_Surface *ground = NULL;
-  		SDL_Rect groundPos;
 		ground = SDL_LoadBMP("img/background.bmp");
 	//front face
 		SDL_Surface *playerFront = NULL;
@@ -132,9 +133,44 @@ void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen)
 
 
 
+//pick a random ground image
+void randomGround(int x, int y, SDL_Surface *screen)
+{
+	SDL_Surface *ground = NULL;
+	ground = SDL_LoadBMP("img/background.bmp");
+
+  	SDL_Surface *ground2 = NULL;
+	ground2 = SDL_LoadBMP("img/background2.bmp");
+
+    	SDL_Surface *ground3 = NULL;
+	ground3 = SDL_LoadBMP("img/background3.bmp");
+
+  	SDL_Rect groundPos;
+    	groundPos.x = x * BOX_SIZE;
+	groundPos.y = y * BOX_SIZE;
+
+	int i = 0, randomNumber = 0;
+	randomNumber = random_number(0,100);
+
+	if (randomNumber <= 60)
+	  {
+		SDL_BlitSurface(ground, NULL, screen, &groundPos);
+	  }
+  	else if(randomNumber >=90)
+  	  {
+	  	SDL_BlitSurface(ground2, NULL, screen, &groundPos);
+	  }
+  	else
+    	  {
+	    	SDL_BlitSurface(ground3, NULL, screen, &groundPos);
+	  }
+
+}
 
 
-
-
-
+//random number between two numbers
+int random_number(int min, int max)
+	{
+	return rand()%(max-min +1) +min;
+	}
 #endif

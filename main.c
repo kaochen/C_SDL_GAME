@@ -21,13 +21,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <time.h>
 
 #include "const.h"
 #include "game.h"
 
 int main(int argc, char *argv[])
 {
-
+  	 srand(time(NULL)); //start random processeur just once
+			    //
   	//check if SDL start correctly
 	if(SDL_Init(SDL_INIT_VIDEO) == -1)
 	  {
@@ -126,9 +128,10 @@ int main(int argc, char *argv[])
 		    switch(map[i][j])
 		      {
 		      case GROUND :
-				groundPos.x = i * BOX_SIZE;
+				randomGround(i, j, screen);
+				/*groundPos.x = i * BOX_SIZE;
 				groundPos.y = j * BOX_SIZE;
-				SDL_BlitSurface(ground, NULL, screen, &groundPos);
+				SDL_BlitSurface(ground, NULL, screen, &groundPos);*/
 			break;
 		      case WOODEN_CASE :
 		      		woodenCasePos.x = i * BOX_SIZE;

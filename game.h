@@ -27,4 +27,10 @@ void movePlayer(int xPlayer, int yPlayer, int direction , SDL_Surface *screen);
 //move a case
 void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen);
 
+//random number between two numbers
+int random_number(int min, int max);
+
+//pick a random ground image
+void randomGround(int x, int y, SDL_Surface *screen);
+
 #endif
