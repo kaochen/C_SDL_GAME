@@ -56,28 +56,28 @@ void movePlayer(int xPlayer, int yPlayer, int direction ,int *xyGround, SDL_Surf
 
 
 	//first clean is place
-  		SDL_BlitSurface(ground, NULL, screen, &playerPos);
+	 	randomGround(xPlayer, yPlayer, xyGround, screen, FIXED);
+  		//SDL_BlitSurface(ground, NULL, screen, &playerPos);
 	switch(direction)
 	    {
 	    case UP:
 			playerPos.y  -= BOX_SIZE;
-			SDL_BlitSurface(ground, NULL, screen, &playerPos);
+	      		randomGround((playerPos.x/BOX_SIZE), ((playerPos.y/BOX_SIZE)+1), xyGround, screen, FIXED);
 			SDL_BlitSurface(playerBack, NULL, screen, &playerPos);
 			break;
 	    case DOWN:
 			playerPos.y  += BOX_SIZE;
-	      		randomGround((playerPos.x/BOX_SIZE), (playerPos.y/BOX_SIZE), xyGround, screen, FIXED);
-			SDL_BlitSurface(ground, NULL, screen, &playerPos);
+	      		randomGround((playerPos.x/BOX_SIZE), ((playerPos.y/BOX_SIZE)-1), xyGround, screen, FIXED);
 			SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
 			break;
 	    case RIGHT:
 			playerPos.x  += BOX_SIZE;
-			SDL_BlitSurface(ground, NULL, screen, &playerPos);
+	      		randomGround(((playerPos.x/BOX_SIZE)-1), (playerPos.y/BOX_SIZE), xyGround, screen, FIXED);
 			SDL_BlitSurface(playerRight, NULL, screen, &playerPos);
 			break;
 	    case LEFT:
 			playerPos.x  -= BOX_SIZE;
-			SDL_BlitSurface(ground, NULL, screen, &playerPos);
+	      		randomGround(((playerPos.x/BOX_SIZE)+1), (playerPos.y/BOX_SIZE), xyGround, screen, FIXED);
 			SDL_BlitSurface(playerLeft, NULL, screen, &playerPos);
 			break;
 	    case STILL:
@@ -168,7 +168,9 @@ void randomGround(int x, int y, int *xyGround, SDL_Surface *screen, int type)
 	  	else
 	    	  {
 		    	SDL_BlitSurface(ground3, NULL, screen, &groundPos);
-		  }
+		  	*xyGround = 3;
+
+		    }
 	    break;
 	  case FIXED:
 	    	if (*xyGround == 2)
