@@ -23,6 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "const.h"
 #include <SDL2/SDL.h>
 
-//read level file
-void readlevel(int map[][NBR_OF_BLOCKS], int level);
+//read a level line
+int readlevel(int map[][NBR_OF_BLOCKS], int level);
 #endif

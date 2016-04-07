@@ -27,7 +27,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "const.h"
 #include "game.h"
 
-void readlevel(int map[][NBR_OF_BLOCKS], int level)
+//read a level line
+int readlevel(int map[][NBR_OF_BLOCKS], int level)
 	{
 	FILE* levelFile = NULL;
 	//open file
@@ -36,7 +37,6 @@ void readlevel(int map[][NBR_OF_BLOCKS], int level)
 	levelFile = fopen("levels.txt", "r");
 	  if (levelFile != NULL)
 	    {
-
 	      //find the number of lines (1 lines == 1 level)
 	      while ((c = getc(levelFile)) != EOF)
 		{
@@ -50,27 +50,28 @@ void readlevel(int map[][NBR_OF_BLOCKS], int level)
 	      rewind(levelFile);
 	//read lines
 	      fgets(lineLevel, NBR_OF_BLOCKS * NBR_OF_BLOCKS +1, levelFile);
+		fprintf(stderr," Level : %s ", lineLevel);
 	//load each number
-		for (i = 0; i < NBR_OF_BLOCKS, i++)//Height
+		for (i = 0; i < NBR_OF_BLOCKS; i++) //Height
 		{
-		  for (j= 0; j < NBR_OF_BLOCKS, j++)//Width
+		  for (j= 0; j < NBR_OF_BLOCKS; j++)//Width
 		    {
-		      switch(lineLevel[i * NBR_OF_BLOCKS] + j)
+		      switch(lineLevel[(i * NBR_OF_BLOCKS) + j])
 			{
 			case '0':
-			  map[i][j] = 0;
+			  map[j][i] = GROUND;
 			  break;
 			case '1':
-			  map[i][j] = 1;
+			  map[j][i] = WALL;
 			  break;
 			case '2':
-			  map[i][j] = 2 ;
+			  map[j][i] = WOODEN_CASE ;
 			  break;
 			case '3':
-			  map[i][j] = 3;
+			  map[j][i] = BALL;
 			  break;
 			case '4':
-			  map[i][j] = 4;
+			  map[j][i] = PLAYER;
 			  break;
 			}
 		    }

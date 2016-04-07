@@ -66,7 +66,7 @@ int main(int argc, char *argv[])
   	int map[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
   	//load a level
 	readlevel(map, 1);
-    	map[1][12] = WOODEN_CASE;
+    	/*map[1][12] = WOODEN_CASE;
 	map[9][9] = WOODEN_CASE;
   	map[5][7] = WOODEN_CASE;
     	map[5][8] = WALL;
@@ -74,7 +74,7 @@ int main(int argc, char *argv[])
       	map[3][7] = WALL;
       	map[2][6] = WALL;
   	map[5][3] = BALL;
-    	map[6][4] = PLAYER;
+    	map[6][4] = PLAYER;*/
 
 	//create a ground map to store ground type from the randomGround function
 	int mapGround[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
