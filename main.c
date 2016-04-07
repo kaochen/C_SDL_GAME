@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "const.h"
 #include "game.h"
+#include "level.h"
 
 int main(int argc, char *argv[])
 {
@@ -64,7 +65,8 @@ int main(int argc, char *argv[])
 	//create a map with coordinates x,y to locate things
   	int map[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
   	//load a level
-  	map[1][12] = WOODEN_CASE;
+	readlevel(map, 1);
+    	map[1][12] = WOODEN_CASE;
 	map[9][9] = WOODEN_CASE;
   	map[5][7] = WOODEN_CASE;
     	map[5][8] = WALL;

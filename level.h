@@ -17,19 +17,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef CONST_H
-#define CONST_H
+#ifndef LEVEL_H
+#define LEVEL_H
 
-#define GAME_NAME "My Game"
+#include "const.h"
+#include <SDL2/SDL.h>
 
-#define W_WIDTH  720
-#define W_HEIGHT 720
-#define BACKGROUND_SIZE 40
-#define BOX_SIZE 40
-#define NBR_OF_BLOCKS 18
-
-
-enum {GROUND, GROUND1, GROUND2, GROUND3, GROUND4, WALL , WOODEN_CASE , BALL, PLAYER  };
-enum {UP , DOWN, RIGHT, LEFT, STILL };
-enum {RANDOM, FIXED};
+//read level file
+void readlevel(int map[][NBR_OF_BLOCKS], int level);
 #endif

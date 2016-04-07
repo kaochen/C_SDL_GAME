@@ -57,8 +57,7 @@ void movePlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surfa
 
 	//first clean is place
 	 	blitGround(xPlayer, yPlayer, xyGround,screen);
-	 	//randomGround(xPlayer, yPlayer, xyGround, screen, FIXED);
-  		//SDL_BlitSurface(ground, NULL, screen, &playerPos);
+	//read the direction choice
 	switch(direction)
 	    {
 	    case UP:
