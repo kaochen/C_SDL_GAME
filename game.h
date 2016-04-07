@@ -24,14 +24,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL.h>
 
 //move player
-void movePlayer(int xPlayer, int yPlayer, int direction ,int *xyGround, SDL_Surface *screen);
+void movePlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surface *screen);
 //move a case
 void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen);
 
 //random number between two numbers
 int random_number(int min, int max);
 
+//add a randomGround
+int addRandomGround();
+
+//blit Ground
+void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen);
+
 //pick a random ground image
-void randomGround(int x, int y, int *xyGround, SDL_Surface *screen, int type);
+//void randomGround(int x, int y, int *xyGround, SDL_Surface *screen, int type);
 
 #endif

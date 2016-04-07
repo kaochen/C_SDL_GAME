@@ -122,14 +122,13 @@ int main(int argc, char *argv[])
 	  {
 		for (j = 0; j < NBR_OF_BLOCKS; j++)
 		  {
+		    //allow a random ground type to each block
+		   	mapGround[i][j] = addRandomGround();
+		    //blit all blocks depending on map types and mapGround types
 		    switch(map[i][j])
 		      {
 		      case GROUND :
-				randomGround(i, j, &mapGround[i][j], screen, RANDOM);
-
-				/*groundPos.x = i * BOX_SIZE;
-				groundPos.y = j * BOX_SIZE;
-				SDL_BlitSurface(ground, NULL, screen, &groundPos);*/
+				blitGround(i, j, mapGround[i][j],screen);
 			break;
 		      case WOODEN_CASE :
 		      		woodenCasePos.x = i * BOX_SIZE;
@@ -144,14 +143,14 @@ int main(int argc, char *argv[])
 		      case BALL :
 		      		ballPos.x = i * BOX_SIZE;
 				ballPos.y = j * BOX_SIZE;
-				randomGround(i, j, &mapGround[i][j], screen, RANDOM);
+				blitGround(i, j, mapGround[i][j],screen);
 				SDL_BlitSurface(ball, NULL, screen, &ballPos);
 			break;
 		      case PLAYER :
 		      		playerPos.x = i * BOX_SIZE;
 				playerPos.y = j * BOX_SIZE;
-			//	movePlayer(i,j, STILL , screen); //see game.c
-				movePlayer(i,j, STILL , &mapGround[i][j], screen);
+				blitGround(i, j, map[i][j], screen);
+				movePlayer(i,j, STILL , mapGround[i][j], screen);
 
 			break;
 
@@ -201,8 +200,7 @@ int main(int argc, char *argv[])
 	      	//move the wooden Case
 			moveCase(xPlayer,yPlayer, RIGHT,screen);
 		//move the player
-		  	//movePlayer(xPlayer,yPlayer, RIGHT , screen);
-		  	movePlayer(xPlayer,yPlayer, RIGHT , &mapGround[xPlayer][yPlayer], screen);
+		  	movePlayer(xPlayer,yPlayer, RIGHT , mapGround[xPlayer][yPlayer], screen);
 		//update new player position
 		  	playerPos.x  += BOX_SIZE;
 		//update status
@@ -215,8 +213,7 @@ int main(int argc, char *argv[])
 		if (map[xPlayer+1][yPlayer]== GROUND)
 		{
 					//move the player
-		  			//movePlayer(xPlayer,yPlayer, RIGHT , screen);
-		  		  	movePlayer(xPlayer,yPlayer, RIGHT , &mapGround[xPlayer][yPlayer], screen);
+		  		  	movePlayer(xPlayer,yPlayer, RIGHT , mapGround[xPlayer][yPlayer], screen);
 		  		  	//update new player position
 		  			playerPos.x  += BOX_SIZE;
 				       	//update status
@@ -248,8 +245,7 @@ int main(int argc, char *argv[])
 	      	//move the wooden Case
 			moveCase(xPlayer,yPlayer, LEFT,screen);
 		//move the player
-		  	//movePlayer(xPlayer,yPlayer, LEFT , screen);
-		  	movePlayer(xPlayer,yPlayer, LEFT , &mapGround[xPlayer][yPlayer], screen);
+		  	movePlayer(xPlayer,yPlayer, LEFT , mapGround[xPlayer][yPlayer], screen);
 		//update new player position
 		  	playerPos.x  -= BOX_SIZE;
 		//update status
@@ -262,8 +258,7 @@ int main(int argc, char *argv[])
 		if (map[xPlayer-1][yPlayer]== GROUND)
 		{
 					//move the player
-		  			//movePlayer(xPlayer,yPlayer, LEFT , screen);
-		  		  	movePlayer(xPlayer,yPlayer, LEFT , &mapGround[xPlayer][yPlayer], screen);
+		  		  	movePlayer(xPlayer,yPlayer, LEFT , mapGround[xPlayer][yPlayer], screen);
 		  		  	//update new player position
 		  			playerPos.x  -= BOX_SIZE;
 				       	//update status
@@ -293,8 +288,7 @@ int main(int argc, char *argv[])
 	      	//move the wooden Case
 			moveCase(xPlayer,yPlayer, UP,screen);
 		//move the player
-		  	//movePlayer(xPlayer,yPlayer, UP , screen);
-		  	movePlayer(xPlayer,yPlayer, UP , &mapGround[xPlayer][yPlayer], screen);
+		  	movePlayer(xPlayer,yPlayer, UP , mapGround[xPlayer][yPlayer], screen);
 		//update new player position
 		  	playerPos.y  -= BOX_SIZE;
 		//update status
@@ -307,8 +301,7 @@ int main(int argc, char *argv[])
 		if (map[xPlayer][yPlayer-1]== GROUND)
 		{
 					//move the player
-		  			//movePlayer(xPlayer,yPlayer, UP , screen);
-		  		  	movePlayer(xPlayer,yPlayer, UP , &mapGround[xPlayer][yPlayer], screen);
+		  		  	movePlayer(xPlayer,yPlayer, UP , mapGround[xPlayer][yPlayer], screen);
 		  		  	//update new player position
 		  			playerPos.y  -= BOX_SIZE;
 				       	//update status
@@ -336,8 +329,7 @@ int main(int argc, char *argv[])
 	      	//move the wooden Case
 			moveCase(xPlayer,yPlayer, DOWN,screen);
 		//move the player
-		  	//movePlayer(xPlayer,yPlayer, DOWN , screen);
-		  	movePlayer(xPlayer,yPlayer, DOWN , &mapGround[xPlayer][yPlayer], screen);
+		  	movePlayer(xPlayer,yPlayer, DOWN , mapGround[xPlayer][yPlayer], screen);
 		//update new player position
 		  	playerPos.y  += BOX_SIZE;
 		//update status
@@ -350,8 +342,7 @@ int main(int argc, char *argv[])
 		if (map[xPlayer][yPlayer+1]== GROUND)
 		{
 					//move the player
-		  			//movePlayer(xPlayer,yPlayer, DOWN , screen);
-		  			movePlayer(xPlayer,yPlayer, DOWN , &mapGround[xPlayer][yPlayer], screen);
+		  			movePlayer(xPlayer,yPlayer, DOWN , mapGround[xPlayer][yPlayer], screen);
 		  		  	//update new player position
 		  			playerPos.y  += BOX_SIZE;
 				       	//update status

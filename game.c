@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 //move the player
 
-void movePlayer(int xPlayer, int yPlayer, int direction ,int *xyGround, SDL_Surface *screen)
+void movePlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surface *screen)
 	{
 	//create a ground surface
 		SDL_Surface *ground = NULL;
@@ -56,32 +56,33 @@ void movePlayer(int xPlayer, int yPlayer, int direction ,int *xyGround, SDL_Surf
 
 
 	//first clean is place
-	 	randomGround(xPlayer, yPlayer, xyGround, screen, FIXED);
+	 	blitGround(xPlayer, yPlayer, xyGround,screen);
+	 	//randomGround(xPlayer, yPlayer, xyGround, screen, FIXED);
   		//SDL_BlitSurface(ground, NULL, screen, &playerPos);
 	switch(direction)
 	    {
 	    case UP:
 			playerPos.y  -= BOX_SIZE;
-	      		randomGround((playerPos.x/BOX_SIZE), ((playerPos.y/BOX_SIZE)+1), xyGround, screen, FIXED);
+	 		blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
 			SDL_BlitSurface(playerBack, NULL, screen, &playerPos);
 			break;
 	    case DOWN:
 			playerPos.y  += BOX_SIZE;
-	      		randomGround((playerPos.x/BOX_SIZE), ((playerPos.y/BOX_SIZE)-1), xyGround, screen, FIXED);
+			blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
 			SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
 			break;
 	    case RIGHT:
 			playerPos.x  += BOX_SIZE;
-	      		randomGround(((playerPos.x/BOX_SIZE)-1), (playerPos.y/BOX_SIZE), xyGround, screen, FIXED);
+			blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
 			SDL_BlitSurface(playerRight, NULL, screen, &playerPos);
 			break;
 	    case LEFT:
 			playerPos.x  -= BOX_SIZE;
-	      		randomGround(((playerPos.x/BOX_SIZE)+1), (playerPos.y/BOX_SIZE), xyGround, screen, FIXED);
+			blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
 			SDL_BlitSurface(playerLeft, NULL, screen, &playerPos);
 			break;
 	    case STILL:
-	      		SDL_BlitSurface(ground, NULL, screen, &playerPos);
+	 		blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
 			SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
 			break;
 	    }
@@ -135,10 +136,12 @@ void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen)
 
 
 //pick a random ground image
-void randomGround(int x, int y, int *xyGround, SDL_Surface *screen, int type)
-{
-	SDL_Surface *ground = NULL;
-	ground = SDL_LoadBMP("img/background.bmp");
+
+//blit ground
+void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen)
+	{
+	SDL_Surface *ground1 = NULL;
+	ground1 = SDL_LoadBMP("img/background.bmp");
 
   	SDL_Surface *ground2 = NULL;
 	ground2 = SDL_LoadBMP("img/background2.bmp");
@@ -150,44 +153,38 @@ void randomGround(int x, int y, int *xyGround, SDL_Surface *screen, int type)
     	groundPos.x = x * BOX_SIZE;
 	groundPos.y = y * BOX_SIZE;
 
-	int i = 0, randomNumber = 0;
-	randomNumber = random_number(0,100);
-	switch(type)
+	switch(typeOfGround)
 	  {
-	  case RANDOM:
-		if (randomNumber <= 60)
-		  {
-			SDL_BlitSurface(ground, NULL, screen, &groundPos);
-		    	*xyGround = 1;
-		  }
-	  	else if(randomNumber >=90)
-	  	  {
-		  	SDL_BlitSurface(ground2, NULL, screen, &groundPos);
-		    	*xyGround = 2;
-		  }
-	  	else
-	    	  {
-		    	SDL_BlitSurface(ground3, NULL, screen, &groundPos);
-		  	*xyGround = 3;
-
-		    }
+	  case GROUND1:
+		SDL_BlitSurface(ground1, NULL, screen, &groundPos);
 	    break;
-	  case FIXED:
-	    	if (*xyGround == 2)
-	     	 {
-		     SDL_BlitSurface(ground2, NULL, screen, &groundPos);
-		 }
-	    	else if(*xyGround == 3)
-	  	  {
-		  	SDL_BlitSurface(ground3, NULL, screen, &groundPos);
-		  }
-	    	else
-	    	  {
-		    	SDL_BlitSurface(ground, NULL, screen, &groundPos);
-		  }
+	  case GROUND2:
+		SDL_BlitSurface(ground2, NULL, screen, &groundPos);
+	    break;
+	  case GROUND3:
+		SDL_BlitSurface(ground3, NULL, screen, &groundPos);
 	    break;
 	  }
 }
+
+//add a more ground choice
+int addRandomGround()
+	{
+		int i = 0, randomNumber = 0;
+		randomNumber = random_number(0,100);
+		  if (randomNumber <= 60)
+			  {
+				return GROUND1;
+			  }
+		  	else if(randomNumber >=90)
+		  	  {
+				return GROUND2;
+			  }
+		  	else
+		    	  {
+				return GROUND3;
+			    }
+	}
 
 
 //random number between two numbers
