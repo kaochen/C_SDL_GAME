@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 //move the player
 
-void movePlayer(int xPlayer, int yPlayer, int direction , SDL_Surface *screen)
+void movePlayer(int xPlayer, int yPlayer, int direction ,int *xyGround, SDL_Surface *screen)
 	{
 	//create a ground surface
 		SDL_Surface *ground = NULL;
@@ -66,6 +66,7 @@ void movePlayer(int xPlayer, int yPlayer, int direction , SDL_Surface *screen)
 			break;
 	    case DOWN:
 			playerPos.y  += BOX_SIZE;
+	      		randomGround((playerPos.x/BOX_SIZE), (playerPos.y/BOX_SIZE), xyGround, screen, FIXED);
 			SDL_BlitSurface(ground, NULL, screen, &playerPos);
 			SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
 			break;
@@ -134,7 +135,7 @@ void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen)
 
 
 //pick a random ground image
-void randomGround(int x, int y, SDL_Surface *screen)
+void randomGround(int x, int y, int *xyGround, SDL_Surface *screen, int type)
 {
 	SDL_Surface *ground = NULL;
 	ground = SDL_LoadBMP("img/background.bmp");
@@ -151,20 +152,39 @@ void randomGround(int x, int y, SDL_Surface *screen)
 
 	int i = 0, randomNumber = 0;
 	randomNumber = random_number(0,100);
-
-	if (randomNumber <= 60)
+	switch(type)
 	  {
-		SDL_BlitSurface(ground, NULL, screen, &groundPos);
+	  case RANDOM:
+		if (randomNumber <= 60)
+		  {
+			SDL_BlitSurface(ground, NULL, screen, &groundPos);
+		    	*xyGround = 1;
+		  }
+	  	else if(randomNumber >=90)
+	  	  {
+		  	SDL_BlitSurface(ground2, NULL, screen, &groundPos);
+		    	*xyGround = 2;
+		  }
+	  	else
+	    	  {
+		    	SDL_BlitSurface(ground3, NULL, screen, &groundPos);
+		  }
+	    break;
+	  case FIXED:
+	    	if (*xyGround == 2)
+	     	 {
+		     SDL_BlitSurface(ground2, NULL, screen, &groundPos);
+		 }
+	    	else if(*xyGround == 3)
+	  	  {
+		  	SDL_BlitSurface(ground3, NULL, screen, &groundPos);
+		  }
+	    	else
+	    	  {
+		    	SDL_BlitSurface(ground, NULL, screen, &groundPos);
+		  }
+	    break;
 	  }
-  	else if(randomNumber >=90)
-  	  {
-	  	SDL_BlitSurface(ground2, NULL, screen, &groundPos);
-	  }
-  	else
-    	  {
-	    	SDL_BlitSurface(ground3, NULL, screen, &groundPos);
-	  }
-
 }
 
 

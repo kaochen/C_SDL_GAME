@@ -20,10 +20,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef GAME_H
 #define GAME_H
 
+#include "const.h"
 #include <SDL2/SDL.h>
 
 //move player
-void movePlayer(int xPlayer, int yPlayer, int direction , SDL_Surface *screen);
+void movePlayer(int xPlayer, int yPlayer, int direction ,int *xyGround, SDL_Surface *screen);
 //move a case
 void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen);
 
@@ -31,6 +32,6 @@ void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen);
 int random_number(int min, int max);
 
 //pick a random ground image
-void randomGround(int x, int y, SDL_Surface *screen);
+void randomGround(int x, int y, int *xyGround, SDL_Surface *screen, int type);
 
 #endif
