@@ -32,7 +32,98 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 	{
 	FILE* levelFile = NULL;
 	//open file
-	int c = 0, i = 0, j = 0, nb_line = 0;
+	int c = 0, x = 0, y = 0, nb_line = 0;
+	levelFile = fopen("levels.txt", "r");
+
+	 //check if file exist
+	  if (levelFile == NULL)
+	  {
+	    fprintf(stderr, "Can't open levels.txt : %s\n", SDL_GetError());
+	    return 0;
+	  }
+	    fprintf(stderr, "levels.txt Opened: %s\n", SDL_GetError());
+	//place the cursor depending of the level choosen
+	  if( level == 0)
+	    {
+	    fseek(levelFile,0,SEEK_SET); //place cursor at the beginning
+	    }
+	  else
+	    {
+	      //read all caract before
+	      int num_line = 0, caract = 0;
+	       while(num_line < ((NBR_OF_BLOCKS +2)*level))
+		 {
+		     caract = fgetc(levelFile);
+		     if(caract == '\n')
+		     {
+		     	num_line++;
+		     }
+		 }
+
+	    }
+	fprintf(stderr, "loading level: %d\t%s\n", level, SDL_GetError());
+	//The cursor is supposed to be in the right position
+	//read the level line by line
+		int level_line = 0, num_caract = 0;
+	    	while(level_line <= NBR_OF_BLOCKS)
+		 {
+		     //fprintf(stderr, "line : %d", level_line);
+		     c = fgetc(levelFile);
+		     if(c == '\n')
+		     {
+		     	level_line++;
+		     }
+		     else if(c == EOF)
+		     {
+		       level_line = NBR_OF_BLOCKS + 1;
+		     }
+		     else
+		     {
+			//show the readen level
+		        fprintf(stderr, "%c", c);
+		       	if (num_caract == (NBR_OF_BLOCKS -1))
+			 {
+		       	    fprintf(stderr, "\n");
+			 }
+		       	 if (num_caract == NBR_OF_BLOCKS)
+			 {
+			   num_caract = 0;
+			 }
+			//affect number to his destiny
+		      	  switch(c)
+					{
+					case '0':
+					  map[num_caract][level_line] = GROUND;
+					  break;
+					case '1':
+					  map[num_caract][level_line] = WALL;
+					  break;
+					case '2':
+					  map[num_caract][level_line] = WOODEN_CASE ;
+					  break;
+					case '3':
+					  map[num_caract][level_line] = BALL;
+					  break;
+					case '4':
+					  map[num_caract][level_line] = PLAYER;
+					  break;
+					}
+			   num_caract++;
+			 }
+		 }
+	  	fprintf(stderr, "Numb of line %d\n", level_line);
+	  	fprintf(stderr, "Level Loaded %s\n", SDL_GetError());
+		fclose(levelFile);
+	}
+
+
+
+//how many level are in the file
+int nbr_of_level()
+	{
+	FILE* levelFile = NULL;
+	//open file
+	int c = 0, i = 0, j = 0, nbrLevel = 0;
 	char lineLevel[NBR_OF_BLOCKS*NBR_OF_BLOCKS +1] = {0};
 	levelFile = fopen("levels.txt", "r");
 	  if (levelFile != NULL)
@@ -40,48 +131,17 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 	      //find the number of lines (1 lines == 1 level)
 	      while ((c = getc(levelFile)) != EOF)
 		{
-		  if ( c == '\n' )
+		  if ( c == '#' )
 		    {
-		      nb_line++;
+		      nbrLevel++;
 		    }
 		}
-	      fprintf(stderr, "Found %d levels\n", nb_line);
-	//replace the cursor to the top
-	      rewind(levelFile);
-	//read lines
-	      fgets(lineLevel, NBR_OF_BLOCKS * NBR_OF_BLOCKS +1, levelFile);
-		fprintf(stderr," Level : %s ", lineLevel);
-	//load each number
-		for (i = 0; i < NBR_OF_BLOCKS; i++) //Height
-		{
-		  for (j= 0; j < NBR_OF_BLOCKS; j++)//Width
-		    {
-		      switch(lineLevel[(i * NBR_OF_BLOCKS) + j])
-			{
-			case '0':
-			  map[j][i] = GROUND;
-			  break;
-			case '1':
-			  map[j][i] = WALL;
-			  break;
-			case '2':
-			  map[j][i] = WOODEN_CASE ;
-			  break;
-			case '3':
-			  map[j][i] = BALL;
-			  break;
-			case '4':
-			  map[j][i] = PLAYER;
-			  break;
-			}
-		    }
-		}
-	fclose(levelFile);
-	  	return 1;
+	    fclose(levelFile);
+	    return nbrLevel;
 	    }
 	else
 	  {
-		fprintf(stderr, "Didn't load levels.txt : %s\n", SDL_GetError());
+		fprintf(stderr, "Can't open levels.txt : %s\n", SDL_GetError());
 	    	return 0;
 	  }
 	}

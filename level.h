@@ -25,4 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 //read a level line
 int readlevel(int map[][NBR_OF_BLOCKS], int level);
+
+//how many level are in the file
+int nbr_of_level();
 #endif

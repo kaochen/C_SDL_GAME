@@ -65,7 +65,8 @@ int main(int argc, char *argv[])
 	//create a map with coordinates x,y to locate things
   	int map[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
   	//load a level
-	readlevel(map, 1);
+	readlevel(map, 0);
+  	fprintf(stderr, "Level Loaded %s\n", SDL_GetError());
     	/*map[1][12] = WOODEN_CASE;
 	map[9][9] = WOODEN_CASE;
   	map[5][7] = WOODEN_CASE;
