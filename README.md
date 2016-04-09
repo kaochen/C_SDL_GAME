@@ -22,6 +22,7 @@ gcc -o game -g *.c *.h `sdl2-config --cflags --libs`-lSDL2main -lSDL2_image -lSD
  * http://jeux.developpez.com/tutoriels/sdl-2/guide-migration/
  * http://www.meruvia.fr/index.php/big-tuto-sdl-1/179-big-tuto-sdl-1-2-chapitre-31-conversion-de-projet-vers-la-sdl-2
  * http://alexandre-laurent.developpez.com/tutoriels/sdl-2/afficher-sprites-sdl-2/
+ * http://www.sokobano.de
 
 ### Color code :
 ```

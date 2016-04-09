@@ -64,18 +64,12 @@ int main(int argc, char *argv[])
 
 	//create a map with coordinates x,y to locate things
   	int map[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
-  	//load a level
+
+	//how many level are in the file
+	int max_Levels = nbr_of_level();
+
+  	//load the level from the levels.txt
 	readlevel(map, 0);
-  	fprintf(stderr, "Level Loaded %s\n", SDL_GetError());
-    	/*map[1][12] = WOODEN_CASE;
-	map[9][9] = WOODEN_CASE;
-  	map[5][7] = WOODEN_CASE;
-    	map[5][8] = WALL;
-      	map[4][9] = WALL;
-      	map[3][7] = WALL;
-      	map[2][6] = WALL;
-  	map[5][3] = BALL;
-    	map[6][4] = PLAYER;*/
 
 	//create a ground map to store ground type from the randomGround function
 	int mapGround[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
