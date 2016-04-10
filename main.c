@@ -26,6 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "const.h"
 #include "game.h"
 #include "level.h"
+#include "menu.h"
 
 int main(int argc, char *argv[])
 {
@@ -67,9 +68,11 @@ int main(int argc, char *argv[])
 
 	//how many level are in the file
 	int max_Levels = nbr_of_level();
+  	int levelChoice = 0;
+  	levelChoice = levelSelector(window, screen);
 
   	//load the level from the levels.txt
-	readlevel(map, 0);
+	readlevel(map, levelChoice);
 
 	//create a ground map to store ground type from the randomGround function
 	int mapGround[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};

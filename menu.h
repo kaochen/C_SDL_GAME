@@ -17,22 +17,17 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef CONST_H
-#define CONST_H
+#ifndef MENU_H
+#define MENU_H
 
-#define GAME_NAME "My Game"
+#include <stdlib.h>
+#include <stdio.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
-#define W_WIDTH  720
-#define W_HEIGHT 720
-#define BACKGROUND_SIZE 40
-#define BOX_SIZE 40
-#define NBR_OF_BLOCKS 18
-#define MENU_WIDTH 220
-#define MENU_HEIGHT 180
-#define BUTTON_WIDTH 180
-#define BUTTON_HEIGHT 60
+#include "const.h"
 
-enum {GROUND, GROUND1, GROUND2, GROUND3, GROUND4, WALL , WOODEN_CASE , BALL,BOX_OK, PLAYER  };
-enum {UP , DOWN, RIGHT, LEFT, STILL };
-enum {RANDOM, FIXED};
+int levelSelector(SDL_Window *window, SDL_Surface *screen);
+
 #endif
+
