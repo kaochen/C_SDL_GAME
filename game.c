@@ -87,49 +87,60 @@ void movePlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surfa
 	    }
 	}
 
-//move a case
-void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen)
+//move a box
+void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction , SDL_Surface *screen)
 	{
 
-	//create a wooden case surface
-	  	SDL_Surface *woodenCase = NULL;
+	//create a box surface
+	SDL_Surface *box = NULL;
 	//load image
-		woodenCase = SDL_LoadBMP("img/box.bmp");
+	box = SDL_LoadBMP("img/box.bmp");
 
-	//case position
-	    	SDL_Rect casePos;
-	  	casePos.x = xPlayer * BOX_SIZE;
-	  	casePos.y = yPlayer * BOX_SIZE;
+	//goal
+ 	SDL_Surface *goal = NULL;
+	//load image
+	goal = IMG_Load("img/ball.png");
 
-	//first clean is place
+	//box position
+	    	SDL_Rect boxPos;
+	  	boxPos.x = xPlayer * BOX_SIZE;
+	  	boxPos.y = yPlayer * BOX_SIZE;
+
+
 	switch(direction)
 	    {
 	    case UP:
-			casePos.x = xPlayer * BOX_SIZE;
-			casePos.y = (yPlayer -2) * BOX_SIZE;
-			SDL_BlitSurface(woodenCase, NULL, screen, &casePos);
+			boxPos.x = xPlayer * BOX_SIZE;
+			boxPos.y = (yPlayer -2) * BOX_SIZE;
 			break;
 	    case DOWN:
-			casePos.x = xPlayer * BOX_SIZE;
-			casePos.y = (yPlayer +2) * BOX_SIZE;
-			SDL_BlitSurface(woodenCase, NULL, screen, &casePos);
+			boxPos.x = xPlayer * BOX_SIZE;
+			boxPos.y = (yPlayer +2) * BOX_SIZE;
 			break;
 	    case RIGHT:
-			casePos.x = (xPlayer +2) * BOX_SIZE;
-			casePos.y = yPlayer * BOX_SIZE;
-			SDL_BlitSurface(woodenCase, NULL, screen, &casePos);
+			boxPos.x = (xPlayer +2) * BOX_SIZE;
+			boxPos.y = yPlayer * BOX_SIZE;
 			break;
 	    case LEFT:
-			casePos.x = (xPlayer -2) * BOX_SIZE;
-			casePos.y = yPlayer * BOX_SIZE;
-			SDL_BlitSurface(woodenCase, NULL, screen, &casePos);
+			boxPos.x = (xPlayer -2) * BOX_SIZE;
+			boxPos.y = yPlayer * BOX_SIZE;
 			break;
 	    case STILL:
-			casePos.x = xPlayer * BOX_SIZE;
-			casePos.y = yPlayer * BOX_SIZE;
-			SDL_BlitSurface(woodenCase, NULL, screen, &casePos);
+			boxPos.x = xPlayer * BOX_SIZE;
+			boxPos.y = yPlayer * BOX_SIZE;
 			break;
 	    }
+	//blit if box on a goal
+	if (map[boxPos.x/BOX_SIZE][boxPos.y/BOX_SIZE] == BALL || map[boxPos.x/BOX_SIZE][boxPos.y/BOX_SIZE] == BOX_OK)
+	    		{
+			SDL_BlitSurface(box, NULL, screen, &boxPos);
+			SDL_BlitSurface(goal, NULL, screen, &boxPos);
+			}
+
+	 else
+		  	{
+			SDL_BlitSurface(box, NULL, screen, &boxPos);
+			}
 	}
 
 

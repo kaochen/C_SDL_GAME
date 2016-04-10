@@ -101,6 +101,9 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 					case '$':
 					  map[num_caract][level_line] = WOODEN_CASE ;
 					  break;
+					case '*':
+					  map[num_caract][level_line] = BOX_OK ;
+					  break;
 					case '.':
 					  map[num_caract][level_line] = BALL;
 					  break;

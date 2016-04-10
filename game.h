@@ -23,10 +23,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "const.h"
 #include <SDL2/SDL.h>
 
+
 //move player
 void movePlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surface *screen);
-//move a case
-void moveCase(int xPlayer, int yPlayer, int direction , SDL_Surface *screen);
+//move a box
+void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction , SDL_Surface *screen);
 
 //random number between two numbers
 int random_number(int min, int max);
