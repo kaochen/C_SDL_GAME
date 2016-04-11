@@ -49,7 +49,7 @@ int main(int argc, char *argv[])
                           SDL_WINDOW_MOUSE_FOCUS|SDL_WINDOW_MOUSE_CAPTURE);
 
     	//set a window icon
-	SDL_SetWindowIcon(window, SDL_LoadBMP("img/icon.bmp"));
+  	SDL_SetWindowIcon(window, IMG_Load("img/icon.png"));
 
   	//Create a surface from the window
   	SDL_Surface *screen = NULL;

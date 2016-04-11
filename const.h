@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef CONST_H
 #define CONST_H
 
-#define GAME_NAME "My Game"
+#define GAME_NAME "SokoRobot"
 
 #define W_WIDTH  720
 #define W_HEIGHT 720
