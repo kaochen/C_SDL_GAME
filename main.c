@@ -331,7 +331,6 @@ int main(int argc, char *argv[])
     }
 
   	//clean
-//	SDL_FreeSurface(goal);
   	SDL_FreeSurface(screen);
 	SDL_DestroyWindow(window);
 	SDL_Quit();

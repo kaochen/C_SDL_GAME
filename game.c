@@ -54,7 +54,6 @@ void movePlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surfa
 	  	playerPos.x = xPlayer * BOX_SIZE;
 	  	playerPos.y = yPlayer * BOX_SIZE;
 
-
 	//first clean is place
 	 	blitGround(xPlayer, yPlayer, xyGround,screen);
 	//read the direction choice
@@ -83,8 +82,15 @@ void movePlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surfa
 	    case STILL:
 	 		blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
 			SDL_BlitSurface(playerFront, NULL, screen, &playerPos);
+
 			break;
 	    }
+	      	//clean
+	  	SDL_FreeSurface(playerFront);
+	    	SDL_FreeSurface(playerBack);
+	      	SDL_FreeSurface(playerLeft);
+	  	SDL_FreeSurface(playerRight);
+	  	SDL_FreeSurface(ground);
 	}
 
 //move a box
@@ -141,7 +147,10 @@ void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction ,
 		  	{
 			SDL_BlitSurface(box, NULL, screen, &boxPos);
 			}
-	}
+	//clean
+	SDL_FreeSurface(box);
+	SDL_FreeSurface(goal);
+}
 
 
 
@@ -175,6 +184,9 @@ void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen)
 		SDL_BlitSurface(ground3, NULL, screen, &groundPos);
 	    break;
 	  }
+SDL_FreeSurface(ground1);
+SDL_FreeSurface(ground2);
+SDL_FreeSurface(ground3);
 }
 
 //blitWalls
@@ -227,6 +239,12 @@ void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen)
     		{
 	  	SDL_BlitSurface(wallBorderBottom, NULL, screen, &wallPos);
 		}
+	//clean
+  	SDL_FreeSurface(wall);
+  	SDL_FreeSurface(wallBorderTop);
+  	SDL_FreeSurface(wallBorderBottom);
+  	SDL_FreeSurface(wallBorderLeft);
+  	SDL_FreeSurface(wallBorderRight);
 }
 
 //add a more ground choice

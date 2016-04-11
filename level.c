@@ -166,7 +166,7 @@ void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_
 			}
 		  }
 	  }
-
+  	SDL_FreeSurface(goal);
 }
 
 
