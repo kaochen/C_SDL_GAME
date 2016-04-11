@@ -23,11 +23,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdio.h>
 #include <string.h>
 #include <ctype.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
 #include "const.h"
 #include "game.h"
 
-//read a level line
+//read a level from the file
 int readlevel(int map[][NBR_OF_BLOCKS], int level)
 	{
 	FILE* levelFile = NULL;
@@ -118,6 +120,54 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 		fclose(levelFile);
 	}
 
+//display level
+void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_Surface *screen)
+{
+  //create a goal surface
+  	SDL_Surface *goal = NULL;
+  	SDL_Rect goalPos;
+	//load image
+	goal = IMG_Load("img/ball.png");
+
+  	//blit surfaces depending of its destiny
+	int x = 0, y = 0;
+  	for (x = 0; x < NBR_OF_BLOCKS; x++)
+	  {
+		for (y = 0; y < NBR_OF_BLOCKS; y++)
+		  {
+		    //allow a random ground type to each block
+			mapGround[x][y] = addRandomGround();
+
+		    //blit all blocks depending on map types and mapGround types
+		    switch(map[x][y])
+		      {
+		      case GROUND :
+				blitGround(x,y,mapGround[x][y],screen);
+			break;
+		      case WOODEN_CASE :
+				moveBox(x,y,map,STILL,screen); //see game.c
+			break;
+		      case BOX_OK :
+				moveBox(x,y,map,STILL,screen); //see game.c
+			break;
+		      case WALL :
+				blitWalls(x,y,map,screen);
+			break;
+		      case BALL :
+		      		goalPos.x = x * BOX_SIZE;
+				goalPos.y = y * BOX_SIZE;
+				blitGround(x,y,mapGround[x][y],screen);
+				SDL_BlitSurface(goal, NULL, screen, &goalPos);
+			break;
+		      case PLAYER :
+				blitGround(x,y, map[x][y], screen);
+				movePlayer(x,y, STILL , mapGround[x][y], screen);
+			break;
+			}
+		  }
+	  }
+
+}
 
 
 //how many level are in the file

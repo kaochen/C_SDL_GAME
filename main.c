@@ -78,65 +78,37 @@ int main(int argc, char *argv[])
 	//create a ground map to store ground type from the randomGround function
 	int mapGround[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
 
-  	//create a goal surface
-  	SDL_Surface *goal = NULL;
-  	SDL_Rect goalPos;
-	//load image
-	goal = IMG_Load("img/ball.png");
-
 
 	//a player position :
   		SDL_Rect playerPos;
     		int xPlayer = 0;
  		int yPlayer = 0;
 
-	//blit surfaces depending of its destiny
-	int x = 0, y = 0;
-  	for (x = 0; x < NBR_OF_BLOCKS; x++)
-	  {
-		for (y = 0; y < NBR_OF_BLOCKS; y++)
-		  {
-		    //allow a random ground type to each block
-			mapGround[x][y] = addRandomGround();
-
-		    //blit all blocks depending on map types and mapGround types
-		    switch(map[x][y])
-		      {
-		      case GROUND :
-				blitGround(x,y,mapGround[x][y],screen);
-			break;
-		      case WOODEN_CASE :
-				moveBox(x,y,map,STILL,screen); //see game.c
-			break;
-		      case BOX_OK :
-				moveBox(x,y,map,STILL,screen); //see game.c
-			break;
-		      case WALL :
-				blitWalls(x,y,map,screen);
-			break;
-		      case BALL :
-		      		goalPos.x = x * BOX_SIZE;
-				goalPos.y = y * BOX_SIZE;
-				blitGround(x,y,mapGround[x][y],screen);
-				SDL_BlitSurface(goal, NULL, screen, &goalPos);
-			break;
-		      case PLAYER :
-		      		playerPos.x = x * BOX_SIZE;
-				playerPos.y = y * BOX_SIZE;
-				blitGround(x,y, map[x][y], screen);
-				movePlayer(x,y, STILL , mapGround[x][y], screen);
-			break;
-			}
-		  }
-	  }
+	//display the level using map and mapGround
+	displayLevel(map,mapGround, screen);
 
 	//refresh the window
   	SDL_UpdateWindowSurface(window);
 
-	//wait for quit event
-  int carryOn = 1;
-  SDL_Event event;
 
+
+  //get the player position
+  int x = 0, y = 0;
+  	for (x = 0; x < NBR_OF_BLOCKS; x++)
+	  {
+		for (y = 0; y < NBR_OF_BLOCKS; y++)
+		  {
+		    if (map[x][y] == PLAYER)
+		      {
+			playerPos.x = x * BOX_SIZE;
+			playerPos.y = y * BOX_SIZE;
+		      }
+	  	   }
+	}
+
+//wait for quit event
+  int carryOn = 1 ;
+  SDL_Event event;
   while(carryOn)
     {
       SDL_WaitEvent(&event);
@@ -359,7 +331,7 @@ int main(int argc, char *argv[])
     }
 
   	//clean
-	SDL_FreeSurface(goal);
+//	SDL_FreeSurface(goal);
   	SDL_FreeSurface(screen);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
