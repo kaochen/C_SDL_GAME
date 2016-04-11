@@ -78,86 +78,57 @@ int main(int argc, char *argv[])
 	//create a ground map to store ground type from the randomGround function
 	int mapGround[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
 
-	//create a wall surface
-  	SDL_Surface *wall = NULL;
-  	SDL_Rect wallPos;
+  	//create a goal surface
+  	SDL_Surface *goal = NULL;
+  	SDL_Rect goalPos;
 	//load image
-	wall = IMG_Load("img/wall.png");
+	goal = IMG_Load("img/ball.png");
 
 
-	//create a wooden case surface
-  	SDL_Surface *woodenCase = NULL;
-	//load image
-	woodenCase = SDL_LoadBMP("img/box.bmp");
-
-  	//create a ball
-  	SDL_Surface *ball = NULL;
-  	SDL_Rect ballPos;
-	//load image
-	ball = IMG_Load("img/ball.png");
-
-  	//player surface
-	//front face
-		SDL_Surface *playerFront = NULL;
-		playerFront = IMG_Load("img/front.png");
-  	//back face
-		SDL_Surface *playerBack = NULL;
-		playerBack = IMG_Load("img/back.png");
-    	//left face
-		SDL_Surface *playerLeft = NULL;
-		playerLeft = IMG_Load("img/left.png");
-      	//rigth face
-		SDL_Surface *playerRight = NULL;
-		playerRight = IMG_Load("img/right.png");
 	//a player position :
   		SDL_Rect playerPos;
-  		playerPos.x = 40;
-    		playerPos.y = 40;
-    		int xPlayer = playerPos.x/NBR_OF_BLOCKS;
- 		int yPlayer = playerPos.y/NBR_OF_BLOCKS;
+    		int xPlayer = 0;
+ 		int yPlayer = 0;
 
-
-
-	int i = 0, j = 0;
-  	for (i = 0; i < NBR_OF_BLOCKS; i++)
+	//blit surfaces depending of its destiny
+	int x = 0, y = 0;
+  	for (x = 0; x < NBR_OF_BLOCKS; x++)
 	  {
-		for (j = 0; j < NBR_OF_BLOCKS; j++)
+		for (y = 0; y < NBR_OF_BLOCKS; y++)
 		  {
 		    //allow a random ground type to each block
-		   	mapGround[i][j] = addRandomGround();
+			mapGround[x][y] = addRandomGround();
+
 		    //blit all blocks depending on map types and mapGround types
-		    switch(map[i][j])
+		    switch(map[x][y])
 		      {
 		      case GROUND :
-				blitGround(i, j, mapGround[i][j],screen);
+				blitGround(x,y,mapGround[x][y],screen);
 			break;
 		      case WOODEN_CASE :
-				moveBox(i,j,map, STILL,screen); //see game.c
+				moveBox(x,y,map,STILL,screen); //see game.c
 			break;
 		      case BOX_OK :
-				moveBox(i,j,map, STILL,screen); //see game.c
+				moveBox(x,y,map,STILL,screen); //see game.c
 			break;
 		      case WALL :
-				blitWalls(i,j, map,screen);
+				blitWalls(x,y,map,screen);
 			break;
 		      case BALL :
-		      		ballPos.x = i * BOX_SIZE;
-				ballPos.y = j * BOX_SIZE;
-				blitGround(i, j, mapGround[i][j],screen);
-				SDL_BlitSurface(ball, NULL, screen, &ballPos);
+		      		goalPos.x = x * BOX_SIZE;
+				goalPos.y = y * BOX_SIZE;
+				blitGround(x,y,mapGround[x][y],screen);
+				SDL_BlitSurface(goal, NULL, screen, &goalPos);
 			break;
 		      case PLAYER :
-		      		playerPos.x = i * BOX_SIZE;
-				playerPos.y = j * BOX_SIZE;
-				blitGround(i, j, map[i][j], screen);
-				movePlayer(i,j, STILL , mapGround[i][j], screen);
-
+		      		playerPos.x = x * BOX_SIZE;
+				playerPos.y = y * BOX_SIZE;
+				blitGround(x,y, map[x][y], screen);
+				movePlayer(x,y, STILL , mapGround[x][y], screen);
 			break;
-
 			}
 		  }
 	  }
-
 
 	//refresh the window
   	SDL_UpdateWindowSurface(window);
@@ -231,8 +202,6 @@ int main(int argc, char *argv[])
 	      break;
 
 
-
-
 	    case SDLK_LEFT:
 	      //Don't go outside
 		if (xPlayer - 1 < 0)
@@ -283,7 +252,7 @@ int main(int argc, char *argv[])
 		}
 	      break;
 
-//not ok
+
 	    case SDLK_UP:
 	      //Don't go outside
 		if (yPlayer - 1 < 0 )
@@ -332,6 +301,8 @@ int main(int argc, char *argv[])
 		  			break;
 		}
 	      break;
+
+
 	    case SDLK_DOWN:
 			      //Don't go outside
 		if (yPlayer + 1 >= NBR_OF_BLOCKS)
@@ -382,18 +353,14 @@ int main(int argc, char *argv[])
 		  			break;
 		}
 	      break;
-	    case SDL_MOUSEBUTTONUP:
-
-	      break;
 	    }
-
 	        SDL_UpdateWindowSurface(window);
 	}
     }
 
   	//clean
-	SDL_FreeSurface(wall);
-  	SDL_FreeSurface(woodenCase);
+	SDL_FreeSurface(goal);
+  	SDL_FreeSurface(screen);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
   	return EXIT_SUCCESS;
