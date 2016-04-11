@@ -105,8 +105,9 @@ while(carryOn)
 	}
 
   }
-        //SDL_Delay(1000);
 	SDL_FreeSurface(menuBackground);
+  	SDL_FreeSurface(level1);
+  	SDL_FreeSurface(level2);
     	return levelChoice;
 }
 #endif

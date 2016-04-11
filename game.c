@@ -192,11 +192,24 @@ SDL_FreeSurface(ground3);
 //blitWalls
 void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen)
 {
-	//create a wall surface
-  	SDL_Surface *wall = NULL;
-  	SDL_Rect wallPos;
-	//load image
-	wall = IMG_Load("img/wall.png");
+	//create a wall 1 surface
+  	SDL_Surface *wall1 = NULL;
+	wall1 = IMG_Load("img/wall.png");
+
+  	//create a wall 2 surface
+  	SDL_Surface *wall2 = NULL;
+	wall2 = IMG_Load("img/wall2.png");
+
+  	//create a wall 3 surface
+  	SDL_Surface *wall3 = NULL;
+	wall3 = IMG_Load("img/wall3.png");
+
+    	//create a wall 4 surface
+  	SDL_Surface *wall4 = NULL;
+	wall4 = IMG_Load("img/wall4.png");
+
+	//set position for wall blocks
+    	SDL_Rect wallPos;
 
 	//create the left wall border
   	SDL_Surface *wallBorderLeft = NULL;
@@ -216,7 +229,27 @@ void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen)
 
 	wallPos.x = x * BOX_SIZE;
 	wallPos.y = y * BOX_SIZE;
-	SDL_BlitSurface(wall, NULL, screen, &wallPos);
+
+  	//blit a random Wall Surface
+  	int i = 0, randomNumber = 0;
+	randomNumber = random_number(0,100);
+	if (randomNumber < 40)
+		{
+			SDL_BlitSurface(wall1, NULL, screen, &wallPos);
+		}
+  	else if(randomNumber < 60)
+    		{
+			SDL_BlitSurface(wall2, NULL, screen, &wallPos);
+		}
+    	else if(randomNumber < 80)
+    		{
+			SDL_BlitSurface(wall3, NULL, screen, &wallPos);
+		}
+  	else
+    		{
+		    	SDL_BlitSurface(wall4, NULL, screen, &wallPos);
+		}
+
 
   //blit wall border expect on window sides
    	//blit left border
@@ -240,7 +273,10 @@ void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen)
 	  	SDL_BlitSurface(wallBorderBottom, NULL, screen, &wallPos);
 		}
 	//clean
-  	SDL_FreeSurface(wall);
+  	SDL_FreeSurface(wall1);
+    	SDL_FreeSurface(wall2);
+      	SDL_FreeSurface(wall3);
+        SDL_FreeSurface(wall4);
   	SDL_FreeSurface(wallBorderTop);
   	SDL_FreeSurface(wallBorderBottom);
   	SDL_FreeSurface(wallBorderLeft);
