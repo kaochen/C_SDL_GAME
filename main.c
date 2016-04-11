@@ -81,7 +81,8 @@ int main(int argc, char *argv[])
   	SDL_Surface *wall = NULL;
   	SDL_Rect wallPos;
 	//load image
-	wall = SDL_LoadBMP("img/wall.bmp");
+	wall = IMG_Load("img/wall.png");
+	//wall = SDL_LoadBMP("img/wall.bmp");
 
 	//create a wooden case surface
   	SDL_Surface *woodenCase = NULL;
