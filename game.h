@@ -38,7 +38,8 @@ int addRandomGround();
 //blit Ground
 void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen);
 
-//pick a random ground image
-//void randomGround(int x, int y, int *xyGround, SDL_Surface *screen, int type);
+//blit walls
+void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen);
+
 
 #endif

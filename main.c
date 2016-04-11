@@ -69,10 +69,11 @@ int main(int argc, char *argv[])
 	//how many level are in the file
 	int max_Levels = nbr_of_level();
   	int levelChoice = 0;
-  	levelChoice = levelSelector(window, screen);
+  	//levelChoice = levelSelector(window, screen);
 
   	//load the level from the levels.txt
-	readlevel(map, levelChoice);
+	//readlevel(map, levelChoice);
+	readlevel(map, 0);
 
 	//create a ground map to store ground type from the randomGround function
 	int mapGround[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
@@ -82,7 +83,7 @@ int main(int argc, char *argv[])
   	SDL_Rect wallPos;
 	//load image
 	wall = IMG_Load("img/wall.png");
-	//wall = SDL_LoadBMP("img/wall.bmp");
+
 
 	//create a wooden case surface
   	SDL_Surface *woodenCase = NULL;
@@ -133,13 +134,11 @@ int main(int argc, char *argv[])
 		      case WOODEN_CASE :
 				moveBox(i,j,map, STILL,screen); //see game.c
 			break;
-		     case BOX_OK :
+		      case BOX_OK :
 				moveBox(i,j,map, STILL,screen); //see game.c
 			break;
 		      case WALL :
-		      		wallPos.x = i * BOX_SIZE;
-				wallPos.y = j * BOX_SIZE;
-				SDL_BlitSurface(wall, NULL, screen, &wallPos);
+				blitWalls(i,j, map,screen);
 			break;
 		      case BALL :
 		      		ballPos.x = i * BOX_SIZE;

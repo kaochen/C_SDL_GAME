@@ -177,6 +177,58 @@ void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen)
 	  }
 }
 
+//blitWalls
+void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen)
+{
+	//create a wall surface
+  	SDL_Surface *wall = NULL;
+  	SDL_Rect wallPos;
+	//load image
+	wall = IMG_Load("img/wall.png");
+
+	//create the left wall border
+  	SDL_Surface *wallBorderLeft = NULL;
+	wallBorderLeft = IMG_Load("img/wallBorderLeft.png");
+
+  	//create the right wall border
+  	SDL_Surface *wallBorderRight = NULL;
+	wallBorderRight = IMG_Load("img/wallBorderRight.png");
+
+  	//create the top wall border
+  	SDL_Surface *wallBorderTop = NULL;
+	wallBorderTop = IMG_Load("img/wallBorderTop.png");
+
+  	//create the bottom wall border
+  	SDL_Surface *wallBorderBottom = NULL;
+	wallBorderBottom = IMG_Load("img/wallBorderBottom.png");
+
+	wallPos.x = x * BOX_SIZE;
+	wallPos.y = y * BOX_SIZE;
+	SDL_BlitSurface(wall, NULL, screen, &wallPos);
+
+  //blit wall border expect on window sides
+   	//blit left border
+  	if (x != 0 && map[x-1][y] != WALL )
+    		{
+	  	SDL_BlitSurface(wallBorderLeft, NULL, screen, &wallPos);
+		}
+    	//blit right border
+  	if (x != NBR_OF_BLOCKS && map[x+1][y] != WALL)
+    		{
+	  	SDL_BlitSurface(wallBorderRight, NULL, screen, &wallPos);
+		}
+    	//blit top border
+  	if ( y!= 0 && map[x][y-1] != WALL)
+    		{
+	  	SDL_BlitSurface(wallBorderTop, NULL, screen, &wallPos);
+		}
+    	//blit bottom border
+  	if (y != NBR_OF_BLOCKS && map[x][y+1] != WALL)
+    		{
+	  	SDL_BlitSurface(wallBorderBottom, NULL, screen, &wallPos);
+		}
+}
+
 //add a more ground choice
 int addRandomGround()
 	{
