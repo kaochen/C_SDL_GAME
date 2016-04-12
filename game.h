@@ -22,10 +22,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "const.h"
 #include <SDL2/SDL.h>
+#include "sprites.h"
 
+//move player and blit the player
+void blitPlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
-//move player
-void movePlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surface *screen);
 //move a box
 void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction , SDL_Surface *screen);
 

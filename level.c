@@ -121,7 +121,7 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 	}
 
 //display level
-void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_Surface *screen)
+void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
   //create a goal surface
   	SDL_Surface *goal = NULL;
@@ -161,7 +161,7 @@ void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_
 			break;
 		      case PLAYER :
 				blitGround(x,y, map[x][y], screen);
-				movePlayer(x,y, STILL , mapGround[x][y], screen);
+				blitPlayer(x,y, STILL , mapGround[x][y], screen, tableSurface);
 			break;
 			}
 		  }

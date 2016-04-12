@@ -20,14 +20,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include "const.h"
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+
+#include "const.h"
+#include "sprites.h"
 //read a level line
 int readlevel(int map[][NBR_OF_BLOCKS], int level);
 
 //display the level using map and mapGround
-void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_Surface *screen);
+void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 //how many level are in the file
 int nbr_of_level();

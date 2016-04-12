@@ -17,24 +17,31 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef CONST_H
-#define CONST_H
+#ifndef SPRITES_H
+#define SPRITES_H
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+#include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
 
-#define GAME_NAME "SokoRobot"
+#include "const.h"
 
-#define W_WIDTH  720
-#define W_HEIGHT 720
-#define BACKGROUND_SIZE 40
-#define BOX_SIZE 40
-#define NBR_OF_BLOCKS 18
-#define MENU_WIDTH 220
-#define MENU_HEIGHT 180
-#define BUTTON_WIDTH 180
-#define BUTTON_HEIGHT 60
-#define NBR_OF_IMAGES 100
+typedef struct
+{
+  //SDL
+  SDL_Surface *image;
+  SDL_Rect imagePos;
 
-enum {GROUND, GROUND1, GROUND2, GROUND3, GROUND4, WALL , WOODEN_CASE , BALL,BOX_OK, PLAYER  };
-enum {UP , DOWN, RIGHT, LEFT, STILL };
-enum {RANDOM, FIXED};
-enum {PLAYER_FRONT,PLAYER_BACK,PLAYER_LEFT,PLAYER_RIGHT,WALL1_IMAGE,WALL2_IMAGE,WALL3_IMAGE,WALL4_IMAGE,GROUND1_IMAGE};
+  int height;
+  int width;
+}Sprites;
+
+//load a sprite as a surface
+void loadSprite(Sprites *sprites, const char *imagePath);
+
+//free Surfaces
+void freeSprites(Sprites tableSurface[NBR_OF_IMAGES]);
+
 #endif

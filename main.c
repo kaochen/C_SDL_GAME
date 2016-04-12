@@ -27,6 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "game.h"
 #include "level.h"
 #include "menu.h"
+#include "sprites.h"
 
 int main(int argc, char *argv[])
 {
@@ -63,6 +64,18 @@ int main(int argc, char *argv[])
     	}
 	    fprintf(stderr, "Creating the main window succeed\n");
 
+  	//load images
+	Sprites tableSurface[NBR_OF_IMAGES];
+	loadSprite(&tableSurface[PLAYER_FRONT], "img/front.png");
+	loadSprite(&tableSurface[PLAYER_BACK], "img/back.png");
+	loadSprite(&tableSurface[PLAYER_LEFT], "img/left.png");
+	loadSprite(&tableSurface[PLAYER_RIGHT], "img/right.png");
+  	loadSprite(&tableSurface[WALL1_IMAGE], "img/wall.png");
+    	loadSprite(&tableSurface[WALL2_IMAGE], "img/wall2.png");
+    	loadSprite(&tableSurface[WALL3_IMAGE], "img/wall3.png");
+    	loadSprite(&tableSurface[WALL4_IMAGE], "img/wall4.png");
+  	loadSprite(&tableSurface[GROUND1_IMAGE], "img/background.bmp");
+
 	//create a map with coordinates x,y to locate things
   	int map[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
 
@@ -85,7 +98,7 @@ int main(int argc, char *argv[])
  		int yPlayer = 0;
 
 	//display the level using map and mapGround
-	displayLevel(map,mapGround, screen);
+	displayLevel(map,mapGround, screen, tableSurface);
 
 	//refresh the window
   	SDL_UpdateWindowSurface(window);
@@ -143,8 +156,8 @@ int main(int argc, char *argv[])
 	      	//move the box
 			moveBox(xPlayer,yPlayer,map, RIGHT,screen);
 		//move the player
-		  	movePlayer(xPlayer,yPlayer, RIGHT , mapGround[xPlayer][yPlayer], screen);
-		//update new player position
+			blitPlayer(xPlayer,yPlayer, RIGHT , mapGround[xPlayer][yPlayer], screen, tableSurface);
+		  //update new player position
 		  	playerPos.x  += BOX_SIZE;
 		//update status
 		if(map[xPlayer+2][yPlayer] == BALL)
@@ -163,8 +176,8 @@ int main(int argc, char *argv[])
 		if (map[xPlayer+1][yPlayer]== GROUND)
 		{
 					//move the player
-		  		  	movePlayer(xPlayer,yPlayer, RIGHT , mapGround[xPlayer][yPlayer], screen);
-		  		  	//update new player position
+		  			blitPlayer(xPlayer,yPlayer, RIGHT , mapGround[xPlayer][yPlayer], screen, tableSurface);
+		  			//update new player position
 		  			playerPos.x  += BOX_SIZE;
 				       	//update status
 				      	map[xPlayer][yPlayer] = GROUND;
@@ -193,7 +206,7 @@ int main(int argc, char *argv[])
 	      	//move the box
 			moveBox(xPlayer,yPlayer,map, LEFT,screen);
 		//move the player
-		  	movePlayer(xPlayer,yPlayer, LEFT , mapGround[xPlayer][yPlayer], screen);
+		  	blitPlayer(xPlayer,yPlayer, LEFT , mapGround[xPlayer][yPlayer], screen, tableSurface);
 		//update new player position
 		  	playerPos.x  -= BOX_SIZE;
 		//update status
@@ -214,7 +227,7 @@ int main(int argc, char *argv[])
 		if (map[xPlayer-1][yPlayer]== GROUND)
 		{
 					//move the player
-		  		  	movePlayer(xPlayer,yPlayer, LEFT , mapGround[xPlayer][yPlayer], screen);
+		  			blitPlayer(xPlayer,yPlayer, LEFT , mapGround[xPlayer][yPlayer], screen, tableSurface);
 		  		  	//update new player position
 		  			playerPos.x  -= BOX_SIZE;
 				       	//update status
@@ -244,7 +257,7 @@ int main(int argc, char *argv[])
 	      	//move the box
 			moveBox(xPlayer,yPlayer,map,UP,screen);
 		//move the player
-		  	movePlayer(xPlayer,yPlayer, UP , mapGround[xPlayer][yPlayer], screen);
+		  	blitPlayer(xPlayer,yPlayer, UP , mapGround[xPlayer][yPlayer], screen, tableSurface);
 		//update new player position
 		  	playerPos.y  -= BOX_SIZE;
 		//update status
@@ -264,8 +277,8 @@ int main(int argc, char *argv[])
 		if (map[xPlayer][yPlayer-1]== GROUND)
 		{
 					//move the player
-		  		  	movePlayer(xPlayer,yPlayer, UP , mapGround[xPlayer][yPlayer], screen);
-		  		  	//update new player position
+		  		  	blitPlayer(xPlayer,yPlayer, UP , mapGround[xPlayer][yPlayer], screen, tableSurface);
+		  			//update new player position
 		  			playerPos.y  -= BOX_SIZE;
 				       	//update status
 				      	map[xPlayer][yPlayer] = GROUND;
@@ -296,7 +309,7 @@ int main(int argc, char *argv[])
 	      	//move the Box
 			moveBox(xPlayer,yPlayer,map, DOWN,screen);
 		//move the player
-		  	movePlayer(xPlayer,yPlayer, DOWN , mapGround[xPlayer][yPlayer], screen);
+			blitPlayer(xPlayer,yPlayer, DOWN , mapGround[xPlayer][yPlayer], screen, tableSurface);
 		//update new player position
 		  	playerPos.y  += BOX_SIZE;
 		//update status
@@ -316,8 +329,8 @@ int main(int argc, char *argv[])
 		if (map[xPlayer][yPlayer+1]== GROUND)
 		{
 					//move the player
-		  			movePlayer(xPlayer,yPlayer, DOWN , mapGround[xPlayer][yPlayer], screen);
-		  		  	//update new player position
+					blitPlayer(xPlayer,yPlayer, DOWN , mapGround[xPlayer][yPlayer], screen, tableSurface);
+		  			//update new player position
 		  			playerPos.y  += BOX_SIZE;
 				       	//update status
 				      	map[xPlayer][yPlayer] = GROUND;
@@ -331,6 +344,7 @@ int main(int argc, char *argv[])
     }
 
   	//clean
+	freeSprites(tableSurface);
   	SDL_FreeSurface(screen);
 	SDL_DestroyWindow(window);
 	SDL_Quit();
