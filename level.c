@@ -127,7 +127,7 @@ void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_
   	SDL_Surface *goal = NULL;
   	SDL_Rect goalPos;
 	//load image
-	goal = IMG_Load("img/ball.png");
+	goal = IMG_Load("img/goal.png");
 
   	//blit surfaces depending of its destiny
 	int x = 0, y = 0;

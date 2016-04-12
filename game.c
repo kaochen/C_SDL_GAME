@@ -105,7 +105,7 @@ void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction ,
 	//goal
  	SDL_Surface *goal = NULL;
 	//load image
-	goal = IMG_Load("img/ball.png");
+	goal = IMG_Load("img/goal.png");
 
 	//box position
 	    	SDL_Rect boxPos;
