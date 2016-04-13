@@ -141,6 +141,42 @@
        y2="535.41663"
        gradientUnits="userSpaceOnUse"
        gradientTransform="matrix(0.05896257,0,0,0.08366206,-1.9150857,987.52696)" />
+    <linearGradient
+       inkscape:collect="always"
+       xlink:href="#linearGradient4205"
+       id="linearGradient4320"
+       x1="3.8214283"
+       y1="19.151787"
+       x2="38.053574"
+       y2="19.151787"
+       gradientUnits="userSpaceOnUse"
+       gradientTransform="translate(-2.6785715,-0.26785716)" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4346"
+       x="-0.072"
+       width="1.144"
+       y="-0.072"
+       height="1.144">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.79546309"
+         id="feGaussianBlur4348" />
+    </filter>
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4538"
+       x="-0.079761906"
+       width="1.1595238"
+       y="-0.081048386"
+       height="1.1620968">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="1.1216518"
+         id="feGaussianBlur4540" />
+    </filter>
   </defs>
   <sodipodi:namedview
      id="base"
@@ -149,11 +185,11 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="11.2"
-     inkscape:cx="3.0065862"
-     inkscape:cy="6.4691017"
+     inkscape:zoom="3.959798"
+     inkscape:cx="-10.948364"
+     inkscape:cy="-16.005143"
      inkscape:document-units="px"
-     inkscape:current-layer="layer1"
+     inkscape:current-layer="layer2"
      showgrid="false"
      inkscape:window-width="1920"
      inkscape:window-height="1016"
@@ -174,10 +210,12 @@
     </rdf:RDF>
   </metadata>
   <g
-     inkscape:label="Calque 1"
+     inkscape:label="Side"
      inkscape:groupmode="layer"
      id="layer1"
-     transform="translate(0,-1012.3622)">
+     transform="translate(0,-1012.3622)"
+     sodipodi:insensitive="true"
+     style="display:none">
     <rect
        style="opacity:1;fill:url(#linearGradient4211);fill-opacity:1;stroke:none;stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4136"
@@ -228,5 +266,52 @@
        y="1031.4125"
        rx="0.46504593"
        ry="19.697975" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer2"
+     inkscape:label="Top">
+    <ellipse
+       style="opacity:1;fill:#000000;fill-opacity:0.63066202;stroke:none;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter4538)"
+       id="path4356"
+       cx="21.875"
+       cy="22.500002"
+       rx="16.875"
+       ry="16.607143" />
+    <circle
+       style="opacity:1;fill:#1660cf;fill-opacity:1;stroke:url(#linearGradient4320);stroke-width:2;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4312"
+       cx="18.258928"
+       cy="18.883928"
+       r="16.116072" />
+    <circle
+       r="13.257718"
+       cy="19.0625"
+       cx="18.4375"
+       id="circle4322"
+       style="opacity:1;fill:none;fill-opacity:1;stroke:#114a9f;stroke-width:1.64527905;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1;filter:url(#filter4346)" />
+    <ellipse
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:#0b3571;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4350"
+       cx="15.28862"
+       cy="12.088736"
+       rx="2.5168514"
+       ry="2.4460573" />
+    <ellipse
+       ry="3.4698446"
+       rx="3.5702691"
+       cy="25.698792"
+       cx="22.858419"
+       id="ellipse4352"
+       style="opacity:1;fill:#0b3571;fill-opacity:1;stroke:#000000;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <ellipse
+       style="opacity:1;fill:#000000;fill-opacity:1;stroke:none;stroke-width:0.38578999;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="ellipse4354"
+       cx="23.885206"
+       cy="26.608688"
+       rx="1.3773741"
+       ry="1.3386313"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>
