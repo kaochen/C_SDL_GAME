@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 #include <time.h>
 
 #include "const.h"
@@ -33,13 +34,20 @@ int main(int argc, char *argv[])
 {
   	 srand(time(NULL)); //start random processeur just once
 			    //
-  	//check if SDL start correctly
+  	//Start and check if SDL start correctly
 	if(SDL_Init(SDL_INIT_VIDEO) == -1)
 	  {
 	    fprintf(stderr, "SDL initialization error: %s\n", SDL_GetError());
 	    exit(EXIT_FAILURE);
 	  }
 	    fprintf(stderr, "SDL initialization ok\n");
+	//Start SDL ttf
+	if(TTF_Init() == -1)
+	  {
+      fprintf(stderr, "TTF_Init initialization error: %s\n", TTF_GetError());
+      	    exit(EXIT_FAILURE);
+    	  }
+
 
 	//Create the window game
  	SDL_Window *window = SDL_CreateWindow(GAME_NAME,
@@ -92,6 +100,8 @@ int main(int argc, char *argv[])
 	loadSprite(&tableSurface[BOX_IMAGE_OK], "img/box.bmp");
 	//goal
 	loadSprite(&tableSurface[GOAL_IMAGE], "img/goal.png");
+  	//menu
+  	loadSprite(&tableSurface[MENU_BACK], "img/menuBlock.png");
 
 
 	//create a map with coordinates x,y to locate things
@@ -117,7 +127,8 @@ int main(int argc, char *argv[])
 
 	//display the level using map and mapGround
 	displayLevel(map,mapGround, screen, tableSurface);
-
+	//diplay menu on top of the screen
+	displayMenu((levelChoice +1), menu,tableSurface);
 	//refresh the window
   	SDL_UpdateWindowSurface(window);
 
@@ -365,6 +376,7 @@ int main(int argc, char *argv[])
 	freeSprites(tableSurface);
   	SDL_FreeSurface(screen);
 	SDL_DestroyWindow(window);
+  	TTF_Quit();
 	SDL_Quit();
   	return EXIT_SUCCESS;
 }

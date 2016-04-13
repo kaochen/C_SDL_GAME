@@ -24,91 +24,63 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdio.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
+#include <SDL2/SDL_ttf.h>
 
 #include "const.h"
+#include "game.h"
+#include "menu.h"
+#include "level.h"
 
-int levelSelector(SDL_Window *window, SDL_Surface *screen)
+//display menu on top of the screen
+void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
 {
-	//create a menu background surface
-  	SDL_Surface *menuBackground = NULL;
-  	SDL_Rect menuPos;
-	menuBackground = SDL_CreateRGBSurface(0, MENU_WIDTH, MENU_HEIGHT, 32, 0,255,0,0);
-	menuPos.x = ((W_HEIGHT - MENU_HEIGHT)/2);
-  	menuPos.y = ((W_WIDTH - MENU_WIDTH)/2);
-	SDL_FillRect(menuBackground, NULL, SDL_MapRGB(screen->format,255,0,0));
-	SDL_BlitSurface(menuBackground, NULL, screen, &menuPos);
-	fprintf(stderr, "Blit menu");
-
-
-  	//create button1:
-    	SDL_Surface *level1 = NULL;
-  	SDL_Rect level1Pos;
-  	level1 = SDL_CreateRGBSurface(0, BUTTON_WIDTH, BUTTON_HEIGHT, 32, 0,255,0,0);
-    	level1Pos.x = (menuPos.x + (MENU_WIDTH - BUTTON_WIDTH)/2);
-  	level1Pos.y = (menuPos.y + (MENU_HEIGHT - 2*BUTTON_HEIGHT)/2);
-  	SDL_FillRect(level1, NULL, SDL_MapRGB(screen->format,0,255,0));
-  	SDL_BlitSurface(level1, NULL, screen, &level1Pos);
-
-    	//create button2:
-    	SDL_Surface *level2 = NULL;
-  	SDL_Rect level2Pos;
-  	level2 = SDL_CreateRGBSurface(0, BUTTON_WIDTH, BUTTON_HEIGHT, 32, 0,255,0,0);
-    	level2Pos.x = (menuPos.x + (MENU_WIDTH - BUTTON_WIDTH)/2);
-  	level2Pos.y = (menuPos.y + (MENU_HEIGHT+10)/2);
-  	SDL_FillRect(level2, NULL, SDL_MapRGB(screen->format,0,255,0));
-  	SDL_BlitSurface(level2, NULL, screen, &level2Pos);
-
-  	//refresh window
-  	SDL_UpdateWindowSurface(window);
-
-  int levelChoice = 0;
-//wait for quit event
-  int carryOn = 1;
-  SDL_Event event;
-while(carryOn)
-    {
-      SDL_WaitEvent(&event);
-      switch(event.type)
-	{
-	case SDL_QUIT:
-	  carryOn = 0;
-	  SDL_DestroyWindow(window);
-	  SDL_Quit();
-	  break;
-	case SDL_KEYDOWN:
-	//listen keyboard:
-	switch(event.key.keysym.sym)
-	    {
-	    case SDLK_UP:
-	  	SDL_FillRect(level1, NULL, SDL_MapRGB(screen->format,0,200,0));
-	  	SDL_BlitSurface(level1, NULL, screen, &level1Pos);
-	      	//reverse
-	      	SDL_FillRect(level2, NULL, SDL_MapRGB(screen->format,0,255,0));
-	  	SDL_BlitSurface(level2, NULL, screen, &level2Pos);
-	      	levelChoice = 0;
-	      	break;
-	    case SDLK_DOWN:
-	      	SDL_FillRect(level1, NULL, SDL_MapRGB(screen->format,0,255,0));
-	  	SDL_BlitSurface(level1, NULL, screen, &level1Pos);
-	      	//reverse
-	      	SDL_FillRect(level2, NULL, SDL_MapRGB(screen->format,0,200,0));
-	  	SDL_BlitSurface(level2, NULL, screen, &level2Pos);
-	      	levelChoice = 1;
-	      break;
-	    case SDLK_RETURN:
-	      	carryOn = 0;
-	      break;
-	    }
-	SDL_UpdateWindowSurface(window);
-	  break;
-
-	}
-
-  }
-	SDL_FreeSurface(menuBackground);
-  	SDL_FreeSurface(level1);
-  	SDL_FreeSurface(level2);
-    	return levelChoice;
+	//first add background:
+	backgroundMenu(menu, tableSurface);
+ 	 //display the level number
+	levelMenu(levelNumber,menu,tableSurface);
 }
+
+//display menu on top of the screen
+void backgroundMenu(SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
+{
+  	SDL_Rect menuPos;
+  	menuPos.x = 0;
+  	menuPos.y = 0;
+  	int i = 0;
+  	for (i = 0; i < NBR_OF_BLOCKS; i++)
+	  {
+		SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL,menu,&menuPos);
+		menuPos.x += BOX_SIZE;
+	   }
+}
+
+//display the level number
+void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
+{
+  //manage font
+  TTF_Font *font = NULL;
+  font = TTF_OpenFont("img/BABIRG__.TTF", 26);
+  SDL_Color fontColor = {255,255,255};
+
+  //get info
+  int levelMax = 0;
+  levelMax = nbr_of_level();
+  //add a text
+  SDL_Surface *levelText = NULL;
+  char text[20] = "";
+  sprintf(text, "Level: %d/%d", levelNumber, levelMax);
+  levelText = TTF_RenderText_Blended(font, text, fontColor);
+
+  //blit the text
+  SDL_Rect levelTextPos;
+  levelTextPos.x = BOX_SIZE*(NBR_OF_BLOCKS-3);
+  levelTextPos.y = 10;
+  SDL_BlitSurface(levelText, NULL, menu, &levelTextPos);
+
+  //clean
+  SDL_FreeSurface(levelText);
+  TTF_CloseFont(font);
+}
+
 #endif
 

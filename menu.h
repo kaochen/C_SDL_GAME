@@ -26,8 +26,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL_image.h>
 
 #include "const.h"
+#include "game.h"
+//diplay menu on top of the screen
+void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
 
-int levelSelector(SDL_Window *window, SDL_Surface *screen);
+//create the menu background
+void backgroundMenu(SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
 
+//diplay the level number
+void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
 #endif
 
