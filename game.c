@@ -81,6 +81,11 @@ void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction ,
 	//load image
 	box = SDL_LoadBMP("img/box.bmp");
 
+	//create a box surface
+	SDL_Surface *barrel = NULL;
+	//load image
+	barrel = IMG_Load("img/barrel.png");
+
 	//goal
  	SDL_Surface *goal = NULL;
 	//load image
@@ -118,13 +123,13 @@ void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction ,
 	//blit if box on a goal
 	if (map[boxPos.x/BOX_SIZE][boxPos.y/BOX_SIZE] == BALL || map[boxPos.x/BOX_SIZE][boxPos.y/BOX_SIZE] == BOX_OK)
 	    		{
-			SDL_BlitSurface(box, NULL, screen, &boxPos);
+			SDL_BlitSurface(barrel, NULL, screen, &boxPos);
 			SDL_BlitSurface(goal, NULL, screen, &boxPos);
 			}
 
 	 else
 		  	{
-			SDL_BlitSurface(box, NULL, screen, &boxPos);
+			SDL_BlitSurface(barrel, NULL, screen, &boxPos);
 			}
 	//clean
 	SDL_FreeSurface(box);
