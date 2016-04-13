@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 void blitPlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 //move a box
-void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction , SDL_Surface *screen);
+void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction , SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 //random number between two numbers
 int random_number(int min, int max);
@@ -37,10 +37,10 @@ int random_number(int min, int max);
 int addRandomGround();
 
 //blit Ground
-void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen);
+void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 //blit walls
-void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen);
+void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 
 #endif

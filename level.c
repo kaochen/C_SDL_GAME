@@ -123,13 +123,10 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 //display level
 void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
-  //create a goal surface
-  	SDL_Surface *goal = NULL;
-  	SDL_Rect goalPos;
-	//load image
-	goal = IMG_Load("img/goal.png");
+  	//goal
+	SDL_Rect goalPos;
 
-  	//blit surfaces depending of its destiny
+   	//blit surfaces depending of its destiny
 	int x = 0, y = 0;
   	for (x = 0; x < NBR_OF_BLOCKS; x++)
 	  {
@@ -142,31 +139,30 @@ void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_
 		    switch(map[x][y])
 		      {
 		      case GROUND :
-				blitGround(x,y,mapGround[x][y],screen);
+				blitGround(x,y,mapGround[x][y],screen,tableSurface);
 			break;
 		      case WOODEN_CASE :
-				moveBox(x,y,map,STILL,screen); //see game.c
+				moveBox(x,y,map,STILL,screen, tableSurface); //see game.c
 			break;
 		      case BOX_OK :
-				moveBox(x,y,map,STILL,screen); //see game.c
+				moveBox(x,y,map,STILL,screen, tableSurface); //see game.c
 			break;
 		      case WALL :
-				blitWalls(x,y,map,screen);
+				blitWalls(x,y,map,screen,tableSurface);
 			break;
 		      case BALL :
 		      		goalPos.x = x * BOX_SIZE;
 				goalPos.y = y * BOX_SIZE;
-				blitGround(x,y,mapGround[x][y],screen);
-				SDL_BlitSurface(goal, NULL, screen, &goalPos);
+				blitGround(x,y,mapGround[x][y],screen,tableSurface);
+				SDL_BlitSurface(tableSurface[GOAL_IMAGE].image, NULL, screen, &goalPos);
 			break;
 		      case PLAYER :
-				blitGround(x,y, map[x][y], screen);
+				blitGround(x,y, map[x][y], screen,tableSurface);
 				blitPlayer(x,y, STILL , mapGround[x][y], screen, tableSurface);
 			break;
 			}
 		  }
 	  }
-  	SDL_FreeSurface(goal);
 }
 
 

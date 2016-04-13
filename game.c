@@ -39,32 +39,32 @@ void blitPlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surfa
 	  	playerPos.y = yPlayer * BOX_SIZE;
 
 	//first clean is place
-	 	blitGround(xPlayer, yPlayer, xyGround,screen);
+	 	blitGround(xPlayer, yPlayer, xyGround,screen,tableSurface);
 	//read the direction choice
 	switch(direction)
 	    {
 	    case UP:
 			playerPos.y  -= BOX_SIZE;
-	 		blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
+	 		blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen,tableSurface);
 	      	      	SDL_BlitSurface(tableSurface[PLAYER_BACK].image, NULL, screen, &playerPos);
 			break;
 	    case DOWN:
 			playerPos.y  += BOX_SIZE;
-			blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
+			blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen,tableSurface);
 	      		SDL_BlitSurface(tableSurface[PLAYER_FRONT].image, NULL, screen, &playerPos);
 			break;
 	    case RIGHT:
 			playerPos.x  += BOX_SIZE;
-			blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
+			blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen,tableSurface);
 	      	      	SDL_BlitSurface(tableSurface[PLAYER_RIGHT].image, NULL, screen, &playerPos);
 			break;
 	    case LEFT:
 			playerPos.x  -= BOX_SIZE;
-			blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
+			blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen,tableSurface);
 	      	      	SDL_BlitSurface(tableSurface[PLAYER_LEFT].image, NULL, screen, &playerPos);
 			break;
 	    case STILL:
-	 		blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen);
+	 		blitGround((playerPos.x/BOX_SIZE),(playerPos.y/BOX_SIZE) , xyGround,screen,tableSurface);
 	      	      	SDL_BlitSurface(tableSurface[PLAYER_FRONT].image, NULL, screen, &playerPos);
 			break;
 	    }
@@ -73,29 +73,12 @@ void blitPlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surfa
 
 
 //move a box
-void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction , SDL_Surface *screen)
+void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction , SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
 	{
-
-	//create a box surface
-	SDL_Surface *box = NULL;
-	//load image
-	box = SDL_LoadBMP("img/box.bmp");
-
-	//create a box surface
-	SDL_Surface *barrel = NULL;
-	//load image
-	barrel = IMG_Load("img/barrel.png");
-
-	//goal
- 	SDL_Surface *goal = NULL;
-	//load image
-	goal = IMG_Load("img/goal.png");
-
 	//box position
 	    	SDL_Rect boxPos;
 	  	boxPos.x = xPlayer * BOX_SIZE;
 	  	boxPos.y = yPlayer * BOX_SIZE;
-
 
 	switch(direction)
 	    {
@@ -120,20 +103,17 @@ void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction ,
 			boxPos.y = yPlayer * BOX_SIZE;
 			break;
 	    }
+	SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL, screen, &boxPos);
 	//blit if box on a goal
 	if (map[boxPos.x/BOX_SIZE][boxPos.y/BOX_SIZE] == BALL || map[boxPos.x/BOX_SIZE][boxPos.y/BOX_SIZE] == BOX_OK)
 	    		{
-			SDL_BlitSurface(barrel, NULL, screen, &boxPos);
-			SDL_BlitSurface(goal, NULL, screen, &boxPos);
+			SDL_BlitSurface(tableSurface[BOX_IMAGE_OK].image, NULL, screen, &boxPos);
 			}
 
 	 else
 		  	{
-			SDL_BlitSurface(barrel, NULL, screen, &boxPos);
+			SDL_BlitSurface(tableSurface[BOX_IMAGE].image, NULL, screen, &boxPos);
 			}
-	//clean
-	SDL_FreeSurface(box);
-	SDL_FreeSurface(goal);
 }
 
 
@@ -141,17 +121,8 @@ void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction ,
 //pick a random ground image
 
 //blit ground
-void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen)
+void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
 	{
-	SDL_Surface *ground1 = NULL;
-	ground1 = SDL_LoadBMP("img/background.bmp");
-
-  	SDL_Surface *ground2 = NULL;
-	ground2 = SDL_LoadBMP("img/background2.bmp");
-
-    	SDL_Surface *ground3 = NULL;
-	ground3 = SDL_LoadBMP("img/background3.bmp");
-
   	SDL_Rect groundPos;
     	groundPos.x = x * BOX_SIZE;
 	groundPos.y = y * BOX_SIZE;
@@ -159,58 +130,23 @@ void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen)
 	switch(typeOfGround)
 	  {
 	  case GROUND1:
-		SDL_BlitSurface(ground1, NULL, screen, &groundPos);
+		SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL, screen, &groundPos);
 	    break;
 	  case GROUND2:
-		SDL_BlitSurface(ground2, NULL, screen, &groundPos);
+		SDL_BlitSurface(tableSurface[GROUND2_IMAGE].image, NULL, screen, &groundPos);
 	    break;
 	  case GROUND3:
-		SDL_BlitSurface(ground3, NULL, screen, &groundPos);
+		SDL_BlitSurface(tableSurface[GROUND3_IMAGE].image, NULL, screen, &groundPos);
 	    break;
 	  }
-SDL_FreeSurface(ground1);
-SDL_FreeSurface(ground2);
-SDL_FreeSurface(ground3);
 }
 
 //blitWalls
-void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen)
+void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
-	//create a wall 1 surface
-  	SDL_Surface *wall1 = NULL;
-	wall1 = IMG_Load("img/wall.png");
-
-  	//create a wall 2 surface
-  	SDL_Surface *wall2 = NULL;
-	wall2 = IMG_Load("img/wall2.png");
-
-  	//create a wall 3 surface
-  	SDL_Surface *wall3 = NULL;
-	wall3 = IMG_Load("img/wall3.png");
-
-    	//create a wall 4 surface
-  	SDL_Surface *wall4 = NULL;
-	wall4 = IMG_Load("img/wall4.png");
 
 	//set position for wall blocks
     	SDL_Rect wallPos;
-
-	//create the left wall border
-  	SDL_Surface *wallBorderLeft = NULL;
-	wallBorderLeft = IMG_Load("img/wallBorderLeft.png");
-
-  	//create the right wall border
-  	SDL_Surface *wallBorderRight = NULL;
-	wallBorderRight = IMG_Load("img/wallBorderRight.png");
-
-  	//create the top wall border
-  	SDL_Surface *wallBorderTop = NULL;
-	wallBorderTop = IMG_Load("img/wallBorderTop.png");
-
-  	//create the bottom wall border
-  	SDL_Surface *wallBorderBottom = NULL;
-	wallBorderBottom = IMG_Load("img/wallBorderBottom.png");
-
 	wallPos.x = x * BOX_SIZE;
 	wallPos.y = y * BOX_SIZE;
 
@@ -219,19 +155,19 @@ void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen)
 	randomNumber = random_number(0,100);
 	if (randomNumber < 40)
 		{
-			SDL_BlitSurface(wall1, NULL, screen, &wallPos);
+			SDL_BlitSurface(tableSurface[WALL1_IMAGE].image, NULL, screen, &wallPos);
 		}
   	else if(randomNumber < 60)
     		{
-			SDL_BlitSurface(wall2, NULL, screen, &wallPos);
+			SDL_BlitSurface(tableSurface[WALL2_IMAGE].image, NULL, screen, &wallPos);
 		}
     	else if(randomNumber < 80)
     		{
-			SDL_BlitSurface(wall3, NULL, screen, &wallPos);
+			SDL_BlitSurface(tableSurface[WALL3_IMAGE].image, NULL, screen, &wallPos);
 		}
   	else
     		{
-		    	SDL_BlitSurface(wall4, NULL, screen, &wallPos);
+		    	SDL_BlitSurface(tableSurface[WALL4_IMAGE].image, NULL, screen, &wallPos);
 		}
 
 
@@ -239,32 +175,23 @@ void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen)
    	//blit left border
   	if (x != 0 && map[x-1][y] != WALL )
     		{
-	  	SDL_BlitSurface(wallBorderLeft, NULL, screen, &wallPos);
+	  	SDL_BlitSurface(tableSurface[WALL_LEFT].image, NULL, screen, &wallPos);
 		}
     	//blit right border
   	if (x != NBR_OF_BLOCKS && map[x+1][y] != WALL)
     		{
-	  	SDL_BlitSurface(wallBorderRight, NULL, screen, &wallPos);
+	  	SDL_BlitSurface(tableSurface[WALL_RIGHT].image, NULL, screen, &wallPos);
 		}
     	//blit top border
   	if ( y!= 0 && map[x][y-1] != WALL)
     		{
-	  	SDL_BlitSurface(wallBorderTop, NULL, screen, &wallPos);
+	  	SDL_BlitSurface(tableSurface[WALL_TOP].image, NULL, screen, &wallPos);
 		}
     	//blit bottom border
   	if (y != NBR_OF_BLOCKS && map[x][y+1] != WALL)
     		{
-	  	SDL_BlitSurface(wallBorderBottom, NULL, screen, &wallPos);
+	  	SDL_BlitSurface(tableSurface[WALL_BOTTOM].image, NULL, screen, &wallPos);
 		}
-	//clean
-  	SDL_FreeSurface(wall1);
-    	SDL_FreeSurface(wall2);
-      	SDL_FreeSurface(wall3);
-        SDL_FreeSurface(wall4);
-  	SDL_FreeSurface(wallBorderTop);
-  	SDL_FreeSurface(wallBorderBottom);
-  	SDL_FreeSurface(wallBorderLeft);
-  	SDL_FreeSurface(wallBorderRight);
 }
 
 //add a more ground choice

@@ -56,25 +56,43 @@ int main(int argc, char *argv[])
   	SDL_Surface *screen = NULL;
   	screen = SDL_GetWindowSurface(window);
 
+    	//Create a surface menu from the window
+  	SDL_Surface *menu = NULL;
+  	menu = SDL_GetWindowSurface(window);
+
   	//Check if the window is created*/
-	if ( window == NULL || screen == NULL )
+	if ( window == NULL || screen == NULL || menu == NULL)
    	{
       	    fprintf(stderr, "Creating the main window failed: %s\n", SDL_GetError());
-	    exit(EXIT_FAILURE);
-    	}
+	    exit(EXIT_FAILURE);    	}
 	    fprintf(stderr, "Creating the main window succeed\n");
 
   	//load images
 	Sprites tableSurface[NBR_OF_IMAGES];
+  	//player
 	loadSprite(&tableSurface[PLAYER_FRONT], "img/front.png");
 	loadSprite(&tableSurface[PLAYER_BACK], "img/back.png");
 	loadSprite(&tableSurface[PLAYER_LEFT], "img/left.png");
 	loadSprite(&tableSurface[PLAYER_RIGHT], "img/right.png");
+  	//walls
   	loadSprite(&tableSurface[WALL1_IMAGE], "img/wall.png");
     	loadSprite(&tableSurface[WALL2_IMAGE], "img/wall2.png");
     	loadSprite(&tableSurface[WALL3_IMAGE], "img/wall3.png");
     	loadSprite(&tableSurface[WALL4_IMAGE], "img/wall4.png");
+  	loadSprite(&tableSurface[WALL_LEFT],"img/wallBorderLeft.png");
+	loadSprite(&tableSurface[WALL_RIGHT],"img/wallBorderRight.png");
+	loadSprite(&tableSurface[WALL_TOP],"img/wallBorderTop.png");
+	loadSprite(&tableSurface[WALL_BOTTOM],"img/wallBorderBottom.png");
+  	//grounds
   	loadSprite(&tableSurface[GROUND1_IMAGE], "img/background.bmp");
+  	loadSprite(&tableSurface[GROUND2_IMAGE], "img/background2.bmp");
+    	loadSprite(&tableSurface[GROUND3_IMAGE], "img/background3.bmp");
+  	//boxes
+  	loadSprite(&tableSurface[BOX_IMAGE], "img/barrel.png");
+	loadSprite(&tableSurface[BOX_IMAGE_OK], "img/box.bmp");
+	//goal
+	loadSprite(&tableSurface[GOAL_IMAGE], "img/goal.png");
+
 
 	//create a map with coordinates x,y to locate things
   	int map[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
@@ -154,7 +172,7 @@ int main(int argc, char *argv[])
 		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && map[xPlayer+2][yPlayer]== GROUND || map[xPlayer+1][yPlayer]== WOODEN_CASE && map[xPlayer+2][yPlayer] == BALL)
 		{
 	      	//move the box
-			moveBox(xPlayer,yPlayer,map, RIGHT,screen);
+			moveBox(xPlayer,yPlayer,map, RIGHT,screen, tableSurface);
 		//move the player
 			blitPlayer(xPlayer,yPlayer, RIGHT , mapGround[xPlayer][yPlayer], screen, tableSurface);
 		  //update new player position
@@ -204,7 +222,7 @@ int main(int argc, char *argv[])
 		if (map[xPlayer-1][yPlayer]== WOODEN_CASE && map[xPlayer-2][yPlayer]== GROUND || map[xPlayer-1][yPlayer]== WOODEN_CASE && map[xPlayer-2][yPlayer] == BALL)
 		{
 	      	//move the box
-			moveBox(xPlayer,yPlayer,map, LEFT,screen);
+			moveBox(xPlayer,yPlayer,map, LEFT,screen, tableSurface);
 		//move the player
 		  	blitPlayer(xPlayer,yPlayer, LEFT , mapGround[xPlayer][yPlayer], screen, tableSurface);
 		//update new player position
@@ -255,7 +273,7 @@ int main(int argc, char *argv[])
 		if (map[xPlayer][yPlayer-1]== WOODEN_CASE && map[xPlayer][yPlayer-2]== GROUND || map[xPlayer][yPlayer-1]== WOODEN_CASE && map[xPlayer][yPlayer-2] == BALL)
 		{
 	      	//move the box
-			moveBox(xPlayer,yPlayer,map,UP,screen);
+			moveBox(xPlayer,yPlayer,map,UP,screen, tableSurface);
 		//move the player
 		  	blitPlayer(xPlayer,yPlayer, UP , mapGround[xPlayer][yPlayer], screen, tableSurface);
 		//update new player position
@@ -307,7 +325,7 @@ int main(int argc, char *argv[])
 		if (map[xPlayer][yPlayer+1]== WOODEN_CASE && map[xPlayer][yPlayer+2]== GROUND || map[xPlayer][yPlayer+1]== WOODEN_CASE && map[xPlayer][yPlayer+2] == BALL)
 		{
 	      	//move the Box
-			moveBox(xPlayer,yPlayer,map, DOWN,screen);
+			moveBox(xPlayer,yPlayer,map, DOWN,screen, tableSurface);
 		//move the player
 			blitPlayer(xPlayer,yPlayer, DOWN , mapGround[xPlayer][yPlayer], screen, tableSurface);
 		//update new player position
