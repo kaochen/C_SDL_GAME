@@ -174,28 +174,28 @@ int main(int argc, char *argv[])
 		if(map[xPlayer+1][yPlayer]== WALL || map[xPlayer+1][yPlayer]== BOX_OK)
 			break;
 	      	//Don't go outside with a case
-	      	if (map[xPlayer+1][yPlayer]== WOODEN_CASE && xPlayer + 2 >= NBR_OF_BLOCKS)
+	      	if (map[xPlayer+1][yPlayer]== BOX && xPlayer + 2 >= NBR_OF_BLOCKS)
 		      break;
 		//Do not move a case if it is close to a wall or an other case
-		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && map[xPlayer+2][yPlayer]== WOODEN_CASE && map[xPlayer+2][yPlayer]== WALL)
+		if (map[xPlayer+1][yPlayer]== BOX && map[xPlayer+2][yPlayer]== BOX && map[xPlayer+2][yPlayer]== WALL)
 			break;
 	      	//Move a case only if there is space to do it
-		if (map[xPlayer+1][yPlayer]== WOODEN_CASE && map[xPlayer+2][yPlayer]== GROUND || map[xPlayer+1][yPlayer]== WOODEN_CASE && map[xPlayer+2][yPlayer] == BALL)
+		if (map[xPlayer+1][yPlayer]== BOX && map[xPlayer+2][yPlayer]== GROUND || map[xPlayer+1][yPlayer]== BOX && map[xPlayer+2][yPlayer] == GOAL)
 		{
 	      	//move the box
-			moveBox(xPlayer,yPlayer,map, RIGHT,screen, tableSurface);
+			moveBox(xPlayer,yPlayer,map, RIGHT,screen,tableSurface);
 		//move the player
 			blitPlayer(xPlayer,yPlayer, RIGHT , mapGround[xPlayer][yPlayer], screen, tableSurface);
 		  //update new player position
 		  	playerPos.x  += BOX_SIZE;
 		//update status
-		if(map[xPlayer+2][yPlayer] == BALL)
+		if(map[xPlayer+2][yPlayer] == GOAL)
 		    {
 		      	map[xPlayer+2][yPlayer] = BOX_OK;
 		    }
 		 else
 		   {
-		     map[xPlayer+2][yPlayer] = WOODEN_CASE;
+		     map[xPlayer+2][yPlayer] = BOX;
 		   }
 			map[xPlayer][yPlayer] = GROUND;
 		      	map[xPlayer+1][yPlayer] = PLAYER;
@@ -224,13 +224,13 @@ int main(int argc, char *argv[])
 		if(map[xPlayer-1][yPlayer]== WALL || map[xPlayer-1][yPlayer]== BOX_OK)
 			break;
 	      	//Don't go outside with a case
-	      	if (map[xPlayer-1][yPlayer]== WOODEN_CASE && xPlayer - 2 < 0)
+	      	if (map[xPlayer-1][yPlayer]== BOX && xPlayer - 2 < 0)
 		      break;
 		//Do not move a case if it is close to a wall or an other case
-		if (map[xPlayer-1][yPlayer]== WOODEN_CASE && map[xPlayer-2][yPlayer]== WOODEN_CASE && map[xPlayer-2][yPlayer]== WALL)
+		if (map[xPlayer-1][yPlayer]== BOX && map[xPlayer-2][yPlayer]== BOX && map[xPlayer-2][yPlayer]== WALL)
 			break;
 	      	//Move a case only if there is space to do it
-		if (map[xPlayer-1][yPlayer]== WOODEN_CASE && map[xPlayer-2][yPlayer]== GROUND || map[xPlayer-1][yPlayer]== WOODEN_CASE && map[xPlayer-2][yPlayer] == BALL)
+		if (map[xPlayer-1][yPlayer]== BOX && map[xPlayer-2][yPlayer]== GROUND || map[xPlayer-1][yPlayer]== BOX && map[xPlayer-2][yPlayer] == GOAL)
 		{
 	      	//move the box
 			moveBox(xPlayer,yPlayer,map, LEFT,screen, tableSurface);
@@ -239,15 +239,14 @@ int main(int argc, char *argv[])
 		//update new player position
 		  	playerPos.x  -= BOX_SIZE;
 		//update status
-		 if(map[xPlayer-2][yPlayer] == BALL)
+		 if(map[xPlayer-2][yPlayer] == GOAL)
 		    {
 		      	map[xPlayer-2][yPlayer] = BOX_OK;
 		    }
 		 else
 		   {
-		     map[xPlayer-2][yPlayer] = WOODEN_CASE;
+		     map[xPlayer-2][yPlayer] = BOX;
 		   }
-		        map[xPlayer-2][yPlayer] = WOODEN_CASE;
 			map[xPlayer][yPlayer] = GROUND;
 		      	map[xPlayer-1][yPlayer] = PLAYER;
 			break;
@@ -275,13 +274,13 @@ int main(int argc, char *argv[])
 		if(map[xPlayer][yPlayer-1]== WALL || map[xPlayer][yPlayer-1]== BOX_OK)
 			break;
 	      	//Don't go outside with a case
-	      	if (map[xPlayer][yPlayer-1]== WOODEN_CASE && yPlayer - 2 < 0)
+	      	if (map[xPlayer][yPlayer-1]== BOX && yPlayer - 2 < 0)
 		      break;
 		//Do not move a case if it is close to a wall or an other case
-		if (map[xPlayer][yPlayer-1]== WOODEN_CASE && map[xPlayer][yPlayer-2]== WOODEN_CASE && map[xPlayer][yPlayer-2]== WALL)
+		if (map[xPlayer][yPlayer-1]== BOX && map[xPlayer][yPlayer-2]== BOX && map[xPlayer][yPlayer-2]== WALL)
 			break;
 	      	//Move a case only if there is space to do it
-		if (map[xPlayer][yPlayer-1]== WOODEN_CASE && map[xPlayer][yPlayer-2]== GROUND || map[xPlayer][yPlayer-1]== WOODEN_CASE && map[xPlayer][yPlayer-2] == BALL)
+		if (map[xPlayer][yPlayer-1]== BOX && map[xPlayer][yPlayer-2]== GROUND || map[xPlayer][yPlayer-1]== BOX && map[xPlayer][yPlayer-2] == GOAL)
 		{
 	      	//move the box
 			moveBox(xPlayer,yPlayer,map,UP,screen, tableSurface);
@@ -290,13 +289,13 @@ int main(int argc, char *argv[])
 		//update new player position
 		  	playerPos.y  -= BOX_SIZE;
 		//update status
-		if(map[xPlayer][yPlayer-2] == BALL)
+		if(map[xPlayer][yPlayer-2] == GOAL)
 		    {
 		      	map[xPlayer][yPlayer-2] = BOX_OK;
 		    }
 		 else
 		   {
-		     map[xPlayer][yPlayer-2] = WOODEN_CASE;
+		     map[xPlayer][yPlayer-2] = BOX;
 		   }
 			map[xPlayer][yPlayer] = GROUND;
 		      	map[xPlayer][yPlayer-1] = PLAYER;
@@ -327,13 +326,13 @@ int main(int argc, char *argv[])
 		if(map[xPlayer][yPlayer+1]== BOX_OK)
 		  	break;
 	      	//Don't go outside with a case
-	      	if (map[xPlayer][yPlayer+1]== WOODEN_CASE && yPlayer + 2 >= NBR_OF_BLOCKS)
+	      	if (map[xPlayer][yPlayer+1]== BOX && yPlayer + 2 >= NBR_OF_BLOCKS)
 		      break;
 		//Do not move a case if it is close to a wall or an other case
-		if (map[xPlayer][yPlayer+1]== WOODEN_CASE && map[xPlayer][yPlayer+2]== WOODEN_CASE && map[xPlayer][yPlayer+2]== WALL)
+		if (map[xPlayer][yPlayer+1]== BOX && map[xPlayer][yPlayer+2]== BOX && map[xPlayer][yPlayer+2]== WALL)
 			break;
 	      	//Move a case only if there is space to do it
-		if (map[xPlayer][yPlayer+1]== WOODEN_CASE && map[xPlayer][yPlayer+2]== GROUND || map[xPlayer][yPlayer+1]== WOODEN_CASE && map[xPlayer][yPlayer+2] == BALL)
+		if (map[xPlayer][yPlayer+1]== BOX && map[xPlayer][yPlayer+2]== GROUND || map[xPlayer][yPlayer+1]== BOX && map[xPlayer][yPlayer+2] == GOAL)
 		{
 	      	//move the Box
 			moveBox(xPlayer,yPlayer,map, DOWN,screen, tableSurface);
@@ -342,13 +341,13 @@ int main(int argc, char *argv[])
 		//update new player position
 		  	playerPos.y  += BOX_SIZE;
 		//update status
-		if(map[xPlayer][yPlayer+2] == BALL)
+		if(map[xPlayer][yPlayer+2] == GOAL)
 		    {
 		      	map[xPlayer][yPlayer+2] = BOX_OK;
 		    }
 		 else
 		   {
-		     map[xPlayer][yPlayer+2] = WOODEN_CASE;
+		     map[xPlayer][yPlayer+2] = BOX;
 		   }
 			map[xPlayer][yPlayer] = GROUND;
 		      	map[xPlayer][yPlayer+1] = PLAYER;

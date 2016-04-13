@@ -101,13 +101,13 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 					  map[num_caract][level_line] = WALL;
 					  break;
 					case '$':
-					  map[num_caract][level_line] = WOODEN_CASE ;
+					  map[num_caract][level_line] = BOX ;
 					  break;
 					case '*':
 					  map[num_caract][level_line] = BOX_OK ;
 					  break;
 					case '.':
-					  map[num_caract][level_line] = BALL;
+					  map[num_caract][level_line] = GOAL;
 					  break;
 					case '@':
 					  map[num_caract][level_line] = PLAYER;
@@ -141,7 +141,7 @@ void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_
 		      case GROUND :
 				blitGround(x,y,mapGround[x][y],screen,tableSurface);
 			break;
-		      case WOODEN_CASE :
+		      case BOX :
 				moveBox(x,y,map,STILL,screen, tableSurface); //see game.c
 			break;
 		      case BOX_OK :
@@ -150,7 +150,7 @@ void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_
 		      case WALL :
 				blitWalls(x,y,map,screen,tableSurface);
 			break;
-		      case BALL :
+		      case GOAL :
 		      		goalPos.x = x * BOX_SIZE;
 				goalPos.y = y * BOX_SIZE;
 				blitGround(x,y,mapGround[x][y],screen,tableSurface);

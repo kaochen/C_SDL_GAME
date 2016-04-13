@@ -105,7 +105,7 @@ void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction ,
 	    }
 	SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL, screen, &boxPos);
 	//blit if box on a goal
-	if (map[boxPos.x/BOX_SIZE][boxPos.y/BOX_SIZE] == BALL || map[boxPos.x/BOX_SIZE][boxPos.y/BOX_SIZE] == BOX_OK)
+	if (map[boxPos.x/BOX_SIZE][boxPos.y/BOX_SIZE] == GOAL || map[boxPos.x/BOX_SIZE][boxPos.y/BOX_SIZE] == BOX_OK)
 	    		{
 			SDL_BlitSurface(tableSurface[BOX_IMAGE_OK].image, NULL, screen, &boxPos);
 			}
