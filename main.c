@@ -96,8 +96,8 @@ int main(int argc, char *argv[])
   	loadSprite(&tableSurface[GROUND2_IMAGE], "img/background2.bmp");
     	loadSprite(&tableSurface[GROUND3_IMAGE], "img/background3.bmp");
   	//boxes
-  	loadSprite(&tableSurface[BOX_IMAGE], "img/barrel.png");
-	loadSprite(&tableSurface[BOX_IMAGE_OK], "img/box.bmp");
+  	loadSprite(&tableSurface[BOX_IMAGE], "img/box.png");
+	loadSprite(&tableSurface[BOX_IMAGE_OK], "img/box_ok.png");
 	//goal
 	loadSprite(&tableSurface[GOAL_IMAGE], "img/goal.png");
   	//menu
