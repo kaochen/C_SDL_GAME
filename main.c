@@ -126,7 +126,9 @@ int main(int argc, char *argv[])
 	//display the level using map and mapGround
 	displayLevel(map,mapGround, screen, tableSurface);
 	//diplay menu on top of the screen
-	displayMenu((levelChoice +1), menu,tableSurface);
+	displayMenu((levelChoice +1), menu,tableSurface,map);
+  	//display Progress in the menu
+	 displayProgress(map, menu,tableSurface);
 	//refresh the window
   	SDL_UpdateWindowSurface(window);
 
@@ -371,7 +373,7 @@ int main(int argc, char *argv[])
 		      	//display the level using map and mapGround
 			displayLevel(map,mapGround, screen, tableSurface);
 			//diplay menu on top of the screen
-			displayMenu((levelChoice +1), menu,tableSurface);
+			displayMenu((levelChoice +1), menu,tableSurface,map);
 		  	fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
 	      	break;
 	    //hit n to load the next level
@@ -386,7 +388,7 @@ int main(int argc, char *argv[])
 		      	//display the level using map and mapGround
 			displayLevel(map,mapGround, screen, tableSurface);
 			//diplay menu on top of the screen
-			displayMenu((levelChoice +1), menu,tableSurface);
+			displayMenu((levelChoice +1), menu,tableSurface,map);
 		  	fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
 		}
 	      	break;
@@ -403,7 +405,7 @@ int main(int argc, char *argv[])
 		      	//display the level using map and mapGround
 			displayLevel(map,mapGround, screen, tableSurface);
 			//diplay menu on top of the screen
-			displayMenu((levelChoice +1), menu,tableSurface);
+			displayMenu((levelChoice +1), menu,tableSurface,map);
 		  	fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
 		}
 	      	break;
@@ -412,6 +414,9 @@ int main(int argc, char *argv[])
 	      carryOn = 0;
 	      break;
 	    }
+
+	//display Progress in the menu
+	 displayProgress(map, menu,tableSurface);
 	        SDL_UpdateWindowSurface(window);
 	}
     }

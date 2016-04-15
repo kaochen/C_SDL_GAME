@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "level.h"
 
 //display menu on top of the screen
-void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
+void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES],int map[][NBR_OF_BLOCKS])
 {
 	//first add background:
 	backgroundMenu(menu, tableSurface);
@@ -66,7 +66,7 @@ void displayShortcut( SDL_Surface *menu)
   shortCutText = TTF_RenderText_Blended(font, "N: next P: previous R: Reset Q: quit", fontColor);
   //blit the text
   SDL_Rect shortCutTextPos;
-  shortCutTextPos.x = 10;
+  shortCutTextPos.x = BOX_SIZE*4;
   shortCutTextPos.y = 10;
   SDL_BlitSurface(shortCutText, NULL, menu, &shortCutTextPos);
 
@@ -104,5 +104,88 @@ void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_I
   TTF_CloseFont(font);
 }
 
-#endif
+//count how many goals are need to complete the level
+int goalLeft(int map[][NBR_OF_BLOCKS])
+{
+  int x = 0, y = 0, nbrOfBoxOk = 0;
+  for (x=0; x < NBR_OF_BLOCKS; x++)
+    {
+      for (y=0; y < NBR_OF_BLOCKS; y++)
+    	{
+	  if(map[x][y] == BOX_OK)
+	    nbrOfBoxOk +=1;
+    	}
+    }
+  return nbrOfBoxOk;
+}
+
+//count how many goals left to complete the level
+int nbr_of_goals(int map[][NBR_OF_BLOCKS])
+{
+  int x = 0, y = 0, nbrOfGoal = 0;
+  for (x=0; x < NBR_OF_BLOCKS; x++)
+    {
+      for (y=0; y < NBR_OF_BLOCKS; y++)
+    	{
+	  if(map[x][y] == GOAL)
+	    nbrOfGoal +=1;
+    	}
+    }
+  return nbrOfGoal;
+}
+
+//display Progress In The Level
+void displayProgress(int map[][NBR_OF_BLOCKS], SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
+{
+   SDL_Rect progressPos;
+  progressPos.x = 0;
+  progressPos.y = 0;
+  //clean Background
+  int x = 0;
+  for (x = 0; x < 3; x++)
+    {
+  	SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu, &progressPos);
+        progressPos.x += BOX_SIZE;
+    }
+
+
+   //manage font
+  TTF_Font *font = NULL;
+  font = TTF_OpenFont("img/BABIRG__.TTF", 26);
+  SDL_Color fontColor = {255,255,255};
+  //get info
+  int i = goalLeft(map);
+  int j = i + nbr_of_goals(map);
+  //merge results
+  SDL_Surface *progress = NULL;
+  char progressText[20] = "";
+  sprintf(progressText, "Goals: %d/%d", i, j);
+  progress = TTF_RenderText_Blended(font, progressText, fontColor);
+
+  //blit progress
+  progressPos.x = 10;
+  progressPos.y = 10;
+  SDL_BlitSurface(progress, NULL, menu, &progressPos);
+
+    //clean
+  SDL_FreeSurface(progress);
+  TTF_CloseFont(font);
+}
+
+
+//Victory or not ?
+int levelFinished(int map[][NBR_OF_BLOCKS])
+{
+  if (nbr_of_goals(map)==0)
+    {
+      fprintf(stderr, "Congrats, you complete this level");
+      return FINISH;
+    }
+  else
+    {
+      return NOT_FINISHED;
+    }
+}
+
+      #endif
 

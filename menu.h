@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "const.h"
 #include "game.h"
 //diplay menu on top of the screen
-void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
+void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES],int map[][NBR_OF_BLOCKS]);
 
 //create the menu background
 void backgroundMenu(SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
@@ -38,5 +38,18 @@ void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_I
 
 //display shortcut in the menu
 void displayShortcut( SDL_Surface *menu);
+
+
+//count how many goals left to complete the level
+int goalLeft(int map[][NBR_OF_BLOCKS]);
+
+//count the number of goals
+int nbr_of_goals(int map[][NBR_OF_BLOCKS]);
+
+//display Progress In The Level
+void displayProgress(int map[][NBR_OF_BLOCKS], SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
+
+//Victory or not ?
+int levelFinished(int map[][NBR_OF_BLOCKS]);
 #endif
 
