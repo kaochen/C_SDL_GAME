@@ -44,8 +44,8 @@
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
      inkscape:zoom="1"
-     inkscape:cx="74.314894"
-     inkscape:cy="24.624237"
+     inkscape:cx="-54.428946"
+     inkscape:cy="35.473137"
      inkscape:document-units="px"
      inkscape:current-layer="layer3"
      showgrid="false"
@@ -72,7 +72,8 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-1012.3622)"
-     style="display:none">
+     style="display:none"
+     sodipodi:insensitive="true">
     <rect
        style="opacity:1;fill:#005789;fill-opacity:1;stroke:none;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        id="rect4903"
@@ -351,6 +352,14 @@
        height="5"
        x="-39"
        y="-38.999996" />
+    <rect
+       y="25.88975"
+       x="-24.260809"
+       height="5.1425953"
+       width="48.597523"
+       id="rect6591"
+       style="opacity:1;fill:#013c7f;fill-opacity:1;stroke:none;stroke-width:1;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       transform="matrix(0.70710677,-0.70710679,0.70710677,0.70710679,0,0)" />
   </g>
   <g
      inkscape:groupmode="layer"
