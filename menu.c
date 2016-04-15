@@ -38,6 +38,7 @@ void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF
 	backgroundMenu(menu, tableSurface);
  	 //display the level number
 	levelMenu(levelNumber,menu,tableSurface);
+	displayShortcut(menu);
 }
 
 //display menu on top of the screen
@@ -54,6 +55,27 @@ void backgroundMenu(SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
 	   }
 }
 
+//display shortcut in the menu
+void displayShortcut( SDL_Surface *menu)
+{
+  //setup font
+  TTF_Font *font = NULL;
+  font = TTF_OpenFont("img/BABIRG__.TTF", 26);
+  SDL_Color fontColor = {255,255,255};
+  SDL_Surface *shortCutText = NULL;
+  shortCutText = TTF_RenderText_Blended(font, "N: next P: previous R: Reset Q: quit", fontColor);
+  //blit the text
+  SDL_Rect shortCutTextPos;
+  shortCutTextPos.x = 10;
+  shortCutTextPos.y = 10;
+  SDL_BlitSurface(shortCutText, NULL, menu, &shortCutTextPos);
+
+    //clean
+  SDL_FreeSurface(shortCutText);
+  TTF_CloseFont(font);
+}
+
+
 //display the level number
 void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
 {
@@ -65,7 +87,7 @@ void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_I
   //get info
   int levelMax = 0;
   levelMax = nbr_of_level();
-  //add a text
+  //indicate level nbr
   SDL_Surface *levelText = NULL;
   char text[20] = "";
   sprintf(text, "Level: %d/%d", levelNumber, levelMax);

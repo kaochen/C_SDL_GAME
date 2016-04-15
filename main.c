@@ -110,11 +110,9 @@ int main(int argc, char *argv[])
 	//how many level are in the file
 	int max_Levels = nbr_of_level();
   	int levelChoice = 0;
-  	//levelChoice = levelSelector(window, screen);
 
   	//load the level from the levels.txt
-	//readlevel(map, levelChoice);
-	readlevel(map, 0);
+	readlevel(map, levelChoice);
 
 	//create a ground map to store ground type from the randomGround function
 	int mapGround[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
@@ -134,22 +132,10 @@ int main(int argc, char *argv[])
 
 
 
-  //get the player position
-  int x = 0, y = 0;
-  	for (x = 0; x < NBR_OF_BLOCKS; x++)
-	  {
-		for (y = 0; y < NBR_OF_BLOCKS; y++)
-		  {
-		    if (map[x][y] == PLAYER)
-		      {
-			playerPos.x = x * BOX_SIZE;
-			playerPos.y = y * BOX_SIZE;
-		      }
-	  	   }
-	}
+
 
 //wait for quit event
-  int carryOn = 1 ;
+  int carryOn = 1 , x = 0, y = 0;
   SDL_Event event;
   while(carryOn)
     {
@@ -160,9 +146,20 @@ int main(int argc, char *argv[])
 	  carryOn = 0;
 	  break;
 	case SDL_KEYDOWN:
-	 //get actual position in the map reference
-	  xPlayer = playerPos.x/BOX_SIZE;
-	  yPlayer = playerPos.y/BOX_SIZE;
+	 //get the player position
+	  	for (x = 0; x < NBR_OF_BLOCKS; x++)
+		  {
+			for (y = 0; y < NBR_OF_BLOCKS; y++)
+			  {
+			    if (map[x][y] == PLAYER)
+			      {
+				xPlayer = x;
+				yPlayer = y;
+				playerPos.x = x * BOX_SIZE;
+				playerPos.y = y * BOX_SIZE;
+			      }
+		  	   }
+		}
 	//listen keyboard:
 	switch(event.key.keysym.sym)
 	    {
@@ -365,6 +362,54 @@ int main(int argc, char *argv[])
 				      	map[xPlayer][yPlayer+1] = PLAYER;
 		  			break;
 		}
+	      break;
+
+	       //hit r to reset the current level
+	    case SDLK_r:
+	        //load the level from the levels.txt
+			readlevel(map, levelChoice);
+		      	//display the level using map and mapGround
+			displayLevel(map,mapGround, screen, tableSurface);
+			//diplay menu on top of the screen
+			displayMenu((levelChoice +1), menu,tableSurface);
+		  	fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
+	      	break;
+	    //hit n to load the next level
+	    case SDLK_n:
+	        //load the level from the levels.txt
+		if (levelChoice > (max_Levels-1))
+		  levelChoice = (max_Levels-1);
+	      	if (levelChoice < (max_Levels-1))
+		{
+		      	levelChoice += 1;
+			readlevel(map, levelChoice);
+		      	//display the level using map and mapGround
+			displayLevel(map,mapGround, screen, tableSurface);
+			//diplay menu on top of the screen
+			displayMenu((levelChoice +1), menu,tableSurface);
+		  	fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
+		}
+	      	break;
+	    //hit p to load the previous level
+	    case SDLK_p:
+	        //load the level from the levels.txt
+		if (levelChoice < 0)
+		  levelChoice = 0;
+	      	if (levelChoice > 0)
+		{
+		      	levelChoice -= 1;
+			readlevel(map, levelChoice);
+
+		      	//display the level using map and mapGround
+			displayLevel(map,mapGround, screen, tableSurface);
+			//diplay menu on top of the screen
+			displayMenu((levelChoice +1), menu,tableSurface);
+		  	fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
+		}
+	      	break;
+	    //hit q to quit
+	    case SDLK_q:
+	      carryOn = 0;
 	      break;
 	    }
 	        SDL_UpdateWindowSurface(window);

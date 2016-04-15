@@ -35,5 +35,8 @@ void backgroundMenu(SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
 
 //diplay the level number
 void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
+
+//display shortcut in the menu
+void displayShortcut( SDL_Surface *menu);
 #endif
 
