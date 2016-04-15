@@ -17,9 +17,9 @@
    version="1.1"
    inkscape:version="0.91 r13725"
    sodipodi:docname="player3.svg"
-   inkscape:export-filename="/home/kao/Projects/C_SDL_GAME/img/icon.png"
-   inkscape:export-xdpi="216"
-   inkscape:export-ydpi="216">
+   inkscape:export-filename="/home/kao/Documents/C_SDL_GAME/img/front.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
     <linearGradient
@@ -575,14 +575,14 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="16"
-     inkscape:cx="-0.585406"
-     inkscape:cy="23.942476"
+     inkscape:zoom="22.627417"
+     inkscape:cx="19.393176"
+     inkscape:cy="22.647339"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="false"
-     inkscape:window-width="1440"
-     inkscape:window-height="836"
+     inkscape:window-width="1920"
+     inkscape:window-height="1016"
      inkscape:window-x="0"
      inkscape:window-y="27"
      inkscape:window-maximized="1"
@@ -595,7 +595,7 @@
         <dc:format>image/svg+xml</dc:format>
         <dc:type
            rdf:resource="http://purl.org/dc/dcmitype/StillImage" />
-        <dc:title></dc:title>
+        <dc:title />
       </cc:Work>
     </rdf:RDF>
   </metadata>
@@ -604,8 +604,7 @@
      inkscape:groupmode="layer"
      id="layer1"
      transform="translate(0,-1012.3622)"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <path
        style="opacity:1;fill:#ff530d;fill-opacity:1;stroke:#000000;stroke-width:0.84369987;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="m 7.6999942,1019.7515 c 0,0 7.0252698,1.6652 27.4134138,2.3873 0.755916,0.026 2.395495,0.3079 2.339064,0.6871 l -1.585657,10.6555 c -0.05643,0.3794 -3.748175,7.066 -5.044006,7.0695 l -20.309585,0.055 c -1.2958264,0 -4.4506449,-6.0402 -4.4843596,-6.4206 l -1.0260115,-11.5701 c -0.033718,-0.3802 1.4061866,-2.9756 2.6971413,-2.8633 z"
@@ -657,7 +656,7 @@
     <rect
        inkscape:export-ydpi="16.77"
        inkscape:export-xdpi="16.77"
-       ry="2.7553015"
+       ry="1.0095792"
        rx="12.665999"
        y="1029.4622"
        x="18.188589"
@@ -679,7 +678,7 @@
     <rect
        inkscape:export-ydpi="16.77"
        inkscape:export-xdpi="16.77"
-       ry="2.7553015"
+       ry="1.1642587"
        rx="12.665999"
        y="1029.4194"
        x="22.410137"
