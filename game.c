@@ -73,7 +73,7 @@ void blitPlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surfa
 
 
 //move a box
-void moveBox(int xPlayer, int yPlayer, int map[][NBR_OF_BLOCKS], int direction , SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
+void moveBox(int xPlayer, int yPlayer, int map[][MAX_BLOCKS], int direction , SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
 	{
 	//box position
 	    	SDL_Rect boxPos;
@@ -142,7 +142,7 @@ void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen, Sprites tabl
 }
 
 //blitWalls
-void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
+void blitWalls(int x, int y, int map[][MAX_BLOCKS],SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
 
 	//set position for wall blocks
@@ -178,7 +178,7 @@ void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen, Sprit
 	  	SDL_BlitSurface(tableSurface[WALL_LEFT].image, NULL, screen, &wallPos);
 		}
     	//blit right border
-  	if (x != NBR_OF_BLOCKS && map[x+1][y] != WALL)
+  	if (x != X_BLOCKS && map[x+1][y] != WALL)
     		{
 	  	SDL_BlitSurface(tableSurface[WALL_RIGHT].image, NULL, screen, &wallPos);
 		}
@@ -188,7 +188,7 @@ void blitWalls(int x, int y, int map[][NBR_OF_BLOCKS],SDL_Surface *screen, Sprit
 	  	SDL_BlitSurface(tableSurface[WALL_TOP].image, NULL, screen, &wallPos);
 		}
     	//blit bottom border
-  	if (y != NBR_OF_BLOCKS && map[x][y+1] != WALL)
+  	if (y != Y_BLOCKS && map[x][y+1] != WALL)
     		{
 	  	SDL_BlitSurface(tableSurface[WALL_BOTTOM].image, NULL, screen, &wallPos);
 		}

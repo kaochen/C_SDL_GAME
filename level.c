@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "game.h"
 
 //read a level from the file
-int readlevel(int map[][NBR_OF_BLOCKS], int level)
+int readlevel(int map[][MAX_BLOCKS], int level)
 	{
 	FILE* levelFile = NULL;
 	//open file
@@ -53,7 +53,7 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 	    {
 	      //read all caract before
 	      int num_line = 0, caract = 0;
-	       while(num_line < ((NBR_OF_BLOCKS +2)*level))
+	       while(num_line < ((Y_BLOCKS +2)*level))
 		 {
 		     caract = fgetc(levelFile);
 		     if(caract == '\n')
@@ -67,7 +67,7 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 	//The cursor is supposed to be in the right position
 	//read the level line by line
 		int level_line = 0, num_caract = 0;
-	    	while(level_line <= NBR_OF_BLOCKS)
+	    	while(level_line <= Y_BLOCKS)
 		 {
 		     //fprintf(stderr, "line : %d", level_line);
 		     c = fgetc(levelFile);
@@ -77,17 +77,17 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 		     }
 		     else if(c == EOF)
 		     {
-		       level_line = NBR_OF_BLOCKS + 1;
+		       level_line = Y_BLOCKS + 1;
 		     }
 		     else
 		     {
 			//show the readen level
 		        fprintf(stderr, "%c", c);
-		       	if (num_caract == (NBR_OF_BLOCKS -1))
+		       	if (num_caract == (X_BLOCKS -1))
 			 {
 		       	    fprintf(stderr, "\n");
 			 }
-		       	 if (num_caract == NBR_OF_BLOCKS)
+		       	 if (num_caract == X_BLOCKS)
 			 {
 			   num_caract = 0;
 			 }
@@ -121,16 +121,16 @@ int readlevel(int map[][NBR_OF_BLOCKS], int level)
 	}
 
 //display level
-void displayLevel(int map[][NBR_OF_BLOCKS], int mapGround[][NBR_OF_BLOCKS], SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
+void displayLevel(int map[][MAX_BLOCKS], int mapGround[][MAX_BLOCKS], SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
   	//goal
 	SDL_Rect goalPos;
 
    	//blit surfaces depending of its destiny
 	int x = 0, y = 0;
-  	for (x = 0; x < NBR_OF_BLOCKS; x++)
+  	for (x = 0; x < X_BLOCKS; x++)
 	  {
-		for (y = 0; y < NBR_OF_BLOCKS; y++)
+		for (y = 0; y < Y_BLOCKS; y++)
 		  {
 		    //allow a random ground type to each block
 			mapGround[x][y] = addRandomGround();

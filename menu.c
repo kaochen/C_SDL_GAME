@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "level.h"
 
 //display menu on top of the screen
-void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES],int map[][NBR_OF_BLOCKS])
+void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES],int map[][MAX_BLOCKS])
 {
 	//first add background:
 	backgroundMenu(menu, tableSurface);
@@ -48,7 +48,7 @@ void backgroundMenu(SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
   	menuPos.x = 0;
   	menuPos.y = 0;
   	int i = 0;
-  	for (i = 0; i < NBR_OF_BLOCKS; i++)
+  	for (i = 0; i < X_BLOCKS; i++)
 	  {
 		SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL,menu,&menuPos);
 		menuPos.x += BOX_SIZE;
@@ -95,7 +95,7 @@ void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_I
 
   //blit the text
   SDL_Rect levelTextPos;
-  levelTextPos.x = BOX_SIZE*(NBR_OF_BLOCKS-3);
+  levelTextPos.x = BOX_SIZE*(X_BLOCKS-3);
   levelTextPos.y = 10;
   SDL_BlitSurface(levelText, NULL, menu, &levelTextPos);
 
@@ -105,12 +105,12 @@ void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_I
 }
 
 //count how many goals are need to complete the level
-int goalLeft(int map[][NBR_OF_BLOCKS])
+int goalLeft(int map[][MAX_BLOCKS])
 {
   int x = 0, y = 0, nbrOfBoxOk = 0;
-  for (x=0; x < NBR_OF_BLOCKS; x++)
+  for (x=0; x < X_BLOCKS; x++)
     {
-      for (y=0; y < NBR_OF_BLOCKS; y++)
+      for (y=0; y < Y_BLOCKS; y++)
     	{
 	  if(map[x][y] == BOX_OK)
 	    nbrOfBoxOk +=1;
@@ -120,12 +120,12 @@ int goalLeft(int map[][NBR_OF_BLOCKS])
 }
 
 //count how many goals left to complete the level
-int nbr_of_goals(int map[][NBR_OF_BLOCKS])
+int nbr_of_goals(int map[][MAX_BLOCKS])
 {
   int x = 0, y = 0, nbrOfGoal = 0;
-  for (x=0; x < NBR_OF_BLOCKS; x++)
+  for (x=0; x < X_BLOCKS; x++)
     {
-      for (y=0; y < NBR_OF_BLOCKS; y++)
+      for (y=0; y < Y_BLOCKS; y++)
     	{
 	  if(map[x][y] == GOAL)
 	    nbrOfGoal +=1;
@@ -135,7 +135,7 @@ int nbr_of_goals(int map[][NBR_OF_BLOCKS])
 }
 
 //display Progress In The Level
-void displayProgress(int map[][NBR_OF_BLOCKS], SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
+void displayProgress(int map[][MAX_BLOCKS], SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
 {
    SDL_Rect progressPos;
   progressPos.x = 0;
@@ -174,7 +174,7 @@ void displayProgress(int map[][NBR_OF_BLOCKS], SDL_Surface *menu, Sprites tableS
 
 
 //Victory or not ?
-int levelFinished(int map[][NBR_OF_BLOCKS])
+int levelFinished(int map[][MAX_BLOCKS])
 {
   if (nbr_of_goals(map)==0)
     {

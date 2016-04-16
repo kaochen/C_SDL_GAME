@@ -105,7 +105,7 @@ int main(int argc, char *argv[])
 
 
 	//create a map with coordinates x,y to locate things
-  	int map[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
+  	int map[MAX_BLOCKS][MAX_BLOCKS] = {0};
 
 	//how many level are in the file
 	int max_Levels = nbr_of_level();
@@ -115,7 +115,7 @@ int main(int argc, char *argv[])
 	readlevel(map, levelChoice);
 
 	//create a ground map to store ground type from the randomGround function
-	int mapGround[NBR_OF_BLOCKS][NBR_OF_BLOCKS] = {0};
+	int mapGround[MAX_BLOCKS][MAX_BLOCKS] = {0};
 
 
 	//a player position :
@@ -149,9 +149,9 @@ int main(int argc, char *argv[])
 	  break;
 	case SDL_KEYDOWN:
 	 //get the player position
-	  	for (x = 0; x < NBR_OF_BLOCKS; x++)
+	  	for (x = 0; x < X_BLOCKS; x++)
 		  {
-			for (y = 0; y < NBR_OF_BLOCKS; y++)
+			for (y = 0; y < Y_BLOCKS; y++)
 			  {
 			    if (map[x][y] == PLAYER)
 			      {
@@ -167,13 +167,13 @@ int main(int argc, char *argv[])
 	    {
 	    case SDLK_RIGHT:
 		//Don't go outside
-		if (xPlayer + 1 >= NBR_OF_BLOCKS)
+		if (xPlayer + 1 >= X_BLOCKS)
 			break;
 		//test if wall
 		if(map[xPlayer+1][yPlayer]== WALL || map[xPlayer+1][yPlayer]== BOX_OK)
 			break;
 	      	//Don't go outside with a case
-	      	if (map[xPlayer+1][yPlayer]== BOX && xPlayer + 2 >= NBR_OF_BLOCKS)
+	      	if (map[xPlayer+1][yPlayer]== BOX && xPlayer + 2 >= X_BLOCKS)
 		      break;
 		//Do not move a case if it is close to a wall or an other case
 		if (map[xPlayer+1][yPlayer]== BOX && map[xPlayer+2][yPlayer]== BOX && map[xPlayer+2][yPlayer]== WALL)
@@ -317,7 +317,7 @@ int main(int argc, char *argv[])
 
 	    case SDLK_DOWN:
 			      //Don't go outside
-		if (yPlayer + 1 >= NBR_OF_BLOCKS)
+		if (yPlayer + 1 >= Y_BLOCKS)
 			break;
 		//test if wall
 		if(map[xPlayer][yPlayer+1]== WALL)
@@ -325,7 +325,7 @@ int main(int argc, char *argv[])
 		if(map[xPlayer][yPlayer+1]== BOX_OK)
 		  	break;
 	      	//Don't go outside with a case
-	      	if (map[xPlayer][yPlayer+1]== BOX && yPlayer + 2 >= NBR_OF_BLOCKS)
+	      	if (map[xPlayer][yPlayer+1]== BOX && yPlayer + 2 >= Y_BLOCKS)
 		      break;
 		//Do not move a case if it is close to a wall or an other case
 		if (map[xPlayer][yPlayer+1]== BOX && map[xPlayer][yPlayer+2]== BOX && map[xPlayer][yPlayer+2]== WALL)
