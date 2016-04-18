@@ -17,6 +17,15 @@ gcc -o game -g *.c *.h `sdl2-config --cflags --libs`-lSDL2main -lSDL2_image -lSD
 ./game
 ```
 
+### Dev stuff
+Good pratice:
+ * [FR] http://emmanuel-delahaye.developpez.com/tutoriels/c/bonnes-pratiques-codage-c/
+```
+apt get install indent
+indent -bli0 -npsl -i3 -ts0 -sob file.c
+```
+
+
 ### Links
  * http://wiki.libsdl.org/Installation#Linux.2FUnix
  * http://jeux.developpez.com/tutoriels/sdl-2/guide-migration/

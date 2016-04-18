@@ -31,161 +31,163 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "menu.h"
 #include "level.h"
 
-//display menu on top of the screen
-void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES],int map[][MAX_BLOCKS])
+/* display menu */
+void displayMenu (int levelNumber, SDL_Surface * menu,
+                  Sprites tableSurface[NBR_OF_IMAGES], int map[][MAX_BLOCKS])
 {
-	//first add background:
-	backgroundMenu(menu, tableSurface);
- 	 //display the level number
-	levelMenu(levelNumber,menu,tableSurface);
-	displayShortcut(menu);
+   /* first add background */
+   backgroundMenu (menu, tableSurface);
+   /* display the level number */
+   levelMenu (levelNumber, menu, tableSurface);
+   displayShortcut (menu);
 }
 
-//display menu on top of the screen
-void backgroundMenu(SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
+/* display background menu */
+void backgroundMenu (SDL_Surface * menu, Sprites tableSurface[NBR_OF_IMAGES])
 {
-  	SDL_Rect menuPos;
-  	menuPos.x = 0;
-  	menuPos.y = 0;
-  	int i = 0;
-  	for (i = 0; i < X_BLOCKS; i++)
-	  {
-		SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL,menu,&menuPos);
-		menuPos.x += BOX_SIZE;
-	   }
+   SDL_Rect menuPos;
+   menuPos.x = 0;
+   menuPos.y = 0;
+   int i = 0;
+   for (i = 0; i < X_BLOCKS; i++)
+   {
+      SDL_BlitSurface (tableSurface[MENU_BACK].image, NULL, menu, &menuPos);
+      menuPos.x += BOX_SIZE;
+   }
 }
 
-//display shortcut in the menu
-void displayShortcut( SDL_Surface *menu)
+/* display shortcut in the menu */
+void displayShortcut (SDL_Surface * menu)
 {
-  //setup font
-  TTF_Font *font = NULL;
-  font = TTF_OpenFont("img/BABIRG__.TTF", 26);
-  SDL_Color fontColor = {255,255,255};
-  SDL_Surface *shortCutText = NULL;
-  shortCutText = TTF_RenderText_Blended(font, "N: next P: previous R: Reset Q: quit", fontColor);
-  //blit the text
-  SDL_Rect shortCutTextPos;
-  shortCutTextPos.x = BOX_SIZE*4;
-  shortCutTextPos.y = 10;
-  SDL_BlitSurface(shortCutText, NULL, menu, &shortCutTextPos);
+   /* setup font */
+   TTF_Font *font = NULL;
+   font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
+   SDL_Color fontColor = { 255, 255, 255 };
+   SDL_Surface *shortCutText = NULL;
+   shortCutText =
+      TTF_RenderText_Blended (font, "N: next P: previous R: Reset Q: quit",
+                              fontColor);
+   /* blit the text */
+   SDL_Rect shortCutTextPos;
+   shortCutTextPos.x = BOX_SIZE * (MAX_BLOCKS - 7);
+   shortCutTextPos.y = 10;
+   SDL_BlitSurface (shortCutText, NULL, menu, &shortCutTextPos);
 
-    //clean
-  SDL_FreeSurface(shortCutText);
-  TTF_CloseFont(font);
+   /* clean */
+   SDL_FreeSurface (shortCutText);
+   TTF_CloseFont (font);
 }
 
-
-//display the level number
-void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
+/* display the level number */
+void levelMenu (int levelNumber, SDL_Surface * menu,
+                Sprites tableSurface[NBR_OF_IMAGES])
 {
-  //manage font
-  TTF_Font *font = NULL;
-  font = TTF_OpenFont("img/BABIRG__.TTF", 26);
-  SDL_Color fontColor = {255,255,255};
+   /* setup font */
+   TTF_Font *font = NULL;
+   font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
+   SDL_Color fontColor = { 255, 255, 255 };
 
-  //get info
-  int levelMax = 0;
-  levelMax = nbr_of_level();
-  //indicate level nbr
-  SDL_Surface *levelText = NULL;
-  char text[20] = "";
-  sprintf(text, "Level: %d/%d", levelNumber, levelMax);
-  levelText = TTF_RenderText_Blended(font, text, fontColor);
+   /* get info */
+   int levelMax = 0;
+   levelMax = nbr_of_level ();
+   /* indicate level nbr */
+   SDL_Surface *levelText = NULL;
+   char text[20] = "";
+   sprintf (text, "Level: %d/%d", levelNumber, levelMax);
+   levelText = TTF_RenderText_Blended (font, text, fontColor);
 
-  //blit the text
-  SDL_Rect levelTextPos;
-  levelTextPos.x = BOX_SIZE*(X_BLOCKS-3);
-  levelTextPos.y = 10;
-  SDL_BlitSurface(levelText, NULL, menu, &levelTextPos);
+   /* blit the text */
+   SDL_Rect levelTextPos;
+   levelTextPos.x = 10;
+   levelTextPos.y = 10;
+   SDL_BlitSurface (levelText, NULL, menu, &levelTextPos);
 
-  //clean
-  SDL_FreeSurface(levelText);
-  TTF_CloseFont(font);
+   /* clean */
+   SDL_FreeSurface (levelText);
+   TTF_CloseFont (font);
 }
 
-//count how many goals are need to complete the level
-int goalLeft(int map[][MAX_BLOCKS])
+/* count how many goals are need to complete the level */
+int goalLeft (int map[][MAX_BLOCKS])
 {
-  int x = 0, y = 0, nbrOfBoxOk = 0;
-  for (x=0; x < X_BLOCKS; x++)
-    {
-      for (y=0; y < Y_BLOCKS; y++)
-    	{
-	  if(map[x][y] == BOX_OK)
-	    nbrOfBoxOk +=1;
-    	}
-    }
-  return nbrOfBoxOk;
+   int x = 0, y = 0, nbrOfBoxOk = 0;
+   for (x = 0; x < X_BLOCKS; x++)
+   {
+      for (y = 0; y < Y_BLOCKS; y++)
+      {
+         if (map[x][y] == BOX_OK)
+            nbrOfBoxOk += 1;
+      }
+   }
+   return nbrOfBoxOk;
 }
 
-//count how many goals left to complete the level
-int nbr_of_goals(int map[][MAX_BLOCKS])
+/* count goals all ready achieve */
+int nbr_of_goals (int map[][MAX_BLOCKS])
 {
-  int x = 0, y = 0, nbrOfGoal = 0;
-  for (x=0; x < X_BLOCKS; x++)
-    {
-      for (y=0; y < Y_BLOCKS; y++)
-    	{
-	  if(map[x][y] == GOAL)
-	    nbrOfGoal +=1;
-    	}
-    }
-  return nbrOfGoal;
+   int x = 0, y = 0, nbrOfGoal = 0;
+   for (x = 0; x < X_BLOCKS; x++)
+   {
+      for (y = 0; y < Y_BLOCKS; y++)
+      {
+         if (map[x][y] == GOAL)
+            nbrOfGoal += 1;
+      }
+   }
+   return nbrOfGoal;
 }
 
-//display Progress In The Level
-void displayProgress(int map[][MAX_BLOCKS], SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES])
+/* Display Progress in the level */
+void displayProgress (int map[][MAX_BLOCKS], SDL_Surface * menu,
+                      Sprites tableSurface[NBR_OF_IMAGES])
 {
    SDL_Rect progressPos;
-  progressPos.x = 0;
-  progressPos.y = 0;
-  //clean Background
-  int x = 0;
-  for (x = 0; x < 3; x++)
-    {
-  	SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu, &progressPos);
-        progressPos.x += BOX_SIZE;
-    }
+   progressPos.x = BOX_SIZE * 3;
+   progressPos.y = 0;
+   /* clean Background */
+   int x = 0;
+   for (x = 0; x < 3; x++)
+   {
+      SDL_BlitSurface (tableSurface[MENU_BACK].image, NULL, menu,
+                       &progressPos);
+      progressPos.x += BOX_SIZE;
+   }
 
+   /* setup font */
+   TTF_Font *font = NULL;
+   font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
+   SDL_Color fontColor = { 255, 255, 255 };
+   /* get info */
+   int i = goalLeft (map);
+   int j = i + nbr_of_goals (map);
+   /* merge results */
+   SDL_Surface *progress = NULL;
+   char progressText[20] = "";
+   sprintf (progressText, "Goals: %d/%d", i, j);
+   progress = TTF_RenderText_Blended (font, progressText, fontColor);
 
-   //manage font
-  TTF_Font *font = NULL;
-  font = TTF_OpenFont("img/BABIRG__.TTF", 26);
-  SDL_Color fontColor = {255,255,255};
-  //get info
-  int i = goalLeft(map);
-  int j = i + nbr_of_goals(map);
-  //merge results
-  SDL_Surface *progress = NULL;
-  char progressText[20] = "";
-  sprintf(progressText, "Goals: %d/%d", i, j);
-  progress = TTF_RenderText_Blended(font, progressText, fontColor);
+   /* blit progress */
+   progressPos.x = BOX_SIZE * 3;
+   progressPos.y = 10;
+   SDL_BlitSurface (progress, NULL, menu, &progressPos);
 
-  //blit progress
-  progressPos.x = 10;
-  progressPos.y = 10;
-  SDL_BlitSurface(progress, NULL, menu, &progressPos);
-
-    //clean
-  SDL_FreeSurface(progress);
-  TTF_CloseFont(font);
+   /* clean */
+   SDL_FreeSurface (progress);
+   TTF_CloseFont (font);
 }
 
-
-//Victory or not ?
-int levelFinished(int map[][MAX_BLOCKS])
+/* Victory or not ? */
+int levelFinished (int map[][MAX_BLOCKS])
 {
-  if (nbr_of_goals(map)==0)
-    {
-      fprintf(stderr, "Congrats, you complete this level");
+   if (nbr_of_goals (map) == 0)
+   {
+      fprintf (stderr, "Congrats, you complete this level");
       return FINISH;
-    }
-  else
-    {
+   }
+   else
+   {
       return NOT_FINISHED;
-    }
+   }
 }
 
-      #endif
-
+#endif

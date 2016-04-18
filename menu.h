@@ -27,29 +27,31 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "const.h"
 #include "game.h"
-//diplay menu on top of the screen
-void displayMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES],int map[][MAX_BLOCKS]);
 
-//create the menu background
-void backgroundMenu(SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
+/* display menu */
+void displayMenu (int levelNumber, SDL_Surface * menu,
+                  Sprites tableSurface[NBR_OF_IMAGES], int map[][MAX_BLOCKS]);
 
-//diplay the level number
-void levelMenu(int levelNumber, SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
+/* display background menu */
+void backgroundMenu (SDL_Surface * menu, Sprites tableSurface[NBR_OF_IMAGES]);
 
-//display shortcut in the menu
-void displayShortcut( SDL_Surface *menu);
+/* display shortcut in the menu */
+void displayShortcut (SDL_Surface * menu);
 
+/* display the level number */
+void levelMenu (int levelNumber, SDL_Surface * menu,
+                Sprites tableSurface[NBR_OF_IMAGES]);
 
-//count how many goals left to complete the level
-int goalLeft(int map[][MAX_BLOCKS]);
+/* count how many goals are need to complete the level */
+int goalLeft (int map[][MAX_BLOCKS]);
 
-//count the number of goals
-int nbr_of_goals(int map[][MAX_BLOCKS]);
+/* count goals all ready achieve */
+int nbr_of_goals (int map[][MAX_BLOCKS]);
 
-//display Progress In The Level
-void displayProgress(int map[][MAX_BLOCKS], SDL_Surface *menu, Sprites tableSurface[NBR_OF_IMAGES]);
+/* Display Progress in the level */
+void displayProgress (int map[][MAX_BLOCKS], SDL_Surface * menu,
+                      Sprites tableSurface[NBR_OF_IMAGES]);
 
-//Victory or not ?
-int levelFinished(int map[][MAX_BLOCKS]);
+/* Victory or not ? */
+int levelFinished (int map[][MAX_BLOCKS]);
 #endif
-
