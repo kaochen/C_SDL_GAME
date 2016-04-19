@@ -1,12 +1,12 @@
 # C_SDL_GAME
-C_SDL_Game is a simple SDL Game write to practice C
+SokoRobo is a Sokoban game. It's written in langage C using SDL2.
 
 This is an early draft, use it carefully.
 
 ```
-git clone https://github.com/kaochen/C_SDL_GAME
-git remote add -m https://github.com/kaochen/C_SDL_GAME.git
-git remote set-url origin git@github.com:kaochen/C_SDL_GAME.git
+git clone https://github.com/kaochen/SokoRobot
+git remote add -m https://github.com/kaochen/SokoRobot.git
+git remote set-url origin git@github.com:kaochen/SokoRobot.git
 ```
 
 ### Compile
@@ -15,7 +15,6 @@ cd
 make
 ./SokoRobot
 ```
-
 
 clean objects *.o:
 ```
