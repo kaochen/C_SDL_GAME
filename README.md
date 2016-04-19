@@ -1,5 +1,5 @@
-# C_SDL_GAME
-SokoRobo is a Sokoban game. It's written in langage C using SDL2.
+# SokoRobot
+SokoRobot is a Sokoban game. It's written in langage C using SDL2.
 
 This is an early draft, use it carefully.
 
