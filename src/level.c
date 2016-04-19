@@ -33,7 +33,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/game.h"
 
 /* read a level from the file */
-int readlevel (int map[][MAX_BLOCKS], int level)
+int readlevel (Square grid[][MAX_BLOCKS], int level)
 {
    int c = 0, x = 0, y = 0, nb_line = 0, num_line = 0, caract = 0;
    /* open file that describe the level */
@@ -93,38 +93,37 @@ int readlevel (int map[][MAX_BLOCKS], int level)
          {
             num_caract = 0;
          }
-         /* Assign the readen caracter to its destination into the map */
+         /* Assign the readen caracter to its destination into the grid*/
          switch (c)
          {
          case ' ':
-            map[num_caract][level_line] = GROUND;
+            grid[num_caract][level_line].roleType = GROUND;
             break;
          case '#':
-            map[num_caract][level_line] = WALL;
+            grid[num_caract][level_line].roleType = WALL;
             break;
          case '$':
-            map[num_caract][level_line] = BOX;
+            grid[num_caract][level_line].roleType = BOX;
             break;
          case '*':
-            map[num_caract][level_line] = BOX_OK;
+            grid[num_caract][level_line].roleType = BOX_OK;
             break;
          case '.':
-            map[num_caract][level_line] = GOAL;
+            grid[num_caract][level_line].roleType = GOAL;
             break;
          case '@':
-            map[num_caract][level_line] = PLAYER;
+            grid[num_caract][level_line].roleType = PLAYER;
             break;
          }
          num_caract++;
       }
    }
-   fprintf (stderr, "Level Loaded %s\n into the map", SDL_GetError ());
+   fprintf (stderr, "Level Loaded %d into the grid %s\n", level, SDL_GetError ());
    fclose (levelFile);
 }
 
 /* display level on the screen */
-void displayLevel (int map[][MAX_BLOCKS], int mapGround[][MAX_BLOCKS],
-                   SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
+void displayLevel (Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
    /* set a goal position */
    SDL_Rect goalPos;
@@ -136,33 +135,33 @@ void displayLevel (int map[][MAX_BLOCKS], int mapGround[][MAX_BLOCKS],
       for (y = 0; y < Y_BLOCKS; y++)
       {
          /* assign a random ground to each block */
-         mapGround[x][y] = addRandomGround ();
+         grid[x][y].groundType = addRandomGround ();
 
-         /* blit all blocks depending on map types and mapGround types */
-         switch (map[x][y])
+         /* blit all blocks depending on grid types*/
+         switch (grid[x][y].roleType)
          {
          case GROUND:
-            blitGround (x, y, mapGround[x][y], screen, tableSurface);
+            blitGround (x, y, grid[x][y].groundType, screen, tableSurface);
             break;
          case BOX:
-            moveBox (x, y, map, STILL, screen, tableSurface);
+            moveBox (x, y, grid, STILL, screen, tableSurface);
             break;
          case BOX_OK:
-            moveBox (x, y, map, STILL, screen, tableSurface);
+            moveBox (x, y, grid, STILL, screen, tableSurface);
             break;
          case WALL:
-            blitWalls (x, y, map, screen, tableSurface);
+            blitWalls (x, y, grid, screen, tableSurface);
             break;
          case GOAL:
             goalPos.x = x * BOX_SIZE;
             goalPos.y = y * BOX_SIZE;
-            blitGround (x, y, mapGround[x][y], screen, tableSurface);
+            blitGround (x, y, grid[x][y].groundType, screen, tableSurface);
             SDL_BlitSurface (tableSurface[GOAL_IMAGE].image, NULL, screen,
                              &goalPos);
             break;
          case PLAYER:
-            blitGround (x, y, map[x][y], screen, tableSurface);
-            blitPlayer (x, y, STILL, mapGround[x][y], screen, tableSurface);
+            blitGround (x, y, grid[x][y].groundType, screen, tableSurface);
+            blitPlayer (x, y, STILL, grid[x][y].roleType, screen, tableSurface);
             break;
          }
       }

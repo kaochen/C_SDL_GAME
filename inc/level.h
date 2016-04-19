@@ -27,12 +27,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "sprites.h"
 
 /* read a level from the file */
-int readlevel (int map[][MAX_BLOCKS], int level);
+int readlevel (Square grid[][MAX_BLOCKS], int level);
 
 /* display level on the screen */
-void displayLevel (int map[][MAX_BLOCKS], int mapGround[][MAX_BLOCKS],
-                   SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+void displayLevel (Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Detect how many levels are describe in the level file */
 int nbr_of_level ();
+
 #endif

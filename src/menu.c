@@ -33,7 +33,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* display menu */
 void displayMenu (int levelNumber, SDL_Surface * menu,
-                  Sprites tableSurface[NBR_OF_IMAGES], int map[][MAX_BLOCKS])
+                  Sprites tableSurface[NBR_OF_IMAGES])
 {
    /* first add background */
    backgroundMenu (menu, tableSurface);
@@ -108,14 +108,14 @@ void levelMenu (int levelNumber, SDL_Surface * menu,
 }
 
 /* count how many goals are need to complete the level */
-int goalLeft (int map[][MAX_BLOCKS])
+int goalLeft (Square grid[][MAX_BLOCKS])
 {
    int x = 0, y = 0, nbrOfBoxOk = 0;
    for (x = 0; x < X_BLOCKS; x++)
    {
       for (y = 0; y < Y_BLOCKS; y++)
       {
-         if (map[x][y] == BOX_OK)
+         if (grid[x][y].roleType == BOX_OK)
             nbrOfBoxOk += 1;
       }
    }
@@ -123,14 +123,14 @@ int goalLeft (int map[][MAX_BLOCKS])
 }
 
 /* count goals all ready achieve */
-int nbr_of_goals (int map[][MAX_BLOCKS])
+int nbr_of_goals (Square grid[][MAX_BLOCKS])
 {
    int x = 0, y = 0, nbrOfGoal = 0;
    for (x = 0; x < X_BLOCKS; x++)
    {
       for (y = 0; y < Y_BLOCKS; y++)
       {
-         if (map[x][y] == GOAL)
+         if (grid[x][y].roleType == GOAL)
             nbrOfGoal += 1;
       }
    }
@@ -138,7 +138,7 @@ int nbr_of_goals (int map[][MAX_BLOCKS])
 }
 
 /* Display Progress in the level */
-void displayProgress (int map[][MAX_BLOCKS], SDL_Surface * menu,
+void displayProgress (Square grid[][MAX_BLOCKS], SDL_Surface * menu,
                       Sprites tableSurface[NBR_OF_IMAGES])
 {
    SDL_Rect progressPos;
@@ -158,8 +158,8 @@ void displayProgress (int map[][MAX_BLOCKS], SDL_Surface * menu,
    font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
    SDL_Color fontColor = { 255, 255, 255 };
    /* get info */
-   int i = goalLeft (map);
-   int j = i + nbr_of_goals (map);
+   int i = goalLeft (grid);
+   int j = i + nbr_of_goals (grid);
    /* merge results */
    SDL_Surface *progress = NULL;
    char progressText[20] = "";
@@ -177,9 +177,9 @@ void displayProgress (int map[][MAX_BLOCKS], SDL_Surface * menu,
 }
 
 /* Victory or not ? */
-int levelFinished (int map[][MAX_BLOCKS])
+int levelFinished (Square grid[][MAX_BLOCKS])
 {
-   if (nbr_of_goals (map) == 0)
+   if (nbr_of_goals (grid) == 0)
    {
       fprintf (stderr, "Congrats, you complete this level");
       return FINISH;

@@ -37,6 +37,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //autorise 100 images max
 #define NBR_OF_IMAGES 100
 
+/* define role for each square*/
+typedef struct
+{
+   int roleType;
+   int groundType;
+} Square;
+
+
+
 //object type
 enum {GROUND, GROUND1, GROUND2, GROUND3, GROUND4, WALL , GOAL,BOX, BOX_OK, PLAYER  };
 

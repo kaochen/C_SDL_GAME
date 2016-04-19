@@ -30,7 +30,7 @@ void blitPlayer (int xPlayer, int yPlayer, int direction, int xyGround,
                  SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* move a box */
-void moveBox (int xPlayer, int yPlayer, int map[][MAX_BLOCKS], int direction,
+void moveBox (int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS], int direction,
               SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* blit ground */
@@ -38,7 +38,7 @@ void blitGround (int x, int y, int typeOfGround, SDL_Surface * screen,
                  Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* blit Walls */
-void blitWalls (int x, int y, int map[][MAX_BLOCKS], SDL_Surface * screen,
+void blitWalls (int x, int y, Square grid[][MAX_BLOCKS], SDL_Surface * screen,
                 Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* add a more ground choice */

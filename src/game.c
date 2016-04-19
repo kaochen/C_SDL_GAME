@@ -82,7 +82,7 @@ void blitPlayer (int xPlayer, int yPlayer, int direction, int xyGround,
 }
 
 /* move a box */
-void moveBox (int xPlayer, int yPlayer, int map[][MAX_BLOCKS], int direction,
+void moveBox (int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS], int direction,
               SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
    /* set box position */
@@ -115,8 +115,8 @@ void moveBox (int xPlayer, int yPlayer, int map[][MAX_BLOCKS], int direction,
    }
    SDL_BlitSurface (tableSurface[GROUND1_IMAGE].image, NULL, screen, &boxPos);
    /* blit BOX_IMAGE_OK if Box on a goal */
-   if (map[boxPos.x / BOX_SIZE][boxPos.y / BOX_SIZE] == GOAL
-       || map[boxPos.x / BOX_SIZE][boxPos.y / BOX_SIZE] == BOX_OK)
+   if (grid[boxPos.x / BOX_SIZE][boxPos.y / BOX_SIZE].roleType == GOAL
+       || grid[boxPos.x / BOX_SIZE][boxPos.y / BOX_SIZE].roleType == BOX_OK)
    {
       SDL_BlitSurface (tableSurface[BOX_IMAGE_OK].image, NULL, screen,
                        &boxPos);
@@ -154,7 +154,7 @@ void blitGround (int x, int y, int typeOfGround, SDL_Surface * screen,
 }
 
 /* blit Walls */
-void blitWalls (int x, int y, int map[][MAX_BLOCKS], SDL_Surface * screen,
+void blitWalls (int x, int y, Square grid[][MAX_BLOCKS], SDL_Surface * screen,
                 Sprites tableSurface[NBR_OF_IMAGES])
 {
 
@@ -189,23 +189,23 @@ void blitWalls (int x, int y, int map[][MAX_BLOCKS], SDL_Surface * screen,
 
    /* blit wall border, expect on window sides */
    /* blit left border */
-   if (x != 0 && map[x - 1][y] != WALL)
+   if (x != 0 && grid[x - 1][y].roleType != WALL)
    {
       SDL_BlitSurface (tableSurface[WALL_LEFT].image, NULL, screen, &wallPos);
    }
    /* blit right border */
-   if (x != X_BLOCKS && map[x + 1][y] != WALL)
+   if (x != X_BLOCKS && grid[x + 1][y].roleType != WALL)
    {
       SDL_BlitSurface (tableSurface[WALL_RIGHT].image, NULL, screen,
                        &wallPos);
    }
    /* blit top border */
-   if (y != 0 && map[x][y - 1] != WALL)
+   if (y != 0 && grid[x][y - 1].roleType != WALL)
    {
       SDL_BlitSurface (tableSurface[WALL_TOP].image, NULL, screen, &wallPos);
    }
    /* blit bottom border */
-   if (y != Y_BLOCKS && map[x][y + 1] != WALL)
+   if (y != Y_BLOCKS && grid[x][y + 1].roleType != WALL)
    {
       SDL_BlitSurface (tableSurface[WALL_BOTTOM].image, NULL, screen,
                        &wallPos);
@@ -213,7 +213,7 @@ void blitWalls (int x, int y, int map[][MAX_BLOCKS], SDL_Surface * screen,
 }
 
 /* add a more ground choice */
-int addRandomGround ()
+int addRandomGround()
 {
    int i = 0, randomNumber = 0;
    randomNumber = random_number (0, 100);

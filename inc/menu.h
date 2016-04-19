@@ -30,7 +30,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* display menu */
 void displayMenu (int levelNumber, SDL_Surface * menu,
-                  Sprites tableSurface[NBR_OF_IMAGES], int map[][MAX_BLOCKS]);
+                  Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* display background menu */
 void backgroundMenu (SDL_Surface * menu, Sprites tableSurface[NBR_OF_IMAGES]);
@@ -43,15 +43,15 @@ void levelMenu (int levelNumber, SDL_Surface * menu,
                 Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* count how many goals are need to complete the level */
-int goalLeft (int map[][MAX_BLOCKS]);
+int goalLeft (Square grid[][MAX_BLOCKS]);
 
 /* count goals all ready achieve */
-int nbr_of_goals (int map[][MAX_BLOCKS]);
+int nbr_of_goals (Square grid[][MAX_BLOCKS]);
 
 /* Display Progress in the level */
-void displayProgress (int map[][MAX_BLOCKS], SDL_Surface * menu,
+void displayProgress (Square grid[][MAX_BLOCKS], SDL_Surface * menu,
                       Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Victory or not ? */
-int levelFinished (int map[][MAX_BLOCKS]);
+int levelFinished (Square grid[][MAX_BLOCKS]);
 #endif
