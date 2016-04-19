@@ -29,28 +29,28 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "const.h"
 #include "sprites.h"
 
-
-//load a sprite as a surface
-void loadSprite(Sprites *sprites, const char *imagePath)
+/* load a sprite as a surface */
+void loadSprite (Sprites * sprites, const char *imagePath)
 {
-	sprites->image = IMG_Load(imagePath);
-  	if (sprites->image == NULL)
-	{
-	    fprintf(stderr, "IMG_Load %s failed: %s\n", imagePath, SDL_GetError());
-	    exit(EXIT_FAILURE);
-	}
-  	sprites->height = 40;
-  	sprites->width = 40;
+   sprites->image = IMG_Load (imagePath);
+   if (sprites->image == NULL)
+   {
+      fprintf (stderr, "IMG_Load %s failed: %s\n", imagePath,
+               SDL_GetError ());
+      exit (EXIT_FAILURE);
+   }
+   sprites->height = 40;
+   sprites->width = 40;
 }
 
-//free Surfaces
-void freeSprites(Sprites tableSurface[NBR_OF_IMAGES])
+/* free all surfaces */
+void freeSprites (Sprites tableSurface[NBR_OF_IMAGES])
 {
-  int i = 0;
-  for(i = 0; i < NBR_OF_IMAGES; i++)
-    {
-        SDL_FreeSurface(tableSurface[i].image);
-    }
+   int i = 0;
+   for (i = 0; i < NBR_OF_IMAGES; i++)
+   {
+      SDL_FreeSurface (tableSurface[i].image);
+   }
 }
 
 #endif

@@ -20,27 +20,31 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef GAME_H
 #define GAME_H
 
-#include "const.h"
 #include <SDL2/SDL.h>
+
+#include "const.h"
 #include "sprites.h"
 
-//move player and blit the player
-void blitPlayer(int xPlayer, int yPlayer, int direction ,int xyGround, SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES]);
+/* move the player and blit player images */
+void blitPlayer (int xPlayer, int yPlayer, int direction, int xyGround,
+                 SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
-//move a box
-void moveBox(int xPlayer, int yPlayer, int map[][MAX_BLOCKS], int direction , SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES]);
+/* move a box */
+void moveBox (int xPlayer, int yPlayer, int map[][MAX_BLOCKS], int direction,
+              SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
-//random number between two numbers
-int random_number(int min, int max);
+/* blit ground */
+void blitGround (int x, int y, int typeOfGround, SDL_Surface * screen,
+                 Sprites tableSurface[NBR_OF_IMAGES]);
 
-//add a randomGround
-int addRandomGround();
+/* blit Walls */
+void blitWalls (int x, int y, int map[][MAX_BLOCKS], SDL_Surface * screen,
+                Sprites tableSurface[NBR_OF_IMAGES]);
 
-//blit Ground
-void blitGround(int x, int y, int typeOfGround,SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES]);
+/* add a more ground choice */
+int addRandomGround ();
 
-//blit walls
-void blitWalls(int x, int y, int map[][MAX_BLOCKS],SDL_Surface *screen, Sprites tableSurface[NBR_OF_IMAGES]);
-
+/* random number between two numbers */
+int random_number (int min, int max);
 
 #endif

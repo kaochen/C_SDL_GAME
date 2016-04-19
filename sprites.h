@@ -28,20 +28,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "const.h"
 
+/* define images/sprites struct */
 typedef struct
 {
-  //SDL
-  SDL_Surface *image;
-  SDL_Rect imagePos;
+   //SDL
+   SDL_Surface *image;
+   SDL_Rect imagePos;
 
-  int height;
-  int width;
-}Sprites;
+   int height;
+   int width;
+} Sprites;
 
-//load a sprite as a surface
-void loadSprite(Sprites *sprites, const char *imagePath);
+/* load a sprite as a surface */
+void loadSprite (Sprites * sprites, const char *imagePath);
 
-//free Surfaces
-void freeSprites(Sprites tableSurface[NBR_OF_IMAGES]);
+/* free all surfaces */
+void freeSprites (Sprites tableSurface[NBR_OF_IMAGES]);
 
 #endif
