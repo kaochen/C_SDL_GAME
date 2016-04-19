@@ -26,9 +26,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL_image.h>
 #include <time.h>
 
-#include "const.h"
-#include "game.h"
-#include "sprites.h"
+#include "../inc/const.h"
+#include "../inc/game.h"
+#include "../inc/sprites.h"
 
 /* move the player and blit player images */
 void blitPlayer (int xPlayer, int yPlayer, int direction, int xyGround,

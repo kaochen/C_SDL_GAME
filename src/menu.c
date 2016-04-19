@@ -26,10 +26,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "const.h"
-#include "game.h"
-#include "menu.h"
-#include "level.h"
+#include "../inc/const.h"
+#include "../inc/game.h"
+#include "../inc/menu.h"
+#include "../inc/level.h"
 
 /* display menu */
 void displayMenu (int levelNumber, SDL_Surface * menu,

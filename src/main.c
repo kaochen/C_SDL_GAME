@@ -24,11 +24,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL_ttf.h>
 #include <time.h>
 
-#include "const.h"
-#include "game.h"
-#include "level.h"
-#include "menu.h"
-#include "sprites.h"
+#include "../inc/const.h"
+#include "../inc/game.h"
+#include "../inc/level.h"
+#include "../inc/menu.h"
+#include "../inc/sprites.h"
 
 int main (int argc, char *argv[])
 {

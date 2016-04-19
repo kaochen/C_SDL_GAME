@@ -20,7 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef LEVEL_C
 #define LEVEL_C
 
-#include "level.h"
+#include "../inc/level.h"
 
 #include <stdlib.h>
 #include <stdio.h>
@@ -29,8 +29,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "const.h"
-#include "game.h"
+#include "../inc/const.h"
+#include "../inc/game.h"
 
 /* read a level from the file */
 int readlevel (int map[][MAX_BLOCKS], int level)
