@@ -37,6 +37,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //autorise 100 images max
 #define NBR_OF_IMAGES 100
 
+#define MAX_CARACT 200
+
 /* define role for each square*/
 typedef struct
 {

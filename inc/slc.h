@@ -17,41 +17,41 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef SPRITES_C
-#define SPRITES_C
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#ifndef SLC_H
+#define SLC_H
 
 #include "../inc/const.h"
-#include "../inc/sprites.h"
 
-/* load a sprite as a surface */
-void loadSprite (Sprites * sprites, const char *imagePath)
+/* define .slc file struct */
+typedef struct
 {
-   sprites->image = IMG_Load (imagePath);
-   if (sprites->image == NULL)
-   {
-      fprintf (stderr, "IMG_Load %s failed: %s\n", imagePath,
-               SDL_GetError ());
-      exit (EXIT_FAILURE);
-   }
-   sprites->height = 40;
-   sprites->width = 40;
-}
+   char filename[MAX_CARACT];
+   char title[MAX_CARACT];
+   char copyright[MAX_CARACT];
+   char description[MAX_CARACT];
 
-/* free all surfaces */
-void freeSprites (Sprites tableSurface[NBR_OF_IMAGES])
+   int maxWidth;
+   int maxHeight;
+   int nbr_of_level;
+} S_slcFile;
+
+/* define level info extract .slc file */
+typedef struct
 {
-   int i = 0;
-   for (i = 0; i < NBR_OF_IMAGES; i++)
-   {
-      SDL_FreeSurface (tableSurface[i].image);
-   }
-   fprintf (stderr, "Free all surfaces: %s\n", SDL_GetError ());
-}
+   int levelNumber ;
+   char levelname[MAX_CARACT];
 
+   int width;
+   int height;
+
+} S_level;
+
+/*open the slc file */
+void openSlcFile ();
+
+/*read one line */
+void extactData(char line[MAX_CARACT]);
+
+/*read one level */
+void readLevel (int levelNum);
 #endif

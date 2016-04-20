@@ -29,6 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/level.h"
 #include "../inc/menu.h"
 #include "../inc/sprites.h"
+#include "../inc/slc.h"
 
 
 int main (int argc, char *argv[])
@@ -117,6 +118,8 @@ int main (int argc, char *argv[])
 
    /* load the level from the levels.txt */
    readlevel(grid,levelChoice);
+   openSlcFile();
+   readLevel(3);
 
      /* Set player position */
    SDL_Rect playerPos;

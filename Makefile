@@ -4,8 +4,8 @@ CC=gcc
 CFLAGS= `sdl2-config --cflags --libs` -lSDL2main -lSDL2_image -lSDL2 -lSDL2_ttf
 LDFLAGS=
 EXEC=SokoRobot
-DEPS= inc/const.h inc/game.h inc/level.h inc/menu.h inc/sprites.h
-OBJS= obj/game.o obj/level.o obj/main.o obj/menu.o obj/sprites.o
+DEPS= inc/const.h inc/game.h inc/level.h inc/menu.h inc/sprites.h inc/slc.h
+OBJS= obj/game.o obj/level.o obj/main.o obj/menu.o obj/sprites.o obj/slc.o
 
 all: $(EXEC)
 
@@ -26,6 +26,9 @@ obj/menu.o: src/menu.c $(DEPS)
 
 obj/sprites.o: src/sprites.c $(DEPS)
 	$(CC) -o obj/sprites.o -c src/sprites.c -I inc $(CFLAGS)
+
+obj/slc.o: src/slc.c $(DEPS)
+	$(CC) -o obj/slc.o -c src/slc.c -I inc $(CFLAGS)
 
 
 clean:
