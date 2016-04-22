@@ -22,36 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../inc/const.h"
 
-/* define .slc file struct */
-typedef struct
-{
-   char filename[MAX_CARACT];
-   char title[MAX_CARACT];
-   char copyright[MAX_CARACT];
-   char description[MAX_CARACT];
 
-   int maxWidth;
-   int maxHeight;
-   int nbr_of_level;
-} S_slcFile;
-
-/* define level info extract .slc file */
-typedef struct
-{
-   int levelNumber ;
-   char levelname[MAX_CARACT];
-
-   int width;
-   int height;
-
-} S_level;
-
-/*open the slc file */
-void openSlcFile ();
-
-/*read one line */
-void extactData(char line[MAX_CARACT]);
-
-/*read one level */
-void readLevel (int levelNum);
+int readXML(void);
+int test(void);
 #endif

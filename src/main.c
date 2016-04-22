@@ -118,8 +118,9 @@ int main (int argc, char *argv[])
 
    /* load the level from the levels.txt */
    readlevel(grid,levelChoice);
-   openSlcFile();
-   readLevel(3);
+   readXML();
+   //openSlcFile();
+   //readLevel(3);
 
      /* Set player position */
    SDL_Rect playerPos;

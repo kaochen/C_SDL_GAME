@@ -1,7 +1,7 @@
 #Makefile
 
 CC=gcc
-CFLAGS= `sdl2-config --cflags --libs` -lSDL2main -lSDL2_image -lSDL2 -lSDL2_ttf
+CFLAGS= `sdl2-config --cflags --libs`  -lSDL2main -lSDL2_image -lSDL2 -lSDL2_ttf `xml2-config --cflags` `xml2-config --libs`
 LDFLAGS=
 EXEC=SokoRobot
 DEPS= inc/const.h inc/game.h inc/level.h inc/menu.h inc/sprites.h inc/slc.h

@@ -20,122 +20,61 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef SLC_C
 #define SLC_C
 
-
-
 #include <stdlib.h>
 #include <stdio.h>
-#include <SDL2/SDL.h>
 #include <string.h>
 
 #include "../inc/slc.h"
 #include "../inc/const.h"
 
-void openSlcFile ()
-{
-   char nameFile[MAX_CARACT] = "levels/12_Blocks.slc";
-   char line[MAX_CARACT] = "";
-   long cursor1 = 0, cursor2 = 0;
-   FILE *slcFile = NULL;
-   slcFile = fopen (nameFile, "r");
+//Read using libxml
+#include <libxml2/libxml/tree.h>
+#include <libxml2/libxml/parser.h>
+#include <libxml2/libxml/xpath.h>
+#include <libxml2/libxml/xpathInternals.h>
 
-   /* check if file exist */
-   if (slcFile != NULL)
-   {
-        fprintf (stderr, "%s opened %s\n", nameFile, SDL_GetError ());
-   }
-  else
+int readXML(void)
+{
+    xmlDocPtr doc;
+    xmlNodePtr root;
+
+    /* Open SLC/XML file */
+    doc = xmlParseFile("levels/12_Blocks.slc");
+    if (doc == NULL)
     {
-          fprintf (stderr, "Can't open %s : %s\n", nameFile, SDL_GetError ());
+        fprintf(stderr, "XML Document not valid\n");
+        return 0;
     }
 
-	while (fgets(line, MAX_CARACT, slcFile)!= NULL)
-	    {
-	  	if(strstr(line, "<Description") != NULL)
-		{
-		     	cursor1 = ftell(slcFile);
-		  	fprintf(stderr, "%s", line );
+    // Start XPath
+	xmlXPathInit();
+	// Create a context
+	xmlXPathContextPtr ctxt = xmlXPathNewContext(doc);
+	if (ctxt == NULL) {
+	    fprintf(stderr, "Error creating the context XPath\n");
+	    exit(-1);
+	}
+	// Read expression with XPath
+	xmlXPathObjectPtr xpathRes = xmlXPathEvalExpression(BAD_CAST "/SokobanLevels/Title/text()", ctxt);
+	if (xpathRes == NULL) {
+	    fprintf(stderr, "Error on the XPath expression\n");
+	    exit(-1);
+	}
+	// Show the result
+	if (xpathRes->type == XPATH_NODESET) {
+	    int i;
+	    printf("Title: ");
+	    for (i = 0; i < xpathRes->nodesetval->nodeNr; i++) {
+		xmlNodePtr n = xpathRes->nodesetval->nodeTab[i];
+		if (n->type == XML_TEXT_NODE || n->type == XML_CDATA_SECTION_NODE) {
+		    fprintf(stderr, "%s\n", n->content);
 		}
-	      	if(strstr(line, "</Description>") != NULL)
-		{
-		     	cursor2 = ftell(slcFile);
-		  	fprintf(stderr, "%s", line );
-		}
-
 	    }
-
-  	fseek(slcFile, cursor1, SEEK_SET);
-	int i = 0, c = 0, l = 0;
-  	l = cursor2 - cursor1 - strlen("</Level>\n");
-  	for (i = 0; i < l; i++)
-    	{
-    	c = fgetc(slcFile);
-	fprintf(stderr, "%c", c );
-    	}
-  	fclose(slcFile);
-}
-
-
-void readLevel (int levelNum)
-{
-   char nameFile[MAX_CARACT] = "levels/12_Blocks.slc";
-   char line[MAX_CARACT] = "";
-   long cursor1 = 0, cursor2 = 0;
-   FILE *slcFile = NULL;
-   slcFile = fopen (nameFile, "r");
-
-   /* check if file exist */
-   if (slcFile != NULL)
-   {
-        fprintf (stderr, "%s opened %s\n", nameFile, SDL_GetError ());
-   }
-  else
-    {
-          fprintf (stderr, "Can't open %s : %s\n", nameFile, SDL_GetError ());
-    }
-
-
-	int j = 0;
-  	fprintf(stderr, "level number :%d\n", levelNum);
-	while (fgets(line, MAX_CARACT, slcFile)!= NULL && j != levelNum)
-	    {
-		  	 /* mark beginning */
-	      		if(strstr(line, "<Level") != NULL)
-			{
-			     	cursor1 = ftell(slcFile);
-			}
-	      		/* mark end */
-		      	if(strstr(line, "</Level>") != NULL)
-			{
-			     	cursor2 = ftell(slcFile);
-			  	j++;
-			}
-
-	    }
-      /* extract content between two marks */
-  	fseek(slcFile, cursor1, SEEK_SET);
-	int i = 0, k= 0,c = 0, l = 0;
-  	char lineLevel[100] = "";
-  	const char start[] = "<L>";
-  	char *token;
-  	l = cursor2 - cursor1 - strlen("</Level>\n");
-  	for (i = 0; i < l; i++)
-    	{
-	    while (c != '\n')
-		{
-		c = fgetc(slcFile);
-		sprintf(lineLevel, "%c", c);
-		token = strtok(lineLevel, start);
-		while(token != NULL)
-		    {
-		      	fprintf(stderr, "%s", lineLevel);
-		      	token = strtok(NULL, start);
-		    }
-
-
-		}
-
-    	}
-
-  	fclose(slcFile);
+	}
+	// free memorie
+	xmlFreeDoc(doc);
+	xmlXPathFreeObject(xpathRes);
+	xmlXPathFreeContext(ctxt);
+  	return 1;
 }
 #endif
