@@ -22,7 +22,12 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../inc/const.h"
 
+//Read using libxml
+#include <libxml2/libxml/tree.h>
+#include <libxml2/libxml/parser.h>
+#include <libxml2/libxml/xpath.h>
+#include <libxml2/libxml/xpathInternals.h>
 
-int readXML(void);
-int test(void);
+int readXML(char *nameLevel);
+
 #endif

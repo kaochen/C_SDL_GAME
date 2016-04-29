@@ -33,48 +33,61 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libxml2/libxml/xpath.h>
 #include <libxml2/libxml/xpathInternals.h>
 
-int readXML(void)
+int readXML (char *nameLevel)
 {
-    xmlDocPtr doc;
-    xmlNodePtr root;
+   xmlDocPtr doc;
 
-    /* Open SLC/XML file */
-    doc = xmlParseFile("levels/12_Blocks.slc");
-    if (doc == NULL)
-    {
-        fprintf(stderr, "XML Document not valid\n");
-        return 0;
-    }
+   /* Open SLC/XML file */
+   doc = xmlParseFile ("levels/12_Blocks.slc");
+   if (doc == NULL)
+   {
+      fprintf (stderr, "XML Document not valid\n");
+      return 0;
+   }
 
-    // Start XPath
-	xmlXPathInit();
-	// Create a context
-	xmlXPathContextPtr ctxt = xmlXPathNewContext(doc);
-	if (ctxt == NULL) {
-	    fprintf(stderr, "Error creating the context XPath\n");
-	    exit(-1);
-	}
-	// Read expression with XPath
-	xmlXPathObjectPtr xpathRes = xmlXPathEvalExpression(BAD_CAST "/SokobanLevels/Title/text()", ctxt);
-	if (xpathRes == NULL) {
-	    fprintf(stderr, "Error on the XPath expression\n");
-	    exit(-1);
-	}
-	// Show the result
-	if (xpathRes->type == XPATH_NODESET) {
-	    int i;
-	    printf("Title: ");
-	    for (i = 0; i < xpathRes->nodesetval->nodeNr; i++) {
-		xmlNodePtr n = xpathRes->nodesetval->nodeTab[i];
-		if (n->type == XML_TEXT_NODE || n->type == XML_CDATA_SECTION_NODE) {
-		    fprintf(stderr, "%s\n", n->content);
-		}
-	    }
-	}
-	// free memorie
-	xmlFreeDoc(doc);
-	xmlXPathFreeObject(xpathRes);
-	xmlXPathFreeContext(ctxt);
-  	return 1;
+   // Start XPath
+   xmlXPathInit ();
+   // Create a context
+   xmlXPathContextPtr ctxt = xmlXPathNewContext (doc);
+   if (ctxt == NULL)
+   {
+      fprintf (stderr, "Error creating the context XPath\n");
+      exit (-1);
+   }
+
+   /* Read Level */
+   char path[MAX_CARACT] = "";
+   sprintf (path, "/SokobanLevels/LevelCollection/Level[@Id=\"%s\"]/L/text()",
+            nameLevel);
+   xmlXPathObjectPtr xpathLevel =
+      xmlXPathEvalExpression (BAD_CAST path, ctxt);
+   if (xpathLevel == NULL)
+   {
+      fprintf (stderr, "Error on the xPathLevel expression\n");
+      exit (-1);
+   }
+   /* Show the result */
+   if (xpathLevel->type == XPATH_NODESET)
+   {
+      int i;
+      xmlNodePtr n;
+      printf ("Level: ");
+      for (i = 0; i < 18; i++)
+      {
+         n = xpathLevel->nodesetval->nodeTab[i];
+         if (n->type == XML_TEXT_NODE || n->type == XML_CDATA_SECTION_NODE)
+         {
+            fprintf (stderr, "%s\n", n->content);
+         }
+      }
+   }
+
+   /* free memory */
+   xmlFreeDoc (doc);
+
+   xmlXPathFreeObject (xpathLevel);
+   xmlXPathFreeContext (ctxt);
+
+   return 1;
 }
 #endif
