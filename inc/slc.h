@@ -56,6 +56,7 @@ void addNewLevel(S_LevelList *levelList, char *name, int height, int width);
 /* read level list one by one */
 void readLevelList(S_LevelList *levelList);
 
-int readXML(char *nameLevel);
+/* read level from slc file */
+int readslcLevel (char *nameLevel, S_LevelList * levelList);
 
 #endif

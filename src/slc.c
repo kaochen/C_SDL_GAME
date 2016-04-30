@@ -89,8 +89,30 @@ void readLevelList (S_LevelList * levelList)
 }
 
 /*Read a level */
-int readXML (char *nameLevel)
+int readslcLevel (char *nameLevel, S_LevelList * levelList)
 {
+   if (levelList == NULL)
+   {
+      exit (EXIT_FAILURE);
+   }
+
+   int nbr_of_lines = 0, nbr_of_columns = 0, firstColumn = 0;
+   S_Level *actual = levelList->first;
+  /* read the all chain list */
+   while (actual != NULL)
+   {
+      /* try to find the nameLevel into the list*/
+      if (strcmp(actual->name,nameLevel) == 0)
+       {
+	 fprintf (stderr, "%s::%s, %d:%d\n", nameLevel, actual->name, actual->width,
+      		  actual->height);
+	 nbr_of_lines = actual->height;
+	 nbr_of_columns = actual->width;
+	 firstColumn = (X_BLOCKS - nbr_of_columns)/2;
+       }
+      actual = actual->next;
+   }
+
    xmlDocPtr doc;
 
    /* Open SLC/XML file */
@@ -128,7 +150,7 @@ int readXML (char *nameLevel)
       int i;
       xmlNodePtr n;
       printf ("Level: ");
-      for (i = 0; i < 18; i++)
+      for (i = 0; i < nbr_of_lines; i++)
       {
          n = xpathLevel->nodesetval->nodeTab[i];
          if (n->type == XML_TEXT_NODE || n->type == XML_CDATA_SECTION_NODE)

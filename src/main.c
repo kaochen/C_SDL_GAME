@@ -123,7 +123,7 @@ int main (int argc, char *argv[])
    addNewLevel(levelList, "Level 8", 18, 18);
    addNewLevel(levelList, "Level 9", 20, 15);
    readLevelList(levelList);
-   readXML("Level 8");
+   readslcLevel ("Level 8",levelList);
 
    /* Set player position */
    SDL_Rect playerPos;
