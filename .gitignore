@@ -1,0 +1,7 @@
+#Ignore this files
+obj/*.o
+SokoRobot
+# Except this files
+
+
+
