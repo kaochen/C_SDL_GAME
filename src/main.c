@@ -119,6 +119,10 @@ int main (int argc, char *argv[])
    /* load the level from the levels.txt */
    readlevel(grid,levelChoice);
    /*Read level from slc file in progress. */
+   S_LevelList *levelList = initLevelList();
+   addNewLevel(levelList, "Level 8", 18, 18);
+   addNewLevel(levelList, "Level 9", 20, 15);
+   readLevelList(levelList);
    readXML("Level 8");
 
    /* Set player position */

@@ -28,6 +28,34 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libxml2/libxml/xpath.h>
 #include <libxml2/libxml/xpathInternals.h>
 
+/* level definion struct */
+typedef struct S_Level S_Level;
+struct S_Level
+{
+   char name[MAX_CARACT];
+   char file[MAX_CARACT];
+   int height;
+   int width;
+   int number;
+   S_Level *next;
+};
+
+/* control level list */
+typedef struct S_LevelList S_LevelList;
+struct S_LevelList
+{
+   S_Level *first;
+};
+
+/* Initiatlize the list of levels */
+S_LevelList *initLevelList();
+
+/*Add a level in the list*/
+void addNewLevel(S_LevelList *levelList, char *name, int height, int width);
+
+/* read level list one by one */
+void readLevelList(S_LevelList *levelList);
+
 int readXML(char *nameLevel);
 
 #endif

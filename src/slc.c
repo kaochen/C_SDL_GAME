@@ -33,6 +33,62 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libxml2/libxml/xpath.h>
 #include <libxml2/libxml/xpathInternals.h>
 
+/* Initiatlize the list of levels */
+S_LevelList *initLevelList ()
+{
+   S_LevelList *levelList = malloc (sizeof (*levelList));
+   S_Level *level = malloc (sizeof (*level));
+   if (levelList == NULL || level == NULL)
+   {
+      exit (EXIT_FAILURE);
+   }
+   /*load first level */
+   strcpy (level->name, "");
+   strcpy (level->file, "");
+   level->height = 0;
+   level->width = 0;
+   level->number = 0;
+   level->next = NULL;
+   /* store adress of the first level */
+   levelList->first = level;
+
+   return levelList;
+}
+
+/*Add a level in the list*/
+void addNewLevel (S_LevelList * levelList, char *name, int height, int width)
+{
+   S_Level *new = malloc (sizeof (*new));
+   if (levelList == NULL || new == NULL)
+   {
+      exit (EXIT_FAILURE);
+   }
+   strcpy (new->name, name);
+   new->height = height;
+   new->width = width;
+
+  /* insert new level the control and the last one of the list*/
+   new->next = levelList->first;
+   levelList->first = new;
+}
+
+/* read level list one by one */
+void readLevelList (S_LevelList * levelList)
+{
+   if (levelList == NULL)
+   {
+      exit (EXIT_FAILURE);
+   }
+   S_Level *actual = levelList->first;
+   while (actual != NULL)
+   {
+      fprintf (stderr, "%s, %d:%d\n", actual->name, actual->width,
+               actual->height);
+      actual = actual->next;
+   }
+}
+
+/*Read a level */
 int readXML (char *nameLevel)
 {
    xmlDocPtr doc;
