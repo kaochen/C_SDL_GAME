@@ -120,12 +120,11 @@ int main (int argc, char *argv[])
    /*readlevel(grid,levelChoice);
    /*Read level from slc file in progress. */
    S_LevelList *levelList = initLevelList();
-   addNewLevel(levelList, "Level 8", 18, 18);
-   addNewLevel(levelList, "Level 9", 20, 15);
-   addNewLevel(levelList, "Level 14", 25, 9);
-   addNewLevel(levelList, "Level 15", 28, 8);
+   addNewLevel(levelList, "Alberto Garcia Arr 6 Alberto 26a", 16, 18);
+   addNewLevel(levelList, "Alberto Garcia Arr 8 Alberto 34a", 11, 15);
+   addNewLevel(levelList, "Alberto Garcia Arr 12 Alberto 42a", 8, 12);
    readLevelList(levelList);
-   readslcLevel ("Level 8",levelList, grid);
+   readslcLevel ("Alberto Garcia Arr 6 Alberto 26a",levelList, grid);
 
    /* Set player position */
    SDL_Rect playerPos;

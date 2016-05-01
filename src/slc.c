@@ -116,7 +116,7 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BL
    xmlDocPtr doc;
 
    /* Open SLC/XML file */
-   doc = xmlParseFile ("levels/12_Blocks.slc");
+   doc = xmlParseFile ("levels/Alberto_Garcia_Arranged.slc");
    if (doc == NULL)
    {
       fprintf (stderr, "XML Document not valid\n");
@@ -190,6 +190,9 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BL
 			    grid[x][y+1].roleType = GOAL;
 			    break;
 			 case '@':
+			    grid[x][y+1].roleType = PLAYER;
+			    break;
+			 case '+':
 			    grid[x][y+1].roleType = PLAYER;
 			    break;
 			 }

@@ -69,7 +69,7 @@ void displayShortcut (SDL_Surface * menu)
                               fontColor);
    /* blit the text */
    SDL_Rect shortCutTextPos;
-   shortCutTextPos.x = BOX_SIZE * (MAX_BLOCKS - 7);
+   shortCutTextPos.x = BOX_SIZE * (X_BLOCKS - 7);
    shortCutTextPos.y = 10;
    SDL_BlitSurface (shortCutText, NULL, menu, &shortCutTextPos);
 
