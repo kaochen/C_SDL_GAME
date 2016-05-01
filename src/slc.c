@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
+#include <dirent.h>
 
 #include "../inc/slc.h"
 #include "../inc/const.h"
@@ -33,6 +34,83 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libxml2/libxml/xpath.h>
 #include <libxml2/libxml/xpathInternals.h>
 
+/*Manage slc files ==================================================*/
+/* Initiatlize the list of files */
+S_FilesList *initFilesList ()
+{
+   S_FilesList *filesList = malloc (sizeof (*filesList));
+   S_Files *files = malloc (sizeof (*files));
+   if (filesList == NULL || files == NULL)
+   {
+      exit (EXIT_FAILURE);
+   }
+   /*load first files */
+   strcpy (files->name, "");
+   files->next = NULL;
+   /* store adress of the first files struct */
+   filesList->first = files;
+
+   return filesList;
+}
+
+/*Add a new file in the list*/
+void addNewFile (S_FilesList * filesList, char *name)
+{
+   S_Files *new = malloc (sizeof (*new));
+   if (filesList == NULL || new == NULL)
+   {
+      exit (EXIT_FAILURE);
+   }
+   strcpy (new->name, name);
+
+   /* insert new file struct into the chain */
+   new->next = filesList->first;
+   filesList->first = new;
+}
+
+
+void listSlcLevelFiles (S_FilesList * filesList)
+{
+   DIR *rep;
+   rep = opendir ("levels/");
+   struct dirent *file = NULL;
+   if (rep == NULL)
+   {
+      perror ("levels ");
+      exit (EXIT_FAILURE);
+   }
+   /*search for slc files */
+   while ((file = readdir (rep)) != NULL)
+   {
+      if (strstr (file->d_name, ".slc") != NULL
+          || strstr (file->d_name, ".SLC") != NULL)
+		addNewFile(filesList, file->d_name);
+         fprintf (stderr, "%s\n", file->d_name);
+   }
+
+   if (closedir (rep) == -1)
+   {
+      perror ("levels ");
+      exit (-1);
+   }
+}
+
+/* read files list one by one */
+void readFilesList (S_FilesList * filesList)
+{
+   if (filesList == NULL)
+   {
+      exit (EXIT_FAILURE);
+   }
+   S_Files *actual = filesList->first;
+   while (actual != NULL)
+   {
+      fprintf (stderr, "Files: %s\n", actual->name);
+      actual = actual->next;
+   }
+}
+
+/*Manage levels ==================================================*/
 /* Initiatlize the list of levels */
 S_LevelList *initLevelList ()
 {
@@ -44,10 +122,8 @@ S_LevelList *initLevelList ()
    }
    /*load first level */
    strcpy (level->name, "");
-   strcpy (level->file, "");
    level->height = 0;
    level->width = 0;
-   level->number = 0;
    level->next = NULL;
    /* store adress of the first level */
    levelList->first = level;
@@ -67,7 +143,7 @@ void addNewLevel (S_LevelList * levelList, char *name, int height, int width)
    new->height = height;
    new->width = width;
 
-  /* insert new level the control and the last one of the list*/
+   /* insert new level struct into the chain */
    new->next = levelList->first;
    levelList->first = new;
 }
@@ -89,7 +165,8 @@ void readLevelList (S_LevelList * levelList)
 }
 
 /*Read a level */
-int readslcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BLOCKS])
+int readslcLevel (char *nameLevel, S_LevelList * levelList,
+                  Square grid[][MAX_BLOCKS])
 {
    if (levelList == NULL)
    {
@@ -98,18 +175,18 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BL
 
    int nbr_of_lines = 0, nbr_of_columns = 0, firstColumn = 0;
    S_Level *actual = levelList->first;
-  /* read the all chain list */
+   /* read the all chain list */
    while (actual != NULL)
    {
-      /* try to find the nameLevel into the list*/
-      if (strcmp(actual->name,nameLevel) == 0)
-       {
-	 fprintf (stderr, "Found %s, %d:%d\n", actual->name, actual->width,
-      		  actual->height);
-	 nbr_of_lines = actual->height;
-	 nbr_of_columns = actual->width;
-	 firstColumn = (X_BLOCKS - nbr_of_columns)/2;
-       }
+      /* try to find the nameLevel into the list */
+      if (strcmp (actual->name, nameLevel) == 0)
+      {
+         fprintf (stderr, "Found %s, %d:%d\n", actual->name, actual->width,
+                  actual->height);
+         nbr_of_lines = actual->height;
+         nbr_of_columns = actual->width;
+         firstColumn = (X_BLOCKS - nbr_of_columns) / 2;
+      }
       actual = actual->next;
    }
 
@@ -144,19 +221,19 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BL
       fprintf (stderr, "Error on the xPathLevel expression\n");
       exit (-1);
    }
-   /*Clean grid before*/
-  	int y = 0, x = 0;
-	for (y = 0; y < Y_BLOCKS; y++)
-    	{
-	    for (x = 0; x < X_BLOCKS; x++)
-	    {
-	      grid[x][y].roleType = GROUND;
-	    }
-	}
+   /*Clean grid before */
+   int y = 0, x = 0;
+   for (y = 0; y < Y_BLOCKS; y++)
+   {
+      for (x = 0; x < X_BLOCKS; x++)
+      {
+         grid[x][y].roleType = GROUND;
+      }
+   }
    /* load level into the grid */
    if (xpathLevel->type == XPATH_NODESET)
    {
-     int c = 0;
+      int c = 0;
       y = 0, x = 0;
       char line[MAX_CARACT] = "";
       xmlNodePtr n;
@@ -166,38 +243,38 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BL
          n = xpathLevel->nodesetval->nodeTab[y];
          if (n->type == XML_TEXT_NODE || n->type == XML_CDATA_SECTION_NODE)
          {
-            strcpy(line, n->content);
-	     fprintf (stderr, "%s\n", n->content);
-	    /* load level into the grid */
-	   c = 0;
-	   for (x = firstColumn; x < (firstColumn + nbr_of_columns); x++)
-	     {
-	       switch (line[c])
-			 {
-			 case ' ':
-			    grid[x][y+1].roleType = GROUND;
-			    break;
-			 case '#':
-			    grid[x][y+1].roleType = WALL;
-			    break;
-			 case '$':
-			    grid[x][y+1].roleType = BOX;
-			    break;
-			 case '*':
-			    grid[x][y+1].roleType = BOX_OK;
-			    break;
-			 case '.':
-			    grid[x][y+1].roleType = GOAL;
-			    break;
-			 case '@':
-			    grid[x][y+1].roleType = PLAYER;
-			    break;
-			 case '+':
-			    grid[x][y+1].roleType = PLAYER;
-			    break;
-			 }
-		c++;
-	     }
+            strcpy (line, n->content);
+            fprintf (stderr, "%s\n", n->content);
+            /* load level into the grid */
+            c = 0;
+            for (x = firstColumn; x < (firstColumn + nbr_of_columns); x++)
+            {
+               switch (line[c])
+               {
+               case ' ':
+                  grid[x][y + 1].roleType = GROUND;
+                  break;
+               case '#':
+                  grid[x][y + 1].roleType = WALL;
+                  break;
+               case '$':
+                  grid[x][y + 1].roleType = BOX;
+                  break;
+               case '*':
+                  grid[x][y + 1].roleType = BOX_OK;
+                  break;
+               case '.':
+                  grid[x][y + 1].roleType = GOAL;
+                  break;
+               case '@':
+                  grid[x][y + 1].roleType = PLAYER;
+                  break;
+               case '+':
+                  grid[x][y + 1].roleType = PLAYER;
+                  break;
+               }
+               c++;
+            }
 
          }
       }
@@ -205,10 +282,8 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BL
 
    /* free memory */
    xmlFreeDoc (doc);
-
    xmlXPathFreeObject (xpathLevel);
    xmlXPathFreeContext (ctxt);
-
    return 1;
 }
 #endif

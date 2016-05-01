@@ -116,15 +116,20 @@ int main (int argc, char *argv[])
    int max_Levels = nbr_of_level ();
    int levelChoice = 0;
 
-   /* load the level from the levels.txt */
-   /*readlevel(grid,levelChoice);
+   /*List slc files from the levels/ folder*/
+   S_FilesList *filesList = initFilesList();
+   listSlcLevelFiles(filesList);
+   readFilesList (filesList);
+
    /*Read level from slc file in progress. */
    S_LevelList *levelList = initLevelList();
+
    addNewLevel(levelList, "Alberto Garcia Arr 6 Alberto 26a", 16, 18);
-   addNewLevel(levelList, "Alberto Garcia Arr 8 Alberto 34a", 11, 15);
-   addNewLevel(levelList, "Alberto Garcia Arr 12 Alberto 42a", 8, 12);
+   addNewLevel(levelList, "Alberto Garcia Arr 8 Alberto 34a", 15, 11);
+   addNewLevel(levelList, "Alberto Garcia Arr 12 Alberto 42a", 12, 8);
    readLevelList(levelList);
-   readslcLevel ("Alberto Garcia Arr 6 Alberto 26a",levelList, grid);
+   readslcLevel ("Alberto Garcia Arr 8 Alberto 34a",levelList, grid);
+
 
    /* Set player position */
    SDL_Rect playerPos;

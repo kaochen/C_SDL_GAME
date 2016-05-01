@@ -28,15 +28,31 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libxml2/libxml/xpath.h>
 #include <libxml2/libxml/xpathInternals.h>
 
+
+/* Structures ============================================ */
+/* files definion struct */
+typedef struct S_Files S_Files;
+struct S_Files
+{
+   char name[MAX_CARACT];
+   S_Files *next;
+};
+
+/* control files list */
+typedef struct S_FilesList S_FilesList;
+struct S_FilesList
+{
+   S_Files *first;
+};
+
+
 /* level definion struct */
 typedef struct S_Level S_Level;
 struct S_Level
 {
    char name[MAX_CARACT];
-   char file[MAX_CARACT];
    int height;
    int width;
-   int number;
    S_Level *next;
 };
 
@@ -47,6 +63,22 @@ struct S_LevelList
    S_Level *first;
 };
 
+/* Functions ============================================ */
+
+/* Files ========================================= */
+/* Initiatlize the list of files */
+S_FilesList *initFilesList ();
+
+/*Add a new file in the list*/
+void addNewFile (S_FilesList * filesList, char *name);
+
+/* list slc files from the levels folder */
+void listSlcLevelFiles(S_FilesList * filesList);
+
+/* read files list one by one */
+void readFilesList (S_FilesList * filesList);
+
+/* Levels ========================================= */
 /* Initiatlize the list of levels */
 S_LevelList *initLevelList();
 
@@ -58,5 +90,4 @@ void readLevelList(S_LevelList *levelList);
 
 /* read level from slc file */
 int readslcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BLOCKS]);
-
 #endif
