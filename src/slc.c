@@ -164,8 +164,8 @@ void readLevelList (S_LevelList * levelList)
    }
 }
 
-/*Read a level */
-int readslcLevel (char *nameLevel, S_LevelList * levelList,
+/*Load slc level into the grid */
+int loadSlcLevel (char *nameLevel, S_LevelList * levelList,
                   Square grid[][MAX_BLOCKS])
 {
    if (levelList == NULL)
@@ -173,7 +173,7 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList,
       exit (EXIT_FAILURE);
    }
 
-   int nbr_of_lines = 0, nbr_of_columns = 0, firstColumn = 0;
+   int nbr_of_lines = 0, firstLines = 0, nbr_of_columns = 0, firstColumn = 0;
    S_Level *actual = levelList->first;
    /* read the all chain list */
    while (actual != NULL)
@@ -185,6 +185,8 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList,
                   actual->height);
          nbr_of_lines = actual->height;
          nbr_of_columns = actual->width;
+	/*Place the drawing into the center of the grid*/
+	 firstLines = ((Y_BLOCKS - nbr_of_lines)/2 +1) ; //+1 for the menu
          firstColumn = (X_BLOCKS - nbr_of_columns) / 2;
       }
       actual = actual->next;
@@ -249,28 +251,29 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList,
             c = 0;
             for (x = firstColumn; x < (firstColumn + nbr_of_columns); x++)
             {
-               switch (line[c])
+	      int y2 = y + firstLines;
+	      switch (line[c])
                {
                case ' ':
-                  grid[x][y + 1].roleType = GROUND;
+                  grid[x][y2].roleType = GROUND;
                   break;
                case '#':
-                  grid[x][y + 1].roleType = WALL;
+                  grid[x][y2].roleType = WALL;
                   break;
                case '$':
-                  grid[x][y + 1].roleType = BOX;
+                  grid[x][y2].roleType = BOX;
                   break;
                case '*':
-                  grid[x][y + 1].roleType = BOX_OK;
+                  grid[x][y2].roleType = BOX_OK;
                   break;
                case '.':
-                  grid[x][y + 1].roleType = GOAL;
+                  grid[x][y2].roleType = GOAL;
                   break;
                case '@':
-                  grid[x][y + 1].roleType = PLAYER;
+                  grid[x][y2].roleType = PLAYER;
                   break;
                case '+':
-                  grid[x][y + 1].roleType = PLAYER;
+                  grid[x][y2].roleType = PLAYER;
                   break;
                }
                c++;

@@ -88,6 +88,6 @@ void addNewLevel(S_LevelList *levelList, char *name, int height, int width);
 /* read level list one by one */
 void readLevelList(S_LevelList *levelList);
 
-/* read level from slc file */
-int readslcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BLOCKS]);
+/*Load slc level into the grid */
+int loadSlcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BLOCKS]);
 #endif

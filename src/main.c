@@ -128,7 +128,7 @@ int main (int argc, char *argv[])
    addNewLevel(levelList, "Alberto Garcia Arr 8 Alberto 34a", 15, 11);
    addNewLevel(levelList, "Alberto Garcia Arr 12 Alberto 42a", 12, 8);
    readLevelList(levelList);
-   readslcLevel ("Alberto Garcia Arr 8 Alberto 34a",levelList, grid);
+   loadSlcLevel ("Alberto Garcia Arr 8 Alberto 34a",levelList, grid);
 
 
    /* Set player position */
