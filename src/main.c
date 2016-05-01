@@ -117,13 +117,15 @@ int main (int argc, char *argv[])
    int levelChoice = 0;
 
    /* load the level from the levels.txt */
-   readlevel(grid,levelChoice);
+   /*readlevel(grid,levelChoice);
    /*Read level from slc file in progress. */
    S_LevelList *levelList = initLevelList();
    addNewLevel(levelList, "Level 8", 18, 18);
    addNewLevel(levelList, "Level 9", 20, 15);
+   addNewLevel(levelList, "Level 14", 25, 9);
+   addNewLevel(levelList, "Level 15", 28, 8);
    readLevelList(levelList);
-   readslcLevel ("Level 8",levelList);
+   readslcLevel ("Level 8",levelList, grid);
 
    /* Set player position */
    SDL_Rect playerPos;
@@ -436,7 +438,6 @@ int main (int argc, char *argv[])
             {
                levelChoice -= 1;
                readlevel (grid, levelChoice);
-
                /* display the level using grid*/
                displayLevel (grid, screen, tableSurface);
                /* display menu on top of the screen */

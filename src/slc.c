@@ -89,7 +89,7 @@ void readLevelList (S_LevelList * levelList)
 }
 
 /*Read a level */
-int readslcLevel (char *nameLevel, S_LevelList * levelList)
+int readslcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BLOCKS])
 {
    if (levelList == NULL)
    {
@@ -104,7 +104,7 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList)
       /* try to find the nameLevel into the list*/
       if (strcmp(actual->name,nameLevel) == 0)
        {
-	 fprintf (stderr, "%s::%s, %d:%d\n", nameLevel, actual->name, actual->width,
+	 fprintf (stderr, "Found %s, %d:%d\n", actual->name, actual->width,
       		  actual->height);
 	 nbr_of_lines = actual->height;
 	 nbr_of_columns = actual->width;
@@ -144,18 +144,58 @@ int readslcLevel (char *nameLevel, S_LevelList * levelList)
       fprintf (stderr, "Error on the xPathLevel expression\n");
       exit (-1);
    }
-   /* Show the result */
+   /*Clean grid before*/
+  	int y = 0, x = 0;
+	for (y = 0; y < Y_BLOCKS; y++)
+    	{
+	    for (x = 0; x < X_BLOCKS; x++)
+	    {
+	      grid[x][y].roleType = GROUND;
+	    }
+	}
+   /* load level into the grid */
    if (xpathLevel->type == XPATH_NODESET)
    {
-      int i;
+     int c = 0;
+      y = 0, x = 0;
+      char line[MAX_CARACT] = "";
       xmlNodePtr n;
       printf ("Level: ");
-      for (i = 0; i < nbr_of_lines; i++)
+      for (y = 0; y < nbr_of_lines; y++)
       {
-         n = xpathLevel->nodesetval->nodeTab[i];
+         n = xpathLevel->nodesetval->nodeTab[y];
          if (n->type == XML_TEXT_NODE || n->type == XML_CDATA_SECTION_NODE)
          {
-            fprintf (stderr, "%s\n", n->content);
+            strcpy(line, n->content);
+	     fprintf (stderr, "%s\n", n->content);
+	    /* load level into the grid */
+	   c = 0;
+	   for (x = firstColumn; x < (firstColumn + nbr_of_columns); x++)
+	     {
+	       switch (line[c])
+			 {
+			 case ' ':
+			    grid[x][y+1].roleType = GROUND;
+			    break;
+			 case '#':
+			    grid[x][y+1].roleType = WALL;
+			    break;
+			 case '$':
+			    grid[x][y+1].roleType = BOX;
+			    break;
+			 case '*':
+			    grid[x][y+1].roleType = BOX_OK;
+			    break;
+			 case '.':
+			    grid[x][y+1].roleType = GOAL;
+			    break;
+			 case '@':
+			    grid[x][y+1].roleType = PLAYER;
+			    break;
+			 }
+		c++;
+	     }
+
          }
       }
    }
