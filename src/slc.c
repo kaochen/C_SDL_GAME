@@ -45,7 +45,7 @@ S_FilesList *initFilesList ()
       exit (EXIT_FAILURE);
    }
    /*load first files */
-   strcpy (files->name, "");
+   strcpy (files->name, FIRST_STRUCT);
    files->next = NULL;
    /* store adress of the first files struct */
    filesList->first = files;
@@ -54,7 +54,7 @@ S_FilesList *initFilesList ()
 }
 
 /*Add a new file in the list*/
-void addNewFile (S_FilesList * filesList, char *name)
+void addNewFile (S_FilesList *filesList, char *name)
 {
    S_Files *new = malloc (sizeof (*new));
    if (filesList == NULL || new == NULL)
@@ -68,8 +68,8 @@ void addNewFile (S_FilesList * filesList, char *name)
    filesList->first = new;
 }
 
-
-void listSlcLevelFiles (S_FilesList * filesList)
+/*Load slc level into the grid */
+void listSlcLevelFiles (S_FilesList *filesList)
 {
    DIR *rep;
    rep = opendir ("levels/");
@@ -79,13 +79,18 @@ void listSlcLevelFiles (S_FilesList * filesList)
       perror ("levels ");
       exit (EXIT_FAILURE);
    }
+
    /*search for slc files */
+   char path[MAX_CARACT] = "";
    while ((file = readdir (rep)) != NULL)
    {
       if (strstr (file->d_name, ".slc") != NULL
           || strstr (file->d_name, ".SLC") != NULL)
-		addNewFile(filesList, file->d_name);
-         fprintf (stderr, "%s\n", file->d_name);
+       {
+	 sprintf (path , "levels/%s", file->d_name);
+	 addNewFile(filesList, path);
+         fprintf (stderr, "%s\n", path);
+       }
    }
 
    if (closedir (rep) == -1)
@@ -96,7 +101,7 @@ void listSlcLevelFiles (S_FilesList * filesList)
 }
 
 /* read files list one by one */
-void readFilesList (S_FilesList * filesList)
+void readFilesList (S_FilesList *filesList)
 {
    if (filesList == NULL)
    {
@@ -121,7 +126,7 @@ S_LevelList *initLevelList ()
       exit (EXIT_FAILURE);
    }
    /*load first level */
-   strcpy (level->name, "");
+   strcpy (level->name, FIRST_STRUCT);
    level->height = 0;
    level->width = 0;
    level->next = NULL;
@@ -131,8 +136,78 @@ S_LevelList *initLevelList ()
    return levelList;
 }
 
+/*get levels infos from files */
+void readLevelsAttributs(S_FilesList *filesList ,S_LevelList *levelList)
+{
+   S_Level *new = malloc (sizeof (*new));
+   if (filesList == NULL || levelList == NULL || new == NULL)
+   {
+      exit (EXIT_FAILURE);
+   }
+
+   /*Get files names*/
+   xmlDocPtr doc;
+   int i = 0;
+   S_Files *actualFile = filesList->first;
+   while (actualFile != NULL)
+   {
+      fprintf (stderr, "Read levels from : %s\n", actualFile->name);
+      actualFile = actualFile->next;
+
+  /* Read each level from each files */
+   if (actualFile->name != NULL && strcmp (actualFile->name, FIRST_STRUCT) != 0 )
+       {
+	    /* Open SLC/XML file */
+	   doc = xmlParseFile (actualFile->name);
+	   if (doc == NULL)
+	   {
+	      fprintf (stderr, "%s not valid\n", actualFile->name);
+	      exit(EXIT_FAILURE);
+	   }
+
+	    // Start XPath
+   	   xmlXPathInit ();
+   	   // Create a context
+   	   xmlXPathContextPtr ctxt = xmlXPathNewContext (doc);
+	   if (ctxt == NULL)
+	   {
+	      fprintf (stderr, "Error creating the context XPath\n");
+	      exit (EXIT_FAILURE);
+	   }
+
+		 /* Read Level */
+		   xmlXPathObjectPtr xpathLevel =   xmlXPathEvalExpression (BAD_CAST "/SokobanLevels/LevelCollection/Level", ctxt);
+		   if (xpathLevel == NULL)
+		   {
+		      fprintf (stderr, "Error on the xPathLevel expression\n");
+		      exit (EXIT_FAILURE);
+	  	   }
+
+		/*get attribut*/
+		xmlChar *name;
+		xmlChar *width;
+		xmlChar *height;
+
+
+		xmlNodePtr Node = xpathLevel->nodesetval->nodeTab[i];
+		for(xmlAttrPtr attr = Node->properties; NULL != attr; attr = attr->next)
+		{
+		  	      name = xmlGetProp(Node, "Id");
+		  	      width = xmlGetProp(Node, "Width");
+		  	      height = xmlGetProp(Node, "Height");
+		}
+	 	printf("File: %s, name: %s, width: %s, height: %s\n", actualFile->name, name, width, height);
+
+
+	    /* free memory */
+	     xmlFreeDoc (doc);
+	       }
+
+	   }
+	}
+
 /*Add a level in the list*/
-void addNewLevel (S_LevelList * levelList, char *name, int height, int width)
+void addNewLevel (S_LevelList *levelList, char *name, int height, int width)
 {
    S_Level *new = malloc (sizeof (*new));
    if (levelList == NULL || new == NULL)
@@ -165,7 +240,7 @@ void readLevelList (S_LevelList * levelList)
 }
 
 /*Load slc level into the grid */
-int loadSlcLevel (char *nameLevel, S_LevelList * levelList,
+int loadSlcLevel (char *nameLevel, S_LevelList *levelList,
                   Square grid[][MAX_BLOCKS])
 {
    if (levelList == NULL)
@@ -239,7 +314,6 @@ int loadSlcLevel (char *nameLevel, S_LevelList * levelList,
       y = 0, x = 0;
       char line[MAX_CARACT] = "";
       xmlNodePtr n;
-      printf ("Level: ");
       for (y = 0; y < nbr_of_lines; y++)
       {
          n = xpathLevel->nodesetval->nodeTab[y];

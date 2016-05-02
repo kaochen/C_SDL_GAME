@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<SokobanLevels xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="SokobanLev.xsd">
+  <Title>SokoRobot levels</Title>
+  <Description>
+Default levels from SokoRobot game
+  </Description>
+  <LevelCollection Copyright="SokoRobot" MaxWidth="20" MaxHeight="20">
+    <Level Id="Level 1" Width="18" Height="14">
+      <L>##################</L>
+      <L>########         #</L>
+      <L>#   $     .      #</L>
+      <L>#         ########</L>
+      <L>#                #</L>
+      <L>#   $     @      #</L>
+      <L>#  #         *   #</L>
+      <L>####.###         #</L>
+      <L>#                #</L>
+      <L>#      $         #</L>
+      <L>#       #.#      #</L>
+      <L>#       ###      #</L>
+      <L>#                #</L>
+      <L>##################</L>
+    </Level>
+        <Level Id="Level 2" Width="18" Height="14">
+      <L>##################</L>
+      <L>########         #</L>
+      <L>#   $     .      #</L>
+      <L>#         ########</L>
+      <L>#           #### #</L>
+      <L>#   $ ####@      #</L>
+      <L>#  #         *   #</L>
+      <L>####.###         #</L>
+      <L>#          ###   #</L>
+      <L>#      $         #</L>
+      <L>#       #.#      #</L>
+      <L>#       ###      #</L>
+      <L>#         ####   #</L>
+      <L>##################</L>
+    </Level>
+  </LevelCollection>
+</SokobanLevels>
+
+

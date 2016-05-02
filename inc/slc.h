@@ -30,6 +30,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 /* Structures ============================================ */
+
+/* Files ========================================= */
 /* files definion struct */
 typedef struct S_Files S_Files;
 struct S_Files
@@ -45,6 +47,7 @@ struct S_FilesList
    S_Files *first;
 };
 
+/* Levels ========================================= */
 
 /* level definion struct */
 typedef struct S_Level S_Level;
@@ -70,17 +73,20 @@ struct S_LevelList
 S_FilesList *initFilesList ();
 
 /*Add a new file in the list*/
-void addNewFile (S_FilesList * filesList, char *name);
+void addNewFile (S_FilesList *filesList, char *name);
 
 /* list slc files from the levels folder */
-void listSlcLevelFiles(S_FilesList * filesList);
+void listSlcLevelFiles(S_FilesList *filesList);
 
 /* read files list one by one */
-void readFilesList (S_FilesList * filesList);
+void readFilesList (S_FilesList *filesList);
 
 /* Levels ========================================= */
 /* Initiatlize the list of levels */
 S_LevelList *initLevelList();
+
+/*get levels infos from files */
+void readLevelsAttributs(S_FilesList *filesList ,S_LevelList *levelList);
 
 /*Add a level in the list*/
 void addNewLevel(S_LevelList *levelList, char *name, int height, int width);
@@ -89,5 +95,5 @@ void addNewLevel(S_LevelList *levelList, char *name, int height, int width);
 void readLevelList(S_LevelList *levelList);
 
 /*Load slc level into the grid */
-int loadSlcLevel (char *nameLevel, S_LevelList * levelList, Square grid[][MAX_BLOCKS]);
+int loadSlcLevel (char *nameLevel, S_LevelList *levelList, Square grid[][MAX_BLOCKS]);
 #endif
