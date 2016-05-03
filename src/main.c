@@ -112,8 +112,6 @@ int main (int argc, char *argv[])
    /* create a grid with coordinates x,y to locate things */
    Square grid[MAX_BLOCKS][MAX_BLOCKS];
 
-   /* how many level are in the file */
-   int max_Levels = nbr_of_level ();
    int levelChoice = 0;
 
    /*List slc files from the levels/ folder*/
@@ -121,17 +119,21 @@ int main (int argc, char *argv[])
    listSlcLevelFiles(filesList);
    readFilesList (filesList);
 
+   fprintf(stderr,"Read files %s\n", SDL_GetError ());
+
    /*Read level from slc file in progress. */
    S_LevelList *levelList = initLevelList();
-
-   addNewLevel(levelList, "Alberto Garcia Arr 6 Alberto 26a", 16, 18);
-   addNewLevel(levelList, "Alberto Garcia Arr 8 Alberto 34a", 15, 11);
-   addNewLevel(levelList, "Alberto Garcia Arr 12 Alberto 42a", 12, 8);
-
    readLevelList(levelList);
-   loadSlcLevel ("Alberto Garcia Arr 8 Alberto 34a",levelList, grid);
-    /*get levels infos from files */
    readLevelsAttributs(filesList ,levelList);
+   fprintf(stderr,"Read levels from files %s\n", SDL_GetError ());
+
+    /* count all levels from all files */
+    int max_Levels =  getNbrOfLevels(levelList);
+
+
+     /*Load first game*/
+    loadSlcLevel (levelChoice,levelList, grid);
+    fprintf(stderr,"First level loaded %s\n", SDL_GetError ());
 
 
    /* Set player position */
@@ -143,7 +145,7 @@ int main (int argc, char *argv[])
    displayLevel (grid, screen, tableSurface);
 
    /* diplay menu on top of the screen */
-   displayMenu ((levelChoice + 1), menu, tableSurface);
+   displayMenu (levelChoice, menu, tableSurface,levelList);
 
    /* display Progress in the menu */
    displayProgress (grid, menu, tableSurface);
@@ -411,12 +413,12 @@ int main (int argc, char *argv[])
 
             /* hit r to reset the current level */
          case SDLK_r:
-            /* load the level from the levels.txt */
-            readlevel (grid, levelChoice);
+            /* load the level */
+	    loadSlcLevel (levelChoice,levelList, grid);
             /* display the level using grid */
             displayLevel (grid, screen, tableSurface);
             /* display menu on top of the screen */
-            displayMenu ((levelChoice + 1), menu, tableSurface);
+            displayMenu ((levelChoice + 1), menu, tableSurface, levelList);
             fprintf (stderr, "Level %d\n loaded", (levelChoice + 1));
             break;
 
@@ -428,11 +430,12 @@ int main (int argc, char *argv[])
             if (levelChoice < (max_Levels - 1))
             {
                levelChoice += 1;
-               readlevel (grid, levelChoice);
+
+	      	        loadSlcLevel (levelChoice,levelList, grid);
                /* display the level using grid */
                displayLevel(grid, screen, tableSurface);
                /* display menu on top of the screen */
-               displayMenu ((levelChoice + 1), menu, tableSurface);
+               displayMenu ((levelChoice + 1), menu, tableSurface, levelList);
                fprintf (stderr, "Level %d\n loaded", (levelChoice + 1));
             }
             break;
@@ -444,11 +447,11 @@ int main (int argc, char *argv[])
             if (levelChoice > 0)
             {
                levelChoice -= 1;
-               readlevel (grid, levelChoice);
+	      	loadSlcLevel (levelChoice,levelList, grid);
                /* display the level using grid*/
                displayLevel (grid, screen, tableSurface);
                /* display menu on top of the screen */
-               displayMenu ((levelChoice + 1), menu, tableSurface);
+               displayMenu ((levelChoice + 1), menu, tableSurface, levelList);
                fprintf (stderr, "Level %d\n loaded", (levelChoice + 1));
             }
             break;

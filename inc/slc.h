@@ -54,6 +54,7 @@ typedef struct S_Level S_Level;
 struct S_Level
 {
    char name[MAX_CARACT];
+   char fileName[MAX_CARACT];
    int height;
    int width;
    S_Level *next;
@@ -89,11 +90,14 @@ S_LevelList *initLevelList();
 void readLevelsAttributs(S_FilesList *filesList ,S_LevelList *levelList);
 
 /*Add a level in the list*/
-void addNewLevel(S_LevelList *levelList, char *name, int height, int width);
+void addNewLevel (S_LevelList *levelList, char *fileName, char *name, int height, int width);
 
 /* read level list one by one */
 void readLevelList(S_LevelList *levelList);
 
 /*Load slc level into the grid */
-int loadSlcLevel (char *nameLevel, S_LevelList *levelList, Square grid[][MAX_BLOCKS]);
+int loadSlcLevel (int levelChoice, S_LevelList *levelList, Square grid[][MAX_BLOCKS]);
+
+/*get levels infos from files */
+int getNbrOfLevels(S_LevelList *levelList);
 #endif

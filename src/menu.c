@@ -30,15 +30,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/game.h"
 #include "../inc/menu.h"
 #include "../inc/level.h"
+#include "../inc/slc.h"
 
 /* display menu */
 void displayMenu (int levelNumber, SDL_Surface * menu,
-                  Sprites tableSurface[NBR_OF_IMAGES])
+                  Sprites tableSurface[NBR_OF_IMAGES], S_LevelList *levelList)
 {
    /* first add background */
    backgroundMenu (menu, tableSurface);
    /* display the level number */
-   levelMenu (levelNumber, menu, tableSurface);
+   levelMenu (levelNumber, menu, tableSurface, levelList);
    displayShortcut (menu);
 }
 
@@ -80,16 +81,16 @@ void displayShortcut (SDL_Surface * menu)
 
 /* display the level number */
 void levelMenu (int levelNumber, SDL_Surface * menu,
-                Sprites tableSurface[NBR_OF_IMAGES])
+                Sprites tableSurface[NBR_OF_IMAGES], S_LevelList *levelList)
 {
    /* setup font */
    TTF_Font *font = NULL;
    font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
    SDL_Color fontColor = { 255, 255, 255 };
 
-   /* get info */
-   int levelMax = 0;
-   levelMax = nbr_of_level ();
+    /* count all levels from all files */
+   int levelMax = getNbrOfLevels(levelList);
+
    /* indicate level nbr */
    SDL_Surface *levelText = NULL;
    char text[20] = "";

@@ -27,20 +27,20 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "const.h"
 #include "game.h"
+#include "slc.h"
 
 /* display menu */
 void displayMenu (int levelNumber, SDL_Surface * menu,
-                  Sprites tableSurface[NBR_OF_IMAGES]);
+                  Sprites tableSurface[NBR_OF_IMAGES], S_LevelList *levelList);
 
 /* display background menu */
 void backgroundMenu (SDL_Surface * menu, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* display shortcut in the menu */
 void displayShortcut (SDL_Surface * menu);
-
 /* display the level number */
 void levelMenu (int levelNumber, SDL_Surface * menu,
-                Sprites tableSurface[NBR_OF_IMAGES]);
+                Sprites tableSurface[NBR_OF_IMAGES], S_LevelList *levelList);
 
 /* count how many goals are need to complete the level */
 int goalLeft (Square grid[][MAX_BLOCKS]);
