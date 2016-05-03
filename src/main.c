@@ -424,7 +424,7 @@ int main (int argc, char *argv[])
 
             /* hit n to load the next level */
          case SDLK_n:
-            /* load the level from the levels.txt */
+            /* load next the level */
             if (levelChoice > (max_Levels - 1))
                levelChoice = (max_Levels - 1);
             if (levelChoice < (max_Levels - 1))
@@ -441,7 +441,7 @@ int main (int argc, char *argv[])
             break;
             /* hit p to load the previous level */
          case SDLK_p:
-            /* load the level from the levels.txt */
+            /* load previous level*/
             if (levelChoice < 0)
                levelChoice = 0;
             if (levelChoice > 0)
