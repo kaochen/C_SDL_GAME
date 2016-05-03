@@ -143,7 +143,7 @@ void displayProgress (Square grid[][MAX_BLOCKS], SDL_Surface * menu,
                       Sprites tableSurface[NBR_OF_IMAGES])
 {
    SDL_Rect progressPos;
-   progressPos.x = BOX_SIZE * 3;
+   progressPos.x = BOX_SIZE * 4;
    progressPos.y = 0;
    /* clean Background */
    int x = 0;
