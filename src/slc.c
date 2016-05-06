@@ -246,7 +246,7 @@ void addNewLevel (S_LevelList *levelList, char *fileName, char *name, int height
       exit (EXIT_FAILURE);
    }
   /* check size and */
-  if (height < X_BLOCKS && width <= Y_BLOCKS )
+  if (height <= X_BLOCKS && width <= Y_BLOCKS )
     {
      strcpy (new->name, name);
      strcpy (new->fileName, fileName);
