@@ -245,14 +245,19 @@ void addNewLevel (S_LevelList *levelList, char *fileName, char *name, int height
    {
       exit (EXIT_FAILURE);
    }
-   strcpy (new->name, name);
-   strcpy (new->fileName, fileName);
-   new->height = height;
-   new->width = width;
+  /* check size and */
+  if (height < X_BLOCKS && width <= Y_BLOCKS )
+    {
+     strcpy (new->name, name);
+     strcpy (new->fileName, fileName);
+     new->height = height;
+     new->width = width;
 
-   /* insert new level struct into the chain */
-   new->next = levelList->first;
-   levelList->first = new;
+     /* insert new level struct into the chain */
+     new->next = levelList->first;
+     levelList->first = new;
+    }
+
 }
 
 /* read level list one by one */
