@@ -108,6 +108,8 @@ int main (int argc, char *argv[])
    loadSprite (&tableSurface[GOAL_IMAGE], "img/goal.png");
    /* menu */
    loadSprite (&tableSurface[MENU_BACK], "img/menuBlock.png");
+   /* outside the wall */
+   loadSprite (&tableSurface[OUTSIDE], "img/outside.png");
 
    /* create a grid with coordinates x,y to locate things */
    Square grid[MAX_BLOCKS][MAX_BLOCKS];

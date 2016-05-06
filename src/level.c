@@ -78,6 +78,12 @@ void displayLevel (Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tabl
             blitGround (x, y, grid, screen, tableSurface);
             blitPlayer (x, y, STILL, grid, screen, tableSurface);
             break;
+	 case OUTSIDE:
+	    goalPos.x = x * BOX_SIZE;
+            goalPos.y = y * BOX_SIZE;
+            SDL_BlitSurface (tableSurface[OUTSIDE].image, NULL, screen,
+                             &goalPos);
+            break;
          }
       }
    }

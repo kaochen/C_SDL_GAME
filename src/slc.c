@@ -349,7 +349,7 @@ int loadSlcLevel (int levelChoice, S_LevelList *levelList,
    /* load level into the grid */
    if (xpathLevel->type == XPATH_NODESET)
    {
-      int c = 0;
+      int c = 0, i = 0;
       y = 0, x = 0;
       char line[MAX_CARACT] = "";
       xmlNodePtr n;
@@ -367,11 +367,11 @@ int loadSlcLevel (int levelChoice, S_LevelList *levelList,
 	      int y2 = y + firstLines;
 	      switch (line[c])
                {
-               case ' ':
-                  grid[x][y2].roleType = GROUND;
-                  break;
-               case '#':
+	       case '#':
                   grid[x][y2].roleType = WALL;
+                  break;
+               case ' ':
+		   grid[x][y2].roleType = GROUND;
                   break;
                case '$':
                   grid[x][y2].roleType = BOX;
@@ -396,7 +396,23 @@ int loadSlcLevel (int levelChoice, S_LevelList *levelList,
 
          }
       }
-   }
+     for (y = 0 ; y < Y_BLOCKS; y++)
+       {
+	     for (x = 0 ; x < X_BLOCKS; x++)
+	       {
+		    /*If a ground is outside the wall use OUTSIDE*/
+		      if(grid[x][y].roleType == GROUND)
+			{
+			 /*Test is outside the wall*/
+			  for (i < 0; i < MAX_BLOCKS; i++)
+			    {
+			      if (grid[x - i][y].roleType == WALL)
+			   	grid[x][y].roleType = OUTSIDE;
+			    }
+			}
+		}
+       }
+ }
 
    /* free memory */
    xmlFreeDoc (doc);
