@@ -338,6 +338,7 @@ int loadSlcLevel (int levelChoice, S_LevelList *levelList,
       for (x = 0; x < X_BLOCKS; x++)
       {
          grid[x][y].roleType = GROUND;
+         grid[x][y].objectType = EMPTY;
       }
    }
    /* load level into the grid */
@@ -371,10 +372,12 @@ int loadSlcLevel (int levelChoice, S_LevelList *levelList,
                   grid[x][y2].roleType = BOX;
                   break;
                case '*':
-                  grid[x][y2].roleType = BOX_OK;
+                  grid[x][y2].roleType = BOX;
+		  grid[x][y2].objectType = GOAL;
                   break;
                case '.':
                   grid[x][y2].roleType = GOAL;
+		  grid[x][y2].objectType = GOAL;
                   break;
                case '@':
                   grid[x][y2].roleType = PLAYER;

@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/sprites.h"
 
 /* move the player and blit player images */
-void blitPlayer (int xPlayer, int yPlayer, int direction, int xyGround,
+void blitPlayer (int xPlayer, int yPlayer, int direction, Square grid[][MAX_BLOCKS],
                  SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
    /* set player position */
@@ -40,41 +40,41 @@ void blitPlayer (int xPlayer, int yPlayer, int direction, int xyGround,
    playerPos.y = yPlayer * BOX_SIZE;
 
    /* first clean is place */
-   blitGround (xPlayer, yPlayer, xyGround, screen, tableSurface);
+   blitGround (xPlayer, yPlayer, grid, screen, tableSurface);
    /* read the direction choice */
    switch (direction)
    {
    case UP:
       playerPos.y -= BOX_SIZE;
       blitGround ((playerPos.x / BOX_SIZE), (playerPos.y / BOX_SIZE),
-                  xyGround, screen, tableSurface);
+                  grid, screen, tableSurface);
       SDL_BlitSurface (tableSurface[PLAYER_BACK].image, NULL, screen,
                        &playerPos);
       break;
    case DOWN:
       playerPos.y += BOX_SIZE;
       blitGround ((playerPos.x / BOX_SIZE), (playerPos.y / BOX_SIZE),
-                  xyGround, screen, tableSurface);
+                  grid, screen, tableSurface);
       SDL_BlitSurface (tableSurface[PLAYER_FRONT].image, NULL, screen,
                        &playerPos);
       break;
    case RIGHT:
       playerPos.x += BOX_SIZE;
       blitGround ((playerPos.x / BOX_SIZE), (playerPos.y / BOX_SIZE),
-                  xyGround, screen, tableSurface);
+                  grid, screen, tableSurface);
       SDL_BlitSurface (tableSurface[PLAYER_RIGHT].image, NULL, screen,
                        &playerPos);
       break;
    case LEFT:
       playerPos.x -= BOX_SIZE;
       blitGround ((playerPos.x / BOX_SIZE), (playerPos.y / BOX_SIZE),
-                  xyGround, screen, tableSurface);
+                  grid, screen, tableSurface);
       SDL_BlitSurface (tableSurface[PLAYER_LEFT].image, NULL, screen,
                        &playerPos);
       break;
    case STILL:
       blitGround ((playerPos.x / BOX_SIZE), (playerPos.y / BOX_SIZE),
-                  xyGround, screen, tableSurface);
+                  grid, screen, tableSurface);
       SDL_BlitSurface (tableSurface[PLAYER_FRONT].image, NULL, screen,
                        &playerPos);
       break;
@@ -116,7 +116,7 @@ void moveBox (int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS], int direction
    SDL_BlitSurface (tableSurface[GROUND1_IMAGE].image, NULL, screen, &boxPos);
    /* blit BOX_IMAGE_OK if Box on a goal */
    if (grid[boxPos.x / BOX_SIZE][boxPos.y / BOX_SIZE].roleType == GOAL
-       || grid[boxPos.x / BOX_SIZE][boxPos.y / BOX_SIZE].roleType == BOX_OK)
+       || grid[boxPos.x / BOX_SIZE][boxPos.y / BOX_SIZE].objectType == GOAL)
    {
       SDL_BlitSurface (tableSurface[BOX_IMAGE_OK].image, NULL, screen,
                        &boxPos);
@@ -129,14 +129,14 @@ void moveBox (int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS], int direction
 }
 
 /* blit ground */
-void blitGround (int x, int y, int typeOfGround, SDL_Surface * screen,
+void blitGround (int x, int y, Square grid[][MAX_BLOCKS], SDL_Surface * screen,
                  Sprites tableSurface[NBR_OF_IMAGES])
 {
    SDL_Rect groundPos;
    groundPos.x = x * BOX_SIZE;
    groundPos.y = y * BOX_SIZE;
 
-   switch (typeOfGround)
+   switch (grid[x][y].groundType)
    {
    case GROUND1:
       SDL_BlitSurface (tableSurface[GROUND1_IMAGE].image, NULL, screen,
@@ -151,6 +151,11 @@ void blitGround (int x, int y, int typeOfGround, SDL_Surface * screen,
                        &groundPos);
       break;
    }
+  /* Blit Goals if needed */
+  if (grid[x][y].objectType == GOAL)
+  SDL_BlitSurface (tableSurface[GOAL_IMAGE].image, NULL, screen,
+                       &groundPos);
+
 }
 
 /* blit Walls */

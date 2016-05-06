@@ -45,13 +45,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 typedef struct
 {
    int roleType;
+   int objectType;
    int groundType;
 } Square;
 
 
 
 //object type
-enum {GROUND, GROUND1, GROUND2, GROUND3, GROUND4, WALL , GOAL,BOX, BOX_OK, PLAYER  };
+enum {GROUND, GROUND1, GROUND2, GROUND3, GROUND4, WALL , GOAL,BOX, BOX_OK, PLAYER, EMPTY};
 
 //direction
 enum {UP , DOWN, RIGHT, LEFT, STILL };

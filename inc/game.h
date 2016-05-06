@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "sprites.h"
 
 /* move the player and blit player images */
-void blitPlayer (int xPlayer, int yPlayer, int direction, int xyGround,
+void blitPlayer (int xPlayer, int yPlayer, int direction, Square grid[][MAX_BLOCKS],
                  SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* move a box */
@@ -34,7 +34,7 @@ void moveBox (int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS], int direction
               SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* blit ground */
-void blitGround (int x, int y, int typeOfGround, SDL_Surface * screen,
+void blitGround (int x, int y, Square grid[][MAX_BLOCKS], SDL_Surface * screen,
                  Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* blit Walls */

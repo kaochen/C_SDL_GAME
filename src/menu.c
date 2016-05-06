@@ -116,7 +116,7 @@ int goalLeft (Square grid[][MAX_BLOCKS])
    {
       for (y = 0; y < Y_BLOCKS; y++)
       {
-         if (grid[x][y].roleType == BOX_OK)
+         if (grid[x][y].roleType == BOX && grid[x][y].objectType == GOAL)
             nbrOfBoxOk += 1;
       }
    }
@@ -131,7 +131,7 @@ int nbr_of_goals (Square grid[][MAX_BLOCKS])
    {
       for (y = 0; y < Y_BLOCKS; y++)
       {
-         if (grid[x][y].roleType == GOAL)
+         if (grid[x][y].objectType == GOAL)
             nbrOfGoal += 1;
       }
    }
@@ -160,7 +160,7 @@ void displayProgress (Square grid[][MAX_BLOCKS], SDL_Surface * menu,
    SDL_Color fontColor = { 255, 255, 255 };
    /* get info */
    int i = goalLeft (grid);
-   int j = i + nbr_of_goals (grid);
+   int j = nbr_of_goals (grid);
    /* merge results */
    SDL_Surface *progress = NULL;
    char progressText[20] = "";
@@ -168,7 +168,7 @@ void displayProgress (Square grid[][MAX_BLOCKS], SDL_Surface * menu,
    progress = TTF_RenderText_Blended (font, progressText, fontColor);
 
    /* blit progress */
-   progressPos.x = BOX_SIZE * 3;
+   progressPos.x = BOX_SIZE * 4 ;
    progressPos.y = 10;
    SDL_BlitSurface (progress, NULL, menu, &progressPos);
 

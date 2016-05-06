@@ -51,10 +51,15 @@ void displayLevel (Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tabl
          switch (grid[x][y].roleType)
          {
          case GROUND:
-            blitGround (x, y, grid[x][y].groundType, screen, tableSurface);
+            blitGround (x, y, grid, screen, tableSurface);
             break;
          case BOX:
-            moveBox (x, y, grid, STILL, screen, tableSurface);
+		moveBox (x, y, grid, STILL, screen, tableSurface);
+	   	if(grid[x][y].objectType != EMPTY)
+	        {
+            	SDL_BlitSurface (tableSurface[GOAL_IMAGE].image, NULL, screen,
+                             &goalPos);
+	         }
             break;
          case BOX_OK:
             moveBox (x, y, grid, STILL, screen, tableSurface);
@@ -65,13 +70,13 @@ void displayLevel (Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tabl
          case GOAL:
             goalPos.x = x * BOX_SIZE;
             goalPos.y = y * BOX_SIZE;
-            blitGround (x, y, grid[x][y].groundType, screen, tableSurface);
+            blitGround (x, y, grid, screen, tableSurface);
             SDL_BlitSurface (tableSurface[GOAL_IMAGE].image, NULL, screen,
                              &goalPos);
             break;
          case PLAYER:
-            blitGround (x, y, grid[x][y].groundType, screen, tableSurface);
-            blitPlayer (x, y, STILL, grid[x][y].roleType, screen, tableSurface);
+            blitGround (x, y, grid, screen, tableSurface);
+            blitPlayer (x, y, STILL, grid, screen, tableSurface);
             break;
          }
       }

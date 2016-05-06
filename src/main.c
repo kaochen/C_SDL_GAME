@@ -187,8 +187,7 @@ int main (int argc, char *argv[])
             if (xPlayer + 1 >= X_BLOCKS)
                break;
             /* Test if wall */
-            if (grid[xPlayer + 1][yPlayer].roleType == WALL
-                || grid[xPlayer + 1][yPlayer].roleType == BOX_OK)
+            if (grid[xPlayer + 1][yPlayer].roleType == WALL)
                break;
             /* Don't go outside with a box */
             if (grid[xPlayer + 1][yPlayer].roleType == BOX && xPlayer + 2 >= X_BLOCKS)
@@ -208,28 +207,21 @@ int main (int argc, char *argv[])
                moveBox (xPlayer, yPlayer, grid, RIGHT, screen, tableSurface);
                /* move the player */
                blitPlayer (xPlayer, yPlayer, RIGHT,
-                           grid[xPlayer][yPlayer].groundType, screen, tableSurface);
+                           grid, screen, tableSurface);
                /* update new player position */
                playerPos.x += BOX_SIZE;
                /* update status */
-               if (grid[xPlayer + 2][yPlayer].roleType == GOAL)
-               {
-                  grid[xPlayer + 2][yPlayer].roleType = BOX_OK;
-               }
-               else
-               {
-                  grid[xPlayer + 2][yPlayer].roleType = BOX;
-               }
+               grid[xPlayer + 2][yPlayer].roleType = BOX;
                grid[xPlayer][yPlayer].roleType = GROUND;
                grid[xPlayer + 1][yPlayer].roleType = PLAYER;
                break;
             }
-            /* move only on ground */
-            if (grid[xPlayer + 1][yPlayer].roleType == GROUND)
+            /* move only on grounds and Goals */
+            if (grid[xPlayer + 1][yPlayer].roleType == GROUND || grid[xPlayer + 1][yPlayer].objectType == GOAL)
             {
                /* move the player */
                blitPlayer (xPlayer, yPlayer, RIGHT,
-                           grid[xPlayer][yPlayer].groundType, screen, tableSurface);
+                           grid, screen, tableSurface);
                /* update new player position */
                playerPos.x += BOX_SIZE;
                /* update status */
@@ -265,28 +257,21 @@ int main (int argc, char *argv[])
                moveBox (xPlayer, yPlayer, grid, LEFT, screen, tableSurface);
                /* move the player */
                blitPlayer (xPlayer, yPlayer, LEFT,
-                           grid[xPlayer][yPlayer].groundType, screen, tableSurface);
+                           grid, screen, tableSurface);
                /* update new player position */
                playerPos.x -= BOX_SIZE;
                /* update status */
-               if (grid[xPlayer - 2][yPlayer].roleType == GOAL)
-               {
-                  grid[xPlayer - 2][yPlayer].roleType = BOX_OK;
-               }
-               else
-               {
-                  grid[xPlayer - 2][yPlayer].roleType = BOX;
-               }
+               grid[xPlayer - 2][yPlayer].roleType = BOX;
                grid[xPlayer][yPlayer].roleType = GROUND;
                grid[xPlayer - 1][yPlayer].roleType = PLAYER;
                break;
             }
-            /* move only on ground */
-            if (grid[xPlayer - 1][yPlayer].roleType == GROUND)
+            /* move only on grounds and Goals */
+            if (grid[xPlayer - 1][yPlayer].roleType == GROUND || grid[xPlayer - 1][yPlayer].roleType == GOAL)
             {
                /* move the player */
                blitPlayer (xPlayer, yPlayer, LEFT,
-                           grid[xPlayer][yPlayer].groundType, screen, tableSurface);
+                           grid, screen, tableSurface);
                /* update new player position */
                playerPos.x -= BOX_SIZE;
                /* update status */
@@ -301,8 +286,7 @@ int main (int argc, char *argv[])
             if (yPlayer - 1 < 0)
                break;
             /* test if wall */
-            if (grid[xPlayer][yPlayer - 1].roleType == WALL
-                || grid[xPlayer][yPlayer - 1].roleType == BOX_OK)
+            if (grid[xPlayer][yPlayer - 1].roleType == WALL)
                break;
             /* Don't go outside with a box */
             if (grid[xPlayer][yPlayer - 1].roleType == BOX && yPlayer - 2 < 0)
@@ -321,28 +305,21 @@ int main (int argc, char *argv[])
                /* move the box */
                moveBox (xPlayer, yPlayer, grid, UP, screen, tableSurface);
                /* move the player */
-               blitPlayer (xPlayer, yPlayer, UP, grid[xPlayer][yPlayer].groundType,
+               blitPlayer (xPlayer, yPlayer, UP, grid,
                            screen, tableSurface);
                /* update new player position */
                playerPos.y -= BOX_SIZE;
                /* update status */
-               if (grid[xPlayer][yPlayer - 2].roleType == GOAL)
-               {
-                  grid[xPlayer][yPlayer - 2].roleType = BOX_OK;
-               }
-               else
-               {
-                  grid[xPlayer][yPlayer - 2].roleType = BOX;
-               }
+               grid[xPlayer][yPlayer - 2].roleType = BOX;
                grid[xPlayer][yPlayer].roleType = GROUND;
                grid[xPlayer][yPlayer - 1].roleType = PLAYER;
                break;
             }
-            /* move only on ground */
-            if (grid[xPlayer][yPlayer - 1].roleType == GROUND)
+            /* move only on grounds and Goals */
+            if (grid[xPlayer][yPlayer - 1].roleType == GROUND || grid[xPlayer][yPlayer - 1].roleType == GOAL)
             {
                /* move the player */
-               blitPlayer (xPlayer, yPlayer, UP, grid[xPlayer][yPlayer].groundType,
+               blitPlayer (xPlayer, yPlayer, UP, grid,
                            screen, tableSurface);
                /* update new player position */
                playerPos.y -= BOX_SIZE;
@@ -360,14 +337,11 @@ int main (int argc, char *argv[])
             /* test if wall */
             if (grid[xPlayer][yPlayer + 1].roleType == WALL)
                break;
-            if (grid[xPlayer][yPlayer + 1].roleType == BOX_OK)
-               break;
             /* Don't go outside with a case */
             if (grid[xPlayer][yPlayer + 1].roleType == BOX && yPlayer + 2 >= Y_BLOCKS)
                break;
             /* Do not move a box if it is close to a wall or an other box */
-            if (grid[xPlayer][yPlayer + 1].roleType == BOX
-                && grid[xPlayer][yPlayer + 2].roleType == BOX
+            if (grid[xPlayer][yPlayer + 1].roleType == BOX  && grid[xPlayer][yPlayer + 2].roleType == BOX
                 && grid[xPlayer][yPlayer + 2].roleType == WALL)
                break;
             /* Move a box only if there is space to do it */
@@ -380,28 +354,21 @@ int main (int argc, char *argv[])
                moveBox (xPlayer, yPlayer, grid, DOWN, screen, tableSurface);
                /* move the player */
                blitPlayer (xPlayer, yPlayer, DOWN,
-                           grid[xPlayer][yPlayer].groundType, screen, tableSurface);
+                           grid, screen, tableSurface);
                /* update new player position */
                playerPos.y += BOX_SIZE;
                /* update status */
-               if (grid[xPlayer][yPlayer + 2].roleType == GOAL)
-               {
-                  grid[xPlayer][yPlayer + 2].roleType = BOX_OK;
-               }
-               else
-               {
-                  grid[xPlayer][yPlayer + 2].roleType = BOX;
-               }
+               grid[xPlayer][yPlayer + 2].roleType = BOX;
                grid[xPlayer][yPlayer].roleType = GROUND;
                grid[xPlayer][yPlayer + 1].roleType = PLAYER;
                break;
             }
-            /* move only on ground */
-            if (grid[xPlayer][yPlayer + 1].roleType == GROUND)
+            /* move only on grounds and Goals */
+            if (grid[xPlayer][yPlayer + 1].roleType == GROUND || grid[xPlayer][yPlayer + 1].roleType == GOAL)
             {
                /* move the player */
                blitPlayer (xPlayer, yPlayer, DOWN,
-                           grid[xPlayer][yPlayer].groundType, screen, tableSurface);
+                           grid, screen, tableSurface);
                /* update new player position */
                playerPos.y += BOX_SIZE;
                /* update status */
