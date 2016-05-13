@@ -100,4 +100,8 @@ int loadSlcLevel (int levelChoice, S_LevelList *levelList, Square grid[][MAX_BLO
 
 /*get levels infos from files */
 int getNbrOfLevels(S_LevelList *levelList);
+
+/* Change grounds that are outiside the walls to outsides */
+void blitOutside (S_LevelList * levelList, Square grid[][MAX_BLOCKS]);
+
 #endif

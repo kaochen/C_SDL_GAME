@@ -34,6 +34,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libxml2/libxml/xpath.h>
 #include <libxml2/libxml/xpathInternals.h>
 
+
+
 /*Manage slc files ==================================================*/
 /* Initiatlize the list of files */
 S_FilesList *initFilesList ()
@@ -54,7 +56,7 @@ S_FilesList *initFilesList ()
 }
 
 /*Add a new file in the list*/
-void addNewFile (S_FilesList *filesList, char *name)
+void addNewFile (S_FilesList * filesList, char *name)
 {
    S_Files *new = malloc (sizeof (*new));
    if (filesList == NULL || new == NULL)
@@ -69,7 +71,7 @@ void addNewFile (S_FilesList *filesList, char *name)
 }
 
 /*Load slc level into the grid */
-void listSlcLevelFiles (S_FilesList *filesList)
+void listSlcLevelFiles (S_FilesList * filesList)
 {
    DIR *rep;
    rep = opendir ("levels/");
@@ -86,11 +88,11 @@ void listSlcLevelFiles (S_FilesList *filesList)
    {
       if (strstr (file->d_name, ".slc") != NULL
           || strstr (file->d_name, ".SLC") != NULL)
-       {
-	 sprintf (path , "levels/%s", file->d_name);
-	 addNewFile(filesList, path);
+      {
+         sprintf (path, "levels/%s", file->d_name);
+         addNewFile (filesList, path);
          fprintf (stderr, "%s\n", path);
-       }
+      }
    }
 
    if (closedir (rep) == -1)
@@ -101,7 +103,7 @@ void listSlcLevelFiles (S_FilesList *filesList)
 }
 
 /* read files list one by one */
-void readFilesList (S_FilesList *filesList)
+void readFilesList (S_FilesList * filesList)
 {
    if (filesList == NULL)
    {
@@ -138,27 +140,27 @@ S_LevelList *initLevelList ()
 }
 
 /*get levels infos from files */
-int getNbrOfLevels(S_LevelList *levelList)
+int getNbrOfLevels (S_LevelList * levelList)
 {
    int i = 0;
-  S_Level *actual = malloc (sizeof (*actual));
-   if ( levelList == NULL || actual == NULL)
+   S_Level *actual = malloc (sizeof (*actual));
+   if (levelList == NULL || actual == NULL)
    {
       perror ("getNbrOfLevels");
       exit (EXIT_FAILURE);
    }
-  actual = levelList->first;
-  while (actual->name != NULL)
-    {
+   actual = levelList->first;
+   while (actual->name != NULL)
+   {
       actual = actual->next;
       i++;
-    }
-  fprintf(stderr, "Found %d levels\n", i);
-  return i;
+   }
+   fprintf (stderr, "Found %d levels\n", i);
+   return i;
 }
 
 /*get levels infos from files */
-void readLevelsAttributs(S_FilesList *filesList ,S_LevelList *levelList)
+void readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
 {
    S_Level *new = malloc (sizeof (*new));
    if (filesList == NULL || levelList == NULL || new == NULL)
@@ -166,7 +168,7 @@ void readLevelsAttributs(S_FilesList *filesList ,S_LevelList *levelList)
       exit (EXIT_FAILURE);
    }
 
-   /*Get files names*/
+   /*Get files names */
    xmlDocPtr doc;
    int i = 0;
    S_Files *actualFile = filesList->first;
@@ -175,88 +177,97 @@ void readLevelsAttributs(S_FilesList *filesList ,S_LevelList *levelList)
       fprintf (stderr, "Read levels from : %s\n", actualFile->name);
       actualFile = actualFile->next;
 
-  /* Read each level from each files */
-   if (actualFile->name != NULL && strcmp (actualFile->name, FIRST_STRUCT) != 0 )
-       {
-	    /* Open SLC/XML file */
-	   doc = xmlParseFile (actualFile->name);
-	   if (doc == NULL)
-	   {
-	      fprintf (stderr, "%s not valid\n", actualFile->name);
-	      exit(EXIT_FAILURE);
-	   }
+      /* Read each level from each files */
+      if (actualFile->name != NULL
+          && strcmp (actualFile->name, FIRST_STRUCT) != 0)
+      {
+         /* Open SLC/XML file */
+         doc = xmlParseFile (actualFile->name);
+         if (doc == NULL)
+         {
+            fprintf (stderr, "%s not valid\n", actualFile->name);
+            exit (EXIT_FAILURE);
+         }
 
-	    // Start XPath
-   	   xmlXPathInit ();
-   	   // Create a context
-   	   xmlXPathContextPtr ctxt = xmlXPathNewContext (doc);
-	   if (ctxt == NULL)
-	   {
-	      fprintf (stderr, "Error creating the context XPath\n");
-	      exit (EXIT_FAILURE);
-	   }
+         // Start XPath
+         xmlXPathInit ();
+         // Create a context
+         xmlXPathContextPtr ctxt = xmlXPathNewContext (doc);
+         if (ctxt == NULL)
+         {
+            fprintf (stderr, "Error creating the context XPath\n");
+            exit (EXIT_FAILURE);
+         }
 
-		 /* Read Level */
-		   xmlXPathObjectPtr xpathLevel =   xmlXPathEvalExpression (BAD_CAST "/SokobanLevels/LevelCollection/Level", ctxt);
-		   if (xpathLevel == NULL)
-		   {
-		      fprintf (stderr, "Error on the xPathLevel expression\n");
-		      exit (EXIT_FAILURE);
-	  	   }
+         /* Read Level */
+         xmlXPathObjectPtr xpathLevel =
+            xmlXPathEvalExpression (BAD_CAST
+                                    "/SokobanLevels/LevelCollection/Level",
+                                    ctxt);
+         if (xpathLevel == NULL)
+         {
+            fprintf (stderr, "Error on the xPathLevel expression\n");
+            exit (EXIT_FAILURE);
+         }
 
-		/*get attributs*/
-		xmlChar *name;
-		xmlChar *width;
-		xmlChar *height;
-	        /*Get the number of levels in a file*/
-	 	int levelCount = 0, i = 0;
-	 	levelCount = xpathLevel->nodesetval->nodeNr;
-		fprintf(stderr, "The files %s contain %d levels\n", actualFile->name, levelCount);
-	 	/*Add S_Level for each levels found */
-		while(i< levelCount)
-		   {
-			xmlNodePtr Node = xpathLevel->nodesetval->nodeTab[i];
-			for(xmlAttrPtr attr = Node->properties; NULL != attr; attr = attr->next)
-			{
-			  	      name = xmlGetProp(Node, "Id");
-			  	      width = xmlGetProp(Node, "Width");
-			  	      height = xmlGetProp(Node, "Height");
-			}
-		 	printf("File: %s, name: %s, width: %s, height: %s\n", actualFile->name, name, width, height);
-   			/*Load infos into the levelList*/
+         /*get attributs */
+         xmlChar *name;
+         xmlChar *width;
+         xmlChar *height;
+         /*Get the number of levels in a file */
+         int levelCount = 0, i = 0;
+         levelCount = xpathLevel->nodesetval->nodeNr;
+         fprintf (stderr, "The files %s contain %d levels\n",
+                  actualFile->name, levelCount);
+         /*Add S_Level for each levels found */
+         while (i < levelCount)
+         {
+            xmlNodePtr Node = xpathLevel->nodesetval->nodeTab[i];
+            for (xmlAttrPtr attr = Node->properties; NULL != attr;
+                 attr = attr->next)
+            {
+               name = xmlGetProp (Node, "Id");
+               width = xmlGetProp (Node, "Width");
+               height = xmlGetProp (Node, "Height");
+            }
+            printf ("File: %s, name: %s, width: %s, height: %s\n",
+                    actualFile->name, name, width, height);
+            /*Load infos into the levelList */
 
-		     	addNewLevel(levelList, actualFile->name,name, atoi(height), atoi(width));
-			i++;
-		   }
-	    /* free memory */
-	     xmlXPathFreeContext(ctxt);
-	     xmlFreeDoc (doc);
+            addNewLevel (levelList, actualFile->name, name, atoi (height),
+                         atoi (width));
+            i++;
+         }
+         /* free memory */
+         xmlXPathFreeContext (ctxt);
+         xmlFreeDoc (doc);
 
-	       }
+      }
 
-	   }
-	}
+   }
+}
 
 /*Add a level in the list*/
-void addNewLevel (S_LevelList *levelList, char *fileName, char *name, int height, int width)
+void addNewLevel (S_LevelList * levelList, char *fileName, char *name,
+                  int height, int width)
 {
    S_Level *new = malloc (sizeof (*new));
    if (levelList == NULL || new == NULL)
    {
       exit (EXIT_FAILURE);
    }
-  /* check size and */
-  if (height <= X_BLOCKS && width <= Y_BLOCKS )
-    {
-     strcpy (new->name, name);
-     strcpy (new->fileName, fileName);
-     new->height = height;
-     new->width = width;
+   /* check size and */
+   if (height <= X_BLOCKS && width <= Y_BLOCKS)
+   {
+      strcpy (new->name, name);
+      strcpy (new->fileName, fileName);
+      new->height = height;
+      new->width = width;
 
-     /* insert new level struct into the chain */
-     new->next = levelList->first;
-     levelList->first = new;
-    }
+      /* insert new level struct into the chain */
+      new->next = levelList->first;
+      levelList->first = new;
+   }
 
 }
 
@@ -277,32 +288,33 @@ void readLevelList (S_LevelList * levelList)
 }
 
 /*Load slc level into the grid */
-int loadSlcLevel (int levelChoice, S_LevelList *levelList,
+int loadSlcLevel (int levelChoice, S_LevelList * levelList,
                   Square grid[][MAX_BLOCKS])
 {
    if (levelList == NULL)
    {
       exit (EXIT_FAILURE);
    }
-   int nbr_of_lines = 0, firstLines = 0, nbr_of_columns = 0, firstColumn = 0, i = 0;
+   int nbr_of_lines = 0, firstLines = 0, nbr_of_columns = 0, firstColumn =
+      0, i = 0;
    S_Level *actual = levelList->first;
    /* read the all chain list */
    while (actual != NULL)
    {
       /* try to find the nameLevel into the list */
- 	if (i == levelChoice)
-	  {
+      if (i == levelChoice)
+      {
          fprintf (stderr, "Found %s, %d:%d\n", actual->name, actual->width,
-         actual->height);
+                  actual->height);
          nbr_of_lines = actual->height;
          nbr_of_columns = actual->width;
-	/*Place the drawing into the center of the grid*/
-	 firstLines = ((Y_BLOCKS - nbr_of_lines)/2 +1) ; //+1 for the menu
+         /*Place the drawing into the center of the grid */
+         firstLines = ((Y_BLOCKS - nbr_of_lines) / 2 + 1); //+1 for the menu
          firstColumn = (X_BLOCKS - nbr_of_columns) / 2;
          break;
- 	}
-     i++;
-     actual = actual->next;
+      }
+      i++;
+      actual = actual->next;
    }
 
    xmlDocPtr doc;
@@ -364,25 +376,25 @@ int loadSlcLevel (int levelChoice, S_LevelList *levelList,
             c = 0;
             for (x = firstColumn; x < (firstColumn + nbr_of_columns); x++)
             {
-	      int y2 = y + firstLines;
-	      switch (line[c])
+               int y2 = y + firstLines;
+               switch (line[c])
                {
-	       case '#':
+               case '#':
                   grid[x][y2].roleType = WALL;
                   break;
                case ' ':
-		   grid[x][y2].roleType = GROUND;
+                  grid[x][y2].roleType = GROUND;
                   break;
                case '$':
                   grid[x][y2].roleType = BOX;
                   break;
                case '*':
                   grid[x][y2].roleType = BOX;
-		  grid[x][y2].objectType = GOAL;
+                  grid[x][y2].objectType = GOAL;
                   break;
                case '.':
                   grid[x][y2].roleType = GOAL;
-		  grid[x][y2].objectType = GOAL;
+                  grid[x][y2].objectType = GOAL;
                   break;
                case '@':
                   grid[x][y2].roleType = PLAYER;
@@ -393,26 +405,11 @@ int loadSlcLevel (int levelChoice, S_LevelList *levelList,
                }
                c++;
             }
-
          }
       }
-     for (y = 0 ; y < Y_BLOCKS; y++)
-       {
-	     for (x = 0 ; x < X_BLOCKS; x++)
-	       {
-		    /*If a ground is outside the wall use OUTSIDE*/
-		      if(grid[x][y].roleType == GROUND)
-			{
-			 /*Test is outside the wall*/
-			  for (i < 0; i < MAX_BLOCKS; i++)
-			    {
-			      if (grid[x - i][y].roleType == WALL)
-			   	grid[x][y].roleType = OUTSIDE;
-			    }
-			}
-		}
-       }
- }
+   }
+   /* Change grounds that are outiside the walls to outsides */
+   blitOutside (levelList, grid);
 
    /* free memory */
    xmlFreeDoc (doc);
@@ -420,4 +417,85 @@ int loadSlcLevel (int levelChoice, S_LevelList *levelList,
    xmlXPathFreeContext (ctxt);
    return 1;
 }
+
+/* Change grounds that are outiside the walls to outsides */
+void blitOutside (S_LevelList * levelList, Square grid[][MAX_BLOCKS])
+{
+   /*Read line by line and Left to Right */
+   int x = 0, y = 0;
+   for (y = 0; y < Y_BLOCKS; y++)
+   {
+      for (x = 0; x < X_BLOCKS; x++)
+      {
+         /*break if wall */
+         if (grid[x][y].roleType == WALL)
+            x = X_BLOCKS;
+
+         /*Change GROUND to OUSIDE */
+         if (grid[x][y].roleType == GROUND)
+         {
+            grid[x][y].roleType = OUTSIDE;
+         }
+      }
+   }
+
+   /*Read line by line Right to Left */
+   x = 0, y = 0;
+   for (y = 0; y < Y_BLOCKS; y++)
+   {
+      for (x = X_BLOCKS; x > -1; x--)
+      {
+         /*break if wall */
+         if (grid[x][y].roleType == WALL)
+            x = -1;
+
+         /*Change GROUND to OUSIDE */
+         if (grid[x][y].roleType == GROUND)
+         {
+            grid[x][y].roleType = OUTSIDE;
+         }
+      }
+   }
+
+   /*Read row by row and Top to Bottom */
+   x = 0;
+   y = 0;
+   for (x = 0; x < X_BLOCKS; x++)
+   {
+      for (y = 0; y < Y_BLOCKS; y++)
+      {
+         /*break if wall */
+         if (grid[x][y].roleType == WALL)
+            y = Y_BLOCKS;
+
+         /*If a ground is outside the wall use OUTSIDE */
+         if (grid[x][y].roleType == GROUND)
+         {
+            grid[x][y].roleType = OUTSIDE;
+         }
+      }
+   }
+
+   /*Read row by row and Bottom to Top */
+   x = 0;
+   y = 0;
+   for (x = 0; x < X_BLOCKS; x++)
+   {
+      for (y = Y_BLOCKS; y > 0; y--)
+      {
+         /*break if wall */
+         if (grid[x][y].roleType == WALL)
+            y = 0;
+
+         /*If a ground is outside the wall use OUTSIDE */
+         if (grid[x][y].roleType == GROUND)
+         {
+            grid[x][y].roleType = OUTSIDE;
+         }
+
+      }
+   }
+
+}
+
 #endif
