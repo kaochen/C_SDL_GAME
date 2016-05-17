@@ -44,6 +44,7 @@ S_FilesList *initFilesList ()
    S_Files *files = malloc (sizeof (*files));
    if (filesList == NULL || files == NULL)
    {
+      fprintf(stderr, "Init files list failed\n");
       exit (EXIT_FAILURE);
    }
    /*load first files */
@@ -51,7 +52,6 @@ S_FilesList *initFilesList ()
    files->next = NULL;
    /* store adress of the first files struct */
    filesList->first = files;
-
    return filesList;
 }
 
@@ -91,7 +91,7 @@ void listSlcLevelFiles (S_FilesList * filesList)
       {
          sprintf (path, "levels/%s", file->d_name);
          addNewFile (filesList, path);
-         fprintf (stderr, "%s\n", path);
+         fprintf (stderr, "Found file :%s\n", path);
       }
    }
 
@@ -109,11 +109,16 @@ void readFilesList (S_FilesList * filesList)
    {
       exit (EXIT_FAILURE);
    }
+   fprintf (stderr, "Read Files List: \n");
    S_Files *actual = filesList->first;
-   while (actual != NULL)
+   int i = 1;
+  /*Read file one by one until you'll find the first initiate struct (FIRST_STRUCT) or get a NULL*/
+   char firstCmp[]= FIRST_STRUCT, secondCmp[MAX_CARACT]= "";
+   while (actual != NULL && strcmp(firstCmp, strcpy(secondCmp, actual->name )) != 0)
    {
-      fprintf (stderr, "Files: %s\n", actual->name);
+      fprintf (stderr, "File %d : %s\n", i, actual->name);
       actual = actual->next;
+      i++;
    }
 }
 
@@ -341,8 +346,7 @@ int loadSlcLevel (int levelChoice, S_LevelList * levelList,
    char path[MAX_CARACT] = "";
    sprintf (path, "/SokobanLevels/LevelCollection/Level[@Id=\"%s\"]/L/text()",
             actual->name);
-   xmlXPathObjectPtr xpathLevel =
-      xmlXPathEvalExpression (BAD_CAST path, ctxt);
+   xmlXPathObjectPtr xpathLevel =  xmlXPathEvalExpression (BAD_CAST path, ctxt);
    if (xpathLevel == NULL)
    {
       fprintf (stderr, "Error on the xPathLevel expression\n");
@@ -408,13 +412,19 @@ int loadSlcLevel (int levelChoice, S_LevelList * levelList,
          }
       }
    }
+   perror("Basic roleType loaded. Perror");
+
    /* Change grounds that are outiside the walls to outsides */
    blitOutside (levelList, grid);
+   perror("Change ousides grounds sprites to OUTSIDE. Perror");
 
    /* free memory */
    xmlFreeDoc (doc);
-   xmlXPathFreeObject (xpathLevel);
    xmlXPathFreeContext (ctxt);
+  // xmlXPathFreeObject(xpathLevel); //Doesn't work ???
+
+   perror("Free memory from loadSlcLevel. Perror");
+
    return 1;
 }
 

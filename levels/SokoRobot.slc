@@ -37,20 +37,20 @@ Default levels from SokoRobot game
       <L>#         ####   #</L>
       <L>##################</L>
     </Level>
-    <Level Id="Too wide" Width="20" Height="21">
+        <Level Id="Level 3" Width="18" Height="14">
       <L>##################</L>
       <L>########         #</L>
       <L>#   $     .      #</L>
       <L>#         ########</L>
-      <L>#                #</L>
-      <L>#   $ #    @      #</L>
-      <L>#  #  #      *   #</L>
+      <L>#           #### #</L>
+      <L>#   $ ####@      #</L>
+      <L>#  #         *   #</L>
       <L>####.###         #</L>
-      <L>#     #          #</L>
-      <L>#     ###        #</L>
+      <L>#        ## ##   #</L>
+      <L>#      $         #</L>
       <L>#       #.#      #</L>
       <L>#       ###      #</L>
-      <L>#                #</L>
+      <L>#         ####   #</L>
       <L>##################</L>
     </Level>
         <Level Id="Too higt" Width="18" Height="28">
@@ -59,7 +59,7 @@ Default levels from SokoRobot game
       <L>#   $     .      #</L>
       <L>#         ########</L>
       <L>#                #</L>
-      <L>#   $ #    @      #</L>
+      <L>#   $ #    @     #</L>
       <L>#  #  #      *   #</L>
       <L>####.###         #</L>
       <L>#     #          #</L>
@@ -73,7 +73,7 @@ Default levels from SokoRobot game
       <L>#   $     .      #</L>
       <L>#         ########</L>
       <L>#                #</L>
-      <L>#   $ #    @      #</L>
+      <L>#   $ #    @     #</L>
       <L>#  #  #      *   #</L>
       <L>####.###         #</L>
       <L>#     #          #</L>

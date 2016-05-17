@@ -117,25 +117,29 @@ int main (int argc, char *argv[])
    int levelChoice = 0;
 
    /*List slc files from the levels/ folder*/
+   perror("Searching files in the levels folder. Perror");
    S_FilesList *filesList = initFilesList();
    listSlcLevelFiles(filesList);
    readFilesList (filesList);
-
-   fprintf(stderr,"Read files %s\n", SDL_GetError ());
+   perror("Level folder explored. Perror");
 
    /*Read level from slc file in progress. */
+   fprintf(stderr,"Get info from each files %s\n", SDL_GetError ());
    S_LevelList *levelList = initLevelList();
    readLevelList(levelList);
+   perror("Read the level list. Perror");
+
    readLevelsAttributs(filesList ,levelList);
-   fprintf(stderr,"Read levels from files %s\n", SDL_GetError ());
+   perror("Get attributs from files. Perror");
+
 
     /* count all levels from all files */
     int max_Levels =  getNbrOfLevels(levelList);
 
-
      /*Load first game*/
+    perror("Loading first level. Perror");
     loadSlcLevel (levelChoice,levelList, grid);
-    fprintf(stderr,"First level loaded %s\n", SDL_GetError ());
+    perror("First level loaded. Perror");
 
 
    /* Set player position */
