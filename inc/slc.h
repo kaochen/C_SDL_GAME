@@ -77,17 +77,17 @@ S_FilesList *initFilesList ();
 void addNewFile (S_FilesList *filesList, char *name);
 
 /* list slc files from the levels folder */
-void listSlcLevelFiles(S_FilesList *filesList);
+int listSlcLevelFiles(S_FilesList *filesList);
 
 /* read files list one by one */
-void readFilesList (S_FilesList *filesList);
+int readFilesList (S_FilesList *filesList);
 
 /* Levels ========================================= */
 /* Initiatlize the list of levels */
 S_LevelList *initLevelList();
 
 /*get levels infos from files */
-void readLevelsAttributs(S_FilesList *filesList ,S_LevelList *levelList);
+int readLevelsAttributs(S_FilesList *filesList ,S_LevelList *levelList);
 
 /*Add a level in the list*/
 void addNewLevel (S_LevelList *levelList, char *fileName, char *name, int height, int width);

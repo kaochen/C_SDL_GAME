@@ -71,15 +71,14 @@ void addNewFile (S_FilesList * filesList, char *name)
 }
 
 /*Load slc level into the grid */
-void listSlcLevelFiles (S_FilesList * filesList)
+int listSlcLevelFiles (S_FilesList * filesList)
 {
    DIR *rep;
    rep = opendir ("levels/");
    struct dirent *file = NULL;
    if (rep == NULL)
    {
-      perror ("levels ");
-      exit (EXIT_FAILURE);
+      return(EXIT_FAILURE);
    }
 
    /*search for slc files */
@@ -95,19 +94,19 @@ void listSlcLevelFiles (S_FilesList * filesList)
       }
    }
 
-   if (closedir (rep) == -1)
+   if (closedir (rep) == EXIT_FAILURE)
    {
-      perror ("levels ");
-      exit (-1);
+     return EXIT_FAILURE;
    }
+  return EXIT_SUCCESS;
 }
 
 /* read files list one by one */
-void readFilesList (S_FilesList * filesList)
+int readFilesList (S_FilesList * filesList)
 {
    if (filesList == NULL)
    {
-      exit (EXIT_FAILURE);
+      return EXIT_FAILURE;
    }
    fprintf (stderr, "Read Files List: \n");
    S_Files *actual = filesList->first;
@@ -120,6 +119,7 @@ void readFilesList (S_FilesList * filesList)
       actual = actual->next;
       i++;
    }
+  return EXIT_SUCCESS;
 }
 
 /*Manage levels ==================================================*/
@@ -165,12 +165,12 @@ int getNbrOfLevels (S_LevelList * levelList)
 }
 
 /*get levels infos from files */
-void readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
+int readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
 {
    S_Level *new = malloc (sizeof (*new));
    if (filesList == NULL || levelList == NULL || new == NULL)
    {
-      exit (EXIT_FAILURE);
+     return EXIT_FAILURE;
    }
 
    /*Get files names */
@@ -179,19 +179,20 @@ void readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
    S_Files *actualFile = filesList->first;
    while (actualFile != NULL)
    {
-      fprintf (stderr, "Read levels from : %s\n", actualFile->name);
       actualFile = actualFile->next;
 
       /* Read each level from each files */
       if (actualFile->name != NULL
           && strcmp (actualFile->name, FIRST_STRUCT) != 0)
       {
+         fprintf (stderr, "Read levels from : %s\n", actualFile->name);
+
          /* Open SLC/XML file */
          doc = xmlParseFile (actualFile->name);
          if (doc == NULL)
          {
             fprintf (stderr, "%s not valid\n", actualFile->name);
-            exit (EXIT_FAILURE);
+            return EXIT_FAILURE;
          }
 
          // Start XPath
@@ -201,7 +202,7 @@ void readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
          if (ctxt == NULL)
          {
             fprintf (stderr, "Error creating the context XPath\n");
-            exit (EXIT_FAILURE);
+            return EXIT_FAILURE;
          }
 
          /* Read Level */
@@ -212,7 +213,7 @@ void readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
          if (xpathLevel == NULL)
          {
             fprintf (stderr, "Error on the xPathLevel expression\n");
-            exit (EXIT_FAILURE);
+            return EXIT_FAILURE;
          }
 
          /*get attributs */
@@ -222,7 +223,7 @@ void readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
          /*Get the number of levels in a file */
          int levelCount = 0, i = 0;
          levelCount = xpathLevel->nodesetval->nodeNr;
-         fprintf (stderr, "The files %s contain %d levels\n",
+         fprintf (stderr, "The files %s contain %d levels\n\n",
                   actualFile->name, levelCount);
          /*Add S_Level for each levels found */
          while (i < levelCount)
@@ -235,8 +236,7 @@ void readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
                width = xmlGetProp (Node, "Width");
                height = xmlGetProp (Node, "Height");
             }
-            printf ("File: %s, name: %s, width: %s, height: %s\n",
-                    actualFile->name, name, width, height);
+            //printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
             /*Load infos into the levelList */
 
             addNewLevel (levelList, actualFile->name, name, atoi (height),
@@ -246,10 +246,10 @@ void readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
          /* free memory */
          xmlXPathFreeContext (ctxt);
          xmlFreeDoc (doc);
-
       }
 
    }
+           return EXIT_SUCCESS;
 }
 
 /*Add a level in the list*/
@@ -298,7 +298,7 @@ int loadSlcLevel (int levelChoice, S_LevelList * levelList,
 {
    if (levelList == NULL)
    {
-      exit (EXIT_FAILURE);
+      return EXIT_FAILURE;
    }
    int nbr_of_lines = 0, firstLines = 0, nbr_of_columns = 0, firstColumn =
       0, i = 0;
@@ -329,7 +329,7 @@ int loadSlcLevel (int levelChoice, S_LevelList * levelList,
    if (doc == NULL)
    {
       fprintf (stderr, "XML Document not valid\n");
-      return 0;
+      return EXIT_FAILURE;
    }
 
    // Start XPath
@@ -339,7 +339,7 @@ int loadSlcLevel (int levelChoice, S_LevelList * levelList,
    if (ctxt == NULL)
    {
       fprintf (stderr, "Error creating the context XPath\n");
-      exit (-1);
+      return EXIT_FAILURE;
    }
 
    /* Read Level */
@@ -350,7 +350,7 @@ int loadSlcLevel (int levelChoice, S_LevelList * levelList,
    if (xpathLevel == NULL)
    {
       fprintf (stderr, "Error on the xPathLevel expression\n");
-      exit (-1);
+      return EXIT_FAILURE;
    }
    /*Clean grid before */
    int y = 0, x = 0;
@@ -412,20 +412,16 @@ int loadSlcLevel (int levelChoice, S_LevelList * levelList,
          }
       }
    }
-   perror("Basic roleType loaded. Perror");
 
    /* Change grounds that are outiside the walls to outsides */
    blitOutside (levelList, grid);
-   perror("Change ousides grounds sprites to OUTSIDE. Perror");
 
    /* free memory */
    xmlFreeDoc (doc);
    xmlXPathFreeContext (ctxt);
   // xmlXPathFreeObject(xpathLevel); //Doesn't work ???
 
-   perror("Free memory from loadSlcLevel. Perror");
-
-   return 1;
+   return EXIT_SUCCESS;
 }
 
 /* Change grounds that are outiside the walls to outsides */

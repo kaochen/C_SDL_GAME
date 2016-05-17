@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 #include <time.h>
+#include <errno.h>
 
 #include "../inc/const.h"
 #include "../inc/game.h"
@@ -37,6 +38,7 @@ int main (int argc, char *argv[])
    /* start random processor just once */
    srand (time (NULL));
 
+  errno = 0;
    /* Start and check if SDL start correctly */
    if (SDL_Init (SDL_INIT_VIDEO) == -1)
    {
@@ -79,7 +81,7 @@ int main (int argc, char *argv[])
                SDL_GetError ());
       exit (EXIT_FAILURE);
    }
-   fprintf (stderr, "Creating the main window succeed\n");
+   fprintf (stderr, "Creating the main window succeed\n\n");
 
    /* load images into a table of struct */
    Sprites tableSurface[NBR_OF_IMAGES];
@@ -117,29 +119,63 @@ int main (int argc, char *argv[])
    int levelChoice = 0;
 
    /*List slc files from the levels/ folder*/
-   perror("Searching files in the levels folder. Perror");
+   fprintf(stderr,"Searching files in the levels folder.\n");
    S_FilesList *filesList = initFilesList();
-   listSlcLevelFiles(filesList);
-   readFilesList (filesList);
-   perror("Level folder explored. Perror");
+   if (listSlcLevelFiles(filesList) == EXIT_SUCCESS)
+    {
+      fprintf(stderr,"Level folder explored.\n");
+    }
+   else
+    {
+      perror("listSlcLevelFiles failed");
+      exit(EXIT_FAILURE);
+    }
+    fprintf(stderr,"\n");
 
-   /*Read level from slc file in progress. */
+   /*Read files name from the filesList to check*/
+   if (readFilesList (filesList) == EXIT_SUCCESS)
+    {
+      fprintf(stderr,"Files list readed.\n");
+    }
+   else
+    {
+         perror("readFilesList failed");
+         exit(EXIT_FAILURE);
+    }
+   fprintf(stderr,"\n");
+
+
+   /*Read level from slc file */
    fprintf(stderr,"Get info from each files %s\n", SDL_GetError ());
    S_LevelList *levelList = initLevelList();
-   readLevelList(levelList);
-   perror("Read the level list. Perror");
+   //readLevelList(levelList);
+   fprintf(stderr,"Read the level list.\n");
 
-   readLevelsAttributs(filesList ,levelList);
-   perror("Get attributs from files. Perror");
-
+   if(readLevelsAttributs(filesList ,levelList) == EXIT_SUCCESS)
+    {
+      fprintf(stderr,"Attributs from files loaded.\n");
+    }
+   else
+    {
+      perror("Error when loading levels attributs from files. Perror");
+      exit(EXIT_FAILURE);
+    }
+    fprintf(stderr,"\n");
 
     /* count all levels from all files */
     int max_Levels =  getNbrOfLevels(levelList);
 
      /*Load first game*/
-    perror("Loading first level. Perror");
-    loadSlcLevel (levelChoice,levelList, grid);
-    perror("First level loaded. Perror");
+    fprintf(stderr,"Loading first level.");
+    if(loadSlcLevel (levelChoice,levelList, grid) == EXIT_SUCCESS)
+    {
+      fprintf(stderr,"Level loaded\n");
+    }
+   else
+    {
+      perror("Impossible to load the level. Perror");
+    }
+
 
 
    /* Set player position */
@@ -223,7 +259,7 @@ int main (int argc, char *argv[])
                break;
             }
             /* move only on grounds and Goals */
-            if (grid[xPlayer + 1][yPlayer].roleType == GROUND || grid[xPlayer + 1][yPlayer].objectType == GOAL)
+            if (grid[xPlayer + 1][yPlayer].roleType == GROUND || grid[xPlayer + 1][yPlayer].roleType == GOAL)
             {
                /* move the player */
                blitPlayer (xPlayer, yPlayer, RIGHT,
@@ -242,8 +278,7 @@ int main (int argc, char *argv[])
             if (xPlayer - 1 < 0)
                break;
             /* test if wall */
-            if (grid[xPlayer - 1][yPlayer].roleType == WALL
-                || grid[xPlayer - 1][yPlayer].roleType == BOX_OK)
+            if (grid[xPlayer - 1][yPlayer].roleType == WALL)
                break;
             /* Don't go outside with a box */
             if (grid[xPlayer - 1][yPlayer].roleType == BOX && xPlayer - 2 < 0)
@@ -387,7 +422,15 @@ int main (int argc, char *argv[])
             /* hit r to reset the current level */
          case SDLK_r:
             /* load the level */
-	    loadSlcLevel (levelChoice,levelList, grid);
+               if(loadSlcLevel (levelChoice,levelList, grid) == EXIT_SUCCESS)
+                   {
+                     fprintf(stderr,"Level loaded\n");
+                   }
+                  else
+                   {
+                     perror("Impossible to load the level. Perror");
+                   }
+
             /* display the level using grid */
             displayLevel (grid, screen, tableSurface);
             /* display menu on top of the screen */
@@ -404,7 +447,14 @@ int main (int argc, char *argv[])
             {
                levelChoice += 1;
 
-	      	        loadSlcLevel (levelChoice,levelList, grid);
+	      	      if(loadSlcLevel (levelChoice,levelList, grid) == EXIT_SUCCESS)
+                   {
+                     fprintf(stderr,"Level loaded\n");
+                   }
+                  else
+                   {
+                     perror("Impossible to load the level. Perror");
+                   }
                /* display the level using grid */
                displayLevel(grid, screen, tableSurface);
                /* display menu on top of the screen */
@@ -420,7 +470,15 @@ int main (int argc, char *argv[])
             if (levelChoice > 0)
             {
                levelChoice -= 1;
-	      	loadSlcLevel (levelChoice,levelList, grid);
+	      	    if(loadSlcLevel (levelChoice,levelList, grid) == EXIT_SUCCESS)
+                {
+                  fprintf(stderr,"Level loaded\n");
+                }
+               else
+                {
+                  perror("Impossible to load the level. Perror");
+                }
+
                /* display the level using grid*/
                displayLevel (grid, screen, tableSurface);
                /* display menu on top of the screen */
