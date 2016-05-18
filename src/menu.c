@@ -178,17 +178,50 @@ void displayProgress (Square grid[][MAX_BLOCKS], SDL_Surface * menu,
 }
 
 /* Victory or not ? */
-int levelFinished (Square grid[][MAX_BLOCKS])
+int levelFinished (Square grid[][MAX_BLOCKS],SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
-   if (nbr_of_goals (grid) == 0)
+
+   /* get info */
+   int i = goalLeft (grid);
+   int j = nbr_of_goals (grid);
+
+   if (i == j)
    {
-      fprintf (stderr, "Congrats, you complete this level");
+      displayCongrats(screen, tableSurface);
       return FINISH;
    }
    else
    {
       return NOT_FINISHED;
    }
+}
+
+
+
+/* display a congrats message to the winner */
+int displayCongrats (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
+{
+   SDL_Rect congratsPos;
+
+   int width = 8, height = 4;
+
+
+   /* add a background*/
+   int x = 0, y = 0;
+   /*lines*/
+   congratsPos.y = ((Y_BLOCKS - height)/2)*BOX_SIZE;
+   for (y = 0; y < height; y++)
+    {
+      /*rows*/
+      congratsPos.x = ((X_BLOCKS - width)/2)*BOX_SIZE;
+      for (x = 0; x < width; x++)
+      {
+         SDL_BlitSurface (tableSurface[MENU_BACK].image, NULL, screen, &congratsPos);
+         congratsPos.x += BOX_SIZE;
+      }
+      congratsPos.y += BOX_SIZE;
+    }
+  return EXIT_SUCCESS;
 }
 
 #endif

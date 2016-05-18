@@ -53,5 +53,8 @@ void displayProgress (Square grid[][MAX_BLOCKS], SDL_Surface * menu,
                       Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Victory or not ? */
-int levelFinished (Square grid[][MAX_BLOCKS]);
+int levelFinished (Square grid[][MAX_BLOCKS],SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+
+/* display a congrats message to the winner */
+int displayCongrats (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 #endif

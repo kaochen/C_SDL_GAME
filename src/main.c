@@ -197,6 +197,7 @@ int main (int argc, char *argv[])
 
 /* wait for quit event */
    int carryOn = 1, x = 0, y = 0;
+   int winStatus = NOT_FINISHED;
    SDL_Event event;
    while (carryOn)
    {
@@ -225,6 +226,9 @@ int main (int argc, char *argv[])
          switch (event.key.keysym.sym)
          {
          case SDLK_RIGHT:
+           /*Do not move when level is finished*/
+            if (winStatus == FINISH)
+              break;
             /* Don't go outside */
             if (xPlayer + 1 >= X_BLOCKS)
                break;
@@ -274,6 +278,10 @@ int main (int argc, char *argv[])
             break;
 
          case SDLK_LEFT:
+            /*Do not move when level is finished*/
+            if (winStatus == FINISH)
+              break;
+
             /* Don't go outside */
             if (xPlayer - 1 < 0)
                break;
@@ -323,6 +331,10 @@ int main (int argc, char *argv[])
             break;
 
          case SDLK_UP:
+          /*Do not move when level is finished*/
+            if (winStatus == FINISH)
+              break;
+
             /* Don't go outside */
             if (yPlayer - 1 < 0)
                break;
@@ -372,6 +384,10 @@ int main (int argc, char *argv[])
             break;
 
          case SDLK_DOWN:
+          /*Do not move when level is finished*/
+            if (winStatus == FINISH)
+              break;
+
             /* Don't go outside */
             if (yPlayer + 1 >= Y_BLOCKS)
                break;
@@ -435,19 +451,18 @@ int main (int argc, char *argv[])
             displayLevel (grid, screen, tableSurface);
             /* display menu on top of the screen */
             displayMenu ((levelChoice + 1), menu, tableSurface, levelList);
+            /*reset status*/
+            winStatus = NOT_FINISHED;
             fprintf (stderr, "Level %d\n loaded", (levelChoice + 1));
             break;
 
             /* hit n to load the next level */
          case SDLK_n:
             /* load next the level */
-            if (levelChoice > (max_Levels - 1))
-               levelChoice = (max_Levels - 1);
-            if (levelChoice < (max_Levels - 1))
-            {
-               levelChoice += 1;
-
-	      	      if(loadSlcLevel (levelChoice,levelList, grid) == EXIT_SUCCESS)
+            levelChoice += 1;
+            if (levelChoice == max_Levels)
+               levelChoice = 0;
+      	      if(loadSlcLevel (levelChoice,levelList, grid) == EXIT_SUCCESS)
                    {
                      fprintf(stderr,"Level loaded\n");
                    }
@@ -459,18 +474,19 @@ int main (int argc, char *argv[])
                displayLevel(grid, screen, tableSurface);
                /* display menu on top of the screen */
                displayMenu ((levelChoice + 1), menu, tableSurface, levelList);
+               /*reset status*/
+               winStatus = NOT_FINISHED;
                fprintf (stderr, "Level %d\n loaded", (levelChoice + 1));
-            }
+
             break;
             /* hit p to load the previous level */
          case SDLK_p:
             /* load previous level*/
-            if (levelChoice < 0)
-               levelChoice = 0;
-            if (levelChoice > 0)
-            {
-               levelChoice -= 1;
-	      	    if(loadSlcLevel (levelChoice,levelList, grid) == EXIT_SUCCESS)
+            levelChoice -= 1;
+            if (levelChoice == -1)
+               levelChoice = max_Levels -1;
+
+	          if(loadSlcLevel (levelChoice,levelList, grid) == EXIT_SUCCESS)
                 {
                   fprintf(stderr,"Level loaded\n");
                 }
@@ -483,8 +499,10 @@ int main (int argc, char *argv[])
                displayLevel (grid, screen, tableSurface);
                /* display menu on top of the screen */
                displayMenu ((levelChoice + 1), menu, tableSurface, levelList);
+               /*reset status*/
+               winStatus = NOT_FINISHED;
                fprintf (stderr, "Level %d\n loaded", (levelChoice + 1));
-            }
+
             break;
             /* hit q to quit */
          case SDLK_q:
@@ -494,6 +512,12 @@ int main (int argc, char *argv[])
 
          /* display Progress in the menu */
          displayProgress (grid, menu, tableSurface);
+
+        /*test if the level is complete by the player*/
+        if(levelFinished(grid,screen,tableSurface) == FINISH)
+          {
+            winStatus = FINISH;
+          }
          SDL_UpdateWindowSurface (window);
       }
    }
