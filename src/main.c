@@ -113,6 +113,9 @@ int main (int argc, char *argv[])
    /* outside the wall */
    loadSprite (&tableSurface[OUTSIDE], "img/outside.png");
 
+   /* Congrats */
+   loadSprite (&tableSurface[CONGRATS], "img/congrats_background.png");
+
    /* create a grid with coordinates x,y to locate things */
    Square grid[MAX_BLOCKS][MAX_BLOCKS];
 

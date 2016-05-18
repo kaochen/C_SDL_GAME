@@ -203,24 +203,36 @@ int displayCongrats (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
    SDL_Rect congratsPos;
 
-   int width = 8, height = 4;
-
+   int width = 320, height = 120;
 
    /* add a background*/
-   int x = 0, y = 0;
-   /*lines*/
-   congratsPos.y = ((Y_BLOCKS - height)/2)*BOX_SIZE;
-   for (y = 0; y < height; y++)
-    {
-      /*rows*/
-      congratsPos.x = ((X_BLOCKS - width)/2)*BOX_SIZE;
-      for (x = 0; x < width; x++)
-      {
-         SDL_BlitSurface (tableSurface[MENU_BACK].image, NULL, screen, &congratsPos);
-         congratsPos.x += BOX_SIZE;
-      }
-      congratsPos.y += BOX_SIZE;
-    }
+   congratsPos.x = ((Y_BLOCKS*BOX_SIZE) - width)/2;
+   congratsPos.y = ((Y_BLOCKS*BOX_SIZE) - height)/2;
+   SDL_BlitSurface (tableSurface[CONGRATS].image, NULL, screen, &congratsPos);
+
+     /* setup font */
+   TTF_Font *font = NULL;
+   const int fontCongratsSize = 50;
+   font = TTF_OpenFont ("img/BABIRG__.TTF", fontCongratsSize);
+   SDL_Color fontColor = { 255, 255, 255 };
+
+   /* merge results */
+   SDL_Surface *congratsMessage = NULL;
+   SDL_Rect congratsMessagePos;
+   char congratsMessageText[20] = "CONGRATS!!!";
+
+   congratsMessage = TTF_RenderText_Blended (font, congratsMessageText, fontColor);
+
+
+   /* blit progress */
+   congratsMessagePos.x = (W_WIDTH - 250)/2;
+   congratsMessagePos.y = (W_HEIGHT - fontCongratsSize)/2;
+   SDL_BlitSurface (congratsMessage, NULL, screen, &congratsMessagePos);
+
+   /* clean */
+   SDL_FreeSurface (congratsMessage);
+   TTF_CloseFont (font);
+
   return EXIT_SUCCESS;
 }
 
