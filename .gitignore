@@ -1,7 +1,4 @@
 #Ignore this files
-obj/*.o
+obj/
 SokoRobot
 # Except this files
-
-
-
