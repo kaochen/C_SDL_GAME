@@ -220,7 +220,7 @@ void blitWalls (int x, int y, Square grid[][MAX_BLOCKS], SDL_Surface * screen,
 /* add a more ground choice */
 int addRandomGround()
 {
-   int i = 0, randomNumber = 0;
+   int randomNumber = 0;
    randomNumber = random_number (0, 100);
    if (randomNumber <= 60)
    {
@@ -234,6 +234,21 @@ int addRandomGround()
    {
       return GROUND3;
    }
+}
+
+/*change OUTSIDE groundType to get more choice between OUTSIDE, OUTSIDE2...*/
+int randomOutside()
+{
+            int randomNumber = 0;
+            randomNumber = random_number (0, 100);
+            if (randomNumber < 95)
+            {
+               return OUTSIDE;
+            }
+            else
+            {
+               return OUTSIDE2;
+            }
 }
 
 /* random number between two numbers */

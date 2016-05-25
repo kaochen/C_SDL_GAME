@@ -39,6 +39,9 @@ typedef struct
    int width;
 } Sprites;
 
+/* Load all sprites */
+int loadAllSprites(Sprites tableSurface[NBR_OF_IMAGES]);
+
 /* load a sprite as a surface */
 void loadSprite (Sprites * sprites, const char *imagePath);
 

@@ -27,6 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../inc/slc.h"
 #include "../inc/const.h"
+#include "../inc/game.h"
 
 //Read using libxml
 #include <libxml2/libxml/tree.h>
@@ -440,7 +441,7 @@ void blitOutside (S_LevelList * levelList, Square grid[][MAX_BLOCKS])
          /*Change GROUND to OUSIDE */
          if (grid[x][y].roleType == GROUND)
          {
-            grid[x][y].roleType = OUTSIDE;
+            grid[x][y].roleType = randomOutside();
          }
       }
    }
@@ -458,7 +459,7 @@ void blitOutside (S_LevelList * levelList, Square grid[][MAX_BLOCKS])
          /*Change GROUND to OUSIDE */
          if (grid[x][y].roleType == GROUND)
          {
-            grid[x][y].roleType = OUTSIDE;
+            grid[x][y].roleType = randomOutside();
          }
       }
    }
@@ -477,7 +478,7 @@ void blitOutside (S_LevelList * levelList, Square grid[][MAX_BLOCKS])
          /*If a ground is outside the wall use OUTSIDE */
          if (grid[x][y].roleType == GROUND)
          {
-            grid[x][y].roleType = OUTSIDE;
+            grid[x][y].roleType = randomOutside();
          }
       }
    }
@@ -496,7 +497,7 @@ void blitOutside (S_LevelList * levelList, Square grid[][MAX_BLOCKS])
          /*If a ground is outside the wall use OUTSIDE */
          if (grid[x][y].roleType == GROUND)
          {
-            grid[x][y].roleType = OUTSIDE;
+            grid[x][y].roleType = randomOutside();
          }
 
       }

@@ -44,6 +44,9 @@ void blitWalls (int x, int y, Square grid[][MAX_BLOCKS], SDL_Surface * screen,
 /* add a more ground choice */
 int addRandomGround ();
 
+/*change OUTSIDE groundType to get more choice between OUTSIDE, OUTSIDE2...*/
+int randomOutside();
+
 /* random number between two numbers */
 int random_number (int min, int max);
 

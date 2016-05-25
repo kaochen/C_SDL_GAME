@@ -85,36 +85,7 @@ int main (int argc, char *argv[])
 
    /* load images into a table of struct */
    Sprites tableSurface[NBR_OF_IMAGES];
-   /* Player faces */
-   loadSprite (&tableSurface[PLAYER_FRONT], "img/front.png");
-   loadSprite (&tableSurface[PLAYER_BACK], "img/back.png");
-   loadSprite (&tableSurface[PLAYER_LEFT], "img/left.png");
-   loadSprite (&tableSurface[PLAYER_RIGHT], "img/right.png");
-   /* walls */
-   loadSprite (&tableSurface[WALL1_IMAGE], "img/wall.png");
-   loadSprite (&tableSurface[WALL2_IMAGE], "img/wall2.png");
-   loadSprite (&tableSurface[WALL3_IMAGE], "img/wall3.png");
-   loadSprite (&tableSurface[WALL4_IMAGE], "img/wall4.png");
-   loadSprite (&tableSurface[WALL_LEFT], "img/wallBorderLeft.png");
-   loadSprite (&tableSurface[WALL_RIGHT], "img/wallBorderRight.png");
-   loadSprite (&tableSurface[WALL_TOP], "img/wallBorderTop.png");
-   loadSprite (&tableSurface[WALL_BOTTOM], "img/wallBorderBottom.png");
-   /* grounds */
-   loadSprite (&tableSurface[GROUND1_IMAGE], "img/background.bmp");
-   loadSprite (&tableSurface[GROUND2_IMAGE], "img/background2.bmp");
-   loadSprite (&tableSurface[GROUND3_IMAGE], "img/background3.bmp");
-   /* boxes */
-   loadSprite (&tableSurface[BOX_IMAGE], "img/box.png");
-   loadSprite (&tableSurface[BOX_IMAGE_OK], "img/box_ok.png");
-   /* goal */
-   loadSprite (&tableSurface[GOAL_IMAGE], "img/goal.png");
-   /* menu */
-   loadSprite (&tableSurface[MENU_BACK], "img/menuBlock.png");
-   /* outside the wall */
-   loadSprite (&tableSurface[OUTSIDE], "img/outside.png");
-
-   /* Congrats */
-   loadSprite (&tableSurface[CONGRATS], "img/congrats_background.png");
+   loadAllSprites(tableSurface);
 
    /* create a grid with coordinates x,y to locate things */
    Square grid[MAX_BLOCKS][MAX_BLOCKS];

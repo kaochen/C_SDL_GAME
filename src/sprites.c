@@ -29,6 +29,43 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/const.h"
 #include "../inc/sprites.h"
 
+/* Load all sprites */
+int loadAllSprites(Sprites tableSurface[NBR_OF_IMAGES])
+{
+     /* Player faces */
+   loadSprite (&tableSurface[PLAYER_FRONT], "img/front.png");
+   loadSprite (&tableSurface[PLAYER_BACK], "img/back.png");
+   loadSprite (&tableSurface[PLAYER_LEFT], "img/left.png");
+   loadSprite (&tableSurface[PLAYER_RIGHT], "img/right.png");
+   /* walls */
+   loadSprite (&tableSurface[WALL1_IMAGE], "img/wall.png");
+   loadSprite (&tableSurface[WALL2_IMAGE], "img/wall2.png");
+   loadSprite (&tableSurface[WALL3_IMAGE], "img/wall3.png");
+   loadSprite (&tableSurface[WALL4_IMAGE], "img/wall4.png");
+   loadSprite (&tableSurface[WALL_LEFT], "img/wallBorderLeft.png");
+   loadSprite (&tableSurface[WALL_RIGHT], "img/wallBorderRight.png");
+   loadSprite (&tableSurface[WALL_TOP], "img/wallBorderTop.png");
+   loadSprite (&tableSurface[WALL_BOTTOM], "img/wallBorderBottom.png");
+   /* grounds */
+   loadSprite (&tableSurface[GROUND1_IMAGE], "img/background.bmp");
+   loadSprite (&tableSurface[GROUND2_IMAGE], "img/background2.bmp");
+   loadSprite (&tableSurface[GROUND3_IMAGE], "img/background3.bmp");
+   /* boxes */
+   loadSprite (&tableSurface[BOX_IMAGE], "img/box.png");
+   loadSprite (&tableSurface[BOX_IMAGE_OK], "img/box_ok.png");
+   /* goal */
+   loadSprite (&tableSurface[GOAL_IMAGE], "img/goal.png");
+   /* menu */
+   loadSprite (&tableSurface[MENU_BACK], "img/menuBlock.png");
+   /* outside the wall */
+   loadSprite (&tableSurface[OUTSIDE_IMAGE], "img/outside.png");
+   loadSprite (&tableSurface[OUTSIDE2_IMAGE], "img/outside2.png");
+
+   /* Congrats */
+   loadSprite (&tableSurface[CONGRATS], "img/congrats_background.png");
+}
+
+
 /* load a sprite as a surface */
 void loadSprite (Sprites * sprites, const char *imagePath)
 {
