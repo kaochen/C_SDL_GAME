@@ -241,13 +241,17 @@ int randomOutside()
 {
             int randomNumber = 0;
             randomNumber = random_number (0, 100);
-            if (randomNumber < 95)
+            if (randomNumber <= 87)
             {
                return OUTSIDE;
             }
-            else
+            else if (randomNumber >= 90)
             {
                return OUTSIDE2;
+            }
+            else
+            {
+               return OUTSIDE3;
             }
 }
 
