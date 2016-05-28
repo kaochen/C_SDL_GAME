@@ -30,8 +30,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define BOX_SIZE 40
 
 //number of blocks
-#define MAX_BLOCKS 23 //Must be higther than X_BLOCKS or Y_BLOCKS
-#define X_BLOCKS 21 //+1 for the menu bar
+#define MAX_BLOCKS 23		//Must be higther than X_BLOCKS or Y_BLOCKS
+#define X_BLOCKS 21		//+1 for the menu bar
 #define Y_BLOCKS 20
 
 //autorise 100 images max
@@ -42,31 +42,32 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define FIRST_STRUCT "first"
 
 /* define role for each square*/
-typedef struct
-{
-   int roleType;
-   int objectType;
-   int groundType;
+typedef struct {
+    int roleType;
+    int objectType;
+    int groundType;
 } Square;
 
 
 
 //object type
-enum {GROUND, GROUND1, GROUND2, GROUND3, GROUND4, OUTSIDE, OUTSIDE2, OUTSIDE3, WALL , GOAL,BOX, BOX_OK, PLAYER, EMPTY};
+enum { GROUND, GROUND1, GROUND2, GROUND3, GROUND4, OUTSIDE, OUTSIDE2,
+	OUTSIDE3, WALL, GOAL, BOX, BOX_OK, PLAYER, EMPTY };
 
 //direction
-enum {UP , DOWN, RIGHT, LEFT, STILL };
-enum {RANDOM, FIXED};
+enum { UP, DOWN, RIGHT, LEFT, STILL };
+enum { RANDOM, FIXED };
 
 //image names
-enum {PLAYER_FRONT,PLAYER_BACK,PLAYER_LEFT,PLAYER_RIGHT,
-  WALL1_IMAGE,WALL2_IMAGE,WALL3_IMAGE,WALL4_IMAGE, WALL_TOP, WALL_BOTTOM, WALL_LEFT, WALL_RIGHT,
-  GROUND1_IMAGE,GROUND2_IMAGE,GROUND3_IMAGE,
-  BOX_IMAGE, BOX_IMAGE_OK,
-  GOAL_IMAGE,
-  MENU_BACK,
-  OUTSIDE_IMAGE, OUTSIDE2_IMAGE, OUTSIDE3_IMAGE,
-  CONGRATS
+enum { PLAYER_FRONT, PLAYER_BACK, PLAYER_LEFT, PLAYER_RIGHT,
+    WALL1_IMAGE, WALL2_IMAGE, WALL3_IMAGE, WALL4_IMAGE, WALL_TOP,
+	WALL_BOTTOM, WALL_LEFT, WALL_RIGHT,
+    GROUND1_IMAGE, GROUND2_IMAGE, GROUND3_IMAGE,
+    BOX_IMAGE, BOX_IMAGE_OK,
+    GOAL_IMAGE,
+    MENU_BACK,
+    OUTSIDE_IMAGE, OUTSIDE2_IMAGE, OUTSIDE3_IMAGE,
+    CONGRATS
 };
-enum {FINISH,NOT_FINISHED};
+enum { FINISH, NOT_FINISHED };
 #endif

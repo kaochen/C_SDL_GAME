@@ -9,11 +9,9 @@ apt install libsdl2-2.0-0 libsdl2-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev libfreet
 
 ```
 
-
+### Download
 ```
 git clone https://github.com/kaochen/SokoRobot
-git remote add -m https://github.com/kaochen/SokoRobot.git
-git remote set-url origin git@github.com:kaochen/SokoRobot.git
 ```
 
 ### Compile
@@ -33,13 +31,28 @@ make mrproper
 ```
 
 ### Dev stuff
-Good pratice:
- * [FR] http://emmanuel-delahaye.developpez.com/tutoriels/c/bonnes-pratiques-codage-c/
+
+Git :
 ```
-apt get install indent
-indent -bli0 -npsl -i3 -ts0 -sob file.c
+git remote set-url origin git@github.com:kaochen/SokoRobot.git
+git status // see changes
+git add -u //update all existing files
+git add new_files.c //add a new file or update en existing one
+git mv file.c newfile.c
+git rm file.c
+git commit -m"new changes"
+git push //push last commit
+git pull //pull last changes
 ```
 
+Good pratice:
+ * [FR] http://emmanuel-delahaye.developpez.com/tutoriels/c/bonnes-pratiques-codage-c/
+
+I used the "Kernighan & Ritchie style" to indent my code.
+```
+apt get install indent
+indent -kr file.c
+```
 
 ### Links
  * http://wiki.libsdl.org/Installation#Linux.2FUnix

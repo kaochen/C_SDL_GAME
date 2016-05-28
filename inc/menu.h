@@ -30,31 +30,36 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "slc.h"
 
 /* display menu */
-void displayMenu (int levelNumber, SDL_Surface * menu,
-                  Sprites tableSurface[NBR_OF_IMAGES], S_LevelList *levelList);
+void displayMenu(int levelNumber, SDL_Surface * menu,
+		 Sprites tableSurface[NBR_OF_IMAGES],
+		 S_LevelList * levelList);
 
 /* display background menu */
-void backgroundMenu (SDL_Surface * menu, Sprites tableSurface[NBR_OF_IMAGES]);
+void backgroundMenu(SDL_Surface * menu,
+		    Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* display shortcut in the menu */
-void displayShortcut (SDL_Surface * menu);
+void displayShortcut(SDL_Surface * menu);
 /* display the level number */
-void levelMenu (int levelNumber, SDL_Surface * menu,
-                Sprites tableSurface[NBR_OF_IMAGES], S_LevelList *levelList);
+void levelMenu(int levelNumber, SDL_Surface * menu,
+	       Sprites tableSurface[NBR_OF_IMAGES],
+	       S_LevelList * levelList);
 
 /* count how many goals are need to complete the level */
-int goalLeft (Square grid[][MAX_BLOCKS]);
+int goalLeft(Square grid[][MAX_BLOCKS]);
 
 /* count goals all ready achieve */
-int nbr_of_goals (Square grid[][MAX_BLOCKS]);
+int nbr_of_goals(Square grid[][MAX_BLOCKS]);
 
 /* Display Progress in the level */
-void displayProgress (Square grid[][MAX_BLOCKS], SDL_Surface * menu,
-                      Sprites tableSurface[NBR_OF_IMAGES]);
+void displayProgress(Square grid[][MAX_BLOCKS], SDL_Surface * menu,
+		     Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Victory or not ? */
-int levelFinished (Square grid[][MAX_BLOCKS],SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+int levelFinished(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
+		  Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* display a congrats message to the winner */
-int displayCongrats (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+int displayCongrats(SDL_Surface * screen,
+		    Sprites tableSurface[NBR_OF_IMAGES]);
 #endif

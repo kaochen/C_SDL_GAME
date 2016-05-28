@@ -28,7 +28,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 /* display level on the screen */
-void displayLevel (Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+void displayLevel(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
+		  Sprites tableSurface[NBR_OF_IMAGES]);
 
 
 #endif

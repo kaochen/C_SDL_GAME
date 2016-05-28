@@ -26,28 +26,30 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "sprites.h"
 
 /* move the player and blit player images */
-void blitPlayer (int xPlayer, int yPlayer, int direction, Square grid[][MAX_BLOCKS],
-                 SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+void blitPlayer(int xPlayer, int yPlayer, int direction,
+		Square grid[][MAX_BLOCKS], SDL_Surface * screen,
+		Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* move a box */
-void moveBox (int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS], int direction,
-              SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+void moveBox(int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS],
+	     int direction, SDL_Surface * screen,
+	     Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* blit ground */
-void blitGround (int x, int y, Square grid[][MAX_BLOCKS], SDL_Surface * screen,
-                 Sprites tableSurface[NBR_OF_IMAGES]);
+void blitGround(int x, int y, Square grid[][MAX_BLOCKS],
+		SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* blit Walls */
-void blitWalls (int x, int y, Square grid[][MAX_BLOCKS], SDL_Surface * screen,
-                Sprites tableSurface[NBR_OF_IMAGES]);
+void blitWalls(int x, int y, Square grid[][MAX_BLOCKS],
+	       SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* add a more ground choice */
-int addRandomGround ();
+int addRandomGround();
 
 /*change OUTSIDE groundType to get more choice between OUTSIDE, OUTSIDE2...*/
 int randomOutside();
 
 /* random number between two numbers */
-int random_number (int min, int max);
+int random_number(int min, int max);
 
 #endif

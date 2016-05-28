@@ -33,72 +33,69 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/game.h"
 
 /* display level on the screen */
-void displayLevel (Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
+void displayLevel(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
+		  Sprites tableSurface[NBR_OF_IMAGES])
 {
-   /* set a goal position */
-   SDL_Rect goalPos;
+    /* set a goal position */
+    SDL_Rect goalPos;
 
-   /* blit surfaces depending of its destiny */
-   int x = 0, y = 0;
-   for (x = 0; x < X_BLOCKS; x++)
-   {
-      for (y = 0; y < Y_BLOCKS; y++)
-      {
-         /* assign a random ground to each block */
-         grid[x][y].groundType = addRandomGround ();
+    /* blit surfaces depending of its destiny */
+    int x = 0, y = 0;
+    for (x = 0; x < X_BLOCKS; x++) {
+	for (y = 0; y < Y_BLOCKS; y++) {
+	    /* assign a random ground to each block */
+	    grid[x][y].groundType = addRandomGround();
 
-         /* blit all blocks depending on grid types*/
-         switch (grid[x][y].roleType)
-         {
-         case GROUND:
-            blitGround (x, y, grid, screen, tableSurface);
-            break;
-         case BOX:
-		moveBox (x, y, grid, STILL, screen, tableSurface);
-	   	if(grid[x][y].objectType != EMPTY)
-	        {
-            	SDL_BlitSurface (tableSurface[GOAL_IMAGE].image, NULL, screen,
-                             &goalPos);
-	         }
-            break;
-         case BOX_OK:
-            moveBox (x, y, grid, STILL, screen, tableSurface);
-            break;
-         case WALL:
-            blitWalls (x, y, grid, screen, tableSurface);
-            break;
-         case GOAL:
-            goalPos.x = x * BOX_SIZE;
-            goalPos.y = y * BOX_SIZE;
-            blitGround (x, y, grid, screen, tableSurface);
-            SDL_BlitSurface (tableSurface[GOAL_IMAGE].image, NULL, screen,
-                             &goalPos);
-            break;
-         case PLAYER:
-            blitGround (x, y, grid, screen, tableSurface);
-            blitPlayer (x, y, STILL, grid, screen, tableSurface);
-            break;
-	      case OUTSIDE:
-	         goalPos.x = x * BOX_SIZE;
-            goalPos.y = y * BOX_SIZE;
-            SDL_BlitSurface (tableSurface[OUTSIDE_IMAGE].image, NULL, screen,
-                             &goalPos);
-            break;
-         case OUTSIDE2:
-	         goalPos.x = x * BOX_SIZE;
-            goalPos.y = y * BOX_SIZE;
-            SDL_BlitSurface (tableSurface[OUTSIDE2_IMAGE].image, NULL, screen,
-                             &goalPos);
-            break;
-         case OUTSIDE3:
-	         goalPos.x = x * BOX_SIZE;
-            goalPos.y = y * BOX_SIZE;
-            SDL_BlitSurface (tableSurface[OUTSIDE3_IMAGE].image, NULL, screen,
-                             &goalPos);
-            break;
-         }
-      }
-   }
+	    /* blit all blocks depending on grid types */
+	    switch (grid[x][y].roleType) {
+	    case GROUND:
+		blitGround(x, y, grid, screen, tableSurface);
+		break;
+	    case BOX:
+		moveBox(x, y, grid, STILL, screen, tableSurface);
+		if (grid[x][y].objectType != EMPTY) {
+		    SDL_BlitSurface(tableSurface[GOAL_IMAGE].image, NULL,
+				    screen, &goalPos);
+		}
+		break;
+	    case BOX_OK:
+		moveBox(x, y, grid, STILL, screen, tableSurface);
+		break;
+	    case WALL:
+		blitWalls(x, y, grid, screen, tableSurface);
+		break;
+	    case GOAL:
+		goalPos.x = x * BOX_SIZE;
+		goalPos.y = y * BOX_SIZE;
+		blitGround(x, y, grid, screen, tableSurface);
+		SDL_BlitSurface(tableSurface[GOAL_IMAGE].image, NULL,
+				screen, &goalPos);
+		break;
+	    case PLAYER:
+		blitGround(x, y, grid, screen, tableSurface);
+		blitPlayer(x, y, STILL, grid, screen, tableSurface);
+		break;
+	    case OUTSIDE:
+		goalPos.x = x * BOX_SIZE;
+		goalPos.y = y * BOX_SIZE;
+		SDL_BlitSurface(tableSurface[OUTSIDE_IMAGE].image, NULL,
+				screen, &goalPos);
+		break;
+	    case OUTSIDE2:
+		goalPos.x = x * BOX_SIZE;
+		goalPos.y = y * BOX_SIZE;
+		SDL_BlitSurface(tableSurface[OUTSIDE2_IMAGE].image, NULL,
+				screen, &goalPos);
+		break;
+	    case OUTSIDE3:
+		goalPos.x = x * BOX_SIZE;
+		goalPos.y = y * BOX_SIZE;
+		SDL_BlitSurface(tableSurface[OUTSIDE3_IMAGE].image, NULL,
+				screen, &goalPos);
+		break;
+	    }
+	}
+    }
 }
 
 #endif
