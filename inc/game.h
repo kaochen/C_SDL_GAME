@@ -47,9 +47,15 @@ void blitWalls(int x, int y, Square grid[][MAX_BLOCKS],
 int addRandomGround();
 
 /*change OUTSIDE groundType to get more choice between OUTSIDE, OUTSIDE2...*/
-int randomOutside();
+int randomOutside(Square grid[][MAX_BLOCKS]);
 
 /* random number between two numbers */
 int random_number(int min, int max);
+
+/* Detect corners turn outside */
+int detectCorner(Square grid[][MAX_BLOCKS]);
+
+/* blit corners */
+int blitCorners(Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 #endif

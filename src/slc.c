@@ -381,8 +381,12 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 	}
     }
 
-    /* Change grounds that are outiside the walls to outsides */
+    /* Change grounds that are outside the walls to the OUTSIDE flag */
     blitOutside(levelList, grid);
+
+    detectCorner(grid);
+    randomOutside(grid);
+
 
     /* free memory */
     xmlFreeDoc(doc);
@@ -403,9 +407,9 @@ void blitOutside(S_LevelList * levelList, Square grid[][MAX_BLOCKS])
 	    if (grid[x][y].roleType == WALL)
 		x = X_BLOCKS;
 
-	    /*Change GROUND to OUSIDE */
+	    /*Change GROUND to OUTSIDE */
 	    if (grid[x][y].roleType == GROUND) {
-		grid[x][y].roleType = randomOutside();
+		grid[x][y].roleType = OUTSIDE;
 	    }
 	}
     }
@@ -418,9 +422,9 @@ void blitOutside(S_LevelList * levelList, Square grid[][MAX_BLOCKS])
 	    if (grid[x][y].roleType == WALL)
 		x = -1;
 
-	    /*Change GROUND to OUSIDE */
+	    /*Change GROUND to OUTSIDE */
 	    if (grid[x][y].roleType == GROUND) {
-		grid[x][y].roleType = randomOutside();
+		grid[x][y].roleType = OUTSIDE;
 	    }
 	}
     }
@@ -436,7 +440,7 @@ void blitOutside(S_LevelList * levelList, Square grid[][MAX_BLOCKS])
 
 	    /*If a ground is outside the wall use OUTSIDE */
 	    if (grid[x][y].roleType == GROUND) {
-		grid[x][y].roleType = randomOutside();
+		grid[x][y].roleType = OUTSIDE;
 	    }
 	}
     }
@@ -452,7 +456,7 @@ void blitOutside(S_LevelList * levelList, Square grid[][MAX_BLOCKS])
 
 	    /*If a ground is outside the wall use OUTSIDE */
 	    if (grid[x][y].roleType == GROUND) {
-		grid[x][y].roleType = randomOutside();
+		grid[x][y].roleType = OUTSIDE;
 	    }
 
 	}

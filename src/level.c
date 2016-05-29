@@ -96,6 +96,7 @@ void displayLevel(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
 	    }
 	}
     }
+     blitCorners(grid, screen,tableSurface);
 }
 
 #endif
