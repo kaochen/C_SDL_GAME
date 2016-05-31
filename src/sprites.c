@@ -51,6 +51,7 @@ int loadAllSprites(Sprites tableSurface[NBR_OF_IMAGES])
     /* walls */
     loadSprite(&tableSurface[CORNER_TR], "img/cornerTop-Right.png");
     loadSprite(&tableSurface[CORNER_TL], "img/cornerTop-Left.png");
+    loadSprite(&tableSurface[CORNER_BR], "img/cornerBottom-Right.png");
 
     /* grounds */
     loadSprite(&tableSurface[GROUND1_IMAGE], "img/background.bmp");
