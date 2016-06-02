@@ -116,7 +116,7 @@ void moveBox(int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS],
     SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL, screen,
 		    &boxPos);
     /* blit BOX_IMAGE_OK if Box on a goal */
-    if (grid[boxPos.x / BOX_SIZE][boxPos.y / BOX_SIZE].roleType == GOAL
+    if (grid[boxPos.x / BOX_SIZE][boxPos.y / BOX_SIZE].mainRole == GOAL
 	|| grid[boxPos.x / BOX_SIZE][boxPos.y / BOX_SIZE].objectType ==
 	GOAL) {
 	SDL_BlitSurface(tableSurface[BOX_IMAGE_OK].image, NULL, screen,
@@ -137,7 +137,7 @@ void blitGround(int x, int y, Square grid[][MAX_BLOCKS],
     groundPos.x = x * BOX_SIZE;
     groundPos.y = y * BOX_SIZE;
 
-    switch (grid[x][y].groundType) {
+    switch (grid[x][y].subRole) {
     case GROUND1:
 	SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL, screen,
 			&groundPos);
@@ -187,22 +187,22 @@ void blitWalls(int x, int y, Square grid[][MAX_BLOCKS],
 
     /* blit wall border, expect on window sides */
     /* blit left border */
-    if (x != 0 && grid[x - 1][y].roleType != WALL && grid[x - 1][y].roleType != TOP_LEFT) {
+    if (x != 0 && grid[x - 1][y].mainRole != WALL && grid[x - 1][y].mainRole != TOP_LEFT) {
 	SDL_BlitSurface(tableSurface[WALL_LEFT].image, NULL, screen,
 			&wallPos);
     }
     /* blit right border */
-    if (x != X_BLOCKS && grid[x + 1][y].roleType != WALL && grid[x + 1][y].roleType != TOP_RIGHT && grid[x + 1][y].roleType != BOTTOM_RIGHT) {
+    if (x != X_BLOCKS && grid[x + 1][y].mainRole != WALL && grid[x + 1][y].mainRole != TOP_RIGHT && grid[x + 1][y].mainRole != BOTTOM_RIGHT) {
 	SDL_BlitSurface(tableSurface[WALL_RIGHT].image, NULL, screen,
 			&wallPos);
     }
     /* blit top border */
-    if (y != 0 && grid[x][y - 1].roleType != WALL && grid[x][y - 1].roleType != TOP_RIGHT && grid[x][y - 1].roleType != TOP_LEFT) {
+    if (y != 0 && grid[x][y - 1].mainRole != WALL && grid[x][y - 1].mainRole != TOP_RIGHT && grid[x][y - 1].mainRole != TOP_LEFT) {
 	SDL_BlitSurface(tableSurface[WALL_TOP].image, NULL, screen,
 			&wallPos);
     }
     /* blit bottom border */
-    if (y != Y_BLOCKS && grid[x][y + 1].roleType != WALL && grid[x][y + 1].roleType != BOTTOM_RIGHT) {
+    if (y != Y_BLOCKS && grid[x][y + 1].mainRole != WALL && grid[x][y + 1].mainRole != BOTTOM_RIGHT) {
 	SDL_BlitSurface(tableSurface[WALL_BOTTOM].image, NULL, screen,
 			&wallPos);
     }
@@ -222,20 +222,20 @@ int addRandomGround()
     }
 }
 
-/*change OUTSIDE groundType to get more choice between OUTSIDE, OUTSIDE2...*/
+/*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
 int randomOutside(Square grid[][MAX_BLOCKS])
 {
     int x = 0, y = 0, randomNumber = 0;
     for (y = 0; y < Y_BLOCKS; y++) {
         for (x = 1; x < Y_BLOCKS; x++) {
-          if(grid[x][y].roleType == OUTSIDE) {
+          if(grid[x][y].mainRole == OUTSIDE) {
                 randomNumber = random_number(0, 100);
                 if (randomNumber <= 87) {
-	            grid[x][y].roleType = OUTSIDE;
+	            grid[x][y].mainRole = OUTSIDE;
                 } else if (randomNumber >= 90) {
-	            grid[x][y].roleType = OUTSIDE2;
+	            grid[x][y].mainRole = OUTSIDE2;
                 } else {
-	            grid[x][y].roleType = OUTSIDE3;
+	            grid[x][y].mainRole = OUTSIDE3;
                 }
             }
         }
@@ -256,16 +256,16 @@ int detectCorner(Square grid[][MAX_BLOCKS])
    int x = 1, y = 1;
    for (y = 1; y < (Y_BLOCKS - 1); y++){
         for (x = 1; x < (Y_BLOCKS - 1); x++){
-            if (grid[x][y].roleType == WALL && grid[x][y-1].roleType == OUTSIDE && grid[x+1][y-1].roleType == OUTSIDE && grid[x+1][y].roleType == OUTSIDE )
-            { grid[x][y].roleType = TOP_RIGHT;
+            if (grid[x][y].mainRole == WALL && grid[x][y-1].mainRole == OUTSIDE && grid[x+1][y-1].mainRole == OUTSIDE && grid[x+1][y].mainRole == OUTSIDE )
+            { grid[x][y].mainRole = TOP_RIGHT;
                fprintf(stderr, "found TOP_RIGHT %d/%d\n", x,y );
              }
-            if (grid[x][y].roleType == WALL && grid[x][y-1].roleType == OUTSIDE && grid[x-1][y-1].roleType == OUTSIDE && grid[x-1][y].roleType == OUTSIDE )
-            { grid[x][y].roleType = TOP_LEFT;
+            if (grid[x][y].mainRole == WALL && grid[x][y-1].mainRole == OUTSIDE && grid[x-1][y-1].mainRole == OUTSIDE && grid[x-1][y].mainRole == OUTSIDE )
+            { grid[x][y].mainRole = TOP_LEFT;
                fprintf(stderr, "found TOP_LEFT %d/%d\n", x,y );
              }
-            if (grid[x][y].roleType == WALL && grid[x][y+1].roleType == OUTSIDE && grid[x+1][y+1].roleType == OUTSIDE && grid[x+1][y].roleType == OUTSIDE )
-            { grid[x][y].roleType = BOTTOM_RIGHT;
+            if (grid[x][y].mainRole == WALL && grid[x][y+1].mainRole == OUTSIDE && grid[x+1][y+1].mainRole == OUTSIDE && grid[x+1][y].mainRole == OUTSIDE )
+            { grid[x][y].mainRole = BOTTOM_RIGHT;
                fprintf(stderr, "found BOTTOM_RIGHT %d/%d\n", x,y );
              }
 
@@ -284,21 +284,21 @@ int blitCorners(Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tableSu
             pos.y = y*BOX_SIZE;
 
 
-            if (grid[x][y].roleType == TOP_RIGHT){
+            if (grid[x][y].mainRole == TOP_RIGHT){
             SDL_BlitSurface(tableSurface[OUTSIDE_IMAGE].image, NULL,
                 screen, &pos);
             SDL_BlitSurface(tableSurface[CORNER_TR].image, NULL,
 				screen, &pos);
             }
 
-            if (grid[x][y].roleType == TOP_LEFT){
+            if (grid[x][y].mainRole == TOP_LEFT){
             SDL_BlitSurface(tableSurface[OUTSIDE_IMAGE].image, NULL,
                 screen, &pos);
 		    SDL_BlitSurface(tableSurface[CORNER_TL].image, NULL,
 				screen, &pos);
             }
 
-            if (grid[x][y].roleType == BOTTOM_RIGHT){
+            if (grid[x][y].mainRole == BOTTOM_RIGHT){
             SDL_BlitSurface(tableSurface[OUTSIDE_IMAGE].image, NULL,
                 screen, &pos);
 		    SDL_BlitSurface(tableSurface[CORNER_BR].image, NULL,

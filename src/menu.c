@@ -118,7 +118,7 @@ int goalLeft(Square grid[][MAX_BLOCKS])
     int x = 0, y = 0, nbrOfBoxOk = 0;
     for (x = 0; x < X_BLOCKS; x++) {
 	for (y = 0; y < Y_BLOCKS; y++) {
-	    if (grid[x][y].roleType == BOX
+	    if (grid[x][y].mainRole == BOX
 		&& grid[x][y].objectType == GOAL)
 		nbrOfBoxOk += 1;
 	}

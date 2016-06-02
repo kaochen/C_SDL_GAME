@@ -46,7 +46,7 @@ void blitWalls(int x, int y, Square grid[][MAX_BLOCKS],
 /* add a more ground choice */
 int addRandomGround();
 
-/*change OUTSIDE groundType to get more choice between OUTSIDE, OUTSIDE2...*/
+/*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
 int randomOutside(Square grid[][MAX_BLOCKS]);
 
 /* random number between two numbers */

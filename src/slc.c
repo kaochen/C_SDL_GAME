@@ -329,7 +329,7 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
     int y = 0, x = 0;
     for (y = 0; y < Y_BLOCKS; y++) {
 	for (x = 0; x < X_BLOCKS; x++) {
-	    grid[x][y].roleType = GROUND;
+	    grid[x][y].mainRole = GROUND;
 	    grid[x][y].objectType = EMPTY;
 	}
     }
@@ -352,27 +352,27 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 		    int y2 = y + firstLines;
 		    switch (line[c]) {
 		    case '#':
-			grid[x][y2].roleType = WALL;
+			grid[x][y2].mainRole = WALL;
 			break;
 		    case ' ':
-			grid[x][y2].roleType = GROUND;
+			grid[x][y2].mainRole = GROUND;
 			break;
 		    case '$':
-			grid[x][y2].roleType = BOX;
+			grid[x][y2].mainRole = BOX;
 			break;
 		    case '*':
-			grid[x][y2].roleType = BOX;
+			grid[x][y2].mainRole = BOX;
 			grid[x][y2].objectType = GOAL;
 			break;
 		    case '.':
-			grid[x][y2].roleType = GOAL;
+			grid[x][y2].mainRole = GOAL;
 			grid[x][y2].objectType = GOAL;
 			break;
 		    case '@':
-			grid[x][y2].roleType = PLAYER;
+			grid[x][y2].mainRole = PLAYER;
 			break;
 		    case '+':
-			grid[x][y2].roleType = PLAYER;
+			grid[x][y2].mainRole = PLAYER;
 			break;
 		    }
 		    c++;
@@ -404,12 +404,12 @@ void blitOutside(S_LevelList * levelList, Square grid[][MAX_BLOCKS])
     for (y = 0; y < Y_BLOCKS; y++) {
 	for (x = 0; x < X_BLOCKS; x++) {
 	    /*break if wall */
-	    if (grid[x][y].roleType == WALL)
+	    if (grid[x][y].mainRole == WALL)
 		x = X_BLOCKS;
 
 	    /*Change GROUND to OUTSIDE */
-	    if (grid[x][y].roleType == GROUND) {
-		grid[x][y].roleType = OUTSIDE;
+	    if (grid[x][y].mainRole == GROUND) {
+		grid[x][y].mainRole = OUTSIDE;
 	    }
 	}
     }
@@ -419,12 +419,12 @@ void blitOutside(S_LevelList * levelList, Square grid[][MAX_BLOCKS])
     for (y = 0; y < Y_BLOCKS; y++) {
 	for (x = X_BLOCKS; x > -1; x--) {
 	    /*break if wall */
-	    if (grid[x][y].roleType == WALL)
+	    if (grid[x][y].mainRole == WALL)
 		x = -1;
 
 	    /*Change GROUND to OUTSIDE */
-	    if (grid[x][y].roleType == GROUND) {
-		grid[x][y].roleType = OUTSIDE;
+	    if (grid[x][y].mainRole == GROUND) {
+		grid[x][y].mainRole = OUTSIDE;
 	    }
 	}
     }
@@ -435,12 +435,12 @@ void blitOutside(S_LevelList * levelList, Square grid[][MAX_BLOCKS])
     for (x = 0; x < X_BLOCKS; x++) {
 	for (y = 0; y < Y_BLOCKS; y++) {
 	    /*break if wall */
-	    if (grid[x][y].roleType == WALL)
+	    if (grid[x][y].mainRole == WALL)
 		y = Y_BLOCKS;
 
 	    /*If a ground is outside the wall use OUTSIDE */
-	    if (grid[x][y].roleType == GROUND) {
-		grid[x][y].roleType = OUTSIDE;
+	    if (grid[x][y].mainRole == GROUND) {
+		grid[x][y].mainRole = OUTSIDE;
 	    }
 	}
     }
@@ -451,12 +451,12 @@ void blitOutside(S_LevelList * levelList, Square grid[][MAX_BLOCKS])
     for (x = 0; x < X_BLOCKS; x++) {
 	for (y = Y_BLOCKS; y > 0; y--) {
 	    /*break if wall */
-	    if (grid[x][y].roleType == WALL)
+	    if (grid[x][y].mainRole == WALL)
 		y = 0;
 
 	    /*If a ground is outside the wall use OUTSIDE */
-	    if (grid[x][y].roleType == GROUND) {
-		grid[x][y].roleType = OUTSIDE;
+	    if (grid[x][y].mainRole == GROUND) {
+		grid[x][y].mainRole = OUTSIDE;
 	    }
 
 	}
