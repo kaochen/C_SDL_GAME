@@ -37,12 +37,15 @@ typedef struct S_Files S_Files;
 struct S_Files {
     char name[MAX_CARACT];
     S_Files *next;
+    S_Files *previous;
 };
 
 /* control files list */
 typedef struct S_FilesList S_FilesList;
 struct S_FilesList {
     S_Files *first;
+    S_Files *last;
+    int nbr_of_files;
 };
 
 /* Levels ========================================= */
@@ -55,12 +58,15 @@ struct S_Level {
     int height;
     int width;
     S_Level *next;
+    S_Level *previous;
 };
 
 /* control level list */
 typedef struct S_LevelList S_LevelList;
 struct S_LevelList {
     S_Level *first;
+    S_Level *last;
+    int nbr_of_levels;
 };
 
 /* Functions ============================================ */
@@ -68,6 +74,9 @@ struct S_LevelList {
 /* Files ========================================= */
 /* Initiatlize the list of files */
 S_FilesList *initFilesList();
+
+/*Add the first file in a empty list*/
+int addFirstFile(S_FilesList * filesList, char *name);
 
 /*Add a new file in the list*/
 void addNewFile(S_FilesList * filesList, char *name);

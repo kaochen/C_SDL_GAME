@@ -42,18 +42,38 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 S_FilesList *initFilesList()
 {
     S_FilesList *filesList = malloc(sizeof(*filesList));
-    S_Files *files = malloc(sizeof(*files));
-    if (filesList == NULL || files == NULL) {
+
+    if (filesList == NULL) {
 	fprintf(stderr, "Init files list failed\n");
 	exit(EXIT_FAILURE);
     }
-    /*load first files */
-    strcpy(files->name, FIRST_STRUCT);
-    files->next = NULL;
-    /* store adress of the first files struct */
-    filesList->first = files;
+    filesList->first = NULL;
+    filesList->last = NULL;
+    filesList->nbr_of_files = 0;
     return filesList;
 }
+
+/*Add the first file in a empty list*/
+int addFirstFile(S_FilesList * filesList, char *name)
+{
+    S_Files *firstFiles = malloc(sizeof(*firstFiles));
+    if (filesList == NULL || firstFiles == NULL) {
+	fprintf(stderr, "Init first file failed\n");
+	return EXIT_FAILURE;
+    }
+    /*update first file data */
+    strcpy(firstFiles->name, name);
+    firstFiles->previous = NULL;
+    firstFiles->next = NULL;
+
+    /*update list files */
+    filesList->first = firstFiles;
+    filesList->last = firstFiles;
+    filesList->nbr_of_files++;
+
+    return EXIT_SUCCESS;
+}
+
 
 /*Add a new file in the list*/
 void addNewFile(S_FilesList * filesList, char *name)
@@ -64,9 +84,12 @@ void addNewFile(S_FilesList * filesList, char *name)
     }
     strcpy(new->name, name);
 
-    /* insert new file struct into the chain */
-    new->next = filesList->first;
-    filesList->first = new;
+    /* insert at the end of the chain */
+    new->next = NULL;
+    new->previous = filesList->last;
+    filesList->last->next = new;
+    filesList->last = new;
+    filesList->nbr_of_files++;
 }
 
 /*Load slc level into the grid */
@@ -85,8 +108,13 @@ int listSlcLevelFiles(S_FilesList * filesList)
 	if (strstr(file->d_name, ".slc") != NULL
 	    || strstr(file->d_name, ".SLC") != NULL) {
 	    sprintf(path, "levels/%s", file->d_name);
-	    addNewFile(filesList, path);
-	    fprintf(stderr, "Found file :%s\n", path);
+	    if (filesList->nbr_of_files == 0) {
+		addFirstFile(filesList, path);
+	    } else {
+		addNewFile(filesList, path);
+	    }
+	    fprintf(stderr, "Found file %d : %s\n",
+		    filesList->nbr_of_files, path);
 	}
     }
 
@@ -104,11 +132,12 @@ int readFilesList(S_FilesList * filesList)
     }
     fprintf(stderr, "Read Files List: \n");
     S_Files *actual = filesList->first;
+    fprintf(stderr, "The file list contain %d files\n",
+	    filesList->nbr_of_files);
+
+    /*Read file one by one until you'll get a NULL */
     int i = 1;
-    /*Read file one by one until you'll find the first initiate struct (FIRST_STRUCT) or get a NULL */
-    char firstCmp[] = FIRST_STRUCT, secondCmp[MAX_CARACT] = "";
-    while (actual != NULL
-	   && strcmp(firstCmp, strcpy(secondCmp, actual->name)) != 0) {
+    while (actual != NULL) {
 	fprintf(stderr, "File %d : %s\n", i, actual->name);
 	actual = actual->next;
 	i++;
@@ -121,20 +150,67 @@ int readFilesList(S_FilesList * filesList)
 S_LevelList *initLevelList()
 {
     S_LevelList *levelList = malloc(sizeof(*levelList));
-    S_Level *level = malloc(sizeof(*level));
-    if (levelList == NULL || level == NULL) {
+    if (levelList == NULL) {
 	exit(EXIT_FAILURE);
     }
-    /*load first level */
-    strcpy(level->name, FIRST_STRUCT);
-    strcpy(level->fileName, FIRST_STRUCT);
-    level->height = 0;
-    level->width = 0;
-    level->next = NULL;
-    /* store adress of the first level */
-    levelList->first = level;
+
+    levelList->first = NULL;
+    levelList->last = NULL;
+    levelList->nbr_of_levels = 0;
 
     return levelList;
+}
+
+/*Add first level into an empty list */
+int addFirstLevel(S_LevelList * levelList, char *fileName, char *name,
+		  int height, int width)
+{
+    S_Level *firstLevel = malloc(sizeof(*firstLevel));
+    if (firstLevel == NULL) {
+	fprintf(stderr, "Add first level failed\n");
+	return EXIT_FAILURE;
+    }
+
+    /*update first file data */
+    strcpy(firstLevel->name, name);
+    strcpy(firstLevel->fileName, fileName);
+    firstLevel->height = height;
+    firstLevel->width = width;
+
+    firstLevel->previous = levelList->first;
+    firstLevel->next = levelList->last;
+
+    /*update  levelList */
+    levelList->first = firstLevel;
+    levelList->last = firstLevel;
+    levelList->nbr_of_levels++;
+    return EXIT_SUCCESS;
+}
+
+/*Add a level in the list*/
+void addNewLevel(S_LevelList * levelList, char *fileName, char *name,
+		 int height, int width)
+{
+    S_Level *new = malloc(sizeof(*new));
+    if (levelList == NULL || new == NULL) {
+	fprintf(stderr, "Add new level failed\n");
+	exit(EXIT_FAILURE);
+    }
+    /* check size and */
+    if (height <= X_BLOCKS && width <= Y_BLOCKS) {
+	strcpy(new->name, name);
+	strcpy(new->fileName, fileName);
+	new->height = height;
+	new->width = width;
+
+	/* insert at the end of the chain */
+	new->next = NULL;
+	new->previous = levelList->last;
+
+	levelList->last->next = new;
+	levelList->last = new;
+	levelList->nbr_of_levels++;
+    }
 }
 
 /*get levels infos from files */
@@ -160,6 +236,7 @@ int readLevelsAttributs(S_FilesList * filesList, S_LevelList * levelList)
 {
     S_Level *new = malloc(sizeof(*new));
     if (filesList == NULL || levelList == NULL || new == NULL) {
+	fprintf(stderr, "readLevelsAttributs failed\n");
 	return EXIT_FAILURE;
     }
 
@@ -168,92 +245,73 @@ int readLevelsAttributs(S_FilesList * filesList, S_LevelList * levelList)
     int i = 0;
     S_Files *actualFile = filesList->first;
     while (actualFile != NULL) {
-	actualFile = actualFile->next;
 
 	/* Read each level from each files */
-	if (actualFile->name != NULL
-	    && strcmp(actualFile->name, FIRST_STRUCT) != 0) {
-	    fprintf(stderr, "Read levels from : %s\n", actualFile->name);
 
-	    /* Open SLC/XML file */
-	    doc = xmlParseFile(actualFile->name);
-	    if (doc == NULL) {
-		fprintf(stderr, "%s not valid\n", actualFile->name);
-		return EXIT_FAILURE;
-	    }
-	    // Start XPath
-	    xmlXPathInit();
-	    // Create a context
-	    xmlXPathContextPtr ctxt = xmlXPathNewContext(doc);
-	    if (ctxt == NULL) {
-		fprintf(stderr, "Error creating the context XPath\n");
-		return EXIT_FAILURE;
-	    }
+	fprintf(stderr, "Read levels from : %s\n", actualFile->name);
 
-	    /* Read Level */
-	    xmlXPathObjectPtr xpathLevel =
-		xmlXPathEvalExpression(BAD_CAST
-				       "/SokobanLevels/LevelCollection/Level",
-				       ctxt);
-	    if (xpathLevel == NULL) {
-		fprintf(stderr, "Error on the xPathLevel expression\n");
-		return EXIT_FAILURE;
-	    }
-
-	    /*get attributs */
-	    xmlChar *name;
-	    xmlChar *width;
-	    xmlChar *height;
-	    /*Get the number of levels in a file */
-	    int levelCount = 0, i = 0;
-	    levelCount = xpathLevel->nodesetval->nodeNr;
-	    fprintf(stderr, "The files %s contain %d levels\n\n",
-		    actualFile->name, levelCount);
-	    /*Add S_Level for each levels found */
-	    while (i < levelCount) {
-		xmlNodePtr Node = xpathLevel->nodesetval->nodeTab[i];
-		for (xmlAttrPtr attr = Node->properties; NULL != attr;
-		     attr = attr->next) {
-		    name = xmlGetProp(Node, "Id");
-		    width = xmlGetProp(Node, "Width");
-		    height = xmlGetProp(Node, "Height");
-		}
-		//printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
-		/*Load infos into the levelList */
-
-		addNewLevel(levelList, actualFile->name, name,
-			    atoi(height), atoi(width));
-		i++;
-	    }
-	    /* free memory */
-	    xmlXPathFreeContext(ctxt);
-	    xmlFreeDoc(doc);
+	/* Open SLC/XML file */
+	doc = xmlParseFile(actualFile->name);
+	if (doc == NULL) {
+	    fprintf(stderr, "%s not valid\n", actualFile->name);
+	    return EXIT_FAILURE;
+	}
+	// Start XPath
+	xmlXPathInit();
+	// Create a context
+	xmlXPathContextPtr ctxt = xmlXPathNewContext(doc);
+	if (ctxt == NULL) {
+	    fprintf(stderr, "Error creating the context XPath\n");
+	    return EXIT_FAILURE;
 	}
 
+	/* Read Level */
+	xmlXPathObjectPtr xpathLevel =
+	    xmlXPathEvalExpression(BAD_CAST
+				   "/SokobanLevels/LevelCollection/Level",
+				   ctxt);
+	if (xpathLevel == NULL) {
+	    fprintf(stderr, "Error on the xPathLevel expression\n");
+	    return EXIT_FAILURE;
+	}
+
+	/*get attributs */
+	xmlChar *name;
+	xmlChar *width;
+	xmlChar *height;
+	/*Get the number of levels in a file */
+	int levelCount = 0, i = 0;
+	levelCount = xpathLevel->nodesetval->nodeNr;
+	fprintf(stderr, "The files %s contain %d levels\n\n",
+		actualFile->name, levelCount);
+	/*Add S_Level for each levels found */
+	while (i < levelCount) {
+	    xmlNodePtr Node = xpathLevel->nodesetval->nodeTab[i];
+	    for (xmlAttrPtr attr = Node->properties; NULL != attr;
+		 attr = attr->next) {
+		name = xmlGetProp(Node, "Id");
+		width = xmlGetProp(Node, "Width");
+		height = xmlGetProp(Node, "Height");
+	    }
+
+	    /*Load infos into the levelList */
+	    if (levelList->nbr_of_levels == 0) {
+		addFirstLevel(levelList, actualFile->name, name,
+			      atoi(height), atoi(width));
+	    } else {
+		addNewLevel(levelList, actualFile->name, name,
+			    atoi(height), atoi(width));
+	    }
+	    //printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
+	    i++;
+	}
+	/* free memory */
+	xmlXPathFreeContext(ctxt);
+	xmlFreeDoc(doc);
+
+	actualFile = actualFile->next;
     }
     return EXIT_SUCCESS;
-}
-
-/*Add a level in the list*/
-void addNewLevel(S_LevelList * levelList, char *fileName, char *name,
-		 int height, int width)
-{
-    S_Level *new = malloc(sizeof(*new));
-    if (levelList == NULL || new == NULL) {
-	exit(EXIT_FAILURE);
-    }
-    /* check size and */
-    if (height <= X_BLOCKS && width <= Y_BLOCKS) {
-	strcpy(new->name, name);
-	strcpy(new->fileName, fileName);
-	new->height = height;
-	new->width = width;
-
-	/* insert new level struct into the chain */
-	new->next = levelList->first;
-	levelList->first = new;
-    }
-
 }
 
 /* read level list one by one */
