@@ -81,6 +81,12 @@ int addFirstFile(S_FilesList * filesList, char *name);
 /*Add a new file in the list*/
 void addNewFile(S_FilesList * filesList, char *name);
 
+/*Erase a file in the list from start*/
+int delFile(S_FilesList * filesList);
+
+/* destroy file list */
+void destroyFileList(S_FilesList * filesList);
+
 /* list slc files from the levels folder */
 int listSlcLevelFiles(S_FilesList * filesList);
 
@@ -97,6 +103,12 @@ int readLevelsAttributs(S_FilesList * filesList, S_LevelList * levelList);
 /*Add a level in the list*/
 void addNewLevel(S_LevelList * levelList, char *fileName, char *name,
 		 int height, int width);
+
+/*Erase a level in the list from start*/
+int delLevel(S_LevelList * levelList);
+
+/* destroy level list */
+void destroy(S_LevelList * levelList);
 
 /* read level list one by one */
 void readLevelList(S_LevelList * levelList);

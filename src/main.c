@@ -477,6 +477,9 @@ int main(int argc, char *argv[])
     }
 
     /* clean */
+    destroy(levelList);
+    free(levelList);
+    free(filesList);
     freeSprites(tableSurface);
     SDL_FreeSurface(screen);
     SDL_DestroyWindow(window);

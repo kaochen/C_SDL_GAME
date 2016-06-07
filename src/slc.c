@@ -92,6 +92,29 @@ void addNewFile(S_FilesList * filesList, char *name)
     filesList->nbr_of_files++;
 }
 
+/*Erase a file in the list from start*/
+int delFile(S_FilesList * filesList)
+{
+    if(filesList->nbr_of_files == 0 )
+      return EXIT_FAILURE;
+    S_Files *del_file = malloc(sizeof(*del_file));
+    del_file = filesList->first;
+    filesList->first = filesList->first->next;
+    if (filesList->nbr_of_files == 1)
+      filesList->last = NULL;
+
+    free(del_file->name);
+    free(del_file);
+    filesList->nbr_of_files--;
+    return EXIT_SUCCESS;
+}
+
+/* destroy file list */
+void destroyFileList(S_FilesList * filesList){
+  while(filesList->nbr_of_files > 0)
+    delFile(filesList);
+}
+
 /*Load slc level into the grid */
 int listSlcLevelFiles(S_FilesList * filesList)
 {
@@ -211,6 +234,28 @@ void addNewLevel(S_LevelList * levelList, char *fileName, char *name,
 	levelList->last = new;
 	levelList->nbr_of_levels++;
     }
+}
+
+/*Erase a level in the list from start*/
+int delLevel(S_LevelList * levelList)
+{
+    if(levelList->nbr_of_levels == 0 )
+      return EXIT_FAILURE;
+    S_Level *del_level = malloc(sizeof(*del_level));
+    del_level = levelList->first;
+    levelList->first = levelList->first->next;
+    if (levelList->nbr_of_levels == 1)
+      levelList->last = NULL;
+
+    free(del_level->name);
+    levelList->nbr_of_levels--;
+    return EXIT_SUCCESS;
+}
+
+/* destroy level list */
+void destroy(S_LevelList * levelList){
+  while(levelList->nbr_of_levels > 0)
+    delLevel(levelList);
 }
 
 /*get levels infos from files */
