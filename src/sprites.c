@@ -74,6 +74,7 @@ int loadAllSprites(Sprites tableSurface[NBR_OF_IMAGES])
 
     /* Congrats */
     loadSprite(&tableSurface[CONGRATS], "img/congrats_background.png");
+    return EXIT_SUCCESS;
 }
 
 

@@ -95,13 +95,13 @@ void addNewFile(S_FilesList * filesList, char *name)
 /*Erase a file in the list from start*/
 int delFile(S_FilesList * filesList)
 {
-    if(filesList->nbr_of_files == 0 )
-      return EXIT_FAILURE;
+    if (filesList->nbr_of_files == 0)
+	return EXIT_FAILURE;
     S_Files *del_file = malloc(sizeof(*del_file));
     del_file = filesList->first;
     filesList->first = filesList->first->next;
     if (filesList->nbr_of_files == 1)
-      filesList->last = NULL;
+	filesList->last = NULL;
 
     free(del_file->name);
     free(del_file);
@@ -110,9 +110,10 @@ int delFile(S_FilesList * filesList)
 }
 
 /* destroy file list */
-void destroyFileList(S_FilesList * filesList){
-  while(filesList->nbr_of_files > 0)
-    delFile(filesList);
+void destroyFileList(S_FilesList * filesList)
+{
+    while (filesList->nbr_of_files > 0)
+	delFile(filesList);
 }
 
 /*Load slc level into the grid */
@@ -239,13 +240,13 @@ void addNewLevel(S_LevelList * levelList, char *fileName, char *name,
 /*Erase a level in the list from start*/
 int delLevel(S_LevelList * levelList)
 {
-    if(levelList->nbr_of_levels == 0 )
-      return EXIT_FAILURE;
+    if (levelList->nbr_of_levels == 0)
+	return EXIT_FAILURE;
     S_Level *del_level = malloc(sizeof(*del_level));
     del_level = levelList->first;
     levelList->first = levelList->first->next;
     if (levelList->nbr_of_levels == 1)
-      levelList->last = NULL;
+	levelList->last = NULL;
 
     free(del_level->name);
     levelList->nbr_of_levels--;
@@ -253,9 +254,10 @@ int delLevel(S_LevelList * levelList)
 }
 
 /* destroy level list */
-void destroy(S_LevelList * levelList){
-  while(levelList->nbr_of_levels > 0)
-    delLevel(levelList);
+void destroy(S_LevelList * levelList)
+{
+    while (levelList->nbr_of_levels > 0)
+	delLevel(levelList);
 }
 
 /*get levels infos from files */
@@ -287,7 +289,6 @@ int readLevelsAttributs(S_FilesList * filesList, S_LevelList * levelList)
 
     /*Get files names */
     xmlDocPtr doc;
-    int i = 0;
     S_Files *actualFile = filesList->first;
     while (actualFile != NULL) {
 
@@ -334,18 +335,17 @@ int readLevelsAttributs(S_FilesList * filesList, S_LevelList * levelList)
 	    xmlNodePtr Node = xpathLevel->nodesetval->nodeTab[i];
 	    for (xmlAttrPtr attr = Node->properties; NULL != attr;
 		 attr = attr->next) {
-		name = xmlGetProp(Node, "Id");
-		width = xmlGetProp(Node, "Width");
-		height = xmlGetProp(Node, "Height");
+		name = xmlGetProp(Node, (xmlChar *) "Id");
+		width = xmlGetProp(Node, (xmlChar *) "Width");
+		height = xmlGetProp(Node, (xmlChar *) "Height");
 	    }
-
 	    /*Load infos into the levelList */
 	    if (levelList->nbr_of_levels == 0) {
-		addFirstLevel(levelList, actualFile->name, name,
-			      atoi(height), atoi(width));
+		addFirstLevel(levelList, actualFile->name, (char*)name,
+			      atoi((char*)height),atoi((char*)width));
 	    } else {
-		addNewLevel(levelList, actualFile->name, name,
-			    atoi(height), atoi(width));
+		addNewLevel(levelList, actualFile->name, (char*)name,
+			      atoi((char*)height),atoi((char*)width));
 	    }
 	    //printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
 	    i++;
@@ -438,7 +438,7 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
     }
     /* load level into the grid */
     if (xpathLevel->type == XPATH_NODESET) {
-	int c = 0, i = 0;
+	int c = 0;
 	y = 0, x = 0;
 	char line[MAX_CARACT] = "";
 	xmlNodePtr n;
@@ -446,7 +446,7 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 	    n = xpathLevel->nodesetval->nodeTab[y];
 	    if (n->type == XML_TEXT_NODE
 		|| n->type == XML_CDATA_SECTION_NODE) {
-		strcpy(line, n->content);
+		strcpy(line, (char*)n->content);
 		fprintf(stderr, "%s\n", n->content);
 		/* load level into the grid */
 		c = 0;
@@ -485,7 +485,7 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
     }
 
     /* Change grounds that are outside the walls to the OUTSIDE flag */
-    blitOutside(levelList, grid);
+    blitOutside(grid);
 
     detectCorner(grid);
     randomOutside(grid);
@@ -500,7 +500,7 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 }
 
 /* Change grounds that are outiside the walls to outsides */
-void blitOutside(S_LevelList * levelList, Square grid[][MAX_BLOCKS])
+void blitOutside(Square grid[][MAX_BLOCKS])
 {
     /*Read line by line and Left to Right */
     int x = 0, y = 0;

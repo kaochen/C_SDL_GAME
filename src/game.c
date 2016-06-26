@@ -169,7 +169,7 @@ void blitWalls(int x, int y, Square grid[][MAX_BLOCKS],
     wallPos.y = y * BOX_SIZE;
 
     /* blit a random Wall Surface */
-    int i = 0, randomNumber = 0;
+    int randomNumber = 0;
     randomNumber = random_number(0, 100);
     if (randomNumber < 40) {
 	SDL_BlitSurface(tableSurface[WALL1_IMAGE].image, NULL, screen,
@@ -306,6 +306,6 @@ int blitCorners(Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tableSu
             }
         }
    }
+   return EXIT_SUCCESS;
 }
-
 #endif

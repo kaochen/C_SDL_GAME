@@ -40,7 +40,7 @@ void displayMenu(int levelNumber, SDL_Surface * menu,
     /* first add background */
     backgroundMenu(menu, tableSurface);
     /* display the level number */
-    levelMenu(levelNumber, menu, tableSurface, levelList);
+    levelMenu(levelNumber, menu, levelList);
     displayShortcut(menu);
 }
 
@@ -65,7 +65,7 @@ void displayShortcut(SDL_Surface * menu)
     /* setup font */
     TTF_Font *font = NULL;
     font = TTF_OpenFont("img/BABIRG__.TTF", 26);
-    SDL_Color fontColor = { 255, 255, 255 };
+    SDL_Color fontColor = { 255, 255, 255, 255 };
     SDL_Surface *shortCutText = NULL;
     shortCutText =
 	TTF_RenderText_Blended(font,
@@ -84,13 +84,12 @@ void displayShortcut(SDL_Surface * menu)
 
 /* display the level number */
 void levelMenu(int levelNumber, SDL_Surface * menu,
-	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList)
 {
     /* setup font */
     TTF_Font *font = NULL;
     font = TTF_OpenFont("img/BABIRG__.TTF", 26);
-    SDL_Color fontColor = { 255, 255, 255 };
+    SDL_Color fontColor = { 255, 255, 255, 255 };
 
     /* count all levels from all files */
     int levelMax = getNbrOfLevels(levelList);
@@ -157,7 +156,7 @@ void displayProgress(Square grid[][MAX_BLOCKS], SDL_Surface * menu,
     /* setup font */
     TTF_Font *font = NULL;
     font = TTF_OpenFont("img/BABIRG__.TTF", 26);
-    SDL_Color fontColor = { 255, 255, 255 };
+    SDL_Color fontColor = { 255, 255, 255, 255 };
     /* get info */
     int i = goalLeft(grid);
     int j = nbr_of_goals(grid);
@@ -214,7 +213,7 @@ int displayCongrats(SDL_Surface * screen,
     TTF_Font *font = NULL;
     const int fontCongratsSize = 50;
     font = TTF_OpenFont("img/BABIRG__.TTF", fontCongratsSize);
-    SDL_Color fontColor = { 255, 255, 255 };
+    SDL_Color fontColor = { 255, 255, 255, 255 };
 
     /* merge results */
     SDL_Surface *congratsMessage = NULL;

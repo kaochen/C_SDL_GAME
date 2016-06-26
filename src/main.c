@@ -35,6 +35,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 int main(int argc, char *argv[])
 {
+    /*manage argument (not used for now)*/
+    int i;
+
+    for (i=1; i < argc; i++)
+    {
+        printf("Argument %d : %s \n", i, argv[i]);
+    }
+
+
+
+
     /* start random processor just once */
     srand(time(NULL));
 
@@ -198,10 +209,10 @@ int main(int argc, char *argv[])
 		    && grid[xPlayer + 2][yPlayer].mainRole == WALL)
 		    break;
 		/* Move a box only if there is space to do it */
-		if (grid[xPlayer + 1][yPlayer].mainRole == BOX
-		    && grid[xPlayer + 2][yPlayer].mainRole == GROUND
-		    || grid[xPlayer + 1][yPlayer].mainRole == BOX
-		    && grid[xPlayer + 2][yPlayer].mainRole == GOAL) {
+		if ((grid[xPlayer + 1][yPlayer].mainRole == BOX
+		    && grid[xPlayer + 2][yPlayer].mainRole == GROUND)
+		    || (grid[xPlayer + 1][yPlayer].mainRole == BOX
+		    && grid[xPlayer + 2][yPlayer].mainRole == GOAL)) {
 		    /* move the box */
 		    moveBox(xPlayer, yPlayer, grid, RIGHT, screen,
 			    tableSurface);
@@ -252,10 +263,10 @@ int main(int argc, char *argv[])
 		    && grid[xPlayer - 2][yPlayer].mainRole == WALL)
 		    break;
 		/* Move a box only if there is space to do it */
-		if (grid[xPlayer - 1][yPlayer].mainRole == BOX
-		    && grid[xPlayer - 2][yPlayer].mainRole == GROUND
-		    || grid[xPlayer - 1][yPlayer].mainRole == BOX
-		    && grid[xPlayer - 2][yPlayer].mainRole == GOAL) {
+		if ((grid[xPlayer - 1][yPlayer].mainRole == BOX
+		    && grid[xPlayer - 2][yPlayer].mainRole == GROUND)
+		    || (grid[xPlayer - 1][yPlayer].mainRole == BOX
+		    && grid[xPlayer - 2][yPlayer].mainRole == GOAL)) {
 		    /* move the box */
 		    moveBox(xPlayer, yPlayer, grid, LEFT, screen,
 			    tableSurface);
@@ -306,10 +317,10 @@ int main(int argc, char *argv[])
 		    && grid[xPlayer][yPlayer - 2].mainRole == WALL)
 		    break;
 		/* Move a box only if there is space to do it */
-		if (grid[xPlayer][yPlayer - 1].mainRole == BOX
-		    && grid[xPlayer][yPlayer - 2].mainRole == GROUND
-		    || grid[xPlayer][yPlayer - 1].mainRole == BOX
-		    && grid[xPlayer][yPlayer - 2].mainRole == GOAL) {
+		if ((grid[xPlayer][yPlayer - 1].mainRole == BOX
+		    && grid[xPlayer][yPlayer - 2].mainRole == GROUND)
+		    || (grid[xPlayer][yPlayer - 1].mainRole == BOX
+		    && grid[xPlayer][yPlayer - 2].mainRole == GOAL)) {
 		    /* move the box */
 		    moveBox(xPlayer, yPlayer, grid, UP, screen,
 			    tableSurface);
@@ -360,10 +371,10 @@ int main(int argc, char *argv[])
 		    && grid[xPlayer][yPlayer + 2].mainRole == WALL)
 		    break;
 		/* Move a box only if there is space to do it */
-		if (grid[xPlayer][yPlayer + 1].mainRole == BOX
-		    && grid[xPlayer][yPlayer + 2].mainRole == GROUND
-		    || grid[xPlayer][yPlayer + 1].mainRole == BOX
-		    && grid[xPlayer][yPlayer + 2].mainRole == GOAL) {
+		if ((grid[xPlayer][yPlayer + 1].mainRole == BOX
+		    && grid[xPlayer][yPlayer + 2].mainRole == GROUND)
+		    || (grid[xPlayer][yPlayer + 1].mainRole == BOX
+		    && grid[xPlayer][yPlayer + 2].mainRole == GOAL)) {
 		    /* move the Box */
 		    moveBox(xPlayer, yPlayer, grid, DOWN, screen,
 			    tableSurface);

@@ -42,7 +42,6 @@ void backgroundMenu(SDL_Surface * menu,
 void displayShortcut(SDL_Surface * menu);
 /* display the level number */
 void levelMenu(int levelNumber, SDL_Surface * menu,
-	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList);
 
 /* count how many goals are need to complete the level */
