@@ -187,7 +187,7 @@ void blitWalls(int x, int y, Square grid[][MAX_BLOCKS],
 
     /* blit wall border, expect on window sides */
     /* blit left border */
-    if (x != 0 && grid[x - 1][y].mainRole != WALL && grid[x - 1][y].mainRole != TOP_LEFT) {
+    if (x != 0 && grid[x - 1][y].mainRole != WALL && grid[x - 1][y].mainRole != TOP_LEFT && grid[x - 1][y].mainRole != BOTTOM_LEFT) {
 	SDL_BlitSurface(tableSurface[WALL_LEFT].image, NULL, screen,
 			&wallPos);
     }
@@ -202,7 +202,7 @@ void blitWalls(int x, int y, Square grid[][MAX_BLOCKS],
 			&wallPos);
     }
     /* blit bottom border */
-    if (y != Y_BLOCKS && grid[x][y + 1].mainRole != WALL && grid[x][y + 1].mainRole != BOTTOM_RIGHT) {
+    if (y != Y_BLOCKS && grid[x][y + 1].mainRole != WALL && grid[x][y + 1].mainRole != BOTTOM_RIGHT && grid[x][y + 1].mainRole != BOTTOM_LEFT) {
 	SDL_BlitSurface(tableSurface[WALL_BOTTOM].image, NULL, screen,
 			&wallPos);
     }
@@ -268,6 +268,10 @@ int detectCorner(Square grid[][MAX_BLOCKS])
             { grid[x][y].mainRole = BOTTOM_RIGHT;
                fprintf(stderr, "found BOTTOM_RIGHT %d/%d\n", x,y );
              }
+            if (grid[x][y].mainRole == WALL && grid[x][y+1].mainRole == OUTSIDE && grid[x-1][y+1].mainRole == OUTSIDE && grid[x-1][y].mainRole == OUTSIDE )
+            { grid[x][y].mainRole = BOTTOM_LEFT;
+               fprintf(stderr, "found BOTTOM_LEFT %d/%d\n", x,y );
+             }
 
         }
     }
@@ -282,26 +286,28 @@ int blitCorners(Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tableSu
         for (x = 0; x < X_BLOCKS; x++){
             pos.x = x*BOX_SIZE;
             pos.y = y*BOX_SIZE;
+            /*first blit a wall */
+          if (grid[x][y].mainRole == TOP_RIGHT || grid[x][y].mainRole == TOP_LEFT || grid[x][y].mainRole == BOTTOM_RIGHT || grid[x][y].mainRole == BOTTOM_LEFT ){
+                     blitWalls(x, y, grid, screen, tableSurface);
+          }
 
-
+            /*then blit the right corner */
             if (grid[x][y].mainRole == TOP_RIGHT){
-            SDL_BlitSurface(tableSurface[OUTSIDE_IMAGE].image, NULL,
-                screen, &pos);
-            SDL_BlitSurface(tableSurface[CORNER_TR].image, NULL,
+         SDL_BlitSurface(tableSurface[CORNER_TR].image, NULL,
 				screen, &pos);
             }
 
             if (grid[x][y].mainRole == TOP_LEFT){
-            SDL_BlitSurface(tableSurface[OUTSIDE_IMAGE].image, NULL,
-                screen, &pos);
 		    SDL_BlitSurface(tableSurface[CORNER_TL].image, NULL,
 				screen, &pos);
             }
 
             if (grid[x][y].mainRole == BOTTOM_RIGHT){
-            SDL_BlitSurface(tableSurface[OUTSIDE_IMAGE].image, NULL,
-                screen, &pos);
 		    SDL_BlitSurface(tableSurface[CORNER_BR].image, NULL,
+				screen, &pos);
+            }
+            if (grid[x][y].mainRole == BOTTOM_LEFT){
+		    SDL_BlitSurface(tableSurface[CORNER_BL].image, NULL,
 				screen, &pos);
             }
         }
