@@ -484,11 +484,11 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 	}
     }
 
+   randomGround(grid);
     /* Change grounds that are outside the walls to the OUTSIDE flag */
-    blitOutside(grid);
 
-    detectCorner(grid);
-    randomOutside(grid);
+   detectOutside(grid);
+   randomOutside(grid);
 
 
     /* free memory */
@@ -500,7 +500,7 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 }
 
 /* Change grounds that are outiside the walls to outsides */
-void blitOutside(Square grid[][MAX_BLOCKS])
+void detectOutside(Square grid[][MAX_BLOCKS])
 {
     /*Read line by line and Left to Right */
     int x = 0, y = 0;

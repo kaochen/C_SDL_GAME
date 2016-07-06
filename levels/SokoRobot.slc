@@ -10,9 +10,9 @@ Default levels from SokoRobot game
       <L>#####      ###</L>
       <L>#   $    .   ##</L>
       <L>#         #####</L>
-      <L>#             #</L>
-      <L>#      @      #</L>
-      <L>###############</L>
+      <L>#          #  </L>
+      <L>#      @   #  #</L>
+      <L>############</L>
     </Level>
     <Level Id="Level 1" Width="18" Height="14">
       <L>##################</L>

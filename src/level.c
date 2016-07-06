@@ -43,10 +43,8 @@ void displayLevel(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
     int x = 0, y = 0;
     for (x = 0; x < X_BLOCKS; x++) {
 	for (y = 0; y < Y_BLOCKS; y++) {
-	    /* assign a random ground to each block */
-	    grid[x][y].subRole = addRandomGround();
 
-	    /* blit all blocks depending on grid types */
+	    /* blit all blocks depending on grid mainRole */
 	    switch (grid[x][y].mainRole) {
 	    case GROUND:
 		blitGround(x, y, grid, screen, tableSurface);
@@ -75,6 +73,10 @@ void displayLevel(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
 		blitGround(x, y, grid, screen, tableSurface);
 		blitPlayer(x, y, STILL, grid, screen, tableSurface);
 		break;
+       }
+
+      /* blit all blocks depending on grid mainRole */
+      switch (grid[x][y].subRole) {
 	    case OUTSIDE:
 		goalPos.x = x * BOX_SIZE;
 		goalPos.y = y * BOX_SIZE;
