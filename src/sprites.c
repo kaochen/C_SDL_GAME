@@ -72,6 +72,7 @@ int loadAllSprites(Sprites tableSurface[NBR_OF_IMAGES])
     loadSprite(&tableSurface[OUTSIDE_IMAGE], "img/outside.png");
     loadSprite(&tableSurface[OUTSIDE2_IMAGE], "img/outside2.png");
     loadSprite(&tableSurface[OUTSIDE3_IMAGE], "img/outside3.png");
+    loadSprite(&tableSurface[OUTSIDE4_IMAGE], "img/outside4.png");
 
     /* Congrats */
     loadSprite(&tableSurface[CONGRATS], "img/congrats_background.png");

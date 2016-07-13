@@ -95,6 +95,12 @@ void displayLevel(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
 		SDL_BlitSurface(tableSurface[OUTSIDE3_IMAGE].image, NULL,
 				screen, &goalPos);
 		break;
+       case OUTSIDE4:
+		goalPos.x = x * BOX_SIZE;
+		goalPos.y = y * BOX_SIZE;
+		SDL_BlitSurface(tableSurface[OUTSIDE4_IMAGE].image, NULL,
+				screen, &goalPos);
+		break;
 	    }
 	}
     }

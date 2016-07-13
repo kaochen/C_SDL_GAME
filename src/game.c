@@ -237,13 +237,14 @@ int randomOutside(Square grid[][MAX_BLOCKS])
         for (x = 0; x < X_BLOCKS; x++) {
           if(grid[x][y].mainRole == OUTSIDE) {
                 randomNumber = random_number(0, 100);
-                if (randomNumber <= 87) {
+                if (randomNumber <= 92) {
 	            grid[x][y].subRole = OUTSIDE;
-                } else if (randomNumber >= 90) {
+                } else if (randomNumber <= 96) {
 	            grid[x][y].subRole = OUTSIDE2;
-                     fprintf(stderr, "add OUTSIDE2 %d/%d\n", x,y );
-                } else {
+                } else if (randomNumber <= 98) {
 	            grid[x][y].subRole = OUTSIDE3;
+                } else {
+	            grid[x][y].subRole = OUTSIDE4;
                 }
             }
         }
