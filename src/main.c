@@ -217,7 +217,7 @@ int main(int argc, char *argv[])
 		    moveBox(xPlayer, yPlayer, grid, RIGHT, screen,
 			    tableSurface);
 		    /* move the player */
-		    blitPlayer(xPlayer, yPlayer, RIGHT,
+		    movePlayer(xPlayer, yPlayer, RIGHT,
 			       grid, screen, tableSurface);
 		    /* update new player position */
 		    playerPos.x += BOX_SIZE;
@@ -231,7 +231,7 @@ int main(int argc, char *argv[])
 		if (grid[xPlayer + 1][yPlayer].mainRole == GROUND
 		    || grid[xPlayer + 1][yPlayer].mainRole == GOAL) {
 		    /* move the player */
-		    blitPlayer(xPlayer, yPlayer, RIGHT,
+		    movePlayer(xPlayer, yPlayer, RIGHT,
 			       grid, screen, tableSurface);
 		    /* update new player position */
 		    playerPos.x += BOX_SIZE;
@@ -271,7 +271,7 @@ int main(int argc, char *argv[])
 		    moveBox(xPlayer, yPlayer, grid, LEFT, screen,
 			    tableSurface);
 		    /* move the player */
-		    blitPlayer(xPlayer, yPlayer, LEFT,
+		    movePlayer(xPlayer, yPlayer, LEFT,
 			       grid, screen, tableSurface);
 		    /* update new player position */
 		    playerPos.x -= BOX_SIZE;
@@ -285,7 +285,7 @@ int main(int argc, char *argv[])
 		if (grid[xPlayer - 1][yPlayer].mainRole == GROUND
 		    || grid[xPlayer - 1][yPlayer].mainRole == GOAL) {
 		    /* move the player */
-		    blitPlayer(xPlayer, yPlayer, LEFT,
+		    movePlayer(xPlayer, yPlayer, LEFT,
 			       grid, screen, tableSurface);
 		    /* update new player position */
 		    playerPos.x -= BOX_SIZE;
@@ -325,7 +325,7 @@ int main(int argc, char *argv[])
 		    moveBox(xPlayer, yPlayer, grid, UP, screen,
 			    tableSurface);
 		    /* move the player */
-		    blitPlayer(xPlayer, yPlayer, UP, grid,
+		    movePlayer(xPlayer, yPlayer, UP, grid,
 			       screen, tableSurface);
 		    /* update new player position */
 		    playerPos.y -= BOX_SIZE;
@@ -339,7 +339,7 @@ int main(int argc, char *argv[])
 		if (grid[xPlayer][yPlayer - 1].mainRole == GROUND
 		    || grid[xPlayer][yPlayer - 1].mainRole == GOAL) {
 		    /* move the player */
-		    blitPlayer(xPlayer, yPlayer, UP, grid,
+		    movePlayer(xPlayer, yPlayer, UP, grid,
 			       screen, tableSurface);
 		    /* update new player position */
 		    playerPos.y -= BOX_SIZE;
@@ -379,7 +379,7 @@ int main(int argc, char *argv[])
 		    moveBox(xPlayer, yPlayer, grid, DOWN, screen,
 			    tableSurface);
 		    /* move the player */
-		    blitPlayer(xPlayer, yPlayer, DOWN,
+		    movePlayer(xPlayer, yPlayer, DOWN,
 			       grid, screen, tableSurface);
 		    /* update new player position */
 		    playerPos.y += BOX_SIZE;
@@ -393,7 +393,7 @@ int main(int argc, char *argv[])
 		if (grid[xPlayer][yPlayer + 1].mainRole == GROUND
 		    || grid[xPlayer][yPlayer + 1].mainRole == GOAL) {
 		    /* move the player */
-		    blitPlayer(xPlayer, yPlayer, DOWN,
+		    movePlayer(xPlayer, yPlayer, DOWN,
 			       grid, screen, tableSurface);
 		    /* update new player position */
 		    playerPos.y += BOX_SIZE;

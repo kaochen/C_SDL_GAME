@@ -71,7 +71,7 @@ void displayLevel(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
 		break;
 	    case PLAYER:
 		blitGround(x, y, grid, screen, tableSurface);
-		blitPlayer(x, y, STILL, grid, screen, tableSurface);
+		movePlayer(x, y, STILL, grid, screen, tableSurface);
 		break;
        }
 
