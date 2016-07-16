@@ -1,6 +1,8 @@
 # SokoRobot
 SokoRobot is a Sokoban game. It's written in langage C using SDL2.
 
+![SokoRobor ScreenShot](./src/img/SokoRobot-ScreenShot.png =420x)
+
 This is an early draft, use it carefully.
 
 ### Dependencies
@@ -16,11 +18,16 @@ git clone https://github.com/kaochen/SokoRobot
 
 ### Compile
 ```
-cd
+cd dowloadfolder
 make
+```
+
+### Play
+```
 ./SokoRobot
 ```
 
+### Clean install
 clean objects *.o:
 ```
 make clean
