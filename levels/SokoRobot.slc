@@ -5,14 +5,14 @@
 Default levels from SokoRobot game
   </Description>
   <LevelCollection Copyright="SokoRobot" MaxWidth="20" MaxHeight="20">
-     <Level Id="Win something" Width="15" Height="7">
-      <L>   #########</L>
-      <L>#####      ###</L>
-      <L>#   $    .   ##</L>
-      <L>#         #####</L>
-      <L>#          #  </L>
-      <L>#      @   #  #</L>
-      <L>############</L>
+     <Level Id="Level 0" Width="11" Height="7">
+      <L> #####</L>
+      <L> #   ######</L>
+      <L> #  .     #</L>
+      <L>##$#####  #</L>
+      <L>#  .  $  ##  </L>
+      <L>#@  ###  #</L>
+      <L>##### ####</L>
     </Level>
     <Level Id="Level 1" Width="18" Height="14">
       <L>##################</L>
