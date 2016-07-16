@@ -120,7 +120,7 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 /*get levels infos from files */
 int getNbrOfLevels(S_LevelList * levelList);
 
-/* Change grounds that are outside the walls to OUTSIDE */
+/* Change GROUND that are outside the walls to OUTSIDE */
 void detectOutside(Square grid[][MAX_BLOCKS]);
 
 #endif

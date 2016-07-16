@@ -51,10 +51,6 @@ void displayLevel(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
 		break;
 	    case BOX:
 		moveBox(x, y, grid, STILL, screen, tableSurface);
-		if (grid[x][y].objectType != EMPTY) {
-		    SDL_BlitSurface(tableSurface[GOAL_IMAGE].image, NULL,
-				    screen, &goalPos);
-		}
 		break;
 	    case BOX_OK:
 		moveBox(x, y, grid, STILL, screen, tableSurface);
