@@ -1,24 +1,24 @@
 # SokoRobot
 SokoRobot is a Sokoban game. It's written in langage C using SDL2.
 
-![SokoRobor ScreenShot](./src/img/SokoRobot-ScreenShot.png =420x)
+![SokoRobor_ScreenShot](./src/img/SokoRobot-ScreenShot.png)
 
 This is an early draft, use it carefully.
 
 ### Dependencies
 ```
-apt install libsdl2-2.0-0 libsdl2-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev libfreetype6-dev libxml2-dev
+apt install git libsdl2-2.0-0 libsdl2-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev libfreetype6-dev libxml2-dev
 
 ```
 
 ### Download
 ```
 git clone https://github.com/kaochen/SokoRobot
+cd downloadfolder/SokoRobot
 ```
 
 ### Compile
 ```
-cd dowloadfolder
 make
 ```
 
