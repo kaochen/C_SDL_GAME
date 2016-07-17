@@ -16,6 +16,10 @@ apt install git libsdl2-2.0-0 libsdl2-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev libf
 git clone https://github.com/kaochen/SokoRobot
 cd downloadfolder/SokoRobot
 ```
+If you have already the project and you want to synchonize from the server :
+```
+git pull
+```
 
 ### Compile
 ```
@@ -39,10 +43,13 @@ make mrproper
 
 ### Dev stuff
 
+![X and Y](https://upload.wikimedia.org/wikipedia/commons/8/86/Rep%C3%A8re_SDL_Window.png)
+
 Git :
 ```
 git remote set-url origin git@github.com:kaochen/SokoRobot.git
 git status // see changes
+git diff //see changes as a patch
 git add -u //update all existing files
 git add new_files.c //add a new file or update en existing one
 git mv file.c newfile.c
