@@ -23,16 +23,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define GAME_NAME "SokoRobot"
 
 //Define Window size
-#define W_WIDTH  840
-#define W_HEIGHT 800
+#define W_WIDTH  440
+#define W_HEIGHT 400
 
 //define size of a square in px
 #define BOX_SIZE 40
 
 //number of blocks
 #define MAX_BLOCKS 23		//Must be higther than X_BLOCKS or Y_BLOCKS
-#define X_BLOCKS 21		//+1 for the menu bar
-#define Y_BLOCKS 20
+#define X_BLOCKS 20		//+1 for the menu bar
+#define Y_BLOCKS 21
 
 //autorise 100 images max
 #define NBR_OF_IMAGES 100

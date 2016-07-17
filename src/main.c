@@ -29,6 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/game.h"
 #include "../inc/level.h"
 #include "../inc/menu.h"
+#include "../inc/settings.h"
 #include "../inc/sprites.h"
 #include "../inc/slc.h"
 
@@ -43,13 +44,12 @@ int main(int argc, char *argv[])
         printf("Argument %d : %s \n", i, argv[i]);
     }
 
-
-
+    /* reset errors*/
+    errno = 0;
 
     /* start random processor just once */
     srand(time(NULL));
 
-    errno = 0;
     /* Start and check if SDL start correctly */
     if (SDL_Init(SDL_INIT_VIDEO) == -1) {
 	fprintf(stderr, "SDL initialization error: %s\n", SDL_GetError());
@@ -63,12 +63,16 @@ int main(int argc, char *argv[])
 	exit(EXIT_FAILURE);
     }
 
+    /*load preferences*/
+
+    printf("Window size %dx%d, maxBlocks: %d\n",getWindow_width(), getWindow_height(), getMax_Blocks());
+
     /* Create the window game */
     SDL_Window *window = SDL_CreateWindow(GAME_NAME,
 					  SDL_WINDOWPOS_UNDEFINED,
 					  SDL_WINDOWPOS_UNDEFINED,
-					  W_WIDTH,
-					  W_HEIGHT,
+					  getWindow_width(),
+					  getWindow_height(),
 					  SDL_WINDOW_MOUSE_FOCUS |
 					  SDL_WINDOW_MOUSE_CAPTURE);
 
@@ -96,7 +100,7 @@ int main(int argc, char *argv[])
     loadAllSprites(tableSurface);
 
     /* create a grid with coordinates x,y to locate things */
-    Square grid[MAX_BLOCKS][MAX_BLOCKS];
+    Square grid[getMax_Blocks()][getMax_Blocks()];
 
     int levelChoice = 0;
 

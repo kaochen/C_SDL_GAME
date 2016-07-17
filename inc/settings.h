@@ -17,20 +17,21 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef LEVEL_H
-#define LEVEL_H
+#ifndef SETTINGS_H
+#define SETTINGS_H
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+/*read window height and width from the preference file */
+int getPrefAsInt(const char* prefName);
 
-#include "const.h"
-#include "sprites.h"
-#include "../inc/settings.h"
+int getWindow_width();
 
+int getWindow_height();
 
-/* display level on the screen */
-void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
-		  Sprites tableSurface[NBR_OF_IMAGES]);
+int getX_Blocks();
+
+int getY_Blocks();
+
+int getMax_Blocks();
 
 
 #endif

@@ -31,9 +31,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../inc/const.h"
 #include "../inc/game.h"
+#include "../inc/settings.h"
 
 /* display level on the screen */
-void displayLevel(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
+void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 		  Sprites tableSurface[NBR_OF_IMAGES])
 {
     /* set a goal position */

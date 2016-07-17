@@ -28,6 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "const.h"
 #include "game.h"
 #include "slc.h"
+#include "../inc/settings.h"
 
 /* display menu */
 void displayMenu(int levelNumber, SDL_Surface * menu,
@@ -45,17 +46,17 @@ void levelMenu(int levelNumber, SDL_Surface * menu,
 	       S_LevelList * levelList);
 
 /* count how many goals are need to complete the level */
-int goalLeft(Square grid[][MAX_BLOCKS]);
+int goalLeft(Square grid[][getMax_Blocks()]);
 
 /* count goals all ready achieve */
-int nbr_of_goals(Square grid[][MAX_BLOCKS]);
+int nbr_of_goals(Square grid[][getMax_Blocks()]);
 
 /* Display Progress in the level */
-void displayProgress(Square grid[][MAX_BLOCKS], SDL_Surface * menu,
+void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
 		     Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Victory or not ? */
-int levelFinished(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
+int levelFinished(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 		  Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* display a congrats message to the winner */

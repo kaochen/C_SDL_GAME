@@ -112,7 +112,7 @@ void levelMenu(int levelNumber, SDL_Surface * menu,
 }
 
 /* count how many goals are need to complete the level */
-int goalLeft(Square grid[][MAX_BLOCKS])
+int goalLeft(Square grid[][getMax_Blocks()])
 {
     int x = 0, y = 0, nbrOfBoxOk = 0;
     for (x = 0; x < X_BLOCKS; x++) {
@@ -126,7 +126,7 @@ int goalLeft(Square grid[][MAX_BLOCKS])
 }
 
 /* count goals all ready achieve */
-int nbr_of_goals(Square grid[][MAX_BLOCKS])
+int nbr_of_goals(Square grid[][getMax_Blocks()])
 {
     int x = 0, y = 0, nbrOfGoal = 0;
     for (x = 0; x < X_BLOCKS; x++) {
@@ -139,7 +139,7 @@ int nbr_of_goals(Square grid[][MAX_BLOCKS])
 }
 
 /* Display Progress in the level */
-void displayProgress(Square grid[][MAX_BLOCKS], SDL_Surface * menu,
+void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
 		     Sprites tableSurface[NBR_OF_IMAGES])
 {
     SDL_Rect progressPos;
@@ -177,7 +177,7 @@ void displayProgress(Square grid[][MAX_BLOCKS], SDL_Surface * menu,
 }
 
 /* Victory or not ? */
-int levelFinished(Square grid[][MAX_BLOCKS], SDL_Surface * screen,
+int levelFinished(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 		  Sprites tableSurface[NBR_OF_IMAGES])
 {
 

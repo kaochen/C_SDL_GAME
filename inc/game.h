@@ -24,35 +24,36 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "const.h"
 #include "sprites.h"
+#include "../inc/settings.h"
 
 /* move the player and blit player images */
 void movePlayer(int xPlayer, int yPlayer, int direction,
-		Square grid[][MAX_BLOCKS], SDL_Surface * screen,
+		Square grid[][getMax_Blocks()], SDL_Surface * screen,
 		Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* move a box */
-void moveBox(int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS],
+void moveBox(int xPlayer, int yPlayer, Square grid[][getMax_Blocks()],
 	     int direction, SDL_Surface * screen,
 	     Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* blit ground */
-void blitGround(int x, int y, Square grid[][MAX_BLOCKS],
+void blitGround(int x, int y, Square grid[][getMax_Blocks()],
 		SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* blit Walls */
-void blitWalls(int x, int y, Square grid[][MAX_BLOCKS],
+void blitWalls(int x, int y, Square grid[][getMax_Blocks()],
 	       SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* add a more ground choice */
-int randomGround(Square grid[][MAX_BLOCKS]);
+int randomGround(Square grid[][getMax_Blocks()]);
 
 /*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
-int randomOutside(Square grid[][MAX_BLOCKS]);
+int randomOutside(Square grid[][getMax_Blocks()]);
 
 /* random number between two numbers */
 int random_number(int min, int max);
 
 /* blit corners */
-int blitCorners(Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+int blitCorners(Square grid[][getMax_Blocks()], SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 #endif

@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define SLC_H
 
 #include "../inc/const.h"
+#include "../inc/settings.h"
 
 //Read using libxml
 #include <libxml2/libxml/tree.h>
@@ -115,12 +116,12 @@ void readLevelList(S_LevelList * levelList);
 
 /*Load slc level into the grid */
 int loadSlcLevel(int levelChoice, S_LevelList * levelList,
-		 Square grid[][MAX_BLOCKS]);
+		 Square grid[][getMax_Blocks()]);
 
 /*get levels infos from files */
 int getNbrOfLevels(S_LevelList * levelList);
 
 /* Change GROUND that are outside the walls to OUTSIDE */
-void detectOutside(Square grid[][MAX_BLOCKS]);
+void detectOutside(Square grid[][getMax_Blocks()]);
 
 #endif

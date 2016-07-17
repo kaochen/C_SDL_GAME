@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* move the player and blit player images */
 void movePlayer(int xPlayer, int yPlayer, int direction,
-		Square grid[][MAX_BLOCKS], SDL_Surface * screen,
+		Square grid[][getMax_Blocks()], SDL_Surface * screen,
 		Sprites tableSurface[NBR_OF_IMAGES])
 {
     /* set player position */
@@ -82,7 +82,7 @@ void movePlayer(int xPlayer, int yPlayer, int direction,
 }
 
 /* move a box */
-void moveBox(int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS],
+void moveBox(int xPlayer, int yPlayer, Square grid[][getMax_Blocks()],
 	     int direction, SDL_Surface * screen,
 	     Sprites tableSurface[NBR_OF_IMAGES])
 {
@@ -130,7 +130,7 @@ void moveBox(int xPlayer, int yPlayer, Square grid[][MAX_BLOCKS],
 }
 
 /* blit ground */
-void blitGround(int x, int y, Square grid[][MAX_BLOCKS],
+void blitGround(int x, int y, Square grid[][getMax_Blocks()],
 		SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
     SDL_Rect groundPos;
@@ -159,7 +159,7 @@ void blitGround(int x, int y, Square grid[][MAX_BLOCKS],
 }
 
 /* blit Walls */
-void blitWalls(int x, int y, Square grid[][MAX_BLOCKS],
+void blitWalls(int x, int y, Square grid[][getMax_Blocks()],
 	       SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
 
@@ -209,7 +209,7 @@ void blitWalls(int x, int y, Square grid[][MAX_BLOCKS],
 }
 
 /* add a more ground choice */
-int randomGround(Square grid[][MAX_BLOCKS])
+int randomGround(Square grid[][getMax_Blocks()])
 {
     int x = 0, y = 0, randomNumber = 0;
     for (y = 0; y < Y_BLOCKS; y++) {
@@ -230,7 +230,7 @@ int randomGround(Square grid[][MAX_BLOCKS])
 }
 
 /*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
-int randomOutside(Square grid[][MAX_BLOCKS])
+int randomOutside(Square grid[][getMax_Blocks()])
 {
     int x = 0, y = 0, randomNumber = 0;
     for (y = 0; y < Y_BLOCKS; y++) {
@@ -260,7 +260,7 @@ int random_number(int min, int max)
 
 
 /* blit corners */
-int blitCorners(Square grid[][MAX_BLOCKS], SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]){
+int blitCorners(Square grid[][getMax_Blocks()], SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]){
     SDL_Rect pos;
     int x = 1, y = 1;
     for (y = 1; y < Y_BLOCKS; y++){
