@@ -72,12 +72,12 @@ int getWindow_height(){
 }
 
 int getX_Blocks(){
-    int x = getWindow_width()/BOX_SIZE;
+    int x = getWindow_width()/SPRITE_SIZE;
     return x;
 }
 
 int getY_Blocks(){
-    int y = getWindow_height()/BOX_SIZE;
+    int y = getWindow_height()/SPRITE_SIZE;
     return y;
 }
 

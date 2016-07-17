@@ -55,7 +55,7 @@ void backgroundMenu(SDL_Surface * menu,
     for (i = 0; i < X_BLOCKS; i++) {
 	SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu,
 			&menuPos);
-	menuPos.x += BOX_SIZE;
+	menuPos.x += SPRITE_SIZE;
     }
 }
 
@@ -73,7 +73,7 @@ void displayShortcut(SDL_Surface * menu)
 			       fontColor);
     /* blit the text */
     SDL_Rect shortCutTextPos;
-    shortCutTextPos.x = BOX_SIZE * (X_BLOCKS - 7);
+    shortCutTextPos.x = SPRITE_SIZE * (X_BLOCKS - 7);
     shortCutTextPos.y = 10;
     SDL_BlitSurface(shortCutText, NULL, menu, &shortCutTextPos);
 
@@ -143,14 +143,14 @@ void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
 		     Sprites tableSurface[NBR_OF_IMAGES])
 {
     SDL_Rect progressPos;
-    progressPos.x = BOX_SIZE * 4;
+    progressPos.x = SPRITE_SIZE * 4;
     progressPos.y = 0;
     /* clean Background */
     int x = 0;
     for (x = 0; x < 3; x++) {
 	SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu,
 			&progressPos);
-	progressPos.x += BOX_SIZE;
+	progressPos.x += SPRITE_SIZE;
     }
 
     /* setup font */
@@ -167,7 +167,7 @@ void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
     progress = TTF_RenderText_Blended(font, progressText, fontColor);
 
     /* blit progress */
-    progressPos.x = BOX_SIZE * 4;
+    progressPos.x = SPRITE_SIZE * 4;
     progressPos.y = 10;
     SDL_BlitSurface(progress, NULL, menu, &progressPos);
 
@@ -204,8 +204,8 @@ int displayCongrats(SDL_Surface * screen,
     int width = 320, height = 120;
 
     /* add a background */
-    congratsPos.x = ((Y_BLOCKS * BOX_SIZE) - width) / 2;
-    congratsPos.y = ((Y_BLOCKS * BOX_SIZE) - height) / 2;
+    congratsPos.x = ((Y_BLOCKS * SPRITE_SIZE) - width) / 2;
+    congratsPos.y = ((Y_BLOCKS * SPRITE_SIZE) - height) / 2;
     SDL_BlitSurface(tableSurface[CONGRATS].image, NULL, screen,
 		    &congratsPos);
 
@@ -225,8 +225,8 @@ int displayCongrats(SDL_Surface * screen,
 
 
     /* blit progress */
-    congratsMessagePos.x = (W_WIDTH - 250) / 2;
-    congratsMessagePos.y = (W_HEIGHT - fontCongratsSize) / 2;
+    congratsMessagePos.x = (getWindow_width() - 250) / 2;
+    congratsMessagePos.y = (getWindow_height() - fontCongratsSize) / 2;
     SDL_BlitSurface(congratsMessage, NULL, screen, &congratsMessagePos);
 
     /* clean */

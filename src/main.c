@@ -186,8 +186,8 @@ int main(int argc, char *argv[])
 		    if (grid[x][y].mainRole == PLAYER) {
 			xPlayer = x;
 			yPlayer = y;
-			playerPos.x = x * BOX_SIZE;
-			playerPos.y = y * BOX_SIZE;
+			playerPos.x = x * SPRITE_SIZE;
+			playerPos.y = y * SPRITE_SIZE;
 		    }
 		}
 	    }
@@ -224,7 +224,7 @@ int main(int argc, char *argv[])
 		    movePlayer(xPlayer, yPlayer, RIGHT,
 			       grid, screen, tableSurface);
 		    /* update new player position */
-		    playerPos.x += BOX_SIZE;
+		    playerPos.x += SPRITE_SIZE;
 		    /* update status */
 		    grid[xPlayer + 2][yPlayer].mainRole = BOX;
 		    grid[xPlayer][yPlayer].mainRole = GROUND;
@@ -238,7 +238,7 @@ int main(int argc, char *argv[])
 		    movePlayer(xPlayer, yPlayer, RIGHT,
 			       grid, screen, tableSurface);
 		    /* update new player position */
-		    playerPos.x += BOX_SIZE;
+		    playerPos.x += SPRITE_SIZE;
 		    /* update status */
 		    grid[xPlayer][yPlayer].mainRole = GROUND;
 		    grid[xPlayer + 1][yPlayer].mainRole = PLAYER;
@@ -278,7 +278,7 @@ int main(int argc, char *argv[])
 		    movePlayer(xPlayer, yPlayer, LEFT,
 			       grid, screen, tableSurface);
 		    /* update new player position */
-		    playerPos.x -= BOX_SIZE;
+		    playerPos.x -= SPRITE_SIZE;
 		    /* update status */
 		    grid[xPlayer - 2][yPlayer].mainRole = BOX;
 		    grid[xPlayer][yPlayer].mainRole = GROUND;
@@ -292,7 +292,7 @@ int main(int argc, char *argv[])
 		    movePlayer(xPlayer, yPlayer, LEFT,
 			       grid, screen, tableSurface);
 		    /* update new player position */
-		    playerPos.x -= BOX_SIZE;
+		    playerPos.x -= SPRITE_SIZE;
 		    /* update status */
 		    grid[xPlayer][yPlayer].mainRole = GROUND;
 		    grid[xPlayer - 1][yPlayer].mainRole = PLAYER;
@@ -332,7 +332,7 @@ int main(int argc, char *argv[])
 		    movePlayer(xPlayer, yPlayer, UP, grid,
 			       screen, tableSurface);
 		    /* update new player position */
-		    playerPos.y -= BOX_SIZE;
+		    playerPos.y -= SPRITE_SIZE;
 		    /* update status */
 		    grid[xPlayer][yPlayer - 2].mainRole = BOX;
 		    grid[xPlayer][yPlayer].mainRole = GROUND;
@@ -346,7 +346,7 @@ int main(int argc, char *argv[])
 		    movePlayer(xPlayer, yPlayer, UP, grid,
 			       screen, tableSurface);
 		    /* update new player position */
-		    playerPos.y -= BOX_SIZE;
+		    playerPos.y -= SPRITE_SIZE;
 		    /* update status */
 		    grid[xPlayer][yPlayer].mainRole = GROUND;
 		    grid[xPlayer][yPlayer - 1].mainRole = PLAYER;
@@ -386,7 +386,7 @@ int main(int argc, char *argv[])
 		    movePlayer(xPlayer, yPlayer, DOWN,
 			       grid, screen, tableSurface);
 		    /* update new player position */
-		    playerPos.y += BOX_SIZE;
+		    playerPos.y += SPRITE_SIZE;
 		    /* update status */
 		    grid[xPlayer][yPlayer + 2].mainRole = BOX;
 		    grid[xPlayer][yPlayer].mainRole = GROUND;
@@ -400,7 +400,7 @@ int main(int argc, char *argv[])
 		    movePlayer(xPlayer, yPlayer, DOWN,
 			       grid, screen, tableSurface);
 		    /* update new player position */
-		    playerPos.y += BOX_SIZE;
+		    playerPos.y += SPRITE_SIZE;
 		    /* update status */
 		    grid[xPlayer][yPlayer].mainRole = GROUND;
 		    grid[xPlayer][yPlayer + 1].mainRole = PLAYER;
