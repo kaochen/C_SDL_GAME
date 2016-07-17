@@ -66,12 +66,12 @@ int getWindow_height(){
 /*One blocks = One sprites  */
 
 int getX_Blocks(){
-    int x = getWindow_height()/SPRITE_SIZE;
+    int x = getWindow_width()/SPRITE_SIZE;
     return x;
 }
 
 int getY_Blocks(){
-    int y = getWindow_width()/SPRITE_SIZE;
+    int y = getWindow_height()/SPRITE_SIZE;
     return y;
 }
 
