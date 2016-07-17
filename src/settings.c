@@ -63,6 +63,7 @@ int getWindow_height(){
     }
     return ret;
 }
+/*One blocks = One sprites  */
 
 int getX_Blocks(){
     int x = getWindow_height()/SPRITE_SIZE;
@@ -74,6 +75,7 @@ int getY_Blocks(){
     return y;
 }
 
+/* Must be higther than getY_Blocks() or getX_Blocks() to allow enough memory*/
 int getMax_Blocks(){
     if (getX_Blocks() > getY_Blocks()){
          return getX_Blocks()+2;

@@ -32,8 +32,8 @@ void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 
     /* blit surfaces depending of its destiny */
     int x = 0, y = 0;
-    for (x = 0; x < X_BLOCKS; x++) {
-	for (y = 0; y < Y_BLOCKS; y++) {
+    for (x = 0; x < getX_Blocks(); x++) {
+	for (y = 0; y < getY_Blocks(); y++) {
 
 	    /* blit all blocks depending on grid mainRole */
 	    switch (grid[x][y].mainRole) {

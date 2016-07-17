@@ -184,7 +184,7 @@ void blitWalls(int x, int y, Square grid[][getMax_Blocks()],
 			&wallPos);
     }
     /* blit right border */
-    if (x != X_BLOCKS && grid[x + 1][y].mainRole != WALL && grid[x + 1][y].mainRole != TOP_RIGHT && grid[x + 1][y].mainRole != BOTTOM_RIGHT) {
+    if (x != getX_Blocks() && grid[x + 1][y].mainRole != WALL && grid[x + 1][y].mainRole != TOP_RIGHT && grid[x + 1][y].mainRole != BOTTOM_RIGHT) {
 	SDL_BlitSurface(tableSurface[WALL_RIGHT].image, NULL, screen,
 			&wallPos);
     }
@@ -194,7 +194,7 @@ void blitWalls(int x, int y, Square grid[][getMax_Blocks()],
 			&wallPos);
     }
     /* blit bottom border */
-    if (y != Y_BLOCKS && grid[x][y + 1].mainRole != WALL && grid[x][y + 1].mainRole != BOTTOM_RIGHT && grid[x][y + 1].mainRole != BOTTOM_LEFT) {
+    if (y != getY_Blocks() && grid[x][y + 1].mainRole != WALL && grid[x][y + 1].mainRole != BOTTOM_RIGHT && grid[x][y + 1].mainRole != BOTTOM_LEFT) {
 	SDL_BlitSurface(tableSurface[WALL_BOTTOM].image, NULL, screen,
 			&wallPos);
     }
@@ -204,8 +204,8 @@ void blitWalls(int x, int y, Square grid[][getMax_Blocks()],
 int randomGround(Square grid[][getMax_Blocks()])
 {
     int x = 0, y = 0, randomNumber = 0;
-    for (y = 0; y < Y_BLOCKS; y++) {
-        for (x = 1; x < Y_BLOCKS; x++) {
+    for (y = 0; y < getY_Blocks(); y++) {
+        for (x = 1; x < getY_Blocks(); x++) {
 
              randomNumber = random_number(0, 100);
              if (randomNumber <= 60) {
@@ -225,8 +225,8 @@ int randomGround(Square grid[][getMax_Blocks()])
 int randomOutside(Square grid[][getMax_Blocks()])
 {
     int x = 0, y = 0, randomNumber = 0;
-    for (y = 0; y < Y_BLOCKS; y++) {
-        for (x = 0; x < X_BLOCKS; x++) {
+    for (y = 0; y < getY_Blocks(); y++) {
+        for (x = 0; x < getX_Blocks(); x++) {
           if(grid[x][y].mainRole == OUTSIDE) {
                 randomNumber = random_number(0, 100);
                 if (randomNumber <= 92) {
@@ -255,8 +255,8 @@ int random_number(int min, int max)
 int blitCorners(Square grid[][getMax_Blocks()], SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]){
     SDL_Rect pos;
     int x = 1, y = 1;
-    for (y = 1; y < Y_BLOCKS; y++){
-        for (x = 1; x < X_BLOCKS; x++){
+    for (y = 1; y < getY_Blocks(); y++){
+        for (x = 1; x < getX_Blocks(); x++){
             pos.x = x*SPRITE_SIZE;
             pos.y = y*SPRITE_SIZE;
             /*blit top right corners */

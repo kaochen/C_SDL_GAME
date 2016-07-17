@@ -181,8 +181,8 @@ int main(int argc, char *argv[])
 	    break;
 	case SDL_KEYDOWN:
 	    /* Get the player position */
-	    for (x = 0; x < X_BLOCKS; x++) {
-		for (y = 0; y < Y_BLOCKS; y++) {
+	    for (x = 0; x < getX_Blocks(); x++) {
+		for (y = 0; y < getY_Blocks(); y++) {
 		    if (grid[x][y].mainRole == PLAYER) {
 			xPlayer = x;
 			yPlayer = y;
@@ -198,14 +198,14 @@ int main(int argc, char *argv[])
 		if (winStatus == FINISH)
 		    break;
 		/* Don't go outside */
-		if (xPlayer + 1 >= X_BLOCKS)
+		if (xPlayer + 1 >= getX_Blocks())
 		    break;
 		/* Test if wall */
 		if (grid[xPlayer + 1][yPlayer].mainRole == WALL)
 		    break;
 		/* Don't go outside with a box */
 		if (grid[xPlayer + 1][yPlayer].mainRole == BOX
-		    && xPlayer + 2 >= X_BLOCKS)
+		    && xPlayer + 2 >= getX_Blocks())
 		    break;
 		/* Do not move a box if it is close to a wall or an other box */
 		if (grid[xPlayer + 1][yPlayer].mainRole == BOX
@@ -360,14 +360,14 @@ int main(int argc, char *argv[])
 		    break;
 
 		/* Don't go outside */
-		if (yPlayer + 1 >= Y_BLOCKS)
+		if (yPlayer + 1 >= getY_Blocks())
 		    break;
 		/* test if wall */
 		if (grid[xPlayer][yPlayer + 1].mainRole == WALL)
 		    break;
 		/* Don't go outside with a case */
 		if (grid[xPlayer][yPlayer + 1].mainRole == BOX
-		    && yPlayer + 2 >= Y_BLOCKS)
+		    && yPlayer + 2 >= getY_Blocks())
 		    break;
 		/* Do not move a box if it is close to a wall or an other box */
 		if (grid[xPlayer][yPlayer + 1].mainRole == BOX

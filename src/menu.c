@@ -43,7 +43,7 @@ void backgroundMenu(SDL_Surface * menu,
     menuPos.x = 0;
     menuPos.y = 0;
     int i = 0;
-    for (i = 0; i < X_BLOCKS; i++) {
+    for (i = 0; i < getX_Blocks(); i++) {
 	SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu,
 			&menuPos);
 	menuPos.x += SPRITE_SIZE;
@@ -64,7 +64,7 @@ void displayShortcut(SDL_Surface * menu)
 			       fontColor);
     /* blit the text */
     SDL_Rect shortCutTextPos;
-    shortCutTextPos.x = SPRITE_SIZE * (X_BLOCKS - 7);
+    shortCutTextPos.x = SPRITE_SIZE * (getX_Blocks() - 7);
     shortCutTextPos.y = 10;
     SDL_BlitSurface(shortCutText, NULL, menu, &shortCutTextPos);
 
@@ -106,8 +106,8 @@ void levelMenu(int levelNumber, SDL_Surface * menu,
 int goalLeft(Square grid[][getMax_Blocks()])
 {
     int x = 0, y = 0, nbrOfBoxOk = 0;
-    for (x = 0; x < X_BLOCKS; x++) {
-	for (y = 0; y < Y_BLOCKS; y++) {
+    for (x = 0; x < getX_Blocks(); x++) {
+	for (y = 0; y < getY_Blocks(); y++) {
 	    if (grid[x][y].mainRole == BOX
 		&& grid[x][y].objectType == GOAL)
 		nbrOfBoxOk += 1;
@@ -120,8 +120,8 @@ int goalLeft(Square grid[][getMax_Blocks()])
 int nbr_of_goals(Square grid[][getMax_Blocks()])
 {
     int x = 0, y = 0, nbrOfGoal = 0;
-    for (x = 0; x < X_BLOCKS; x++) {
-	for (y = 0; y < Y_BLOCKS; y++) {
+    for (x = 0; x < getX_Blocks(); x++) {
+	for (y = 0; y < getY_Blocks(); y++) {
 	    if (grid[x][y].objectType == GOAL)
 		nbrOfGoal += 1;
 	}
@@ -195,8 +195,8 @@ int displayCongrats(SDL_Surface * screen,
     int width = 320, height = 120;
 
     /* add a background */
-    congratsPos.x = ((Y_BLOCKS * SPRITE_SIZE) - width) / 2;
-    congratsPos.y = ((Y_BLOCKS * SPRITE_SIZE) - height) / 2;
+    congratsPos.x = ((getY_Blocks() * SPRITE_SIZE) - width) / 2;
+    congratsPos.y = ((getY_Blocks() * SPRITE_SIZE) - height) / 2;
     SDL_BlitSurface(tableSurface[CONGRATS].image, NULL, screen,
 		    &congratsPos);
 

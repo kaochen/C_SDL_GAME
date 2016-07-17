@@ -206,7 +206,7 @@ void addNewLevel(S_LevelList * levelList, char *fileName, char *name,
 	exit(EXIT_FAILURE);
     }
     /* check size and */
-    if (height <= X_BLOCKS && width <= Y_BLOCKS) {
+    if (height <= getX_Blocks() && width <= getY_Blocks()) {
 	strcpy(new->name, name);
 	strcpy(new->fileName, fileName);
 	new->height = height;
@@ -377,8 +377,8 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 	    nbr_of_lines = actual->height;
 	    nbr_of_columns = actual->width;
 	    /*Place the drawing into the center of the grid */
-	    firstLines = ((Y_BLOCKS - nbr_of_lines) / 2 + 1);	//+1 for the menu
-	    firstColumn = (X_BLOCKS - nbr_of_columns) / 2;
+	    firstLines = ((getY_Blocks() - nbr_of_lines) / 2 + 1);	//+1 for the menu
+	    firstColumn = (getX_Blocks() - nbr_of_columns) / 2;
 	    break;
 	}
 	i++;
@@ -415,8 +415,8 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
     }
     /*Clean grid before */
     int y = 0, x = 0;
-    for (y = 0; y < Y_BLOCKS; y++) {
-	for (x = 0; x < X_BLOCKS; x++) {
+    for (y = 0; y < getY_Blocks(); y++) {
+	for (x = 0; x < getX_Blocks(); x++) {
 	    grid[x][y].mainRole = GROUND;
 	    grid[x][y].objectType = EMPTY;
 	}
@@ -488,11 +488,11 @@ void detectOutside(Square grid[][getMax_Blocks()])
 {
     /*Read line by line and Left to Right */
     int x = 0, y = 0;
-    for (y = 0; y < Y_BLOCKS; y++) {
-	for (x = 0; x < X_BLOCKS; x++) {
+    for (y = 0; y < getY_Blocks(); y++) {
+	for (x = 0; x < getX_Blocks(); x++) {
 	    /*break if wall */
 	    if (grid[x][y].mainRole == WALL)
-		x = X_BLOCKS;
+		x = getX_Blocks();
 
 	    /*Change GROUND to OUTSIDE */
 	    if (grid[x][y].mainRole == GROUND) {
@@ -503,8 +503,8 @@ void detectOutside(Square grid[][getMax_Blocks()])
 
     /*Read line by line Right to Left */
     x = 0, y = 0;
-    for (y = 0; y < Y_BLOCKS; y++) {
-	for (x = X_BLOCKS; x > -1; x--) {
+    for (y = 0; y < getY_Blocks(); y++) {
+	for (x = getX_Blocks(); x > -1; x--) {
 	    /*break if wall */
 	    if (grid[x][y].mainRole == WALL)
 		x = -1;
@@ -519,11 +519,11 @@ void detectOutside(Square grid[][getMax_Blocks()])
     /*Read row by row and Top to Bottom */
     x = 0;
     y = 0;
-    for (x = 0; x < X_BLOCKS; x++) {
-	for (y = 0; y < Y_BLOCKS; y++) {
+    for (x = 0; x < getX_Blocks(); x++) {
+	for (y = 0; y < getY_Blocks(); y++) {
 	    /*break if wall */
 	    if (grid[x][y].mainRole == WALL)
-		y = Y_BLOCKS;
+		y = getY_Blocks();
 
 	    /*If a ground is outside the wall use OUTSIDE */
 	    if (grid[x][y].mainRole == GROUND) {
@@ -535,8 +535,8 @@ void detectOutside(Square grid[][getMax_Blocks()])
     /*Read row by row and Bottom to Top */
     x = 0;
     y = 0;
-    for (x = 0; x < X_BLOCKS; x++) {
-	for (y = Y_BLOCKS; y > 0; y--) {
+    for (x = 0; x < getX_Blocks(); x++) {
+	for (y = getY_Blocks(); y > 0; y--) {
 	    /*break if wall */
 	    if (grid[x][y].mainRole == WALL)
 		y = 0;
