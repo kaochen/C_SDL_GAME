@@ -20,6 +20,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef SETTINGS_H
 #define SETTINGS_H
 
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <ctype.h>
+
+#include "const.h"
+
+
 /*read window height and width from the preference file */
 int getPrefAsInt(const char* prefName);
 

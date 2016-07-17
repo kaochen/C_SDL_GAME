@@ -20,8 +20,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef SLC_H
 #define SLC_H
 
-#include "../inc/const.h"
-#include "../inc/settings.h"
+#include <stdlib.h>
+#include <stdio.h>
+#include <string.h>
+#include <dirent.h>
+
+#include "const.h"
+#include "game.h"
+#include "settings.h"
 
 //Read using libxml
 #include <libxml2/libxml/tree.h>

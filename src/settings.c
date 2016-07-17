@@ -22,13 +22,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../inc/settings.h"
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-
-#include "../inc/const.h"
-
 /*read window height and width from the preference file */
 int getPrefAsInt(const char* prefName){
   FILE* prefFile = NULL;
@@ -72,12 +65,12 @@ int getWindow_height(){
 }
 
 int getX_Blocks(){
-    int x = getWindow_width()/SPRITE_SIZE;
+    int x = getWindow_height()/SPRITE_SIZE;
     return x;
 }
 
 int getY_Blocks(){
-    int y = getWindow_height()/SPRITE_SIZE;
+    int y = getWindow_width()/SPRITE_SIZE;
     return y;
 }
 

@@ -19,6 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #ifndef SPRITES_H
 #define SPRITES_H
+
 #include <stdlib.h>
 #include <stdio.h>
 #include <string.h>
@@ -27,6 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL_image.h>
 
 #include "const.h"
+#include "settings.h"
 
 /* define images/sprites struct */
 typedef struct {

@@ -20,17 +20,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef MENU_C
 #define MENU_C
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
-#include <SDL2/SDL_ttf.h>
-
-#include "../inc/const.h"
-#include "../inc/game.h"
 #include "../inc/menu.h"
-#include "../inc/level.h"
-#include "../inc/slc.h"
+
 
 /* display menu */
 void displayMenu(int levelNumber, SDL_Surface * menu,

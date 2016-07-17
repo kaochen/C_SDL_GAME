@@ -20,22 +20,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef SLC_C
 #define SLC_C
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <dirent.h>
-
 #include "../inc/slc.h"
-#include "../inc/const.h"
-#include "../inc/game.h"
-
-//Read using libxml
-#include <libxml2/libxml/tree.h>
-#include <libxml2/libxml/parser.h>
-#include <libxml2/libxml/xpath.h>
-#include <libxml2/libxml/xpathInternals.h>
-
-
 
 /*Manage slc files ==================================================*/
 /* Initiatlize the list of files */

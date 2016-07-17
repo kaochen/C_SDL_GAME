@@ -20,11 +20,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef GAME_H
 #define GAME_H
 
+#include <stdlib.h>
+#include <stdio.h>
 #include <SDL2/SDL.h>
+#include <SDL2/SDL_image.h>
+#include <time.h>
 
 #include "const.h"
 #include "sprites.h"
-#include "../inc/settings.h"
+#include "settings.h"
 
 /* move the player and blit player images */
 void movePlayer(int xPlayer, int yPlayer, int direction,

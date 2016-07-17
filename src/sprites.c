@@ -19,14 +19,7 @@
 
 #ifndef SPRITES_C
 #define SPRITES_C
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
 
-#include "../inc/const.h"
 #include "../inc/sprites.h"
 
 /* Load all sprites */
