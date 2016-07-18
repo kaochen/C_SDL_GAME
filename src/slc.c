@@ -205,8 +205,8 @@ void addNewLevel(S_LevelList * levelList, char *fileName, char *name,
 	fprintf(stderr, "Add new level failed\n");
 	exit(EXIT_FAILURE);
     }
-    /* check size and */
-    if (width <= getX_Blocks() && height <= getY_Blocks()) {
+    /* check size before add (-1 is for the top menu)*/
+    if (width <= getX_Blocks() && height <= (getY_Blocks()-1)) {
 	strcpy(new->name, name);
 	strcpy(new->fileName, fileName);
 	new->height = height;
@@ -486,65 +486,67 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 /* Change GROUND that are outside the walls to OUTSIDE */
 void detectOutside(Square grid[][getMax_Blocks()])
 {
-    /*Read line by line and Left to Right */
+    /*Read left to right */
     int x = 0, y = 0;
-    for (y = 0; y < getY_Blocks(); y++) {
-	for (x = 0; x < getX_Blocks(); x++) {
+    for (y = 0; y <= getY_Blocks(); y++) {
+	for (x = 0; x <= getX_Blocks(); x++) {
 	    /*break if wall */
-	    if (grid[x][y].mainRole == WALL)
-		x = getX_Blocks();
-
+	    if (grid[x][y].mainRole == WALL){
+		x = getX_Blocks() + 1;
+        }
+        else{
 	    /*Change GROUND to OUTSIDE */
-	    if (grid[x][y].mainRole == GROUND) {
-		grid[x][y].mainRole = OUTSIDE;
-	    }
+	    if (grid[x][y].mainRole == GROUND){
+		grid[x][y].mainRole = OUTSIDE;}
+        }
 	}
     }
 
-    /*Read line by line Right to Left */
+    /*Read right to left*/
     x = 0, y = 0;
-    for (y = 0; y < getY_Blocks(); y++) {
-	for (x = getX_Blocks(); x > -1; x--) {
+    for (y = 0; y <= getY_Blocks(); y++) {
+	for (x = getX_Blocks(); x >= 0; x--) {
 	    /*break if wall */
-	    if (grid[x][y].mainRole == WALL)
-		x = -1;
+	    if (grid[x][y].mainRole == WALL){
+		x = -1;}
+        else{
+        /*Change GROUND to OUTSIDE */
+	    if (grid[x][y].mainRole == GROUND){
+		grid[x][y].mainRole = OUTSIDE;}
+        }
 
-	    /*Change GROUND to OUTSIDE */
-	    if (grid[x][y].mainRole == GROUND) {
-		grid[x][y].mainRole = OUTSIDE;
-	    }
 	}
     }
 
-    /*Read row by row and Top to Bottom */
+    /*Read Top to Bottom */
     x = 0;
     y = 0;
-    for (x = 0; x < getX_Blocks(); x++) {
-	for (y = 0; y < getY_Blocks(); y++) {
+    for (x = 0; x <= getX_Blocks(); x++) {
+	for (y = 0; y <= getY_Blocks(); y++) {
 	    /*break if wall */
-	    if (grid[x][y].mainRole == WALL)
-		y = getY_Blocks();
-
+	    if (grid[x][y].mainRole == WALL){
+		y = getY_Blocks() + 1;}
+        else{
 	    /*If a ground is outside the wall use OUTSIDE */
 	    if (grid[x][y].mainRole == GROUND) {
-		grid[x][y].mainRole = OUTSIDE;
-	    }
+		grid[x][y].mainRole = OUTSIDE;}
+        }
 	}
     }
 
-    /*Read row by row and Bottom to Top */
+    /*Read Bottom to Top */
     x = 0;
     y = 0;
     for (x = 0; x < getX_Blocks(); x++) {
 	for (y = getY_Blocks(); y > 0; y--) {
 	    /*break if wall */
-	    if (grid[x][y].mainRole == WALL)
-		y = 0;
-
+	    if (grid[x][y].mainRole == WALL){
+		y = 0;}
+        else{
 	    /*If a ground is outside the wall use OUTSIDE */
 	    if (grid[x][y].mainRole == GROUND) {
-		grid[x][y].mainRole = OUTSIDE;
-	    }
+		grid[x][y].mainRole = OUTSIDE;}
+        }
 
 	}
     }
