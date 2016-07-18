@@ -195,7 +195,7 @@ int displayCongrats(SDL_Surface * screen,
     int width = 320, height = 120;
 
     /* add a background */
-    congratsPos.x = ((getY_Blocks() * SPRITE_SIZE) - width) / 2;
+    congratsPos.x = ((getX_Blocks() * SPRITE_SIZE) - width) / 2;
     congratsPos.y = ((getY_Blocks() * SPRITE_SIZE) - height) / 2;
     SDL_BlitSurface(tableSurface[CONGRATS].image, NULL, screen,
 		    &congratsPos);
