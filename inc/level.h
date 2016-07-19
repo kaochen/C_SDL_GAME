@@ -20,22 +20,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef LEVEL_H
 #define LEVEL_H
 
-#include <stdlib.h>
-#include <stdio.h>
-#include <string.h>
-#include <ctype.h>
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
-#include "game.h"
 #include "const.h"
 #include "sprites.h"
-#include "settings.h"
-
+#include "slc.h"
 
 /* display level on the screen */
 void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 		  Sprites tableSurface[NBR_OF_IMAGES]);
 
+/*get level name*/
+int getLevelName(int levelChoice, S_LevelList * levelList, char * levelName);
 
+
+/*Found the level number with just the name*/
+int findLevelNumber(S_LevelList * levelList, char * levelName);
 #endif

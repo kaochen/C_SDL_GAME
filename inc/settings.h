@@ -40,5 +40,6 @@ int getY_Blocks();
 
 int getMax_Blocks();
 
-
+/* write a pref char */
+int writePrefChar(const char* prefName, const char* value);
 #endif

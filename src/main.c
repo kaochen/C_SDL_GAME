@@ -102,6 +102,7 @@ int main(int argc, char *argv[])
     Square grid[getMax_Blocks()][getMax_Blocks()];
 
     int levelChoice = 0;
+    char levelName[MAX_CARACT]="";
 
     /*List slc files from the levels/ folder */
     fprintf(stderr, "Searching files in the levels folder.\n");
@@ -475,6 +476,10 @@ int main(int argc, char *argv[])
 		break;
 		/* hit q to quit */
 	    case SDLK_q:
+      /* write last level name before closing */
+         strcpy(levelName, "");
+          getLevelName(levelChoice,levelList,levelName);
+          writePrefChar("LevelName", levelName);
 		carryOn = 0;
 		break;
 	    }

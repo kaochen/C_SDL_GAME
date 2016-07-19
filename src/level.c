@@ -94,4 +94,53 @@ void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
      blitCorners(grid, screen,tableSurface);
 }
 
+
+
+/*get level name*/
+int getLevelName(int levelChoice, S_LevelList * levelList, char * levelName)
+{
+    if (levelList == NULL) {
+	return EXIT_FAILURE;
+    }
+    int i = 0;
+    S_Level *actual = levelList->first;
+    /* read the all chain list */
+    while (actual != NULL) {
+	/* try to find the nameLevel into the list */
+	if (i == levelChoice) {
+	    fprintf(stderr, "Actual name Level \"%s\"\n", actual->name);
+       strcpy(levelName, actual->name);
+	    break;
+	}
+	i++;
+	actual = actual->next;
+    }
+ return EXIT_SUCCESS;
+}
+
+/*Found the level number with just the name*/
+int findLevelNumber(S_LevelList * levelList, char * levelName)
+{
+    if (levelList == NULL) {
+	    fprintf(stderr, "struct levelList does not exit");
+    }
+    int i = 0;
+    S_Level *actual = levelList->first;
+    /* read the all chain list */
+    while (actual != NULL) {
+	/* try to find the nameLevel into the list */
+	if (!strcmp(actual->name,levelName)) {
+	    fprintf(stderr, "I found the level %s : %d\n", actual->name, i);
+       return i;
+	    break;}
+   else{
+       	i++;
+       	actual = actual->next;
+   }
+    }
+ return 0;
+}
+
+
+
 #endif

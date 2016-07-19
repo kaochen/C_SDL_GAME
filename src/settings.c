@@ -27,15 +27,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int getPrefAsInt(const char* prefName){
   FILE* prefFile = NULL;
   char line[MAX_CARACT]="";
-  char settingsName[MAX_CARACT] = "";
-  strcpy(settingsName, prefName);
+  char settingName[MAX_CARACT] = "";
+  strcpy(settingName, prefName);
 
   int ret = 0;
   prefFile = fopen("preferences.ini", "r");
   if(prefFile != NULL){
 
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
-        if(strstr(line, settingsName) !=NULL){
+        if(strstr(line, settingName) !=NULL){
           ret = atoi(strpbrk(line, "0123456789"));
         }
       }
@@ -86,4 +86,33 @@ int getMax_Blocks(){
     }
 }
 
+/* write a pref char */
+int writePrefChar(const char * prefName, const char * value){
+  FILE* prefFile = NULL;
+
+  char line[MAX_CARACT]="";
+  char settingName[MAX_CARACT] = "";
+  strcpy(settingName, prefName);
+  char settingValue[MAX_CARACT]="";
+  strcpy(settingValue, value);
+  printf("searching :%s = %s\n", settingName, value);
+  prefFile = fopen("preferences.ini", "r+");
+  if(prefFile != NULL){
+
+    while (fgets(line, MAX_CARACT, prefFile) != NULL){
+        if(strstr(line, settingName) !=NULL){
+         printf("found setting here %s\n", line);
+         break;
+        }
+      }
+      fseek(prefFile,-(strlen(line)),SEEK_CUR);
+      fprintf(prefFile, "%s = %s\n",settingName, value);
+  }
+  else{
+    printf("Failed to open \"preferences.ini\" file");
+    return EXIT_FAILURE;
+  }
+fclose(prefFile);
+return EXIT_SUCCESS;
+}
 #endif
