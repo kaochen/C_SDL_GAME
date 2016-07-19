@@ -227,4 +227,9 @@ int displayCongrats(SDL_Surface * screen,
     return EXIT_SUCCESS;
 }
 
+/* return the height of the menu in blocks*/
+int menuHeight(void){
+  int nbrOfBlocks = 1;
+  return nbrOfBlocks;
+}
 #endif

@@ -21,6 +21,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define SLC_C
 
 #include "../inc/slc.h"
+#include "../inc/menu.h"
 
 /*Manage slc files ==================================================*/
 /* Initiatlize the list of files */
@@ -205,8 +206,8 @@ void addNewLevel(S_LevelList * levelList, char *fileName, char *name,
 	fprintf(stderr, "Add new level failed\n");
 	exit(EXIT_FAILURE);
     }
-    /* check size before add (-1 is for the top menu)*/
-    if (width <= getX_Blocks() && height <= (getY_Blocks()-1)) {
+    /* check size before add */
+    if (width <= getX_Blocks() && height <= (getY_Blocks()-menuHeight())) {
 	strcpy(new->name, name);
 	strcpy(new->fileName, fileName);
 	new->height = height;
@@ -377,7 +378,7 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 	    nbr_of_lines = actual->height;
 	    nbr_of_columns = actual->width;
 	    /*Place the drawing into the center of the grid */
-	    firstLines = ((getY_Blocks() - nbr_of_lines) / 2 + 1);	//+1 for the menu
+	    firstLines = ((getY_Blocks() - nbr_of_lines) / 2 + menuHeight());	// + menu
 	    firstColumn = (getX_Blocks() - nbr_of_columns) / 2;
 	    break;
 	}

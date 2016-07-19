@@ -160,7 +160,7 @@ int main(int argc, char *argv[])
     /* display the level using the grid */
     displayLevel(grid, screen, tableSurface);
 
-    /* diplay menu on top of the screen */
+    /* display menu on top of the screen */
     displayMenu(levelChoice, menu, tableSurface, levelList);
 
     /* display Progress in the menu */
