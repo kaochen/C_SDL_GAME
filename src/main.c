@@ -73,8 +73,7 @@ int main(int argc, char *argv[])
 					  SDL_WINDOWPOS_UNDEFINED,
 					  getWindow_width(),
 					  getWindow_height(),
-					  SDL_WINDOW_MOUSE_FOCUS |
-					  SDL_WINDOW_MOUSE_CAPTURE);
+					  SDL_WINDOW_MOUSE_FOCUS);
 
     /* Set window icon */
     SDL_SetWindowIcon(window, IMG_Load("img/icon.png"));
