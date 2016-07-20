@@ -129,6 +129,7 @@ int writePrefChar(const char * prefName, const char * value){
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
         if(strstr(line, settingName) !=NULL){
          fprintf(tmpFile, "%s = %s\n",settingName, value);
+         strcpy(line,"");//empty the line buffer
         }
         else{
       fprintf(tmpFile,"%s",line);
@@ -141,7 +142,7 @@ int writePrefChar(const char * prefName, const char * value){
   }
 fclose(prefFile);
 fclose(tmpFile);
-rename("tmp.ini","preferences.ini");
+ rename("tmp.ini","preferences.ini");
 
 return EXIT_SUCCESS;
 }
