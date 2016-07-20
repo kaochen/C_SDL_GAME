@@ -141,6 +141,30 @@ int findLevelNumber(S_LevelList * levelList, char * levelName)
  return 0;
 }
 
+/*get a levelchoice by reading the level name from the preference file*/
+int readLevelFromSetting(S_LevelList * levelList)
+{
+    int i = 0, ret = 0;
+    char levelName[MAX_CARACT]="Alberto Garcia Arr 1 Alberto 1a";
+    getPrefAsChar("levelName", levelName);
+    fprintf(stderr, "leveName read from pref File %s\n", levelName);
 
-
+    if (levelList == NULL) {
+	exit(EXIT_FAILURE);
+    }
+    S_Level *actual = levelList->first;
+    while (actual != NULL) {
+      if(strstr(actual->name, levelName) !=NULL){
+          ret = i;
+          break;
+        }
+      else{
+        ret = 0;
+        i++;
+      }
+	actual = actual->next;
+    }
+  fprintf(stderr,"levelchoice from file : %d\n", ret);
+  return ret;
+}
 #endif

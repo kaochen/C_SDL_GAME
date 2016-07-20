@@ -22,8 +22,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../inc/settings.h"
 #include "../inc/menu.h"
+#include <string.h>
 
-/*read window height and width from the preference file */
+/*get int value from the preference file */
 int getPrefAsInt(const char* prefName){
   FILE* prefFile = NULL;
   char line[MAX_CARACT]="";
@@ -48,6 +49,27 @@ fclose(prefFile);
 return ret;
 }
 
+/*get char value from the preference file */
+int getPrefAsChar(const char* prefName, char * prefValue){
+  FILE* prefFile = NULL;
+  char line[MAX_CARACT]="";
+  prefFile = fopen("preferences.ini", "r");
+  if(prefFile != NULL){
+
+    while (fgets(line, MAX_CARACT, prefFile) != NULL){
+        if(strstr(line, prefValue) !=NULL){
+          prefValue = strpbrk(line, "=");
+          fprintf(stderr, "%s ::::: %s\n",prefName, prefValue);
+        }
+  }
+  }
+  else{
+    printf("Failed to open \"preferences.ini\" file");
+    return EXIT_FAILURE;
+  }
+fclose(prefFile);
+return EXIT_SUCCESS;
+}
 
 int getWindow_width(){
     int ret = getPrefAsInt("window_width");
@@ -88,31 +110,39 @@ int getMax_Blocks(){
 
 /* write a pref char */
 int writePrefChar(const char * prefName, const char * value){
-  FILE* prefFile = NULL;
 
   char line[MAX_CARACT]="";
   char settingName[MAX_CARACT] = "";
   strcpy(settingName, prefName);
   char settingValue[MAX_CARACT]="";
   strcpy(settingValue, value);
+
   printf("searching :%s = %s\n", settingName, value);
+
+  FILE* prefFile = NULL;
   prefFile = fopen("preferences.ini", "r+");
-  if(prefFile != NULL){
+  FILE* tmpFile = NULL;
+  tmpFile = fopen("tmp.ini", "w+");
+
+  if(prefFile != NULL && prefFile != NULL ){
 
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
         if(strstr(line, settingName) !=NULL){
-         printf("found setting here %s\n", line);
-         break;
+         fprintf(tmpFile, "%s = %s\n",settingName, value);
+        }
+        else{
+      fprintf(tmpFile,"%s",line);
         }
       }
-      fseek(prefFile,-(strlen(line)),SEEK_CUR);
-      fprintf(prefFile, "%s = %s\n",settingName, value);
   }
   else{
     printf("Failed to open \"preferences.ini\" file");
     return EXIT_FAILURE;
   }
 fclose(prefFile);
+fclose(tmpFile);
+rename("tmp.ini","preferences.ini");
+
 return EXIT_SUCCESS;
 }
 #endif

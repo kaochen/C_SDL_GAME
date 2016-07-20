@@ -101,8 +101,9 @@ int main(int argc, char *argv[])
     /* create a grid with coordinates x,y to locate things */
     Square grid[getMax_Blocks()][getMax_Blocks()];
 
-    int levelChoice = 0;
+
     char levelName[MAX_CARACT]="";
+
 
     /*List slc files from the levels/ folder */
     fprintf(stderr, "Searching files in the levels folder.\n");
@@ -143,6 +144,9 @@ int main(int argc, char *argv[])
     int max_Levels = getNbrOfLevels(levelList);
 
     /*Load first game */
+
+    int levelChoice = 0;
+    readLevelFromSetting(levelList);
     fprintf(stderr, "Loading first level.");
     if (loadSlcLevel(levelChoice, levelList, grid) == EXIT_SUCCESS) {
 	fprintf(stderr, "Level loaded\n");

@@ -37,4 +37,8 @@ int getLevelName(int levelChoice, S_LevelList * levelList, char * levelName);
 
 /*Found the level number with just the name*/
 int findLevelNumber(S_LevelList * levelList, char * levelName);
+
+/*get a levelchoice by reading the level name from the preference file*/
+int readLevelFromSetting(S_LevelList * levelList);
+
 #endif
