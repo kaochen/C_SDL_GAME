@@ -49,26 +49,29 @@ fclose(prefFile);
 return ret;
 }
 
-/*get char value from the preference file */
-int getPrefAsChar(const char* prefName, char * prefValue){
+char* getPrefAsChar(const char* prefName){
   FILE* prefFile = NULL;
   char line[MAX_CARACT]="";
+  char *ret= malloc(MAX_CARACT);
+
   prefFile = fopen("preferences.ini", "r");
   if(prefFile != NULL){
-
+            fprintf(stderr,"prefName: %s\n", prefName);
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
-        if(strstr(line, prefValue) !=NULL){
-          prefValue = strpbrk(line, "=");
-          fprintf(stderr, "%s ::::: %s\n",prefName, prefValue);
+        if(strstr(line, prefName) != NULL){
+
+            fprintf(stderr,"line: %s\n", line);
+            ret = strpbrk(line, "=");
+
+            fprintf(stderr,"ret: %s\n", ret);
+            }
         }
-  }
   }
   else{
     printf("Failed to open \"preferences.ini\" file");
-    return EXIT_FAILURE;
   }
 fclose(prefFile);
-return EXIT_SUCCESS;
+return ret;
 }
 
 int getWindow_width(){
