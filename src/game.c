@@ -263,24 +263,24 @@ int blitCorners(Square grid[][getMax_Blocks()], SDL_Surface * screen, Sprites ta
             if (grid[x][y].mainRole == WALL && grid[x][y-1].mainRole == OUTSIDE && grid[x+1][y-1].mainRole == OUTSIDE && grid[x+1][y].mainRole == OUTSIDE )
             {
              SDL_BlitSurface(tableSurface[CORNER_TR].image, NULL,	screen, &pos);
-             fprintf(stderr, "found TOP_RIGHT %d/%d\n", x,y );
+             //fprintf(stderr, "found TOP_RIGHT %d/%d\n", x,y );
             }
             /*blit top left corners */
             if (grid[x][y].mainRole == WALL && grid[x][y-1].mainRole == OUTSIDE && grid[x-1][y-1].mainRole == OUTSIDE && grid[x-1][y].mainRole == OUTSIDE )
             {
 		      SDL_BlitSurface(tableSurface[CORNER_TL].image, NULL,	screen, &pos);
-            fprintf(stderr, "found TOP_LEFT %d/%d\n", x,y );
+            //fprintf(stderr, "found TOP_LEFT %d/%d\n", x,y );
             }
             /*blit bottom right corners */
             if (grid[x][y].mainRole == WALL && grid[x][y+1].mainRole == OUTSIDE && grid[x+1][y+1].mainRole == OUTSIDE && grid[x+1][y].mainRole == OUTSIDE )
             {
               SDL_BlitSurface(tableSurface[CORNER_BR].image, NULL,screen, &pos);
-              fprintf(stderr, "found BOTTOM_RIGHT %d/%d\n", x,y );
+              //fprintf(stderr, "found BOTTOM_RIGHT %d/%d\n", x,y );
             }
             if (grid[x][y].mainRole == WALL && grid[x][y+1].mainRole == OUTSIDE && grid[x-1][y+1].mainRole == OUTSIDE && grid[x-1][y].mainRole == OUTSIDE )
             {
 		    SDL_BlitSurface(tableSurface[CORNER_BL].image, NULL,	screen, &pos);
-            fprintf(stderr, "found BOTTOM_LEFT %d/%d\n", x,y );
+            //fprintf(stderr, "found BOTTOM_LEFT %d/%d\n", x,y );
             }
         }
    }

@@ -145,11 +145,10 @@ int findLevelNumber(S_LevelList * levelList, char * levelName)
 int readLevelFromSetting(S_LevelList * levelList)
 {
     int i = 0, ret = 0;
-    char levelName[MAX_CARACT]="Alberto Garcia Arr 3 Alberto 6a";
-    char *buf =  getPrefAsChar("LevelName");
-    fprintf(stderr, "buf: %s\n", buf);
+    char levelName[MAX_CARACT]="";
+    char *buf = getPrefAsChar("LevelName");
     strcpy(levelName, buf);
-    fprintf(stderr, "leveName read from pref File %s\n", levelName);
+    fprintf(stderr, "First level to load is %s\n", levelName);
 
     if (levelList == NULL) {
 	exit(EXIT_FAILURE);

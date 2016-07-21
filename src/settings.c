@@ -53,17 +53,22 @@ char* getPrefAsChar(const char* prefName){
   FILE* prefFile = NULL;
   char line[MAX_CARACT]="";
   char *ret= malloc(MAX_CARACT);
-
+  char ret2[MAX_CARACT]="";
+  int i = 0, size = 0;
   prefFile = fopen("preferences.ini", "r");
   if(prefFile != NULL){
-            fprintf(stderr,"prefName: %s\n", prefName);
+        //fprintf(stderr,"prefName: %s\n", prefName);
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
         if(strstr(line, prefName) != NULL){
-
-            fprintf(stderr,"line: %s\n", line);
-            ret = strpbrk(line, "=");
-
-            fprintf(stderr,"ret: %s\n", ret);
+            //fprintf(stderr,"line: %s", line);
+            ret = strchr(line, '=');
+            //fprintf(stderr,"ret:%s", ret);
+            /*dump first carac =*/
+            size = strlen(ret);
+            for(i=1;i<= (size);i++){
+              ret2[i-1]=ret[i];
+            }
+            //fprintf(stderr,"ret2:%s", ret2);
             }
         }
   }
@@ -71,6 +76,8 @@ char* getPrefAsChar(const char* prefName){
     printf("Failed to open \"preferences.ini\" file");
   }
 fclose(prefFile);
+strcpy(ret,ret2);
+fprintf(stderr,"From \"preferences.ini\": %s = %s", prefName, ret);
 return ret;
 }
 

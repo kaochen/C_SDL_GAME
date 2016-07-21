@@ -147,13 +147,12 @@ int main(int argc, char *argv[])
 
     int levelChoice = 0;
     readLevelFromSetting(levelList);
-    fprintf(stderr, "Loading first level.");
+    fprintf(stderr, "Loading first level.\n");
     if (loadSlcLevel(levelChoice, levelList, grid) == EXIT_SUCCESS) {
 	fprintf(stderr, "Level loaded\n");
     } else {
 	perror("Impossible to load the level. Perror");
     }
-
 
 
     /* Set player position */
