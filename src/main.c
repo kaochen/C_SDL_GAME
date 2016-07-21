@@ -145,8 +145,7 @@ int main(int argc, char *argv[])
 
     /*Load first game */
 
-    int levelChoice = 0;
-    readLevelFromSetting(levelList);
+    int levelChoice =  readLevelFromSetting(levelList);
     fprintf(stderr, "Loading first level.\n");
     if (loadSlcLevel(levelChoice, levelList, grid) == EXIT_SUCCESS) {
 	fprintf(stderr, "Level loaded\n");
@@ -424,7 +423,7 @@ int main(int argc, char *argv[])
 		/* display the level using grid */
 		displayLevel(grid, screen, tableSurface);
 		/* display menu on top of the screen */
-		displayMenu((levelChoice + 1), menu, tableSurface,
+		displayMenu((levelChoice), menu, tableSurface,
 			    levelList);
 		/*reset status */
 		winStatus = NOT_FINISHED;
@@ -446,11 +445,11 @@ int main(int argc, char *argv[])
 		/* display the level using grid */
 		displayLevel(grid, screen, tableSurface);
 		/* display menu on top of the screen */
-		displayMenu((levelChoice + 1), menu, tableSurface,
+		displayMenu((levelChoice), menu, tableSurface,
 			    levelList);
 		/*reset status */
 		winStatus = NOT_FINISHED;
-		fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
+		fprintf(stderr, "Level %d\n loaded", (levelChoice));
 
 		break;
 		/* hit p to load the previous level */
@@ -470,11 +469,11 @@ int main(int argc, char *argv[])
 		/* display the level using grid */
 		displayLevel(grid, screen, tableSurface);
 		/* display menu on top of the screen */
-		displayMenu((levelChoice + 1), menu, tableSurface,
+		displayMenu((levelChoice), menu, tableSurface,
 			    levelList);
 		/*reset status */
 		winStatus = NOT_FINISHED;
-		fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
+		fprintf(stderr, "Level %d\n loaded", (levelChoice));
 
 		break;
 		/* hit q to quit */

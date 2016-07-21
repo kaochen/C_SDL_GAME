@@ -54,21 +54,37 @@ char* getPrefAsChar(const char* prefName){
   char line[MAX_CARACT]="";
   char *ret= malloc(MAX_CARACT);
   char ret2[MAX_CARACT]="";
-  int i = 0, size = 0;
+  int i = 0, j = -1 ,size = 0;
   prefFile = fopen("preferences.ini", "r");
   if(prefFile != NULL){
         //fprintf(stderr,"prefName: %s\n", prefName);
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
         if(strstr(line, prefName) != NULL){
             //fprintf(stderr,"line: %s", line);
-            ret = strchr(line, '=');
+            ret = strchr(line, '"');
             //fprintf(stderr,"ret:%s", ret);
-            /*dump first carac =*/
+
+            /*dump quatation marks "" */
             size = strlen(ret);
-            for(i=1;i<= (size);i++){
-              ret2[i-1]=ret[i];
+            for (i=0;i<size;i++){
+              if(ret[i]=='"'){
+              }
+              else{
+                j++;
+                ret2[j]=ret[i];
+              }
             }
-            //fprintf(stderr,"ret2:%s", ret2);
+
+            /*dump \n */
+            size = strlen(ret2);
+            for (i=0;i<=size;i++){
+                if(ret2[i] == '\n')
+                  {
+                  ret2[i] = '\0';
+                  }
+            }
+
+            //fprintf(stderr,"ret2:%sreturn\n", ret2);
             }
         }
   }
@@ -77,7 +93,7 @@ char* getPrefAsChar(const char* prefName){
   }
 fclose(prefFile);
 strcpy(ret,ret2);
-fprintf(stderr,"From \"preferences.ini\": %s = %s", prefName, ret);
+fprintf(stderr,"From \"preferences.ini\": %s = %s\n", prefName, ret);
 return ret;
 }
 
@@ -138,7 +154,7 @@ int writePrefChar(const char * prefName, const char * value){
 
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
         if(strstr(line, settingName) !=NULL){
-         fprintf(tmpFile, "%s = %s\n",settingName, value);
+         fprintf(tmpFile, "%s = \"%s\"\n",settingName, value);
          strcpy(line,"");//empty the line buffer
         }
         else{
