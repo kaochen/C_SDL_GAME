@@ -205,7 +205,7 @@ int randomGround(Square grid[][getMax_Blocks()])
 {
     int x = 0, y = 0, randomNumber = 0;
     for (y = 0; y < getY_Blocks(); y++) {
-        for (x = 0; x < getY_Blocks(); x++) {
+        for (x = 0; x < getX_Blocks(); x++) {
 
              randomNumber = random_number(0, 100);
              if (randomNumber <= 60) {
