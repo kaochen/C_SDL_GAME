@@ -37,7 +37,13 @@ int getPrefAsInt(const char* prefName){
 
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
         if(strstr(line, settingName) !=NULL){
+          //fprintf(stderr,"line: %s", line);
+          if (strpbrk(line, "0123456789") != NULL){
           ret = atoi(strpbrk(line, "0123456789"));
+          }
+            else{
+               ret = 0;
+                }
         }
       }
 
@@ -61,8 +67,12 @@ char* getPrefAsChar(const char* prefName){
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
         if(strstr(line, prefName) != NULL){
             //fprintf(stderr,"line: %s", line);
-            ret = strchr(line, '"');
-            //fprintf(stderr,"ret:%s", ret);
+            if(strchr(line, '"') != NULL){
+            ret = strchr(line, '"');}
+            else{
+              strcpy(ret,"");
+            }
+            fprintf(stderr,"ret:%s", ret);
 
             /*dump quatation marks "" */
             size = strlen(ret);
