@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/settings.h"
 #include "../inc/menu.h"
 #include <string.h>
+#include <errno.h>
 
 /*get int value from the preference file */
 int getPrefAsInt(const char* prefName){
@@ -49,7 +50,7 @@ int getPrefAsInt(const char* prefName){
 
   }
   else{
-    printf("Failed to open \"preferences.ini\" file");
+    perror("Failed to open \"preferences.ini\"");
   }
 fclose(prefFile);
 return ret;
@@ -99,7 +100,7 @@ char* getPrefAsChar(const char* prefName){
         }
   }
   else{
-    printf("Failed to open \"preferences.ini\" file");
+    perror("Failed to open \"preferences.ini\"");
   }
 fclose(prefFile);
 strcpy(ret,ret2);
@@ -173,12 +174,12 @@ int writePrefChar(const char * prefName, const char * value){
       }
   }
   else{
-    printf("Failed to open \"preferences.ini\" file");
+    perror("Failed to open \"preferences.ini\"");
     return EXIT_FAILURE;
   }
 fclose(prefFile);
 fclose(tmpFile);
- rename("tmp.ini","preferences.ini");
+rename("tmp.ini","preferences.ini");
 
 return EXIT_SUCCESS;
 }
