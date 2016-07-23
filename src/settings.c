@@ -33,7 +33,7 @@ int getPrefAsInt(const char* prefName){
   strcpy(settingName, prefName);
 
   int ret = 0;
-  prefFile = fopen("preferences.ini", "r");
+  prefFile = fopen(PREF_FILE, "r");
   if(prefFile != NULL){
 
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
@@ -50,7 +50,7 @@ int getPrefAsInt(const char* prefName){
 
   }
   else{
-    perror("Failed to open \"preferences.ini\"");
+    fprintf(stderr, "Error opening %s: %s\n", PREF_FILE, strerror(errno));
   }
 fclose(prefFile);
 return ret;
@@ -62,7 +62,7 @@ char* getPrefAsChar(const char* prefName){
   char *ret= malloc(MAX_CARACT);
   char ret2[MAX_CARACT]="";
   int i = 0, j = -1 ,size = 0;
-  prefFile = fopen("preferences.ini", "r");
+  prefFile = fopen(PREF_FILE, "r");
   if(prefFile != NULL){
         //fprintf(stderr,"prefName: %s\n", prefName);
     while (fgets(line, MAX_CARACT, prefFile) != NULL){
@@ -100,11 +100,11 @@ char* getPrefAsChar(const char* prefName){
         }
   }
   else{
-    perror("Failed to open \"preferences.ini\"");
+    fprintf(stderr, "Error opening %s: %s\n", PREF_FILE, strerror( errno));
   }
 fclose(prefFile);
 strcpy(ret,ret2);
-fprintf(stderr,"From \"preferences.ini\": %s = %s\n", prefName, ret);
+fprintf(stderr,"From \"%s\": %s = %s\n",PREF_FILE, prefName, ret);
 return ret;
 }
 
@@ -157,7 +157,7 @@ int writePrefChar(const char * prefName, const char * value){
   printf("searching :%s = %s\n", settingName, value);
 
   FILE* prefFile = NULL;
-  prefFile = fopen("preferences.ini", "r+");
+  prefFile = fopen(PREF_FILE, "r+");
   FILE* tmpFile = NULL;
   tmpFile = fopen("tmp.ini", "w+");
 
@@ -174,12 +174,12 @@ int writePrefChar(const char * prefName, const char * value){
       }
   }
   else{
-    perror("Failed to open \"preferences.ini\"");
+    fprintf(stderr, "Error opening %s: %s\n", PREF_FILE, strerror( errno));
     return EXIT_FAILURE;
   }
 fclose(prefFile);
 fclose(tmpFile);
-rename("tmp.ini","preferences.ini");
+rename("tmp.ini", PREF_FILE);
 
 return EXIT_SUCCESS;
 }
