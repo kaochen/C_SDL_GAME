@@ -1,7 +1,7 @@
 #Makefile
 
 CC=gcc
-CFLAGS= -std=c11 -Wall -Wextra `sdl2-config --cflags --libs`  -lSDL2main -lSDL2_image -lSDL2 -lSDL2_ttf `xml2-config --cflags` `xml2-config --libs`
+CFLAGS= -std=c11 -Wall -Wextra `sdl2-config --cflags --libs`  -lSDL2main -lSDL2_image -lSDL2 -lSDL2_ttf `xml2-config --cflags` `xml2-config --libs` -lSDL2_gfx
 LDFLAGS=
 OBJDIR=obj
 EXEC=SokoRobot

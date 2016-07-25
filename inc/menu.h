@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
+#include <SDL2/SDL2_rotozoom.h>
 
 #include "const.h"
 #include "game.h"
@@ -67,4 +68,10 @@ int displayCongrats(SDL_Surface * screen,
 /* return the height of the menu in blocks*/
 int menuHeight(void);
 
+/* circle progress */
+int circleProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
+		     Sprites tableSurface[NBR_OF_IMAGES]);
+
+/* menu position*/
+int menuPosX(void);
 #endif

@@ -31,6 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 //define size of a sprite in px
 #define SPRITE_SIZE 40
 
+#define MENU_WIDTH 400
 
 //autorise 100 images max
 #define NBR_OF_IMAGES 100

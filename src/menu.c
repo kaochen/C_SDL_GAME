@@ -39,11 +39,12 @@ void displayMenu(int levelNumber, SDL_Surface * menu,
 void backgroundMenu(SDL_Surface * menu,
 		    Sprites tableSurface[NBR_OF_IMAGES])
 {
-    SDL_Rect menuPos;
-    menuPos.x = 0;
-    menuPos.y = 0;
     int i = 0;
-    for (i = 0; i < getX_Blocks(); i++) {
+    SDL_Rect menuPos;
+    menuPos.x = (getX_Blocks()*SPRITE_SIZE - MENU_WIDTH)/2; //center the menu
+    menuPos.y = 0;
+
+    for (i = 0; i < MENU_WIDTH/SPRITE_SIZE; i++) {
 	SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu,
 			&menuPos);
 	menuPos.x += SPRITE_SIZE;
@@ -60,11 +61,11 @@ void displayShortcut(SDL_Surface * menu)
     SDL_Surface *shortCutText = NULL;
     shortCutText =
 	TTF_RenderText_Blended(font,
-			       "N: next P: previous R: Reset Q: quit",
+			       "(M) =",
 			       fontColor);
     /* blit the text */
     SDL_Rect shortCutTextPos;
-    shortCutTextPos.x = SPRITE_SIZE * (getX_Blocks() - 7);
+    shortCutTextPos.x = ((getX_Blocks()*SPRITE_SIZE-MENU_WIDTH)/2) + (MENU_WIDTH - 2*SPRITE_SIZE);
     shortCutTextPos.y = 10;
     SDL_BlitSurface(shortCutText, NULL, menu, &shortCutTextPos);
 
@@ -232,4 +233,24 @@ int menuHeight(void){
   int nbrOfBlocks = 1;
   return nbrOfBlocks;
 }
+
+/* circle progress */
+  int circleProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
+		     Sprites tableSurface[NBR_OF_IMAGES]){
+
+  SDL_Surface *circle = NULL, *image = NULL;
+  SDL_Rect pos;
+  double angle = 0;
+  circle = rotozoomSurface (image,angle, 1.0, 1);
+  pos.x = getX_Blocks()*SPRITE_SIZE/2;
+  SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu,
+			&pos);
+  return EXIT_SUCCESS;
+}
+
+/* menu position*/
+int menuPosX(void){
+  return ((getX_Blocks()*SPRITE_SIZE) - MENU_WIDTH /2);
+}
+
 #endif
