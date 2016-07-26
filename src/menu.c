@@ -145,9 +145,9 @@ void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
     circlePos.x = menuPosX () + 16;
     circlePos.y = 5;
 
-    /* progress.png is 2° part of cirle 360/2 = 180 */
+    /* progress.png is a small part of 360° cirle*/
     int angle = (goalLeft(grid)*360/nbr_of_goals(grid))*(-1);
-    fprintf(stderr,"Angle is %d\n", angle);
+    //fprintf(stderr,"Angle is %d\n", angle);
     int i = 0;
     /* blit progress circle size image is 56*56px*/
   for(i=0;i>=angle;i--){
