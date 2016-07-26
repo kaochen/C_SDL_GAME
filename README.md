@@ -4,6 +4,12 @@ SokoRobot is a Sokoban game. It's written in langage C using SDL2.
 ![SokoRobor_ScreenShot](./src/img/SokoRobot-ScreenShot.png)
 
 This is an early draft, use it carefully.
+### Shortcuts
+* m: menu
+* n: next level
+* p: previous level
+* r: reset current level
+* q: quit
 
 ### Dependencies
 ```
