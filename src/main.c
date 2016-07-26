@@ -163,10 +163,7 @@ int main(int argc, char *argv[])
     displayLevel(grid, screen, tableSurface);
 
     /* display menu on top of the screen */
-    displayMenu(levelChoice, menu, tableSurface, levelList);
-
-    /* display Progress in the menu */
-    displayProgress(grid, menu, tableSurface);
+    displayMenu(levelChoice, menu, tableSurface, levelList, grid);
 
     /* refresh the window */
     SDL_UpdateWindowSurface(window);
@@ -423,8 +420,7 @@ int main(int argc, char *argv[])
 		/* display the level using grid */
 		displayLevel(grid, screen, tableSurface);
 		/* display menu on top of the screen */
-		displayMenu((levelChoice), menu, tableSurface,
-			    levelList);
+      displayMenu(levelChoice, menu, tableSurface, levelList, grid);
 		/*reset status */
 		winStatus = NOT_FINISHED;
 		fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
@@ -445,8 +441,7 @@ int main(int argc, char *argv[])
 		/* display the level using grid */
 		displayLevel(grid, screen, tableSurface);
 		/* display menu on top of the screen */
-		displayMenu((levelChoice), menu, tableSurface,
-			    levelList);
+		displayMenu((levelChoice), menu, tableSurface,levelList,grid);
 		/*reset status */
 		winStatus = NOT_FINISHED;
 		fprintf(stderr, "Level %d\n loaded", (levelChoice));
@@ -469,8 +464,7 @@ int main(int argc, char *argv[])
 		/* display the level using grid */
 		displayLevel(grid, screen, tableSurface);
 		/* display menu on top of the screen */
-		displayMenu((levelChoice), menu, tableSurface,
-			    levelList);
+		displayMenu((levelChoice), menu, tableSurface,levelList,grid);
 		/*reset status */
 		winStatus = NOT_FINISHED;
 		fprintf(stderr, "Level %d\n loaded", (levelChoice));
@@ -486,8 +480,7 @@ int main(int argc, char *argv[])
 		break;
 	    }
 
-	    /* display Progress in the menu */
-	    displayProgress(grid, menu, tableSurface);
+		displayMenu((levelChoice), menu, tableSurface,levelList,grid);
 
 	    /*test if the level is complete by the player */
 	    if (levelFinished(grid, screen, tableSurface) == FINISH) {

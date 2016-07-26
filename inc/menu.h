@@ -35,7 +35,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* display menu */
 void displayMenu(int levelNumber, SDL_Surface * menu,
 		 Sprites tableSurface[NBR_OF_IMAGES],
-		 S_LevelList * levelList);
+		 S_LevelList * levelList,Square grid[][getMax_Blocks()]);
 
 /* display background menu */
 void backgroundMenu(SDL_Surface * menu,
@@ -68,9 +68,6 @@ int displayCongrats(SDL_Surface * screen,
 /* return the height of the menu in blocks*/
 int menuHeight(void);
 
-/* circle progress */
-int circleProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
-		     Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* menu position*/
 int menuPosX(void);

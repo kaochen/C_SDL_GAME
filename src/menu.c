@@ -23,32 +23,37 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/menu.h"
 
 
+
 /* display menu */
 void displayMenu(int levelNumber, SDL_Surface * menu,
 		 Sprites tableSurface[NBR_OF_IMAGES],
-		 S_LevelList * levelList)
+		 S_LevelList * levelList,Square grid[][getMax_Blocks()])
 {
     /* first add background */
     backgroundMenu(menu, tableSurface);
     /* display the level number */
     levelMenu(levelNumber, menu, levelList);
+  	 displayProgress(grid, menu, tableSurface);
     displayShortcut(menu);
+
+    SDL_Rect facePos;
+    facePos.x = menuPosX () + 24;
+    facePos.y = 12;
+  	 SDL_BlitSurface(tableSurface[PLAYER_FRONT].image, NULL, menu,
+			&facePos);
+
 }
 
 /* display background menu */
 void backgroundMenu(SDL_Surface * menu,
 		    Sprites tableSurface[NBR_OF_IMAGES])
 {
-    int i = 0;
     SDL_Rect menuPos;
-    menuPos.x = (getX_Blocks()*SPRITE_SIZE - MENU_WIDTH)/2; //center the menu
+    menuPos.x = menuPosX();
     menuPos.y = 0;
-
-    for (i = 0; i < MENU_WIDTH/SPRITE_SIZE; i++) {
 	SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu,
 			&menuPos);
-	menuPos.x += SPRITE_SIZE;
-    }
+
 }
 
 /* display shortcut in the menu */
@@ -61,11 +66,11 @@ void displayShortcut(SDL_Surface * menu)
     SDL_Surface *shortCutText = NULL;
     shortCutText =
 	TTF_RenderText_Blended(font,
-			       "(M) =",
+			       "(M)",
 			       fontColor);
     /* blit the text */
     SDL_Rect shortCutTextPos;
-    shortCutTextPos.x = ((getX_Blocks()*SPRITE_SIZE-MENU_WIDTH)/2) + (MENU_WIDTH - 2*SPRITE_SIZE);
+    shortCutTextPos.x = menuPosX() + (MENU_WIDTH - 2*SPRITE_SIZE - 4);
     shortCutTextPos.y = 10;
     SDL_BlitSurface(shortCutText, NULL, menu, &shortCutTextPos);
 
@@ -94,7 +99,7 @@ void levelMenu(int levelNumber, SDL_Surface * menu,
 
     /* blit the text */
     SDL_Rect levelTextPos;
-    levelTextPos.x = 10;
+    levelTextPos.x = menuPosX () + 150;
     levelTextPos.y = 10;
     SDL_BlitSurface(levelText, NULL, menu, &levelTextPos);
 
@@ -134,38 +139,24 @@ int nbr_of_goals(Square grid[][getMax_Blocks()])
 void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
 		     Sprites tableSurface[NBR_OF_IMAGES])
 {
-    SDL_Rect progressPos;
-    progressPos.x = SPRITE_SIZE * 4;
-    progressPos.y = 0;
-    /* clean Background */
-    int x = 0;
-    for (x = 0; x < 3; x++) {
-	SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu,
-			&progressPos);
-	progressPos.x += SPRITE_SIZE;
-    }
+    SDL_Surface *circle = NULL;
+    SDL_Rect circlePos;
+    /*place progress.png in the circle*/
+    circlePos.x = menuPosX () + 16;
+    circlePos.y = 5;
 
-    /* setup font */
-    TTF_Font *font = NULL;
-    font = TTF_OpenFont("img/BABIRG__.TTF", 26);
-    SDL_Color fontColor = { 255, 255, 255, 255 };
-    /* get info */
-    int i = goalLeft(grid);
-    int j = nbr_of_goals(grid);
-    /* merge results */
-    SDL_Surface *progress = NULL;
-    char progressText[20] = "";
-    sprintf(progressText, "Goals: %d/%d", i, j);
-    progress = TTF_RenderText_Blended(font, progressText, fontColor);
-
-    /* blit progress */
-    progressPos.x = SPRITE_SIZE * 4;
-    progressPos.y = 10;
-    SDL_BlitSurface(progress, NULL, menu, &progressPos);
-
-    /* clean */
-    SDL_FreeSurface(progress);
-    TTF_CloseFont(font);
+    /* progress.png is 2° part of cirle 360/2 = 180 */
+    int angle = (goalLeft(grid)*360/nbr_of_goals(grid))*(-1);
+    fprintf(stderr,"Angle is %d\n", angle);
+    int i = 0;
+    /* blit progress circle size image is 56*56px*/
+  for(i=0;i>=angle;i--){
+    circle = rotozoomSurface(tableSurface[PROGRESS].image, i, 1.0, 1);
+    circlePos.x = menuPosX () + 16 +(56-circle->w)/2;
+    circlePos.y = 5 +(56-circle->h)/2;
+    SDL_BlitSurface(circle, NULL, menu, &circlePos);
+  }
+   SDL_FreeSurface(circle);
 }
 
 /* Victory or not ? */
@@ -234,23 +225,9 @@ int menuHeight(void){
   return nbrOfBlocks;
 }
 
-/* circle progress */
-  int circleProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
-		     Sprites tableSurface[NBR_OF_IMAGES]){
-
-  SDL_Surface *circle = NULL, *image = NULL;
-  SDL_Rect pos;
-  double angle = 0;
-  circle = rotozoomSurface (image,angle, 1.0, 1);
-  pos.x = getX_Blocks()*SPRITE_SIZE/2;
-  SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu,
-			&pos);
-  return EXIT_SUCCESS;
-}
-
 /* menu position*/
 int menuPosX(void){
-  return ((getX_Blocks()*SPRITE_SIZE) - MENU_WIDTH /2);
+  return ((getWindow_width() - MENU_WIDTH) /2);
 }
 
 #endif

@@ -260,7 +260,7 @@ int getNbrOfLevels(S_LevelList * levelList)
 	actual = actual->next;
 	i++;
     }
-    fprintf(stderr, "Found %d levels\n", i);
+    //fprintf(stderr, "Found %d levels\n", i);
     return i;
 }
 
