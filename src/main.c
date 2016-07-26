@@ -162,6 +162,8 @@ int main(int argc, char *argv[])
     /* display the level using the grid */
     displayLevel(grid, screen, tableSurface);
 
+    blitbackMenu(screen);
+
     /* display menu on top of the screen */
     displayMenu(levelChoice, menu, tableSurface, levelList, grid);
 

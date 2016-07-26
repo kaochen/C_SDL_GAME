@@ -97,4 +97,28 @@ void freeSprites(Sprites tableSurface[NBR_OF_IMAGES])
     fprintf(stderr, "Free all surfaces: %s\n", SDL_GetError());
 }
 
+/* blit background behind the menu */
+int blitbackMenu(SDL_Surface * screen){
+  SDL_SaveBMP(screen, "/tmp/screenshot.bmp");
+  SDL_Surface * back;
+  back=IMG_Load("/tmp/screenshot.bmp");
+  if(back == NULL){
+        fprintf(stderr, "IMG_Load %s failed\n", SDL_GetError());
+  }
+  SDL_Rect backPos;
+  backPos.x=0;
+  backPos.y=0;
+
+  SDL_Rect key;
+  key.x = 0;
+  key.y = 0;
+  key.w = getWindow_width();
+  key.h = 2 * SPRITE_SIZE;
+
+  SDL_BlitSurface(back,&key,screen,&backPos);
+  SDL_FreeSurface(back);
+  remove("/tmp/screenshot.bmp");
+  return EXIT_SUCCESS;
+}
+
 #endif
