@@ -233,4 +233,33 @@ int menuPosX(void){
   return ((getWindow_width() - MENU_WIDTH) /2);
 }
 
+/* Open the menu panel */
+int openMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
+{
+    SDL_SaveBMP(screen, "/tmp/screenshot.bmp");
+    SDL_Rect menuPos;
+    menuPos.x = menuPosX() + 40;
+    menuPos.y = 0;
+    SDL_BlitSurface(tableSurface[CONGRATS].image, NULL, screen,
+		    &menuPos);
+  return EXIT_SUCCESS;
+}
+
+/* Open the menu panel */
+int closeMenu(SDL_Surface * screen){
+    SDL_Surface * image;
+    image = IMG_Load("/tmp/screenshot.bmp");
+    if (image == NULL) {
+	      fprintf(stderr, "IMG_Load /tmp/screenshot.bmp failed: %s\n",SDL_GetError());
+    }
+    SDL_Rect posFill;
+    posFill.x=0;
+    posFill.y=0;
+
+    SDL_BlitSurface(image, NULL, screen, &posFill);
+    SDL_FreeSurface(image);
+    remove("/tmp/screenshot.bmp");
+    return EXIT_SUCCESS;
+}
+
 #endif

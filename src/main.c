@@ -162,7 +162,7 @@ int main(int argc, char *argv[])
     /* display the level using the grid */
     displayLevel(grid, screen, tableSurface);
 
-    blitbackMenu(screen);
+    //blitbackMenu(screen);
 
     /* display menu on top of the screen */
     displayMenu(levelChoice, menu, tableSurface, levelList, grid);
@@ -171,8 +171,8 @@ int main(int argc, char *argv[])
     SDL_UpdateWindowSurface(window);
 
 /* wait for quit event */
-    int carryOn = 1, x = 0, y = 0;
-    int winStatus = NOT_FINISHED;
+    int carryOn = 1, x = 0, y = 0, menuOpened = 0;
+    bool freezeCommand = false;
     SDL_Event event;
     while (carryOn) {
 	SDL_WaitEvent(&event);
@@ -196,7 +196,7 @@ int main(int argc, char *argv[])
 	    switch (event.key.keysym.sym) {
 	    case SDLK_RIGHT:
 		/*Do not move when level is finished */
-		if (winStatus == FINISH)
+		if (freezeCommand == true)
 		    break;
 		/* Don't go outside */
 		if (xPlayer + 1 >= getX_Blocks())
@@ -249,7 +249,7 @@ int main(int argc, char *argv[])
 
 	    case SDLK_LEFT:
 		/*Do not move when level is finished */
-		if (winStatus == FINISH)
+		if (freezeCommand == true)
 		    break;
 
 		/* Don't go outside */
@@ -303,7 +303,7 @@ int main(int argc, char *argv[])
 
 	    case SDLK_UP:
 		/*Do not move when level is finished */
-		if (winStatus == FINISH)
+		if (freezeCommand == true)
 		    break;
 
 		/* Don't go outside */
@@ -357,7 +357,7 @@ int main(int argc, char *argv[])
 
 	    case SDLK_DOWN:
 		/*Do not move when level is finished */
-		if (winStatus == FINISH)
+		if (freezeCommand == true)
 		    break;
 
 		/* Don't go outside */
@@ -408,6 +408,22 @@ int main(int argc, char *argv[])
 		    break;
 		}
 		break;
+		/* hit m to open or close the menu */
+	    case SDLK_m:
+       if (menuOpened == 0){
+       fprintf(stderr, "opening Menu\n");
+       openMenu(screen,tableSurface);
+         freezeCommand = true;
+         menuOpened = 1;
+       }
+       else{
+       closeMenu(screen);
+         fprintf(stderr, "closing Menu\n");
+         freezeCommand = false;
+         menuOpened = 0;
+       }
+		break;
+
 
 		/* hit r to reset the current level */
 	    case SDLK_r:
@@ -424,7 +440,7 @@ int main(int argc, char *argv[])
 		/* display menu on top of the screen */
       displayMenu(levelChoice, menu, tableSurface, levelList, grid);
 		/*reset status */
-		winStatus = NOT_FINISHED;
+      freezeCommand = false;
 		fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
 		break;
 
@@ -445,10 +461,10 @@ int main(int argc, char *argv[])
 		/* display menu on top of the screen */
 		displayMenu((levelChoice), menu, tableSurface,levelList,grid);
 		/*reset status */
-		winStatus = NOT_FINISHED;
+      freezeCommand = false;
 		fprintf(stderr, "Level %d\n loaded", (levelChoice));
-
 		break;
+
 		/* hit p to load the previous level */
 	    case SDLK_p:
 		/* load previous level */
@@ -468,7 +484,7 @@ int main(int argc, char *argv[])
 		/* display menu on top of the screen */
 		displayMenu((levelChoice), menu, tableSurface,levelList,grid);
 		/*reset status */
-		winStatus = NOT_FINISHED;
+		freezeCommand = false;
 		fprintf(stderr, "Level %d\n loaded", (levelChoice));
 
 		break;
@@ -486,7 +502,7 @@ int main(int argc, char *argv[])
 
 	    /*test if the level is complete by the player */
 	    if (levelFinished(grid, screen, tableSurface) == FINISH) {
-		winStatus = FINISH;
+		freezeCommand = true;
 	    }
 	    SDL_UpdateWindowSurface(window);
 	}

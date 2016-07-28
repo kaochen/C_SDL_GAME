@@ -71,4 +71,10 @@ int menuHeight(void);
 
 /* menu position*/
 int menuPosX(void);
+
+/* Open the menu panel */
+int openMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+
+/* Open the menu panel */
+int closeMenu(SDL_Surface * screen);
 #endif

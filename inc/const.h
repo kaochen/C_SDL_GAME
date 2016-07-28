@@ -46,7 +46,12 @@ typedef struct {
     int subRole;
 } Square;
 
+typedef enum bool bool;
 
+enum bool
+{
+true = 1, false = 0
+};
 
 //object type
 enum { GROUND, GROUND1, GROUND2, GROUND3, GROUND4, OUTSIDE, OUTSIDE2,
