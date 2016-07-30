@@ -239,10 +239,76 @@ int openMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
     SDL_SaveBMP(screen, "/tmp/screenshot.bmp");
     SDL_Rect menuPos;
     menuPos.x = menuPosX() + 40;
-    menuPos.y = 0;
+    menuPos.y = 30;
     SDL_BlitSurface(tableSurface[CONGRATS].image, NULL, screen,
 		    &menuPos);
+
+    displayMenuList(screen, 0);
+    displaySubMenu(screen,tableSurface, 0);
+
   return EXIT_SUCCESS;
+}
+
+/* display Sub menu */
+int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int subMenuChoice){
+    SDL_Rect subMenuPos;
+    subMenuPos.x = menuPosX() + 40;
+    subMenuPos.y = 170;
+    SDL_BlitSurface(tableSurface[CONGRATS].image, NULL, screen, &subMenuPos);
+    fprintf(stderr, "levelChoice %d\n", subMenuChoice);
+    return EXIT_SUCCESS;
+}
+
+/* Show menu List */
+void displayMenuList(SDL_Surface * screen, int menuChoice)
+{
+    /* blit text */
+    /* setup font */
+    TTF_Font *font = NULL;
+    font = TTF_OpenFont("img/BABIRG__.TTF", 26);
+    SDL_Color fontColor = { 255, 255, 255, 255 };
+    SDL_Surface *menuText = NULL;
+    SDL_Rect menuTextPos;
+    menuTextPos.x = menuPosX() + 60;
+
+      /* blit the text */
+    menuText = TTF_RenderText_Blended(font,"Current Level Infos", fontColor);
+    menuTextPos.y = 60;
+    SDL_BlitSurface(menuText, NULL, screen, &menuTextPos);
+
+    menuText = TTF_RenderText_Blended(font,"Shortcuts", fontColor);
+    menuTextPos.y += 30;
+    SDL_BlitSurface(menuText, NULL, screen, &menuTextPos);
+
+    menuText = TTF_RenderText_Blended(font,"About", fontColor);
+    menuTextPos.y += 30;
+    SDL_BlitSurface(menuText, NULL, screen, &menuTextPos);
+
+   /*Blit point */
+    /* setup font */
+    TTF_Font *fontPoint = NULL;
+    fontPoint = TTF_OpenFont("img/BABIRG__.TTF", 60);
+    SDL_Color fontPointColor = { 255, 255, 255, 255 };
+    SDL_Surface *point = NULL;
+    SDL_Rect pointPos;
+    pointPos.x = menuPosX() + 45;
+    pointPos.y = 60;
+
+    if(menuChoice == 1){
+       pointPos.y += 30;
+    }
+    else if (menuChoice == 2){
+       pointPos.y += 30;
+    }
+
+      point = TTF_RenderText_Blended(fontPoint,"*", fontPointColor);
+      SDL_BlitSurface(point, NULL, screen, &pointPos);
+
+    /* clean */
+    SDL_FreeSurface(menuText);
+    TTF_CloseFont(font);
+    SDL_FreeSurface(point);
+    TTF_CloseFont(fontPoint);
 }
 
 /* Open the menu panel */

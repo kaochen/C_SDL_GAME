@@ -75,6 +75,12 @@ int menuPosX(void);
 /* Open the menu panel */
 int openMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
+/* display Sub menu */
+int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int subMenuChoice);
+
+/* Show menu List */
+void displayMenuList(SDL_Surface * screen, int menuChoice);
+
 /* Open the menu panel */
 int closeMenu(SDL_Surface * screen);
 #endif
