@@ -48,8 +48,4 @@ void loadSprite(Sprites * sprites, const char *imagePath);
 
 /* free all surfaces */
 void freeSprites(Sprites tableSurface[NBR_OF_IMAGES]);
-
-
-/* blit background behind the menu */
-int blitbackMenu(SDL_Surface * screen);
 #endif
