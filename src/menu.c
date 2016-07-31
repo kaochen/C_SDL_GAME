@@ -209,7 +209,6 @@ int displayCongrats(SDL_Surface * screen,
     congratsMessage =
 	TTF_RenderText_Blended(font, congratsMessageText, fontColor);
 
-
     /* blit progress */
     congratsMessagePos.x = (getWindow_width() - 250) / 2;
     congratsMessagePos.y = (getWindow_height() - fontCongratsSize) / 2;
@@ -308,25 +307,41 @@ int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_L
     /* blit text */
     /* setup font */
     TTF_Font *font = NULL;
-    font = TTF_OpenFont("img/BABIRG__.TTF", 22);
+    font = TTF_OpenFont("img/BABIRG__.TTF", 26);
     SDL_Color fontColor = { 255, 255, 255, 255 };
     SDL_Surface *menuText = NULL;
     SDL_Rect menuTextPos;
     menuTextPos.x = menuPosX() + 60;
 
 
-
   if (menuChoice == 0){
     /*Level Info*/
     int i = 0;
-    char nameLevel[MAX_CARACT] = "Name : ";
+    unsigned int sizeMax = 28;
+    char nameLevel[MAX_CARACT] = "Name: ";
     char nameFile[MAX_CARACT] = "File: ";
+    char *pbuf;
+
     S_Level *actual = malloc(sizeof(*actual));
         actual = levelList->first;
     while (actual->name != NULL) {
       if (i == levelChoice){
-            sprintf(nameLevel,"Name: %s",actual->name);
-            sprintf(nameFile,"File: %s",actual->fileName);
+            /*trunk long name*/
+            if (strlen(actual->name) > sizeMax){
+            sprintf(nameLevel,"%s...",strncat(nameLevel,actual->name, sizeMax));
+            }
+            else{
+            sprintf(nameLevel,"%s",strcat(nameLevel,actual->name));
+            }
+
+            /*trunk long file name*/
+            pbuf = strpbrk(actual->fileName, "/");
+            if (strlen(pbuf) > sizeMax){
+                sprintf(nameFile,"File: %s...",strncat(nameFile,pbuf, sizeMax));
+            }
+            else{
+                sprintf(nameFile,"File: %s",pbuf);
+            }
       }
 	actual = actual->next;
      i++;
