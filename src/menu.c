@@ -80,7 +80,7 @@ void displayShortcut(SDL_Surface * menu)
 }
 
 /* display the level number */
-void levelMenu(int levelNumber, SDL_Surface * menu,
+void levelMenu(int levelNumber, SDL_Surface * screen,
 	       S_LevelList * levelList)
 {
     /* setup font */
@@ -101,7 +101,7 @@ void levelMenu(int levelNumber, SDL_Surface * menu,
     SDL_Rect levelTextPos;
     levelTextPos.x = menuPosX () + 150;
     levelTextPos.y = 10;
-    SDL_BlitSurface(levelText, NULL, menu, &levelTextPos);
+    SDL_BlitSurface(levelText, NULL, screen, &levelTextPos);
 
     /* clean */
     SDL_FreeSurface(levelText);
@@ -136,7 +136,7 @@ int nbr_of_goals(Square grid[][getMax_Blocks()])
 }
 
 /* Display Progress in the level */
-void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
+void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 		     Sprites tableSurface[NBR_OF_IMAGES])
 {
     SDL_Surface *circle = NULL;
@@ -155,7 +155,7 @@ void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
     circlePos.x = menuPosX () + 16 +(56-circle->w)/2;
     circlePos.y = 5 +(56-circle->h)/2;
     if(angle != 0){
-    SDL_BlitSurface(circle, NULL, menu, &circlePos);
+    SDL_BlitSurface(circle, NULL, screen, &circlePos);
     SDL_FreeSurface(circle);
     }
   }
@@ -233,35 +233,18 @@ int menuPosX(void){
   return ((getWindow_width() - MENU_WIDTH) /2);
 }
 
-/* Open the menu panel */
-int openMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
+
+
+/* Show menu List */
+void openMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_LevelList * levelList, int menuChoice, int levelChoice)
 {
-    SDL_SaveBMP(screen, "/tmp/screenshot.bmp");
+    /* blit background*/
     SDL_Rect menuPos;
     menuPos.x = menuPosX() + 40;
     menuPos.y = 30;
     SDL_BlitSurface(tableSurface[CONGRATS].image, NULL, screen,
 		    &menuPos);
 
-    displayMenuList(screen, 0);
-    displaySubMenu(screen,tableSurface, 0);
-
-  return EXIT_SUCCESS;
-}
-
-/* display Sub menu */
-int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int subMenuChoice){
-    SDL_Rect subMenuPos;
-    subMenuPos.x = menuPosX() + 40;
-    subMenuPos.y = 170;
-    SDL_BlitSurface(tableSurface[CONGRATS].image, NULL, screen, &subMenuPos);
-    fprintf(stderr, "levelChoice %d\n", subMenuChoice);
-    return EXIT_SUCCESS;
-}
-
-/* Show menu List */
-void displayMenuList(SDL_Surface * screen, int menuChoice)
-{
     /* blit text */
     /* setup font */
     TTF_Font *font = NULL;
@@ -298,11 +281,13 @@ void displayMenuList(SDL_Surface * screen, int menuChoice)
        pointPos.y += 30;
     }
     else if (menuChoice == 2){
-       pointPos.y += 30;
+       pointPos.y += 60;
     }
 
       point = TTF_RenderText_Blended(fontPoint,"*", fontPointColor);
       SDL_BlitSurface(point, NULL, screen, &pointPos);
+
+   displaySubMenu(screen,tableSurface,levelList,menuChoice, levelChoice);
 
     /* clean */
     SDL_FreeSurface(menuText);
@@ -311,7 +296,78 @@ void displayMenuList(SDL_Surface * screen, int menuChoice)
     TTF_CloseFont(fontPoint);
 }
 
-/* Open the menu panel */
+/* display Sub menu */
+int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_LevelList * levelList, int menuChoice, int levelChoice){
+
+    /* blit background */
+    SDL_Rect subMenuPos;
+    subMenuPos.x = menuPosX() + 40;
+    subMenuPos.y = 170;
+    SDL_BlitSurface(tableSurface[CONGRATS].image, NULL, screen, &subMenuPos);
+
+    /* blit text */
+    /* setup font */
+    TTF_Font *font = NULL;
+    font = TTF_OpenFont("img/BABIRG__.TTF", 22);
+    SDL_Color fontColor = { 255, 255, 255, 255 };
+    SDL_Surface *menuText = NULL;
+    SDL_Rect menuTextPos;
+    menuTextPos.x = menuPosX() + 60;
+
+
+
+  if (menuChoice == 0){
+    /*Level Info*/
+    int i = 0;
+    char nameLevel[MAX_CARACT] = "Name : ";
+    char nameFile[MAX_CARACT] = "File: ";
+    S_Level *actual = malloc(sizeof(*actual));
+        actual = levelList->first;
+    while (actual->name != NULL) {
+      if (i == levelChoice){
+            sprintf(nameLevel,"Name: %s",actual->name);
+            sprintf(nameFile,"File: %s",actual->fileName);
+      }
+	actual = actual->next;
+     i++;
+    }
+
+    menuText = TTF_RenderText_Blended(font,nameLevel, fontColor);
+    menuTextPos.y = 180;
+    SDL_BlitSurface(menuText, NULL, screen, &menuTextPos);
+
+    menuText = TTF_RenderText_Blended(font,"Authors:", fontColor);
+    menuTextPos.y += 30;
+    SDL_BlitSurface(menuText, NULL, screen, &menuTextPos);
+
+    menuText = TTF_RenderText_Blended(font,nameFile, fontColor);
+    menuTextPos.y += 30;
+    SDL_BlitSurface(menuText, NULL, screen, &menuTextPos);
+  }
+
+   /*Shortcuts*/
+    else if (menuChoice == 1){
+    menuText = TTF_RenderText_Blended(font,"m : open and close menu", fontColor);
+    menuTextPos.y = 180;
+    SDL_BlitSurface(menuText, NULL, screen, &menuTextPos);
+
+    menuText = TTF_RenderText_Blended(font,"n : next level   p : previous level", fontColor);
+    menuTextPos.y += 30;
+    SDL_BlitSurface(menuText, NULL, screen, &menuTextPos);
+
+    menuText = TTF_RenderText_Blended(font,"r : reset current level   q : quit game", fontColor);
+    menuTextPos.y += 30;
+    SDL_BlitSurface(menuText, NULL, screen, &menuTextPos);
+  }
+
+    /* clean */
+    SDL_FreeSurface(menuText);
+    TTF_CloseFont(font);
+    return EXIT_SUCCESS;
+}
+
+
+/* Close the menu */
 int closeMenu(SDL_Surface * screen){
     SDL_Surface * image;
     image = IMG_Load("/tmp/screenshot.bmp");

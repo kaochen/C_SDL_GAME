@@ -72,15 +72,13 @@ int menuHeight(void);
 /* menu position*/
 int menuPosX(void);
 
-/* Open the menu panel */
-int openMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+
+/* Open the main menu */
+void openMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_LevelList * levelList, int menuChoice, int levelChoice);
 
 /* display Sub menu */
-int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int subMenuChoice);
+int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_LevelList * levelList, int menuChoice, int levelChoice);
 
-/* Show menu List */
-void displayMenuList(SDL_Surface * screen, int menuChoice);
-
-/* Open the menu panel */
+/* Close the menu */
 int closeMenu(SDL_Surface * screen);
 #endif

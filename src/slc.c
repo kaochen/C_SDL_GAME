@@ -55,7 +55,7 @@ int addFirstFile(S_FilesList * filesList, char *name)
     /*update list files */
     filesList->first = firstFiles;
     filesList->last = firstFiles;
-    filesList->nbr_of_files++;
+    filesList->nbr_of_files = 1;
 
     return EXIT_SUCCESS;
 }
@@ -78,28 +78,30 @@ void addNewFile(S_FilesList * filesList, char *name)
     filesList->nbr_of_files++;
 }
 
-/*Erase a file in the list from start*/
+/*Erase a file in the list from last*/
 int delFile(S_FilesList * filesList)
 {
     if (filesList->nbr_of_files == 0)
-	return EXIT_FAILURE;
+	return -1;
     S_Files *del_file = malloc(sizeof(*del_file));
-    del_file = filesList->first;
-    filesList->first = filesList->first->next;
+    del_file = filesList->last;
+    filesList->last = filesList->first->previous;
     if (filesList->nbr_of_files == 1)
 	filesList->last = NULL;
 
-    free(del_file->name);
     free(del_file);
     filesList->nbr_of_files--;
-    return EXIT_SUCCESS;
+    return 0;
 }
 
 /* destroy file list */
 void destroyFileList(S_FilesList * filesList)
 {
-    while (filesList->nbr_of_files > 0)
-	delFile(filesList);
+
+    while (filesList->nbr_of_files > 0){
+    delFile(filesList);
+    }
+    fprintf(stderr,"\tFiles list destroyed\n");
 }
 
 /*Load slc level into the grid */
@@ -193,7 +195,7 @@ int addFirstLevel(S_LevelList * levelList, char *fileName, char *name,
     /*update  levelList */
     levelList->first = firstLevel;
     levelList->last = firstLevel;
-    levelList->nbr_of_levels++;
+    levelList->nbr_of_levels = 1;
     return EXIT_SUCCESS;
 }
 
@@ -223,27 +225,29 @@ void addNewLevel(S_LevelList * levelList, char *fileName, char *name,
     }
 }
 
-/*Erase a level in the list from start*/
+/*Erase a level in the list from last*/
 int delLevel(S_LevelList * levelList)
 {
-    if (levelList->nbr_of_levels == 0)
-	return EXIT_FAILURE;
-    S_Level *del_level = malloc(sizeof(*del_level));
-    del_level = levelList->first;
-    levelList->first = levelList->first->next;
-    if (levelList->nbr_of_levels == 1)
-	levelList->last = NULL;
+    if (levelList->nbr_of_levels == 0){
+    levelList->last = NULL;
+  	return -1;
+    }
 
-    free(del_level->name);
+    S_Level *del_level = malloc(sizeof(*del_level));
+    del_level = levelList->last;
+    levelList->last = levelList->last->previous;
+    free(del_level);
     levelList->nbr_of_levels--;
-    return EXIT_SUCCESS;
+    return 0;
 }
 
 /* destroy level list */
 void destroy(S_LevelList * levelList)
 {
-    while (levelList->nbr_of_levels > 0)
+    while (levelList->nbr_of_levels > 0){
 	delLevel(levelList);
+    }
+    fprintf(stderr,"\tLevel list destroyed\n");
 }
 
 /*get levels infos from files */

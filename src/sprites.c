@@ -92,7 +92,12 @@ void freeSprites(Sprites tableSurface[NBR_OF_IMAGES])
 {
     int i = 0;
     for (i = 0; i < NBR_OF_IMAGES; i++) {
-	SDL_FreeSurface(tableSurface[i].image);
+
+      if(tableSurface[i].image == NULL){
+        i = NBR_OF_IMAGES + 1;
+      }
+    SDL_FreeSurface(tableSurface[i].image);
+   fprintf(stderr, "Free surfaces: %d\n", i);
     }
     fprintf(stderr, "Free all surfaces: %s\n", SDL_GetError());
 }
