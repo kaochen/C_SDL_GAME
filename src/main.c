@@ -462,6 +462,7 @@ int main(int argc, char *argv[])
 
 		    /*reset status */
             freezeCommand = false;
+            menuOpened = 0;
 		    fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
 		    break;
 
@@ -482,6 +483,7 @@ int main(int argc, char *argv[])
 
 		    /*reset status */
             freezeCommand = false;
+            menuOpened = 0;
 		    fprintf(stderr, "Level %d\n loaded", (levelChoice));
 		    break;
 
@@ -504,6 +506,7 @@ int main(int argc, char *argv[])
 
 		    /*reset status */
 		    freezeCommand = false;
+          menuOpened = 0;
 		    fprintf(stderr, "Level %d\n loaded", (levelChoice));
 
 		    break;
