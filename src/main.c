@@ -151,7 +151,6 @@ int main(int argc, char *argv[])
 
 
     /* Set player position */
-    SDL_Rect playerPos;
     int xPlayer = 0;
     int yPlayer = 0;
 
@@ -165,372 +164,376 @@ int main(int argc, char *argv[])
     SDL_UpdateWindowSurface(window);
 
 /* wait for quit event */
+    const int FPS = 10;
+    Uint32 currentTime = 0;
+    Uint32 previousTime = 0;
     int carryOn = 1, x = 0, y = 0, menuOpened = 0, menuChoice = 0;
     bool freezeCommand = false;
     SDL_Event event;
     while (carryOn) {
-	    SDL_WaitEvent(&event);
+            displayLevel(grid, screen, tableSurface);
+	    //SDL_WaitEvent(&event);
+        while(SDL_PollEvent(&event)){
 
-	    switch (event.type) {
-	    case SDL_QUIT:
-	        carryOn = 0;
-	        break;
-	    case SDL_KEYDOWN:
-	        /* Get the player position */
-	        for (x = 0; x < getX_Blocks(); x++) {
-		    for (y = 0; y < getY_Blocks(); y++) {
-		        if (grid[x][y].mainRole == PLAYER) {
-			    xPlayer = x;
-			    yPlayer = y;
-			    playerPos.x = x * SPRITE_SIZE;
-			    playerPos.y = y * SPRITE_SIZE;
-		        }
-		    }
-	        }
-	        /* listen keyboard */
-	        switch (event.key.keysym.sym) {
-	        case SDLK_RIGHT:
-		    /*Do not move when level is finished */
-		    if (freezeCommand == true)
-		        break;
-		    /* Don't go outside */
-		    if (xPlayer + 1 >= getX_Blocks())
-		        break;
-		    /* Test if wall */
-		    if (grid[xPlayer + 1][yPlayer].mainRole == WALL)
-		        break;
-		    /* Don't go outside with a box */
-		    if (grid[xPlayer + 1][yPlayer].mainRole == BOX
-		        && xPlayer + 2 >= getX_Blocks())
-		        break;
-		    /* Do not move a box if it is close to a wall or an other box */
-		    if (grid[xPlayer + 1][yPlayer].mainRole == BOX
-		        && grid[xPlayer + 2][yPlayer].mainRole == BOX
-		        && grid[xPlayer + 2][yPlayer].mainRole == WALL)
-		        break;
-		    /* Move a box only if there is space to do it */
-		    if ((grid[xPlayer + 1][yPlayer].mainRole == BOX
-		        && grid[xPlayer + 2][yPlayer].mainRole == GROUND)
-		        || (grid[xPlayer + 1][yPlayer].mainRole == BOX
-		        && grid[xPlayer + 2][yPlayer].mainRole == GOAL)) {
-		        /* move the box */
-		        moveBox(xPlayer, yPlayer, grid, RIGHT, screen,
-			        tableSurface);
-		        /* move the player */
-		        movePlayer(xPlayer, yPlayer, RIGHT,
-			           grid, screen, tableSurface);
-		        /* update new player position */
-		        playerPos.x += SPRITE_SIZE;
-		        /* update status */
-		        grid[xPlayer + 2][yPlayer].mainRole = BOX;
-		        grid[xPlayer][yPlayer].mainRole = GROUND;
-		        grid[xPlayer + 1][yPlayer].mainRole = PLAYER;
-		        break;
-		    }
-		    /* move only on grounds and Goals */
-		    if (grid[xPlayer + 1][yPlayer].mainRole == GROUND
-		        || grid[xPlayer + 1][yPlayer].mainRole == GOAL) {
-		        /* move the player */
-		        movePlayer(xPlayer, yPlayer, RIGHT,
-			           grid, screen, tableSurface);
-		        /* update new player position */
-		        playerPos.x += SPRITE_SIZE;
-		        /* update status */
-		        grid[xPlayer][yPlayer].mainRole = GROUND;
-		        grid[xPlayer + 1][yPlayer].mainRole = PLAYER;
-		        break;
-		    }
-		    break;
+	        switch (event.type) {
+	            case SDL_QUIT:
+	                carryOn = 0;
+	                break;
+	            case SDL_KEYDOWN:
+	                /* Get the player position */
+	                for (x = 0; x < getX_Blocks(); x++) {
+		            for (y = 0; y < getY_Blocks(); y++) {
+		                if (grid[x][y].mainRole == PLAYER){
+			            xPlayer = x;
+			            yPlayer = y;
+                        fprintf(stderr, "player on %d:%d\n", xPlayer, yPlayer);
+		                }
+		            }
+	                }
+	                /* listen keyboard */
+	                switch (event.key.keysym.sym) {
+	                case SDLK_RIGHT:
+		            /*Do not move when level is finished */
+		            if (freezeCommand == true)
+		                break;
+		            /* Don't go outside */
+		            if (xPlayer + 1 >= getX_Blocks())
+		                break;
+		            /* Test if wall */
+		            if (grid[xPlayer + 1][yPlayer].mainRole == WALL)
+		                break;
+		            /* Don't go outside with a box */
+		            if (grid[xPlayer + 1][yPlayer].mainRole == BOX
+		                && xPlayer + 2 >= getX_Blocks())
+		                break;
+		            /* Do not move a box if it is close to a wall or an other box */
+		            if (grid[xPlayer + 1][yPlayer].mainRole == BOX
+		                && grid[xPlayer + 2][yPlayer].mainRole == BOX
+		                && grid[xPlayer + 2][yPlayer].mainRole == WALL)
+		                break;
+		            /* Move a box only if there is space to do it */
+		            if ((grid[xPlayer + 1][yPlayer].mainRole == BOX
+		                && grid[xPlayer + 2][yPlayer].mainRole == GROUND)
+		                || (grid[xPlayer + 1][yPlayer].mainRole == BOX
+		                && grid[xPlayer + 2][yPlayer].mainRole == GOAL)) {
 
-	        case SDLK_LEFT:
-		    /*Do not move when level is finished */
-		    if (freezeCommand == true)
-		        break;
+		                /* clean old position */
+		                grid[xPlayer][yPlayer].mainRole = GROUND;
+                        grid[xPlayer][yPlayer].playerRole = EMPTY;
 
-		    /* Don't go outside */
-		    if (xPlayer - 1 < 0)
-		        break;
-		    /* test if wall */
-		    if (grid[xPlayer - 1][yPlayer].mainRole == WALL)
-		        break;
-		    /* Don't go outside with a box */
-		    if (grid[xPlayer - 1][yPlayer].mainRole == BOX
-		        && xPlayer - 2 < 0)
-		        break;
-		    /* Do not move a box if it is close to a wall or an other box */
-		    if (grid[xPlayer - 1][yPlayer].mainRole == BOX
-		        && grid[xPlayer - 2][yPlayer].mainRole == BOX
-		        && grid[xPlayer - 2][yPlayer].mainRole == WALL)
-		        break;
-		    /* Move a box only if there is space to do it */
-		    if ((grid[xPlayer - 1][yPlayer].mainRole == BOX
-		        && grid[xPlayer - 2][yPlayer].mainRole == GROUND)
-		        || (grid[xPlayer - 1][yPlayer].mainRole == BOX
-		        && grid[xPlayer - 2][yPlayer].mainRole == GOAL)) {
-		        /* move the box */
-		        moveBox(xPlayer, yPlayer, grid, LEFT, screen,
-			        tableSurface);
-		        /* move the player */
-		        movePlayer(xPlayer, yPlayer, LEFT,
-			           grid, screen, tableSurface);
-		        /* update new player position */
-		        playerPos.x -= SPRITE_SIZE;
-		        /* update status */
-		        grid[xPlayer - 2][yPlayer].mainRole = BOX;
-		        grid[xPlayer][yPlayer].mainRole = GROUND;
-		        grid[xPlayer - 1][yPlayer].mainRole = PLAYER;
-		        break;
-		    }
-		    /* move only on grounds and Goals */
-		    if (grid[xPlayer - 1][yPlayer].mainRole == GROUND
-		        || grid[xPlayer - 1][yPlayer].mainRole == GOAL) {
-		        /* move the player */
-		        movePlayer(xPlayer, yPlayer, LEFT,
-			           grid, screen, tableSurface);
-		        /* update new player position */
-		        playerPos.x -= SPRITE_SIZE;
-		        /* update status */
-		        grid[xPlayer][yPlayer].mainRole = GROUND;
-		        grid[xPlayer - 1][yPlayer].mainRole = PLAYER;
-		        break;
-		    }
-		    break;
+    	                /* update new position */
+		                grid[xPlayer + 2][yPlayer].mainRole = BOX;
+		                grid[xPlayer + 1][yPlayer].mainRole = PLAYER;
+                        grid[xPlayer + 1][yPlayer].playerRole = PLAYER_R;
+		                break;
+		            }
+		            /* move only on grounds and Goals */
+		            if (grid[xPlayer + 1][yPlayer].mainRole == GROUND
+		                || grid[xPlayer + 1][yPlayer].mainRole == GOAL) {
 
-	        case SDLK_UP:
-            if (menuOpened == 0){
-		        /*Do not move when level is finished */
-		        if (freezeCommand == true)
+                        /* clean old position */
+		                grid[xPlayer][yPlayer].mainRole = GROUND;
+                        grid[xPlayer][yPlayer].playerRole = EMPTY;
+
+    	                /* update new position */
+		                grid[xPlayer + 1][yPlayer].mainRole = PLAYER;
+                        grid[xPlayer + 1][yPlayer].playerRole = PLAYER_R;
+		                break;
+		            }
 		            break;
 
-		        /* Don't go outside */
-		        if (yPlayer - 1 < 0)
-		            break;
-		        /* test if wall */
-		        if (grid[xPlayer][yPlayer - 1].mainRole == WALL)
-		            break;
-		        /* Don't go outside with a box */
-		        if (grid[xPlayer][yPlayer - 1].mainRole == BOX
-		            && yPlayer - 2 < 0)
-		            break;
-		        /* Do not move a box if it is close to a wall or an other box */
-		        if (grid[xPlayer][yPlayer - 1].mainRole == BOX
-		            && grid[xPlayer][yPlayer - 2].mainRole == BOX
-		            && grid[xPlayer][yPlayer - 2].mainRole == WALL)
-		            break;
-		        /* Move a box only if there is space to do it */
-		        if ((grid[xPlayer][yPlayer - 1].mainRole == BOX
-		            && grid[xPlayer][yPlayer - 2].mainRole == GROUND)
-		            || (grid[xPlayer][yPlayer - 1].mainRole == BOX
-		            && grid[xPlayer][yPlayer - 2].mainRole == GOAL)) {
-		            /* move the box */
-		            moveBox(xPlayer, yPlayer, grid, UP, screen,
-			            tableSurface);
-		            /* move the player */
-		            movePlayer(xPlayer, yPlayer, UP, grid,
-			               screen, tableSurface);
-		            /* update new player position */
-		            playerPos.y -= SPRITE_SIZE;
-		            /* update status */
-		            grid[xPlayer][yPlayer - 2].mainRole = BOX;
-		            grid[xPlayer][yPlayer].mainRole = GROUND;
-		            grid[xPlayer][yPlayer - 1].mainRole = PLAYER;
-		            break;
-		        }
-		        /* move only on grounds and Goals */
-		        if (grid[xPlayer][yPlayer - 1].mainRole == GROUND
-		            || grid[xPlayer][yPlayer - 1].mainRole == GOAL) {
-		            /* move the player */
-		            movePlayer(xPlayer, yPlayer, UP, grid,
-			               screen, tableSurface);
-		            /* update new player position */
-		            playerPos.y -= SPRITE_SIZE;
-		            /* update status */
-		            grid[xPlayer][yPlayer].mainRole = GROUND;
-		            grid[xPlayer][yPlayer - 1].mainRole = PLAYER;
-		            break;
-		        }
-            }
-            else if (menuOpened == 1)
-              {
-                menuChoice--;
-                /* make circle */
-                if (menuChoice == -1){
-                  menuChoice = 2;
-                }
-                openMenu(screen,tableSurface, levelList,menuChoice,levelChoice);
-              }
-		    break;
+	                case SDLK_LEFT:
+		            /*Do not move when level is finished */
+		            if (freezeCommand == true)
+		                break;
 
-	        case SDLK_DOWN:
-            if (menuOpened == 0){
-		        /*Do not move when level is finished */
-		        if (freezeCommand == true)
+		            /* Don't go outside */
+		            if (xPlayer - 1 < 0)
+		                break;
+		            /* test if wall */
+		            if (grid[xPlayer - 1][yPlayer].mainRole == WALL)
+		                break;
+		            /* Don't go outside with a box */
+		            if (grid[xPlayer - 1][yPlayer].mainRole == BOX
+		                && xPlayer - 2 < 0)
+		                break;
+		            /* Do not move a box if it is close to a wall or an other box */
+		            if (grid[xPlayer - 1][yPlayer].mainRole == BOX
+		                && grid[xPlayer - 2][yPlayer].mainRole == BOX
+		                && grid[xPlayer - 2][yPlayer].mainRole == WALL)
+		                break;
+		            /* Move a box only if there is space to do it */
+		            if ((grid[xPlayer - 1][yPlayer].mainRole == BOX
+		                && grid[xPlayer - 2][yPlayer].mainRole == GROUND)
+		                || (grid[xPlayer - 1][yPlayer].mainRole == BOX
+		                && grid[xPlayer - 2][yPlayer].mainRole == GOAL)) {
+
+                        /* clean old position */
+		                grid[xPlayer][yPlayer].mainRole = GROUND;
+                        grid[xPlayer][yPlayer].playerRole = EMPTY;
+
+    	                /* update new position */
+		                grid[xPlayer - 2][yPlayer].mainRole = BOX;
+		                grid[xPlayer - 1][yPlayer].mainRole = PLAYER;
+                        grid[xPlayer - 1][yPlayer].playerRole = PLAYER_L;
+		                break;
+		            }
+		            /* move only on grounds and Goals */
+		            if (grid[xPlayer - 1][yPlayer].mainRole == GROUND
+		                || grid[xPlayer - 1][yPlayer].mainRole == GOAL) {
+
+                        /* clean old position */
+		                grid[xPlayer][yPlayer].mainRole = GROUND;
+                        grid[xPlayer][yPlayer].playerRole = EMPTY;
+
+                        /* update new position */
+		                grid[xPlayer - 1][yPlayer].mainRole = PLAYER;
+                        grid[xPlayer - 1][yPlayer].playerRole = PLAYER_L;
+		                break;
+		            }
 		            break;
 
-		        /* Don't go outside */
-		        if (yPlayer + 1 >= getY_Blocks())
+	                case SDLK_UP:
+                    if (menuOpened == 0){
+		                /*Do not move when level is finished */
+		                if (freezeCommand == true)
+		                    break;
+
+		                /* Don't go outside */
+		                if (yPlayer - 1 < 0)
+		                    break;
+		                /* test if wall */
+		                if (grid[xPlayer][yPlayer - 1].mainRole == WALL)
+		                    break;
+		                /* Don't go outside with a box */
+		                if (grid[xPlayer][yPlayer - 1].mainRole == BOX
+		                    && yPlayer - 2 < 0)
+		                    break;
+		                /* Do not move a box if it is close to a wall or an other box */
+		                if (grid[xPlayer][yPlayer - 1].mainRole == BOX
+		                    && grid[xPlayer][yPlayer - 2].mainRole == BOX
+		                    && grid[xPlayer][yPlayer - 2].mainRole == WALL)
+		                    break;
+		                /* Move a box only if there is space to do it */
+		                if ((grid[xPlayer][yPlayer - 1].mainRole == BOX
+		                    && grid[xPlayer][yPlayer - 2].mainRole == GROUND)
+		                    || (grid[xPlayer][yPlayer - 1].mainRole == BOX
+		                    && grid[xPlayer][yPlayer - 2].mainRole == GOAL)) {
+
+                            /* clean old position */
+		                    grid[xPlayer][yPlayer].mainRole = GROUND;
+                            grid[xPlayer][yPlayer].playerRole = EMPTY;
+
+                            /* update new position */
+		                    grid[xPlayer][yPlayer - 2].mainRole = BOX;
+		                    grid[xPlayer][yPlayer - 1].mainRole = PLAYER;
+                            grid[xPlayer][yPlayer - 1].playerRole = PLAYER_B;
+		                    break;
+		                }
+		                /* move only on grounds and Goals */
+		                if (grid[xPlayer][yPlayer - 1].mainRole == GROUND
+		                    || grid[xPlayer][yPlayer - 1].mainRole == GOAL) {
+
+                            /* clean old position */
+    		                grid[xPlayer][yPlayer].mainRole = GROUND;
+                            grid[xPlayer][yPlayer].playerRole = EMPTY;
+
+                            /* update new position */
+		                    grid[xPlayer][yPlayer - 1].mainRole = PLAYER;
+                            grid[xPlayer][yPlayer - 1].playerRole = PLAYER_B;
+		                    break;
+		                }
+                    }
+                    else if (menuOpened == 1)
+                      {
+                        menuChoice--;
+                        /* make circle */
+                        if (menuChoice == -1){
+                          menuChoice = 2;
+                        }
+                        openMenu(screen,tableSurface, levelList,menuChoice,levelChoice);
+                      }
 		            break;
-		        /* test if wall */
-		        if (grid[xPlayer][yPlayer + 1].mainRole == WALL)
+
+	                case SDLK_DOWN:
+                    if (menuOpened == 0){
+		                /*Do not move when level is finished */
+		                if (freezeCommand == true)
+		                    break;
+
+		                /* Don't go outside */
+		                if (yPlayer + 1 >= getY_Blocks())
+		                    break;
+		                /* test if wall */
+		                if (grid[xPlayer][yPlayer + 1].mainRole == WALL)
+		                    break;
+		                /* Don't go outside with a case */
+		                if (grid[xPlayer][yPlayer + 1].mainRole == BOX
+		                    && yPlayer + 2 >= getY_Blocks())
+		                    break;
+		                /* Do not move a box if it is close to a wall or an other box */
+		                if (grid[xPlayer][yPlayer + 1].mainRole == BOX
+		                    && grid[xPlayer][yPlayer + 2].mainRole == BOX
+		                    && grid[xPlayer][yPlayer + 2].mainRole == WALL)
+		                    break;
+		                /* Move a box only if there is space to do it */
+		                if ((grid[xPlayer][yPlayer + 1].mainRole == BOX
+		                    && grid[xPlayer][yPlayer + 2].mainRole == GROUND)
+		                    || (grid[xPlayer][yPlayer + 1].mainRole == BOX
+		                    && grid[xPlayer][yPlayer + 2].mainRole == GOAL)) {
+
+                            /* clean old position */
+		                    grid[xPlayer][yPlayer].mainRole = GROUND;
+                            grid[xPlayer][yPlayer].playerRole = EMPTY;
+
+                            /* update new position */
+		                    grid[xPlayer][yPlayer + 2].mainRole = BOX;
+		                    grid[xPlayer][yPlayer + 1].mainRole = PLAYER;
+                            grid[xPlayer][yPlayer + 1].playerRole = PLAYER_F;
+		                    break;
+		                }
+		                /* move only on grounds and Goals */
+		                if (grid[xPlayer][yPlayer + 1].mainRole == GROUND
+		                    || grid[xPlayer][yPlayer + 1].mainRole == GOAL) {
+
+                            /* clean old position */
+		                    grid[xPlayer][yPlayer].mainRole = GROUND;
+                            grid[xPlayer][yPlayer].playerRole = EMPTY;
+
+                            /* update new position */
+		                    grid[xPlayer][yPlayer + 1].mainRole = PLAYER;
+                            grid[xPlayer][yPlayer + 1].playerRole = PLAYER_F;
+		                    break;
+		                }
+                    }
+                    else if (menuOpened == 1)
+                      {
+                        menuChoice++;
+                        /* make circle */
+                        if (menuChoice == 3){
+                          menuChoice = 0;
+                        }
+                        openMenu(screen,tableSurface,levelList, menuChoice, levelChoice);
+                      }
+		                break;
+
+		                /* hit m to open or close the menu */
+
+	                    case SDLK_m:
+                       if (menuOpened == 0){
+                       fprintf(stderr, "opening Menu\n");
+                       SDL_SaveBMP(screen, "/tmp/screenshot.bmp"); //backup background for closing
+                       openMenu(screen, tableSurface, levelList, menuChoice, levelChoice);
+                         freezeCommand = true;
+                         menuOpened = 1;
+                       }
+                       else{
+                       closeMenu(screen);
+                         fprintf(stderr, "closing Menu\n");
+                         /*reset status */
+                         freezeCommand = false;
+                         menuOpened = 0;
+                         menuChoice = 0;
+                       }
+                        break;
+
+
+		            /* hit r to reset the current level */
+	                case SDLK_r:
+		            /* load the level */
+		            if (loadSlcLevel(levelChoice, levelList, grid) ==
+		                EXIT_SUCCESS) {
+		                fprintf(stderr, "Level loaded\n");
+		            } else {
+		                perror("Impossible to load the level. Perror");
+		            }
+
+		            /* display the level using grid */
+		            displayLevel(grid, screen, tableSurface);
+
+		            /*reset status */
+                    freezeCommand = false;
+                    menuOpened = 0;
+		            fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
 		            break;
-		        /* Don't go outside with a case */
-		        if (grid[xPlayer][yPlayer + 1].mainRole == BOX
-		            && yPlayer + 2 >= getY_Blocks())
+
+		            /* hit n to load the next level */
+	                case SDLK_n:
+		            /* load next the level */
+		            levelChoice += 1;
+		            if (levelChoice == max_Levels)
+		                levelChoice = 0;
+		            if (loadSlcLevel(levelChoice, levelList, grid) ==
+		                EXIT_SUCCESS) {
+		                fprintf(stderr, "Level loaded\n");
+		            } else {
+		                perror("Impossible to load the level. Perror");
+		            }
+		            /* display the level using grid */
+		            displayLevel(grid, screen, tableSurface);
+
+		            /*reset status */
+                    freezeCommand = false;
+                    menuOpened = 0;
+		            fprintf(stderr, "Level %d\n loaded", (levelChoice));
 		            break;
-		        /* Do not move a box if it is close to a wall or an other box */
-		        if (grid[xPlayer][yPlayer + 1].mainRole == BOX
-		            && grid[xPlayer][yPlayer + 2].mainRole == BOX
-		            && grid[xPlayer][yPlayer + 2].mainRole == WALL)
+
+		            /* hit p to load the previous level */
+	                case SDLK_p:
+		            /* load previous level */
+		            levelChoice -= 1;
+		            if (levelChoice == -1)
+		                levelChoice = max_Levels - 1;
+
+		            if (loadSlcLevel(levelChoice, levelList, grid) ==
+		                EXIT_SUCCESS) {
+		                fprintf(stderr, "Level loaded\n");
+		            } else {
+		                perror("Impossible to load the level. Perror");
+		            }
+
+		            /* display the level using grid */
+		            displayLevel(grid, screen, tableSurface);
+
+		            /*reset status */
+		            freezeCommand = false;
+                  menuOpened = 0;
+		            fprintf(stderr, "Level %d\n loaded", (levelChoice));
+
 		            break;
-		        /* Move a box only if there is space to do it */
-		        if ((grid[xPlayer][yPlayer + 1].mainRole == BOX
-		            && grid[xPlayer][yPlayer + 2].mainRole == GROUND)
-		            || (grid[xPlayer][yPlayer + 1].mainRole == BOX
-		            && grid[xPlayer][yPlayer + 2].mainRole == GOAL)) {
-		            /* move the Box */
-		            moveBox(xPlayer, yPlayer, grid, DOWN, screen,
-			            tableSurface);
-		            /* move the player */
-		            movePlayer(xPlayer, yPlayer, DOWN,
-			               grid, screen, tableSurface);
-		            /* update new player position */
-		            playerPos.y += SPRITE_SIZE;
-		            /* update status */
-		            grid[xPlayer][yPlayer + 2].mainRole = BOX;
-		            grid[xPlayer][yPlayer].mainRole = GROUND;
-		            grid[xPlayer][yPlayer + 1].mainRole = PLAYER;
+		            /* hit q to quit */
+	                case SDLK_q:
+                  /* write last level name before closing */
+                     strcpy(levelName, "");
+                      getLevelName(levelChoice,levelList,levelName);
+                      writePrefChar("LevelName", levelName);
+		            carryOn = 0;
+                    fprintf(stderr, "\nThe quit command (q) has been pressed.\n");
+                    fprintf(stderr, "Start ending programm:\n");
 		            break;
-		        }
-		        /* move only on grounds and Goals */
-		        if (grid[xPlayer][yPlayer + 1].mainRole == GROUND
-		            || grid[xPlayer][yPlayer + 1].mainRole == GOAL) {
-		            /* move the player */
-		            movePlayer(xPlayer, yPlayer, DOWN,
-			               grid, screen, tableSurface);
-		            /* update new player position */
-		            playerPos.y += SPRITE_SIZE;
-		            /* update status */
-		            grid[xPlayer][yPlayer].mainRole = GROUND;
-		            grid[xPlayer][yPlayer + 1].mainRole = PLAYER;
-		            break;
-		        }
-            }
-            else if (menuOpened == 1)
-              {
-                menuChoice++;
-                /* make circle */
-                if (menuChoice == 3){
-                  menuChoice = 0;
-                }
-                openMenu(screen,tableSurface,levelList, menuChoice, levelChoice);
-              }
-		        break;
 
-		        /* hit m to open or close the menu */
+                    } //end of  switch (event.type)
+            } //end of switch (event.type) {
 
-	            case SDLK_m:
-               if (menuOpened == 0){
-               fprintf(stderr, "opening Menu\n");
-               SDL_SaveBMP(screen, "/tmp/screenshot.bmp"); //backup background for closing
-               openMenu(screen, tableSurface, levelList, menuChoice, levelChoice);
-                 freezeCommand = true;
-                 menuOpened = 1;
-               }
-               else{
-               closeMenu(screen);
-                 fprintf(stderr, "closing Menu\n");
-                 /*reset status */
-                 freezeCommand = false;
-                 menuOpened = 0;
-                 menuChoice = 0;
-               }
-                break;
-
-
-		    /* hit r to reset the current level */
-	        case SDLK_r:
-		    /* load the level */
-		    if (loadSlcLevel(levelChoice, levelList, grid) ==
-		        EXIT_SUCCESS) {
-		        fprintf(stderr, "Level loaded\n");
-		    } else {
-		        perror("Impossible to load the level. Perror");
-		    }
-
-		    /* display the level using grid */
-		    displayLevel(grid, screen, tableSurface);
-
-		    /*reset status */
-            freezeCommand = false;
-            menuOpened = 0;
-		    fprintf(stderr, "Level %d\n loaded", (levelChoice + 1));
-		    break;
-
-		    /* hit n to load the next level */
-	        case SDLK_n:
-		    /* load next the level */
-		    levelChoice += 1;
-		    if (levelChoice == max_Levels)
-		        levelChoice = 0;
-		    if (loadSlcLevel(levelChoice, levelList, grid) ==
-		        EXIT_SUCCESS) {
-		        fprintf(stderr, "Level loaded\n");
-		    } else {
-		        perror("Impossible to load the level. Perror");
-		    }
-		    /* display the level using grid */
-		    displayLevel(grid, screen, tableSurface);
-
-		    /*reset status */
-            freezeCommand = false;
-            menuOpened = 0;
-		    fprintf(stderr, "Level %d\n loaded", (levelChoice));
-		    break;
-
-		    /* hit p to load the previous level */
-	        case SDLK_p:
-		    /* load previous level */
-		    levelChoice -= 1;
-		    if (levelChoice == -1)
-		        levelChoice = max_Levels - 1;
-
-		    if (loadSlcLevel(levelChoice, levelList, grid) ==
-		        EXIT_SUCCESS) {
-		        fprintf(stderr, "Level loaded\n");
-		    } else {
-		        perror("Impossible to load the level. Perror");
-		    }
-
-		    /* display the level using grid */
-		    displayLevel(grid, screen, tableSurface);
-
-		    /*reset status */
-		    freezeCommand = false;
-          menuOpened = 0;
-		    fprintf(stderr, "Level %d\n loaded", (levelChoice));
-
-		    break;
-		    /* hit q to quit */
-	        case SDLK_q:
-          /* write last level name before closing */
-             strcpy(levelName, "");
-              getLevelName(levelChoice,levelList,levelName);
-              writePrefChar("LevelName", levelName);
-		    carryOn = 0;
-            fprintf(stderr, "\nThe quit command (q) has been pressed.\n");
-            fprintf(stderr, "Start ending programm:\n");
-		    break;
-	        }
 
        /*display congrats if the level is finished*/
 	    if (levelFinished(grid, screen, tableSurface) == FINISH) {
 		    freezeCommand = true;}
-
+            }  // end of while(SDL_PollEvent(&event)){
 	    displayMenu((levelChoice), screen, tableSurface,levelList,grid);
 
 	    SDL_UpdateWindowSurface(window);
+        /* setup delay using FPS */
+        currentTime = SDL_GetTicks();
+        if((currentTime-previousTime) < (unsigned)(1000/FPS) ) {
+                SDL_Delay((unsigned)(1000/FPS)-(currentTime-previousTime));
+
 	    }
-    }
+        else{previousTime = currentTime;
+        }
+
+        } // end of   while (carryOn){
+
 
     /* clean */
     fprintf(stderr,"- Destroying level list\n");
@@ -549,6 +552,6 @@ int main(int argc, char *argv[])
     fprintf(stderr,"- TFF is out\n");
     SDL_Quit();
     fprintf(stderr,"- SDL is out\n");
-    fprintf(stderr, "Everythings, seems good, Bye\n");
+    fprintf(stderr, "Everythings seems good, Bye\n");
     return EXIT_SUCCESS;
 }

@@ -44,6 +44,7 @@ typedef struct {
     int mainRole;
     int objectType;
     int subRole;
+    int playerRole; //PLAYER_F,PLAYER_B,PLAYER_L,PLAYER_R
 } Square;
 
 typedef enum bool bool;
@@ -55,8 +56,8 @@ true = 1, false = 0
 
 //object type
 enum { GROUND, GROUND1, GROUND2, GROUND3, GROUND4, OUTSIDE, OUTSIDE2,
-	OUTSIDE3, OUTSIDE4, WALL, GOAL, BOX, BOX_OK, PLAYER, EMPTY,
-  	TOP_RIGHT, TOP_LEFT, BOTTOM_RIGHT, BOTTOM_LEFT, };
+	OUTSIDE3, OUTSIDE4, WALL, WALL1, WALL2, WALL3, GOAL, BOX, BOX_OK, PLAYER, EMPTY,
+	PLAYER_F,PLAYER_B,PLAYER_L,PLAYER_R};
 
 //direction
 enum { UP, DOWN, RIGHT, LEFT, STILL };

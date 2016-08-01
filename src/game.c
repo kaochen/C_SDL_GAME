@@ -150,53 +150,42 @@ void blitGround(int x, int y, Square grid[][getMax_Blocks()],
 
 }
 
-/* blit Walls */
-void blitWalls(int x, int y, Square grid[][getMax_Blocks()],
+/* blit borders on walls */
+void blitBorders(Square grid[][getMax_Blocks()],
 	       SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
+   SDL_Rect wallPos;
+   int x = 1, y = 1;
+    for (y = 1; y < getY_Blocks() -1; y++){
+        for (x = 1; x < getX_Blocks() -1; x++){
+            /* set position for wall blocks */
+            wallPos.x = x * SPRITE_SIZE;
+            wallPos.y = y * SPRITE_SIZE;
 
-    /* set position for wall blocks */
-    SDL_Rect wallPos;
-    wallPos.x = x * SPRITE_SIZE;
-    wallPos.y = y * SPRITE_SIZE;
-
-    /* blit a random Wall Surface */
-    int randomNumber = 0;
-    randomNumber = random_number(0, 100);
-    if (randomNumber < 40) {
-	SDL_BlitSurface(tableSurface[WALL1_IMAGE].image, NULL, screen,
-			&wallPos);
-    } else if (randomNumber < 60) {
-	SDL_BlitSurface(tableSurface[WALL2_IMAGE].image, NULL, screen,
-			&wallPos);
-    } else if (randomNumber < 80) {
-	SDL_BlitSurface(tableSurface[WALL3_IMAGE].image, NULL, screen,
-			&wallPos);
-    } else {
-	SDL_BlitSurface(tableSurface[WALL4_IMAGE].image, NULL, screen,
-			&wallPos);
-    }
-
-    /* blit wall border, expect on window sides */
-    /* blit left border */
-    if (x != 0 && grid[x - 1][y].mainRole != WALL && grid[x - 1][y].mainRole != TOP_LEFT && grid[x - 1][y].mainRole != BOTTOM_LEFT) {
-	SDL_BlitSurface(tableSurface[WALL_LEFT].image, NULL, screen,
-			&wallPos);
-    }
-    /* blit right border */
-    if (x != getX_Blocks() && grid[x + 1][y].mainRole != WALL && grid[x + 1][y].mainRole != TOP_RIGHT && grid[x + 1][y].mainRole != BOTTOM_RIGHT) {
-	SDL_BlitSurface(tableSurface[WALL_RIGHT].image, NULL, screen,
-			&wallPos);
-    }
-    /* blit top border */
-    if (y != 0 && grid[x][y - 1].mainRole != WALL && grid[x][y - 1].mainRole != TOP_RIGHT && grid[x][y - 1].mainRole != TOP_LEFT) {
-	SDL_BlitSurface(tableSurface[WALL_TOP].image, NULL, screen,
-			&wallPos);
-    }
-    /* blit bottom border */
-    if (y != getY_Blocks() && grid[x][y + 1].mainRole != WALL && grid[x][y + 1].mainRole != BOTTOM_RIGHT && grid[x][y + 1].mainRole != BOTTOM_LEFT) {
-	SDL_BlitSurface(tableSurface[WALL_BOTTOM].image, NULL, screen,
-			&wallPos);
+            /* blit wall border, expect on window sides */
+            /* blit left border */
+          if (grid[x][y].mainRole == WALL){
+                if (grid[x - 1][y].mainRole != WALL) {
+	            SDL_BlitSurface(tableSurface[WALL_LEFT].image, NULL, screen,
+			            &wallPos);
+                }
+                /* blit right border */
+                if (grid[x + 1][y].mainRole != WALL) {
+	            SDL_BlitSurface(tableSurface[WALL_RIGHT].image, NULL, screen,
+			            &wallPos);
+                }
+                /* blit top border */
+                if (grid[x][y - 1].mainRole != WALL) {
+	            SDL_BlitSurface(tableSurface[WALL_TOP].image, NULL, screen,
+			            &wallPos);
+                }
+                /* blit bottom border */
+                if (grid[x][y + 1].mainRole != WALL) {
+	            SDL_BlitSurface(tableSurface[WALL_BOTTOM].image, NULL, screen,
+			            &wallPos);
+                }
+          }
+        }
     }
 }
 
@@ -220,6 +209,30 @@ int randomGround(Square grid[][getMax_Blocks()])
     }
     return EXIT_SUCCESS;
 }
+
+/* add a more ground choice */
+int randomWall(Square grid[][getMax_Blocks()])
+{
+    int x = 0, y = 0, randomNumber = 0;
+    for (y = 0; y < getY_Blocks(); y++) {
+        for (x = 0; x < getX_Blocks(); x++) {
+
+             randomNumber = random_number(0, 100);
+              if(grid[x][y].mainRole == WALL){
+                 if (randomNumber <= 60) {
+	             grid[x][y].subRole = WALL1;
+                 } else if (randomNumber >= 90) {
+	             grid[x][y].subRole = WALL2;
+                 } else {
+	             grid[x][y].subRole = WALL3;
+                 }
+              }
+
+        }
+    }
+    return EXIT_SUCCESS;
+}
+
 
 /*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
 int randomOutside(Square grid[][getMax_Blocks()])

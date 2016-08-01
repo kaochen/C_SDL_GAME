@@ -443,6 +443,10 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 		for (x = firstColumn; x < (firstColumn + nbr_of_columns);
 		     x++) {
 		    int y2 = y + firstLines;
+            //clean first
+            grid[x][y2].mainRole = GROUND;
+            grid[x][y2].playerRole = EMPTY;
+
 		    switch (line[c]) {
 		    case '#':
 			grid[x][y2].mainRole = WALL;
@@ -463,9 +467,11 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 			break;
 		    case '@':
 			grid[x][y2].mainRole = PLAYER;
+            grid[x][y2].playerRole = PLAYER_F;
 			break;
 		    case '+':
 			grid[x][y2].mainRole = PLAYER;
+            grid[x][y2].playerRole = PLAYER_F;
 			break;
 		    }
 		    c++;
@@ -475,6 +481,7 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
     }
 
    randomGround(grid);
+   randomWall(grid);
     /* Change grounds that are outside the walls to the OUTSIDE flag */
    detectOutside(grid);
    randomOutside(grid);

@@ -44,12 +44,15 @@ void moveBox(int xPlayer, int yPlayer, Square grid[][getMax_Blocks()],
 void blitGround(int x, int y, Square grid[][getMax_Blocks()],
 		SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
-/* blit Walls */
-void blitWalls(int x, int y, Square grid[][getMax_Blocks()],
+/* blit borders on walls */
+void blitBorders(Square grid[][getMax_Blocks()],
 	       SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* add a more ground choice */
 int randomGround(Square grid[][getMax_Blocks()]);
+
+/* add a more ground choice */
+int randomWall(Square grid[][getMax_Blocks()]);
 
 /*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
 int randomOutside(Square grid[][getMax_Blocks()]);

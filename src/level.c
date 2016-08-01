@@ -30,6 +30,7 @@ void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
     /* set a goal position */
     SDL_Rect goalPos;
 
+
     /* blit surfaces depending of its destiny */
     int x = 0, y = 0;
     for (x = 0; x < getX_Blocks(); x++) {
@@ -41,13 +42,12 @@ void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 		blitGround(x, y, grid, screen, tableSurface);
 		break;
 	    case BOX:
-		moveBox(x, y, grid, STILL, screen, tableSurface);
+        SDL_BlitSurface(tableSurface[BOX_IMAGE].image, NULL,screen, &goalPos);
+		//moveBox(x, y, grid, STILL, screen, tableSurface);
 		break;
 	    case BOX_OK:
-		moveBox(x, y, grid, STILL, screen, tableSurface);
-		break;
-	    case WALL:
-		blitWalls(x, y, grid, screen, tableSurface);
+        SDL_BlitSurface(tableSurface[BOX_IMAGE_OK].image, NULL,screen, &goalPos);
+		//moveBox(x, y, grid, STILL, screen, tableSurface);
 		break;
 	    case GOAL:
 		goalPos.x = x * SPRITE_SIZE;
@@ -57,8 +57,8 @@ void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 				screen, &goalPos);
 		break;
 	    case PLAYER:
-		blitGround(x, y, grid, screen, tableSurface);
-		movePlayer(x, y, STILL, grid, screen, tableSurface);
+		//blitGround(x, y, grid, screen, tableSurface);
+		//movePlayer(x, y, STILL, grid, screen, tableSurface);
 		break;
        }
 
@@ -88,9 +88,56 @@ void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 		SDL_BlitSurface(tableSurface[OUTSIDE4_IMAGE].image, NULL,
 				screen, &goalPos);
 		break;
-	    }
-	}
+        case WALL1:
+        goalPos.x = x * SPRITE_SIZE;
+		goalPos.y = y * SPRITE_SIZE;
+	    SDL_BlitSurface(tableSurface[WALL1_IMAGE].image, NULL, screen,
+			    &goalPos);
+	    break;
+        case WALL2:
+        goalPos.x = x * SPRITE_SIZE;
+		goalPos.y = y * SPRITE_SIZE;
+	    SDL_BlitSurface(tableSurface[WALL2_IMAGE].image, NULL, screen,
+			    &goalPos);
+	    break;
+        case WALL3:
+        goalPos.x = x * SPRITE_SIZE;
+		goalPos.y = y * SPRITE_SIZE;
+	    SDL_BlitSurface(tableSurface[WALL3_IMAGE].image, NULL, screen,
+			    &goalPos);
+	    break;
+	        }
+
+        /*Blit PLAYER Face*/
+        if(grid[x][y].mainRole == PLAYER){
+        switch (grid[x][y].playerRole) {
+        goalPos.x = x * SPRITE_SIZE;
+		goalPos.y = y * SPRITE_SIZE;
+	    case PLAYER_F:
+        blitGround(x, y, grid, screen, tableSurface);
+		SDL_BlitSurface(tableSurface[PLAYER_F].image, NULL,
+				screen, &goalPos);
+		break;
+        case PLAYER_B:
+        blitGround(x, y, grid, screen, tableSurface);
+		SDL_BlitSurface(tableSurface[PLAYER_BACK].image, NULL,
+				screen, &goalPos);
+		break;
+        case PLAYER_L:
+        blitGround(x, y, grid, screen, tableSurface);
+		SDL_BlitSurface(tableSurface[PLAYER_LEFT].image, NULL,
+				screen, &goalPos);
+		break;
+        case PLAYER_R:
+        blitGround(x, y, grid, screen, tableSurface);
+		SDL_BlitSurface(tableSurface[PLAYER_RIGHT].image, NULL,
+				screen, &goalPos);
+		break;
+        }
+        }
+        }
     }
+     blitBorders(grid, screen,tableSurface);
      blitCorners(grid, screen,tableSurface);
 }
 
