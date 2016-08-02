@@ -28,114 +28,94 @@ void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 		  Sprites tableSurface[NBR_OF_IMAGES])
 {
     /* set a goal position */
-    SDL_Rect goalPos;
-
+    SDL_Rect pos;
 
     /* blit surfaces depending of its destiny */
     int x = 0, y = 0;
+    /*first pass*/
     for (x = 0; x < getX_Blocks(); x++) {
 	for (y = 0; y < getY_Blocks(); y++) {
-
+		pos.x = x * SPRITE_SIZE;
+		pos.y = y * SPRITE_SIZE;
 	    /* blit all blocks depending on grid mainRole */
 	    switch (grid[x][y].mainRole) {
 	    case GROUND:
-		blitGround(x, y, grid, screen, tableSurface);
 		break;
 	    case BOX:
-        SDL_BlitSurface(tableSurface[BOX_IMAGE].image, NULL,screen, &goalPos);
-		//moveBox(x, y, grid, STILL, screen, tableSurface);
+        SDL_BlitSurface(tableSurface[BOX_IMAGE].image, NULL,screen, &pos);
 		break;
 	    case BOX_OK:
-        SDL_BlitSurface(tableSurface[BOX_IMAGE_OK].image, NULL,screen, &goalPos);
-		//moveBox(x, y, grid, STILL, screen, tableSurface);
+        SDL_BlitSurface(tableSurface[BOX_IMAGE_OK].image, NULL,screen, &pos);
 		break;
 	    case GOAL:
-		goalPos.x = x * SPRITE_SIZE;
-		goalPos.y = y * SPRITE_SIZE;
-		blitGround(x, y, grid, screen, tableSurface);
-		SDL_BlitSurface(tableSurface[GOAL_IMAGE].image, NULL,
-				screen, &goalPos);
+        SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL,screen, &pos);
 		break;
 	    case PLAYER:
-		//blitGround(x, y, grid, screen, tableSurface);
-		//movePlayer(x, y, STILL, grid, screen, tableSurface);
+        SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL,screen, &pos);
 		break;
        }
 
-      /* blit all blocks depending on grid mainRole */
+
+      /* blit all blocks depending on grid subRole */
       switch (grid[x][y].subRole) {
+        case GROUND1:
+	    SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL, screen,&pos);
+	    break;
+        case GROUND2:
+	    SDL_BlitSurface(tableSurface[GROUND2_IMAGE].image, NULL, screen,&pos);
+	    break;
+        case GROUND3:
+	    SDL_BlitSurface(tableSurface[GROUND3_IMAGE].image, NULL, screen,&pos);
+        break;
 	    case OUTSIDE:
-		goalPos.x = x * SPRITE_SIZE;
-		goalPos.y = y * SPRITE_SIZE;
-		SDL_BlitSurface(tableSurface[OUTSIDE_IMAGE].image, NULL,
-				screen, &goalPos);
+		SDL_BlitSurface(tableSurface[OUTSIDE_IMAGE].image, NULL,screen, &pos);
 		break;
 	    case OUTSIDE2:
-		goalPos.x = x * SPRITE_SIZE;
-		goalPos.y = y * SPRITE_SIZE;
-		SDL_BlitSurface(tableSurface[OUTSIDE2_IMAGE].image, NULL,
-				screen, &goalPos);
+		SDL_BlitSurface(tableSurface[OUTSIDE2_IMAGE].image, NULL,screen, &pos);
 		break;
 	    case OUTSIDE3:
-		goalPos.x = x * SPRITE_SIZE;
-		goalPos.y = y * SPRITE_SIZE;
-		SDL_BlitSurface(tableSurface[OUTSIDE3_IMAGE].image, NULL,
-				screen, &goalPos);
+		SDL_BlitSurface(tableSurface[OUTSIDE3_IMAGE].image, NULL,screen, &pos);
 		break;
-       case OUTSIDE4:
-		goalPos.x = x * SPRITE_SIZE;
-		goalPos.y = y * SPRITE_SIZE;
-		SDL_BlitSurface(tableSurface[OUTSIDE4_IMAGE].image, NULL,
-				screen, &goalPos);
+        case OUTSIDE4:
+		SDL_BlitSurface(tableSurface[OUTSIDE4_IMAGE].image, NULL,screen, &pos);
 		break;
         case WALL1:
-        goalPos.x = x * SPRITE_SIZE;
-		goalPos.y = y * SPRITE_SIZE;
-	    SDL_BlitSurface(tableSurface[WALL1_IMAGE].image, NULL, screen,
-			    &goalPos);
+	    SDL_BlitSurface(tableSurface[WALL1_IMAGE].image, NULL, screen,&pos);
 	    break;
         case WALL2:
-        goalPos.x = x * SPRITE_SIZE;
-		goalPos.y = y * SPRITE_SIZE;
-	    SDL_BlitSurface(tableSurface[WALL2_IMAGE].image, NULL, screen,
-			    &goalPos);
+	    SDL_BlitSurface(tableSurface[WALL2_IMAGE].image, NULL, screen,&pos);
 	    break;
         case WALL3:
-        goalPos.x = x * SPRITE_SIZE;
-		goalPos.y = y * SPRITE_SIZE;
-	    SDL_BlitSurface(tableSurface[WALL3_IMAGE].image, NULL, screen,
-			    &goalPos);
+	    SDL_BlitSurface(tableSurface[WALL3_IMAGE].image, NULL, screen,&pos);
+        break;
+        case WALL4:
+	    SDL_BlitSurface(tableSurface[WALL4_IMAGE].image, NULL, screen,&pos);
 	    break;
 	        }
+        switch (grid[x][y].objectType) {
+        case GOAL:
+          if(grid[x][y].mainRole != BOX && grid[x][y].mainRole != BOX_OK  ){
+        		SDL_BlitSurface(tableSurface[GOAL_IMAGE].image, NULL,screen, &pos);
+          }
+        break;
+        }
 
-        /*Blit PLAYER Face*/
-        if(grid[x][y].mainRole == PLAYER){
         switch (grid[x][y].playerRole) {
-        goalPos.x = x * SPRITE_SIZE;
-		goalPos.y = y * SPRITE_SIZE;
-	    case PLAYER_F:
-        blitGround(x, y, grid, screen, tableSurface);
-		SDL_BlitSurface(tableSurface[PLAYER_F].image, NULL,
-				screen, &goalPos);
-		break;
+        case PLAYER_F:
+	    SDL_BlitSurface(tableSurface[PLAYER_FRONT].image, NULL,screen, &pos);
+	    break;
         case PLAYER_B:
-        blitGround(x, y, grid, screen, tableSurface);
-		SDL_BlitSurface(tableSurface[PLAYER_BACK].image, NULL,
-				screen, &goalPos);
-		break;
+	    SDL_BlitSurface(tableSurface[PLAYER_BACK].image, NULL,screen, &pos);
+	    break;
         case PLAYER_L:
-        blitGround(x, y, grid, screen, tableSurface);
-		SDL_BlitSurface(tableSurface[PLAYER_LEFT].image, NULL,
-				screen, &goalPos);
-		break;
+	    SDL_BlitSurface(tableSurface[PLAYER_LEFT].image, NULL,screen, &pos);
+	    break;
         case PLAYER_R:
-        blitGround(x, y, grid, screen, tableSurface);
-		SDL_BlitSurface(tableSurface[PLAYER_RIGHT].image, NULL,
-				screen, &goalPos);
-		break;
+	    SDL_BlitSurface(tableSurface[PLAYER_RIGHT].image, NULL,screen, &pos);
+	    break;
         }
-        }
-        }
+    }
+
     }
      blitBorders(grid, screen,tableSurface);
      blitCorners(grid, screen,tableSurface);

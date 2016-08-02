@@ -445,7 +445,9 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 		    int y2 = y + firstLines;
             //clean first
             grid[x][y2].mainRole = GROUND;
+            grid[x][y2].subRole = EMPTY;
             grid[x][y2].playerRole = EMPTY;
+            grid[x][y2].objectType = EMPTY;
 
 		    switch (line[c]) {
 		    case '#':

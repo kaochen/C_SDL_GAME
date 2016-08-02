@@ -30,19 +30,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "sprites.h"
 #include "settings.h"
 
-/* move the player and blit player images */
-void movePlayer(int xPlayer, int yPlayer, int direction,
-		Square grid[][getMax_Blocks()], SDL_Surface * screen,
-		Sprites tableSurface[NBR_OF_IMAGES]);
-
-/* move a box */
-void moveBox(int xPlayer, int yPlayer, Square grid[][getMax_Blocks()],
-	     int direction, SDL_Surface * screen,
-	     Sprites tableSurface[NBR_OF_IMAGES]);
-
-/* blit ground */
-void blitGround(int x, int y, Square grid[][getMax_Blocks()],
-		SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* blit borders on walls */
 void blitBorders(Square grid[][getMax_Blocks()],
