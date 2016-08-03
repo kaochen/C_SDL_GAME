@@ -115,7 +115,7 @@ int goalLeft(Square grid[][getMax_Blocks()])
     for (x = 0; x < getX_Blocks(); x++) {
 	for (y = 0; y < getY_Blocks(); y++) {
 	    if (grid[x][y].mainRole == BOX
-		&& grid[x][y].objectType == GOAL)
+		&& grid[x][y].goalRole == GOAL)
 		nbrOfBoxOk += 1;
 	}
     }
@@ -128,7 +128,7 @@ int nbr_of_goals(Square grid[][getMax_Blocks()])
     int x = 0, y = 0, nbrOfGoal = 0;
     for (x = 0; x < getX_Blocks(); x++) {
 	for (y = 0; y < getY_Blocks(); y++) {
-	    if (grid[x][y].objectType == GOAL)
+	    if (grid[x][y].goalRole == GOAL)
 		nbrOfGoal += 1;
 	}
     }

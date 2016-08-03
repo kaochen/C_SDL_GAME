@@ -41,10 +41,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* define role for each square*/
 typedef struct {
-    int mainRole;
-    int objectType;
-    int subRole;
-    int playerRole; //PLAYER_F,PLAYER_B,PLAYER_L,PLAYER_R
+    int mainRole; //GROUND, OUTSIDE, WALL, BOX
+    int subRole; // OUTSIDE, OUTSIDE2, OUTSIDE3, OUTSIDE4, WALL1, WALL2, WALL3, WALL4,
+    int goalRole; // GOAL, BOX, BOX_OK, EMPTY,
+    int boxRole; //BOX, BOX_OK, EMPTY
+    int playerRole; //PLAYER_F,PLAYER_B,PLAYER_L,PLAYER_R, EMPTY,
 } Square;
 
 typedef enum bool bool;

@@ -92,7 +92,7 @@ void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 	    SDL_BlitSurface(tableSurface[WALL4_IMAGE].image, NULL, screen,&pos);
 	    break;
 	        }
-        switch (grid[x][y].objectType) {
+        switch (grid[x][y].goalRole) {
         case GOAL:
           if(grid[x][y].mainRole != BOX && grid[x][y].mainRole != BOX_OK  ){
         		SDL_BlitSurface(tableSurface[GOAL_IMAGE].image, NULL,screen, &pos);

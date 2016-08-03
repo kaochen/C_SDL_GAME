@@ -215,24 +215,24 @@ int main(int argc, char *argv[])
 		            if ((grid[xPlayer + 1][yPlayer].mainRole == BOX
 		                && grid[xPlayer + 2][yPlayer].mainRole == GROUND)
 		                || (grid[xPlayer + 1][yPlayer].mainRole == BOX
-		                && grid[xPlayer + 2][yPlayer].mainRole == GOAL)) {
+		                && grid[xPlayer + 2][yPlayer].goalRole == GOAL)) {
 
 		                /* clean old position */
 		                grid[xPlayer][yPlayer].mainRole = GROUND;
-                        grid[xPlayer][yPlayer].playerRole = EMPTY;
+                      grid[xPlayer][yPlayer].playerRole = EMPTY;
 
     	                /* update new position */
 		                grid[xPlayer + 2][yPlayer].mainRole = BOX;
 		                grid[xPlayer + 1][yPlayer].mainRole = PLAYER;
-                        grid[xPlayer + 1][yPlayer].playerRole = PLAYER_R;
+                      grid[xPlayer + 1][yPlayer].playerRole = PLAYER_R;
 		                break;
 		            }
 		            /* move only on grounds and Goals */
 		            if (grid[xPlayer + 1][yPlayer].mainRole == GROUND
-		                || grid[xPlayer + 1][yPlayer].mainRole == GOAL) {
+		                || grid[xPlayer + 1][yPlayer].goalRole == GOAL) {
 
                         /* clean old position */
-		                grid[xPlayer][yPlayer].mainRole = GROUND;
+		                  grid[xPlayer][yPlayer].mainRole = GROUND;
                         grid[xPlayer][yPlayer].playerRole = EMPTY;
 
     	                /* update new position */
@@ -266,7 +266,7 @@ int main(int argc, char *argv[])
 		            if ((grid[xPlayer - 1][yPlayer].mainRole == BOX
 		                && grid[xPlayer - 2][yPlayer].mainRole == GROUND)
 		                || (grid[xPlayer - 1][yPlayer].mainRole == BOX
-		                && grid[xPlayer - 2][yPlayer].mainRole == GOAL)) {
+		                && grid[xPlayer - 2][yPlayer].goalRole == GOAL)) {
 
                         /* clean old position */
 		                grid[xPlayer][yPlayer].mainRole = GROUND;
@@ -280,7 +280,7 @@ int main(int argc, char *argv[])
 		            }
 		            /* move only on grounds and Goals */
 		            if (grid[xPlayer - 1][yPlayer].mainRole == GROUND
-		                || grid[xPlayer - 1][yPlayer].mainRole == GOAL) {
+		                || grid[xPlayer - 1][yPlayer].goalRole == GOAL) {
 
                         /* clean old position */
 		                grid[xPlayer][yPlayer].mainRole = GROUND;
@@ -318,7 +318,7 @@ int main(int argc, char *argv[])
 		                if ((grid[xPlayer][yPlayer - 1].mainRole == BOX
 		                    && grid[xPlayer][yPlayer - 2].mainRole == GROUND)
 		                    || (grid[xPlayer][yPlayer - 1].mainRole == BOX
-		                    && grid[xPlayer][yPlayer - 2].mainRole == GOAL)) {
+		                    && grid[xPlayer][yPlayer - 2].goalRole == GOAL)) {
 
                             /* clean old position */
 		                    grid[xPlayer][yPlayer].mainRole = GROUND;
@@ -332,7 +332,7 @@ int main(int argc, char *argv[])
 		                }
 		                /* move only on grounds and Goals */
 		                if (grid[xPlayer][yPlayer - 1].mainRole == GROUND
-		                    || grid[xPlayer][yPlayer - 1].mainRole == GOAL) {
+		                    || grid[xPlayer][yPlayer - 1].goalRole == GOAL) {
 
                             /* clean old position */
     		                grid[xPlayer][yPlayer].mainRole = GROUND;
@@ -380,7 +380,7 @@ int main(int argc, char *argv[])
 		                if ((grid[xPlayer][yPlayer + 1].mainRole == BOX
 		                    && grid[xPlayer][yPlayer + 2].mainRole == GROUND)
 		                    || (grid[xPlayer][yPlayer + 1].mainRole == BOX
-		                    && grid[xPlayer][yPlayer + 2].mainRole == GOAL)) {
+		                    && grid[xPlayer][yPlayer + 2].goalRole == GOAL)) {
 
                             /* clean old position */
 		                    grid[xPlayer][yPlayer].mainRole = GROUND;
@@ -394,7 +394,7 @@ int main(int argc, char *argv[])
 		                }
 		                /* move only on grounds and Goals */
 		                if (grid[xPlayer][yPlayer + 1].mainRole == GROUND
-		                    || grid[xPlayer][yPlayer + 1].mainRole == GOAL) {
+		                    || grid[xPlayer][yPlayer + 1].goalRole == GOAL) {
 
                             /* clean old position */
 		                    grid[xPlayer][yPlayer].mainRole = GROUND;
