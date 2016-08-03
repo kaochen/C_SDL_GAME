@@ -32,19 +32,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "settings.h"
 #include "slc.h"
 
-/* display menu */
-void displayMenu(int levelNumber, SDL_Surface * menu,
+/* display Top Bar*/
+void displayTopBar(int levelNumber, SDL_Surface * screen,
 		 Sprites tableSurface[NBR_OF_IMAGES],
 		 S_LevelList * levelList,Square grid[][getMax_Blocks()]);
 
 /* display background menu */
-void backgroundMenu(SDL_Surface * menu,
+void backgroundMenu(SDL_Surface * screen,
 		    Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* display shortcut in the menu */
-void displayShortcut(SDL_Surface * menu);
+void displayShortcut(SDL_Surface * screen);
 /* display the level number */
-void levelMenu(int levelNumber, SDL_Surface * menu,
+void levelMenu(int levelNumber, SDL_Surface * screen,
 	       S_LevelList * levelList);
 
 /* count how many goals are need to complete the level */
@@ -79,6 +79,4 @@ void openMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_LevelL
 /* display Sub menu */
 int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_LevelList * levelList, int menuChoice, int levelChoice);
 
-/* Close the menu */
-int closeMenu(SDL_Surface * screen);
 #endif

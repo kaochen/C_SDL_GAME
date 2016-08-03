@@ -157,8 +157,8 @@ int main(int argc, char *argv[])
     /* display the level using the grid */
     displayLevel(grid, screen, tableSurface);
 
-    /* display menu on top of the screen */
-    displayMenu(levelChoice, screen, tableSurface, levelList, grid);
+    /* display the top bar  */
+    displayTopBar(levelChoice, screen, tableSurface, levelList, grid);
 
     /* refresh the window */
     SDL_UpdateWindowSurface(window);
@@ -422,13 +422,10 @@ int main(int argc, char *argv[])
 	                    case SDLK_m:
                        if (menuOpened == 0){
                        fprintf(stderr, "opening Menu\n");
-                       SDL_SaveBMP(screen, "/tmp/screenshot.bmp"); //backup background for closing
-                       openMenu(screen, tableSurface, levelList, menuChoice, levelChoice);
                          freezeCommand = true;
                          menuOpened = 1;
                        }
                        else{
-                       closeMenu(screen);
                          fprintf(stderr, "closing Menu\n");
                          /*reset status */
                          freezeCommand = false;
@@ -520,7 +517,12 @@ int main(int argc, char *argv[])
 	    if (levelFinished(grid, screen, tableSurface) == FINISH) {
 		    freezeCommand = true;}
             }  // end of while(SDL_PollEvent(&event)){
-	    displayMenu((levelChoice), screen, tableSurface,levelList,grid);
+
+      if (menuOpened == 1){
+       openMenu(screen, tableSurface, levelList, menuChoice, levelChoice);
+      }
+
+	   displayTopBar((levelChoice), screen, tableSurface,levelList,grid);
 
 	    SDL_UpdateWindowSurface(window);
         /* setup delay using FPS */

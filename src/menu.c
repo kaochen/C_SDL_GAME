@@ -24,40 +24,40 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 
-/* display menu */
-void displayMenu(int levelNumber, SDL_Surface * menu,
+/* display Top Bar*/
+void displayTopBar(int levelNumber, SDL_Surface * screen,
 		 Sprites tableSurface[NBR_OF_IMAGES],
 		 S_LevelList * levelList,Square grid[][getMax_Blocks()])
 {
     /* first add background */
-    backgroundMenu(menu, tableSurface);
+    backgroundMenu(screen, tableSurface);
     /* display the level number */
-    levelMenu(levelNumber, menu, levelList);
-  	displayProgress(grid, menu, tableSurface);
-    displayShortcut(menu);
+    levelMenu(levelNumber, screen, levelList);
+  	 displayProgress(grid, screen, tableSurface);
+    displayShortcut(screen);
 
     SDL_Rect facePos;
     facePos.x = menuPosX () + 24;
     facePos.y = 12;
-  	 SDL_BlitSurface(tableSurface[PLAYER_FRONT].image, NULL, menu,
+  	 SDL_BlitSurface(tableSurface[PLAYER_FRONT].image, NULL, screen,
 			&facePos);
 
 }
 
 /* display background menu */
-void backgroundMenu(SDL_Surface * menu,
+void backgroundMenu(SDL_Surface * screen,
 		    Sprites tableSurface[NBR_OF_IMAGES])
 {
     SDL_Rect menuPos;
     menuPos.x = menuPosX();
     menuPos.y = 0;
-	SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, menu,
+	SDL_BlitSurface(tableSurface[MENU_BACK].image, NULL, screen,
 			&menuPos);
 
 }
 
 /* display shortcut in the menu */
-void displayShortcut(SDL_Surface * menu)
+void displayShortcut(SDL_Surface * screen)
 {
     /* setup font */
     TTF_Font *font = NULL;
@@ -72,7 +72,7 @@ void displayShortcut(SDL_Surface * menu)
     SDL_Rect shortCutTextPos;
     shortCutTextPos.x = menuPosX() + (MENU_WIDTH - 2*SPRITE_SIZE - 4);
     shortCutTextPos.y = 10;
-    SDL_BlitSurface(shortCutText, NULL, menu, &shortCutTextPos);
+    SDL_BlitSurface(shortCutText, NULL, screen, &shortCutTextPos);
 
     /* clean */
     SDL_FreeSurface(shortCutText);
@@ -381,22 +381,5 @@ int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_L
     return EXIT_SUCCESS;
 }
 
-
-/* Close the menu */
-int closeMenu(SDL_Surface * screen){
-    SDL_Surface * image;
-    image = IMG_Load("/tmp/screenshot.bmp");
-    if (image == NULL) {
-	      fprintf(stderr, "IMG_Load /tmp/screenshot.bmp failed: %s\n",SDL_GetError());
-    }
-    SDL_Rect posFill;
-    posFill.x=0;
-    posFill.y=0;
-
-    SDL_BlitSurface(image, NULL, screen, &posFill);
-    SDL_FreeSurface(image);
-    remove("/tmp/screenshot.bmp");
-    return EXIT_SUCCESS;
-}
 
 #endif
