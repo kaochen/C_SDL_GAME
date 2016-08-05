@@ -423,7 +423,9 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
     for (y = 0; y < getY_Blocks(); y++) {
 	for (x = 0; x < getX_Blocks(); x++) {
 	    grid[x][y].mainRole = GROUND;
+        grid[x][y].subRole = GROUND1;
 	    grid[x][y].goalRole = EMPTY;
+      	grid[x][y].playerRole = EMPTY;
 	}
     }
     /* load level into the grid */
@@ -443,11 +445,6 @@ int loadSlcLevel(int levelChoice, S_LevelList * levelList,
 		for (x = firstColumn; x < (firstColumn + nbr_of_columns);
 		     x++) {
 		    int y2 = y + firstLines;
-            //clean first
-            grid[x][y2].mainRole = GROUND;
-            grid[x][y2].subRole = EMPTY;
-            grid[x][y2].playerRole = EMPTY;
-            grid[x][y2].goalRole = EMPTY;
 
 		    switch (line[c]) {
 		    case '#':

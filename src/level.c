@@ -37,24 +37,6 @@ void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 	for (y = 0; y < getY_Blocks(); y++) {
 		pos.x = x * SPRITE_SIZE;
 		pos.y = y * SPRITE_SIZE;
-	    /* blit all blocks depending on grid mainRole */
-	    switch (grid[x][y].mainRole) {
-	    case GROUND:
-		break;
-	    case BOX:
-        SDL_BlitSurface(tableSurface[BOX_IMAGE].image, NULL,screen, &pos);
-		break;
-	    case BOX_OK:
-        SDL_BlitSurface(tableSurface[BOX_IMAGE_OK].image, NULL,screen, &pos);
-		break;
-	    case GOAL:
-        SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL,screen, &pos);
-		break;
-	    case PLAYER:
-        SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL,screen, &pos);
-		break;
-       }
-
 
       /* blit all blocks depending on grid subRole */
       switch (grid[x][y].subRole) {
@@ -92,13 +74,29 @@ void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 	    SDL_BlitSurface(tableSurface[WALL4_IMAGE].image, NULL, screen,&pos);
 	    break;
 	        }
+
+
         switch (grid[x][y].goalRole) {
         case GOAL:
-          if(grid[x][y].mainRole != BOX && grid[x][y].mainRole != BOX_OK  ){
-        		SDL_BlitSurface(tableSurface[GOAL_IMAGE].image, NULL,screen, &pos);
-          }
+        SDL_BlitSurface(tableSurface[GOAL_IMAGE].image, NULL,screen, &pos);
         break;
         }
+
+
+	    /* blit all blocks depending on grid mainRole */
+	    switch (grid[x][y].mainRole) {
+	    case BOX:
+        if(grid[x][y].goalRole == GOAL){
+        SDL_BlitSurface(tableSurface[BOX_IMAGE_OK].image, NULL,screen, &pos);
+          }
+        else{
+        SDL_BlitSurface(tableSurface[BOX_IMAGE].image, NULL,screen, &pos);
+        }
+		break;
+	    case PLAYER:
+        SDL_BlitSurface(tableSurface[GROUND1_IMAGE].image, NULL,screen, &pos);
+		break;
+       }
 
         switch (grid[x][y].playerRole) {
         case PLAYER_F:
