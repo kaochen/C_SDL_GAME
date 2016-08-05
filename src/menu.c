@@ -163,18 +163,16 @@ void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * screen,
 }
 
 /* Victory or not ? */
-int levelFinished(Square grid[][getMax_Blocks()], SDL_Surface * screen,
-		  Sprites tableSurface[NBR_OF_IMAGES])
+int levelFinished(Square grid[][getMax_Blocks()])
 {
-
     /* get info */
     int i = goalLeft(grid);
     int j = nbr_of_goals(grid);
 
     if (i == j) {
-	displayCongrats(screen, tableSurface);
 	return FINISH;
-    } else {
+    }
+    else {
 	return NOT_FINISHED;
     }
 }

@@ -409,12 +409,12 @@ int main(int argc, char *argv[])
 
 	                    case SDLK_m:
                        if (menuOpened == 0){
-                       fprintf(stderr, "opening Menu\n");
+                         //fprintf(stderr, "opening Menu\n");
                          freezeCommand = true;
                          menuOpened = 1;
                        }
                        else{
-                         fprintf(stderr, "closing Menu\n");
+                         //fprintf(stderr, "closing Menu\n");
                          /*reset status */
                          freezeCommand = false;
                          menuOpened = 0;
@@ -500,12 +500,13 @@ int main(int argc, char *argv[])
                     } //end of  switch (event.type)
             } //end of switch (event.type) {
 
-
-       /*display congrats if the level is finished*/
-	    if (levelFinished(grid, screen, tableSurface) == FINISH) {
-		    freezeCommand = true;}
             }  // end of while(SDL_PollEvent(&event)){
 
+       /*display congrats if the level is finished*/
+	    if (levelFinished(grid) == FINISH && menuOpened == 0 ) {
+            displayCongrats(screen, tableSurface);
+		    freezeCommand = true;
+        }
       if (menuOpened == 1){
        openMenu(screen, tableSurface, levelList, menuChoice, levelChoice);
       }
