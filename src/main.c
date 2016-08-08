@@ -163,8 +163,16 @@ int main(int argc, char *argv[])
     /* refresh the window */
     SDL_UpdateWindowSurface(window);
 
+   /* get framerate from settings */
+    int fps = getPrefAsInt("framerate");
+     if (fps < 12){
+         fps = 12;
+       }
+    fprintf(stderr, "Framerate %d\n", fps);
+
 /* wait for quit event */
-    const int FPS = 10;
+
+
     Uint32 currentTime = 0;
     Uint32 previousTime = 0;
     int carryOn = 1, x = 0, y = 0, menuOpened = 0, menuChoice = 0;
@@ -514,10 +522,10 @@ int main(int argc, char *argv[])
 	   displayTopBar((levelChoice), screen, tableSurface,levelList,grid);
 
 	    SDL_UpdateWindowSurface(window);
-        /* setup delay using FPS */
+        /* setup delay using framerate */
         currentTime = SDL_GetTicks();
-        if((currentTime-previousTime) < (unsigned)(1000/FPS) ) {
-                SDL_Delay((unsigned)(1000/FPS)-(currentTime-previousTime));
+        if((currentTime-previousTime) < (unsigned)(1000/fps) ) {
+                SDL_Delay((unsigned)(1000/fps)-(currentTime-previousTime));
 
 	    }
         else{previousTime = currentTime;
