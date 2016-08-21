@@ -51,7 +51,7 @@ int main(int argc, char *argv[])
     srand(time(NULL));
 
     /* Start and check if SDL start correctly */
-    if (SDL_Init(SDL_INIT_VIDEO) == -1) {
+    if (SDL_Init(SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1) {
 	fprintf(stderr, "SDL initialization error: %s\n", SDL_GetError());
 	exit(EXIT_FAILURE);
     }
@@ -179,7 +179,6 @@ int main(int argc, char *argv[])
     bool freezeCommand = false;
     SDL_Event event;
     while (carryOn) {
-            displayLevel(grid, screen, tableSurface);
 	    //SDL_WaitEvent(&event);
         while(SDL_PollEvent(&event)){
 
@@ -428,6 +427,7 @@ int main(int argc, char *argv[])
                          menuOpened = 0;
                          menuChoice = 0;
                        }
+
                         break;
 
 
@@ -441,8 +441,6 @@ int main(int argc, char *argv[])
 		                perror("Impossible to load the level. Perror");
 		            }
 
-		            /* display the level using grid */
-		            displayLevel(grid, screen, tableSurface);
 
 		            /*reset status */
                     freezeCommand = false;
@@ -462,8 +460,6 @@ int main(int argc, char *argv[])
 		            } else {
 		                perror("Impossible to load the level. Perror");
 		            }
-		            /* display the level using grid */
-		            displayLevel(grid, screen, tableSurface);
 
 		            /*reset status */
                     freezeCommand = false;
@@ -485,9 +481,6 @@ int main(int argc, char *argv[])
 		                perror("Impossible to load the level. Perror");
 		            }
 
-		            /* display the level using grid */
-		            displayLevel(grid, screen, tableSurface);
-
 		            /*reset status */
 		            freezeCommand = false;
                   menuOpened = 0;
@@ -506,6 +499,7 @@ int main(int argc, char *argv[])
 		            break;
 
                     } //end of  switch (event.type)
+                displayLevel(grid, screen, tableSurface);
             } //end of switch (event.type) {
 
             }  // end of while(SDL_PollEvent(&event)){
