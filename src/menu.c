@@ -320,7 +320,7 @@ int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_L
     char nameFile[MAX_CARACT] = "File: ";
     char *pbuf;
 
-    S_Level *actual = malloc(sizeof(*actual));
+    S_Level* actual = malloc(sizeof(*actual));
         actual = levelList->first;
     while (actual->name != NULL) {
       if (i == levelChoice){
@@ -356,6 +356,8 @@ int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_L
     menuText = TTF_RenderText_Blended(font,nameFile, fontColor);
     menuTextPos.y += 30;
     SDL_BlitSurface(menuText, NULL, screen, &menuTextPos);
+
+    free(actual);
   }
 
    /*Shortcuts*/
