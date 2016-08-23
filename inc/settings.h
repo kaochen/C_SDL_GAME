@@ -28,21 +28,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "const.h"
 
 /*read window height and width from the preference file */
-int getPrefAsInt(const char* prefName);
+int getPrefAsInt (const char *prefName);
 
 /*get char value from the preference file */
-char* getPrefAsChar(const char* prefName);
+char *getPrefAsChar (const char *prefName);
 
-int getWindow_width();
+int getWindow_width ();
 
-int getWindow_height();
+int getWindow_height ();
 
-int getX_Blocks();
+int getX_Blocks ();
 
-int getY_Blocks();
+int getY_Blocks ();
 
-int getMax_Blocks();
+int getMax_Blocks ();
 
 /* write a pref char */
-int writePrefChar(const char* prefName, const char* value);
+int writePrefChar (const char *prefName, const char *value);
 #endif

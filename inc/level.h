@@ -28,17 +28,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "slc.h"
 
 /* display level on the screen */
-void displayLevel(Square grid[][getMax_Blocks()], SDL_Surface * screen,
-		  Sprites tableSurface[NBR_OF_IMAGES]);
+void displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
+		   Sprites tableSurface[NBR_OF_IMAGES]);
 
 /*get level name*/
-int getLevelName(int levelChoice, S_LevelList * levelList, char * levelName);
+int getLevelName (int levelChoice, S_LevelList * levelList, char *levelName);
 
 
 /*Found the level number with just the name*/
-int findLevelNumber(S_LevelList * levelList, char * levelName);
+int findLevelNumber (S_LevelList * levelList, char *levelName);
 
 /*get a levelchoice by reading the level name from the preference file*/
-int readLevelFromSetting(S_LevelList * levelList);
+int readLevelFromSetting (S_LevelList * levelList);
 
 #endif

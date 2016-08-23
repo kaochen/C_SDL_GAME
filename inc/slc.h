@@ -42,93 +42,97 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* Files ========================================= */
 /* files definion struct */
 typedef struct S_Files S_Files;
-struct S_Files {
-    char name[MAX_CARACT];
-    S_Files *next;
-    S_Files *previous;
+struct S_Files
+{
+  char name[MAX_CARACT];
+  S_Files *next;
+  S_Files *previous;
 };
 
 /* control files list */
 typedef struct S_FilesList S_FilesList;
-struct S_FilesList {
-    S_Files *first;
-    S_Files *last;
-    int nbr_of_files;
+struct S_FilesList
+{
+  S_Files *first;
+  S_Files *last;
+  int nbr_of_files;
 };
 
 /* Levels ========================================= */
 
 /* level definion struct */
 typedef struct S_Level S_Level;
-struct S_Level {
-    char name[MAX_CARACT];
-    char fileName[MAX_CARACT];
-    int height;
-    int width;
-    S_Level *next;
-    S_Level *previous;
+struct S_Level
+{
+  char name[MAX_CARACT];
+  char fileName[MAX_CARACT];
+  int height;
+  int width;
+  S_Level *next;
+  S_Level *previous;
 };
 
 /* control level list */
 typedef struct S_LevelList S_LevelList;
-struct S_LevelList {
-    S_Level *first;
-    S_Level *last;
-    int nbr_of_levels;
+struct S_LevelList
+{
+  S_Level *first;
+  S_Level *last;
+  int nbr_of_levels;
 };
 
 /* Functions ============================================ */
 
 /* Files ========================================= */
 /* Initiatlize the list of files */
-S_FilesList *initFilesList();
+S_FilesList *initFilesList ();
 
 /*Add the first file in a empty list*/
-int addFirstFile(S_FilesList * filesList, char *name);
+int addFirstFile (S_FilesList * filesList, char *name);
 
 /*Add a new file in the list*/
-void addNewFile(S_FilesList * filesList, char *name);
+void addNewFile (S_FilesList * filesList, char *name);
 
 /*Erase a file in the list from start*/
-int delFile(S_FilesList * filesList);
+int delFile (S_FilesList * filesList);
 
 /* destroy file list */
-void destroyFileList(S_FilesList * filesList);
+void destroyFileList (S_FilesList * filesList);
 
 /* list slc files from the levels folder */
-int listSlcLevelFiles(S_FilesList * filesList);
+int listSlcLevelFiles (S_FilesList * filesList);
 
 /* Read the files list one element by one */
-int readFilesList(S_FilesList * filesList);
+int readFilesList (S_FilesList * filesList);
 
 /* Levels ========================================= */
 /* Initiatlize the list of levels */
-S_LevelList *initLevelList();
+S_LevelList *initLevelList ();
 
 /*get levels infos from files */
-int readLevelsAttributs(S_FilesList * filesList, S_LevelList * levelList);
+int readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList);
 
 /*Add a level in the list*/
-void addNewLevel(S_LevelList * levelList, char *fileName, char *name,
-		 int height, int width);
+void addNewLevel (S_LevelList * levelList, char *fileName, char *name,
+		  int height, int width);
 
 /*Erase a level in the list from start*/
-int delLevel(S_LevelList * levelList);
+int delLevel (S_LevelList * levelList);
 
 /* destroy level list */
-void destroy(S_LevelList * levelList);
+void destroy (S_LevelList * levelList);
 
 /* read level list one by one */
-void readLevelList(S_LevelList * levelList);
+void readLevelList (S_LevelList * levelList);
 
 /*Load slc level into the grid */
-int loadSlcLevel(int levelChoice, S_LevelList * levelList,
-		 Square grid[][getMax_Blocks()]);
+int loadSlcLevel (int levelChoice, S_LevelList * levelList,
+		  Square grid[][getMax_Blocks ()]);
 
 /*get levels infos from files */
-int getNbrOfLevels(S_LevelList * levelList);
+int getNbrOfLevels (S_LevelList * levelList);
 
 /* Change GROUND that are outside the walls to OUTSIDE */
-void detectOutside(Square grid[][getMax_Blocks()]);
+void detectOutside (Square grid[][getMax_Blocks ()]);
 
 #endif

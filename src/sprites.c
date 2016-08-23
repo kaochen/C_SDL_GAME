@@ -23,82 +23,88 @@
 #include "../inc/sprites.h"
 
 /* Load all sprites */
-int loadAllSprites(Sprites tableSurface[NBR_OF_IMAGES])
+int
+loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
 {
-    /* Player faces  */
-    loadSprite(&tableSurface[PLAYER_FRONT], "img/front.png");
-    loadSprite(&tableSurface[PLAYER_BACK], "img/back.png");
-    loadSprite(&tableSurface[PLAYER_LEFT], "img/left.png");
-    loadSprite(&tableSurface[PLAYER_RIGHT], "img/right.png");
+  /* Player faces  */
+  loadSprite (&tableSurface[PLAYER_FRONT], "img/front.png");
+  loadSprite (&tableSurface[PLAYER_BACK], "img/back.png");
+  loadSprite (&tableSurface[PLAYER_LEFT], "img/left.png");
+  loadSprite (&tableSurface[PLAYER_RIGHT], "img/right.png");
 
-    /* walls */
-    loadSprite(&tableSurface[WALL1_IMAGE], "img/wall.png");
-    loadSprite(&tableSurface[WALL2_IMAGE], "img/wall2.png");
-    loadSprite(&tableSurface[WALL3_IMAGE], "img/wall3.png");
-    loadSprite(&tableSurface[WALL4_IMAGE], "img/wall4.png");
-    loadSprite(&tableSurface[WALL_LEFT], "img/wallBorderLeft.png");
-    loadSprite(&tableSurface[WALL_RIGHT], "img/wallBorderRight.png");
-    loadSprite(&tableSurface[WALL_TOP], "img/wallBorderTop.png");
-    loadSprite(&tableSurface[WALL_BOTTOM], "img/wallBorderBottom.png");
+  /* walls */
+  loadSprite (&tableSurface[WALL1_IMAGE], "img/wall.png");
+  loadSprite (&tableSurface[WALL2_IMAGE], "img/wall2.png");
+  loadSprite (&tableSurface[WALL3_IMAGE], "img/wall3.png");
+  loadSprite (&tableSurface[WALL4_IMAGE], "img/wall4.png");
+  loadSprite (&tableSurface[WALL_LEFT], "img/wallBorderLeft.png");
+  loadSprite (&tableSurface[WALL_RIGHT], "img/wallBorderRight.png");
+  loadSprite (&tableSurface[WALL_TOP], "img/wallBorderTop.png");
+  loadSprite (&tableSurface[WALL_BOTTOM], "img/wallBorderBottom.png");
 
-    /* walls */
-    loadSprite(&tableSurface[CORNER_TR], "img/cornerTop-Right.png");
-    loadSprite(&tableSurface[CORNER_TL], "img/cornerTop-Left.png");
-    loadSprite(&tableSurface[CORNER_BR], "img/cornerBottom-Right.png");
-    loadSprite(&tableSurface[CORNER_BL], "img/cornerBottom-Left.png");
+  /* walls */
+  loadSprite (&tableSurface[CORNER_TR], "img/cornerTop-Right.png");
+  loadSprite (&tableSurface[CORNER_TL], "img/cornerTop-Left.png");
+  loadSprite (&tableSurface[CORNER_BR], "img/cornerBottom-Right.png");
+  loadSprite (&tableSurface[CORNER_BL], "img/cornerBottom-Left.png");
 
-    /* grounds */
-    loadSprite(&tableSurface[GROUND1_IMAGE], "img/background.bmp");
-    loadSprite(&tableSurface[GROUND2_IMAGE], "img/background2.bmp");
-    loadSprite(&tableSurface[GROUND3_IMAGE], "img/background3.bmp");
+  /* grounds */
+  loadSprite (&tableSurface[GROUND1_IMAGE], "img/background.bmp");
+  loadSprite (&tableSurface[GROUND2_IMAGE], "img/background2.bmp");
+  loadSprite (&tableSurface[GROUND3_IMAGE], "img/background3.bmp");
 
-    /* boxes */
-    loadSprite(&tableSurface[BOX_IMAGE], "img/box.png");
-    loadSprite(&tableSurface[BOX_IMAGE_OK], "img/box_ok.png");
+  /* boxes */
+  loadSprite (&tableSurface[BOX_IMAGE], "img/box.png");
+  loadSprite (&tableSurface[BOX_IMAGE_OK], "img/box_ok.png");
 
-    /* goal */
-    loadSprite(&tableSurface[GOAL_IMAGE], "img/goal.png");
-    /* menu */
-    loadSprite(&tableSurface[MENU_BACK], "img/menuBack.png");
-    loadSprite(&tableSurface[PROGRESS], "img/progress.png");
+  /* goal */
+  loadSprite (&tableSurface[GOAL_IMAGE], "img/goal.png");
+  /* menu */
+  loadSprite (&tableSurface[MENU_BACK], "img/menuBack.png");
+  loadSprite (&tableSurface[PROGRESS], "img/progress.png");
 
-    /* outside the wall */
-    loadSprite(&tableSurface[OUTSIDE_IMAGE], "img/outside.png");
-    loadSprite(&tableSurface[OUTSIDE2_IMAGE], "img/outside2.png");
-    loadSprite(&tableSurface[OUTSIDE3_IMAGE], "img/outside3.png");
-    loadSprite(&tableSurface[OUTSIDE4_IMAGE], "img/outside4.png");
+  /* outside the wall */
+  loadSprite (&tableSurface[OUTSIDE_IMAGE], "img/outside.png");
+  loadSprite (&tableSurface[OUTSIDE2_IMAGE], "img/outside2.png");
+  loadSprite (&tableSurface[OUTSIDE3_IMAGE], "img/outside3.png");
+  loadSprite (&tableSurface[OUTSIDE4_IMAGE], "img/outside4.png");
 
-    /* Congrats */
-    loadSprite(&tableSurface[CONGRATS], "img/congrats_background.png");
-    return EXIT_SUCCESS;
+  /* Congrats */
+  loadSprite (&tableSurface[CONGRATS], "img/congrats_background.png");
+  return EXIT_SUCCESS;
 }
 
 
 /* load a sprite as a surface */
-void loadSprite(Sprites * sprites, const char *imagePath)
+void
+loadSprite (Sprites * sprites, const char *imagePath)
 {
-    sprites->image = IMG_Load(imagePath);
-    if (sprites->image == NULL) {
-	fprintf(stderr, "IMG_Load %s failed: %s\n", imagePath,
-		SDL_GetError());
-	exit(EXIT_FAILURE);
+  sprites->image = IMG_Load (imagePath);
+  if (sprites->image == NULL)
+    {
+      fprintf (stderr, "IMG_Load %s failed: %s\n", imagePath,
+	       SDL_GetError ());
+      exit (EXIT_FAILURE);
     }
-    sprites->height = 40;
-    sprites->width = 40;
+  sprites->height = 40;
+  sprites->width = 40;
 }
 
 /* free all surfaces */
-void freeSprites(Sprites tableSurface[NBR_OF_IMAGES])
+void
+freeSprites (Sprites tableSurface[NBR_OF_IMAGES])
 {
-    int i = 0;
-    for (i = 0; i < NBR_OF_IMAGES; i++) {
+  int i = 0;
+  for (i = 0; i < NBR_OF_IMAGES; i++)
+    {
 
-      if(tableSurface[i].image == NULL){
-        i = NBR_OF_IMAGES + 1;
-      }
-    SDL_FreeSurface(tableSurface[i].image);
-   fprintf(stderr, "Free surfaces: %d\n", i);
+      if (tableSurface[i].image == NULL)
+	{
+	  i = NBR_OF_IMAGES + 1;
+	}
+      SDL_FreeSurface (tableSurface[i].image);
+      fprintf (stderr, "Free surfaces: %d\n", i);
     }
-    fprintf(stderr, "Free all surfaces: %s\n", SDL_GetError());
+  fprintf (stderr, "Free all surfaces: %s\n", SDL_GetError ());
 }
 #endif

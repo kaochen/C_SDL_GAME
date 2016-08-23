@@ -486,7 +486,7 @@ main (int argc, char *argv[])
 		      freezeCommand = false;
 		      menuOpened = 0;
 		      menuChoice = 0;
-            refresh = 1;
+		      refresh = 1;
 		    }
 		  break;
 
@@ -508,7 +508,7 @@ main (int argc, char *argv[])
 		  /*reset status */
 		  freezeCommand = false;
 		  menuOpened = 0;
-        refresh = 1;
+		  refresh = 1;
 		  fprintf (stderr, "Level %d\n loaded", (levelChoice + 1));
 		  break;
 
@@ -531,7 +531,7 @@ main (int argc, char *argv[])
 		  /*reset status */
 		  freezeCommand = false;
 		  menuOpened = 0;
-        refresh = 1;
+		  refresh = 1;
 		  fprintf (stderr, "Level %d\n loaded", (levelChoice));
 		  break;
 
@@ -555,7 +555,7 @@ main (int argc, char *argv[])
 		  /*reset status */
 		  freezeCommand = false;
 		  menuOpened = 0;
-        refresh = 1;
+		  refresh = 1;
 		  fprintf (stderr, "Level %d\n loaded", (levelChoice));
 
 		  break;

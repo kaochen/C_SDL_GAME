@@ -33,49 +33,51 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "slc.h"
 
 /* display Top Bar*/
-void displayTopBar(int levelNumber, SDL_Surface * screen,
-		 Sprites tableSurface[NBR_OF_IMAGES],
-		 S_LevelList * levelList,Square grid[][getMax_Blocks()]);
+void displayTopBar (int levelNumber, SDL_Surface * screen,
+		    Sprites tableSurface[NBR_OF_IMAGES],
+		    S_LevelList * levelList, Square grid[][getMax_Blocks ()]);
 
 /* display background menu */
-void backgroundMenu(SDL_Surface * screen,
-		    Sprites tableSurface[NBR_OF_IMAGES]);
-
-/* display shortcut in the menu */
-void displayShortcut(SDL_Surface * screen);
-/* display the level number */
-void levelMenu(int levelNumber, SDL_Surface * screen,
-	       S_LevelList * levelList);
-
-/* count how many goals are need to complete the level */
-int goalLeft(Square grid[][getMax_Blocks()]);
-
-/* count goals all ready achieve */
-int nbr_of_goals(Square grid[][getMax_Blocks()]);
-
-/* Display Progress in the level */
-void displayProgress(Square grid[][getMax_Blocks()], SDL_Surface * menu,
+void backgroundMenu (SDL_Surface * screen,
 		     Sprites tableSurface[NBR_OF_IMAGES]);
 
+/* display shortcut in the menu */
+void displayShortcut (SDL_Surface * screen);
+/* display the level number */
+void levelMenu (int levelNumber, SDL_Surface * screen,
+		S_LevelList * levelList);
+
+/* count how many goals are need to complete the level */
+int goalLeft (Square grid[][getMax_Blocks ()]);
+
+/* count goals all ready achieve */
+int nbr_of_goals (Square grid[][getMax_Blocks ()]);
+
+/* Display Progress in the level */
+void displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * menu,
+		      Sprites tableSurface[NBR_OF_IMAGES]);
+
 /* Victory or not ? */
-int levelFinished(Square grid[][getMax_Blocks()]);
+int levelFinished (Square grid[][getMax_Blocks ()]);
 
 /* display a congrats message to the winner */
-int displayCongrats(SDL_Surface * screen,
-		    Sprites tableSurface[NBR_OF_IMAGES]);
+int displayCongrats (SDL_Surface * screen,
+		     Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* return the height of the menu in blocks*/
-int menuHeight(void);
+int menuHeight (void);
 
 
 /* menu position*/
-int menuPosX(void);
+int menuPosX (void);
 
 
 /* Open the main menu */
-void openMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_LevelList * levelList, int menuChoice, int levelChoice);
+void openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
+	       S_LevelList * levelList, int menuChoice, int levelChoice);
 
 /* display Sub menu */
-int displaySubMenu(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_LevelList * levelList, int menuChoice, int levelChoice);
+int displaySubMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
+		    S_LevelList * levelList, int menuChoice, int levelChoice);
 
 #endif
