@@ -1,5 +1,6 @@
 #Ignore this files
 obj/
 SokoRobot
-preferences.ini
+.buildconfig
+
 # Except this files
