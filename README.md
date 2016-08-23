@@ -69,10 +69,10 @@ git pull //pull last changes
 Good pratice:
  * [FR] http://emmanuel-delahaye.developpez.com/tutoriels/c/bonnes-pratiques-codage-c/
 
-I used the "Kernighan & Ritchie style" to indent my code.
+I used the "GNU Style" to indent my code.
 ```
 apt get install indent
-indent -kr file.c
+indent -gnu file.c
 ```
 
 ### Links
