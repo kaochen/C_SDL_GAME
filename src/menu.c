@@ -61,14 +61,14 @@ displayShortcut (SDL_Surface * screen)
 {
   /* setup font */
   TTF_Font *font = NULL;
-  font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
+  font = TTF_OpenFont (FONT_ROBOTO_REGULAR, 22);
   SDL_Color fontColor = { 255, 255, 255, 255 };
   SDL_Surface *shortCutText = NULL;
   shortCutText = TTF_RenderText_Blended (font, "(M)", fontColor);
   /* blit the text */
   SDL_Rect shortCutTextPos;
-  shortCutTextPos.x = menuPosX () + (MENU_WIDTH - 2 * SPRITE_SIZE - 4);
-  shortCutTextPos.y = 10;
+  shortCutTextPos.x = menuPosX () + (MENU_WIDTH - 2 * SPRITE_SIZE - 7);
+  shortCutTextPos.y = 4;
   SDL_BlitSurface (shortCutText, NULL, screen, &shortCutTextPos);
 
   /* clean */
@@ -82,7 +82,7 @@ levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
 {
   /* setup font */
   TTF_Font *font = NULL;
-  font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
+  font = TTF_OpenFont (FONT_ROBOTO_REGULAR, 22);
   SDL_Color fontColor = { 255, 255, 255, 255 };
 
   /* count all levels from all files */
@@ -96,8 +96,8 @@ levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
 
   /* blit the text */
   SDL_Rect levelTextPos;
-  levelTextPos.x = menuPosX () + 150;
-  levelTextPos.y = 10;
+  levelTextPos.x = menuPosX () + 120;
+  levelTextPos.y = 5;
   SDL_BlitSurface (levelText, NULL, screen, &levelTextPos);
 
   /* clean */
@@ -203,7 +203,7 @@ displayCongrats (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
   /* setup font */
   TTF_Font *font = NULL;
   const int fontCongratsSize = 50;
-  font = TTF_OpenFont ("img/BABIRG__.TTF", fontCongratsSize);
+  font = TTF_OpenFont (FONT_ROBOTO_REGULAR, fontCongratsSize);
   SDL_Color fontColor = { 255, 255, 255, 255 };
 
   /* merge results */
@@ -257,7 +257,7 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   /* blit text */
   /* setup font */
   TTF_Font *font = NULL;
-  font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
+  font = TTF_OpenFont (FONT_ROBOTO_REGULAR, 22);
   SDL_Color fontColor = { 255, 255, 255, 255 };
   SDL_Surface *menuText = NULL;
   SDL_Rect menuTextPos;
@@ -265,7 +265,7 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 
   /* blit the text */
   menuText = TTF_RenderText_Blended (font, "Current Level Infos", fontColor);
-  menuTextPos.y = 60;
+  menuTextPos.y = 55;
   SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
   menuText = TTF_RenderText_Blended (font, "Shortcuts", fontColor);
@@ -279,7 +279,7 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   /*Blit point */
   /* setup font */
   TTF_Font *fontPoint = NULL;
-  fontPoint = TTF_OpenFont ("img/BABIRG__.TTF", 60);
+  fontPoint = TTF_OpenFont (FONT_ROBOTO_REGULAR, 20);
   SDL_Color fontPointColor = { 255, 255, 255, 255 };
   SDL_Surface *point = NULL;
   SDL_Rect pointPos;
@@ -322,7 +322,7 @@ displaySubMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   /* blit text */
   /* setup font */
   TTF_Font *font = NULL;
-  font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
+  font = TTF_OpenFont (FONT_ROBOTO_REGULAR, 20);
   SDL_Color fontColor = { 255, 255, 255, 255 };
   SDL_Surface *menuText = NULL;
   SDL_Rect menuTextPos;
