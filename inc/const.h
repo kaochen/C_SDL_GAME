@@ -38,7 +38,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define MAX_CARACT 200
 
-
+#define FONT_ROBOTO_BOLD "/usr/share/fonts/truetype/roboto/hinted/Roboto-Bold.ttf"
+#define FONT_ROBOTO_REGULAR "/usr/share/fonts/truetype/roboto/hinted/Roboto-Regular.ttf"
 /* define role for each square*/
 typedef struct
 {
