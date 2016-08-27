@@ -31,7 +31,7 @@ displayTopBar (int levelNumber, SDL_Surface * screen,
 	       S_LevelList * levelList, Square grid[][getMax_Blocks ()])
 {
   /* first add background */
-  backgroundMenu (screen, tableSurface);
+  backgroundTopBar (screen, tableSurface);
   /* display the level number */
   levelMenu (levelNumber, screen, levelList);
   displayProgress (grid, screen, tableSurface);
@@ -46,7 +46,7 @@ displayTopBar (int levelNumber, SDL_Surface * screen,
 
 /* display background menu */
 void
-backgroundMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
+backgroundTopBar (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
   SDL_Rect menuPos;
   menuPos.x = menuPosX ();
@@ -249,10 +249,7 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 	  S_LevelList * levelList, int menuChoice, int levelChoice)
 {
   /* blit background */
-  SDL_Rect menuPos;
-  menuPos.x = menuPosX () + 40;
-  menuPos.y = 30;
-  SDL_BlitSurface (tableSurface[CONGRATS].image, NULL, screen, &menuPos);
+  displayOpenMenuBackground(screen,tableSurface);
 
   /* blit text */
   /* setup font */
@@ -298,7 +295,7 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   point = TTF_RenderText_Blended (fontPoint, "*", fontPointColor);
   SDL_BlitSurface (point, NULL, screen, &pointPos);
 
-  displaySubMenu (screen, tableSurface, levelList, menuChoice, levelChoice);
+  displaySubMenu (screen, levelList, menuChoice, levelChoice);
 
   /* clean */
   SDL_FreeSurface (menuText);
@@ -309,16 +306,8 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 
 /* display Sub menu */
 int
-displaySubMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
-		S_LevelList * levelList, int menuChoice, int levelChoice)
+displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, int levelChoice)
 {
-
-  /* blit background */
-  SDL_Rect subMenuPos;
-  subMenuPos.x = menuPosX () + 40;
-  subMenuPos.y = 170;
-  SDL_BlitSurface (tableSurface[CONGRATS].image, NULL, screen, &subMenuPos);
-
   /* blit text */
   /* setup font */
   TTF_Font *font = NULL;
@@ -414,5 +403,24 @@ displaySubMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   return EXIT_SUCCESS;
 }
 
+/* Display the background menu */
+void
+displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]){
+  int i = 0, size = 8;
+  SDL_Rect subMenuPos;
+  subMenuPos.x = menuPosX () + 25;
+  subMenuPos.y = 40;
+   SDL_BlitSurface (tableSurface[MENU_RIBBON].image, NULL, screen, &subMenuPos);
+   SDL_BlitSurface (tableSurface[MENU_TOP_LIGHT].image, NULL, screen, &subMenuPos);
+  subMenuPos.y += 40;
+
+  for(i = 1; i < size; i++)
+    {
+      SDL_BlitSurface (tableSurface[MENU_RIBBON].image, NULL, screen, &subMenuPos);
+      subMenuPos.y += 40;
+   }
+   /* add a bottom to the menu */
+   SDL_BlitSurface (tableSurface[MENU_BOTTOM].image, NULL, screen, &subMenuPos);
+}
 
 #endif

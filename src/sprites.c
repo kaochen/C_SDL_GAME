@@ -61,6 +61,9 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[GOAL_IMAGE], "img/goal.png");
   /* menu */
   loadSprite (&tableSurface[MENU_BACK], "img/menuBack.png");
+  loadSprite (&tableSurface[MENU_RIBBON], "img/menu_ribbon.png");
+  loadSprite (&tableSurface[MENU_BOTTOM], "img/menu_bottom.png");
+  loadSprite (&tableSurface[MENU_TOP_LIGHT], "img/menu_top_light.png");
   loadSprite (&tableSurface[PROGRESS], "img/progress.png");
 
   /* outside the wall */

@@ -37,8 +37,8 @@ void displayTopBar (int levelNumber, SDL_Surface * screen,
 		    Sprites tableSurface[NBR_OF_IMAGES],
 		    S_LevelList * levelList, Square grid[][getMax_Blocks ()]);
 
-/* display background menu */
-void backgroundMenu (SDL_Surface * screen,
+/* display background top bar */
+void backgroundTopBar (SDL_Surface * screen,
 		     Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* display shortcut in the menu */
@@ -77,7 +77,9 @@ void openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList, int menuChoice, int levelChoice);
 
 /* display Sub menu */
-int displaySubMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
-		    S_LevelList * levelList, int menuChoice, int levelChoice);
+int displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, int levelChoice);
 
+/* Display the background menu */
+void
+displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 #endif
