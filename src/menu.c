@@ -153,16 +153,16 @@ displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
   //fprintf(stderr,"Angle is %d\n", angle);
   int i = 0;
   /* blit progress circle size image is 56*56px */
-  for (i = 0; i <= angle; i = i + 5)
+  for (i = 360; i >= angle; i = i - 5)
     {
       circle = rotozoomSurface (tableSurface[PROGRESS].image, i, 1.0, 1);
       circlePos.x = menuPosX () + 16 + (56 - circle->w) / 2;
       circlePos.y = 5 + (56 - circle->h) / 2;
-      if (angle != 0)
-	{
-	  SDL_BlitSurface (circle, NULL, screen, &circlePos);
-	  SDL_FreeSurface (circle);
-	}
+      if (angle != 360)
+	      {
+	        SDL_BlitSurface (circle, NULL, screen, &circlePos);
+	        SDL_FreeSurface (circle);
+	      }
     }
 
 }
