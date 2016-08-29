@@ -149,6 +149,19 @@
        y1="356.17813"
        x2="186.40376"
        y2="347.20126" />
+    <filter
+       inkscape:collect="always"
+       style="color-interpolation-filters:sRGB"
+       id="filter4500"
+       x="-0.18000001"
+       width="1.36"
+       y="-0.18000001"
+       height="1.36">
+      <feGaussianBlur
+         inkscape:collect="always"
+         stdDeviation="0.75"
+         id="feGaussianBlur4502" />
+    </filter>
   </defs>
   <sodipodi:namedview
      showguides="false"
@@ -159,10 +172,10 @@
      inkscape:window-width="1920"
      units="px"
      showgrid="false"
-     inkscape:current-layer="layer10"
+     inkscape:current-layer="layer11"
      inkscape:document-units="px"
-     inkscape:cy="435.30952"
-     inkscape:cx="115.41928"
+     inkscape:cy="390.14096"
+     inkscape:cx="272.65634"
      inkscape:zoom="2"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
@@ -728,5 +741,78 @@
          x="320.52289"
          id="tspan5124"
          sodipodi:role="line">(M)</tspan></text>
+  </g>
+  <g
+     inkscape:groupmode="layer"
+     id="layer11"
+     inkscape:label="Cross"
+     style="opacity:0.15">
+    <g
+       transform="translate(-77.00002,48)"
+       id="g4268"
+       style="display:inline;opacity:0;filter:url(#filter4500)"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/menu_cross.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90">
+      <rect
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.01960784"
+         id="rect4270"
+         width="10"
+         height="1"
+         x="330"
+         y="89"
+         ry="0.375"
+         rx="0.375" />
+      <rect
+         rx="0.375"
+         ry="0.375"
+         y="-335.5"
+         x="84.5"
+         height="1"
+         width="10"
+         id="rect4272"
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.01960784"
+         transform="matrix(0,1,-1,0,0,0)" />
+      <circle
+         style="opacity:1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.01960784"
+         id="circle4274"
+         cx="334.99997"
+         cy="89.5"
+         r="1.5" />
+    </g>
+    <rect
+       rx="0.375"
+       ry="0.375"
+       y="137"
+       x="250.99998"
+       height="1"
+       width="14"
+       id="rect4222"
+       style="display:inline;opacity:1;fill:#ffffff;fill-opacity:0.58823529;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.01960784"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/menu_cross.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       transform="matrix(0,1,-1,0,0,0)"
+       style="display:inline;opacity:0.5;fill:#ffffff;fill-opacity:0.58823529;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.01960784"
+       id="rect4224"
+       width="6"
+       height="1"
+       x="134.5"
+       y="-258.5"
+       ry="0.375"
+       rx="0.375"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/menu_cross.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <circle
+       r="1.5"
+       cy="137.5"
+       cx="257.99997"
+       id="path4226"
+       style="display:inline;opacity:1;fill:#ffffff;fill-opacity:0.58823529;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.01960784"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/menu_cross.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
 </svg>

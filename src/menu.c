@@ -421,6 +421,23 @@ displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAG
    }
    /* add a bottom to the menu */
    SDL_BlitSurface (tableSurface[MENU_BOTTOM].image, NULL, screen, &subMenuPos);
+
+
+  /* Distribute Cross over the menu */
+  int x = 0, y = 0, start = menuPosX () + 30;
+  SDL_Rect  crossPos;
+  crossPos.y = 50;
+  for(y = 0; y <= (size*4/3); y++)
+    {
+    crossPos.x = start;
+     for(x = 0; x < 9; x++)
+       {
+         SDL_BlitSurface (tableSurface[MENU_CROSS].image, NULL, screen, &crossPos);
+         crossPos.x += 30;
+       }
+       crossPos.y += 30;
+    }
+
 }
 
 #endif
