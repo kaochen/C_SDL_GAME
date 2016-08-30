@@ -89,7 +89,7 @@ getPrefAsChar (const char *prefName)
 		{
 		  strcpy (ret, "");
 		}
-	      fprintf (stderr, "ret:%s", ret);
+	      //fprintf (stderr, "ret:%s", ret);
 
 	      /*dump quatation marks "" */
 	      size = strlen (ret);

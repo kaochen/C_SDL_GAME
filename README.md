@@ -52,7 +52,19 @@ make mrproper
 
 ![X and Y](https://upload.wikimedia.org/wikipedia/commons/8/86/Rep%C3%A8re_SDL_Window.png)
 
-Git :
+#### Create a new theme
+
+add a new folder in SokoRobot/img/ ex: myTheme
+add your images in it, keep the same name based on the original folder
+img/original/box.png --> img/myTheme/box.png
+
+change theme parameters in the preferences.ini file
+theme = "original" --> theme = "myTheme"
+
+If the program can't find a image in your theme folder, it will pick up one from the original folder.
+
+
+#### Git :
 ```
 git remote set-url origin git@github.com:kaochen/SokoRobot.git
 git status // see changes

@@ -45,7 +45,7 @@ typedef struct
 int loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* load a sprite as a surface */
-void loadSprite (Sprites * sprites, const char *imagePath);
+void loadSprite (Sprites * sprites, const char *themePath, const char *imageName);
 
 /* free all surfaces */
 void freeSprites (Sprites tableSurface[NBR_OF_IMAGES]);

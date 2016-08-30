@@ -51,7 +51,7 @@ backgroundTopBar (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
   SDL_Rect menuPos;
   menuPos.x = menuPosX ();
   menuPos.y = 0;
-  SDL_BlitSurface (tableSurface[MENU_BACK].image, NULL, screen, &menuPos);
+  SDL_BlitSurface (tableSurface[MENU_BAR].image, NULL, screen, &menuPos);
 
 }
 
