@@ -430,7 +430,7 @@ displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAG
   for(y = 0; y <= (size*4/3); y++)
     {
     crossPos.x = start;
-     for(x = 0; x < 9; x++)
+     for(x = 0; x < 12; x++)
        {
          SDL_BlitSurface (tableSurface[MENU_CROSS].image, NULL, screen, &crossPos);
          crossPos.x += 30;
