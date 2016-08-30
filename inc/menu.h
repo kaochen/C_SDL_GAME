@@ -81,5 +81,5 @@ int displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoic
 
 /* Display the background menu */
 void
-displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int menuChoice);
 #endif

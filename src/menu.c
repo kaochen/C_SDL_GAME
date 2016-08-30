@@ -53,6 +53,21 @@ backgroundTopBar (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
   menuPos.y = 0;
   SDL_BlitSurface (tableSurface[MENU_BAR].image, NULL, screen, &menuPos);
 
+   /* Distribute Cross over the menu */
+  int x = 0, y = 0, start = menuPosX ();
+  SDL_Rect  crossPos;
+  crossPos.y = 2;
+  for(y = 0; y <= 1; y++)
+    {
+    crossPos.x = start;
+     for(x = 0; x < 14; x++)
+       {
+         SDL_BlitSurface (tableSurface[MENU_CROSS].image, NULL, screen, &crossPos);
+         crossPos.x += 30;
+       }
+       crossPos.y += 25;
+    }
+
 }
 
 /* display shortcut in the menu */
@@ -249,7 +264,7 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 	  S_LevelList * levelList, int menuChoice, int levelChoice)
 {
   /* blit background */
-  displayOpenMenuBackground(screen,tableSurface);
+  displayOpenMenuBackground(screen,tableSurface,menuChoice);
 
   /* blit text */
   /* setup font */
@@ -384,14 +399,26 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
       menuText =
-	TTF_RenderText_Blended (font, "n : next level   p : previous level",
+	TTF_RenderText_Blended (font, "n : next level",
+				fontColor);
+      menuTextPos.y += 30;
+      SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+
+      menuText =
+	TTF_RenderText_Blended (font, "p : previous level",
 				fontColor);
       menuTextPos.y += 30;
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
       menuText =
 	TTF_RenderText_Blended (font,
-				"r : reset current level   q : quit game",
+				"r : reset current level",
+				fontColor);
+      menuTextPos.y += 30;
+      SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+
+      menuText =
+	TTF_RenderText_Blended (font, "q : quit game",
 				fontColor);
       menuTextPos.y += 30;
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
@@ -405,8 +432,17 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
 
 /* Display the background menu */
 void
-displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]){
-  int i = 0, size = 8;
+displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int menuChoice){
+  int i = 0, size = 0;
+  if (menuChoice == 1)
+    {
+      size = 7;
+    }
+   else
+     {
+       size = 6;
+     }
+
   SDL_Rect subMenuPos;
   subMenuPos.x = menuPosX () + 25;
   subMenuPos.y = 40;
@@ -437,6 +473,13 @@ displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAG
        }
        crossPos.y += 30;
     }
+
+  /* add a separator line */
+  SDL_Rect sepPos;
+  sepPos.x = start;
+  sepPos.y = 150;
+  SDL_BlitSurface (tableSurface[MENU_SEPARATOR].image, NULL, screen, &sepPos);
+
 
 }
 
