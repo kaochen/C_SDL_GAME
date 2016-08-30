@@ -53,21 +53,6 @@ backgroundTopBar (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
   menuPos.y = 0;
   SDL_BlitSurface (tableSurface[MENU_BAR].image, NULL, screen, &menuPos);
 
-   /* Distribute Cross over the menu */
-  int x = 0, y = 0, start = menuPosX ();
-  SDL_Rect  crossPos;
-  crossPos.y = 2;
-  for(y = 0; y <= 1; y++)
-    {
-    crossPos.x = start;
-     for(x = 0; x < 14; x++)
-       {
-         SDL_BlitSurface (tableSurface[MENU_CROSS].image, NULL, screen, &crossPos);
-         crossPos.x += 30;
-       }
-       crossPos.y += 25;
-    }
-
 }
 
 /* display shortcut in the menu */
@@ -460,23 +445,29 @@ displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAG
 
 
   /* Distribute Cross over the menu */
-  int x = 0, y = 0, start = menuPosX () + 30;
+  int x = 0, y = 0, start = menuPosX ();
   SDL_Rect  crossPos;
-  crossPos.y = 50;
-  for(y = 0; y <= (size*4/3); y++)
+  crossPos.y = 60;
+  for(y = 0; y < (size*4/3); y++)
     {
-    crossPos.x = start;
-     for(x = 0; x < 12; x++)
-       {
-         SDL_BlitSurface (tableSurface[MENU_CROSS].image, NULL, screen, &crossPos);
-         crossPos.x += 30;
-       }
-       crossPos.y += 30;
+      /*jump line for separator*/
+      if(y == 3)
+        {
+          crossPos.y += 20;
+        }
+         crossPos.x = start + 40;
+           for(x = 0; x < 11; x++)
+             {
+               SDL_BlitSurface (tableSurface[MENU_SQUARE].image, NULL, screen, &crossPos);
+               crossPos.x += 30;
+             }
+             crossPos.y += 30;
+
     }
 
   /* add a separator line */
   SDL_Rect sepPos;
-  sepPos.x = start;
+  sepPos.x = start + 33;
   sepPos.y = 150;
   SDL_BlitSurface (tableSurface[MENU_SEPARATOR].image, NULL, screen, &sepPos);
 
