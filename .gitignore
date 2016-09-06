@@ -2,5 +2,6 @@
 obj/
 SokoRobot
 .buildconfig
+locale/fr/*.mo
 
 # Except this files

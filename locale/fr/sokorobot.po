@@ -1,0 +1,54 @@
+msgid ""
+msgstr ""
+"Language: fr\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+
+msgid "Argument %d : %s \n"
+msgstr "Argument %d : %s \n"
+
+msgid "SDL initialization error: %s\n"
+msgstr "SDL initialization erreur: %s\n"
+
+msgid "TTF_Init initialization error: %s\n"
+msgstr "TTF_Init initialization erreur: %s\n"
+
+msgid "The window size request from settings is %dx%d\n"
+msgstr "La taille de la fenêtre demandé dans les préferences est de %dx%d\n"
+
+msgid "SDL_CreateWindow failed: %s\n"
+msgstr "SDL_CreateWindow a échoué: %s\n"
+
+msgid "SDL_GetWindowSurface failed: %s\n"
+msgstr "SDL_CreateWindow a échoué: %s\n"
+
+msgid "The SDL window has been created.\n"
+msgstr "La fenêtre SDL a été créée.\n"
+
+msgid "The level files cannot from the folder levels/ be listed."
+msgstr "Impossible de lister les fichiers contenant les niveaux depuis le dossier levels/."
+
+msgid "The level list cannot be verified."
+msgstr "La liste des fichiers de niveaux ne peut être vérifier"
+
+msgid "Error when loading levels attributs from files."
+msgstr "Une erreur a eu lieu lors du chargement, depuis les fichiers, des attributs"
+
+msgid "The list of the possible levels has been generate from the content of the folder levels/.\n"
+msgstr "La liste des niveaux possible a été généré à partir du contenu du dossier levels/.\n"
+
+msgid "Loading first level.\n"
+msgstr "Chargement du premier niveau.\n"
+
+msgid "Level loaded.\n"
+msgstr "Niveau chargé.\n"
+
+msgid "Cannot load the first level.\n"
+msgstr "Impossible de charger le premier niveau.\n"
+
+
+
+
+

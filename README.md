@@ -87,6 +87,32 @@ apt get install indent
 indent -gnu file.c
 ```
 
+#### translate
+
+Edit or add a file named "sokorobot.po" in the "locale" folder (in french for example)
+```
+locale/fr/sokorobot.po
+```
+Compile it:
+```
+msgfmt -o locale/fr/sokorobot.mo locale/fr/sokorobot.po
+```
+copy the .mo file into /usr/share/locale/
+```
+cp locale/fr/sokorobot.mo /usr/share/locale/fr/LC_MESSAGES/
+```
+run SokoRobot
+```
+./SokoRobot
+```
+change langage from the terminal to test:
+```
+export LANG=en_EN.utf-8
+```
+or in french
+```
+export LANG=fr_FR.utf-8
+```
 ### Links
  * http://wiki.libsdl.org/Installation#Linux.2FUnix
  * http://jeux.developpez.com/tutoriels/sdl-2/guide-migration/

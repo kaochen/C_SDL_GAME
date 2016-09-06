@@ -17,13 +17,17 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+#include <libintl.h>
+#include <locale.h>
+
 #include <stdlib.h>
 #include <stdio.h>
+#include <errno.h>
+#include <time.h>
+
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
-#include <time.h>
-#include <errno.h>
 
 #include "../inc/const.h"
 #include "../inc/game.h"
@@ -37,12 +41,17 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int
 main (int argc, char *argv[])
 {
+  /* Set up gettext for internalisation */
+  setlocale(LC_ALL, "");
+  textdomain("sokorobot");
+  bindtextdomain("sokorobot", "/usr/share/locale");
+
   /*manage argument (not used for now) */
   int i;
 
   for (i = 1; i < argc; i++)
     {
-      printf ("Argument %d : %s \n", i, argv[i]);
+      printf (gettext("Argument %d : %s \n"), i, argv[i]);
     }
 
   /* reset errors */
@@ -54,22 +63,22 @@ main (int argc, char *argv[])
   /* Start and check if SDL start correctly */
   if (SDL_Init (SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
     {
-      fprintf (stderr, "SDL initialization error: %s\n", SDL_GetError ());
+      fprintf (stderr, gettext("SDL initialization error: %s\n"), SDL_GetError ());
       exit (EXIT_FAILURE);
     }
 
   /* Start SDL TTF */
   if (TTF_Init () == -1)
     {
-      fprintf (stderr, "TTF_Init initialization error: %s\n",
+      fprintf (stderr, gettext("TTF_Init initialization error: %s\n"),
 	       TTF_GetError ());
       exit (EXIT_FAILURE);
     }
 
   /*load preferences */
 
-  printf ("Window size %dx%d, maxBlocks: %d\n", getWindow_width (),
-	  getWindow_height (), getMax_Blocks ());
+  printf (gettext("The window size request from settings is %dx%d\n"), getWindow_width (),
+	  getWindow_height ());
 
   /* Create the window game */
   SDL_Window *window = SDL_CreateWindow (GAME_NAME,
@@ -79,6 +88,14 @@ main (int argc, char *argv[])
 					 getWindow_height (),
 					 SDL_WINDOW_MOUSE_FOCUS);
 
+  /* Check window */
+  if (window == NULL)
+    {
+      fprintf (stderr, gettext("SDL_CreateWindow failed: %s\n"),
+	       SDL_GetError ());
+      exit (EXIT_FAILURE);
+    }
+
   /* Set window icon */
   SDL_SetWindowIcon (window, IMG_Load ("img/icon.png"));
 
@@ -87,14 +104,16 @@ main (int argc, char *argv[])
   screen = SDL_GetWindowSurface (window);
 
   /* Check if window and surface are created */
-  if (window == NULL || screen == NULL)
+  if (screen == NULL)
     {
-      fprintf (stderr, "Creating the main window failed: %s\n",
+      fprintf (stderr, gettext("SDL_GetWindowSurface failed: %s\n"),
 	       SDL_GetError ());
       exit (EXIT_FAILURE);
     }
-  fprintf (stderr, "Creating the main window succeed\n\n");
 
+  fprintf (stderr, gettext("The SDL window has been created.\n"));
+
+  fprintf (stderr, "\n");
   /* load images into a table of struct */
   Sprites tableSurface[NBR_OF_IMAGES];
   loadAllSprites (tableSurface);
@@ -105,65 +124,47 @@ main (int argc, char *argv[])
 
   char levelName[MAX_CARACT] = "";
 
-
+  fprintf (stderr, "\n");
   /*List slc files from the levels/ folder */
-  fprintf (stderr, "Searching files in the levels folder.\n");
   S_FilesList *filesList = initFilesList ();
-  if (listSlcLevelFiles (filesList) == EXIT_SUCCESS)
+  if (listSlcLevelFiles (filesList) == EXIT_FAILURE)
     {
-      fprintf (stderr, "Level folder explored.\n");
+      perror (gettext("The level files cannot from the folder levels/ be listed."));
     }
-  else
-    {
-      perror ("listSlcLevelFiles failed");
-      exit (EXIT_FAILURE);
-    }
-  fprintf (stderr, "\n");
 
+  fprintf (stderr, "\n");
   /*Read files name from the filesList to check */
-  if (readFilesList (filesList) == EXIT_SUCCESS)
+  if (readFilesList (filesList) == EXIT_FAILURE)
     {
-      fprintf (stderr, "Files list readed.\n");
+      perror (gettext("The level list cannot be verified."));
     }
-  else
-    {
-      perror ("readFilesList failed");
-      exit (EXIT_FAILURE);
-    }
+
+
   fprintf (stderr, "\n");
-
-
   /*Read level from slc file */
-  fprintf (stderr, "Get info from each files %s\n", SDL_GetError ());
   S_LevelList *levelList = initLevelList ();
   //readLevelList(levelList);
-  fprintf (stderr, "Read the level list.\n");
+  if (readLevelsAttributs (filesList, levelList) == EXIT_FAILURE)
+    {
+      perror (gettext("Error when loading levels attributs from files."));
+    }
 
-  if (readLevelsAttributs (filesList, levelList) == EXIT_SUCCESS)
-    {
-      fprintf (stderr, "Attributs from files loaded.\n");
-    }
-  else
-    {
-      perror ("Error when loading levels attributs from files. Perror");
-      exit (EXIT_FAILURE);
-    }
+  fprintf (stderr, gettext("The list of the possible levels has been generate from the content of the folder levels/.\n"));
   fprintf (stderr, "\n");
-
   /* count all levels from all files */
   int max_Levels = getNbrOfLevels (levelList);
 
   /*Load first game */
 
   int levelChoice = readLevelFromSetting (levelList);
-  fprintf (stderr, "Loading first level.\n");
+  fprintf (stderr, gettext("Loading first level.\n"));
   if (loadSlcLevel (levelChoice, levelList, grid) == EXIT_SUCCESS)
     {
-      fprintf (stderr, "Level loaded\n");
+      fprintf (stderr, gettext("Level loaded.\n"));
     }
   else
     {
-      perror ("Impossible to load the level. Perror");
+      perror (gettext("Cannot load the first level.\n"));
     }
 
 
