@@ -13,7 +13,7 @@ This is an early draft, use it carefully.
 
 ### Dependencies
 ```
-apt install build-essential git
+apt install build-essential git gettext
 apt install libsdl2-2.0-0 libsdl2-dev libsdl2-ttf-2.0-0 libsdl2-ttf-dev libfreetype6-dev libxml2-dev libsdl2-image-2.0-0 libsdl2-image-dev libsdl2-gfx-dev
 
 ```
@@ -87,7 +87,7 @@ apt get install indent
 indent -gnu file.c
 ```
 
-#### translate
+#### Translate
 
 Edit or add a file named "sokorobot.po" in the "locale" folder (in french for example)
 ```
