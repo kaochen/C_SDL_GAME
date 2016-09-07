@@ -41,7 +41,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int
 main (int argc, char *argv[])
 {
-  /* Set up gettext for internalisation */
+  /* Set up gettext for internationalisation */
   setlocale(LC_ALL, "");
   textdomain("sokorobot");
   bindtextdomain("sokorobot", "/usr/share/locale");

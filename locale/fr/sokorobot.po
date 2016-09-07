@@ -51,4 +51,52 @@ msgstr "Impossible de charger le premier niveau.\n"
 
 
 
+msgid "Level: %d/%d"
+msgstr "Niveau : %d/%d"
+
+msgid "The font file %s was not found.\n"
+msgstr "Impossible de trouver le fichier %s.\n"
+
+msgid "CONGRATS!!!"
+msgstr "FELICITATION!!!"
+
+msgid "Current Level Infos"
+msgstr "Information sur le niveau actuel"
+
+msgid "Shortcuts"
+msgstr "Raccourcis"
+
+msgid "About"
+msgstr "A propos"
+
+msgid "Name: "
+msgstr "Nom : "
+
+msgid "File: "
+msgstr "Fichier : "
+
+msgid "File: %s..."
+msgstr "Fichier : %s..."
+
+msgid "File: %s"
+msgstr "Fichier : %s"
+
+msgid "Authors:"
+msgstr "Auteurs : "
+
+msgid "m : open and close menu"
+msgstr "m : ouvrir et fermer le menu"
+
+msgid "n : next level"
+msgstr "n : niveau suivant"
+
+msgid "p : previous level"
+msgstr "p : niveau précédent"
+
+msgid "r : reset current level"
+msgstr "r : remet à zéro le niveau actuel"
+
+msgid "q : quit game"
+msgstr "q : quitter le jeu"
+
 

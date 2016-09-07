@@ -22,7 +22,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../inc/menu.h"
 
+#include <libintl.h>
+#include <locale.h>
 
+#include <sys/stat.h>
 
 /* display Top Bar*/
 void
@@ -82,7 +85,21 @@ levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
 {
   /* setup font */
   TTF_Font *font = NULL;
-  font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
+  char fontPath[MAX_CARACT] = "/usr/share/fonts/truetype/roboto/hinted/Roboto-Bold.ttf";
+  struct stat  file_stat;
+   if (stat(fontPath,&file_stat) < 0)
+     {
+       fprintf(stderr, gettext("The font file %s was not found.\n"), fontPath);
+       strcpy(fontPath,"/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf");
+         if (stat(fontPath,&file_stat) < 0)
+           {
+            fprintf(stderr, gettext("The font file %s was not found.\n"), fontPath);
+            exit (EXIT_FAILURE);
+           }
+     }
+
+  font = TTF_OpenFont (fontPath, 20);
+
   SDL_Color fontColor = { 255, 255, 255, 255 };
 
   /* count all levels from all files */
@@ -91,12 +108,12 @@ levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
   /* indicate level nbr */
   SDL_Surface *levelText = NULL;
   char text[20] = "";
-  sprintf (text, "Level: %d/%d", levelNumber, levelMax);
+  sprintf (text, gettext("Level: %d/%d"), levelNumber, levelMax);
   levelText = TTF_RenderText_Blended (font, text, fontColor);
 
   /* blit the text */
   SDL_Rect levelTextPos;
-  levelTextPos.x = menuPosX () + 150;
+  levelTextPos.x = (getWindow_width ()  - levelText->w)/2;
   levelTextPos.y = 10;
   SDL_BlitSurface (levelText, NULL, screen, &levelTextPos);
 
@@ -202,21 +219,35 @@ displayCongrats (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 
   /* setup font */
   TTF_Font *font = NULL;
-  const int fontCongratsSize = 50;
-  font = TTF_OpenFont ("img/BABIRG__.TTF", fontCongratsSize);
+  char fontPath[MAX_CARACT] = "/usr/share/fonts/truetype/roboto/hinted/Roboto-Bold.ttf";
+  struct stat  file_stat;
+   if (stat(fontPath,&file_stat) < 0)
+     {
+       fprintf(stderr, gettext("The font file %s was not found.\n"), fontPath);
+       strcpy(fontPath,"/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf");
+         if (stat(fontPath,&file_stat) < 0)
+           {
+            fprintf(stderr, gettext("The font file %s was not found.\n"), fontPath);
+            exit (EXIT_FAILURE);
+           }
+     }
+
+  const int fontCongratsSize = 30;
+  font = TTF_OpenFont (fontPath, fontCongratsSize);
   SDL_Color fontColor = { 255, 255, 255, 255 };
 
   /* merge results */
   SDL_Surface *congratsMessage = NULL;
   SDL_Rect congratsMessagePos;
-  char congratsMessageText[20] = "CONGRATS!!!";
+  char congratsMessageText[100] = "";
+  strcpy(congratsMessageText, gettext("CONGRATS!!!"));
 
   congratsMessage =
     TTF_RenderText_Blended (font, congratsMessageText, fontColor);
 
   /* blit progress */
-  congratsMessagePos.x = (getWindow_width () - 250) / 2;
-  congratsMessagePos.y = (getWindow_height () - fontCongratsSize) / 2;
+  congratsMessagePos.x = (getWindow_width () - congratsMessage->w) / 2;
+  congratsMessagePos.y = (getWindow_height () - congratsMessage->h) / 2;
   SDL_BlitSurface (congratsMessage, NULL, screen, &congratsMessagePos);
 
   /* clean */
@@ -254,34 +285,48 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   /* blit text */
   /* setup font */
   TTF_Font *font = NULL;
-  font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
+  char fontPath[MAX_CARACT] = "/usr/share/fonts/truetype/roboto/hinted/Roboto-Bold.ttf";
+  struct stat  file_stat;
+   if (stat(fontPath,&file_stat) < 0)
+     {
+       fprintf(stderr, gettext("The font file %s was not found.\n"), fontPath);
+       strcpy(fontPath,"/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf");
+         if (stat(fontPath,&file_stat) < 0)
+           {
+            fprintf(stderr, gettext("The font file %s was not found.\n"), fontPath);
+            exit (EXIT_FAILURE);
+           }
+     }
+
+  font = TTF_OpenFont (fontPath, 18);
+
   SDL_Color fontColor = { 255, 255, 255, 255 };
   SDL_Surface *menuText = NULL;
   SDL_Rect menuTextPos;
   menuTextPos.x = menuPosX () + 60;
 
   /* blit the text */
-  menuText = TTF_RenderText_Blended (font, "Current Level Infos", fontColor);
+  menuText = TTF_RenderText_Blended (font, gettext("Current Level Infos"), fontColor);
   menuTextPos.y = 60;
   SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
-  menuText = TTF_RenderText_Blended (font, "Shortcuts", fontColor);
+  menuText = TTF_RenderText_Blended (font, gettext("Shortcuts"), fontColor);
   menuTextPos.y += 30;
   SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
-  menuText = TTF_RenderText_Blended (font, "About", fontColor);
+  menuText = TTF_RenderText_Blended (font, gettext("About"), fontColor);
   menuTextPos.y += 30;
   SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
   /*Blit point */
   /* setup font */
   TTF_Font *fontPoint = NULL;
-  fontPoint = TTF_OpenFont ("img/BABIRG__.TTF", 60);
+  fontPoint = TTF_OpenFont (fontPath, 20);
   SDL_Color fontPointColor = { 255, 255, 255, 255 };
   SDL_Surface *point = NULL;
   SDL_Rect pointPos;
   pointPos.x = menuPosX () + 45;
-  pointPos.y = 60;
+  pointPos.y = 62;
 
   if (menuChoice == 1)
     {
@@ -311,7 +356,20 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
   /* blit text */
   /* setup font */
   TTF_Font *font = NULL;
-  font = TTF_OpenFont ("img/BABIRG__.TTF", 26);
+  char fontPath[MAX_CARACT] = "/usr/share/fonts/truetype/roboto/hinted/Roboto-Bold.ttf";
+  struct stat  file_stat;
+   if (stat(fontPath,&file_stat) < 0)
+     {
+       fprintf(stderr, gettext("The font file %s was not found.\n"), fontPath);
+       strcpy(fontPath,"/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf");
+         if (stat(fontPath,&file_stat) < 0)
+           {
+            fprintf(stderr, gettext("The font file %s was not found.\n"), fontPath);
+            exit (EXIT_FAILURE);
+           }
+     }
+
+  font = TTF_OpenFont (fontPath, 18);
   SDL_Color fontColor = { 255, 255, 255, 255 };
   SDL_Surface *menuText = NULL;
   SDL_Rect menuTextPos;
@@ -323,9 +381,13 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
       /*Level Info */
       int i = 0;
       unsigned int sizeMax = 28;
-      char nameLevel[MAX_CARACT] = "Name: ";
-      char nameFile[MAX_CARACT] = "File: ";
-      char *pbuf;
+      char nameLevel[MAX_CARACT] = "";
+      strcpy(nameLevel, gettext("Name: "));
+
+      char nameFile[MAX_CARACT] = "";
+      strcpy(nameFile, gettext("File: "));
+
+                   char *pbuf;
 
       S_Level *actual = malloc (sizeof (*actual));
       actual = levelList->first;
@@ -348,12 +410,11 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
 	      pbuf = strpbrk (actual->fileName, "/");
 	      if (strlen (pbuf) > sizeMax)
 		{
-		  sprintf (nameFile, "File: %s...",
-			   strncat (nameFile, pbuf, sizeMax));
+		  sprintf (nameFile, gettext("File: %s..."), strncat(nameFile, pbuf, sizeMax));
 		}
 	      else
 		{
-		  sprintf (nameFile, "File: %s", pbuf);
+		  sprintf (nameFile, gettext("File: %s"), pbuf);
 		}
 	    }
 	  actual = actual->next;
@@ -364,7 +425,7 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
       menuTextPos.y = 180;
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
-      menuText = TTF_RenderText_Blended (font, "Authors:", fontColor);
+      menuText = TTF_RenderText_Blended (font, gettext("Authors:"), fontColor);
       menuTextPos.y += 30;
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
@@ -379,31 +440,31 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
   else if (menuChoice == 1)
     {
       menuText =
-	TTF_RenderText_Blended (font, "m : open and close menu", fontColor);
+	TTF_RenderText_Blended (font, gettext("m : open and close menu"), fontColor);
       menuTextPos.y = 180;
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
       menuText =
-	TTF_RenderText_Blended (font, "n : next level",
+	TTF_RenderText_Blended (font, gettext("n : next level"),
 				fontColor);
       menuTextPos.y += 30;
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
       menuText =
-	TTF_RenderText_Blended (font, "p : previous level",
+	TTF_RenderText_Blended (font, gettext("p : previous level"),
 				fontColor);
       menuTextPos.y += 30;
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
       menuText =
 	TTF_RenderText_Blended (font,
-				"r : reset current level",
+				gettext("r : reset current level"),
 				fontColor);
       menuTextPos.y += 30;
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
       menuText =
-	TTF_RenderText_Blended (font, "q : quit game",
+	TTF_RenderText_Blended (font, gettext("q : quit game"),
 				fontColor);
       menuTextPos.y += 30;
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
