@@ -127,6 +127,7 @@ getPrefAsChar (const char *prefName)
   strcpy (ret, ret2);
   fprintf (stderr, "From \"%s\": %s = %s\n", PREF_FILE, prefName, ret);
   return ret;
+  free(ret);
 }
 
 int

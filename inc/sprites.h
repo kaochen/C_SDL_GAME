@@ -49,4 +49,6 @@ void loadSprite (Sprites * sprites, const char *themePath, const char *imageName
 
 /* free all surfaces */
 void freeSprites (Sprites tableSurface[NBR_OF_IMAGES]);
+
+char * findFont(void);
 #endif

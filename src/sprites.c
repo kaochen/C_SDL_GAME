@@ -21,6 +21,9 @@
 #define SPRITES_C
 
 #include "../inc/sprites.h"
+#include <libintl.h>
+#include <locale.h>
+
 #include <sys/stat.h>
 
 /* Load all sprites */
@@ -156,5 +159,25 @@ freeSprites (Sprites tableSurface[NBR_OF_IMAGES])
       fprintf (stderr, "Free surfaces: %d\n", i);
     }
   fprintf (stderr, "Free all surfaces: %s\n", SDL_GetError ());
+}
+
+
+char *
+findFont(void){
+  char *ret = malloc (MAX_CARACT);
+  char fontPath[MAX_CARACT] = "/usr/share/fonts/truetype/roboto/hinted/Roboto-Bold.ttf";
+  struct stat  file_stat;
+   if (stat(fontPath,&file_stat) < 0)
+     {
+       strcpy(fontPath,"/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf");
+         if (stat(fontPath,&file_stat) < 0)
+           {
+            fprintf(stderr, gettext("Roboto-Bold.ttf was not found. Install the fonts-roboto package\n"));
+            exit (EXIT_FAILURE);
+           }
+     }
+    strcpy(ret, fontPath);
+    return ret;
+    free(ret);
 }
 #endif
