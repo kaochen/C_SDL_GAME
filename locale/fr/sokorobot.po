@@ -99,4 +99,20 @@ msgstr "r : remet à zéro le niveau actuel"
 msgid "q : quit game"
 msgstr "q : quitter le jeu"
 
+msgid "the file %s does not exist\n"
+msgstr "Le fichier %s n'existe pas\n"
 
+msgid "Load default image instead: %s\n\n"
+msgstr "Chargement de l'image par défaut à la place : %s\n\n"
+
+msgid "%s exist\n"
+msgstr "%s existe\n"
+
+msgid "IMG_Load %s failed: %s\n"
+msgstr "IMG_Load %s a échoué : %s\n"
+
+msgid "Free surfaces: %d\n"
+msgstr "Liberation de la surfaces: %d\n"
+
+msgid "All surfaces are free: %s\n"
+msgstr "Toutes les surfaces ont été libéré %s\n"

@@ -122,20 +122,20 @@ loadSprite (Sprites * sprites, const char *themePath, const char *imageName)
   struct stat  file_stat;
    if (stat(filePath,&file_stat) < 0)
      {
-       printf("the file %s does not exist\n", filePath);
+       printf(gettext("the file %s does not exist\n"), filePath);
        strcpy(filePath,"img/original/");
        strcat(filePath,imageName);
-       fprintf (stderr, "Load default image instead: %s\n\n", filePath);
+       fprintf (stderr, gettext("Load default image instead: %s\n\n"), filePath);
      }
    else
      {
-     printf("%s exist\n", filePath);
+     printf(gettext("%s exist\n"), filePath);
      }
 
   sprites->image = IMG_Load (filePath);
   if (sprites->image == NULL)
     {
-      fprintf (stderr, "IMG_Load %s failed: %s\n", filePath,
+      fprintf (stderr, gettext("IMG_Load %s failed: %s\n"), filePath,
 	       SDL_GetError ());
       exit (EXIT_FAILURE);
     }
@@ -156,9 +156,9 @@ freeSprites (Sprites tableSurface[NBR_OF_IMAGES])
 	  i = NBR_OF_IMAGES + 1;
 	}
       SDL_FreeSurface (tableSurface[i].image);
-      fprintf (stderr, "Free surfaces: %d\n", i);
+      fprintf (stderr, gettext("Free surfaces: %d\n"), i);
     }
-  fprintf (stderr, "Free all surfaces: %s\n", SDL_GetError ());
+  fprintf (stderr, gettext("All surfaces are free: %s\n"), SDL_GetError ());
 }
 
 
