@@ -86,7 +86,12 @@ I used the "GNU Style" to indent my code.
 apt get install indent
 indent -gnu file.c
 ```
-
+#### memory leak
+```
+apt install valgrind
+valgrind --leak-check=yes ./SokoRobot
+valgrind --leak-check=full --show-leak-kinds=all ./SokoRobot
+```
 #### Translate
 
 Edit or add a file named "sokorobot.po" in the "locale" folder (in french for example)

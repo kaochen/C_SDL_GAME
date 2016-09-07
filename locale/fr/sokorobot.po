@@ -111,8 +111,5 @@ msgstr "%s existe\n"
 msgid "IMG_Load %s failed: %s\n"
 msgstr "IMG_Load %s a échoué : %s\n"
 
-msgid "Free surfaces: %d\n"
-msgstr "Liberation de la surfaces: %d\n"
-
-msgid "All surfaces are free: %s\n"
-msgstr "Toutes les surfaces ont été libéré %s\n"
+msgid "\tAll surfaces are free %s\n"
+msgstr "\tToutes les surfaces ont été libéré %s\n"

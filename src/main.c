@@ -622,8 +622,8 @@ main (int argc, char *argv[])
   fprintf (stderr, "- Destroying file list\n");
   destroyFileList (filesList);
   free (filesList);
-  //fprintf(stderr,"-Freeing Sprites\n");
-  //freeSprites(tableSurface);
+  fprintf(stderr,"-Freeing Sprites\n");
+  freeSprites(tableSurface);
   SDL_FreeSurface (screen);
   fprintf (stderr, "- Free SDL screen\n");
   SDL_DestroyWindow (window);

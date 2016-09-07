@@ -388,7 +388,6 @@ readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
       /* free memory */
       xmlXPathFreeContext (ctxt);
       xmlFreeDoc (doc);
-
       actualFile = actualFile->next;
     }
   return EXIT_SUCCESS;

@@ -80,6 +80,7 @@ displayShortcut (SDL_Surface * screen)
   /* clean */
   SDL_FreeSurface (shortCutText);
   TTF_CloseFont (font);
+font = NULL;
 }
 
 /* display the level number */
@@ -113,6 +114,7 @@ levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
   /* clean */
   SDL_FreeSurface (levelText);
   TTF_CloseFont (font);
+  font = NULL;
 }
 
 /* count how many goals are need to complete the level */
@@ -171,10 +173,9 @@ displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
       if (angle != 360)
 	      {
 	        SDL_BlitSurface (circle, NULL, screen, &circlePos);
-	        SDL_FreeSurface (circle);
 	      }
     }
-
+	SDL_FreeSurface (circle);
 }
 
 /* Victory or not ? */
@@ -236,6 +237,7 @@ displayCongrats (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
   /* clean */
   SDL_FreeSurface (congratsMessage);
   TTF_CloseFont (font);
+  font = NULL;
 
   return EXIT_SUCCESS;
 }
@@ -282,14 +284,17 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   menuText = TTF_RenderUTF8_Blended (font, gettext("Current Level Infos"), fontColor);
   menuTextPos.y = 60;
   SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+  menuText = NULL;
 
   menuText = TTF_RenderUTF8_Blended (font, gettext("Shortcuts"), fontColor);
   menuTextPos.y += 30;
   SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+  menuText = NULL;
 
   menuText = TTF_RenderUTF8_Blended (font, gettext("About"), fontColor);
   menuTextPos.y += 30;
   SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+  menuText = NULL;
 
   /*Blit point */
   /* setup font */
@@ -318,8 +323,10 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   /* clean */
   SDL_FreeSurface (menuText);
   TTF_CloseFont (font);
+  font = NULL;
   SDL_FreeSurface (point);
   TTF_CloseFont (fontPoint);
+  fontPoint = NULL;
 }
 
 /* display Sub menu */
@@ -331,8 +338,8 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
   TTF_Font *font = NULL;
   char fontPath[MAX_CARACT] = "";
   strcpy(fontPath,findFont());
-
   font = TTF_OpenFont (fontPath, 18);
+
   SDL_Color fontColor = { 255, 255, 255, 255 };
   SDL_Surface *menuText = NULL;
   SDL_Rect menuTextPos;
@@ -355,34 +362,35 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
       S_Level *actual = malloc (sizeof (*actual));
       actual = levelList->first;
       while (actual->name != NULL)
-	{
-	  if (i == levelChoice)
-	    {
-	      /*trunk long name */
-	      if (strlen (actual->name) > sizeMax)
-		{
-		  sprintf (nameLevel, "%s...",
-			   strncat (nameLevel, actual->name, sizeMax));
-		}
-	      else
-		{
-		  sprintf (nameLevel, "%s", strcat (nameLevel, actual->name));
-		}
+	        {
+	          if (i == levelChoice)
+	            {
+	              /*trunk long name */
+	              if (strlen (actual->name) > sizeMax)
+		        {
+		          sprintf (nameLevel, "%s...",
+			           strncat (nameLevel, actual->name, sizeMax));
+		        }
+	              else
+		        {
+		          sprintf (nameLevel, "%s", strcat (nameLevel, actual->name));
+		        }
 
-	      /*trunk long file name */
-	      pbuf = strpbrk (actual->fileName, "/");
-	      if (strlen (pbuf) > sizeMax)
-		{
-		  sprintf (nameFile, gettext("File: %s.."), strncat(nameFile, pbuf, sizeMax));
-		}
-	      else
-		{
-		  sprintf (nameFile, gettext("File: %s"), pbuf);
-		}
-	    }
-	  actual = actual->next;
-	  i++;
-	}
+	              /*trunk long file name */
+	              pbuf = strpbrk (actual->fileName, "/");
+	              if (strlen (pbuf) > sizeMax)
+		        {
+		          sprintf (nameFile, gettext("File: %s.."), strncat(nameFile, pbuf, sizeMax));
+		        }
+	              else
+		        {
+		          sprintf (nameFile, gettext("File: %s"), pbuf);
+		        }
+	            }
+	          actual = actual->next;
+	          i++;
+	        }
+      free (actual);
 
       menuText = TTF_RenderUTF8_Blended (font, nameLevel, fontColor);
       menuTextPos.y = 180;
@@ -396,7 +404,6 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
       menuTextPos.y += 30;
       SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
 
-      free (actual);
     }
 
   /*Shortcuts */
@@ -436,6 +443,7 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
   /* clean */
   SDL_FreeSurface (menuText);
   TTF_CloseFont (font);
+  font = NULL;
   return EXIT_SUCCESS;
 }
 

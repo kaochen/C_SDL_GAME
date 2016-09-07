@@ -151,14 +151,12 @@ freeSprites (Sprites tableSurface[NBR_OF_IMAGES])
   for (i = 0; i < NBR_OF_IMAGES; i++)
     {
 
-      if (tableSurface[i].image == NULL)
-	{
-	  i = NBR_OF_IMAGES + 1;
-	}
-      SDL_FreeSurface (tableSurface[i].image);
-      fprintf (stderr, gettext("Free surfaces: %d\n"), i);
+      if (tableSurface[i].height == 40)
+	    {
+          SDL_FreeSurface (tableSurface[i].image);
+	    }
     }
-  fprintf (stderr, gettext("All surfaces are free: %s\n"), SDL_GetError ());
+  fprintf (stderr, gettext("\tAll surfaces are free %s\n"), SDL_GetError ());
 }
 
 
