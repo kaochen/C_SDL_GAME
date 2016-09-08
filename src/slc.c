@@ -20,6 +20,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef SLC_C
 #define SLC_C
 
+#include <libintl.h>
+#include <locale.h>
+
 #include "../inc/slc.h"
 #include "../inc/menu.h"
 
