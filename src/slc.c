@@ -91,6 +91,12 @@ delFile (S_FilesList * filesList)
   if (filesList->nbr_of_files == 0)
     return -1;
   S_Files *del_file = malloc (sizeof (*del_file));
+   if(del_file == NULL)
+        {
+         fprintf(stderr,gettext("not enough memory"));
+         exit(EXIT_FAILURE);
+        }
+
   del_file = filesList->last;
   filesList->last = filesList->first->previous;
   if (filesList->nbr_of_files == 1)
@@ -263,6 +269,11 @@ delLevel (S_LevelList * levelList)
     }
 
   S_Level *del_level = malloc (sizeof (*del_level));
+  if(del_level == NULL)
+        {
+         fprintf(stderr,gettext("not enough memory"));
+         exit(EXIT_FAILURE);
+        }
   del_level = levelList->last;
   levelList->last = levelList->last->previous;
   free (del_level);

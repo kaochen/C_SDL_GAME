@@ -360,6 +360,11 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
       char *pbuf;
 
       S_Level *actual = malloc (sizeof (*actual));
+      if(actual == NULL)
+        {
+         fprintf(stderr,gettext("not enough memory"));
+         exit(EXIT_FAILURE);
+        }
       actual = levelList->first;
       while (actual->name != NULL)
 	        {
