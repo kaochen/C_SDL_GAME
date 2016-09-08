@@ -44,7 +44,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 typedef struct S_Files S_Files;
 struct S_Files
 {
-  char name[MAX_CARACT];
+  char *name;
   S_Files *next;
   S_Files *previous;
 };

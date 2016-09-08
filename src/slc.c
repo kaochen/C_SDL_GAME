@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libintl.h>
 #include <locale.h>
 
+
 #include "../inc/slc.h"
 #include "../inc/menu.h"
 
@@ -54,6 +55,15 @@ addFirstFile (S_FilesList * filesList, char *name)
       fprintf (stderr, "Init first file failed\n");
       return EXIT_FAILURE;
     }
+     firstFiles->name = malloc(MAX_CARACT);
+   if (firstFiles->name  == NULL )
+      {
+         fprintf (stderr, "Add new file failed\n");
+         exit(EXIT_FAILURE);
+      }
+
+
+
   /*update first file data */
   strcpy (firstFiles->name, name);
   firstFiles->previous = NULL;
@@ -77,6 +87,15 @@ addNewFile (S_FilesList * filesList, char *name)
     {
       exit (EXIT_FAILURE);
     }
+
+   new->name = malloc(MAX_CARACT);
+   if (new->name  == NULL )
+      {
+         fprintf (stderr, "Add new file failed\n");
+         exit(EXIT_FAILURE);
+      }
+
+
   strcpy (new->name, name);
 
   /* insert at the end of the chain */
@@ -105,6 +124,7 @@ delFile (S_FilesList * filesList)
   if (filesList->nbr_of_files == 1)
     filesList->last = NULL;
 
+  free(del_file->name);
   free (del_file);
   filesList->nbr_of_files--;
   return 0;
@@ -237,7 +257,6 @@ addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
   levelList->last = firstLevel;
   levelList->nbr_of_levels = 1;
   return EXIT_SUCCESS;
-
 }
 
 /*Add a level in the list*/
@@ -331,7 +350,7 @@ getNbrOfLevels (S_LevelList * levelList)
       i++;
       actual = actual->next;
     }
-  fprintf(stderr, "Found %d levels\n", i);
+  //fprintf(stderr, "Found %d levels\n", i);
   return i;
 }
 
@@ -339,90 +358,98 @@ getNbrOfLevels (S_LevelList * levelList)
 int
 readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
 {
-  S_Level *new = malloc (sizeof (*new));
-  if (filesList == NULL || levelList == NULL || new == NULL)
+  S_Files *actualFile  = malloc (sizeof (*actualFile));
+  if (filesList == NULL || levelList == NULL || actualFile == NULL)
     {
       fprintf (stderr, "readLevelsAttributs failed\n");
       return EXIT_FAILURE;
     }
 
   /*Get files names */
-  xmlDocPtr doc;
-  S_Files *actualFile = filesList->first;
+   xmlDoc *doc = NULL;
+   xmlNode *Node = NULL;
+
+   LIBXML_TEST_VERSION
+
+  actualFile = filesList->first;
   while (actualFile != NULL)
     {
 
-      /* Read each level from each files */
+            /* Read each level from each files */
 
-      fprintf (stderr, "Read levels from : %s\n", actualFile->name);
+            fprintf (stderr, "Read levels from : %s\n", actualFile->name);
 
-      /* Open SLC/XML file */
-      doc = xmlParseFile (actualFile->name);
-      if (doc == NULL)
-	{
-	  fprintf (stderr, "%s not valid\n", actualFile->name);
-	  return EXIT_FAILURE;
-	}
-      // Start XPath
-      xmlXPathInit ();
-      // Create a context
-      xmlXPathContextPtr ctxt = xmlXPathNewContext (doc);
-      if (ctxt == NULL)
-	{
-	  fprintf (stderr, "Error creating the context XPath\n");
-	  return EXIT_FAILURE;
-	}
+            /* Open SLC/XML file */
+            doc = xmlParseFile (actualFile->name);
+            if (doc == NULL)
+	            {
+	              fprintf (stderr, "%s not valid\n", actualFile->name);
+	              return EXIT_FAILURE;
+	            }
+            // Start XPath
+            xmlXPathInit ();
+            // Create a context
+            xmlXPathContextPtr ctxt = xmlXPathNewContext (doc);
+            if (ctxt == NULL)
+	            {
+	              fprintf (stderr, "Error creating the context XPath\n");
+	              return EXIT_FAILURE;
+	            }
 
-      /* Read Level */
-      xmlXPathObjectPtr xpathLevel =
-	xmlXPathEvalExpression (BAD_CAST
-				"/SokobanLevels/LevelCollection/Level",
-				ctxt);
-      if (xpathLevel == NULL)
-	{
-	  fprintf (stderr, "Error on the xPathLevel expression\n");
-	  return EXIT_FAILURE;
-	}
+            /* Read Level */
+            xmlXPathObjectPtr xpathLevel =
+	      xmlXPathEvalExpression (BAD_CAST
+				      "/SokobanLevels/LevelCollection/Level",
+				      ctxt);
+            if (xpathLevel == NULL)
+	      {
+	        fprintf (stderr, "Error on the xPathLevel expression\n");
+	        return EXIT_FAILURE;
+	      }
 
-      /*get attributs */
-      xmlChar *name;
-      xmlChar *width;
-      xmlChar *height;
-      /*Get the number of levels in a file */
-      int levelCount = 0, i = 0;
-      levelCount = xpathLevel->nodesetval->nodeNr;
-      fprintf (stderr, "The files %s contain %d levels\n\n",
-	       actualFile->name, levelCount);
-      /*Add S_Level for each levels found */
-      while (i < levelCount)
-	{
-	  xmlNodePtr Node = xpathLevel->nodesetval->nodeTab[i];
-	  for (xmlAttrPtr attr = Node->properties; NULL != attr;
-	       attr = attr->next)
-	    {
-	      name = xmlGetProp (Node, (xmlChar *) "Id");
-	      width = xmlGetProp (Node, (xmlChar *) "Width");
-	      height = xmlGetProp (Node, (xmlChar *) "Height");
-	    }
-	  /*Load infos into the levelList */
-	  if (levelList->nbr_of_levels == 0)
-	    {
-	      addFirstLevel (levelList, actualFile->name, (char *) name,
-			     atoi ((char *) height), atoi ((char *) width));
-	    }
-	  else
-	    {
-	      addNewLevel (levelList, actualFile->name, (char *) name,
-			   atoi ((char *) height), atoi ((char *) width));
-	    }
-	  //printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
-	  i++;
-	}
-      /* free memory */
-      xmlXPathFreeContext (ctxt);
-      xmlFreeDoc (doc);
-      actualFile = actualFile->next;
-    }
+            /*get attributs */
+            xmlChar *name;
+            xmlChar *width;
+            xmlChar *height;
+            /*Get the number of levels in a file */
+            int levelCount = 0, i = 0;
+            levelCount = xpathLevel->nodesetval->nodeNr;
+            fprintf (stderr, "The files %s contain %d levels\n\n",
+	             actualFile->name, levelCount);
+            /*Add S_Level for each levels found */
+            while (i < levelCount)
+	            {
+	              Node = xpathLevel->nodesetval->nodeTab[i];
+	              for (xmlAttrPtr attr = Node->properties; NULL != attr;
+	                   attr = attr->next)
+	                {
+	                  name = xmlGetProp (Node, (const xmlChar *)"Id");
+	                  width = xmlGetProp (Node, (const xmlChar *)"Width");
+	                  height = xmlGetProp (Node, (const xmlChar *)"Height");
+	                }
+	              /*Load infos into the levelList */
+	              if (levelList->nbr_of_levels == 0)
+	                {
+	                  addFirstLevel (levelList, actualFile->name, (char *) name,
+			                 atoi ((char *) height), atoi ((char *) width));
+	                }
+	              else
+	                {
+	                  addNewLevel (levelList, actualFile->name, (char *) name,
+			               atoi ((char *) height), atoi ((char *) width));
+	                }
+	              //printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
+	              i++;
+	            }
+            /* free memory */
+            xmlXPathFreeContext (ctxt);
+            xmlFreeDoc (doc);
+            xmlFree(name);
+            xmlFree(width);
+            xmlFree(height);
+            actualFile = actualFile->next;
+          }
+  free(actualFile);
   return EXIT_SUCCESS;
 }
 
@@ -580,7 +607,7 @@ loadSlcLevel (int levelChoice, S_LevelList * levelList,
   /* free memory */
   xmlFreeDoc (doc);
   xmlXPathFreeContext (ctxt);
-  // xmlXPathFreeObject(xpathLevel); //Doesn't work ???
+  xmlXPathFreeObject(xpathLevel);
 
   return EXIT_SUCCESS;
 }

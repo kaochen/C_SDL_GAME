@@ -278,25 +278,27 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   font = TTF_OpenFont (fontPath, 18);
 
   SDL_Color fontColor = { 255, 255, 255, 255 };
-  SDL_Surface *menuText = NULL;
-  SDL_Rect menuTextPos;
-  menuTextPos.x = menuPosX () + 60;
+
+  SDL_Rect linePos;
+  SDL_Surface *line1 = NULL;
+  SDL_Surface *line2 = NULL;
+  SDL_Surface *line3 = NULL;
+
+  linePos.x = menuPosX () + 60;
 
   /* blit the text */
-  menuText = TTF_RenderUTF8_Blended (font, gettext("Current Level Infos"), fontColor);
-  menuTextPos.y = 60;
-  SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
-  menuText = NULL;
+  line1 = TTF_RenderUTF8_Blended (font, gettext("Current Level Infos"), fontColor);
+  linePos.y = 60;
+  SDL_BlitSurface (line1, NULL, screen, &linePos);
 
-  menuText = TTF_RenderUTF8_Blended (font, gettext("Shortcuts"), fontColor);
-  menuTextPos.y += 30;
-  SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
-  menuText = NULL;
+  line2 = TTF_RenderUTF8_Blended (font, gettext("Shortcuts"), fontColor);
+  linePos.y += 30;
+  SDL_BlitSurface (line2, NULL, screen, &linePos);
 
-  menuText = TTF_RenderUTF8_Blended (font, gettext("About"), fontColor);
-  menuTextPos.y += 30;
-  SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
-  menuText = NULL;
+  line3 = TTF_RenderUTF8_Blended (font, gettext("About"), fontColor);
+  linePos.y += 30;
+  SDL_BlitSurface (line3, NULL, screen, &linePos);
+
 
   /*Blit point */
   /* setup font */
@@ -323,7 +325,9 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   displaySubMenu (screen, levelList, menuChoice, levelChoice);
 
   /* clean */
-  SDL_FreeSurface (menuText);
+  SDL_FreeSurface (line1);
+  SDL_FreeSurface (line2);
+  SDL_FreeSurface (line3);
   TTF_CloseFont (font);
   font = NULL;
   SDL_FreeSurface (point);
@@ -343,9 +347,18 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
   font = TTF_OpenFont (fontPath, 18);
 
   SDL_Color fontColor = { 255, 255, 255, 255 };
-  SDL_Surface *menuText = NULL;
-  SDL_Rect menuTextPos;
-  menuTextPos.x = menuPosX () + 60;
+  SDL_Rect linePos;
+  SDL_Surface *line01 = NULL;
+  SDL_Surface *line02 = NULL;
+  SDL_Surface *line03 = NULL;
+
+  SDL_Surface *line11 = NULL;
+  SDL_Surface *line12 = NULL;
+  SDL_Surface *line13 = NULL;
+  SDL_Surface *line14 = NULL;
+  SDL_Surface *line15 = NULL;
+
+  linePos.x = menuPosX () + 60;
 
 
   if (menuChoice == 0)
@@ -401,56 +414,63 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
 	        }
       free (actual);
 
-      menuText = TTF_RenderUTF8_Blended (font, nameLevel, fontColor);
-      menuTextPos.y = 180;
-      SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+      line01 = TTF_RenderUTF8_Blended (font, nameLevel, fontColor);
+      linePos.y = 180;
+      SDL_BlitSurface (line01, NULL, screen, &linePos);
 
-      menuText = TTF_RenderUTF8_Blended (font, gettext("Authors:"), fontColor);
-      menuTextPos.y += 30;
-      SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+      line02 = TTF_RenderUTF8_Blended (font, gettext("Authors:"), fontColor);
+      linePos.y += 30;
+      SDL_BlitSurface (line02, NULL, screen, &linePos);
 
-      menuText = TTF_RenderUTF8_Blended (font, nameFile, fontColor);
-      menuTextPos.y += 30;
-      SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+      line03 = TTF_RenderUTF8_Blended (font, nameFile, fontColor);
+      linePos.y += 30;
+      SDL_BlitSurface (line03, NULL, screen, &linePos);
 
     }
 
   /*Shortcuts */
   else if (menuChoice == 1)
     {
-      menuText =
+      line11 =
 	TTF_RenderUTF8_Blended (font, gettext("m : open and close menu"), fontColor);
-      menuTextPos.y = 180;
-      SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+      linePos.y = 180;
+      SDL_BlitSurface (line11, NULL, screen, &linePos);
 
-      menuText =
+      line12 =
 	TTF_RenderUTF8_Blended (font, gettext("n : next level"),
 				fontColor);
-      menuTextPos.y += 30;
-      SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+      linePos.y += 30;
+      SDL_BlitSurface (line12, NULL, screen, &linePos);
 
-      menuText =
+      line13 =
 	TTF_RenderUTF8_Blended (font, gettext("p : previous level"),
 				fontColor);
-      menuTextPos.y += 30;
-      SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+      linePos.y += 30;
+      SDL_BlitSurface (line12, NULL, screen, &linePos);
 
-      menuText =
+      line14 =
 	TTF_RenderUTF8_Blended (font,
 				gettext("r : reset current level"),
 				fontColor);
-      menuTextPos.y += 30;
-      SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+      linePos.y += 30;
+      SDL_BlitSurface (line14, NULL, screen, &linePos);
 
-      menuText =
+      line15 =
 	TTF_RenderUTF8_Blended (font, gettext("q : quit game"),
 				fontColor);
-      menuTextPos.y += 30;
-      SDL_BlitSurface (menuText, NULL, screen, &menuTextPos);
+      linePos.y += 30;
+      SDL_BlitSurface (line15, NULL, screen, &linePos);
     }
 
   /* clean */
-  SDL_FreeSurface (menuText);
+  SDL_FreeSurface (line01);
+  SDL_FreeSurface (line02);
+  SDL_FreeSurface (line03);
+  SDL_FreeSurface (line11);
+  SDL_FreeSurface (line12);
+  SDL_FreeSurface (line13);
+  SDL_FreeSurface (line14);
+  SDL_FreeSurface (line15);
   TTF_CloseFont (font);
   font = NULL;
   return EXIT_SUCCESS;
