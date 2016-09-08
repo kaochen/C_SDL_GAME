@@ -102,7 +102,7 @@ levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
   /* indicate level nbr */
   SDL_Surface *levelText = NULL;
   char text[20] = "";
-  sprintf (text, gettext("Level: %d/%d"), levelNumber, levelMax);
+  sprintf (text, gettext("Level: %d/%d"), levelNumber, levelMax-1);
   levelText = TTF_RenderUTF8_Blended (font, text, fontColor);
 
   /* blit the text */
@@ -154,7 +154,7 @@ void
 displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 		 Sprites tableSurface[NBR_OF_IMAGES])
 {
-  SDL_Surface *circle = NULL;
+
   SDL_Rect circlePos;
   /*place progress.png in the circle */
   circlePos.x = menuPosX () + 16;
@@ -167,15 +167,17 @@ displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
   /* blit progress circle size image is 56*56px */
   for (i = 360; i >= angle; i = i - 5)
     {
-      circle = rotozoomSurface (tableSurface[PROGRESS].image, i, 1.0, 1);
+      SDL_Surface *circle = rotozoomSurface (tableSurface[PROGRESS].image, i, 1.0, 1);
+
       circlePos.x = menuPosX () + 16 + (56 - circle->w) / 2;
       circlePos.y = 5 + (56 - circle->h) / 2;
       if (angle != 360)
 	      {
 	        SDL_BlitSurface (circle, NULL, screen, &circlePos);
 	      }
+      	SDL_FreeSurface (circle);
     }
-	SDL_FreeSurface (circle);
+
 }
 
 /* Victory or not ? */
@@ -365,9 +367,11 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
          fprintf(stderr,gettext("not enough memory"));
          exit(EXIT_FAILURE);
         }
+
       actual = levelList->first;
-      while (actual->name != NULL)
+      while (actual != NULL)
 	        {
+
 	          if (i == levelChoice)
 	            {
 	              /*trunk long name */

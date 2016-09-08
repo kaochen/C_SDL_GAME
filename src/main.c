@@ -141,6 +141,7 @@ main (int argc, char *argv[])
 
 
   fprintf (stderr, "\n");
+
   /*Read level from slc file */
   S_LevelList *levelList = initLevelList ();
   //readLevelList(levelList);
@@ -151,6 +152,7 @@ main (int argc, char *argv[])
 
   fprintf (stderr, gettext("The list of the possible levels has been generate from the content of the folder levels/.\n"));
   fprintf (stderr, "\n");
+
   /* count all levels from all files */
   int max_Levels = getNbrOfLevels (levelList);
 

@@ -3,5 +3,5 @@ obj/
 SokoRobot
 .buildconfig
 locale/fr/*.mo
-
+valgrind.log
 # Except this files

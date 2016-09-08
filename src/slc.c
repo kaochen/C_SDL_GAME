@@ -215,7 +215,14 @@ addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
       fprintf (stderr, "Add first level failed\n");
       return EXIT_FAILURE;
     }
+        firstLevel->name = malloc(MAX_CARACT);
+        firstLevel->fileName = malloc(MAX_CARACT);
 
+           if (firstLevel->name == NULL || firstLevel->fileName == NULL  )
+             {
+               fprintf (stderr, "Add first level failed\n");
+               exit(EXIT_FAILURE);
+             }
   /*update first file data */
   strcpy (firstLevel->name, name);
   strcpy (firstLevel->fileName, fileName);
@@ -230,6 +237,7 @@ addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
   levelList->last = firstLevel;
   levelList->nbr_of_levels = 1;
   return EXIT_SUCCESS;
+
 }
 
 /*Add a level in the list*/
@@ -246,6 +254,15 @@ addNewLevel (S_LevelList * levelList, char *fileName, char *name,
   /* check size before add */
   if (width <= getX_Blocks () && height <= (getY_Blocks () - menuHeight ()))
     {
+        new->name = malloc(MAX_CARACT);
+        new->fileName = malloc(MAX_CARACT);
+
+           if (new->name == NULL || new->fileName == NULL  )
+             {
+               fprintf (stderr, "Add first level failed\n");
+               exit(EXIT_FAILURE);
+             }
+
       strcpy (new->name, name);
       strcpy (new->fileName, fileName);
       new->height = height;
@@ -279,6 +296,8 @@ delLevel (S_LevelList * levelList)
         }
   del_level = levelList->last;
   levelList->last = levelList->last->previous;
+  free(del_level->name);
+  free(del_level->fileName);
   free (del_level);
   levelList->nbr_of_levels--;
   return 0;
@@ -307,12 +326,12 @@ getNbrOfLevels (S_LevelList * levelList)
       exit (EXIT_FAILURE);
     }
   actual = levelList->first;
-  while (actual->name != NULL)
+  while (actual != NULL)
     {
-      actual = actual->next;
       i++;
+      actual = actual->next;
     }
-  //fprintf(stderr, "Found %d levels\n", i);
+  fprintf(stderr, "Found %d levels\n", i);
   return i;
 }
 

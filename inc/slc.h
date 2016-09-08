@@ -64,8 +64,8 @@ struct S_FilesList
 typedef struct S_Level S_Level;
 struct S_Level
 {
-  char name[MAX_CARACT];
-  char fileName[MAX_CARACT];
+  char *name;
+  char *fileName;
   int height;
   int width;
   S_Level *next;

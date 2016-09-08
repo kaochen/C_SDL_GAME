@@ -89,8 +89,8 @@ indent -gnu file.c
 #### memory leak
 ```
 apt install valgrind
-valgrind --leak-check=yes ./SokoRobot
-valgrind --leak-check=full --show-leak-kinds=all ./SokoRobot
+valgrind --leak-check=yes --log-file=valgrind.log ./SokoRobot
+valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind.log ./SokoRobot
 ```
 #### Translate
 
