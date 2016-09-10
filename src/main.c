@@ -118,8 +118,24 @@ main (int argc, char *argv[])
   Sprites tableSurface[NBR_OF_IMAGES];
   loadAllSprites (tableSurface);
 
-  /* create a grid with coordinates x,y to locate things */
-  Square grid[getMax_Blocks ()][getMax_Blocks ()];
+  /* create a grid with coordinates x,y to locate Role from the struct Square */
+  int maxBlocks = getMax_Blocks ();
+  Square grid[maxBlocks][maxBlocks];
+  int xGrid = 0;
+  int yGrid = 0;
+    for(yGrid = 0; yGrid <=maxBlocks; yGrid++)
+     {
+        for(xGrid = 0; xGrid <=maxBlocks; xGrid++)
+           {
+               grid[xGrid][yGrid].mainRole = GROUND;
+               grid[xGrid][yGrid].subRole = EMPTY;
+               grid[xGrid][yGrid].goalRole = EMPTY;
+               grid[xGrid][yGrid].boxRole = EMPTY;
+               grid[xGrid][yGrid].playerRole = EMPTY;
+
+           }
+     }
+
 
 
   char levelName[MAX_CARACT] = "";

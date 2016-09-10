@@ -64,71 +64,68 @@ getPrefAsInt (const char *prefName)
   return ret;
 }
 
-char *
-getPrefAsChar (const char *prefName)
-{
-  FILE *prefFile = NULL;
-  char line[MAX_CARACT] = "";
-  char *ret = malloc (MAX_CARACT);
-  char ret2[MAX_CARACT] = "";
-  int i = 0, j = -1, size = 0;
-  prefFile = fopen (PREF_FILE, "r");
-  if (prefFile != NULL)
-    {
-      //fprintf(stderr,"prefName: %s\n", prefName);
+void
+getPrefChar(char * pref, const char *setting) {
+
+    FILE *prefFile = NULL;
+    char line[MAX_CARACT] = "";
+    char ret[MAX_CARACT] = "";
+    char ret2[MAX_CARACT] = "";
+    char *test = NULL;
+    strcpy(ret, pref);
+    unsigned int i = 0 , size = 0;
+    int j = -1;
+    prefFile = fopen (PREF_FILE, "r");
+      if (prefFile == NULL)
+         {
+            fprintf (stderr, "Error opening %s: %s\n", PREF_FILE, strerror (errno));
+            exit(EXIT_FAILURE);
+         }
       while (fgets (line, MAX_CARACT, prefFile) != NULL)
-	{
-	  if (strstr (line, prefName) != NULL)
-	    {
-	      //fprintf(stderr,"line: %s", line);
-	      if (strchr (line, '"') != NULL)
-		{
-		  ret = strchr (line, '"');
-		}
-	      else
-		{
-		  strcpy (ret, "");
-		}
-	      //fprintf (stderr, "ret:%s", ret);
+	      {
+	        if (strstr (line, setting) != NULL)
+	          {
+                  if (strchr (line, '"') != NULL)
+		               {
+		                 test = strchr (line, '"');
+                       strcpy (ret, test);
+		               }
+	                     else
+		               {
+		                 strcpy (ret, "");
+		               }
 
-	      /*dump quatation marks "" */
-	      size = strlen (ret);
-	      for (i = 0; i < size; i++)
-		{
-		  if (ret[i] == '"')
-		    {
-		    }
-		  else
-		    {
-		      j++;
-		      ret2[j] = ret[i];
-		    }
-		}
+               /*dump quatation marks "" */
+	                  size = strlen (ret);
+	                  for (i = 0; i < size; i++)
+		                  {
+		                    if (ret[i] == '"')
+		                      {
+		                      }
+		                    else
+		                      {
+		                        j++;
+		                        ret2[j] = ret[i];
+		                      }
+		                  }
+                 strcpy (ret, ret2);
 
-	      /*dump \n */
-	      size = strlen (ret2);
-	      for (i = 0; i <= size; i++)
-		{
-		  if (ret2[i] == '\n')
-		    {
-		      ret2[i] = '\0';
-		    }
-		}
+	               /*dump \n */
+                  for(i = 0; i <= strlen (ret); i++ )
+                    {
+                    if (ret[i] == '\n')
+                      {
+                      ret[i] = '\0';
+                      }
+                     }
+               	//fprintf(stderr,"line: %s", ret);
+                  strcpy(pref, ret);
+             }
 
-	      //fprintf(stderr,"ret2:%sreturn\n", ret2);
-	    }
-	}
-    }
-  else
-    {
-      fprintf (stderr, "Error opening %s: %s\n", PREF_FILE, strerror (errno));
-    }
-  fclose (prefFile);
-  strcpy (ret, ret2);
-  fprintf (stderr, "From \"%s\": %s = %s\n", PREF_FILE, prefName, ret);
-  return ret;
-  free(ret);
+         }
+      fclose (prefFile);
 }
+
 
 int
 getWindow_width ()

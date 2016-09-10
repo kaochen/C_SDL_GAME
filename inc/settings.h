@@ -31,7 +31,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int getPrefAsInt (const char *prefName);
 
 /*get char value from the preference file */
-char *getPrefAsChar (const char *prefName);
+void getPrefChar(char * ret, const char *setting);
 
 int getWindow_width ();
 

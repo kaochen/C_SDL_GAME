@@ -229,7 +229,7 @@ int
 addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
 	       int height, int width)
 {
-  S_Level *firstLevel = malloc (sizeof (*firstLevel));
+  S_Level *firstLevel = malloc (sizeof (S_Level));
   if (firstLevel == NULL)
     {
       fprintf (stderr, "Add first level failed\n");
@@ -264,7 +264,7 @@ void
 addNewLevel (S_LevelList * levelList, char *fileName, char *name,
 	     int height, int width)
 {
-  S_Level *new = malloc (sizeof (*new));
+  S_Level *new = malloc (sizeof (S_Level));
   if (levelList == NULL || new == NULL)
     {
       fprintf (stderr, "Add new level failed\n");

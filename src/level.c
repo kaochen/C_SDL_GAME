@@ -210,8 +210,7 @@ readLevelFromSetting (S_LevelList * levelList)
 {
   int i = 0, ret = 0;
   char levelName[MAX_CARACT] = "";
-  char *buf = getPrefAsChar ("LevelName");
-  strcpy (levelName, buf);
+  getPrefChar (levelName, "LevelName");
   fprintf (stderr, "First level to load is %s\n", levelName);
 
   if (levelList == NULL)

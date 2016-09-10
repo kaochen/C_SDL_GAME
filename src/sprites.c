@@ -35,8 +35,8 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   fprintf (stderr, "Loading Theme:\n");
   char themePath[MAX_CARACT] = "";
   char bufPath[MAX_CARACT] = "";
-  char *buf = getPrefAsChar("theme");
-  strcpy (bufPath, buf);
+  getPrefChar (bufPath, "theme");
+
   sprintf (themePath, "img/%s/", bufPath);
   fprintf (stderr, "Theme: %s\n", themePath);
 
