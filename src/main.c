@@ -116,6 +116,11 @@ main (int argc, char *argv[])
   fprintf (stderr, "\n");
   /* load images into a table of struct */
   Sprites tableSurface[NBR_OF_IMAGES];
+
+  for (i = 0; i <=NBR_OF_IMAGES; i++)
+    {
+      tableSurface[i].image = 0;
+    }
   loadAllSprites (tableSurface);
 
   /* create a grid with coordinates x,y to locate Role from the struct Square */

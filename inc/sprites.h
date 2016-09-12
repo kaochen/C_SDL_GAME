@@ -35,10 +35,7 @@ typedef struct
 {
   //SDL
   SDL_Surface *image;
-  SDL_Rect imagePos;
 
-  int height;
-  int width;
 } Sprites;
 
 /* Load all sprites */

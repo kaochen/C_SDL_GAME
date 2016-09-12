@@ -139,8 +139,6 @@ loadSprite (Sprites * sprites, const char *themePath, const char *imageName)
 	       SDL_GetError ());
       exit (EXIT_FAILURE);
     }
-  sprites->height = 40;
-  sprites->width = 40;
 }
 
 /* free all surfaces */
@@ -151,7 +149,7 @@ freeSprites (Sprites tableSurface[NBR_OF_IMAGES])
   for (i = 0; i < NBR_OF_IMAGES; i++)
     {
 
-      if (tableSurface[i].height == 40)
+      if (tableSurface[i].image != 0)
 	    {
           SDL_FreeSurface (tableSurface[i].image);
 	    }

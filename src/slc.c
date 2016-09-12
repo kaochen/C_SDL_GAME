@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 S_FilesList *
 initFilesList ()
 {
-  S_FilesList *filesList = malloc (sizeof (*filesList));
+  S_FilesList *filesList = malloc (sizeof (S_FilesList));
 
   if (filesList == NULL)
     {
@@ -112,7 +112,7 @@ delFile (S_FilesList * filesList)
 {
   if (filesList->nbr_of_files == 0)
     return -1;
-  S_Files *del_file = malloc (sizeof (*del_file));
+  S_Files *del_file = malloc (sizeof (S_Files));
    if(del_file == NULL)
         {
          fprintf(stderr,gettext("not enough memory"));
@@ -120,13 +120,16 @@ delFile (S_FilesList * filesList)
         }
 
   del_file = filesList->last;
-  filesList->last = filesList->first->previous;
+  filesList->last = filesList->last->previous;
   if (filesList->nbr_of_files == 1)
     filesList->last = NULL;
 
   free(del_file->name);
   free (del_file);
-  filesList->nbr_of_files--;
+   if (filesList->nbr_of_files > 0)
+     {
+      filesList->nbr_of_files--;
+      }
   return 0;
 }
 
@@ -307,7 +310,7 @@ delLevel (S_LevelList * levelList)
       return -1;
     }
 
-  S_Level *del_level = malloc (sizeof (*del_level));
+  S_Level *del_level = malloc (sizeof (S_Level));
   if(del_level == NULL)
         {
          fprintf(stderr,gettext("not enough memory"));
@@ -315,10 +318,14 @@ delLevel (S_LevelList * levelList)
         }
   del_level = levelList->last;
   levelList->last = levelList->last->previous;
+
   free(del_level->name);
   free(del_level->fileName);
   free (del_level);
-  levelList->nbr_of_levels--;
+
+  if (levelList->nbr_of_levels > 0){
+   levelList->nbr_of_levels--;
+  }
   return 0;
 }
 
@@ -338,7 +345,7 @@ int
 getNbrOfLevels (S_LevelList * levelList)
 {
   int i = 0;
-  S_Level *actual = malloc (sizeof (*actual));
+  S_Level *actual = malloc (sizeof (S_Level));
   if (levelList == NULL || actual == NULL)
     {
       perror ("getNbrOfLevels");
