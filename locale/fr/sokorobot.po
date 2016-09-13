@@ -51,10 +51,10 @@ msgstr "Impossible de charger le premier niveau.\n"
 
 
 msgid "not enough memory"
-msgid "pas assez de mémoire"
+msgstr "pas assez de mémoire"
 
 msgid "Level: %d/%d"
-msgid "Niveau : %d/%d"
+msgstr "Niveau : %d/%d"
 
 msgid "The font file %s was not found.\n"
 msgstr "Impossible de trouver le fichier %s.\n"
