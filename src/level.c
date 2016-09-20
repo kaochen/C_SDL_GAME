@@ -22,12 +22,21 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../inc/level.h"
 
+#include <libintl.h>
+#include <locale.h>
 
 /* display level on the screen */
-void
+int
 displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 	      Sprites tableSurface[NBR_OF_IMAGES])
 {
+ if (grid == NULL || screen == NULL || tableSurface == NULL)
+    {
+      fprintf (stderr, gettext("init displayLevel failed: %s\n"),
+	       SDL_GetError ());
+      return EXIT_FAILURE;
+    }
+
   /* set a goal position */
   SDL_Rect pos;
 
@@ -143,8 +152,19 @@ displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 	}
 
     }
-  blitBorders (grid, screen, tableSurface);
-  blitCorners (grid, screen, tableSurface);
+  if (blitBorders (grid, screen, tableSurface) == EXIT_FAILURE)
+    {
+         fprintf (stderr, gettext("blitBorders failed.\n"));
+         return EXIT_FAILURE;
+    }
+
+   if (blitCorners (grid, screen, tableSurface) == EXIT_FAILURE)
+    {
+         fprintf (stderr, gettext("blitCorners failed.\n"));
+         return EXIT_FAILURE;
+    }
+
+  return EXIT_SUCCESS;
 }
 
 

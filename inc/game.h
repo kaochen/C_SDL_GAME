@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 /* blit borders on walls */
-void blitBorders (Square grid[][getMax_Blocks ()],
+int blitBorders (Square grid[][getMax_Blocks ()],
 		  SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* add a more ground choice */

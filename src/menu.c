@@ -28,40 +28,78 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <sys/stat.h>
 
 /* display Top Bar*/
-void
+int
 displayTopBar (int levelNumber, SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList, Square grid[][getMax_Blocks ()])
 {
   /* first add background */
-  backgroundTopBar (screen, tableSurface);
+    if ( backgroundTopBar (screen, tableSurface) == EXIT_FAILURE)
+    {
+      fprintf (stderr, gettext("backgroundTopBar failed.\n"));
+      return EXIT_FAILURE;
+    }
+
   /* display the level number */
-  levelMenu (levelNumber, screen, levelList);
-  displayProgress (grid, screen, tableSurface);
-  displayShortcut (screen);
+  if ( levelMenu (levelNumber, screen, levelList) == EXIT_FAILURE)
+    {
+      fprintf (stderr, gettext("levelMenu failed.\n"));
+      return EXIT_FAILURE;
+    }
+
+   /* display the circle */
+   if (displayProgress (grid, screen, tableSurface) == EXIT_FAILURE)
+    {
+      fprintf (stderr, gettext("levelMenu failed.\n"));
+      return EXIT_FAILURE;
+    }
+
+   /* display shortcut to open the menu */
+   if (displayShortcut (screen) == EXIT_FAILURE)
+    {
+      fprintf (stderr, gettext("levelMenu failed.\n"));
+      return EXIT_FAILURE;
+    }
+
 
   SDL_Rect facePos;
   facePos.x = menuPosX () + 24;
   facePos.y = 12;
   SDL_BlitSurface (tableSurface[PLAYER_FRONT].image, NULL, screen, &facePos);
+  return EXIT_SUCCESS;
 
 }
 
 /* display background menu */
-void
+int
 backgroundTopBar (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
+   if ( screen == NULL || tableSurface == NULL)
+    {
+      fprintf (stderr, gettext("init backgroundTopBar failed: %s\n"),
+	       SDL_GetError ());
+      return EXIT_FAILURE;
+    }
+
   SDL_Rect menuPos;
   menuPos.x = menuPosX ();
   menuPos.y = 0;
   SDL_BlitSurface (tableSurface[MENU_BAR].image, NULL, screen, &menuPos);
+  return EXIT_SUCCESS;
 
 }
 
 /* display shortcut in the menu */
-void
+int
 displayShortcut (SDL_Surface * screen)
 {
+
+    if ( screen == NULL)
+    {
+      fprintf (stderr, gettext("init displayShortcut failed: %s\n"),
+	       SDL_GetError ());
+      return EXIT_FAILURE;
+    }
   /* setup font */
   TTF_Font *font = NULL;
   char fontPath[MAX_CARACT] = "";
@@ -80,13 +118,22 @@ displayShortcut (SDL_Surface * screen)
   /* clean */
   SDL_FreeSurface (shortCutText);
   TTF_CloseFont (font);
-font = NULL;
+   font = NULL;
+  return EXIT_SUCCESS;
 }
 
 /* display the level number */
-void
+int
 levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
 {
+
+   if ( screen == NULL || levelList == NULL)
+    {
+      fprintf (stderr, gettext("init levelMenu failed: %s\n"),
+	       SDL_GetError ());
+      return EXIT_FAILURE;
+    }
+
   /* setup font */
   TTF_Font *font = NULL;
   char fontPath[MAX_CARACT] = "";
@@ -115,6 +162,7 @@ levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
   SDL_FreeSurface (levelText);
   TTF_CloseFont (font);
   font = NULL;
+  return EXIT_SUCCESS;
 }
 
 /* count how many goals are need to complete the level */
@@ -150,10 +198,16 @@ nbr_of_goals (Square grid[][getMax_Blocks ()])
 }
 
 /* Display Progress in the level */
-void
+int
 displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 		 Sprites tableSurface[NBR_OF_IMAGES])
 {
+  if ( screen == NULL || grid == NULL || screen == NULL)
+    {
+      fprintf (stderr, gettext("init displayProgress failed: %s\n"),
+	       SDL_GetError ());
+      return EXIT_FAILURE;
+    }
 
   SDL_Rect circlePos;
   /*place progress.png in the circle */
@@ -177,7 +231,7 @@ displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 	      }
       	SDL_FreeSurface (circle);
     }
-
+   return EXIT_SUCCESS;
 }
 
 /* Victory or not ? */

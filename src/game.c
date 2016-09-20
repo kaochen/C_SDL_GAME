@@ -22,11 +22,22 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "../inc/game.h"
 
+#include <libintl.h>
+#include <locale.h>
+
 /* blit borders on walls */
-void
+int
 blitBorders (Square grid[][getMax_Blocks ()],
 	     SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
+   if (grid == NULL || screen == NULL || tableSurface == NULL)
+    {
+      fprintf (stderr, gettext("init blitBorders failed: %s\n"),
+	       SDL_GetError ());
+      return EXIT_FAILURE;
+    }
+
+
   SDL_Rect wallPos;
   int x = 1, y = 1;
   for (y = 1; y < getY_Blocks () - 1; y++)
@@ -67,6 +78,7 @@ blitBorders (Square grid[][getMax_Blocks ()],
 	    }
 	}
     }
+  return EXIT_SUCCESS;
 }
 
 /* add a more ground choice */

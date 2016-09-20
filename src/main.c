@@ -196,10 +196,19 @@ main (int argc, char *argv[])
   int yPlayer = 0;
 
   /* display the level using the grid */
-  displayLevel (grid, screen, tableSurface);
+  if (displayLevel (grid, screen, tableSurface) == EXIT_FAILURE)
+    {
+      fprintf (stderr, gettext("first displayLevel failed.\n"));
+      exit(EXIT_FAILURE);
+    }
 
   /* display the top bar  */
-  displayTopBar (levelChoice, screen, tableSurface, levelList, grid);
+  if (displayTopBar (levelChoice, screen, tableSurface, levelList, grid) == EXIT_FAILURE)
+    {
+      fprintf (stderr, gettext("first displayTopBar failed.\n"));
+      exit(EXIT_FAILURE);
+    }
+
 
   /* refresh the window */
   SDL_UpdateWindowSurface (window);
@@ -604,7 +613,11 @@ main (int argc, char *argv[])
 
       if (refresh == 1)
 	{
-	  displayLevel (grid, screen, tableSurface);
+       /* display the level using the grid */
+	   if (displayLevel (grid, screen, tableSurface) == EXIT_FAILURE)
+          {
+            fprintf (stderr, gettext("displayLevel failed.\n"));
+          }
 	  /*display congrats if the level is finished */
 	  if (levelFinished (grid) == FINISH && menuOpened == 0)
 	    {
