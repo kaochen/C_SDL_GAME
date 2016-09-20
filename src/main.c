@@ -124,13 +124,14 @@ main (int argc, char *argv[])
   loadAllSprites (tableSurface);
 
   /* create a grid with coordinates x,y to locate Role from the struct Square */
-  int maxBlocks = getMax_Blocks ();
-  Square grid[maxBlocks][maxBlocks];
+  int max_X_Blocks = getMax_X_Blocks ();
+  int max_Y_Blocks = getMax_Y_Blocks ();
+  Square grid[max_X_Blocks][max_Y_Blocks];
   int xGrid = 0;
   int yGrid = 0;
-    for(yGrid = 0; yGrid <=maxBlocks; yGrid++)
+    for(yGrid = 0; yGrid <=max_Y_Blocks; yGrid++)
      {
-        for(xGrid = 0; xGrid <=maxBlocks; xGrid++)
+        for(xGrid = 0; xGrid <=max_X_Blocks; xGrid++)
            {
                grid[xGrid][yGrid].mainRole = GROUND;
                grid[xGrid][yGrid].subRole = EMPTY;

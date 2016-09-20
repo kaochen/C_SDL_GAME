@@ -41,7 +41,8 @@ int getX_Blocks ();
 
 int getY_Blocks ();
 
-int getMax_Blocks ();
+int getMax_X_Blocks ();
+int getMax_Y_Blocks ();
 
 /* write a pref char */
 int writePrefChar (const char *prefName, const char *value);

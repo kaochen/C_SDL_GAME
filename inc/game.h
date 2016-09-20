@@ -32,23 +32,23 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 /* blit borders on walls */
-int blitBorders (Square grid[][getMax_Blocks ()],
+int blitBorders (Square grid[][getMax_Y_Blocks ()],
 		  SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* add a more ground choice */
-int randomGround (Square grid[][getMax_Blocks ()]);
+int randomGround (Square grid[][getMax_Y_Blocks ()]);
 
 /* add a more ground choice */
-int randomWall (Square grid[][getMax_Blocks ()]);
+int randomWall (Square grid[][getMax_Y_Blocks ()]);
 
 /*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
-int randomOutside (Square grid[][getMax_Blocks ()]);
+int randomOutside (Square grid[][getMax_Y_Blocks ()]);
 
 /* random number between two numbers */
 int random_number (int min, int max);
 
 /* blit corners */
-int blitCorners (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
+int blitCorners (Square grid[][getMax_Y_Blocks ()], SDL_Surface * screen,
 		 Sprites tableSurface[NBR_OF_IMAGES]);
 
 #endif

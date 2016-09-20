@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* blit borders on walls */
 int
-blitBorders (Square grid[][getMax_Blocks ()],
+blitBorders (Square grid[][getMax_Y_Blocks ()],
 	     SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
    if (grid == NULL || screen == NULL || tableSurface == NULL)
@@ -83,7 +83,7 @@ blitBorders (Square grid[][getMax_Blocks ()],
 
 /* add a more ground choice */
 int
-randomGround (Square grid[][getMax_Blocks ()])
+randomGround (Square grid[][getMax_Y_Blocks ()])
 {
   int x = 0, y = 0, randomNumber = 0;
   for (y = 0; y < getY_Blocks (); y++)
@@ -114,7 +114,7 @@ randomGround (Square grid[][getMax_Blocks ()])
 
 /* add a more ground choice */
 int
-randomWall (Square grid[][getMax_Blocks ()])
+randomWall (Square grid[][getMax_Y_Blocks ()])
 {
   int x = 0, y = 0, randomNumber = 0;
   for (y = 0; y < getY_Blocks (); y++)
@@ -151,7 +151,7 @@ randomWall (Square grid[][getMax_Blocks ()])
 
 /*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
 int
-randomOutside (Square grid[][getMax_Blocks ()])
+randomOutside (Square grid[][getMax_Y_Blocks ()])
 {
   int x = 0, y = 0, randomNumber = 0;
   for (y = 0; y < getY_Blocks (); y++)
@@ -193,7 +193,7 @@ random_number (int min, int max)
 
 /* blit corners */
 int
-blitCorners (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
+blitCorners (Square grid[][getMax_Y_Blocks ()], SDL_Surface * screen,
 	     Sprites tableSurface[NBR_OF_IMAGES])
 {
   SDL_Rect pos;

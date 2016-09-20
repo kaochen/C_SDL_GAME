@@ -167,16 +167,15 @@ getY_Blocks ()
 
 /* Must be higther than getY_Blocks() or getX_Blocks() to allow enough memory*/
 int
-getMax_Blocks ()
+getMax_X_Blocks ()
 {
-  if (getX_Blocks () > getY_Blocks ())
-    {
       return getX_Blocks () + 2;
-    }
-  else
-    {
-      return getY_Blocks () + 2;
-    }
+}
+
+int
+getMax_Y_Blocks ()
+{
+    return getY_Blocks () + 2;
 }
 
 /* write a pref char */
