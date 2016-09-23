@@ -128,9 +128,9 @@ main (int argc, char *argv[])
   Square grid[maxBlocks][maxBlocks];
   int xGrid = 0;
   int yGrid = 0;
-    for(yGrid = 0; yGrid <=maxBlocks; yGrid++)
+    for(yGrid = 0; yGrid < maxBlocks; yGrid++)
      {
-        for(xGrid = 0; xGrid <=maxBlocks; xGrid++)
+        for(xGrid = 0; xGrid < maxBlocks; xGrid++)
            {
                grid[xGrid][yGrid].mainRole = GROUND;
                grid[xGrid][yGrid].subRole = EMPTY;
