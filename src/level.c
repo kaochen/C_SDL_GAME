@@ -27,7 +27,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* display level on the screen */
 int
-displayLevel (Square grid[][getMax_Y_Blocks ()], SDL_Surface * screen,
+displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 	      Sprites tableSurface[NBR_OF_IMAGES])
 {
  if (grid == NULL || screen == NULL || tableSurface == NULL)
@@ -42,13 +42,10 @@ displayLevel (Square grid[][getMax_Y_Blocks ()], SDL_Surface * screen,
 
   /* blit surfaces depending of its destiny */
   int x = 0, y = 0;
-  int xBlocks = getX_Blocks ();
-  int yBlocks = getY_Blocks ();
-
   /*first pass */
-  for (x = 0; x < xBlocks; x++)
+  for (x = 0; x < getX_Blocks (); x++)
     {
-      for (y = 0; y < yBlocks; y++)
+      for (y = 0; y < getY_Blocks (); y++)
 	{
 	  pos.x = x * SPRITE_SIZE;
 	  pos.y = y * SPRITE_SIZE;
@@ -153,8 +150,8 @@ displayLevel (Square grid[][getMax_Y_Blocks ()], SDL_Surface * screen,
 	      break;
 	    }
 	}
-        }
 
+    }
   if (blitBorders (grid, screen, tableSurface) == EXIT_FAILURE)
     {
          fprintf (stderr, gettext("blitBorders failed.\n"));

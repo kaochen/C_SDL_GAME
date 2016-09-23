@@ -480,7 +480,7 @@ readLevelList (S_LevelList * levelList)
 /*Load slc level into the grid */
 int
 loadSlcLevel (int levelChoice, S_LevelList * levelList,
-	      Square grid[][getMax_Y_Blocks ()])
+	      Square grid[][getMax_Blocks ()])
 {
   if (levelList == NULL)
     {
@@ -538,26 +538,23 @@ loadSlcLevel (int levelChoice, S_LevelList * levelList,
       fprintf (stderr, "Error on the xPathLevel expression\n");
       return EXIT_FAILURE;
     }
-
   /*Clean grid before */
   int y = 0, x = 0;
   for (y = 0; y < getY_Blocks (); y++)
     {
       for (x = 0; x < getX_Blocks (); x++)
-       {
-         grid[x][y].mainRole = GROUND;
-         grid[x][y].subRole = GROUND1;
-         grid[x][y].goalRole = EMPTY;
-         grid[x][y].playerRole = EMPTY;
-       }
+	{
+	  grid[x][y].mainRole = GROUND;
+	  grid[x][y].subRole = GROUND1;
+	  grid[x][y].goalRole = EMPTY;
+	  grid[x][y].playerRole = EMPTY;
+	}
     }
-
-
   /* load level into the grid */
   if (xpathLevel->type == XPATH_NODESET)
     {
       int c = 0;
-      int y = 0, x = 0;
+      y = 0, x = 0;
       char line[MAX_CARACT] = "";
       xmlNodePtr n;
       for (y = 0; y < nbr_of_lines; y++)
@@ -624,7 +621,7 @@ loadSlcLevel (int levelChoice, S_LevelList * levelList,
 
 /* Change GROUND that are outside the walls to OUTSIDE */
 void
-detectOutside (Square grid[][getMax_Y_Blocks ()])
+detectOutside (Square grid[][getMax_Blocks ()])
 {
   /*Read left to right */
   int x = 0, y = 0;
