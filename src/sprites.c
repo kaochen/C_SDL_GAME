@@ -17,6 +17,8 @@
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+/*This file contains all that concern the image files and sprites management.*/
+
 #ifndef SPRITES_C
 #define SPRITES_C
 
