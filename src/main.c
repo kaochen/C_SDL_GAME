@@ -123,27 +123,14 @@ main (int argc, char *argv[])
     }
   loadAllSprites (tableSurface);
 
-  /* create a grid with coordinates x,y to locate Role from the struct Square */
-  int maxBlocks = getMax_Blocks ();
-  Square grid[maxBlocks][maxBlocks];
-  int xGrid = 0;
-  int yGrid = 0;
-    for(yGrid = 0; yGrid < maxBlocks; yGrid++)
-     {
-        for(xGrid = 0; xGrid < maxBlocks; xGrid++)
-           {
-               grid[xGrid][yGrid].mainRole = GROUND;
-               grid[xGrid][yGrid].subRole = EMPTY;
-               grid[xGrid][yGrid].goalRole = EMPTY;
-               grid[xGrid][yGrid].boxRole = EMPTY;
-               grid[xGrid][yGrid].playerRole = EMPTY;
+  /* create a grid using the heigth and width form settings */
 
-           }
-     }
+  int h = getMax_Blocks (),w = getMax_Blocks () ;
+  Square grid[h][w];
+  grid_init(h, w,grid);
 
 
 
-  char levelName[MAX_CARACT] = "";
 
   fprintf (stderr, "\n");
   /*List slc files from the levels/ folder */
@@ -223,7 +210,7 @@ main (int argc, char *argv[])
 
 /* wait for quit event */
 
-
+  char levelName[MAX_CARACT] = "";
   Uint32 currentTime = 0;
   Uint32 previousTime = 0;
   int carryOn = 1, refresh = 1, x = 0, y = 0, menuOpened = 0, menuChoice = 0;

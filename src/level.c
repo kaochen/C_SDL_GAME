@@ -27,6 +27,19 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libintl.h>
 #include <locale.h>
 
+/* Init grid */
+
+void
+grid_init(size_t h, size_t w, Square grid[h][w])
+{
+  for(size_t x=0; x<h; ++x)
+    for(size_t y=0; y<w; ++y)
+      grid[x][y] = (Square) {.mainRole=GROUND, .subRole=EMPTY, .goalRole=EMPTY, .boxRole=EMPTY, .playerRole=EMPTY };
+}
+
+
+
+
 /* display level on the screen */
 int
 displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
