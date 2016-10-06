@@ -482,7 +482,7 @@ readLevelList (S_LevelList * levelList)
 /*Load slc level into the grid */
 int
 loadSlcLevel (int levelChoice, S_LevelList * levelList,
-	      Square grid[][getMax_Blocks ()])
+	      Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   if (levelList == NULL)
     {
@@ -623,7 +623,7 @@ loadSlcLevel (int levelChoice, S_LevelList * levelList,
 
 /* Change GROUND that are outside the walls to OUTSIDE */
 void
-detectOutside (Square grid[][getMax_Blocks ()])
+detectOutside (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   /*Read left to right */
   int x = 0, y = 0;

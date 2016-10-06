@@ -125,9 +125,9 @@ main (int argc, char *argv[])
 
   /* create a grid using the heigth and width form settings */
 
-  int h = getMax_Blocks (),w = getMax_Blocks () ;
-  Square grid[h][w];
-  grid_init(h, w,grid);
+  int h = getMax_Y_Blocks (),w = getMax_X_Blocks () ;
+  Square grid[w][h];
+  grid_init(w, h,grid);
 
 
 

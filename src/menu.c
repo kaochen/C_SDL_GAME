@@ -33,7 +33,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int
 displayTopBar (int levelNumber, SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
-	       S_LevelList * levelList, Square grid[][getMax_Blocks ()])
+	       S_LevelList * levelList, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   /* first add background */
     if ( backgroundTopBar (screen, tableSurface) == EXIT_FAILURE)
@@ -169,7 +169,7 @@ levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
 
 /* count how many goals are need to complete the level */
 int
-goalLeft (Square grid[][getMax_Blocks ()])
+goalLeft (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   int x = 0, y = 0, nbrOfBoxOk = 0;
   for (x = 0; x < getX_Blocks (); x++)
@@ -185,7 +185,7 @@ goalLeft (Square grid[][getMax_Blocks ()])
 
 /* count goals all ready achieve */
 int
-nbr_of_goals (Square grid[][getMax_Blocks ()])
+nbr_of_goals (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   int x = 0, y = 0, nbrOfGoal = 0;
   for (x = 0; x < getX_Blocks (); x++)
@@ -201,7 +201,7 @@ nbr_of_goals (Square grid[][getMax_Blocks ()])
 
 /* Display Progress in the level */
 int
-displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
+displayProgress (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface * screen,
 		 Sprites tableSurface[NBR_OF_IMAGES])
 {
   if ( screen == NULL || grid == NULL || screen == NULL)
@@ -238,7 +238,7 @@ displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 
 /* Victory or not ? */
 int
-levelFinished (Square grid[][getMax_Blocks ()])
+levelFinished (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   /* get info */
   int i = goalLeft (grid);

@@ -30,10 +30,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* Init grid */
 
 void
-grid_init(size_t h, size_t w, Square grid[h][w])
+grid_init(size_t w, size_t h, Square grid[w][h])
 {
-  for(size_t x=0; x<h; ++x)
-    for(size_t y=0; y<w; ++y)
+   for(size_t y=0; y<h; ++y)
+      for(size_t x=0; x<w; ++x)
       grid[x][y] = (Square) {.mainRole=GROUND, .subRole=EMPTY, .goalRole=EMPTY, .boxRole=EMPTY, .playerRole=EMPTY };
 }
 
@@ -42,7 +42,7 @@ grid_init(size_t h, size_t w, Square grid[h][w])
 
 /* display level on the screen */
 int
-displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
+displayLevel (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface * screen,
 	      Sprites tableSurface[NBR_OF_IMAGES])
 {
  if (grid == NULL || screen == NULL || tableSurface == NULL)
@@ -114,7 +114,6 @@ displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 	      break;
 	    }
 
-
 	  switch (grid[x][y].goalRole)
 	    {
 	    case GOAL:
@@ -122,7 +121,6 @@ displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 			       &pos);
 	      break;
 	    }
-
 
 	  /* blit all blocks depending on grid mainRole */
 	  switch (grid[x][y].mainRole)

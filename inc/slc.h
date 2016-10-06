@@ -127,12 +127,12 @@ void readLevelList (S_LevelList * levelList);
 
 /*Load slc level into the grid */
 int loadSlcLevel (int levelChoice, S_LevelList * levelList,
-		  Square grid[][getMax_Blocks ()]);
+		  Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
 /*get levels infos from files */
 int getNbrOfLevels (S_LevelList * levelList);
 
 /* Change GROUND that are outside the walls to OUTSIDE */
-void detectOutside (Square grid[][getMax_Blocks ()]);
+void detectOutside (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
 #endif

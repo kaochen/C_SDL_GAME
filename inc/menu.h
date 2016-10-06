@@ -35,7 +35,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* display Top Bar*/
 int displayTopBar (int levelNumber, SDL_Surface * screen,
 		    Sprites tableSurface[NBR_OF_IMAGES],
-		    S_LevelList * levelList, Square grid[][getMax_Blocks ()]);
+		    S_LevelList * levelList, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
 /* display background top bar */
 int backgroundTopBar (SDL_Surface * screen,
@@ -48,17 +48,17 @@ int levelMenu (int levelNumber, SDL_Surface * screen,
 		S_LevelList * levelList);
 
 /* count how many goals are need to complete the level */
-int goalLeft (Square grid[][getMax_Blocks ()]);
+int goalLeft (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
 /* count goals all ready achieve */
-int nbr_of_goals (Square grid[][getMax_Blocks ()]);
+int nbr_of_goals (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
 /* Display Progress in the level */
-int displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * menu,
+int displayProgress (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface * menu,
 		      Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Victory or not ? */
-int levelFinished (Square grid[][getMax_Blocks ()]);
+int levelFinished (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
 /* display a congrats message to the winner */
 int displayCongrats (SDL_Surface * screen,
