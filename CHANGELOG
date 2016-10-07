@@ -1,0 +1,6 @@
+new
+ * Fixed the grid table when settings load a non-square window.
+ * Added a changelog
+
+first alpha v0.01
+ * SokoRobot is a Sokoban game write in C using SDL2
