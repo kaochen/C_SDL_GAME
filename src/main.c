@@ -33,6 +33,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/level.h"
 #include "../inc/level_decor.h"
 #include "../inc/menu.h"
+#include "../inc/menu_text.h"
 #include "../inc/settings.h"
 #include "../inc/sprites.h"
 #include "../inc/slc.h"

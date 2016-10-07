@@ -6,7 +6,7 @@ LDFLAGS=
 OBJDIR=obj
 EXEC=SokoRobot
 DEPS= inc/const.h inc/level.h inc/level_decor.h inc/menu.h inc/sprites.h inc/slc.h
-OBJS= $(OBJDIR)/level.o $(OBJDIR)/level_decor.o $(OBJDIR)/main.o $(OBJDIR)/menu.o $(OBJDIR)/settings.o $(OBJDIR)/sprites.o $(OBJDIR)/slc.o
+OBJS= $(OBJDIR)/level.o $(OBJDIR)/level_decor.o $(OBJDIR)/main.o $(OBJDIR)/menu.o $(OBJDIR)/menu_text.o $(OBJDIR)/settings.o $(OBJDIR)/sprites.o $(OBJDIR)/slc.o
 
 #first create the obj folder to receive *.o files :
 $(shell   mkdir -p $(OBJDIR))
@@ -28,6 +28,9 @@ $(OBJDIR)/level_decor.o: src/level_decor.c $(DEPS)
 
 $(OBJDIR)/menu.o: src/menu.c $(DEPS)
 	$(CC) -o $(OBJDIR)/menu.o -c src/menu.c -I inc $(CFLAGS)
+
+$(OBJDIR)/menu_text.o: src/menu_text.c $(DEPS)
+	$(CC) -o $(OBJDIR)/menu_text.o -c src/menu_text.c -I inc $(CFLAGS)
 
 $(OBJDIR)/settings.o: src/settings.c $(DEPS)
 	$(CC) -o $(OBJDIR)/settings.o -c src/settings.c -I inc $(CFLAGS)
