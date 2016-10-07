@@ -26,7 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <dirent.h>
 
 #include "const.h"
-#include "game.h"
+#include "level_decor.h"
 #include "settings.h"
 
 

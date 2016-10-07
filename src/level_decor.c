@@ -17,10 +17,12 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef GAME_C
-#define GAME_C
+/*This file handles the functions needed to improve the design of the the level.*/
 
-#include "../inc/game.h"
+#ifndef LEVEL_DECOR_C
+#define LEVEL_DECOR_C
+
+#include "../inc/level_decor.h"
 
 #include <libintl.h>
 #include <locale.h>

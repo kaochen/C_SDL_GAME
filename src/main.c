@@ -30,8 +30,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL_ttf.h>
 
 #include "../inc/const.h"
-#include "../inc/game.h"
 #include "../inc/level.h"
+#include "../inc/level_decor.h"
 #include "../inc/menu.h"
 #include "../inc/settings.h"
 #include "../inc/sprites.h"

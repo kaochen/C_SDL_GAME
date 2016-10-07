@@ -28,7 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL2_rotozoom.h>
 
 #include "const.h"
-#include "game.h"
+#include "level_decor.h"
 #include "settings.h"
 #include "slc.h"
 
