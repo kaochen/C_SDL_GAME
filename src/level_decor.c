@@ -41,10 +41,9 @@ blitBorders (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()],
 
 
   SDL_Rect wallPos;
-  int x = 1, y = 1;
-  for (y = 1; y < getY_Blocks () - 1; y++)
+  for (int y = 0; y < getY_Blocks (); y++)
     {
-      for (x = 1; x < getX_Blocks () - 1; x++)
+      for (int x = 0; x < getX_Blocks (); x++)
 	{
 	  /* set position for wall blocks */
 	  wallPos.x = x * SPRITE_SIZE;
