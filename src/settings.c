@@ -176,7 +176,7 @@ getMax_X_Blocks ()
 int
 getMax_Y_Blocks ()
 {
-      return getY_Blocks () + 3;
+      return getY_Blocks () + 2;
 }
 
 
