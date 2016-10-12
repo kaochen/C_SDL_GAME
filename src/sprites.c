@@ -99,6 +99,7 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[MENU_TOP_LIGHT], themePath,"menu_top_light.png");
   loadSprite (&tableSurface[MENU_SQUARE], themePath,"menu_square.png");
   loadSprite (&tableSurface[MENU_SEPARATOR], themePath,"menu_separator.png");
+  loadSprite (&tableSurface[MENU_OVERTEXT], themePath,"menu_overText.png");
 
 
   /* outside the wall */

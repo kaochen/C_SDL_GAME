@@ -304,6 +304,7 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   SDL_BlitSurface (point, NULL, screen, &pointPos);
 
   displaySubMenu (screen, levelList, menuChoice, levelChoice);
+  displayOverTextImage(screen, tableSurface,menuChoice);
 
   /* clean */
   SDL_FreeSurface (line1);
@@ -396,7 +397,7 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
       free (actual);
 
       line01 = TTF_RenderUTF8_Blended (font, nameLevel, fontColor);
-      linePos.y = 180;
+      linePos.y = 178;
       SDL_BlitSurface (line01, NULL, screen, &linePos);
 
       line02 = TTF_RenderUTF8_Blended (font, gettext("Authors:"), fontColor);
@@ -414,7 +415,7 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
     {
       line11 =
 	TTF_RenderUTF8_Blended (font, gettext("m : open and close menu"), fontColor);
-      linePos.y = 180;
+      linePos.y = 178;
       SDL_BlitSurface (line11, NULL, screen, &linePos);
 
       line12 =
@@ -471,22 +472,22 @@ displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAG
      }
 
   SDL_Rect subMenuPos;
-  subMenuPos.x = menuPosX () + 25;
-  subMenuPos.y = 40;
+  subMenuPos.x = menuPosX () + 20;
+  subMenuPos.y = SPRITE_SIZE;
    SDL_BlitSurface (tableSurface[MENU_RIBBON].image, NULL, screen, &subMenuPos);
    SDL_BlitSurface (tableSurface[MENU_TOP_LIGHT].image, NULL, screen, &subMenuPos);
-  subMenuPos.y += 40;
+  subMenuPos.y += SPRITE_SIZE;
 
   for(i = 1; i < size; i++)
     {
       SDL_BlitSurface (tableSurface[MENU_RIBBON].image, NULL, screen, &subMenuPos);
-      subMenuPos.y += 40;
+      subMenuPos.y += SPRITE_SIZE;
    }
    /* add a bottom to the menu */
    SDL_BlitSurface (tableSurface[MENU_BOTTOM].image, NULL, screen, &subMenuPos);
 
 
-  /* Distribute Cross over the menu */
+  /* Distribute littles squares behind the menu the menu */
   int x = 0, y = 0, start = menuPosX ();
   SDL_Rect  crossPos;
   crossPos.y = 60;
@@ -497,7 +498,7 @@ displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAG
         {
           crossPos.y += 20;
         }
-         crossPos.x = start + 40;
+         crossPos.x = start + SPRITE_SIZE;
            for(x = 0; x < 11; x++)
              {
                SDL_BlitSurface (tableSurface[MENU_SQUARE].image, NULL, screen, &crossPos);
@@ -515,5 +516,35 @@ displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAG
 
 
 }
+
+/* Display pattern over the text menu */
+void
+displayOverTextImage(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int menuChoice)
+{
+    int x = 0, y = 0, xSize = 360/SPRITE_SIZE, ySize = 0, start = menuPosX ();
+    if (menuChoice == 1)
+    {
+      ySize = 8;
+    }
+   else
+     {
+       ySize = 7;
+     }
+
+     SDL_Rect Pos;
+     Pos.x = start + 20;
+
+   for(x = 0; x < xSize; x++)
+         {
+         Pos.y = SPRITE_SIZE + 10;
+          for(y = 1; y < ySize; y++)
+          {
+            SDL_BlitSurface (tableSurface[MENU_OVERTEXT].image, NULL, screen, &Pos);
+            Pos.y += SPRITE_SIZE;
+          }
+         Pos.x += SPRITE_SIZE;
+         }
+}
+
 
 #endif
