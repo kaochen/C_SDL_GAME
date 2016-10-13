@@ -3,6 +3,11 @@ SokoRobot is a Sokoban game. It's written in langage C using SDL2.
 
 ![SokoRobor_ScreenShot](./src/img/SokoRobot-ScreenShot.png)
 
+The game is under the license: **GPLv2** , and all graphics are under Creative Commons : **CC BY-SA 4.0**
+
+<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Creative Commons License" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/88x31.png" /></a><br />This work is licensed under a <a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/">Creative Commons Attribution-ShareAlike 4.0 International License</a>.
+
+
 This is an early draft, use it carefully.
 ### Shortcuts
 * m: menu
@@ -49,6 +54,10 @@ make mrproper
 ```
 
 ### Dev stuff
+Use the develop branch to get the lastest commits:
+```
+git checkout develop
+```
 
 ![X and Y](https://upload.wikimedia.org/wikipedia/commons/8/86/Rep%C3%A8re_SDL_Window.png)
 
