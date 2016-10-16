@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define MENU_C
 
 #include "../inc/menu.h"
+#include "../inc/menu_text.h"
 
 #include <libintl.h>
 #include <locale.h>
@@ -32,7 +33,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* display Top Bar*/
 int
 displayTopBar (int levelNumber, SDL_Surface * screen,
-	       Sprites tableSurface[NBR_OF_IMAGES],
+	       Sprites tableSurface[NBR_OF_IMAGES], S_Text tableTextSurface[NBR_OF_TEXT],
 	       S_LevelList * levelList, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   /* first add background */
@@ -57,7 +58,7 @@ displayTopBar (int levelNumber, SDL_Surface * screen,
     }
 
    /* display shortcut to open the menu */
-   if (displayShortcut (screen) == EXIT_FAILURE)
+   if (displayShortcut (screen, tableTextSurface) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext("levelMenu failed.\n"));
       return EXIT_FAILURE;
@@ -244,7 +245,7 @@ menuPosX (void)
 
 /* Show menu List */
 void
-openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
+openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], S_Text tableTextSurface[NBR_OF_TEXT],
 	  S_LevelList * levelList, int menuChoice, int levelChoice)
 {
   /* blit background */
@@ -303,7 +304,7 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   point = TTF_RenderUTF8_Blended (fontPoint, "*", fontPointColor);
   SDL_BlitSurface (point, NULL, screen, &pointPos);
 
-  displaySubMenu (screen, levelList, menuChoice, levelChoice);
+  displaySubMenu (screen, tableTextSurface,levelList, menuChoice, levelChoice);
   displayOverTextImage(screen, tableSurface,menuChoice);
 
   /* clean */
@@ -319,7 +320,7 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 
 /* display Sub menu */
 int
-displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, int levelChoice)
+displaySubMenu (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList, int menuChoice, int levelChoice)
 {
   /* blit text */
   /* setup font */
@@ -333,12 +334,6 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
   SDL_Surface *line01 = NULL;
   SDL_Surface *line02 = NULL;
   SDL_Surface *line03 = NULL;
-
-  SDL_Surface *line11 = NULL;
-  SDL_Surface *line12 = NULL;
-  SDL_Surface *line13 = NULL;
-  SDL_Surface *line14 = NULL;
-  SDL_Surface *line15 = NULL;
 
   linePos.x = menuPosX () + 60;
 
@@ -413,46 +408,35 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
   /*Shortcuts */
   else if (menuChoice == 1)
     {
-      line11 =
-	TTF_RenderUTF8_Blended (font, gettext("m : open and close menu"), fontColor);
       linePos.y = 178;
-      SDL_BlitSurface (line11, NULL, screen, &linePos);
+      SDL_BlitSurface (tableTextSurface[SHORTCUTS1].textSurface, NULL, screen, &linePos);
 
-      line12 =
-	TTF_RenderUTF8_Blended (font, gettext("n : next level"),
-				fontColor);
       linePos.y += 30;
-      SDL_BlitSurface (line12, NULL, screen, &linePos);
+      SDL_BlitSurface (tableTextSurface[SHORTCUTS2].textSurface, NULL, screen, &linePos);
 
-      line13 =
-	TTF_RenderUTF8_Blended (font, gettext("p : previous level"),
-				fontColor);
       linePos.y += 30;
-      SDL_BlitSurface (line12, NULL, screen, &linePos);
+      SDL_BlitSurface (tableTextSurface[SHORTCUTS3].textSurface, NULL, screen, &linePos);
 
-      line14 =
-	TTF_RenderUTF8_Blended (font,
-				gettext("r : reset current level"),
-				fontColor);
       linePos.y += 30;
-      SDL_BlitSurface (line14, NULL, screen, &linePos);
+      SDL_BlitSurface (tableTextSurface[SHORTCUTS4].textSurface, NULL, screen, &linePos);
 
-      line15 =
-	TTF_RenderUTF8_Blended (font, gettext("q : quit game"),
-				fontColor);
       linePos.y += 30;
-      SDL_BlitSurface (line15, NULL, screen, &linePos);
+      SDL_BlitSurface (tableTextSurface[SHORTCUTS5].textSurface, NULL, screen, &linePos);
     }
 
+    /*ABOUT */
+  else if (menuChoice == 2)
+    {
+      linePos.y = 178;
+      SDL_BlitSurface (tableTextSurface[ABOUT1].textSurface, NULL, screen, &linePos);
+
+      linePos.y += 30;
+      SDL_BlitSurface (tableTextSurface[ABOUT2].textSurface, NULL, screen, &linePos);
+    }
   /* clean */
   SDL_FreeSurface (line01);
   SDL_FreeSurface (line02);
   SDL_FreeSurface (line03);
-  SDL_FreeSurface (line11);
-  SDL_FreeSurface (line12);
-  SDL_FreeSurface (line13);
-  SDL_FreeSurface (line14);
-  SDL_FreeSurface (line15);
   TTF_CloseFont (font);
   font = NULL;
   return EXIT_SUCCESS;
@@ -462,14 +446,17 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
 void
 displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int menuChoice){
   int i = 0, size = 0;
-  if (menuChoice == 1)
-    {
-      size = 7;
-    }
-   else
-     {
-       size = 6;
-     }
+  switch (menuChoice){
+    case 0:
+        size = 6;
+        break;
+    case 1:
+        size = 7;
+        break;
+    case 2:
+        size = 5;
+        break;
+  }
 
   SDL_Rect subMenuPos;
   subMenuPos.x = menuPosX () + 20;

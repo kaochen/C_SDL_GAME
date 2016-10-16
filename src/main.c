@@ -125,6 +125,11 @@ main (int argc, char *argv[])
     }
   loadAllSprites (tableSurface);
 
+  /* load text into a table of struct */
+
+  S_Text tableTextSurface[NBR_OF_TEXT];
+  tableTextSurface_init(tableTextSurface);
+
   /* create a grid using the heigth and width form settings */
 
   int h = getMax_Y_Blocks (),w = getMax_X_Blocks () ;
@@ -192,7 +197,7 @@ main (int argc, char *argv[])
     }
 
   /* display the top bar  */
-  if (displayTopBar (levelChoice, screen, tableSurface, levelList, grid) == EXIT_FAILURE)
+  if (displayTopBar (levelChoice, screen, tableSurface,tableTextSurface, levelList, grid) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext("first displayTopBar failed.\n"));
       exit(EXIT_FAILURE);
@@ -280,7 +285,7 @@ main (int argc, char *argv[])
 			      {
 			        menuChoice = 2;
 			      }
-		      openMenu (screen, tableSurface, levelList, menuChoice,
+		      openMenu (screen, tableSurface,tableTextSurface, levelList, menuChoice,
 				levelChoice);
 		      refresh = 1;
 		    }
@@ -305,7 +310,7 @@ main (int argc, char *argv[])
 			      {
 			        menuChoice = 0;
 			      }
-		      openMenu (screen, tableSurface, levelList, menuChoice,
+		      openMenu (screen, tableSurface,tableTextSurface, levelList, menuChoice,
 				levelChoice);
 		      refresh = 1;
 		    }
@@ -435,11 +440,11 @@ main (int argc, char *argv[])
 	    }
 	  if (menuOpened == 1)
 	    {
-	      openMenu (screen, tableSurface, levelList, menuChoice,
+	      openMenu (screen, tableSurface,tableTextSurface, levelList, menuChoice,
 			levelChoice);
 	    }
 
-	  displayTopBar ((levelChoice), screen, tableSurface, levelList,
+	  displayTopBar ((levelChoice), screen, tableSurface,tableTextSurface, levelList,
 			 grid);
 
 	  SDL_UpdateWindowSurface (window);
@@ -467,6 +472,8 @@ main (int argc, char *argv[])
   fprintf (stderr, "- Destroying file list\n");
   destroyFileList (filesList);
   free (filesList);
+  fprintf(stderr,"-Freeing texts\n");
+  freeS_Text (tableTextSurface);
   fprintf(stderr,"-Freeing Sprites\n");
   freeSprites(tableSurface);
   SDL_FreeSurface (screen);

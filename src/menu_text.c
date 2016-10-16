@@ -22,6 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef MENU_TEXT_C
 #define MENU_TEXT_C
 
+#include "../inc/menu.h"
 #include "../inc/menu_text.h"
 
 #include <libintl.h>
@@ -29,36 +30,83 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <sys/stat.h>
 
-/* display shortcut in the menu */
-int
-displayShortcut (SDL_Surface * screen)
+/*init the textSurface table */
+void
+tableTextSurface_init(S_Text tableTextSurface[NBR_OF_TEXT])
+{
+      /* Init all the table */
+      for(size_t i=0; i<NBR_OF_TEXT; ++i)
+      tableTextSurface[i] = (S_Text) {.textSurface=NULL};
+
+      /* Init main Menu */
+      size_t fontSize = 18, R = 255, G = 255, B = 255, A = 255;
+      loadTextAsSurface(ABOUT,tableTextSurface, gettext("About"), fontSize, R, G, B, A);
+      loadTextAsSurface(MENU_SHORTCUT,tableTextSurface, "(M)", fontSize, R, G, B, A);
+
+      /* Init sub Menu */
+      /*shortcuts*/
+      size_t fontSizeSub = 18;
+      loadTextAsSurface(SHORTCUTS1,tableTextSurface, gettext("m : open and close menu"), fontSizeSub, R, G, B, A);
+      loadTextAsSurface(SHORTCUTS2,tableTextSurface, gettext("n : next level"), fontSizeSub, R, G, B, A);
+      loadTextAsSurface(SHORTCUTS3,tableTextSurface, gettext("p : previous level"), fontSizeSub, R, G, B, A);
+      loadTextAsSurface(SHORTCUTS4,tableTextSurface, gettext("r : reset current level"), fontSizeSub, R, G, B, A);
+      loadTextAsSurface(SHORTCUTS5,tableTextSurface, gettext("q : quit game"), fontSizeSub, R, G, B, A);
+      /* Init sub Menu */
+      /*about*/
+      loadTextAsSurface(ABOUT1,tableTextSurface, gettext("Website :"), fontSizeSub, R, G, B, A);
+      loadTextAsSurface(ABOUT2,tableTextSurface, gettext("github.com/kaochen/SokoRobot"), fontSizeSub, R, G, B, A);
+}
+
+/* free all text surfaces */
+void
+freeS_Text (S_Text tableTextSurface[NBR_OF_TEXT])
 {
 
-    if ( screen == NULL)
+  for (size_t i = 0; i < NBR_OF_TEXT; i++)
+    {
+      if (tableTextSurface[i].textSurface != NULL)
+	    {
+          SDL_FreeSurface (tableTextSurface[i].textSurface);
+	    }
+    }
+  fprintf (stderr, gettext("\tAll text surfaces are free %s\n"), SDL_GetError ());
+}
+
+/*make from a text a table and load it into the tableTextSurface*/
+void
+loadTextAsSurface(size_t t, S_Text tableTextSurface[NBR_OF_TEXT], char *text, size_t fontSize, size_t R, size_t G, size_t B, size_t A)
+{
+  /* setup font */
+  TTF_Font *font = NULL;
+  char fontPath[MAX_CARACT] = "";
+  strcpy(fontPath,findFont());
+  font = TTF_OpenFont (fontPath, fontSize);
+
+
+  SDL_Color fontColor = { R, G, B, A };
+  tableTextSurface[t].textSurface = TTF_RenderUTF8_Blended (font, text, fontColor);
+  //clean
+  TTF_CloseFont (font);
+  font = NULL;
+}
+
+/* display shortcut in the menu */
+int
+displayShortcut (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT])
+{
+    if (screen == NULL)
     {
       fprintf (stderr, gettext("init displayShortcut failed: %s\n"),
 	       SDL_GetError ());
       return EXIT_FAILURE;
     }
-  /* setup font */
-  TTF_Font *font = NULL;
-  char fontPath[MAX_CARACT] = "";
-  strcpy(fontPath,findFont());
 
-  font = TTF_OpenFont (fontPath, 20);
-  SDL_Color fontColor = { 255, 255, 255, 255 };
-  SDL_Surface *shortCutText = NULL;
-  shortCutText = TTF_RenderText_Blended (font, "(M)", fontColor);
   /* blit the text */
   SDL_Rect shortCutTextPos;
   shortCutTextPos.x = menuPosX () + (MENU_WIDTH - 2 * SPRITE_SIZE - 5);
-  shortCutTextPos.y = (SPRITE_SIZE - shortCutText->h)/2;
-  SDL_BlitSurface (shortCutText, NULL, screen, &shortCutTextPos);
+  shortCutTextPos.y = (SPRITE_SIZE - tableTextSurface[MENU_SHORTCUT].textSurface->h)/2;
 
-  /* clean */
-  SDL_FreeSurface (shortCutText);
-  TTF_CloseFont (font);
-   font = NULL;
+  SDL_BlitSurface (tableTextSurface[MENU_SHORTCUT].textSurface, NULL, screen, &shortCutTextPos);
   return EXIT_SUCCESS;
 }
 

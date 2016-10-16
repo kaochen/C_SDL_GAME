@@ -34,9 +34,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "slc.h"
 
 /* display Top Bar*/
-int displayTopBar (int levelNumber, SDL_Surface * screen,
-		    Sprites tableSurface[NBR_OF_IMAGES],
-		    S_LevelList * levelList, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
+int
+displayTopBar (int levelNumber, SDL_Surface * screen,
+	       Sprites tableSurface[NBR_OF_IMAGES], S_Text tableTextSurface[NBR_OF_TEXT],
+	       S_LevelList * levelList, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
 /* display background top bar */
 int backgroundTopBar (SDL_Surface * screen,
@@ -69,11 +70,11 @@ int menuPosX (void);
 
 
 /* Open the main menu */
-void openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
+void openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_Text tableTextSurface[NBR_OF_TEXT],
 	       S_LevelList * levelList, int menuChoice, int levelChoice);
 
 /* display Sub menu */
-int displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, int levelChoice);
+int displaySubMenu (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList, int menuChoice, int levelChoice);
 
 /* Display the background menu */
 void

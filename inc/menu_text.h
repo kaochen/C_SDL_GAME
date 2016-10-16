@@ -33,8 +33,29 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "settings.h"
 #include "slc.h"
 
+enum {INFO,SHORTCUTS,SHORTCUTS1,SHORTCUTS2,SHORTCUTS3,SHORTCUTS4,SHORTCUTS5, ABOUT,ABOUT1,ABOUT2,MENU_SHORTCUT};
+
+/* define images/sprites struct */
+typedef struct
+{
+  SDL_Surface *textSurface;
+} S_Text;
+
+/*init the textSurface table */
+void
+tableTextSurface_init(S_Text tableTextSurface[NBR_OF_TEXT]);
+
+/* free all text surfaces */
+void
+freeS_Text (S_Text tableTextSurface[NBR_OF_TEXT]);
+
+/*make from a text a table and load it into the tableTextSurface*/
+void
+loadTextAsSurface(size_t t, S_Text tableTextSurface[NBR_OF_TEXT], char *text, size_t fontSize, size_t R, size_t G, size_t B, size_t A);
+
 /* display shortcut in the menu */
-int displayShortcut (SDL_Surface * screen);
+int
+displayShortcut (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT]);
 
 /* display the level number */
 int levelMenu (int levelNumber, SDL_Surface * screen,
