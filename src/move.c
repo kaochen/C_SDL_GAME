@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define MOVE_C
 
 #include "../inc/move.h"
+#include <math.h>
 
 /* move player and update object status" */
 int
@@ -108,5 +109,59 @@ movePlayer(int xPlayer, int yPlayer, int direction , Square grid[getMax_X_Blocks
 		      return 1;}
 return 0;
 }
+
+/*Find the player on the grid*/
+void
+getPosPlayer(int *xPlayer, int *yPlayer, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]){
+	    int x = 0, y = 0;
+         for (x = 0; x < getX_Blocks (); x++)
+		{
+		  for (y = 0; y < getY_Blocks (); y++)
+		    {
+		      if (grid[x][y].mainRole == PLAYER)
+			{
+			  *xPlayer = x;
+			  *yPlayer = y;
+			  //fprintf(stderr, "player on %d:%d\n", *xPlayer, *yPlayer);
+			}
+		    }
+		}
+}
+
+
+int
+mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor){
+    int dir;
+    double xV = (double)(xCursor - (xPlayer*SPRITE_SIZE+SPRITE_SIZE/2));
+    double yV = (double)(yCursor - (yPlayer*SPRITE_SIZE+SPRITE_SIZE/2));
+    double val = 360.0 / (2*PI);
+    double angle = 180 - (atan2(xV,yV) * val);
+
+    char d[10] = "";
+    if ((angle >= 315 || angle <= 45)){
+        dir = UP;
+        strcpy(d, "UP");
+    }
+    else if ((angle >= 135 && angle <= 225)){
+        dir = DOWN;
+        strcpy(d, "DOWN");
+    }
+    else if ((angle > 225 && angle < 315)){
+        dir = LEFT;
+       strcpy(d, "LEFT");
+    }
+    else if ((angle > 45 && angle < 135)){
+        dir = RIGHT;
+        strcpy(d, "RIGHT");
+    }
+    else{
+        dir = STILL;
+        strcpy(d, "STILL");
+    }
+
+//   	fprintf(stderr, "Player%d:%d Cursor%d:%d Dir:%s Angle:%lf\n", xPlayer*SPRITE_SIZE, yPlayer*SPRITE_SIZE, xCursor, yCursor, d, angle);
+    return dir;
+}
+
 
 #endif

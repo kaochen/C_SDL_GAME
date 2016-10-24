@@ -30,4 +30,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int
 movePlayer(int xPlayer, int yPlayer, int direction , Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
+/*Find the player on the grid*/
+void
+getPosPlayer(int *xPlayer, int *yPlayer, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
+
+
+int
+mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor);
 #endif

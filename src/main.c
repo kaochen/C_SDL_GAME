@@ -220,7 +220,7 @@ main (int argc, char *argv[])
   char levelName[MAX_CARACT] = "";
   Uint32 currentTime = 0;
   Uint32 previousTime = 0;
-  int carryOn = 1, refresh = 1, x = 0, y = 0, menuOpened = 0, menuChoice = 0;
+  int carryOn = 1, refresh = 1, menuOpened = 0, menuChoice = 0;
   bool freezeCommand = false;
   SDL_Event event;
   while (carryOn)
@@ -234,20 +234,32 @@ main (int argc, char *argv[])
 	    case SDL_QUIT:
 	      carryOn = 0;
 	      break;
+        case SDL_MOUSEBUTTONUP:
+            if(event.button.button == SDL_BUTTON_LEFT)
+                {
+                int xCursor = event.button.x;
+                int yCursor = event.button.y;
+                getPosPlayer(&xPlayer, &yPlayer, grid);
+
+                if (menuOpened == 0)
+		        {
+		          /*Do not move when level is finished */
+		          if (freezeCommand == true)
+			          break;
+
+                  int direction = mouseMoveDirection(xPlayer, yPlayer, xCursor, yCursor);
+
+                  refresh = movePlayer(xPlayer,yPlayer, direction , grid);
+                }
+
+                }
+            break;
+
 	    case SDL_KEYDOWN:
 	      /* Get the player position */
-	      for (x = 0; x < getX_Blocks (); x++)
-		{
-		  for (y = 0; y < getY_Blocks (); y++)
-		    {
-		      if (grid[x][y].mainRole == PLAYER)
-			{
-			  xPlayer = x;
-			  yPlayer = y;
-			  //fprintf(stderr, "player on %d:%d\n", xPlayer, yPlayer);
-			}
-		    }
-		}
+            getPosPlayer(&xPlayer, &yPlayer, grid);
+
+
 	      /* listen keyboard */
 	      switch (event.key.keysym.sym)
 		{
