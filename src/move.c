@@ -148,7 +148,7 @@ mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor){
     }
     else if ((angle > 225 && angle < 315)){
         dir = LEFT;
-       strcpy(d, "LEFT");
+        strcpy(d, "LEFT");
     }
     else if ((angle > 45 && angle < 135)){
         dir = RIGHT;
@@ -159,7 +159,7 @@ mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor){
         strcpy(d, "STILL");
     }
 
-//   	fprintf(stderr, "Player%d:%d Cursor%d:%d Dir:%s Angle:%lf\n", xPlayer*SPRITE_SIZE, yPlayer*SPRITE_SIZE, xCursor, yCursor, d, angle);
+    //  fprintf(stderr, "Player%d:%d Cursor%d:%d Dir:%s Angle:%lf\n", xPlayer*SPRITE_SIZE, yPlayer*SPRITE_SIZE, xCursor, yCursor, d, angle);
     return dir;
 }
 

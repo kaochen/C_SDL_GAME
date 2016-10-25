@@ -34,7 +34,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define MENU_WIDTH 400
 
 //autorise 100 images max
-#define NBR_OF_IMAGES 35
+#define NBR_OF_IMAGES 50
 #define NBR_OF_TEXT 20
 
 #define MAX_CARACT 200
@@ -49,6 +49,7 @@ typedef struct
   int goalRole;			// GOAL, BOX, BOX_OK, EMPTY,
   int boxRole;			//BOX, BOX_OK, EMPTY
   int playerRole;		//PLAYER_F,PLAYER_B,PLAYER_L,PLAYER_R, EMPTY,
+  int target; 			//TARGET,EMPTY
 } Square;
 
 typedef enum bool bool;
@@ -62,7 +63,8 @@ enum bool
 enum
 { GROUND, GROUND1, GROUND2, GROUND3, GROUND4, OUTSIDE, OUTSIDE2,
   OUTSIDE3, OUTSIDE4, WALL, WALL1, WALL2, WALL3, WALL4, GOAL, BOX, BOX_OK,
-    PLAYER, EMPTY,
+  TARGET,
+  PLAYER, EMPTY,
   PLAYER_F, PLAYER_B, PLAYER_L, PLAYER_R
 };
 
@@ -75,6 +77,7 @@ enum
 //image names
 enum
 { PLAYER_FRONT, PLAYER_BACK, PLAYER_LEFT, PLAYER_RIGHT,
+  TARGET_IMAGE,
   WALL1_IMAGE, WALL2_IMAGE, WALL3_IMAGE, WALL4_IMAGE, WALL_TOP,
   WALL_BOTTOM, WALL_LEFT, WALL_RIGHT,
   CORNER_TR, CORNER_TL, CORNER_BR, CORNER_BL,

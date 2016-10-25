@@ -62,6 +62,9 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[PLAYER_LEFT], themePath,"player_left.png");
   loadSprite (&tableSurface[PLAYER_RIGHT], themePath,"player_right.png");
 
+  /* Target to blit over ground */
+  loadSprite (&tableSurface[TARGET_IMAGE], themePath,"target.png");
+
   /* walls */
   loadSprite (&tableSurface[WALL1_IMAGE], themePath,"wall1.png");
   loadSprite (&tableSurface[WALL2_IMAGE], themePath,"wall2.png");

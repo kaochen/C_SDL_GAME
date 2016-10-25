@@ -34,7 +34,7 @@ grid_init(size_t w, size_t h, Square grid[w][h])
 {
    for(size_t y=0; y<h; ++y)
       for(size_t x=0; x<w; ++x)
-      grid[x][y] = (Square) {.mainRole=GROUND, .subRole=EMPTY, .goalRole=EMPTY, .boxRole=EMPTY, .playerRole=EMPTY };
+      grid[x][y] = (Square) {.mainRole=GROUND, .subRole=EMPTY, .goalRole=EMPTY, .boxRole=EMPTY, .playerRole=EMPTY, .target=EMPTY };
 }
 
 
@@ -162,6 +162,17 @@ displayLevel (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface *
 			       &pos);
 	      break;
 	    }
+
+        /*display target over ground */
+        switch (grid[x][y].target)
+	    {
+	    case TARGET:
+	      SDL_BlitSurface (tableSurface[TARGET_IMAGE].image, NULL, screen,
+			       &pos);
+          grid[x][y].target = EMPTY;
+	      break;
+        }
+
 	}
 
     }

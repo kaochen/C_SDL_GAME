@@ -220,7 +220,8 @@ main (int argc, char *argv[])
   char levelName[MAX_CARACT] = "";
   Uint32 currentTime = 0;
   Uint32 previousTime = 0;
-  int carryOn = 1, refresh = 1, menuOpened = 0, menuChoice = 0;
+  int carryOn = 1, refresh = 1, menuOpened = 0, menuChoice = 0, target = STILL, next_target = STILL;
+  int xCursor = 0, yCursor = 0;
   bool freezeCommand = false;
   SDL_Event event;
   while (carryOn)
@@ -228,17 +229,56 @@ main (int argc, char *argv[])
       //SDL_WaitEvent(&event);
       while (SDL_PollEvent (&event))
 	{
-
 	  switch (event.type)
 	    {
 	    case SDL_QUIT:
 	      carryOn = 0;
 	      break;
+
+        case SDL_MOUSEMOTION:
+		          /*Do not move when level is finished */
+		          if (freezeCommand == true)
+			          break;
+
+                    xCursor = event.button.x;
+                    yCursor = event.button.y;
+                    getPosPlayer(&xPlayer, &yPlayer, grid);
+                    next_target = mouseMoveDirection(xPlayer, yPlayer, xCursor, yCursor);
+
+                    if (target != next_target ){
+                        switch (next_target){
+                        case RIGHT:
+                                if (grid[xPlayer+1][yPlayer].mainRole == GROUND)
+                                grid[xPlayer+1][yPlayer].target = TARGET;
+                            break;
+                        case LEFT:
+                                if (grid[xPlayer-1][yPlayer].mainRole == GROUND)
+                                grid[xPlayer-1][yPlayer].target = TARGET;
+                            break;
+                        case UP:
+                                if (grid[xPlayer][yPlayer-1].mainRole == GROUND)
+                                grid[xPlayer][yPlayer-1].target = TARGET;
+                            break;
+                        case DOWN:
+                                if (grid[xPlayer][yPlayer+1].mainRole == GROUND)
+                                grid[xPlayer][yPlayer+1].target = TARGET;
+                            break;
+                        case STILL:
+                            break;
+                        }
+
+                        target = next_target;
+                        refresh = 1;
+
+                    }
+
+                break;
+
         case SDL_MOUSEBUTTONUP:
             if(event.button.button == SDL_BUTTON_LEFT)
                 {
-                int xCursor = event.button.x;
-                int yCursor = event.button.y;
+                xCursor = event.button.x;
+                yCursor = event.button.y;
                 getPosPlayer(&xPlayer, &yPlayer, grid);
 
                 if (menuOpened == 0)
@@ -250,6 +290,8 @@ main (int argc, char *argv[])
                   int direction = mouseMoveDirection(xPlayer, yPlayer, xCursor, yCursor);
 
                   refresh = movePlayer(xPlayer,yPlayer, direction , grid);
+                  //reset target status if move
+                  target = STILL;
                 }
 
                 }
