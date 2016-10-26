@@ -171,25 +171,25 @@ moveTarget(int next_target, int xPlayer,int yPlayer, Square grid[getMax_X_Blocks
                                 case RIGHT:
                                         if (grid[xPlayer+1][yPlayer].mainRole == GROUND)
                                             x++;
-                                        if (grid[xPlayer+1][yPlayer].mainRole == BOX && grid[xPlayer+2][yPlayer].mainRole != WALL)
+                                        if (grid[xPlayer+1][yPlayer].mainRole == BOX && grid[xPlayer+2][yPlayer].mainRole == GROUND)
                                             x +=2;
                                     break;
                                 case LEFT:
                                         if (grid[xPlayer-1][yPlayer].mainRole == GROUND)
                                             --x;
-                                        if (grid[xPlayer-1][yPlayer].mainRole == BOX && grid[xPlayer-2][yPlayer].mainRole != WALL)
+                                        if (grid[xPlayer-1][yPlayer].mainRole == BOX && grid[xPlayer-2][yPlayer].mainRole == GROUND)
                                             x -=2;
                                     break;
                                 case UP:
                                         if (grid[xPlayer][yPlayer-1].mainRole == GROUND)
                                             --y;
-                                        if (grid[xPlayer][yPlayer-1].mainRole == BOX && grid[xPlayer][yPlayer-2].mainRole != WALL)
+                                        if (grid[xPlayer][yPlayer-1].mainRole == BOX && grid[xPlayer][yPlayer-2].mainRole == GROUND)
                                             y -=2;
                                     break;
                                 case DOWN:
                                         if (grid[xPlayer][yPlayer+1].mainRole == GROUND)
                                             ++y;
-                                        if (grid[xPlayer][yPlayer+1].mainRole == BOX && grid[xPlayer][yPlayer+2].mainRole != WALL)
+                                        if (grid[xPlayer][yPlayer+1].mainRole == BOX && grid[xPlayer][yPlayer+2].mainRole == GROUND)
                                             y +=2;
                                     break;
                                 case STILL:
