@@ -37,4 +37,8 @@ getPosPlayer(int *xPlayer, int *yPlayer, Square grid[getMax_X_Blocks ()][getMax_
 
 int
 mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor);
+
+/*choose where the target will be displayed*/
+void
+moveTarget(int next_target, int xPlayer,int yPlayer, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 #endif

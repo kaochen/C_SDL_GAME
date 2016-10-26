@@ -243,33 +243,13 @@ main (int argc, char *argv[])
                     xCursor = event.button.x;
                     yCursor = event.button.y;
                     getPosPlayer(&xPlayer, &yPlayer, grid);
+                    /*Place the target image between the cursor and the player to indicate the next move*/
                     next_target = mouseMoveDirection(xPlayer, yPlayer, xCursor, yCursor);
 
-                    if (target != next_target ){
-                        switch (next_target){
-                        case RIGHT:
-                                if (grid[xPlayer+1][yPlayer].mainRole == GROUND)
-                                grid[xPlayer+1][yPlayer].target = TARGET;
-                            break;
-                        case LEFT:
-                                if (grid[xPlayer-1][yPlayer].mainRole == GROUND)
-                                grid[xPlayer-1][yPlayer].target = TARGET;
-                            break;
-                        case UP:
-                                if (grid[xPlayer][yPlayer-1].mainRole == GROUND)
-                                grid[xPlayer][yPlayer-1].target = TARGET;
-                            break;
-                        case DOWN:
-                                if (grid[xPlayer][yPlayer+1].mainRole == GROUND)
-                                grid[xPlayer][yPlayer+1].target = TARGET;
-                            break;
-                        case STILL:
-                            break;
-                        }
-
-                        target = next_target;
-                        refresh = 1;
-
+                    if (target != next_target){
+                    moveTarget( next_target, xPlayer,yPlayer, grid);
+                    refresh = 1;
+                    target = next_target;
                     }
 
                 break;
@@ -474,7 +454,7 @@ main (int argc, char *argv[])
 
 		}		//end of  switch (event.type)
 
-	    }			//end of switch (event.type) {
+	    }			//end of switch (event.type)
 
 	}			// end of while(SDL_PollEvent(&event))
 
@@ -516,7 +496,7 @@ main (int argc, char *argv[])
 	  previousTime = currentTime;
 	}
 
-    }				// end of   while (carryOn){
+    }				// end of   while (carryOn)
 
 
   /* clean */
@@ -541,3 +521,4 @@ main (int argc, char *argv[])
   fprintf (stderr, "Everythings seems good, Bye\n");
   return EXIT_SUCCESS;
 }
+

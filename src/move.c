@@ -163,5 +163,40 @@ mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor){
     return dir;
 }
 
+/*choose where the target image will be displayed*/
+void
+moveTarget(int next_target, int xPlayer,int yPlayer, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]){
+            int x = xPlayer; int y = yPlayer;
+                    switch (next_target){
+                                case RIGHT:
+                                        if (grid[xPlayer+1][yPlayer].mainRole == GROUND)
+                                            x++;
+                                        if (grid[xPlayer+1][yPlayer].mainRole == BOX && grid[xPlayer+2][yPlayer].mainRole != WALL)
+                                            x +=2;
+                                    break;
+                                case LEFT:
+                                        if (grid[xPlayer-1][yPlayer].mainRole == GROUND)
+                                            --x;
+                                        if (grid[xPlayer-1][yPlayer].mainRole == BOX && grid[xPlayer-2][yPlayer].mainRole != WALL)
+                                            x -=2;
+                                    break;
+                                case UP:
+                                        if (grid[xPlayer][yPlayer-1].mainRole == GROUND)
+                                            --y;
+                                        if (grid[xPlayer][yPlayer-1].mainRole == BOX && grid[xPlayer][yPlayer-2].mainRole != WALL)
+                                            y -=2;
+                                    break;
+                                case DOWN:
+                                        if (grid[xPlayer][yPlayer+1].mainRole == GROUND)
+                                            ++y;
+                                        if (grid[xPlayer][yPlayer+1].mainRole == BOX && grid[xPlayer][yPlayer+2].mainRole != WALL)
+                                            y +=2;
+                                    break;
+                                case STILL:
+                                    break;
+                                }
+                        if(grid[x][y].playerRole == EMPTY)
+                            grid[x][y].target = TARGET;
+}
 
 #endif
