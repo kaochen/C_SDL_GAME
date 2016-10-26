@@ -236,22 +236,38 @@ main (int argc, char *argv[])
 	      break;
 
         case SDL_MOUSEMOTION:
-		          /*Do not move when level is finished */
+
+                            xCursor = event.button.x;
+                            yCursor = event.button.y;
+                if (menuOpened == 1){
+                    if(xCursor > menuPosX() && xCursor < menuPosX() + MENU_WIDTH){
+                        if(yCursor < 90)
+			            menuChoice = 0;
+                        if(yCursor >= 90 && yCursor <3*SPRITE_SIZE)
+                        menuChoice = 1;
+                        if(yCursor >=3*SPRITE_SIZE)
+                        menuChoice = 2;
+                    }
+                refresh = 1;
+                break;
+                }
+
+            	/*Do not move when level is finished */
 		          if (freezeCommand == true)
 			          break;
 
-                    xCursor = event.button.x;
-                    yCursor = event.button.y;
-                    getPosPlayer(&xPlayer, &yPlayer, grid);
-                    /*Place the target image between the cursor and the player to indicate the next move*/
-                    next_target = mouseMoveDirection(xPlayer, yPlayer, xCursor, yCursor);
+                 if (menuOpened == 0){
+                            /*Place the target image between the cursor and the player to indicate the next move*/
+                            getPosPlayer(&xPlayer, &yPlayer, grid);
+                            next_target = mouseMoveDirection(xPlayer, yPlayer, xCursor, yCursor);
 
-                    if (target != next_target){
-                    moveTarget( next_target, xPlayer,yPlayer, grid);
-                    refresh = 1;
-                    target = next_target;
-                    }
-
+                            if (target != next_target){
+                            moveTarget( next_target, xPlayer,yPlayer, grid);
+                            refresh = 1;
+                            target = next_target;
+                            break;
+                            }
+                     }
                 break;
 
         case SDL_MOUSEBUTTONUP:
@@ -259,10 +275,22 @@ main (int argc, char *argv[])
                 {
                 xCursor = event.button.x;
                 yCursor = event.button.y;
-                getPosPlayer(&xPlayer, &yPlayer, grid);
+                /*Open and close the menu */
+                    if(xCursor > menuPosX() && xCursor < menuPosX() + MENU_WIDTH){
+                        if (yCursor<SPRITE_SIZE){
+                                if(menuOpened == 0)
+                                    menuOpened = 1;
+                                else if (menuOpened == 1)
+                                    menuOpened = 0;
+
+                            refresh = 1;
+                            break;
+                            }
+                    }
 
                 if (menuOpened == 0)
 		        {
+                  getPosPlayer(&xPlayer, &yPlayer, grid);
 		          /*Do not move when level is finished */
 		          if (freezeCommand == true)
 			          break;
