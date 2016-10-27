@@ -276,20 +276,29 @@ main (int argc, char *argv[])
                 xCursor = event.button.x;
                 yCursor = event.button.y;
                 /*Open and close the menu */
-                    if(xCursor > menuPosX() && xCursor < menuPosX() + MENU_WIDTH){
-                        if (yCursor<SPRITE_SIZE){
-                                if(menuOpened == 0)
-                                    menuOpened = 1;
-                                else if (menuOpened == 1)
-                                    menuOpened = 0;
 
+                if (menuOpened == 1)
+		        {
+                    /*Clic outside the open menu to close it*/
+                    if((xCursor < menuPosX() || xCursor > menuPosX() + MENU_WIDTH ) ||
+                      ( yCursor < SPRITE_SIZE || yCursor > 7*SPRITE_SIZE)){
+                           menuOpened = 0;
                             refresh = 1;
                             break;
-                            }
+                        }
                     }
 
                 if (menuOpened == 0)
 		        {
+                    /*Clic on the top bar top open the menu*/
+                    if(xCursor > menuPosX() && xCursor < menuPosX() + MENU_WIDTH){
+                        if (yCursor<SPRITE_SIZE){
+                           menuOpened = 1;
+                            refresh = 1;
+                            break;
+                        }
+                    }
+
                   getPosPlayer(&xPlayer, &yPlayer, grid);
 		          /*Do not move when level is finished */
 		          if (freezeCommand == true)
