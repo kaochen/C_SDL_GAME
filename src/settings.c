@@ -16,6 +16,7 @@ You should have received a copy of the GNU General Public License
 along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
+/*This file handles the reading and decoding of the setting file "preference.ini".*/
 
 #ifndef SETTINGS_C
 #define SETIINGS_C
@@ -165,19 +166,20 @@ getY_Blocks ()
   return y;
 }
 
-/* Must be higther than getY_Blocks() or getX_Blocks() to allow enough memory*/
 int
-getMax_Blocks ()
+getMax_X_Blocks ()
 {
-  if (getX_Blocks () > getY_Blocks ())
-    {
       return getX_Blocks () + 2;
-    }
-  else
-    {
-      return getY_Blocks () + 2;
-    }
 }
+
+
+int
+getMax_Y_Blocks ()
+{
+      return getY_Blocks () + 2;
+}
+
+
 
 /* write a pref char */
 int

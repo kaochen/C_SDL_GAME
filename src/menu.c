@@ -17,10 +17,13 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+/*This file handles all the function needed to build the menu.*/
+
 #ifndef MENU_C
 #define MENU_C
 
 #include "../inc/menu.h"
+#include "../inc/menu_text.h"
 
 #include <libintl.h>
 #include <locale.h>
@@ -30,8 +33,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* display Top Bar*/
 int
 displayTopBar (int levelNumber, SDL_Surface * screen,
-	       Sprites tableSurface[NBR_OF_IMAGES],
-	       S_LevelList * levelList, Square grid[][getMax_Blocks ()])
+	       Sprites tableSurface[NBR_OF_IMAGES], S_Text tableTextSurface[NBR_OF_TEXT],
+	       S_LevelList * levelList, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   /* first add background */
     if ( backgroundTopBar (screen, tableSurface) == EXIT_FAILURE)
@@ -55,7 +58,7 @@ displayTopBar (int levelNumber, SDL_Surface * screen,
     }
 
    /* display shortcut to open the menu */
-   if (displayShortcut (screen) == EXIT_FAILURE)
+   if (displayShortcut (screen, tableTextSurface) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext("levelMenu failed.\n"));
       return EXIT_FAILURE;
@@ -89,85 +92,10 @@ backgroundTopBar (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 
 }
 
-/* display shortcut in the menu */
-int
-displayShortcut (SDL_Surface * screen)
-{
-
-    if ( screen == NULL)
-    {
-      fprintf (stderr, gettext("init displayShortcut failed: %s\n"),
-	       SDL_GetError ());
-      return EXIT_FAILURE;
-    }
-  /* setup font */
-  TTF_Font *font = NULL;
-  char fontPath[MAX_CARACT] = "";
-  strcpy(fontPath,findFont());
-
-  font = TTF_OpenFont (fontPath, 20);
-  SDL_Color fontColor = { 255, 255, 255, 255 };
-  SDL_Surface *shortCutText = NULL;
-  shortCutText = TTF_RenderText_Blended (font, "(M)", fontColor);
-  /* blit the text */
-  SDL_Rect shortCutTextPos;
-  shortCutTextPos.x = menuPosX () + (MENU_WIDTH - 2 * SPRITE_SIZE - 5);
-  shortCutTextPos.y = (SPRITE_SIZE - shortCutText->h)/2;
-  SDL_BlitSurface (shortCutText, NULL, screen, &shortCutTextPos);
-
-  /* clean */
-  SDL_FreeSurface (shortCutText);
-  TTF_CloseFont (font);
-   font = NULL;
-  return EXIT_SUCCESS;
-}
-
-/* display the level number */
-int
-levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
-{
-
-   if ( screen == NULL || levelList == NULL)
-    {
-      fprintf (stderr, gettext("init levelMenu failed: %s\n"),
-	       SDL_GetError ());
-      return EXIT_FAILURE;
-    }
-
-  /* setup font */
-  TTF_Font *font = NULL;
-  char fontPath[MAX_CARACT] = "";
-  strcpy(fontPath,findFont());
-
-  font = TTF_OpenFont (fontPath, 20);
-
-  SDL_Color fontColor = { 255, 255, 255, 255 };
-
-  /* count all levels from all files */
-  int levelMax = getNbrOfLevels (levelList);
-
-  /* indicate level nbr */
-  SDL_Surface *levelText = NULL;
-  char text[20] = "";
-  sprintf (text, gettext("Level: %d/%d"), levelNumber, levelMax-1);
-  levelText = TTF_RenderUTF8_Blended (font, text, fontColor);
-
-  /* blit the text */
-  SDL_Rect levelTextPos;
-  levelTextPos.x = (getWindow_width ()  - levelText->w)/2;
-  levelTextPos.y = (SPRITE_SIZE - levelText->h)/2;
-  SDL_BlitSurface (levelText, NULL, screen, &levelTextPos);
-
-  /* clean */
-  SDL_FreeSurface (levelText);
-  TTF_CloseFont (font);
-  font = NULL;
-  return EXIT_SUCCESS;
-}
 
 /* count how many goals are need to complete the level */
 int
-goalLeft (Square grid[][getMax_Blocks ()])
+goalLeft (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   int x = 0, y = 0, nbrOfBoxOk = 0;
   for (x = 0; x < getX_Blocks (); x++)
@@ -183,7 +111,7 @@ goalLeft (Square grid[][getMax_Blocks ()])
 
 /* count goals all ready achieve */
 int
-nbr_of_goals (Square grid[][getMax_Blocks ()])
+nbr_of_goals (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   int x = 0, y = 0, nbrOfGoal = 0;
   for (x = 0; x < getX_Blocks (); x++)
@@ -199,7 +127,7 @@ nbr_of_goals (Square grid[][getMax_Blocks ()])
 
 /* Display Progress in the level */
 int
-displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
+displayProgress (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface * screen,
 		 Sprites tableSurface[NBR_OF_IMAGES])
 {
   if ( screen == NULL || grid == NULL || screen == NULL)
@@ -236,7 +164,7 @@ displayProgress (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 
 /* Victory or not ? */
 int
-levelFinished (Square grid[][getMax_Blocks ()])
+levelFinished (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   /* get info */
   int i = goalLeft (grid);
@@ -317,7 +245,7 @@ menuPosX (void)
 
 /* Show menu List */
 void
-openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
+openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], S_Text tableTextSurface[NBR_OF_TEXT],
 	  S_LevelList * levelList, int menuChoice, int levelChoice)
 {
   /* blit background */
@@ -376,7 +304,8 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   point = TTF_RenderUTF8_Blended (fontPoint, "*", fontPointColor);
   SDL_BlitSurface (point, NULL, screen, &pointPos);
 
-  displaySubMenu (screen, levelList, menuChoice, levelChoice);
+  displaySubMenu (screen, tableTextSurface,levelList, menuChoice, levelChoice);
+  displayOverTextImage(screen, tableSurface,menuChoice);
 
   /* clean */
   SDL_FreeSurface (line1);
@@ -391,7 +320,7 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 
 /* display Sub menu */
 int
-displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, int levelChoice)
+displaySubMenu (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList, int menuChoice, int levelChoice)
 {
   /* blit text */
   /* setup font */
@@ -405,12 +334,6 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
   SDL_Surface *line01 = NULL;
   SDL_Surface *line02 = NULL;
   SDL_Surface *line03 = NULL;
-
-  SDL_Surface *line11 = NULL;
-  SDL_Surface *line12 = NULL;
-  SDL_Surface *line13 = NULL;
-  SDL_Surface *line14 = NULL;
-  SDL_Surface *line15 = NULL;
 
   linePos.x = menuPosX () + 60;
 
@@ -469,7 +392,7 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
       free (actual);
 
       line01 = TTF_RenderUTF8_Blended (font, nameLevel, fontColor);
-      linePos.y = 180;
+      linePos.y = 178;
       SDL_BlitSurface (line01, NULL, screen, &linePos);
 
       line02 = TTF_RenderUTF8_Blended (font, gettext("Authors:"), fontColor);
@@ -485,46 +408,35 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
   /*Shortcuts */
   else if (menuChoice == 1)
     {
-      line11 =
-	TTF_RenderUTF8_Blended (font, gettext("m : open and close menu"), fontColor);
-      linePos.y = 180;
-      SDL_BlitSurface (line11, NULL, screen, &linePos);
+      linePos.y = 178;
+      SDL_BlitSurface (tableTextSurface[SHORTCUTS1].textSurface, NULL, screen, &linePos);
 
-      line12 =
-	TTF_RenderUTF8_Blended (font, gettext("n : next level"),
-				fontColor);
       linePos.y += 30;
-      SDL_BlitSurface (line12, NULL, screen, &linePos);
+      SDL_BlitSurface (tableTextSurface[SHORTCUTS2].textSurface, NULL, screen, &linePos);
 
-      line13 =
-	TTF_RenderUTF8_Blended (font, gettext("p : previous level"),
-				fontColor);
       linePos.y += 30;
-      SDL_BlitSurface (line12, NULL, screen, &linePos);
+      SDL_BlitSurface (tableTextSurface[SHORTCUTS3].textSurface, NULL, screen, &linePos);
 
-      line14 =
-	TTF_RenderUTF8_Blended (font,
-				gettext("r : reset current level"),
-				fontColor);
       linePos.y += 30;
-      SDL_BlitSurface (line14, NULL, screen, &linePos);
+      SDL_BlitSurface (tableTextSurface[SHORTCUTS4].textSurface, NULL, screen, &linePos);
 
-      line15 =
-	TTF_RenderUTF8_Blended (font, gettext("q : quit game"),
-				fontColor);
       linePos.y += 30;
-      SDL_BlitSurface (line15, NULL, screen, &linePos);
+      SDL_BlitSurface (tableTextSurface[SHORTCUTS5].textSurface, NULL, screen, &linePos);
     }
 
+    /*ABOUT */
+  else if (menuChoice == 2)
+    {
+      linePos.y = 178;
+      SDL_BlitSurface (tableTextSurface[ABOUT1].textSurface, NULL, screen, &linePos);
+
+      linePos.y += 30;
+      SDL_BlitSurface (tableTextSurface[ABOUT2].textSurface, NULL, screen, &linePos);
+    }
   /* clean */
   SDL_FreeSurface (line01);
   SDL_FreeSurface (line02);
   SDL_FreeSurface (line03);
-  SDL_FreeSurface (line11);
-  SDL_FreeSurface (line12);
-  SDL_FreeSurface (line13);
-  SDL_FreeSurface (line14);
-  SDL_FreeSurface (line15);
   TTF_CloseFont (font);
   font = NULL;
   return EXIT_SUCCESS;
@@ -534,32 +446,35 @@ displaySubMenu (SDL_Surface * screen, S_LevelList * levelList, int menuChoice, i
 void
 displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int menuChoice){
   int i = 0, size = 0;
-  if (menuChoice == 1)
-    {
-      size = 7;
-    }
-   else
-     {
-       size = 6;
-     }
+  switch (menuChoice){
+    case 0:
+        size = 6;
+        break;
+    case 1:
+        size = 7;
+        break;
+    case 2:
+        size = 5;
+        break;
+  }
 
   SDL_Rect subMenuPos;
-  subMenuPos.x = menuPosX () + 25;
-  subMenuPos.y = 40;
+  subMenuPos.x = menuPosX () + 20;
+  subMenuPos.y = SPRITE_SIZE;
    SDL_BlitSurface (tableSurface[MENU_RIBBON].image, NULL, screen, &subMenuPos);
    SDL_BlitSurface (tableSurface[MENU_TOP_LIGHT].image, NULL, screen, &subMenuPos);
-  subMenuPos.y += 40;
+  subMenuPos.y += SPRITE_SIZE;
 
   for(i = 1; i < size; i++)
     {
       SDL_BlitSurface (tableSurface[MENU_RIBBON].image, NULL, screen, &subMenuPos);
-      subMenuPos.y += 40;
+      subMenuPos.y += SPRITE_SIZE;
    }
    /* add a bottom to the menu */
    SDL_BlitSurface (tableSurface[MENU_BOTTOM].image, NULL, screen, &subMenuPos);
 
 
-  /* Distribute Cross over the menu */
+  /* Distribute littles squares behind the menu the menu */
   int x = 0, y = 0, start = menuPosX ();
   SDL_Rect  crossPos;
   crossPos.y = 60;
@@ -570,7 +485,7 @@ displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAG
         {
           crossPos.y += 20;
         }
-         crossPos.x = start + 40;
+         crossPos.x = start + SPRITE_SIZE;
            for(x = 0; x < 11; x++)
              {
                SDL_BlitSurface (tableSurface[MENU_SQUARE].image, NULL, screen, &crossPos);
@@ -588,5 +503,35 @@ displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAG
 
 
 }
+
+/* Display pattern over the text menu */
+void
+displayOverTextImage(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int menuChoice)
+{
+    int x = 0, y = 0, xSize = 360/SPRITE_SIZE, ySize = 0, start = menuPosX ();
+    if (menuChoice == 1)
+    {
+      ySize = 8;
+    }
+   else
+     {
+       ySize = 7;
+     }
+
+     SDL_Rect Pos;
+     Pos.x = start + 20;
+
+   for(x = 0; x < xSize; x++)
+         {
+         Pos.y = SPRITE_SIZE + 10;
+          for(y = 1; y < ySize; y++)
+          {
+            SDL_BlitSurface (tableSurface[MENU_OVERTEXT].image, NULL, screen, &Pos);
+            Pos.y += SPRITE_SIZE;
+          }
+         Pos.x += SPRITE_SIZE;
+         }
+}
+
 
 #endif

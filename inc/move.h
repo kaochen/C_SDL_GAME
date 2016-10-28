@@ -17,31 +17,28 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef LEVEL_H
-#define LEVEL_H
+#ifndef MOVE_H
+#define MOVE_H
 
-#include <SDL2/SDL.h>
-#include <SDL2/SDL_image.h>
+#include <stdlib.h>
+#include <stdio.h>
 
 #include "const.h"
-#include "sprites.h"
-#include "slc.h"
-
-/* Init grid */
-void grid_init(size_t w, size_t h, Square grid[w][h]);
-
-/* display level on the screen */
-int displayLevel (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface * screen,
-		   Sprites tableSurface[NBR_OF_IMAGES]);
-
-/*get level name*/
-int getLevelName (int levelChoice, S_LevelList * levelList, char *levelName);
+#include "settings.h"
 
 
-/*Found the level number with just the name*/
-int findLevelNumber (S_LevelList * levelList, char *levelName);
+int
+movePlayer(int xPlayer, int yPlayer, int direction , Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
-/*get a levelchoice by reading the level name from the preference file*/
-int readLevelFromSetting (S_LevelList * levelList);
+/*Find the player on the grid*/
+void
+getPosPlayer(int *xPlayer, int *yPlayer, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
+
+int
+mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor);
+
+/*choose where the target will be displayed*/
+void
+moveTarget(int next_target, int xPlayer,int yPlayer, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 #endif

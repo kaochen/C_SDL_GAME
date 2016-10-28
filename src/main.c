@@ -30,9 +30,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL_ttf.h>
 
 #include "../inc/const.h"
-#include "../inc/game.h"
 #include "../inc/level.h"
+#include "../inc/level_decor.h"
 #include "../inc/menu.h"
+#include "../inc/menu_text.h"
+#include "../inc/move.h"
 #include "../inc/settings.h"
 #include "../inc/sprites.h"
 #include "../inc/slc.h"
@@ -123,27 +125,19 @@ main (int argc, char *argv[])
     }
   loadAllSprites (tableSurface);
 
-  /* create a grid with coordinates x,y to locate Role from the struct Square */
-  int maxBlocks = getMax_Blocks ();
-  Square grid[maxBlocks][maxBlocks];
-  int xGrid = 0;
-  int yGrid = 0;
-    for(yGrid = 0; yGrid < maxBlocks; yGrid++)
-     {
-        for(xGrid = 0; xGrid < maxBlocks; xGrid++)
-           {
-               grid[xGrid][yGrid].mainRole = GROUND;
-               grid[xGrid][yGrid].subRole = EMPTY;
-               grid[xGrid][yGrid].goalRole = EMPTY;
-               grid[xGrid][yGrid].boxRole = EMPTY;
-               grid[xGrid][yGrid].playerRole = EMPTY;
+  /* load text into a table of struct */
 
-           }
-     }
+  S_Text tableTextSurface[NBR_OF_TEXT];
+  tableTextSurface_init(tableTextSurface);
+
+  /* create a grid using the heigth and width form settings */
+
+  int h = getMax_Y_Blocks (),w = getMax_X_Blocks () ;
+  Square grid[w][h];
+  grid_init(w, h,grid);
 
 
 
-  char levelName[MAX_CARACT] = "";
 
   fprintf (stderr, "\n");
   /*List slc files from the levels/ folder */
@@ -203,7 +197,7 @@ main (int argc, char *argv[])
     }
 
   /* display the top bar  */
-  if (displayTopBar (levelChoice, screen, tableSurface, levelList, grid) == EXIT_FAILURE)
+  if (displayTopBar (levelChoice, screen, tableSurface,tableTextSurface, levelList, grid) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext("first displayTopBar failed.\n"));
       exit(EXIT_FAILURE);
@@ -223,10 +217,11 @@ main (int argc, char *argv[])
 
 /* wait for quit event */
 
-
+  char levelName[MAX_CARACT] = "";
   Uint32 currentTime = 0;
   Uint32 previousTime = 0;
-  int carryOn = 1, refresh = 1, x = 0, y = 0, menuOpened = 0, menuChoice = 0;
+  int carryOn = 1, refresh = 1, menuOpened = 0, menuChoice = 0, target = STILL, next_target = STILL;
+  int xCursor = 0, yCursor = 0;
   bool freezeCommand = false;
   SDL_Event event;
   while (carryOn)
@@ -234,26 +229,96 @@ main (int argc, char *argv[])
       //SDL_WaitEvent(&event);
       while (SDL_PollEvent (&event))
 	{
-
 	  switch (event.type)
 	    {
 	    case SDL_QUIT:
 	      carryOn = 0;
 	      break;
+
+        case SDL_MOUSEMOTION:
+
+                            xCursor = event.button.x;
+                            yCursor = event.button.y;
+                if (menuOpened == 1){
+                    if(xCursor > menuPosX() && xCursor < menuPosX() + MENU_WIDTH){
+                        if(yCursor < 90)
+			            menuChoice = 0;
+                        if(yCursor >= 90 && yCursor <3*SPRITE_SIZE)
+                        menuChoice = 1;
+                        if(yCursor >=3*SPRITE_SIZE)
+                        menuChoice = 2;
+                    }
+                refresh = 1;
+                break;
+                }
+
+            	/*Do not move when level is finished */
+		          if (freezeCommand == true)
+			          break;
+
+                 if (menuOpened == 0){
+                            /*Place the target image between the cursor and the player to indicate the next move*/
+                            getPosPlayer(&xPlayer, &yPlayer, grid);
+                            next_target = mouseMoveDirection(xPlayer, yPlayer, xCursor, yCursor);
+
+                            if (target != next_target){
+                            moveTarget( next_target, xPlayer,yPlayer, grid);
+                            refresh = 1;
+                            target = next_target;
+                            break;
+                            }
+                     }
+                break;
+
+        case SDL_MOUSEBUTTONUP:
+            if(event.button.button == SDL_BUTTON_LEFT)
+                {
+                xCursor = event.button.x;
+                yCursor = event.button.y;
+                /*Open and close the menu */
+
+                if (menuOpened == 1)
+		        {
+                    /*Clic outside the open menu to close it*/
+                    if((xCursor < menuPosX() || xCursor > menuPosX() + MENU_WIDTH ) ||
+                      ( yCursor < SPRITE_SIZE || yCursor > 7*SPRITE_SIZE)){
+                           menuOpened = 0;
+                            refresh = 1;
+                            break;
+                        }
+                    }
+
+                if (menuOpened == 0)
+		        {
+                    /*Clic on the top bar top open the menu*/
+                    if(xCursor > menuPosX() && xCursor < menuPosX() + MENU_WIDTH){
+                        if (yCursor<SPRITE_SIZE){
+                           menuOpened = 1;
+                            refresh = 1;
+                            break;
+                        }
+                    }
+
+                  getPosPlayer(&xPlayer, &yPlayer, grid);
+		          /*Do not move when level is finished */
+		          if (freezeCommand == true)
+			          break;
+
+                  int direction = mouseMoveDirection(xPlayer, yPlayer, xCursor, yCursor);
+
+                  refresh = movePlayer(xPlayer,yPlayer, direction , grid);
+                  //reset target status if move
+                  target = STILL;
+                }
+
+                }
+            break;
+
 	    case SDL_KEYDOWN:
 	      /* Get the player position */
-	      for (x = 0; x < getX_Blocks (); x++)
-		{
-		  for (y = 0; y < getY_Blocks (); y++)
-		    {
-		      if (grid[x][y].mainRole == PLAYER)
-			{
-			  xPlayer = x;
-			  yPlayer = y;
-			  //fprintf(stderr, "player on %d:%d\n", xPlayer, yPlayer);
-			}
-		    }
-		}
+            getPosPlayer(&xPlayer, &yPlayer, grid);
+
+
 	      /* listen keyboard */
 	      switch (event.key.keysym.sym)
 		{
@@ -261,53 +326,8 @@ main (int argc, char *argv[])
 		  /*Do not move when level is finished */
 		  if (freezeCommand == true)
 		    break;
-		  /* Don't go outside */
-		  if (xPlayer + 1 >= getX_Blocks ())
-		    break;
-		  /* Test if wall */
-		  if (grid[xPlayer + 1][yPlayer].mainRole == WALL)
-		    break;
-		  /* Don't go outside with a box */
-		  if (grid[xPlayer + 1][yPlayer].mainRole == BOX
-		      && xPlayer + 2 >= getX_Blocks ())
-		    break;
-		  /* Do not move a box if it is close to a wall or an other box */
-		  if (grid[xPlayer + 1][yPlayer].mainRole == BOX
-		      && grid[xPlayer + 2][yPlayer].mainRole == BOX
-		      && grid[xPlayer + 2][yPlayer].mainRole == WALL)
-		    break;
-		  /* Move a box only if there is space to do it */
-		  if ((grid[xPlayer + 1][yPlayer].mainRole == BOX
-		       && grid[xPlayer + 2][yPlayer].mainRole == GROUND))
-		    {
 
-		      /* clean old position */
-		      grid[xPlayer][yPlayer].mainRole = GROUND;
-		      grid[xPlayer][yPlayer].playerRole = EMPTY;
-
-		      /* update new position */
-		      grid[xPlayer + 2][yPlayer].mainRole = BOX;
-		      grid[xPlayer + 1][yPlayer].mainRole = PLAYER;
-		      grid[xPlayer + 1][yPlayer].playerRole = PLAYER_R;
-
-		      refresh = 1;
-		      break;
-		    }
-		  /* move only on grounds and Goals */
-		  if (grid[xPlayer + 1][yPlayer].mainRole == GROUND)
-		    {
-
-		      /* clean old position */
-		      grid[xPlayer][yPlayer].mainRole = GROUND;
-		      grid[xPlayer][yPlayer].playerRole = EMPTY;
-
-		      /* update new position */
-		      grid[xPlayer + 1][yPlayer].mainRole = PLAYER;
-		      grid[xPlayer + 1][yPlayer].playerRole = PLAYER_R;
-
-		      refresh = 1;
-		      break;
-		    }
+        refresh = movePlayer(xPlayer,yPlayer, RIGHT , grid);
 		  break;
 
 		case SDLK_LEFT:
@@ -315,119 +335,28 @@ main (int argc, char *argv[])
 		  if (freezeCommand == true)
 		    break;
 
-		  /* Don't go outside */
-		  if (xPlayer - 1 < 0)
-		    break;
-		  /* test if wall */
-		  if (grid[xPlayer - 1][yPlayer].mainRole == WALL)
-		    break;
-		  /* Don't go outside with a box */
-		  if (grid[xPlayer - 1][yPlayer].mainRole == BOX
-		      && xPlayer - 2 < 0)
-		    break;
-		  /* Do not move a box if it is close to a wall or an other box */
-		  if (grid[xPlayer - 1][yPlayer].mainRole == BOX
-		      && grid[xPlayer - 2][yPlayer].mainRole == BOX
-		      && grid[xPlayer - 2][yPlayer].mainRole == WALL)
-		    break;
-		  /* Move a box only if there is space to do it */
-		  if ((grid[xPlayer - 1][yPlayer].mainRole == BOX
-		       && grid[xPlayer - 2][yPlayer].mainRole == GROUND))
-		    {
-
-		      /* clean old position */
-		      grid[xPlayer][yPlayer].mainRole = GROUND;
-		      grid[xPlayer][yPlayer].playerRole = EMPTY;
-
-		      /* update new position */
-		      grid[xPlayer - 2][yPlayer].mainRole = BOX;
-		      grid[xPlayer - 1][yPlayer].mainRole = PLAYER;
-		      grid[xPlayer - 1][yPlayer].playerRole = PLAYER_L;
-
-		      refresh = 1;
-		      break;
-		    }
-		  /* move only on grounds and Goals */
-		  if (grid[xPlayer - 1][yPlayer].mainRole == GROUND)
-		    {
-
-		      /* clean old position */
-		      grid[xPlayer][yPlayer].mainRole = GROUND;
-		      grid[xPlayer][yPlayer].playerRole = EMPTY;
-
-		      /* update new position */
-		      grid[xPlayer - 1][yPlayer].mainRole = PLAYER;
-		      grid[xPlayer - 1][yPlayer].playerRole = PLAYER_L;
-
-		      refresh = 1;
-		      break;
-		    }
-		  break;
+        refresh = movePlayer(xPlayer,yPlayer, LEFT , grid);
+          break;
 
 		case SDLK_UP:
 		  if (menuOpened == 0)
 		    {
 		      /*Do not move when level is finished */
 		      if (freezeCommand == true)
-			break;
+			      break;
 
-		      /* Don't go outside */
-		      if (yPlayer - 1 < 0)
-			break;
-		      /* test if wall */
-		      if (grid[xPlayer][yPlayer - 1].mainRole == WALL)
-			break;
-		      /* Don't go outside with a box */
-		      if (grid[xPlayer][yPlayer - 1].mainRole == BOX
-			  && yPlayer - 2 < 0)
-			break;
-		      /* Do not move a box if it is close to a wall or an other box */
-		      if (grid[xPlayer][yPlayer - 1].mainRole == BOX
-			  && grid[xPlayer][yPlayer - 2].mainRole == BOX
-			  && grid[xPlayer][yPlayer - 2].mainRole == WALL)
-			break;
-		      /* Move a box only if there is space to do it */
-		      if ((grid[xPlayer][yPlayer - 1].mainRole == BOX
-			   && grid[xPlayer][yPlayer - 2].mainRole == GROUND))
-			{
-
-			  /* clean old position */
-			  grid[xPlayer][yPlayer].mainRole = GROUND;
-			  grid[xPlayer][yPlayer].playerRole = EMPTY;
-
-			  /* update new position */
-			  grid[xPlayer][yPlayer - 2].mainRole = BOX;
-			  grid[xPlayer][yPlayer - 1].mainRole = PLAYER;
-			  grid[xPlayer][yPlayer - 1].playerRole = PLAYER_B;
-
-			  refresh = 1;
+           refresh = movePlayer(xPlayer,yPlayer, UP , grid);
 			  break;
 			}
-		      /* move only on grounds and Goals */
-		      if (grid[xPlayer][yPlayer - 1].mainRole == GROUND)
-			{
-
-			  /* clean old position */
-			  grid[xPlayer][yPlayer].mainRole = GROUND;
-			  grid[xPlayer][yPlayer].playerRole = EMPTY;
-
-			  /* update new position */
-			  grid[xPlayer][yPlayer - 1].mainRole = PLAYER;
-			  grid[xPlayer][yPlayer - 1].playerRole = PLAYER_B;
-
-			  refresh = 1;
-			  break;
-			}
-		    }
-		  else if (menuOpened == 1)
+		  else
 		    {
 		      menuChoice--;
 		      /* make circle */
 		      if (menuChoice == -1)
-			{
-			  menuChoice = 2;
-			}
-		      openMenu (screen, tableSurface, levelList, menuChoice,
+			      {
+			        menuChoice = 2;
+			      }
+		      openMenu (screen, tableSurface,tableTextSurface, levelList, menuChoice,
 				levelChoice);
 		      refresh = 1;
 		    }
@@ -438,65 +367,21 @@ main (int argc, char *argv[])
 		    {
 		      /*Do not move when level is finished */
 		      if (freezeCommand == true)
-			break;
+			      break;
 
-		      /* Don't go outside */
-		      if (yPlayer + 1 >= getY_Blocks ())
-			break;
-		      /* test if wall */
-		      if (grid[xPlayer][yPlayer + 1].mainRole == WALL)
-			break;
-		      /* Don't go outside with a case */
-		      if (grid[xPlayer][yPlayer + 1].mainRole == BOX
-			  && yPlayer + 2 >= getY_Blocks ())
-			break;
-		      /* Do not move a box if it is close to a wall or an other box */
-		      if (grid[xPlayer][yPlayer + 1].mainRole == BOX
-			  && grid[xPlayer][yPlayer + 2].mainRole == BOX
-			  && grid[xPlayer][yPlayer + 2].mainRole == WALL)
-			break;
-		      /* Move a box only if there is space to do it */
-		      if ((grid[xPlayer][yPlayer + 1].mainRole == BOX
-			   && grid[xPlayer][yPlayer + 2].mainRole == GROUND))
-			{
-
-			  /* clean old position */
-			  grid[xPlayer][yPlayer].mainRole = GROUND;
-			  grid[xPlayer][yPlayer].playerRole = EMPTY;
-
-			  /* update new position */
-			  grid[xPlayer][yPlayer + 2].mainRole = BOX;
-			  grid[xPlayer][yPlayer + 1].mainRole = PLAYER;
-			  grid[xPlayer][yPlayer + 1].playerRole = PLAYER_F;
-
-			  refresh = 1;
+		     refresh = movePlayer(xPlayer,yPlayer, DOWN , grid);
 			  break;
 			}
-		      /* move only on grounds and Goals */
-		      if (grid[xPlayer][yPlayer + 1].mainRole == GROUND)
-			{
 
-			  /* clean old position */
-			  grid[xPlayer][yPlayer].mainRole = GROUND;
-			  grid[xPlayer][yPlayer].playerRole = EMPTY;
-
-			  /* update new position */
-			  grid[xPlayer][yPlayer + 1].mainRole = PLAYER;
-			  grid[xPlayer][yPlayer + 1].playerRole = PLAYER_F;
-
-			  refresh = 1;
-			  break;
-			}
-		    }
-		  else if (menuOpened == 1)
+		  else
 		    {
 		      menuChoice++;
 		      /* make circle */
 		      if (menuChoice == 3)
-			{
-			  menuChoice = 0;
-			}
-		      openMenu (screen, tableSurface, levelList, menuChoice,
+			      {
+			        menuChoice = 0;
+			      }
+		      openMenu (screen, tableSurface,tableTextSurface, levelList, menuChoice,
 				levelChoice);
 		      refresh = 1;
 		    }
@@ -606,7 +491,7 @@ main (int argc, char *argv[])
 
 		}		//end of  switch (event.type)
 
-	    }			//end of switch (event.type) {
+	    }			//end of switch (event.type)
 
 	}			// end of while(SDL_PollEvent(&event))
 
@@ -626,11 +511,11 @@ main (int argc, char *argv[])
 	    }
 	  if (menuOpened == 1)
 	    {
-	      openMenu (screen, tableSurface, levelList, menuChoice,
+	      openMenu (screen, tableSurface,tableTextSurface, levelList, menuChoice,
 			levelChoice);
 	    }
 
-	  displayTopBar ((levelChoice), screen, tableSurface, levelList,
+	  displayTopBar ((levelChoice), screen, tableSurface,tableTextSurface, levelList,
 			 grid);
 
 	  SDL_UpdateWindowSurface (window);
@@ -648,7 +533,7 @@ main (int argc, char *argv[])
 	  previousTime = currentTime;
 	}
 
-    }				// end of   while (carryOn){
+    }				// end of   while (carryOn)
 
 
   /* clean */
@@ -658,6 +543,8 @@ main (int argc, char *argv[])
   fprintf (stderr, "- Destroying file list\n");
   destroyFileList (filesList);
   free (filesList);
+  fprintf(stderr,"-Freeing texts\n");
+  freeS_Text (tableTextSurface);
   fprintf(stderr,"-Freeing Sprites\n");
   freeSprites(tableSurface);
   SDL_FreeSurface (screen);
@@ -671,3 +558,4 @@ main (int argc, char *argv[])
   fprintf (stderr, "Everythings seems good, Bye\n");
   return EXIT_SUCCESS;
 }
+

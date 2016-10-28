@@ -17,17 +17,19 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
-#ifndef GAME_C
-#define GAME_C
+/*This file handles the functions needed to improve the design of the the level.*/
 
-#include "../inc/game.h"
+#ifndef LEVEL_DECOR_C
+#define LEVEL_DECOR_C
+
+#include "../inc/level_decor.h"
 
 #include <libintl.h>
 #include <locale.h>
 
 /* blit borders on walls */
 int
-blitBorders (Square grid[][getMax_Blocks ()],
+blitBorders (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()],
 	     SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
 {
    if (grid == NULL || screen == NULL || tableSurface == NULL)
@@ -39,10 +41,9 @@ blitBorders (Square grid[][getMax_Blocks ()],
 
 
   SDL_Rect wallPos;
-  int x = 1, y = 1;
-  for (y = 1; y < getY_Blocks () - 1; y++)
+  for (int y = 0; y < getY_Blocks (); y++)
     {
-      for (x = 1; x < getX_Blocks () - 1; x++)
+      for (int x = 0; x < getX_Blocks (); x++)
 	{
 	  /* set position for wall blocks */
 	  wallPos.x = x * SPRITE_SIZE;
@@ -83,7 +84,7 @@ blitBorders (Square grid[][getMax_Blocks ()],
 
 /* add a more ground choice */
 int
-randomGround (Square grid[][getMax_Blocks ()])
+randomGround (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   int x = 0, y = 0, randomNumber = 0;
   for (y = 0; y < getY_Blocks (); y++)
@@ -114,7 +115,7 @@ randomGround (Square grid[][getMax_Blocks ()])
 
 /* add a more ground choice */
 int
-randomWall (Square grid[][getMax_Blocks ()])
+randomWall (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   int x = 0, y = 0, randomNumber = 0;
   for (y = 0; y < getY_Blocks (); y++)
@@ -151,7 +152,7 @@ randomWall (Square grid[][getMax_Blocks ()])
 
 /*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
 int
-randomOutside (Square grid[][getMax_Blocks ()])
+randomOutside (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   int x = 0, y = 0, randomNumber = 0;
   for (y = 0; y < getY_Blocks (); y++)
@@ -193,7 +194,7 @@ random_number (int min, int max)
 
 /* blit corners */
 int
-blitCorners (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
+blitCorners (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface * screen,
 	     Sprites tableSurface[NBR_OF_IMAGES])
 {
   SDL_Rect pos;

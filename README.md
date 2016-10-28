@@ -40,7 +40,7 @@ make
 
 ### Play
 ```
-./SokoRobot
+./bin/SokoRobot
 ```
 
 ### Clean install

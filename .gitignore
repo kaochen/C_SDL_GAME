@@ -1,6 +1,6 @@
 #Ignore this files
 obj/
-SokoRobot
+bin/
 .buildconfig
 locale/fr/*.mo
 valgrind.log

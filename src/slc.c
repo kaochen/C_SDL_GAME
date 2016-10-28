@@ -17,6 +17,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+/*This file handles the reading and decoding of .slc files.*/
+
 #ifndef SLC_C
 #define SLC_C
 
@@ -480,7 +482,7 @@ readLevelList (S_LevelList * levelList)
 /*Load slc level into the grid */
 int
 loadSlcLevel (int levelChoice, S_LevelList * levelList,
-	      Square grid[][getMax_Blocks ()])
+	      Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   if (levelList == NULL)
     {
@@ -621,7 +623,7 @@ loadSlcLevel (int levelChoice, S_LevelList * levelList,
 
 /* Change GROUND that are outside the walls to OUTSIDE */
 void
-detectOutside (Square grid[][getMax_Blocks ()])
+detectOutside (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   /*Read left to right */
   int x = 0, y = 0;

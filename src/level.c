@@ -17,6 +17,8 @@ along with this program; if not, write to the Free Software
 Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 */
 
+/*This file handles the basic functions needed to build and display the level.*/
+
 #ifndef LEVEL_C
 #define LEVEL_C
 
@@ -25,9 +27,22 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libintl.h>
 #include <locale.h>
 
+/* Init grid */
+
+void
+grid_init(size_t w, size_t h, Square grid[w][h])
+{
+   for(size_t y=0; y<h; ++y)
+      for(size_t x=0; x<w; ++x)
+      grid[x][y] = (Square) {.mainRole=GROUND, .subRole=EMPTY, .goalRole=EMPTY, .boxRole=EMPTY, .playerRole=EMPTY, .target=EMPTY };
+}
+
+
+
+
 /* display level on the screen */
 int
-displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
+displayLevel (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface * screen,
 	      Sprites tableSurface[NBR_OF_IMAGES])
 {
  if (grid == NULL || screen == NULL || tableSurface == NULL)
@@ -99,7 +114,6 @@ displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 	      break;
 	    }
 
-
 	  switch (grid[x][y].goalRole)
 	    {
 	    case GOAL:
@@ -107,7 +121,6 @@ displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 			       &pos);
 	      break;
 	    }
-
 
 	  /* blit all blocks depending on grid mainRole */
 	  switch (grid[x][y].mainRole)
@@ -149,6 +162,17 @@ displayLevel (Square grid[][getMax_Blocks ()], SDL_Surface * screen,
 			       &pos);
 	      break;
 	    }
+
+        /*display target over ground */
+        switch (grid[x][y].target)
+	    {
+	    case TARGET:
+	      SDL_BlitSurface (tableSurface[TARGET_IMAGE].image, NULL, screen,
+			       &pos);
+          grid[x][y].target = EMPTY;
+	      break;
+        }
+
 	}
 
     }

@@ -17,6 +17,8 @@
  * 59 Temple Place - Suite 330, Boston, MA 02111-1307, USA.
  */
 
+/*This file contains all that concern the image files and sprites management.*/
+
 #ifndef SPRITES_C
 #define SPRITES_C
 
@@ -60,6 +62,9 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[PLAYER_LEFT], themePath,"player_left.png");
   loadSprite (&tableSurface[PLAYER_RIGHT], themePath,"player_right.png");
 
+  /* Target to blit over ground */
+  loadSprite (&tableSurface[TARGET_IMAGE], themePath,"target.png");
+
   /* walls */
   loadSprite (&tableSurface[WALL1_IMAGE], themePath,"wall1.png");
   loadSprite (&tableSurface[WALL2_IMAGE], themePath,"wall2.png");
@@ -77,16 +82,16 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[CORNER_BL], themePath,"cornerBottom-Left.png");
 
   /* grounds */
-  loadSprite (&tableSurface[GROUND1_IMAGE], themePath,"background1.bmp");
-  loadSprite (&tableSurface[GROUND2_IMAGE], themePath,"background2.bmp");
-  loadSprite (&tableSurface[GROUND3_IMAGE], themePath,"background3.bmp");
+  loadSprite (&tableSurface[GROUND1_IMAGE], themePath,"tile1.png");
+  loadSprite (&tableSurface[GROUND2_IMAGE], themePath,"tile2.png");
+  loadSprite (&tableSurface[GROUND3_IMAGE], themePath,"tile3.png");
 
   /* boxes */
   loadSprite (&tableSurface[BOX_IMAGE], themePath,"box.png");
   loadSprite (&tableSurface[BOX_IMAGE_OK], themePath,"box_ok.png");
 
   /* goal */
-  loadSprite (&tableSurface[GOAL_IMAGE], themePath,"goal.png");
+  loadSprite (&tableSurface[GOAL_IMAGE], themePath,"tile_goal.png");
   /* top bar */
   loadSprite (&tableSurface[PROGRESS], themePath,"progress.png");
   loadSprite (&tableSurface[MENU_BAR], themePath,"menu_bar.png");
@@ -97,6 +102,7 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[MENU_TOP_LIGHT], themePath,"menu_top_light.png");
   loadSprite (&tableSurface[MENU_SQUARE], themePath,"menu_square.png");
   loadSprite (&tableSurface[MENU_SEPARATOR], themePath,"menu_separator.png");
+  loadSprite (&tableSurface[MENU_OVERTEXT], themePath,"menu_overText.png");
 
 
   /* outside the wall */

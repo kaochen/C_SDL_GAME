@@ -1,0 +1,12 @@
+new
+ * Updated a part of the design
+ * Put graphics under CC BY-SA 4.0
+ * The mouse can  navigate into the menu.
+ * The mouse can move the player.
+ * Fixed the "grid" table when settings load a non-square window.
+ * Added a changelog
+ * Move exec ./SokoRobot to ./bin/SokoRobot
+
+first alpha v0.01
+ * Prepared for internationalisation with gettext();
+ * SokoRobot is a Sokoban game writed in C using SDL2
