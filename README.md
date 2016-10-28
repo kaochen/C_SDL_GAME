@@ -82,7 +82,8 @@ git add -u //update all existing files
 git add new_files.c //add a new file or update en existing one
 git mv file.c newfile.c
 git rm file.c
-git commit -m"new changes"
+git commit -m"new changesgit checkout -b"
+git branch -b 'develop' //add a new branch
 git push //push last commit
 git pull //pull last changes
 ```
