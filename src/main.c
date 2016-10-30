@@ -223,7 +223,10 @@ main (int argc, char *argv[])
   int carryOn = 1, refresh = 1, menuOpened = 0, menuChoice = 0, target = STILL, next_target = STILL;
   int xCursor = 0, yCursor = 0;
   bool freezeCommand = false;
+
   SDL_Event event;
+  Uint32 windowID = SDL_GetWindowID(window);
+
   while (carryOn)
     {
       //SDL_WaitEvent(&event);
@@ -235,6 +238,18 @@ main (int argc, char *argv[])
 	      carryOn = 0;
 	      break;
 
+        case SDL_WINDOWEVENT:  {
+          if (event.window.windowID == windowID)  {
+            switch (event.window.event)  {
+
+              case SDL_WINDOWEVENT_FOCUS_GAINED:  {
+	               refresh = 1;
+                break;
+              }
+
+            }
+          }
+        }
         case SDL_MOUSEMOTION:
 
                             xCursor = event.button.x;
