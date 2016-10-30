@@ -242,7 +242,7 @@ main (int argc, char *argv[])
           if (event.window.windowID == windowID)  {
             switch (event.window.event)  {
 
-              case SDL_WINDOWEVENT_FOCUS_GAINED:  {
+              case SDL_WINDOWEVENT_EXPOSED:  {
 	               refresh = 1;
                 break;
               }
