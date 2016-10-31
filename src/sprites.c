@@ -33,7 +33,7 @@ int
 loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
 {
 
-  /*read theme choice*/
+  /*read theme choice */
   fprintf (stderr, "Loading Theme:\n");
   char themePath[MAX_CARACT] = "";
   char bufPath[MAX_CARACT] = "";
@@ -42,77 +42,78 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   sprintf (themePath, "img/%s/", bufPath);
   fprintf (stderr, "Theme: %s\n", themePath);
 
-  /*test if folder exist*/
-  struct stat  file_stat;
-   if (stat(themePath,&file_stat) < 0)
-     {
-       printf("The theme folder %s does not exist\n", themePath);
-       strcpy(themePath,"img/original/");
-       fprintf (stderr, "Change theme folder to default: %s\n\n", themePath);
-     }
-   else
-     {
-     printf("The theme folder %s exist\n\n", themePath);
-     }
+  /*test if folder exist */
+  struct stat file_stat;
+  if (stat (themePath, &file_stat) < 0)
+    {
+      printf ("The theme folder %s does not exist\n", themePath);
+      strcpy (themePath, "img/original/");
+      fprintf (stderr, "Change theme folder to default: %s\n\n", themePath);
+    }
+  else
+    {
+      printf ("The theme folder %s exist\n\n", themePath);
+    }
 
 
   /* Player faces  */
-  loadSprite (&tableSurface[PLAYER_FRONT], themePath,"player_front.png");
-  loadSprite (&tableSurface[PLAYER_BACK], themePath,"player_back.png");
-  loadSprite (&tableSurface[PLAYER_LEFT], themePath,"player_left.png");
-  loadSprite (&tableSurface[PLAYER_RIGHT], themePath,"player_right.png");
+  loadSprite (&tableSurface[PLAYER_FRONT], themePath, "player_front.png");
+  loadSprite (&tableSurface[PLAYER_BACK], themePath, "player_back.png");
+  loadSprite (&tableSurface[PLAYER_LEFT], themePath, "player_left.png");
+  loadSprite (&tableSurface[PLAYER_RIGHT], themePath, "player_right.png");
 
   /* Target to blit over ground */
-  loadSprite (&tableSurface[TARGET_IMAGE], themePath,"target.png");
+  loadSprite (&tableSurface[TARGET_IMAGE], themePath, "target.png");
 
   /* walls */
-  loadSprite (&tableSurface[WALL1_IMAGE], themePath,"wall1.png");
-  loadSprite (&tableSurface[WALL2_IMAGE], themePath,"wall2.png");
-  loadSprite (&tableSurface[WALL3_IMAGE], themePath,"wall3.png");
-  loadSprite (&tableSurface[WALL4_IMAGE], themePath,"wall4.png");
-  loadSprite (&tableSurface[WALL_LEFT], themePath,"wallBorderLeft.png");
-  loadSprite (&tableSurface[WALL_RIGHT], themePath,"wallBorderRight.png");
-  loadSprite (&tableSurface[WALL_TOP], themePath,"wallBorderTop.png");
-  loadSprite (&tableSurface[WALL_BOTTOM], themePath,"wallBorderBottom.png");
+  loadSprite (&tableSurface[WALL1_IMAGE], themePath, "wall1.png");
+  loadSprite (&tableSurface[WALL2_IMAGE], themePath, "wall2.png");
+  loadSprite (&tableSurface[WALL3_IMAGE], themePath, "wall3.png");
+  loadSprite (&tableSurface[WALL4_IMAGE], themePath, "wall4.png");
+  loadSprite (&tableSurface[WALL_LEFT], themePath, "wallBorderLeft.png");
+  loadSprite (&tableSurface[WALL_RIGHT], themePath, "wallBorderRight.png");
+  loadSprite (&tableSurface[WALL_TOP], themePath, "wallBorderTop.png");
+  loadSprite (&tableSurface[WALL_BOTTOM], themePath, "wallBorderBottom.png");
 
   /* walls */
-  loadSprite (&tableSurface[CORNER_TR], themePath,"cornerTop-Right.png");
-  loadSprite (&tableSurface[CORNER_TL], themePath,"cornerTop-Left.png");
-  loadSprite (&tableSurface[CORNER_BR], themePath,"cornerBottom-Right.png");
-  loadSprite (&tableSurface[CORNER_BL], themePath,"cornerBottom-Left.png");
+  loadSprite (&tableSurface[CORNER_TR], themePath, "cornerTop-Right.png");
+  loadSprite (&tableSurface[CORNER_TL], themePath, "cornerTop-Left.png");
+  loadSprite (&tableSurface[CORNER_BR], themePath, "cornerBottom-Right.png");
+  loadSprite (&tableSurface[CORNER_BL], themePath, "cornerBottom-Left.png");
 
   /* grounds */
-  loadSprite (&tableSurface[GROUND1_IMAGE], themePath,"tile1.png");
-  loadSprite (&tableSurface[GROUND2_IMAGE], themePath,"tile2.png");
-  loadSprite (&tableSurface[GROUND3_IMAGE], themePath,"tile3.png");
+  loadSprite (&tableSurface[GROUND1_IMAGE], themePath, "tile1.png");
+  loadSprite (&tableSurface[GROUND2_IMAGE], themePath, "tile2.png");
+  loadSprite (&tableSurface[GROUND3_IMAGE], themePath, "tile3.png");
 
   /* boxes */
-  loadSprite (&tableSurface[BOX_IMAGE], themePath,"box.png");
-  loadSprite (&tableSurface[BOX_IMAGE_OK], themePath,"box_ok.png");
+  loadSprite (&tableSurface[BOX_IMAGE], themePath, "box.png");
+  loadSprite (&tableSurface[BOX_IMAGE_OK], themePath, "box_ok.png");
 
   /* goal */
-  loadSprite (&tableSurface[GOAL_IMAGE], themePath,"tile_goal.png");
+  loadSprite (&tableSurface[GOAL_IMAGE], themePath, "tile_goal.png");
   /* top bar */
-  loadSprite (&tableSurface[PROGRESS], themePath,"progress.png");
-  loadSprite (&tableSurface[MENU_BAR], themePath,"menu_bar.png");
+  loadSprite (&tableSurface[PROGRESS], themePath, "progress.png");
+  loadSprite (&tableSurface[MENU_BAR], themePath, "menu_bar.png");
 
-  /* menu*/
-  loadSprite (&tableSurface[MENU_RIBBON], themePath,"menu_ribbon.png");
-  loadSprite (&tableSurface[MENU_BOTTOM], themePath,"menu_bottom.png");
-  loadSprite (&tableSurface[MENU_TOP_LIGHT], themePath,"menu_top_light.png");
-  loadSprite (&tableSurface[MENU_SQUARE], themePath,"menu_square.png");
-  loadSprite (&tableSurface[MENU_SEPARATOR], themePath,"menu_separator.png");
-  loadSprite (&tableSurface[MENU_OVERTEXT], themePath,"menu_overText.png");
+  /* menu */
+  loadSprite (&tableSurface[MENU_RIBBON], themePath, "menu_ribbon.png");
+  loadSprite (&tableSurface[MENU_BOTTOM], themePath, "menu_bottom.png");
+  loadSprite (&tableSurface[MENU_TOP_LIGHT], themePath, "menu_top_light.png");
+  loadSprite (&tableSurface[MENU_SQUARE], themePath, "menu_square.png");
+  loadSprite (&tableSurface[MENU_SEPARATOR], themePath, "menu_separator.png");
+  loadSprite (&tableSurface[MENU_OVERTEXT], themePath, "menu_overText.png");
+  loadSprite (&tableSurface[MENU_HIGHLIGHT], themePath, "menu_highlight.png");
 
 
   /* outside the wall */
-  loadSprite (&tableSurface[OUTSIDE_IMAGE], themePath,"outside.png");
-  loadSprite (&tableSurface[OUTSIDE2_IMAGE], themePath,"outside2.png");
-  loadSprite (&tableSurface[OUTSIDE3_IMAGE], themePath,"outside3.png");
-  loadSprite (&tableSurface[OUTSIDE4_IMAGE], themePath,"outside4.png");
+  loadSprite (&tableSurface[OUTSIDE_IMAGE], themePath, "outside.png");
+  loadSprite (&tableSurface[OUTSIDE2_IMAGE], themePath, "outside2.png");
+  loadSprite (&tableSurface[OUTSIDE3_IMAGE], themePath, "outside3.png");
+  loadSprite (&tableSurface[OUTSIDE4_IMAGE], themePath, "outside4.png");
 
   /* Congrats */
-  loadSprite (&tableSurface[CONGRATS], themePath,"congrats_background.png");
+  loadSprite (&tableSurface[CONGRATS], themePath, "congrats_background.png");
   return EXIT_SUCCESS;
 }
 
@@ -122,26 +123,27 @@ void
 loadSprite (Sprites * sprites, const char *themePath, const char *imageName)
 {
   char filePath[MAX_CARACT] = "";
-  strcpy(filePath, themePath);
-  strcat(filePath,imageName);
+  strcpy (filePath, themePath);
+  strcat (filePath, imageName);
   /* test if file exist */
-  struct stat  file_stat;
-   if (stat(filePath,&file_stat) < 0)
-     {
-       printf(gettext("the file %s does not exist\n"), filePath);
-       strcpy(filePath,"img/original/");
-       strcat(filePath,imageName);
-       fprintf (stderr, gettext("Load default image instead: %s\n\n"), filePath);
-     }
-   else
-     {
-     printf(gettext("%s exist\n"), filePath);
-     }
+  struct stat file_stat;
+  if (stat (filePath, &file_stat) < 0)
+    {
+      printf (gettext ("the file %s does not exist\n"), filePath);
+      strcpy (filePath, "img/original/");
+      strcat (filePath, imageName);
+      fprintf (stderr, gettext ("Load default image instead: %s\n\n"),
+	       filePath);
+    }
+  else
+    {
+      printf (gettext ("%s exist\n"), filePath);
+    }
 
   sprites->image = IMG_Load (filePath);
   if (sprites->image == NULL)
     {
-      fprintf (stderr, gettext("IMG_Load %s failed: %s\n"), filePath,
+      fprintf (stderr, gettext ("IMG_Load %s failed: %s\n"), filePath,
 	       SDL_GetError ());
       exit (EXIT_FAILURE);
     }
@@ -156,30 +158,34 @@ freeSprites (Sprites tableSurface[NBR_OF_IMAGES])
     {
 
       if (tableSurface[i].image != 0)
-	    {
-          SDL_FreeSurface (tableSurface[i].image);
-	    }
+	{
+	  SDL_FreeSurface (tableSurface[i].image);
+	}
     }
-  fprintf (stderr, gettext("\tAll surfaces are free %s\n"), SDL_GetError ());
+  fprintf (stderr, gettext ("\tAll surfaces are free %s\n"), SDL_GetError ());
 }
 
 
 char *
-findFont(void){
+findFont (void)
+{
   char *ret = malloc (MAX_CARACT);
-  char fontPath[MAX_CARACT] = "/usr/share/fonts/truetype/roboto/hinted/Roboto-Bold.ttf";
-  struct stat  file_stat;
-   if (stat(fontPath,&file_stat) < 0)
-     {
-       strcpy(fontPath,"/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf");
-         if (stat(fontPath,&file_stat) < 0)
-           {
-            fprintf(stderr, gettext("Roboto-Bold.ttf was not found. Install the fonts-roboto package\n"));
-            exit (EXIT_FAILURE);
-           }
-     }
-    strcpy(ret, fontPath);
-    return ret;
-    free(ret);
+  char fontPath[MAX_CARACT] =
+    "/usr/share/fonts/truetype/roboto/hinted/Roboto-Bold.ttf";
+  struct stat file_stat;
+  if (stat (fontPath, &file_stat) < 0)
+    {
+      strcpy (fontPath, "/usr/share/fonts/truetype/roboto/Roboto-Bold.ttf");
+      if (stat (fontPath, &file_stat) < 0)
+	{
+	  fprintf (stderr,
+		   gettext
+		   ("Roboto-Bold.ttf was not found. Install the fonts-roboto package\n"));
+	  exit (EXIT_FAILURE);
+	}
+    }
+  strcpy (ret, fontPath);
+  return ret;
+  free (ret);
 }
 #endif
