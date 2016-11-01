@@ -105,6 +105,12 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[MENU_OVERTEXT], themePath, "menu_overText.png");
   loadSprite (&tableSurface[MENU_HIGHLIGHT], themePath, "menu_highlight.png");
 
+  /* buttons */
+  loadSprite (&tableSurface[BUTTON_ARROW_L], themePath, "button_arrow_l.png");
+  loadSprite (&tableSurface[BUTTON_ARROW_P], themePath, "button_arrow_p.png");
+  loadSprite (&tableSurface[BUTTON_RESET], themePath, "button_reset.png");
+  loadSprite (&tableSurface[BUTTON_BACKWARDS], themePath, "button_backwards.png");
+
 
   /* outside the wall */
   loadSprite (&tableSurface[OUTSIDE_IMAGE], themePath, "outside.png");

@@ -34,7 +34,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int
 displayTopBar (int levelNumber, SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
-	       S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList,
+	       S_LevelList * levelList,
 	       Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 {
   /* first add background */
@@ -51,15 +51,15 @@ displayTopBar (int levelNumber, SDL_Surface * screen,
       return EXIT_FAILURE;
     }
 
-  /* display the circle */
-  if (displayProgress (grid, screen, tableSurface) == EXIT_FAILURE)
+  /* display the buttons */
+  if (displayTopBarButtons (screen, tableSurface) == EXIT_FAILURE)
     {
-      fprintf (stderr, gettext ("levelMenu failed.\n"));
+      fprintf (stderr, gettext ("displayTopBarButtons() failed.\n"));
       return EXIT_FAILURE;
     }
 
-  /* display shortcut to open the menu */
-  if (displayShortcut (screen, tableTextSurface) == EXIT_FAILURE)
+  /* display the circle */
+  if (displayProgress (grid, screen, tableSurface) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("levelMenu failed.\n"));
       return EXIT_FAILURE;
@@ -550,5 +550,29 @@ displayOverTextImage (SDL_Surface * screen,
     }
 }
 
+/* Display buttons on the top bar*/
+int
+displayTopBarButtons (SDL_Surface * screen,
+		      Sprites tableSurface[NBR_OF_IMAGES])
+{
 
+  SDL_Rect buttonsPos;
+  buttonsPos.x = menuPosX () + 80;
+  buttonsPos.y = 1;
+  SDL_BlitSurface (tableSurface[BUTTON_ARROW_L].image, NULL, screen,
+		   &buttonsPos);
+
+  buttonsPos.x += (MENU_WIDTH - (5 * SPRITE_SIZE));
+  SDL_BlitSurface (tableSurface[BUTTON_ARROW_P].image, NULL, screen,
+		   &buttonsPos);
+
+  buttonsPos.x += SPRITE_SIZE - 5 ;
+  SDL_BlitSurface (tableSurface[BUTTON_BACKWARDS].image, NULL, screen,
+		   &buttonsPos);
+
+  buttonsPos.x += SPRITE_SIZE -5 ;
+  SDL_BlitSurface (tableSurface[BUTTON_RESET].image, NULL, screen,
+		   &buttonsPos);
+  return EXIT_SUCCESS;
+}
 #endif

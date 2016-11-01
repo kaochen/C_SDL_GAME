@@ -202,7 +202,7 @@ main (int argc, char *argv[])
 
   /* display the top bar  */
   if (displayTopBar
-      (levelChoice, screen, tableSurface, tableTextSurface, levelList,
+      (levelChoice, screen, tableSurface, levelList,
        grid) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("first displayTopBar() failed.\n"));
@@ -557,7 +557,7 @@ main (int argc, char *argv[])
 	    }
 
 	  displayTopBar ((levelChoice), screen, tableSurface,
-			 tableTextSurface, levelList, grid);
+			 levelList, grid);
 
 	  SDL_UpdateWindowSurface (window);
 	  refresh = 0;

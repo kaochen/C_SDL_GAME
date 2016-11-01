@@ -36,7 +36,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* display Top Bar*/
 int
 displayTopBar (int levelNumber, SDL_Surface * screen,
-	       Sprites tableSurface[NBR_OF_IMAGES], S_Text tableTextSurface[NBR_OF_TEXT],
+	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
 /* display background top bar */
@@ -83,5 +83,9 @@ displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAG
 /* Display pattern over the text menu */
 void
 displayOverTextImage(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], int menuChoice);
+
+/* Display buttons on the top bar*/
+int
+displayTopBarButtons (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 #endif

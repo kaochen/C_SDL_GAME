@@ -44,8 +44,6 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TEXT])
   size_t fontSize = 18, R = 255, G = 255, B = 255, A = 255;
   loadTextAsSurface (ABOUT, tableTextSurface, gettext ("About"), fontSize, R,
 		     G, B, A);
-  loadTextAsSurface (MENU_SHORTCUT, tableTextSurface, "(M)", fontSize, R, G,
-		     B, A);
 
   /* Init sub Menu */
   /*shortcuts */
@@ -107,27 +105,7 @@ loadTextAsSurface (size_t t, S_Text tableTextSurface[NBR_OF_TEXT], char *text,
   font = NULL;
 }
 
-/* display shortcut in the menu */
-int
-displayShortcut (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT])
-{
-  if (screen == NULL)
-    {
-      fprintf (stderr, gettext ("init displayShortcut failed: %s\n"),
-	       SDL_GetError ());
-      return EXIT_FAILURE;
-    }
 
-  /* blit the text */
-  SDL_Rect shortCutTextPos;
-  shortCutTextPos.x = menuPosX () + (MENU_WIDTH - 2 * SPRITE_SIZE - 5);
-  shortCutTextPos.y =
-    (SPRITE_SIZE - tableTextSurface[MENU_SHORTCUT].textSurface->h) / 2;
-
-  SDL_BlitSurface (tableTextSurface[MENU_SHORTCUT].textSurface, NULL, screen,
-		   &shortCutTextPos);
-  return EXIT_SUCCESS;
-}
 
 /* display the level number */
 int
