@@ -445,6 +445,13 @@ displaySubMenu (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT],
                SDL_BlitSurface (tableTextSurface[line[j]].textSurface, NULL, screen, &linePos);
             }
    }
+  /*clean*/
+  SDL_FreeSurface (tableTextSurface[INFO1].textSurface);
+  SDL_FreeSurface (tableTextSurface[INFO2].textSurface);
+  SDL_FreeSurface (tableTextSurface[INFO3].textSurface);
+  tableTextSurface[INFO1].textSurface = NULL;
+  tableTextSurface[INFO2].textSurface = NULL;
+  tableTextSurface[INFO3].textSurface = NULL;
 
   return EXIT_SUCCESS;
 }
