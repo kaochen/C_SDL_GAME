@@ -111,7 +111,6 @@ loadTextAsSurface (size_t t, S_Text tableTextSurface[NBR_OF_TEXT], char *text,
 int
 levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
 {
-
   if (screen == NULL || levelList == NULL)
     {
       fprintf (stderr, gettext ("init levelMenu failed: %s\n"),
@@ -138,10 +137,10 @@ levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
   levelText = TTF_RenderUTF8_Blended (font, text, fontColor);
 
   /* blit the text */
-  SDL_Rect levelTextPos;
-  levelTextPos.x = (getWindow_width () - levelText->w) / 2;
-  levelTextPos.y = (SPRITE_SIZE - levelText->h) / 2;
-  SDL_BlitSurface (levelText, NULL, screen, &levelTextPos);
+  SDL_Rect pos;
+  pos.x = (menuPosX () + ((MENU_WIDTH - levelText->w)/ 2));
+  pos.y = (SPRITE_SIZE - levelText->h) / 2;
+  SDL_BlitSurface (levelText, NULL, screen, &pos);
 
   /* clean */
   SDL_FreeSurface (levelText);

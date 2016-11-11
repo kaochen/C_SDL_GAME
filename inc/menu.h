@@ -33,11 +33,36 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "settings.h"
 #include "slc.h"
 
+/*define menu object*/
+enum
+{M_EMPTY, M_PREVIOUS, M_NEXT, M_RESET, M_BACKWARDS, M_INFO, M_SHORTCUTS, M_ABOUT
+};
+
+/*menuChoice*/
+enum{
+MC_INFO, MC_SHORTCUTS, MC_ABOUT
+};
+
+enum {
+SUB_EMPTY,
+INFO,SHORTCUTS,ABOUT,
+INFO1,INFO2,INFO3,
+SHORTCUTS1,SHORTCUTS2,SHORTCUTS3,SHORTCUTS4,SHORTCUTS5,
+ABOUT1,ABOUT2
+};
+
+
+/* Init menu grid */
+int
+initGridMenu(int gridMenu[MENU_LINE][MENU_ROW]);
+
 /* display Top Bar*/
 int
 displayTopBar (int levelNumber, SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
-	       S_LevelList * levelList, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
+	       S_LevelList * levelList,
+	       Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()],
+               int gridMenu[MENU_LINE][MENU_ROW]);
 
 /* display background top bar */
 int backgroundTopBar (SDL_Surface * screen,
@@ -69,9 +94,11 @@ int menuHeight (void);
 int menuPosX (void);
 
 
-/* Open the main menu */
-void openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],S_Text tableTextSurface[NBR_OF_TEXT],
-	       S_LevelList * levelList, int menuChoice, int levelChoice);
+/* Show menu List */
+void
+openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
+	  S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList,
+	  int menuChoice, int levelChoice, int gridMenu[MENU_LINE][MENU_ROW]);
 
 /* display Sub menu */
 int displaySubMenu (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList, int menuChoice, int levelChoice);
@@ -86,6 +113,6 @@ displayOverTextImage(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], 
 
 /* Display buttons on the top bar*/
 int
-displayTopBarButtons (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
-
+displayTopBarButtons (SDL_Surface * screen,
+		      Sprites tableSurface[NBR_OF_IMAGES], int gridMenu[MENU_LINE][MENU_ROW]);
 #endif

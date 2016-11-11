@@ -137,7 +137,9 @@ main (int argc, char *argv[])
   Square grid[w][h];
   grid_init (w, h, grid);
 
-
+   /* create a sub grid for dispatch items on the menu */
+   int gridMenu[MENU_LINE][MENU_ROW];
+   initGridMenu(gridMenu);
 
 
   fprintf (stderr, "\n");
@@ -203,7 +205,7 @@ main (int argc, char *argv[])
   /* display the top bar  */
   if (displayTopBar
       (levelChoice, screen, tableSurface, levelList,
-       grid) == EXIT_FAILURE)
+       grid, gridMenu) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("first displayTopBar() failed.\n"));
       exit (EXIT_FAILURE);
@@ -226,7 +228,7 @@ main (int argc, char *argv[])
   char levelName[MAX_CARACT] = "";
   Uint32 currentTime = 0;
   Uint32 previousTime = 0;
-  int carryOn = 1, refresh = 1, menuOpened = 0, menuChoice = 0, target =
+  int carryOn = 1, refresh = 1, menuOpened = 0, menuChoice = MC_INFO, target =
     STILL, next_target = STILL;
   int xCursor = 0, yCursor = 0;
   bool freezeCommand = false;
@@ -271,11 +273,11 @@ main (int argc, char *argv[])
 		      && xCursor < menuPosX () + MENU_WIDTH)
 		    {
 		      if (yCursor < 90)
-			menuChoice = 0;
+			menuChoice = MC_INFO;
 		      if (yCursor >= 90 && yCursor < 3 * SPRITE_SIZE)
-			menuChoice = 1;
+			menuChoice = MC_SHORTCUTS;
 		      if (yCursor >= 3 * SPRITE_SIZE)
-			menuChoice = 2;
+			menuChoice = MC_ABOUT;
 		    }
 		  refresh = 1;
 		  break;
@@ -393,12 +395,12 @@ main (int argc, char *argv[])
 		    {
 		      menuChoice--;
 		      /* make circle */
-		      if (menuChoice == -1)
+		      if (menuChoice < MC_INFO)
 			{
-			  menuChoice = 2;
+			  menuChoice = MC_ABOUT;
 			}
 		      openMenu (screen, tableSurface, tableTextSurface,
-				levelList, menuChoice, levelChoice);
+				levelList, menuChoice, levelChoice, gridMenu);
 		      refresh = 1;
 		    }
 		  break;
@@ -418,12 +420,12 @@ main (int argc, char *argv[])
 		    {
 		      menuChoice++;
 		      /* make circle */
-		      if (menuChoice == 3)
+		      if (menuChoice > MC_ABOUT)
 			{
-			  menuChoice = 0;
+			  menuChoice = MC_INFO;
 			}
 		      openMenu (screen, tableSurface, tableTextSurface,
-				levelList, menuChoice, levelChoice);
+				levelList, menuChoice, levelChoice, gridMenu);
 		      refresh = 1;
 		    }
 		  break;
@@ -553,11 +555,11 @@ main (int argc, char *argv[])
 	  if (menuOpened == 1)
 	    {
 	      openMenu (screen, tableSurface, tableTextSurface, levelList,
-			menuChoice, levelChoice);
+			menuChoice, levelChoice, gridMenu);
 	    }
 
 	  displayTopBar ((levelChoice), screen, tableSurface,
-			 levelList, grid);
+			 levelList, grid, gridMenu);
 
 	  SDL_UpdateWindowSurface (window);
 	  refresh = 0;

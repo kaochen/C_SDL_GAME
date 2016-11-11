@@ -131,7 +131,7 @@ getPosPlayer(int *xPlayer, int *yPlayer, Square grid[getMax_X_Blocks ()][getMax_
 
 int
 mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor){
-    int dir;
+    int dir = STILL;
     double xV = (double)(xCursor - (xPlayer*SPRITE_SIZE+SPRITE_SIZE/2));
     double yV = (double)(yCursor - (yPlayer*SPRITE_SIZE+SPRITE_SIZE/2));
     double val = 360.0 / (2*PI);
