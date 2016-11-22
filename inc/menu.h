@@ -44,17 +44,26 @@ MC_INFO, MC_SHORTCUTS, MC_ABOUT
 };
 
 enum {
-SUB_EMPTY,
-INFO,SHORTCUTS,ABOUT,
+SUB_EMPTY, TOPBAR, OPENMENU,
+INFO,SHORTCUTS,ABOUT,FILES, //main menu
 INFO1,INFO2,INFO3,
 SHORTCUTS1,SHORTCUTS2,SHORTCUTS3,SHORTCUTS4,SHORTCUTS5,
-ABOUT1,ABOUT2
+ABOUT1,ABOUT2,
+FILES1,FILES2,FILES3,FILES4
 };
 
+typedef struct
+{
+ int type;
+ int master;
+ int check;
+ int x;
+ int y;
+}S_Menu;
 
 /* Init menu grid */
-int
-initGridMenu(int gridMenu[MENU_LINE][MENU_ROW]);
+S_Menu *
+initGridMenu(void);
 
 /* display Top Bar*/
 int
@@ -62,7 +71,7 @@ displayTopBar (int levelNumber, SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList,
 	       Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()],
-               int gridMenu[MENU_LINE][MENU_ROW]);
+               S_Menu gridMenu[MENU_LINE]);
 
 /* display background top bar */
 int backgroundTopBar (SDL_Surface * screen,
@@ -98,7 +107,7 @@ int menuPosX (void);
 void
 openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 	  S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList,
-	  int menuChoice, int levelChoice, int gridMenu[MENU_LINE][MENU_ROW]);
+	  int menuChoice, int levelChoice, S_Menu gridMenu[MENU_LINE]);
 
 /* display Sub menu */
 int displaySubMenu (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList, int menuChoice, int levelChoice);
@@ -114,5 +123,5 @@ displayOverTextImage(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], 
 /* Display buttons on the top bar*/
 int
 displayTopBarButtons (SDL_Surface * screen,
-		      Sprites tableSurface[NBR_OF_IMAGES], int gridMenu[MENU_LINE][MENU_ROW]);
+		      Sprites tableSurface[NBR_OF_IMAGES], S_Menu gridMenu[MENU_LINE]);
 #endif

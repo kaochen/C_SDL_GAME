@@ -31,23 +31,31 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <sys/stat.h>
 
 /* Init menu grid */
-int
-initGridMenu(int gridMenu[MENU_LINE][MENU_ROW]){
-   /*clean the array*/
-   for(size_t r = 0; r <= MENU_ROW; r++){
-      for(size_t l = 0; l <= MENU_LINE; l++)
-         gridMenu[l][r] = M_EMPTY;
-   }
+S_Menu *
+initGridMenu(void){
 
+  S_Menu *gridMenu;
+  gridMenu = malloc (MENU_LINE * sizeof (S_Menu));
+   size_t siz;
+
+   siz = sizeof (S_Menu);
+   printf("Sizeof p := %zu\n", siz);
+   /* clean the array */
+      for(size_t l = 0; l < MENU_LINE; l++){
+
+      gridMenu[l] = (S_Menu) {.type=SUB_EMPTY, .master=TOPBAR, .check=0, .x=0, .y=0};
+      }
+   size_t start = menuPosX ();
    //place elements
-   gridMenu[2][1] = M_PREVIOUS;
-   gridMenu[7][1] = M_NEXT;
-   gridMenu[8][1] = M_RESET;
-   gridMenu[9][1] = M_BACKWARDS;
-   gridMenu[1][2] = M_INFO;
-   gridMenu[1][3] = M_SHORTCUTS;
-   gridMenu[1][4] = M_ABOUT;
-   return EXIT_SUCCESS;
+   gridMenu[0] = (S_Menu) {.type=M_PREVIOUS, .master=TOPBAR, .check=0, .x=start + 2*SPRITE_SIZE, .y=1};
+   gridMenu[1] = (S_Menu) {.type=M_NEXT, .master=TOPBAR, .check=0, .x=start + 7*SPRITE_SIZE, .y=1};
+   gridMenu[2] = (S_Menu) {.type=M_RESET, .master=TOPBAR, .check=0, .x=start + 8*SPRITE_SIZE, .y=1};
+   gridMenu[3] = (S_Menu) {.type=M_BACKWARDS, .master=TOPBAR, .check=0, .x=start + 9*SPRITE_SIZE, .y=1};
+   gridMenu[4] = (S_Menu) {.type=M_INFO, .master=OPENMENU, .check=0, .x=start + 1*SPRITE_SIZE, .y=1 *SPRITE_SIZE+20};
+   gridMenu[5] = (S_Menu) {.type=M_SHORTCUTS, .master=OPENMENU, .check=0, .x=start + 1*SPRITE_SIZE, .y=2 *SPRITE_SIZE + 10};
+   gridMenu[6] = (S_Menu) {.type=M_ABOUT, .master=OPENMENU, .check=0, .x=start + 1*SPRITE_SIZE, .y=3 *SPRITE_SIZE};
+
+   return gridMenu;
 }
 
 /* display Top Bar*/
@@ -56,7 +64,7 @@ displayTopBar (int levelNumber, SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList,
 	       Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()],
-          int gridMenu[MENU_LINE][MENU_ROW])
+          S_Menu gridMenu[MENU_LINE])
 {
   /* first add background */
   if (backgroundTopBar (screen, tableSurface) == EXIT_FAILURE)
@@ -270,7 +278,7 @@ menuPosX (void)
 void
 openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 	  S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList,
-	  int menuChoice, int levelChoice, int gridMenu[MENU_LINE][MENU_ROW])
+	  int menuChoice, int levelChoice, S_Menu gridMenu[MENU_LINE])
 {
   /* blit background */
   displayOpenMenuBackground (screen, tableSurface, menuChoice);
@@ -285,15 +293,14 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 
   SDL_Color fontColor = { 255, 255, 255, 255 };
 
-  size_t start = menuPosX (), i = 0;
+  size_t i = 0;
   SDL_Rect linePos;
 
-   for (size_t r = 0; r < MENU_ROW; r++){
      for (size_t l = 0; l < MENU_LINE; l++){
         char text[MAX_CARACT] = "";
         size_t exist = 0;
         int menu = MC_INFO;
-        switch (gridMenu[l][r]){
+        switch (gridMenu[l].type){
         case M_INFO:
            strcpy(text, gettext ("Current Level Infos"));
            menu = MC_INFO;
@@ -314,8 +321,8 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
            /*blit text*/
            SDL_Surface *line = NULL;
            line = TTF_RenderUTF8_Blended (font, text, fontColor);
-           linePos.x = start + SPRITE_SIZE;
-           linePos.y = i*(SPRITE_SIZE-10);
+           linePos.x = gridMenu[l].x;
+           linePos.y = gridMenu[l].y;
            SDL_BlitSurface (line, NULL, screen, &linePos);
            if (menu == menuChoice ){
                linePos.x -= 10;
@@ -325,7 +332,6 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
 
            SDL_FreeSurface (line);
         }
-     }
     i++;
   }
 
@@ -561,14 +567,14 @@ displayOverTextImage (SDL_Surface * screen,
 /* Display buttons on the top bar*/
 int
 displayTopBarButtons (SDL_Surface * screen,
-		      Sprites tableSurface[NBR_OF_IMAGES], int gridMenu[MENU_LINE][MENU_ROW])
+		      Sprites tableSurface[NBR_OF_IMAGES], S_Menu gridMenu[MENU_LINE])
 {
   SDL_Rect buttonsPos;
-  size_t start = menuPosX (), i = 0;
+  size_t  i = 0;
 
   for (size_t l = 0; l < MENU_LINE; l++){
    size_t  imageName = NO_IMAGE;
-     switch (gridMenu[l][1])
+     switch (gridMenu[l].type)
      {
      case M_PREVIOUS :
             imageName = BUTTON_ARROW_L;
@@ -583,8 +589,8 @@ displayTopBarButtons (SDL_Surface * screen,
             imageName = BUTTON_BACKWARDS;
         break;
      }
-     buttonsPos.x = start + i*SPRITE_SIZE;
-     buttonsPos.y = 1;
+     buttonsPos.x = gridMenu[l].x;
+     buttonsPos.y = gridMenu[l].y;
      if (imageName != NO_IMAGE)
          SDL_BlitSurface (tableSurface[imageName].image, NULL, screen,
                           &buttonsPos);

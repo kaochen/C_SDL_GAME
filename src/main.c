@@ -138,8 +138,9 @@ main (int argc, char *argv[])
   grid_init (w, h, grid);
 
    /* create a sub grid for dispatch items on the menu */
-   int gridMenu[MENU_LINE][MENU_ROW];
-   initGridMenu(gridMenu);
+   fprintf (stderr, gettext ("Marker1.\n"));
+   S_Menu *gridMenu = initGridMenu();
+   fprintf (stderr, gettext ("Marker2.\n"));
 
 
   fprintf (stderr, "\n");
