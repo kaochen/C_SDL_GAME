@@ -42,6 +42,10 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TEXT])
 
   /* Init main Menu */
   size_t fontSize = 18, R = 255, G = 255, B = 255, A = 255;
+  loadTextAsSurface (INFO, tableTextSurface, gettext ("Current Level Infos"), fontSize, R,
+		     G, B, A);
+  loadTextAsSurface (SHORTCUTS, tableTextSurface, gettext ("Shortcuts"), fontSize, R,
+		     G, B, A);
   loadTextAsSurface (ABOUT, tableTextSurface, gettext ("About"), fontSize, R,
 		     G, B, A);
 

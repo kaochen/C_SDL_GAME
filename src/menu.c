@@ -36,24 +36,20 @@ initGridMenu(void){
 
   S_Menu *gridMenu;
   gridMenu = malloc (MENU_LINE * sizeof (S_Menu));
-   size_t siz;
 
-   siz = sizeof (S_Menu);
-   printf("Sizeof p := %zu\n", siz);
    /* clean the array */
       for(size_t l = 0; l < MENU_LINE; l++){
-
-      gridMenu[l] = (S_Menu) {.type=SUB_EMPTY, .master=TOPBAR, .check=0, .x=0, .y=0};
+      gridMenu[l] = (S_Menu) {.role=SUB_EMPTY, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .x=0, .y=0};
       }
    size_t start = menuPosX ();
    //place elements
-   gridMenu[0] = (S_Menu) {.type=M_PREVIOUS, .master=TOPBAR, .check=0, .x=start + 2*SPRITE_SIZE, .y=1};
-   gridMenu[1] = (S_Menu) {.type=M_NEXT, .master=TOPBAR, .check=0, .x=start + 7*SPRITE_SIZE, .y=1};
-   gridMenu[2] = (S_Menu) {.type=M_RESET, .master=TOPBAR, .check=0, .x=start + 8*SPRITE_SIZE, .y=1};
-   gridMenu[3] = (S_Menu) {.type=M_BACKWARDS, .master=TOPBAR, .check=0, .x=start + 9*SPRITE_SIZE, .y=1};
-   gridMenu[4] = (S_Menu) {.type=M_INFO, .master=OPENMENU, .check=0, .x=start + 1*SPRITE_SIZE, .y=1 *SPRITE_SIZE+20};
-   gridMenu[5] = (S_Menu) {.type=M_SHORTCUTS, .master=OPENMENU, .check=0, .x=start + 1*SPRITE_SIZE, .y=2 *SPRITE_SIZE + 10};
-   gridMenu[6] = (S_Menu) {.type=M_ABOUT, .master=OPENMENU, .check=0, .x=start + 1*SPRITE_SIZE, .y=3 *SPRITE_SIZE};
+   gridMenu[0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .x=start + 2*SPRITE_SIZE, .y=1};
+   gridMenu[1] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=SUB_EMPTY, .menu=MC_TOPBAR, .x=start + 7*SPRITE_SIZE, .y=1};
+   gridMenu[2] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .x=start + 8*SPRITE_SIZE, .y=1};
+   gridMenu[3] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .x=start + 9*SPRITE_SIZE, .y=1};
+   gridMenu[4] = (S_Menu) {.role=M_INFO, .type=OPENMENU, .text=INFO, .menu=MC_INFO, .x=start + 1*SPRITE_SIZE, .y=1 *SPRITE_SIZE+20};
+   gridMenu[5] = (S_Menu) {.role=M_SHORTCUTS, .type=OPENMENU, .text=SHORTCUTS, .menu=MC_SHORTCUTS, .x=start + 1*SPRITE_SIZE, .y=2 *SPRITE_SIZE + 10};
+   gridMenu[6] = (S_Menu) {.role=M_ABOUT, .type=OPENMENU, .text=ABOUT, .menu=MC_ABOUT, .x=start + 1*SPRITE_SIZE, .y=3 *SPRITE_SIZE};
 
    return gridMenu;
 }
@@ -283,65 +279,29 @@ openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
   /* blit background */
   displayOpenMenuBackground (screen, tableSurface, menuChoice);
 
-  /* blit text */
-  /* setup font */
-  TTF_Font *font = NULL;
-  char fontPath[MAX_CARACT] = "";
-  strcpy (fontPath, findFont ());
-
-  font = TTF_OpenFont (fontPath, 18);
-
-  SDL_Color fontColor = { 255, 255, 255, 255 };
-
-  size_t i = 0;
-  SDL_Rect linePos;
+  SDL_Rect pos;
 
      for (size_t l = 0; l < MENU_LINE; l++){
-        char text[MAX_CARACT] = "";
-        size_t exist = 0;
-        int menu = MC_INFO;
-        switch (gridMenu[l].type){
-        case M_INFO:
-           strcpy(text, gettext ("Current Level Infos"));
-           menu = MC_INFO;
-           exist = 1;
-           break;
-        case M_SHORTCUTS:
-           strcpy(text, gettext ("Shortcuts"));
-           menu = MC_SHORTCUTS;
-           exist = 1;
-           break;
-        case M_ABOUT:
-           strcpy(text, gettext ("About"));
-           menu = MC_ABOUT;
-           exist = 1;
-           break;
-        }
-        if (exist == 1){
-           /*blit text*/
-           SDL_Surface *line = NULL;
-           line = TTF_RenderUTF8_Blended (font, text, fontColor);
-           linePos.x = gridMenu[l].x;
-           linePos.y = gridMenu[l].y;
-           SDL_BlitSurface (line, NULL, screen, &linePos);
-           if (menu == menuChoice ){
-               linePos.x -= 10;
-               SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen,
-		             &linePos);
-               }
 
-           SDL_FreeSurface (line);
+        if (gridMenu[l].type == OPENMENU){
+           /*blit text*/
+           pos.x = gridMenu[l].x;
+           pos.y = gridMenu[l].y;
+           size_t surface = gridMenu[l].text;
+           SDL_BlitSurface (tableTextSurface[surface].textSurface, NULL, screen, &pos);
+           /*blit highlight*/
+           if (gridMenu[l].menu == menuChoice ){
+               pos.x -= 10;
+               SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen,
+		             &pos);
+               }
         }
-    i++;
   }
 
   displaySubMenu (screen, tableTextSurface, levelList, menuChoice,
 		  levelChoice);
   displayOverTextImage (screen, tableSurface, menuChoice);
 
-  /* clean */
-  TTF_CloseFont (font);
-  font = NULL;
 }
 
 /* display Sub menu */
@@ -350,7 +310,7 @@ displaySubMenu (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT],
 		S_LevelList * levelList, int menuChoice, int levelChoice )
 {
   /* blit text */
-
+  //  fprintf (stderr, "menuChoice : %d\n", menuChoice);
   SDL_Rect linePos;
 
   linePos.x = menuPosX () + 40;
@@ -471,13 +431,13 @@ displayOpenMenuBackground (SDL_Surface * screen,
   int i = 0, size = 0;
   switch (menuChoice)
     {
-    case 0:
+    case MC_INFO:
       size = 6;
       break;
-    case 1:
+    case MC_SHORTCUTS:
       size = 7;
       break;
-    case 2:
+    case MC_ABOUT:
       size = 5;
       break;
     }
@@ -574,7 +534,7 @@ displayTopBarButtons (SDL_Surface * screen,
 
   for (size_t l = 0; l < MENU_LINE; l++){
    size_t  imageName = NO_IMAGE;
-     switch (gridMenu[l].type)
+     switch (gridMenu[l].role)
      {
      case M_PREVIOUS :
             imageName = BUTTON_ARROW_L;

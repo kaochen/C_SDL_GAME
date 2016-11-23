@@ -40,7 +40,7 @@ enum
 
 /*menuChoice*/
 enum{
-MC_INFO, MC_SHORTCUTS, MC_ABOUT
+MC_TOPBAR, MC_INFO, MC_SHORTCUTS, MC_ABOUT
 };
 
 enum {
@@ -54,9 +54,10 @@ FILES1,FILES2,FILES3,FILES4
 
 typedef struct
 {
+ int role;
  int type;
- int master;
- int check;
+ int text;
+ int menu;
  int x;
  int y;
 }S_Menu;
