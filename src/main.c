@@ -229,8 +229,14 @@ main (int argc, char *argv[])
   char levelName[MAX_CARACT] = "";
   Uint32 currentTime = 0;
   Uint32 previousTime = 0;
-  int carryOn = 1, refresh = 1, menuOpened = 0, menuChoice = MC_INFO, target =
+  int carryOn = 1, refresh = 1, menuOpened = 0, target =
     STILL, next_target = STILL;
+
+  S_menuchoice menuChoice;
+  menuChoice.tab = MC_INFO;
+  menuChoice.sub = 0;
+  menuChoice.max = 4;
+
   int xCursor = 0, yCursor = 0;
   bool freezeCommand = false;
 
@@ -242,6 +248,21 @@ main (int argc, char *argv[])
       //SDL_WaitEvent(&event);
       while (SDL_PollEvent (&event))
 	{
+      switch (menuChoice.tab)
+            {
+            case MC_INFO:
+                menuChoice.max = MENU_MAX_INFO;
+                break;
+            case MC_SHORTCUTS:
+                menuChoice.max = MENU_MAX_SHORTCUTS;
+                break;
+            case MC_ABOUT:
+                menuChoice.max = MENU_MAX_ABOUT;
+                break;
+            case MC_FILE:
+                menuChoice.max = MENU_MAX_FILE;
+                break;
+            }
 	  switch (event.type)
 	    {
 	    case SDL_QUIT:
@@ -270,15 +291,19 @@ main (int argc, char *argv[])
 	      yCursor = event.button.y;
 	      if (menuOpened == 1)
 		{
-		  if (xCursor > menuPosX ()
-		      && xCursor < menuPosX () + MENU_WIDTH)
+          /* navigate into the different tabs */
+          int first = menuPosX() + 3*SPRITE_SIZE;
+		  if (yCursor > SPRITE_SIZE
+		      && yCursor < 2*SPRITE_SIZE)
 		    {
-		      if (yCursor < 90)
-			menuChoice = MC_INFO;
-		      if (yCursor >= 90 && yCursor < 3 * SPRITE_SIZE)
-			menuChoice = MC_SHORTCUTS;
-		      if (yCursor >= 3 * SPRITE_SIZE)
-			menuChoice = MC_ABOUT;
+		      if (xCursor < first)
+			menuChoice.tab = MC_INFO;
+		      if (xCursor >= first && yCursor < first + 3 * SPRITE_SIZE)
+			menuChoice.tab = MC_SHORTCUTS;
+		      if (xCursor >= first + 3 * SPRITE_SIZE && xCursor < first + 5 * SPRITE_SIZE)
+			menuChoice.tab = MC_ABOUT;
+		      if (xCursor >= first + 5 * SPRITE_SIZE)
+			menuChoice.tab = MC_FILE;
 		    }
 		  refresh = 1;
 		  break;
@@ -367,19 +392,52 @@ main (int argc, char *argv[])
 	      switch (event.key.keysym.sym)
 		{
 		case SDLK_RIGHT:
-		  /*Do not move when level is finished */
-		  if (freezeCommand == true)
-		    break;
+        if (menuOpened == 0)
+		    {
+		      /*Do not move when level is finished */
+		      if (freezeCommand == true)
+			break;
 
-		  refresh = movePlayer (xPlayer, yPlayer, RIGHT, grid);
+		      refresh = movePlayer (xPlayer, yPlayer, RIGHT, grid);
+		      break;
+		    }
+
+		  else
+		    {
+		      menuChoice.tab++;
+		      /* make circle */
+		      if (menuChoice.tab > MC_FILE)
+			{
+			  menuChoice.tab = MC_INFO;
+			}
+		      openMenu (screen, tableSurface, tableTextSurface,
+				levelList, menuChoice, levelChoice, gridMenu);
+		      refresh = 1;
+		    }
 		  break;
 
 		case SDLK_LEFT:
-		  /*Do not move when level is finished */
-		  if (freezeCommand == true)
-		    break;
+		  if (menuOpened == 0)
+		    {
+		      /*Do not move when level is finished */
+		      if (freezeCommand == true)
+			break;
 
-		  refresh = movePlayer (xPlayer, yPlayer, LEFT, grid);
+		      refresh = movePlayer (xPlayer, yPlayer, LEFT, grid);
+		      break;
+		    }
+		  else
+		    {
+		      menuChoice.tab--;
+		      /* make circle */
+		      if (menuChoice.tab < MC_INFO)
+			{
+			  menuChoice.tab = MC_FILE;
+			}
+		      openMenu (screen, tableSurface, tableTextSurface,
+				levelList, menuChoice, levelChoice, gridMenu);
+		      refresh = 1;
+		    }
 		  break;
 
 		case SDLK_UP:
@@ -394,11 +452,11 @@ main (int argc, char *argv[])
 		    }
 		  else
 		    {
-		      menuChoice--;
+		      menuChoice.sub--;
 		      /* make circle */
-		      if (menuChoice < MC_INFO)
+		      if (menuChoice.sub < 0)
 			{
-			  menuChoice = MC_ABOUT;
+			  menuChoice.sub = menuChoice.max;
 			}
 		      openMenu (screen, tableSurface, tableTextSurface,
 				levelList, menuChoice, levelChoice, gridMenu);
@@ -419,11 +477,11 @@ main (int argc, char *argv[])
 
 		  else
 		    {
-		      menuChoice++;
+		      menuChoice.sub++;
 		      /* make circle */
-		      if (menuChoice > MC_ABOUT)
+		      if (menuChoice.sub > menuChoice.max)
 			{
-			  menuChoice = MC_INFO;
+			  menuChoice.sub = 0;
 			}
 		      openMenu (screen, tableSurface, tableTextSurface,
 				levelList, menuChoice, levelChoice, gridMenu);
@@ -447,7 +505,7 @@ main (int argc, char *argv[])
 		      /*reset status */
 		      freezeCommand = false;
 		      menuOpened = 0;
-		      menuChoice = 0;
+		      menuChoice.tab = 0;
 		      refresh = 1;
 		    }
 		  break;
