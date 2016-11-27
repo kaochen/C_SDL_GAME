@@ -179,11 +179,18 @@ main (int argc, char *argv[])
   /* count all levels from all files */
   int max_Levels = getNbrOfLevels (levelList);
 
-  /*Load first game */
+  /*init Menu Choice*/
+  S_menuchoice menuChoice;
+  menuChoice.tab = MC_INFO;
+  menuChoice.sub = 0;
+  menuChoice.max = 4;
+  menuChoice.open = 0;
+  menuChoice.freeze = 0;
 
+  /*Load first game */
   int levelChoice = readLevelFromSetting (levelList);
   fprintf (stderr, gettext ("Loading first level.\n"));
-  if (loadSlcLevel (levelChoice, levelList, grid) == EXIT_SUCCESS)
+  if (loadSlcLevel (levelChoice, levelList, grid, &menuChoice) == EXIT_SUCCESS)
     {
       fprintf (stderr, gettext ("Level loaded.\n"));
     }
@@ -232,12 +239,6 @@ main (int argc, char *argv[])
   Uint32 previousTime = 0;
   int carryOn = 1, refresh = 1, target = STILL, next_target = STILL;
 
-  S_menuchoice menuChoice;
-  menuChoice.tab = MC_INFO;
-  menuChoice.sub = 0;
-  menuChoice.max = 4;
-  menuChoice.open = 0;
-  menuChoice.freeze = 0;
 
   int xCursor = 0, yCursor = 0;
 
@@ -472,22 +473,10 @@ main (int argc, char *argv[])
 		  /* hit r to reset the current level */
 		case SDLK_r:
 		  /* load the level */
-		  if (loadSlcLevel (levelChoice, levelList, grid) ==
-		      EXIT_SUCCESS)
-		    {
-		      fprintf (stderr, "Level loaded\n");
-		    }
-		  else
-		    {
-		      perror ("Impossible to load the level. Perror");
-		    }
+		  if (loadSlcLevel (levelChoice, levelList, grid, &menuChoice) == EXIT_FAILURE)
+		          perror ("Impossible to load the level. Perror");
 
-
-		  /*reset status */
-		  menuChoice.freeze = 0;
-		  menuChoice.open = 0;
 		  refresh = 1;
-		  fprintf (stderr, "Level %d\n loaded", (levelChoice + 1));
 		  break;
 
 		  /* hit n to load the next level */
@@ -496,21 +485,12 @@ main (int argc, char *argv[])
 		  levelChoice += 1;
 		  if (levelChoice == max_Levels)
 		    levelChoice = 0;
-		  if (loadSlcLevel (levelChoice, levelList, grid) ==
-		      EXIT_SUCCESS)
-		    {
-		      fprintf (stderr, "Level loaded\n");
-		    }
-		  else
-		    {
-		      perror ("Impossible to load the level. Perror");
-		    }
 
-		  /*reset status */
-		  menuChoice.freeze = 0;
-		  menuChoice.open = 0;
+		  if (loadSlcLevel (levelChoice, levelList, grid, &menuChoice) ==
+		      EXIT_FAILURE)
+		      perror ("Impossible to load the level. Perror");
+
 		  refresh = 1;
-		  fprintf (stderr, "Level %d\n loaded", (levelChoice));
 		  break;
 
 		  /* hit p to load the previous level */
@@ -520,23 +500,13 @@ main (int argc, char *argv[])
 		  if (levelChoice == -1)
 		    levelChoice = max_Levels - 1;
 
-		  if (loadSlcLevel (levelChoice, levelList, grid) ==
-		      EXIT_SUCCESS)
-		    {
-		      fprintf (stderr, "Level loaded\n");
-		    }
-		  else
-		    {
+		  if (loadSlcLevel (levelChoice, levelList, grid, &menuChoice) ==
+		      EXIT_FAILURE)
 		      perror ("Impossible to load the level. Perror");
-		    }
 
-		  /*reset status */
-		  menuChoice.freeze = 0;
-		  menuChoice.open = 0;
 		  refresh = 1;
-		  fprintf (stderr, "Level %d\n loaded", (levelChoice));
-
 		  break;
+
 		  /* hit q to quit */
 		case SDLK_q:
 		  /* write last level name before closing */

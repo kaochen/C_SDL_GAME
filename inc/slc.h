@@ -28,6 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "const.h"
 #include "level_decor.h"
 #include "settings.h"
+#include "menu.h"
 
 
 //Read using libxml
@@ -37,49 +38,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libxml2/libxml/xpathInternals.h>
 
 
-/* Structures ============================================ */
-
-/* Files ========================================= */
-/* files definion struct */
-typedef struct S_Files S_Files;
-struct S_Files
-{
-  char *name;
-  S_Files *next;
-  S_Files *previous;
-};
-
-/* control files list */
-typedef struct S_FilesList S_FilesList;
-struct S_FilesList
-{
-  S_Files *first;
-  S_Files *last;
-  int nbr_of_files;
-};
-
-/* Levels ========================================= */
-
-/* level definion struct */
-typedef struct S_Level S_Level;
-struct S_Level
-{
-  char *name;
-  char *fileName;
-  int height;
-  int width;
-  S_Level *next;
-  S_Level *previous;
-};
-
-/* control level list */
-typedef struct S_LevelList S_LevelList;
-struct S_LevelList
-{
-  S_Level *first;
-  S_Level *last;
-  int nbr_of_levels;
-};
 
 /* Functions ============================================ */
 
@@ -126,8 +84,9 @@ void destroy (S_LevelList * levelList);
 void readLevelList (S_LevelList * levelList);
 
 /*Load slc level into the grid */
-int loadSlcLevel (int levelChoice, S_LevelList * levelList,
-		  Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
+int
+loadSlcLevel (int levelChoice, S_LevelList * levelList,
+	      Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], S_menuchoice *menuChoice);
 
 /*get levels infos from files */
 int getNbrOfLevels (S_LevelList * levelList);

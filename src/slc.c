@@ -25,9 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <libintl.h>
 #include <locale.h>
 
-
 #include "../inc/slc.h"
-#include "../inc/menu.h"
 
 /*Manage slc files ==================================================*/
 /* Initiatlize the list of files */
@@ -482,7 +480,7 @@ readLevelList (S_LevelList * levelList)
 /*Load slc level into the grid */
 int
 loadSlcLevel (int levelChoice, S_LevelList * levelList,
-	      Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
+	      Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], S_menuchoice *menuChoice)
 {
   if (levelList == NULL)
     {
@@ -617,6 +615,12 @@ loadSlcLevel (int levelChoice, S_LevelList * levelList,
   xmlFreeDoc (doc);
   xmlXPathFreeContext (ctxt);
   xmlXPathFreeObject(xpathLevel);
+
+  /*refresh status*/
+  menuChoice->freeze = 0;
+  menuChoice->open = 0;
+  fprintf (stderr, "Level %d loaded\n", (levelChoice + 1));
+
 
   return EXIT_SUCCESS;
 }

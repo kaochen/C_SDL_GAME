@@ -52,24 +52,7 @@ ABOUT1,ABOUT2,
 FILES1,FILES2,FILES3,FILES4
 };
 
-typedef struct
-{
- int role;
- int type;
- int text;
- int menu;
- int x;
- int y;
-}S_Menu;
 
-typedef struct
-{
- int tab;
- int sub; //under tabs
- int max; //max lines in sub part
- int open; //the menu panel is open or not
- int freeze; //Freeze the gameplay when menu or congrats are open
-}S_menuchoice;
 
 /* Init menu grid */
 S_Menu *

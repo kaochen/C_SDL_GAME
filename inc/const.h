@@ -100,4 +100,67 @@ enum
 };
 enum
 { FINISH, NOT_FINISHED };
+
+/* Structures ============================================ */
+
+/* Files ========================================= */
+/* files definion struct */
+typedef struct S_Files S_Files;
+struct S_Files
+{
+  char *name;
+  S_Files *next;
+  S_Files *previous;
+};
+
+/* control files list */
+typedef struct S_FilesList S_FilesList;
+struct S_FilesList
+{
+  S_Files *first;
+  S_Files *last;
+  int nbr_of_files;
+};
+
+/* Levels ========================================= */
+
+/* level definion struct */
+typedef struct S_Level S_Level;
+struct S_Level
+{
+  char *name;
+  char *fileName;
+  int height;
+  int width;
+  S_Level *next;
+  S_Level *previous;
+};
+
+/* control level list */
+typedef struct {
+  S_Level *first;
+  S_Level *last;
+  int nbr_of_levels;
+} S_LevelList;
+
+/* Menus ========================================= */
+
+typedef struct
+{
+ int role;
+ int type;
+ int text;
+ int menu;
+ int x;
+ int y;
+}S_Menu;
+
+typedef struct
+{
+ int tab;
+ int sub; //under tabs
+ int max; //max lines in sub part
+ int open; //the menu panel is open or not
+ int freeze; //Freeze the gameplay when menu or congrats are open
+}S_menuchoice;
 #endif

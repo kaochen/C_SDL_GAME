@@ -23,7 +23,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define MENU_TEXT_C
 
 #include "../inc/menu.h"
-#include "../inc/menu_text.h"
 
 #include <libintl.h>
 #include <locale.h>
