@@ -229,16 +229,16 @@ main (int argc, char *argv[])
   char levelName[MAX_CARACT] = "";
   Uint32 currentTime = 0;
   Uint32 previousTime = 0;
-  int carryOn = 1, refresh = 1, menuOpened = 0, target =
-    STILL, next_target = STILL;
+  int carryOn = 1, refresh = 1, target = STILL, next_target = STILL;
 
   S_menuchoice menuChoice;
   menuChoice.tab = MC_INFO;
   menuChoice.sub = 0;
   menuChoice.max = 4;
+  menuChoice.open = 0;
+  menuChoice.freeze = 0;
 
   int xCursor = 0, yCursor = 0;
-  bool freezeCommand = false;
 
   SDL_Event event;
   Uint32 windowID = SDL_GetWindowID (window);
@@ -289,7 +289,7 @@ main (int argc, char *argv[])
 
 	      xCursor = event.button.x;
 	      yCursor = event.button.y;
-	      if (menuOpened == 1)
+	      if (menuChoice.open == 1)
 		{
           /* navigate into the different tabs */
           int first = menuPosX() + 3*SPRITE_SIZE;
@@ -310,10 +310,10 @@ main (int argc, char *argv[])
 		}
 
 	      /*Do not move when level is finished */
-	      if (freezeCommand == true)
+	      if (menuChoice.freeze == 1 )
 		break;
 
-	      if (menuOpened == 0)
+	      if (menuChoice.open == 0)
 		{
 		  /*Place the target image between the cursor and the player to indicate the next move */
 		  getPosPlayer (&xPlayer, &yPlayer, grid);
@@ -337,7 +337,7 @@ main (int argc, char *argv[])
 		  yCursor = event.button.y;
 		  /*Open and close the menu */
 
-		  if (menuOpened == 1)
+		  if (menuChoice.open == 1)
 		    {
 		      /*Clic outside the open menu to close it */
 		      if ((xCursor < menuPosX ()
@@ -345,13 +345,12 @@ main (int argc, char *argv[])
 			  || (yCursor < SPRITE_SIZE
 			      || yCursor > 7 * SPRITE_SIZE))
 			{
-			  menuOpened = 0;
-			  refresh = 1;
+              refresh = openCloseTheMenu(&menuChoice);
 			  break;
 			}
 		    }
 
-		  if (menuOpened == 0)
+		  if (menuChoice.open == 0)
 		    {
 		      /*Clic on the top bar top open the menu */
 		      if (xCursor > menuPosX ()
@@ -359,15 +358,14 @@ main (int argc, char *argv[])
 			{
 			  if (yCursor < SPRITE_SIZE)
 			    {
-			      menuOpened = 1;
-			      refresh = 1;
-			      break;
+                refresh = openCloseTheMenu(&menuChoice);
+			    break;
 			    }
 			}
 
 		      getPosPlayer (&xPlayer, &yPlayer, grid);
 		      /*Do not move when level is finished */
-		      if (freezeCommand == true)
+		      if (menuChoice.freeze == 1)
 			break;
 
 		      int direction =
@@ -392,10 +390,10 @@ main (int argc, char *argv[])
 	      switch (event.key.keysym.sym)
 		{
 		case SDLK_RIGHT:
-        if (menuOpened == 0)
+        if (menuChoice.open == 0)
 		    {
 		      /*Do not move when level is finished */
-		      if (freezeCommand == true)
+		      if (menuChoice.freeze == 1)
 			break;
 
 		      refresh = movePlayer (xPlayer, yPlayer, RIGHT, grid);
@@ -410,17 +408,15 @@ main (int argc, char *argv[])
 			{
 			  menuChoice.tab = MC_INFO;
 			}
-		      openMenu (screen, tableSurface, tableTextSurface,
-				levelList, menuChoice, levelChoice, gridMenu);
 		      refresh = 1;
 		    }
 		  break;
 
 		case SDLK_LEFT:
-		  if (menuOpened == 0)
+		  if (menuChoice.open == 0)
 		    {
 		      /*Do not move when level is finished */
-		      if (freezeCommand == true)
+		      if (menuChoice.freeze == 1)
 			break;
 
 		      refresh = movePlayer (xPlayer, yPlayer, LEFT, grid);
@@ -434,17 +430,15 @@ main (int argc, char *argv[])
 			{
 			  menuChoice.tab = MC_FILE;
 			}
-		      openMenu (screen, tableSurface, tableTextSurface,
-				levelList, menuChoice, levelChoice, gridMenu);
 		      refresh = 1;
 		    }
 		  break;
 
 		case SDLK_UP:
-		  if (menuOpened == 0)
+		  if (menuChoice.open == 0)
 		    {
 		      /*Do not move when level is finished */
-		      if (freezeCommand == true)
+		      if (menuChoice.freeze == 1)
 			break;
 
 		      refresh = movePlayer (xPlayer, yPlayer, UP, grid);
@@ -458,17 +452,15 @@ main (int argc, char *argv[])
 			{
 			  menuChoice.sub = menuChoice.max;
 			}
-		      openMenu (screen, tableSurface, tableTextSurface,
-				levelList, menuChoice, levelChoice, gridMenu);
 		      refresh = 1;
 		    }
 		  break;
 
 		case SDLK_DOWN:
-		  if (menuOpened == 0)
+		  if (menuChoice.open == 0)
 		    {
 		      /*Do not move when level is finished */
-		      if (freezeCommand == true)
+		      if (menuChoice.freeze == 1)
 			break;
 
 		      refresh = movePlayer (xPlayer, yPlayer, DOWN, grid);
@@ -483,8 +475,6 @@ main (int argc, char *argv[])
 			{
 			  menuChoice.sub = 0;
 			}
-		      openMenu (screen, tableSurface, tableTextSurface,
-				levelList, menuChoice, levelChoice, gridMenu);
 		      refresh = 1;
 		    }
 		  break;
@@ -492,22 +482,7 @@ main (int argc, char *argv[])
 		  /* hit m to open or close the menu */
 
 		case SDLK_m:
-		  if (menuOpened == 0)
-		    {
-		      //fprintf(stderr, "opening Menu\n");
-		      freezeCommand = true;
-		      menuOpened = 1;
-		      refresh = 1;
-		    }
-		  else
-		    {
-		      //fprintf(stderr, "closing Menu\n");
-		      /*reset status */
-		      freezeCommand = false;
-		      menuOpened = 0;
-		      menuChoice.tab = 0;
-		      refresh = 1;
-		    }
+            refresh = openCloseTheMenu(&menuChoice);
 		  break;
 
 
@@ -526,8 +501,8 @@ main (int argc, char *argv[])
 
 
 		  /*reset status */
-		  freezeCommand = false;
-		  menuOpened = 0;
+		  menuChoice.freeze = 0;
+		  menuChoice.open = 0;
 		  refresh = 1;
 		  fprintf (stderr, "Level %d\n loaded", (levelChoice + 1));
 		  break;
@@ -549,8 +524,8 @@ main (int argc, char *argv[])
 		    }
 
 		  /*reset status */
-		  freezeCommand = false;
-		  menuOpened = 0;
+		  menuChoice.freeze = 0;
+		  menuChoice.open = 0;
 		  refresh = 1;
 		  fprintf (stderr, "Level %d\n loaded", (levelChoice));
 		  break;
@@ -573,8 +548,8 @@ main (int argc, char *argv[])
 		    }
 
 		  /*reset status */
-		  freezeCommand = false;
-		  menuOpened = 0;
+		  menuChoice.freeze = 0;
+		  menuChoice.open = 0;
 		  refresh = 1;
 		  fprintf (stderr, "Level %d\n loaded", (levelChoice));
 
@@ -606,12 +581,12 @@ main (int argc, char *argv[])
 	      fprintf (stderr, gettext ("displayLevel() failed.\n"));
 	    }
 	  /*display congrats if the level is finished */
-	  if (levelFinished (grid) == FINISH && menuOpened == 0)
+	  if (levelFinished (grid) == FINISH && menuChoice.open == 0)
 	    {
 	      displayCongrats (screen, tableSurface);
-	      freezeCommand = true;
+	      menuChoice.freeze = 1;
 	    }
-	  if (menuOpened == 1)
+	  if (menuChoice.open == 1)
 	    {
 	      openMenu (screen, tableSurface, tableTextSurface, levelList,
 			menuChoice, levelChoice, gridMenu);

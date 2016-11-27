@@ -269,7 +269,22 @@ menuPosX (void)
   return ((getWindow_width () - MENU_WIDTH) / 2);
 }
 
+/* Open And close the menu */
+int
+openCloseTheMenu(S_menuchoice *menuChoice){
+		  if (menuChoice->open == 0)
+            {
+		    menuChoice->freeze = 1;
+            menuChoice->open = 1;
+            }
+		  else{
+		    menuChoice->freeze = 0;
+            menuChoice->open = 0;
+          }
 
+        //fprintf (stderr, "change to freeze: %d open:%d\n", menuChoice->freeze, menuChoice->freeze);
+        return 1;
+}
 
 /* Show menu List */
 void

@@ -67,6 +67,8 @@ typedef struct
  int tab;
  int sub; //under tabs
  int max; //max lines in sub part
+ int open; //the menu panel is open or not
+ int freeze; //Freeze the gameplay when menu or congrats are open
 }S_menuchoice;
 
 /* Init menu grid */
@@ -110,6 +112,9 @@ int menuHeight (void);
 /* menu position*/
 int menuPosX (void);
 
+/* Open And close the menu */
+int
+openCloseTheMenu (S_menuchoice *menuChoice);
 
 /* Show menu List */
 void
