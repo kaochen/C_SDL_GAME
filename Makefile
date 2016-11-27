@@ -27,7 +27,7 @@ BINDIR=./bin/
 
 EXEC= SokoRobot
 DEPS= inc/const.h inc/level.h inc/level_decor.h inc/menu.h inc/sprites.h inc/slc.h
-OBJS= $(OBJDIR)level.o $(OBJDIR)level_decor.o $(OBJDIR)main.o $(OBJDIR)menu.o $(OBJDIR)menu_text.o $(OBJDIR)move.o $(OBJDIR)settings.o $(OBJDIR)sprites.o $(OBJDIR)slc.o
+OBJS= $(OBJDIR)level.o $(OBJDIR)level_decor.o $(OBJDIR)main.o $(OBJDIR)menu.o $(OBJDIR)menu_text.o $(OBJDIR)mouse.o $(OBJDIR)move.o $(OBJDIR)settings.o $(OBJDIR)sprites.o $(OBJDIR)slc.o
 
 #first create the obj folder to receive *.o files :
 $(shell   mkdir -p $(OBJDIR))
@@ -52,6 +52,9 @@ $(OBJDIR)menu.o: src/menu.c $(DEPS)
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
 $(OBJDIR)menu_text.o: src/menu_text.c $(DEPS)
+	$(CC) -o $@ -c $< -I inc $(CFLAGS)
+
+$(OBJDIR)mouse.o: src/mouse.c $(DEPS)
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
 $(OBJDIR)move.o: src/move.c $(DEPS)

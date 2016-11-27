@@ -34,6 +34,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "../inc/level_decor.h"
 #include "../inc/menu.h"
 #include "../inc/menu_text.h"
+#include "../inc/mouse.h"
 #include "../inc/move.h"
 #include "../inc/settings.h"
 #include "../inc/sprites.h"
@@ -289,25 +290,7 @@ main (int argc, char *argv[])
 
 	      xCursor = event.button.x;
 	      yCursor = event.button.y;
-	      if (menuChoice.open == 1)
-		{
-          /* navigate into the different tabs */
-          int first = menuPosX() + 3*SPRITE_SIZE;
-		  if (yCursor > SPRITE_SIZE
-		      && yCursor < 2*SPRITE_SIZE)
-		    {
-		      if (xCursor < first)
-			menuChoice.tab = MC_INFO;
-		      if (xCursor >= first && yCursor < first + 3 * SPRITE_SIZE)
-			menuChoice.tab = MC_SHORTCUTS;
-		      if (xCursor >= first + 3 * SPRITE_SIZE && xCursor < first + 5 * SPRITE_SIZE)
-			menuChoice.tab = MC_ABOUT;
-		      if (xCursor >= first + 5 * SPRITE_SIZE)
-			menuChoice.tab = MC_FILE;
-		    }
-		  refresh = 1;
-		  break;
-		}
+          refresh = mouseMotion(&menuChoice,xCursor,yCursor,gridMenu);
 
 	      /*Do not move when level is finished */
 	      if (menuChoice.freeze == 1 )
