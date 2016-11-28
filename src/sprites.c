@@ -110,6 +110,7 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[BUTTON_ARROW_P], themePath, "button_arrow_p.png");
   loadSprite (&tableSurface[BUTTON_RESET], themePath, "button_reset.png");
   loadSprite (&tableSurface[BUTTON_BACKWARDS], themePath, "button_backwards.png");
+  loadSprite (&tableSurface[BUTTON_FILE], themePath, "button_file.png");
 
 
   /* outside the wall */

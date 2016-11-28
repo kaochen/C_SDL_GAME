@@ -537,7 +537,7 @@ displayOpenMenuBackground (SDL_Surface * screen,
   iconPos.x += 2*SPRITE_SIZE;
   SDL_BlitSurface (tableSurface[BUTTON_ARROW_P].image, NULL, screen, &iconPos);
   iconPos.x += 2*SPRITE_SIZE;
-  SDL_BlitSurface (tableSurface[BUTTON_BACKWARDS].image, NULL, screen, &iconPos);
+  SDL_BlitSurface (tableSurface[BUTTON_FILE].image, NULL, screen, &iconPos);
 }
 
 /* Display pattern over the text menu */
