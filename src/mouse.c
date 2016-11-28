@@ -29,7 +29,9 @@ mouseMotion(S_menuchoice *menuChoice, int xCursor, int yCursor, S_Menu gridMenu[
     int start = menuPosX();
     int xGrid = (xCursor-start)/SPRITE_SIZE;
     int yGrid = yCursor/SPRITE_SIZE;
+    int ySub = yCursor/(SPRITE_SIZE-10);
     if (menuChoice->open == 1){
+    /* tabs */
     for (size_t i = 0; i < MENU_LINE; i++){   /*tabs or equal to 2 SPRITE_SIZE*/
         int  x = xGrid;
         //fprintf (stderr, "for %d:%d ", xGrid, yGrid);
@@ -44,8 +46,14 @@ mouseMotion(S_menuchoice *menuChoice, int xCursor, int yCursor, S_Menu gridMenu[
                 return 1; //refresh
                 }
             }
+      /* Lines in the sub menu */
+    if(xGrid > 0 && xGrid < (MENU_WIDTH/SPRITE_SIZE) && ySub > 3 && ySub <= 4 + menuChoice->max ){
+        menuChoice->sub = ySub - 4;
+        //fprintf (stderr, "menuChoice : %d:%d\n", menuChoice->sub, ySub);
+        return 1; //refresh
+        }
     }
-    return 0; //refresh
+    return 0; //no refresh
 }
 
 #endif
