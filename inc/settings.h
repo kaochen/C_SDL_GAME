@@ -27,6 +27,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include "const.h"
 
+/* Searching for preferences.ini */
+void
+searchPrefFile(char * prefFile);
+
+/* load settings from pref file */
+S_preferences *
+loadPrefStruct(void);
+
 /*read window height and width from the preference file */
 int getPrefAsInt (const char *prefName);
 

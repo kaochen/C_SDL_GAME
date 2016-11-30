@@ -26,6 +26,37 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <string.h>
 #include <errno.h>
 
+/* Searching for preferences.ini */
+void
+searchPrefFile(char * prefFile){
+
+FILE *file = NULL;
+char path[MAX_CARACT]= "./";
+strcat(path,PREF_FILE);
+file = fopen(path, "r");
+
+if (file != NULL){
+    strcpy(prefFile,path);
+    }
+else{
+      fprintf (stderr, "Error opening %s: %s\n", PREF_FILE, strerror (errno));
+      exit(EXIT_FAILURE);
+    }
+fclose(file);
+}
+
+/* load settings from pref file */
+S_preferences *
+loadPrefStruct(void){
+
+  S_preferences *pref;
+  pref = malloc (MENU_LINE * sizeof (S_preferences));
+      pref->window_width = getWindow_width();
+      pref->window_height = getWindow_height();
+      pref->framerate = getPrefAsInt ("framerate");
+  return pref;
+}
+
 /*get int value from the preference file */
 int
 getPrefAsInt (const char *prefName)
@@ -35,8 +66,11 @@ getPrefAsInt (const char *prefName)
   char settingName[MAX_CARACT] = "";
   strcpy (settingName, prefName);
 
+  char fileName[MAX_CARACT]= "";
+  searchPrefFile(fileName);
+
   int ret = 0;
-  prefFile = fopen (PREF_FILE, "r");
+  prefFile = fopen (fileName, "r");
   if (prefFile != NULL)
     {
 
@@ -60,6 +94,7 @@ getPrefAsInt (const char *prefName)
   else
     {
       fprintf (stderr, "Error opening %s: %s\n", PREF_FILE, strerror (errno));
+      exit(EXIT_FAILURE);
     }
   fclose (prefFile);
   return ret;
@@ -76,7 +111,11 @@ getPrefChar(char * pref, const char *setting) {
     strcpy(ret, pref);
     unsigned int i = 0 , size = 0;
     int j = -1;
-    prefFile = fopen (PREF_FILE, "r");
+
+    char fileName[MAX_CARACT]= "";
+    searchPrefFile(fileName);
+
+    prefFile = fopen (fileName, "r");
       if (prefFile == NULL)
          {
             fprintf (stderr, "Error opening %s: %s\n", PREF_FILE, strerror (errno));

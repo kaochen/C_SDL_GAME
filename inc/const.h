@@ -155,6 +155,7 @@ typedef struct
  int y;
 }S_Menu;
 
+/*Struct to store menu status*/
 typedef struct
 {
  int tab;
@@ -163,4 +164,13 @@ typedef struct
  int open; //the menu panel is open or not
  int freeze; //Freeze the gameplay when menu or congrats are open
 }S_menuchoice;
+
+/*Struct to store settings*/
+typedef struct
+{
+ int window_height;
+ int window_width;
+ int framerate;
+}S_preferences;
+
 #endif

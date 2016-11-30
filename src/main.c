@@ -81,15 +81,16 @@ main (int argc, char *argv[])
 
   /*load preferences */
 
+  S_preferences *pref = loadPrefStruct();
   printf (gettext ("The window size request from settings is %dx%d\n"),
-	  getWindow_width (), getWindow_height ());
+	  pref->window_width, pref->window_height);
 
   /* Create the window game */
   SDL_Window *window = SDL_CreateWindow (GAME_NAME,
 					 SDL_WINDOWPOS_UNDEFINED,
 					 SDL_WINDOWPOS_UNDEFINED,
-					 getWindow_width (),
-					 getWindow_height (),
+					 pref->window_width,
+					 pref->window_height,
 					 SDL_WINDOW_MOUSE_FOCUS);
 
   /* Check window */
@@ -139,9 +140,7 @@ main (int argc, char *argv[])
   grid_init (w, h, grid);
 
    /* create a sub grid for dispatch items on the menu */
-   fprintf (stderr, gettext ("Marker1.\n"));
    S_Menu *gridMenu = initGridMenu();
-   fprintf (stderr, gettext ("Marker2.\n"));
 
 
   fprintf (stderr, "\n");
@@ -225,7 +224,7 @@ main (int argc, char *argv[])
   SDL_UpdateWindowSurface (window);
 
   /* get framerate from settings */
-  int fps = getPrefAsInt ("framerate");
+  int fps = pref->framerate;
   if (fps < 12)
     {
       fps = 12;
