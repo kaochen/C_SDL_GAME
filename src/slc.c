@@ -614,11 +614,11 @@ loadSlcLevel (S_preferences * pref,
 	}
     }
 
-  randomGround (grid);
-  randomWall (grid);
+  randomGround (pref, grid);
+  randomWall (pref, grid);
   /* Change grounds that are outside the walls to the OUTSIDE flag */
-  detectOutside (grid);
-  randomOutside (grid);
+  detectOutside (pref, grid);
+  randomOutside (pref, grid);
 
 
   /* free memory */
@@ -637,18 +637,18 @@ loadSlcLevel (S_preferences * pref,
 
 /* Change GROUND that are outside the walls to OUTSIDE */
 void
-detectOutside (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
-{
+detectOutside (S_preferences *pref,
+              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]){
   /*Read left to right */
   int x = 0, y = 0;
-  for (y = 0; y <= getY_Blocks (); y++)
+  for (y = 0; y <= pref->y_Blocks; y++)
     {
-      for (x = 0; x <= getX_Blocks (); x++)
+      for (x = 0; x <= pref->x_Blocks; x++)
 	{
 	  /*break if wall */
 	  if (grid[x][y].mainRole == WALL)
 	    {
-	      x = getX_Blocks () + 1;
+	      x = pref->x_Blocks + 1;
 	    }
 	  else
 	    {
@@ -663,9 +663,9 @@ detectOutside (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 
   /*Read right to left */
   x = 0, y = 0;
-  for (y = 0; y <= getY_Blocks (); y++)
+  for (y = 0; y <= pref->y_Blocks; y++)
     {
-      for (x = getX_Blocks (); x >= 0; x--)
+      for (x = pref->x_Blocks; x >= 0; x--)
 	{
 	  /*break if wall */
 	  if (grid[x][y].mainRole == WALL)
@@ -687,14 +687,14 @@ detectOutside (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
   /*Read Top to Bottom */
   x = 0;
   y = 0;
-  for (x = 0; x <= getX_Blocks (); x++)
+  for (x = 0; x <= pref->x_Blocks; x++)
     {
-      for (y = 0; y <= getY_Blocks (); y++)
+      for (y = 0; y <= pref->y_Blocks; y++)
 	{
 	  /*break if wall */
 	  if (grid[x][y].mainRole == WALL)
 	    {
-	      y = getY_Blocks () + 1;
+	      y = pref->y_Blocks + 1;
 	    }
 	  else
 	    {
@@ -710,9 +710,9 @@ detectOutside (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
   /*Read Bottom to Top */
   x = 0;
   y = 0;
-  for (x = 0; x < getX_Blocks (); x++)
+  for (x = 0; x < pref->x_Blocks; x++)
     {
-      for (y = getY_Blocks (); y > 0; y--)
+      for (y = pref->y_Blocks; y > 0; y--)
 	{
 	  /*break if wall */
 	  if (grid[x][y].mainRole == WALL)

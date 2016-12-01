@@ -27,18 +27,29 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "settings.h"
 
 
+/* move player and update object status" */
 int
-movePlayer(int xPlayer, int yPlayer, int direction , Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
+movePlayer (S_preferences *pref,
+            int xPlayer,
+            int yPlayer,
+            int direction ,
+            Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
 
 /*Find the player on the grid*/
 void
-getPosPlayer(int *xPlayer, int *yPlayer, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
-
+getPosPlayer(S_preferences *pref,
+             int *xPlayer,
+             int *yPlayer,
+             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
 
 int
 mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor);
 
-/*choose where the target will be displayed*/
+/*choose where the target image will be displayed*/
 void
-moveTarget(int next_target, int xPlayer,int yPlayer, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
+moveTarget(S_preferences *pref,
+           int next_target,
+           int xPlayer,
+           int yPlayer,
+           Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
 #endif

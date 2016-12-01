@@ -124,12 +124,13 @@ backgroundTopBar (S_preferences * pref,
 
 /* count how many goals are need to complete the level */
 int
-goalLeft (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
+goalLeft (S_preferences *pref,
+              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
 {
   int x = 0, y = 0, nbrOfBoxOk = 0;
-  for (x = 0; x < getX_Blocks (); x++)
+  for (x = 0; x < pref->max_X_Blocks; x++)
     {
-      for (y = 0; y < getY_Blocks (); y++)
+      for (y = 0; y < pref->max_Y_Blocks; y++)
 	{
 	  if (grid[x][y].mainRole == BOX && grid[x][y].goalRole == GOAL)
 	    nbrOfBoxOk += 1;
@@ -140,12 +141,13 @@ goalLeft (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 
 /* count goals all ready achieve */
 int
-nbr_of_goals (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
+nbr_of_goals (S_preferences *pref,
+              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
 {
   int x = 0, y = 0, nbrOfGoal = 0;
-  for (x = 0; x < getX_Blocks (); x++)
+  for (x = 0; x < pref->x_Blocks; x++)
     {
-      for (y = 0; y < getY_Blocks (); y++)
+      for (y = 0; y < pref->y_Blocks; y++)
 	{
 	  if (grid[x][y].goalRole == GOAL)
 	    nbrOfGoal += 1;
@@ -173,7 +175,7 @@ displayProgress (S_preferences * pref,
   circlePos.y = 5;
 
   /* progress.png is a small part of 360° cirle */
-  int angle = (360 - goalLeft (grid) * 360 / nbr_of_goals (grid));
+  int angle = (360 - goalLeft (pref, grid) * 360 / nbr_of_goals (pref, grid));
   //fprintf(stderr,"Angle is %d\n", angle);
   int i = 0;
   /* blit progress circle size image is 56*56px */
@@ -195,11 +197,12 @@ displayProgress (S_preferences * pref,
 
 /* Victory or not ? */
 int
-levelFinished (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
+levelFinished (S_preferences *pref,
+               Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
 {
   /* get info */
-  int i = goalLeft (grid);
-  int j = nbr_of_goals (grid);
+  int i = goalLeft (pref, grid);
+  int j = nbr_of_goals (pref, grid);
 
   if (i == j)
     {
@@ -215,15 +218,17 @@ levelFinished (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()])
 
 /* display a congrats message to the winner */
 int
-displayCongrats (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
+displayCongrats (S_preferences *pref,
+                 SDL_Surface * screen,
+                 Sprites tableSurface[NBR_OF_IMAGES])
 {
   SDL_Rect congratsPos;
 
   int width = 320, height = 120;
 
   /* add a background */
-  congratsPos.x = ((getX_Blocks () * SPRITE_SIZE) - width) / 2;
-  congratsPos.y = ((getY_Blocks () * SPRITE_SIZE) - height) / 2;
+  congratsPos.x = (pref->window_width - width) / 2;
+  congratsPos.y = (pref->window_height - height) / 2;
   SDL_BlitSurface (tableSurface[CONGRATS].image, NULL, screen, &congratsPos);
 
   /* setup font */

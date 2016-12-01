@@ -135,7 +135,7 @@ main (int argc, char *argv[])
 
   /* create a grid using the heigth and width form settings */
 
-  int h = getMax_Y_Blocks (), w = getMax_X_Blocks ();
+  int h = pref->max_Y_Blocks, w = pref->max_X_Blocks;
   Square grid[w][h];
   grid_init (w, h, grid);
 
@@ -204,7 +204,7 @@ main (int argc, char *argv[])
   int yPlayer = 0;
 
   /* display the level using the grid */
-  if (displayLevel (grid, screen, tableSurface) == EXIT_FAILURE)
+  if (displayLevel (pref, grid, screen, tableSurface) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("first displayLevel() failed.\n"));
       exit (EXIT_FAILURE);
@@ -294,13 +294,13 @@ main (int argc, char *argv[])
 	      if (menuChoice.open == 0)
 		{
 		  /*Place the target image between the cursor and the player to indicate the next move */
-		  getPosPlayer (&xPlayer, &yPlayer, grid);
+		  getPosPlayer (pref, &xPlayer, &yPlayer, grid);
 		  next_target =
 		    mouseMoveDirection (xPlayer, yPlayer, xCursor, yCursor);
 
 		  if (target != next_target)
 		    {
-		      moveTarget (next_target, xPlayer, yPlayer, grid);
+		      moveTarget (pref, next_target, xPlayer, yPlayer, grid);
 		      refresh = 1;
 		      target = next_target;
 		      break;
@@ -341,7 +341,7 @@ main (int argc, char *argv[])
 			    }
 			}
 
-		      getPosPlayer (&xPlayer, &yPlayer, grid);
+		      getPosPlayer (pref, &xPlayer, &yPlayer, grid);
 		      /*Do not move when level is finished */
 		      if (menuChoice.freeze == 1)
 			break;
@@ -351,7 +351,7 @@ main (int argc, char *argv[])
 					    yCursor);
 
 		      refresh =
-			movePlayer (xPlayer, yPlayer, direction, grid);
+			movePlayer (pref, xPlayer, yPlayer, direction, grid);
 		      //reset target status if move
 		      target = STILL;
 		    }
@@ -361,7 +361,7 @@ main (int argc, char *argv[])
 
 	    case SDL_KEYDOWN:
 	      /* Get the player position */
-	      getPosPlayer (&xPlayer, &yPlayer, grid);
+	      getPosPlayer (pref, &xPlayer, &yPlayer, grid);
 
 
 	      /* listen keyboard */
@@ -374,7 +374,7 @@ main (int argc, char *argv[])
 		      if (menuChoice.freeze == 1)
 			break;
 
-		      refresh = movePlayer (xPlayer, yPlayer, RIGHT, grid);
+		      refresh = movePlayer (pref, xPlayer, yPlayer, RIGHT, grid);
 		      break;
 		    }
 
@@ -397,7 +397,7 @@ main (int argc, char *argv[])
 		      if (menuChoice.freeze == 1)
 			break;
 
-		      refresh = movePlayer (xPlayer, yPlayer, LEFT, grid);
+		      refresh = movePlayer (pref, xPlayer, yPlayer, LEFT, grid);
 		      break;
 		    }
 		  else
@@ -419,7 +419,7 @@ main (int argc, char *argv[])
 		      if (menuChoice.freeze == 1)
 			break;
 
-		      refresh = movePlayer (xPlayer, yPlayer, UP, grid);
+		      refresh = movePlayer (pref, xPlayer, yPlayer, UP, grid);
 		      break;
 		    }
 		  else
@@ -441,7 +441,7 @@ main (int argc, char *argv[])
 		      if (menuChoice.freeze == 1)
 			break;
 
-		      refresh = movePlayer (xPlayer, yPlayer, DOWN, grid);
+		      refresh = movePlayer (pref, xPlayer, yPlayer, DOWN, grid);
 		      break;
 		    }
 
@@ -523,14 +523,14 @@ main (int argc, char *argv[])
       if (refresh == 1)
 	{
 	  /* display the level using the grid */
-	  if (displayLevel (grid, screen, tableSurface) == EXIT_FAILURE)
+	  if (displayLevel (pref, grid, screen, tableSurface) == EXIT_FAILURE)
 	    {
 	      fprintf (stderr, gettext ("displayLevel() failed.\n"));
 	    }
 	  /*display congrats if the level is finished */
-	  if (levelFinished (grid) == FINISH && menuChoice.open == 0)
+	  if (levelFinished (pref, grid) == FINISH && menuChoice.open == 0)
 	    {
-	      displayCongrats (screen, tableSurface);
+	      displayCongrats (pref, screen, tableSurface);
 	      menuChoice.freeze = 1;
 	    }
 	  if (menuChoice.open == 1)

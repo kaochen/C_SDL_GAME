@@ -207,34 +207,6 @@ getWindow_height ()
   return ret;
 }
 
-/*One blocks = One sprites  */
-
-int
-getX_Blocks ()
-{
-  int x = getWindow_width () / SPRITE_SIZE;
-  return x;
-}
-
-int
-getY_Blocks ()
-{
-  int y = getWindow_height () / SPRITE_SIZE;
-  return y;
-}
-
-int
-getMax_X_Blocks ()
-{
-      return getX_Blocks () + 2;
-}
-
-
-int
-getMax_Y_Blocks ()
-{
-      return getY_Blocks () + 2;
-}
 
 
 

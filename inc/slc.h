@@ -103,6 +103,8 @@ loadSlcLevel (S_preferences * pref,
 int getNbrOfLevels (S_LevelList * levelList);
 
 /* Change GROUND that are outside the walls to OUTSIDE */
-void detectOutside (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
+void
+detectOutside (S_preferences *pref,
+              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
 
 #endif

@@ -42,8 +42,10 @@ grid_init(size_t w, size_t h, Square grid[w][h])
 
 /* display level on the screen */
 int
-displayLevel (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface * screen,
-	      Sprites tableSurface[NBR_OF_IMAGES])
+displayLevel (S_preferences *pref,
+              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
+              SDL_Surface * screen,
+              Sprites tableSurface[NBR_OF_IMAGES])
 {
  if (grid == NULL || screen == NULL || tableSurface == NULL)
     {
@@ -58,9 +60,9 @@ displayLevel (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface *
   /* blit surfaces depending of its destiny */
   int x = 0, y = 0;
   /*first pass */
-  for (x = 0; x < getX_Blocks (); x++)
+  for (x = 0; x < pref->x_Blocks; x++)
     {
-      for (y = 0; y < getY_Blocks (); y++)
+      for (y = 0; y < pref->y_Blocks; y++)
 	{
 	  pos.x = x * SPRITE_SIZE;
 	  pos.y = y * SPRITE_SIZE;
@@ -176,13 +178,13 @@ displayLevel (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface *
 	}
 
     }
-  if (blitBorders (grid, screen, tableSurface) == EXIT_FAILURE)
+  if (blitBorders (pref, grid, screen, tableSurface) == EXIT_FAILURE)
     {
          fprintf (stderr, gettext("blitBorders failed.\n"));
          return EXIT_FAILURE;
     }
 
-   if (blitCorners (grid, screen, tableSurface) == EXIT_FAILURE)
+   if (blitCorners (pref, grid, screen, tableSurface) == EXIT_FAILURE)
     {
          fprintf (stderr, gettext("blitCorners failed.\n"));
          return EXIT_FAILURE;

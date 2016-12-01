@@ -76,10 +76,14 @@ backgroundTopBar (S_preferences * pref,
 
 
 /* count how many goals are need to complete the level */
-int goalLeft (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
+int
+goalLeft (S_preferences *pref,
+              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
 
 /* count goals all ready achieve */
-int nbr_of_goals (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
+int
+nbr_of_goals (S_preferences *pref,
+              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
 
 /* Display Progress in the level */
 int
@@ -88,11 +92,15 @@ displayProgress (S_preferences * pref,
        SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Victory or not ? */
-int levelFinished (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
+int
+levelFinished (S_preferences *pref,
+               Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
 
 /* display a congrats message to the winner */
-int displayCongrats (SDL_Surface * screen,
-		     Sprites tableSurface[NBR_OF_IMAGES]);
+int
+displayCongrats (S_preferences *pref,
+                 SDL_Surface * screen,
+                 Sprites tableSurface[NBR_OF_IMAGES]);
 
 
 /* Open And close the menu */

@@ -27,10 +27,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* move player and update object status" */
 int
-movePlayer(int xPlayer, int yPlayer, int direction , Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]){
+movePlayer (S_preferences *pref,
+            int xPlayer,
+            int yPlayer,
+            int direction ,
+            Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]){
 
         int xStep1 = xPlayer, xStep2 = xPlayer, yStep1 = yPlayer, yStep2 = yPlayer, image = PLAYER_F;
-        int xMax = getX_Blocks (), yMax = getY_Blocks ();
    	  switch (direction)
 	         {
 	         case UP:
@@ -59,7 +62,7 @@ movePlayer(int xPlayer, int yPlayer, int direction , Square grid[getMax_X_Blocks
 
 
 		  /* Don't go outside */
-		  if ((xStep1 < 0 && xStep1 >= xMax) || (yStep1 < 0 && yStep1 >= yMax ))
+		  if ((xStep1 < 0 && xStep1 >= pref->x_Blocks) || (yStep1 < 0 && yStep1 >= pref->y_Blocks ))
             return  0;
 
 		  /* test if wall */
@@ -68,7 +71,7 @@ movePlayer(int xPlayer, int yPlayer, int direction , Square grid[getMax_X_Blocks
 
 
 		  /* Don't go outside with a box */
-		  if (grid[xStep1][yStep1].mainRole == BOX  && (xStep2 < 0 && xStep2 >= xMax ) && (yStep2 < 0 && yStep2 >= yMax ))
+		  if (grid[xStep1][yStep1].mainRole == BOX  && (xStep2 < 0 && xStep2 >= pref->x_Blocks ) && (yStep2 < 0 && yStep2 >= pref->y_Blocks ))
           return  0;
 
 
@@ -112,11 +115,15 @@ return 0;
 
 /*Find the player on the grid*/
 void
-getPosPlayer(int *xPlayer, int *yPlayer, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]){
+getPosPlayer(S_preferences *pref,
+             int *xPlayer,
+             int *yPlayer,
+             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]){
+
 	    int x = 0, y = 0;
-         for (x = 0; x < getX_Blocks (); x++)
+         for (x = 0; x < pref->x_Blocks; x++)
 		{
-		  for (y = 0; y < getY_Blocks (); y++)
+		  for (y = 0; y < pref->y_Blocks; y++)
 		    {
 		      if (grid[x][y].mainRole == PLAYER)
 			{
@@ -165,8 +172,12 @@ mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor){
 
 /*choose where the target image will be displayed*/
 void
-moveTarget(int next_target, int xPlayer,int yPlayer, Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]){
-            int x = xPlayer; int y = yPlayer;
+moveTarget(S_preferences *pref,
+           int next_target,
+           int xPlayer,
+           int yPlayer,
+           Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]){
+           int x = xPlayer; int y = yPlayer;
                     switch (next_target){
                                 case RIGHT:
                                         if (grid[xPlayer+1][yPlayer].mainRole == GROUND)
