@@ -68,11 +68,19 @@ int readFilesList (S_FilesList * filesList);
 S_LevelList *initLevelList ();
 
 /*get levels infos from files */
-int readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList);
+int
+readLevelsAttributs (S_preferences * pref,
+                     S_FilesList * filesList,
+                     S_LevelList * levelList);
 
 /*Add a level in the list*/
-void addNewLevel (S_LevelList * levelList, char *fileName, char *name,
-		  int height, int width);
+void
+addNewLevel (S_preferences *pref,
+             S_LevelList * levelList,
+             char *fileName,
+             char *name,
+             int height,
+             int width);
 
 /*Erase a level in the list from start*/
 int delLevel (S_LevelList * levelList);
@@ -85,8 +93,11 @@ void readLevelList (S_LevelList * levelList);
 
 /*Load slc level into the grid */
 int
-loadSlcLevel (int levelChoice, S_LevelList * levelList,
-	      Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], S_menuchoice *menuChoice);
+loadSlcLevel (S_preferences * pref,
+              int levelChoice,
+              S_LevelList * levelList,
+              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
+              S_menuchoice *menuChoice);
 
 /*get levels infos from files */
 int getNbrOfLevels (S_LevelList * levelList);

@@ -29,5 +29,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /*detect mouse motion*/
 int
-mouseMotion(S_menuchoice *menuChoice, int xCursor, int yCursor, S_Menu gridMenu[MENU_LINE]);
+mouseMotion(S_preferences * pref,
+            S_menuchoice *menuChoice,
+            int xCursor,
+            int yCursor,
+            S_Menu gridMenu[MENU_LINE]);
 #endif

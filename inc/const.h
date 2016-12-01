@@ -168,9 +168,20 @@ typedef struct
 /*Struct to store settings*/
 typedef struct
 {
+ /* Main Window */
  int window_height;
  int window_width;
+ int x_Blocks; //number of SPRITE_SIZE in  window_width
+ int y_Blocks; //number of SPRITE_SIZE in  window_height
+ int max_X_Blocks;
+ int max_Y_Blocks;
+
+ /*Menu */
+ int x_menu; // menu position on x
+ int y_menu; // menu position on y
+ int h_menu_block; // menu height in block;
  int framerate;
+
 }S_preferences;
 
 #endif

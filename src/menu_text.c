@@ -114,7 +114,10 @@ loadTextAsSurface (size_t t, S_Text tableTextSurface[NBR_OF_TEXT], char *text,
 
 /* display the level number */
 int
-levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
+levelMenu (S_preferences * pref,
+           int levelNumber,
+           SDL_Surface * screen,
+           S_LevelList * levelList)
 {
   if (screen == NULL || levelList == NULL)
     {
@@ -143,7 +146,7 @@ levelMenu (int levelNumber, SDL_Surface * screen, S_LevelList * levelList)
 
   /* blit the text */
   SDL_Rect pos;
-  pos.x = (menuPosX () + ((MENU_WIDTH - levelText->w)/ 2));
+  pos.x = (pref->x_menu + ((MENU_WIDTH - levelText->w)/ 2));
   pos.y = (SPRITE_SIZE - levelText->h) / 2;
   SDL_BlitSurface (levelText, NULL, screen, &pos);
 

@@ -51,9 +51,27 @@ loadPrefStruct(void){
 
   S_preferences *pref;
   pref = malloc (MENU_LINE * sizeof (S_preferences));
+   /* Main window */
+      /* Window size */
       pref->window_width = getWindow_width();
       pref->window_height = getWindow_height();
-      pref->framerate = getPrefAsInt ("framerate");
+   /* Number of blocks */
+      pref->x_Blocks = pref->window_width/SPRITE_SIZE;
+      pref->y_Blocks = pref->window_height/SPRITE_SIZE;
+      pref->max_X_Blocks =  pref->x_Blocks + 2;
+      pref->max_Y_Blocks =  pref->y_Blocks + 2;
+
+   /* Menu */
+      pref->x_menu = (pref->window_width - MENU_WIDTH )/2;
+      pref->y_menu = 0;
+      pref->h_menu_block = 1;
+   /*framerate*/
+    int fps = getPrefAsInt ("framerate");
+        if (fps < 12)
+          {
+            fps = 12;
+          }
+      pref->framerate = fps;
   return pref;
 }
 

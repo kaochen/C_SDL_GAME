@@ -165,7 +165,7 @@ main (int argc, char *argv[])
   /*Read level from slc file */
   S_LevelList *levelList = initLevelList ();
   //readLevelList(levelList);
-  if (readLevelsAttributs (filesList, levelList) == EXIT_FAILURE)
+  if (readLevelsAttributs (pref, filesList, levelList) == EXIT_FAILURE)
     {
       perror (gettext ("Error when loading levels attributs from files."));
     }
@@ -189,7 +189,7 @@ main (int argc, char *argv[])
   /*Load first game */
   int levelChoice = readLevelFromSetting (levelList);
   fprintf (stderr, gettext ("Loading first level.\n"));
-  if (loadSlcLevel (levelChoice, levelList, grid, &menuChoice) == EXIT_SUCCESS)
+  if (loadSlcLevel (pref, levelChoice, levelList, grid, &menuChoice) == EXIT_SUCCESS)
     {
       fprintf (stderr, gettext ("Level loaded.\n"));
     }
@@ -212,7 +212,7 @@ main (int argc, char *argv[])
 
   /* display the top bar  */
   if (displayTopBar
-      (levelChoice, screen, tableSurface, levelList,
+      (pref, levelChoice, screen, tableSurface, levelList,
        grid, gridMenu) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("first displayTopBar() failed.\n"));
@@ -223,13 +223,8 @@ main (int argc, char *argv[])
   /* refresh the window */
   SDL_UpdateWindowSurface (window);
 
-  /* get framerate from settings */
-  int fps = pref->framerate;
-  if (fps < 12)
-    {
-      fps = 12;
-    }
-  fprintf (stderr, "Framerate %d\n", fps);
+  /* display framerate from settings */
+  fprintf (stderr, "Framerate %d\n", pref->framerate);
 
 /* wait for quit event */
 
@@ -290,7 +285,7 @@ main (int argc, char *argv[])
 
 	      xCursor = event.button.x;
 	      yCursor = event.button.y;
-          refresh = mouseMotion(&menuChoice,xCursor,yCursor,gridMenu);
+         refresh = mouseMotion(pref, &menuChoice,xCursor,yCursor,gridMenu);
 
 	      /*Do not move when level is finished */
 	      if (menuChoice.freeze == 1 )
@@ -323,8 +318,8 @@ main (int argc, char *argv[])
 		  if (menuChoice.open == 1)
 		    {
 		      /*Clic outside the open menu to close it */
-		      if ((xCursor < menuPosX ()
-			   || xCursor > menuPosX () + MENU_WIDTH)
+		      if ((xCursor < pref->x_menu
+			   || xCursor > pref->x_menu + MENU_WIDTH)
 			  || (yCursor < SPRITE_SIZE
 			      || yCursor > 7 * SPRITE_SIZE))
 			{
@@ -336,8 +331,8 @@ main (int argc, char *argv[])
 		  if (menuChoice.open == 0)
 		    {
 		      /*Clic on the top bar top open the menu */
-		      if (xCursor > menuPosX ()
-			  && xCursor < menuPosX () + MENU_WIDTH)
+		      if (xCursor > pref->x_menu
+			  && xCursor < pref->x_menu + MENU_WIDTH)
 			{
 			  if (yCursor < SPRITE_SIZE)
 			    {
@@ -472,7 +467,7 @@ main (int argc, char *argv[])
 		  /* hit r to reset the current level */
 		case SDLK_r:
 		  /* load the level */
-		  if (loadSlcLevel (levelChoice, levelList, grid, &menuChoice) == EXIT_FAILURE)
+		  if (loadSlcLevel (pref, levelChoice, levelList, grid, &menuChoice) == EXIT_FAILURE)
 		          perror ("Impossible to load the level. Perror");
 
 		  refresh = 1;
@@ -485,7 +480,7 @@ main (int argc, char *argv[])
 		  if (levelChoice == max_Levels)
 		    levelChoice = 0;
 
-		  if (loadSlcLevel (levelChoice, levelList, grid, &menuChoice) ==
+		  if (loadSlcLevel (pref, levelChoice, levelList, grid, &menuChoice) ==
 		      EXIT_FAILURE)
 		      perror ("Impossible to load the level. Perror");
 
@@ -499,7 +494,7 @@ main (int argc, char *argv[])
 		  if (levelChoice == -1)
 		    levelChoice = max_Levels - 1;
 
-		  if (loadSlcLevel (levelChoice, levelList, grid, &menuChoice) ==
+		  if (loadSlcLevel (pref, levelChoice, levelList, grid, &menuChoice) ==
 		      EXIT_FAILURE)
 		      perror ("Impossible to load the level. Perror");
 
@@ -540,11 +535,11 @@ main (int argc, char *argv[])
 	    }
 	  if (menuChoice.open == 1)
 	    {
-	      openMenu (screen, tableSurface, tableTextSurface, levelList,
+	      openMenu (pref, screen, tableSurface, tableTextSurface, levelList,
 			menuChoice, levelChoice, gridMenu);
 	    }
 
-	  displayTopBar ((levelChoice), screen, tableSurface,
+	  displayTopBar (pref, levelChoice, screen, tableSurface,
 			 levelList, grid, gridMenu);
 
 	  SDL_UpdateWindowSurface (window);
@@ -552,9 +547,9 @@ main (int argc, char *argv[])
 	}
       /* setup delay using framerate */
       currentTime = SDL_GetTicks ();
-      if ((currentTime - previousTime) < (unsigned) (1000 / fps))
+      if ((currentTime - previousTime) < (unsigned) (1000 / pref->framerate))
 	{
-	  SDL_Delay ((unsigned) (1000 / fps) - (currentTime - previousTime));
+	  SDL_Delay ((unsigned) (1000 / pref->framerate) - (currentTime - previousTime));
 
 	}
       else

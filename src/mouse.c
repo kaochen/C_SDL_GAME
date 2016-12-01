@@ -23,11 +23,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define MOUSE_C
 
 #include "../inc/mouse.h"
+
 /*detect mouse motion*/
 int
-mouseMotion(S_menuchoice *menuChoice, int xCursor, int yCursor, S_Menu gridMenu[MENU_LINE]){
-    int start = menuPosX();
-    int xGrid = (xCursor-start)/SPRITE_SIZE;
+mouseMotion(S_preferences * pref,
+            S_menuchoice *menuChoice,
+            int xCursor,
+            int yCursor,
+            S_Menu gridMenu[MENU_LINE]){
+
+    int xGrid = (xCursor-pref->x_menu)/SPRITE_SIZE;
     int yGrid = yCursor/SPRITE_SIZE;
     int ySub = yCursor/(SPRITE_SIZE-10);
     if (menuChoice->open == 1){

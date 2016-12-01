@@ -58,7 +58,10 @@ int
 displayShortcut (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT]);
 
 /* display the level number */
-int levelMenu (int levelNumber, SDL_Surface * screen,
-		S_LevelList * levelList);
+int
+levelMenu (S_preferences * pref,
+           int levelNumber,
+           SDL_Surface * screen,
+           S_LevelList * levelList);
 
 #endif

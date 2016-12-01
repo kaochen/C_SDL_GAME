@@ -60,15 +60,19 @@ initGridMenu(void);
 
 /* display Top Bar*/
 int
-displayTopBar (int levelNumber, SDL_Surface * screen,
+displayTopBar (S_preferences * pref,
+	       int levelNumber,
+	       SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList,
-	       Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()],
+	       Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
                S_Menu gridMenu[MENU_LINE]);
 
-/* display background top bar */
-int backgroundTopBar (SDL_Surface * screen,
-		     Sprites tableSurface[NBR_OF_IMAGES]);
+/* display background of the top bar menu */
+int
+backgroundTopBar (S_preferences * pref,
+                  SDL_Surface * screen,
+                  Sprites tableSurface[NBR_OF_IMAGES]);
 
 
 /* count how many goals are need to complete the level */
@@ -78,8 +82,10 @@ int goalLeft (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 int nbr_of_goals (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 
 /* Display Progress in the level */
-int displayProgress (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], SDL_Surface * menu,
-		      Sprites tableSurface[NBR_OF_IMAGES]);
+int
+displayProgress (S_preferences * pref,
+       Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
+       SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Victory or not ? */
 int levelFinished (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
@@ -88,12 +94,6 @@ int levelFinished (Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()]);
 int displayCongrats (SDL_Surface * screen,
 		     Sprites tableSurface[NBR_OF_IMAGES]);
 
-/* return the height of the menu in blocks*/
-int menuHeight (void);
-
-
-/* menu position*/
-int menuPosX (void);
 
 /* Open And close the menu */
 int
@@ -101,23 +101,43 @@ openCloseTheMenu (S_menuchoice *menuChoice);
 
 /* Show menu List */
 void
-openMenu (SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES],
-	  S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList,
-	  S_menuchoice menuChoice, int levelChoice, S_Menu gridMenu[MENU_LINE]);
+openMenu (S_preferences *pref,
+          SDL_Surface * screen,
+          Sprites tableSurface[NBR_OF_IMAGES],
+	       S_Text tableTextSurface[NBR_OF_TEXT],
+          S_LevelList * levelList,
+          S_menuchoice menuChoice,
+          int levelChoice,
+          S_Menu gridMenu[MENU_LINE]);
 
 /* display Sub menu */
-int displaySubMenu (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT], S_LevelList * levelList, S_menuchoice menuChoice, int levelChoice);
+int
+displaySubMenu (S_preferences * pref,
+                SDL_Surface * screen,
+                S_Text tableTextSurface[NBR_OF_TEXT],
+                S_LevelList * levelList,
+                S_menuchoice menuChoice,
+                int levelChoice );
+
 
 /* Display the background menu */
 void
-displayOpenMenuBackground(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], S_menuchoice menuChoice);
+displayOpenMenuBackground (S_preferences * pref,
+                           SDL_Surface * screen,
+			   Sprites tableSurface[NBR_OF_IMAGES],
+			   S_menuchoice menuChoice);
 
 /* Display pattern over the text menu */
 void
-displayOverTextImage(SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES], S_menuchoice menuChoice);
+displayOverTextImage (S_preferences * pref,
+                     SDL_Surface * screen,
+		     Sprites tableSurface[NBR_OF_IMAGES],
+                     S_menuchoice menuChoice);
 
 /* Display buttons on the top bar*/
 int
-displayTopBarButtons (SDL_Surface * screen,
-		      Sprites tableSurface[NBR_OF_IMAGES], S_Menu gridMenu[MENU_LINE]);
+displayTopBarButtons (S_preferences *pref,
+		      SDL_Surface * screen,
+		      Sprites tableSurface[NBR_OF_IMAGES],
+		      S_Menu gridMenu[MENU_LINE]);
 #endif

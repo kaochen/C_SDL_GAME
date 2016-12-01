@@ -264,8 +264,12 @@ addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
 
 /*Add a level in the list*/
 void
-addNewLevel (S_LevelList * levelList, char *fileName, char *name,
-	     int height, int width)
+addNewLevel (S_preferences *pref,
+             S_LevelList * levelList,
+             char *fileName,
+             char *name,
+             int height,
+             int width)
 {
   S_Level *new = malloc (sizeof (S_Level));
   if (levelList == NULL || new == NULL)
@@ -274,7 +278,7 @@ addNewLevel (S_LevelList * levelList, char *fileName, char *name,
       exit (EXIT_FAILURE);
     }
   /* check size before add */
-  if (width <= getX_Blocks () && height <= (getY_Blocks () - menuHeight ()))
+  if (width <= pref->x_Blocks && height <= (pref->y_Blocks - pref->h_menu_block))
     {
         new->name = malloc(MAX_CARACT);
         new->fileName = malloc(MAX_CARACT);
@@ -363,7 +367,9 @@ getNbrOfLevels (S_LevelList * levelList)
 
 /*get levels infos from files */
 int
-readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
+readLevelsAttributs (S_preferences * pref,
+                     S_FilesList * filesList,
+                     S_LevelList * levelList)
 {
   S_Files *actualFile  = malloc (sizeof (*actualFile));
   if (filesList == NULL || levelList == NULL || actualFile == NULL)
@@ -442,7 +448,7 @@ readLevelsAttributs (S_FilesList * filesList, S_LevelList * levelList)
 	                }
 	              else
 	                {
-	                  addNewLevel (levelList, actualFile->name, (char *) name,
+	                  addNewLevel (pref, levelList, actualFile->name, (char *) name,
 			               atoi ((char *) height), atoi ((char *) width));
 	                }
 	              //printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
@@ -479,8 +485,11 @@ readLevelList (S_LevelList * levelList)
 
 /*Load slc level into the grid */
 int
-loadSlcLevel (int levelChoice, S_LevelList * levelList,
-	      Square grid[getMax_X_Blocks ()][getMax_Y_Blocks ()], S_menuchoice *menuChoice)
+loadSlcLevel (S_preferences * pref,
+              int levelChoice,
+              S_LevelList * levelList,
+              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
+              S_menuchoice *menuChoice)
 {
   if (levelList == NULL)
     {
@@ -500,8 +509,9 @@ loadSlcLevel (int levelChoice, S_LevelList * levelList,
 	  nbr_of_lines = actual->height;
 	  nbr_of_columns = actual->width;
 	  /*Place the drawing into the center of the grid */
-	  firstLines = ((getY_Blocks () - nbr_of_lines) / 2 + menuHeight ());	// + menu
-	  firstColumn = (getX_Blocks () - nbr_of_columns) / 2;
+	  firstLines = ((pref->y_Blocks - nbr_of_lines) / 2 + pref->h_menu_block);	// + menu
+	  firstColumn = (pref->x_Blocks - nbr_of_columns) / 2;
+
 	  break;
 	}
       i++;
@@ -540,9 +550,9 @@ loadSlcLevel (int levelChoice, S_LevelList * levelList,
     }
   /*Clean grid before */
   int y = 0, x = 0;
-  for (y = 0; y < getY_Blocks (); y++)
+  for (y = 0; y < pref->y_Blocks; y++)
     {
-      for (x = 0; x < getX_Blocks (); x++)
+      for (x = 0; x < pref->x_Blocks; x++)
 	{
 	  grid[x][y].mainRole = GROUND;
 	  grid[x][y].subRole = GROUND1;
