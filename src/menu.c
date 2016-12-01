@@ -250,8 +250,8 @@ displayCongrats (S_preferences *pref,
     TTF_RenderUTF8_Blended (font, congratsMessageText, fontColor);
 
   /* blit progress */
-  congratsMessagePos.x = (getWindow_width () - congratsMessage->w) / 2;
-  congratsMessagePos.y = (getWindow_height () - congratsMessage->h) / 2;
+  congratsMessagePos.x = (pref->window_width - congratsMessage->w) / 2;
+  congratsMessagePos.y = (pref->window_height - congratsMessage->h) / 2;
   SDL_BlitSurface (congratsMessage, NULL, screen, &congratsMessagePos);
 
   /* clean */
