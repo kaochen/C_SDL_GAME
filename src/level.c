@@ -28,15 +28,14 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <locale.h>
 
 /* Init grid */
-
 void
-grid_init(size_t w, size_t h, Square grid[w][h])
+grid_init(S_preferences *pref,
+          Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
 {
-   for(size_t y=0; y<h; ++y)
-      for(size_t x=0; x<w; ++x)
+   for(int y=0; y < pref->max_Y_Blocks; ++y)
+      for(int x=0; x< pref->max_X_Blocks; ++x)
       grid[x][y] = (Square) {.mainRole=GROUND, .subRole=EMPTY, .goalRole=EMPTY, .boxRole=EMPTY, .playerRole=EMPTY, .target=EMPTY };
 }
-
 
 
 

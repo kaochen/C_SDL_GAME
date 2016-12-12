@@ -137,10 +137,8 @@ main (int argc, char *argv[])
   tableTextSurface_init (tableTextSurface);
 
   /* create a grid using the heigth and width form settings */
-
-  int h = pref->max_Y_Blocks, w = pref->max_X_Blocks;
-  Square grid[w][h];
-  grid_init (w, h, grid);
+  Square grid[pref->max_X_Blocks][pref->max_Y_Blocks];
+  grid_init (pref, grid);
 
    /* create a sub grid for dispatch items on the menu */
    S_Menu *gridMenu = initGridMenu();
