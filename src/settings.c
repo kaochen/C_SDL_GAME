@@ -68,6 +68,8 @@ loadPrefStruct(void){
 
    /* Level */
       pref->level = 0;
+      pref->level = 1;
+
    /*framerate*/
     int fps = getPrefAsInt ("framerate");
         if (fps < 12)

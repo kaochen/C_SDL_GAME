@@ -175,8 +175,6 @@ main (int argc, char *argv[])
 	   ("The list of the possible levels has been generate from the content of the folder levels/.\n"));
   fprintf (stderr, "\n");
 
-  /* count all levels from all files */
-  int max_Levels = getNbrOfLevels (levelList);
 
   /*init Menu Choice*/
   S_menuchoice menuChoice;
@@ -188,6 +186,8 @@ main (int argc, char *argv[])
 
   /*Load first game */
   pref->level = readLevelFromSetting (levelList);
+  pref->level_max = getNbrOfLevels (levelList);
+
   fprintf (stderr, gettext ("Loading first level.\n"));
 
   if (loadSlcLevel (pref, levelList, grid, &menuChoice) == EXIT_SUCCESS)
@@ -478,7 +478,7 @@ main (int argc, char *argv[])
 		case SDLK_n:
 		  /* load next the level */
 		  pref->level += 1;
-		  if (pref->level == max_Levels)
+		  if (pref->level == pref->level_max)
 		    pref->level = 0;
 
 		  if (loadSlcLevel (pref, levelList, grid, &menuChoice) ==
@@ -493,7 +493,7 @@ main (int argc, char *argv[])
 		  /* load previous level */
 		  pref->level -= 1;
 		  if (pref->level == -1)
-		    pref->level = max_Levels - 1;
+		    pref->level = pref->level_max - 1;
 
 		  if (loadSlcLevel (pref, levelList, grid, &menuChoice) ==
 		      EXIT_FAILURE)

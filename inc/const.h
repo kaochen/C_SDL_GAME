@@ -183,7 +183,7 @@ typedef struct
 
  /* Level */
  int level;
-
+ int level_max;
  int framerate;
 
 }S_preferences;
