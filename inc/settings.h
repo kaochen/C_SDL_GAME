@@ -25,6 +25,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <string.h>
 #include <ctype.h>
 
+#include <SDL2/SDL.h>
 #include "const.h"
 
 /* Searching for preferences.ini */
@@ -33,7 +34,7 @@ searchPrefFile(char * prefFile);
 
 /* load settings from pref file */
 S_preferences *
-loadPrefStruct(void);
+loadPrefStruct(SDL_DisplayMode current);
 
 /*read window height and width from the preference file */
 int getPrefAsInt (const char *prefName);
@@ -41,13 +42,18 @@ int getPrefAsInt (const char *prefName);
 /*get char value from the preference file */
 void getPrefChar(char * ret, const char *setting);
 
-int getWindow_width ();
+int
+getWindow_width (S_preferences * pref);
 
-int getWindow_height ();
+int
+getWindow_height (S_preferences * pref);
 
 
+int
+getWindow_framerate (S_preferences * pref);
 
 
 /* write a pref char */
-int writePrefChar (const char *prefName, const char *value);
+int
+writePrefChar (const char *prefName, const char *value);
 #endif

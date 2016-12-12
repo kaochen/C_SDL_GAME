@@ -47,14 +47,31 @@ fclose(file);
 
 /* load settings from pref file */
 S_preferences *
-loadPrefStruct(void){
+loadPrefStruct(SDL_DisplayMode current){
 
   S_preferences *pref;
   pref = malloc (MENU_LINE * sizeof (S_preferences));
+  int i = 0;
+  /*get infos from the current display */
+  for(i = 0; i < SDL_GetNumVideoDisplays(); ++i){
+    int should_be_zero = SDL_GetCurrentDisplayMode(i, &current);
+    if(should_be_zero != 0)
+      // In case of error...
+      SDL_Log("Could not get display mode for video display #%d: %s", i, SDL_GetError());
+
+    else
+      // On success, print the current display mode.
+      SDL_Log("Display #%d: current display mode is %dx%dpx @ %dhz.", i, current.w, current.h, current.refresh_rate);
+   }
+
+
    /* Main window */
       /* Window size */
-      pref->window_width = getWindow_width();
-      pref->window_height = getWindow_height();
+      pref->display_width = current.w;
+      pref->display_height = current.h;
+
+      pref->window_width = getWindow_width(pref);
+      pref->window_height = getWindow_height(pref);
    /* Number of blocks */
       pref->x_Blocks = pref->window_width/SPRITE_SIZE;
       pref->y_Blocks = pref->window_height/SPRITE_SIZE;
@@ -71,12 +88,8 @@ loadPrefStruct(void){
       pref->level = 1;
 
    /*framerate*/
-    int fps = getPrefAsInt ("framerate");
-        if (fps < 12)
-          {
-            fps = 12;
-          }
-      pref->framerate = fps;
+      pref->display_framerate = current.refresh_rate;
+      pref->framerate = getWindow_framerate(pref);
   return pref;
 }
 
@@ -191,27 +204,45 @@ getPrefChar(char * pref, const char *setting) {
 
 
 int
-getWindow_width ()
+getWindow_width (S_preferences * pref)
 {
   int ret = getPrefAsInt ("window_width");
   if (ret < W_WIDTH)
     {
       ret = W_WIDTH;
     }
+  if (ret > pref->display_width){
+    ret = pref->display_width - 80;
+  }
   return ret;
 }
 
 int
-getWindow_height ()
+getWindow_height (S_preferences * pref)
 {
   int ret = getPrefAsInt ("window_height");
   if (ret < W_HEIGHT)
     {
       ret = W_HEIGHT;
     }
+  if (ret > pref->display_height){
+    ret = pref->display_height - 80;
+  }
   return ret;
 }
 
+int
+getWindow_framerate (S_preferences * pref)
+{
+       int fps = getPrefAsInt ("framerate");
+        if (fps < 12){
+            fps = 12;
+        }
+        if (fps > pref->display_framerate){
+          fps = pref->display_framerate;
+        }
+        return fps;
+}
 
 
 

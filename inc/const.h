@@ -169,6 +169,8 @@ typedef struct
 typedef struct
 {
  /* Main Window */
+ int display_width;
+ int display_height;
  int window_height;
  int window_width;
  int x_Blocks; //number of SPRITE_SIZE in  window_width
@@ -184,6 +186,9 @@ typedef struct
  /* Level */
  int level;
  int level_max;
+
+ /* framerate */
+ int display_framerate;
  int framerate;
 
 }S_preferences;

@@ -63,6 +63,9 @@ main (int argc, char *argv[])
   /* start random processor just once */
   srand (time (NULL));
 
+  /* Declare display mode structure */
+  SDL_DisplayMode current;
+
   /* Start and check if SDL start correctly */
   if (SDL_Init (SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
     {
@@ -81,7 +84,7 @@ main (int argc, char *argv[])
 
   /*load preferences */
 
-  S_preferences *pref = loadPrefStruct();
+  S_preferences *pref = loadPrefStruct(current);
   printf (gettext ("The window size request from settings is %dx%d\n"),
 	  pref->window_width, pref->window_height);
 
