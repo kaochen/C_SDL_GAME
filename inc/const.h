@@ -151,6 +151,7 @@ typedef struct
  int type;
  int text;
  int menu;
+ int image;
 }S_Menu;
 
 /*Struct to store menu status*/

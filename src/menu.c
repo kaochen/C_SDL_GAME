@@ -36,17 +36,17 @@ gridMenu_init(S_preferences *pref,
 {
    for(int y=0; y < pref->menu_Y_Blocks; ++y)
       for(int x=0; x< pref->menu_X_Blocks; ++x)
-      gridMenu[x][y] = (S_Menu) {.role=SUB_EMPTY, .type=SUB_EMPTY, .text=SUB_EMPTY, .menu=MC_TOPBAR};
+      gridMenu[x][y] = (S_Menu) {.role=SUB_EMPTY, .type=SUB_EMPTY, .text=SUB_EMPTY, .menu=MC_TOPBAR, .image=NO_IMAGE};
 
     //place elements
-   gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR};
-   gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=SUB_EMPTY, .menu=MC_TOPBAR};
-   gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR};
-   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR};
-   gridMenu[1][1] = (S_Menu) {.role=M_INFO, .type=OPENMENU, .text=INFO, .menu=MC_INFO};
-   gridMenu[3][1] = (S_Menu) {.role=M_SHORTCUTS, .type=OPENMENU, .text=SHORTCUTS, .menu=MC_SHORTCUTS};
-   gridMenu[5][1] = (S_Menu) {.role=M_ABOUT, .type=OPENMENU, .text=ABOUT, .menu=MC_ABOUT};
-   gridMenu[7][1] = (S_Menu) {.role=M_FILE, .type=OPENMENU, .text=FILES, .menu=MC_FILE};
+   gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .image=BUTTON_ARROW_L};
+   gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=SUB_EMPTY, .menu=MC_TOPBAR, .image=BUTTON_ARROW_P};
+   gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .image=BUTTON_RESET};
+   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .image=BUTTON_BACKWARDS};
+   gridMenu[1][1] = (S_Menu) {.role=M_INFO, .type=OPENMENU, .text=INFO, .menu=MC_INFO, .image=BUTTON_FILE};
+   gridMenu[3][1] = (S_Menu) {.role=M_SHORTCUTS, .type=OPENMENU, .text=SHORTCUTS, .menu=MC_SHORTCUTS, .image=BUTTON_FILE};
+   gridMenu[5][1] = (S_Menu) {.role=M_ABOUT, .type=OPENMENU, .text=ABOUT, .menu=MC_ABOUT, .image=BUTTON_FILE};
+   gridMenu[7][1] = (S_Menu) {.role=M_FILE, .type=OPENMENU, .text=FILES, .menu=MC_FILE, .image=BUTTON_FILE};
 
 }
 
@@ -288,7 +288,7 @@ openMenu (S_preferences *pref,
           S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
 {
   /* blit background */
-  displayOpenMenuBackground (pref, screen, tableSurface, menuChoice);
+  displayOpenMenuBackground (pref, screen, tableSurface, menuChoice, gridMenu);
   SDL_Rect pos;
    int x = 0, y = 0;
     for(y = 0; y < pref->menu_Y_Blocks; ++y){
@@ -431,8 +431,9 @@ displaySubMenu (S_preferences * pref,
 void
 displayOpenMenuBackground (S_preferences * pref,
                            SDL_Surface * screen,
-			                  Sprites tableSurface[NBR_OF_IMAGES],
-			                  S_menuchoice menuChoice)
+			                     Sprites tableSurface[NBR_OF_IMAGES],
+			                     S_menuchoice menuChoice,
+                           S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
 {
   int i = 0, size = 0;
   switch (menuChoice.tab)
@@ -527,22 +528,24 @@ displayOpenMenuBackground (S_preferences * pref,
   /* add tab icons */
 
   SDL_Rect iconPos;
-  iconPos.x = pref->x_menu + 3*SPRITE_SIZE/2;
   iconPos.y = SPRITE_SIZE + 5;
-  SDL_BlitSurface (tableSurface[BUTTON_RESET].image, NULL, screen, &iconPos);
-  iconPos.x += 2*SPRITE_SIZE;
-  SDL_BlitSurface (tableSurface[BUTTON_ARROW_L].image, NULL, screen, &iconPos);
-  iconPos.x += 2*SPRITE_SIZE;
-  SDL_BlitSurface (tableSurface[BUTTON_ARROW_P].image, NULL, screen, &iconPos);
-  iconPos.x += 2*SPRITE_SIZE;
-  SDL_BlitSurface (tableSurface[BUTTON_FILE].image, NULL, screen, &iconPos);
+
+  for(int y=0; y < pref->menu_Y_Blocks; ++y){
+      for(int x=0; x< pref->menu_X_Blocks; ++x){
+        if(gridMenu[x][y].type == OPENMENU){
+          iconPos.x = pref->x_menu + SPRITE_SIZE/2 + x*SPRITE_SIZE;
+          // fprintf (stderr, "x: %d y:%d\n", iconPos.x,iconPos.y);
+          SDL_BlitSurface (tableSurface[gridMenu[x][y].image].image, NULL, screen, &iconPos);
+        }
+      }
+    }
 }
 
 /* Display pattern over the text menu */
 void
 displayOverTextImage(S_preferences * pref,
                      SDL_Surface * screen,
-		               Sprites tableSurface[NBR_OF_IMAGES],
+		                 Sprites tableSurface[NBR_OF_IMAGES],
                      S_menuchoice menuChoice)
 {
   int x = 0, y = 0, xSize = 360 / SPRITE_SIZE, ySize = 0;
@@ -586,29 +589,15 @@ displayTopBarButtons (S_preferences *pref,
     for(y = 0; y < pref->menu_Y_Blocks; ++y){
         for(x = 0; x< pref->menu_X_Blocks; ++x){
           if (gridMenu[x][y].type == TOPBAR){
-             switch (gridMenu[x][y].role)
-             {
-             case M_PREVIOUS :
-                    imageName = BUTTON_ARROW_L;
-                    break;
-             case M_NEXT :
-                    imageName = BUTTON_ARROW_P;
-                break;
-             case M_RESET :
-                    imageName = BUTTON_RESET;
-                break;
-             case M_BACKWARDS :
-                    imageName = BUTTON_BACKWARDS;
-                break;
-             }
+              imageName = gridMenu[x][y].image;
 
-     buttonsPos.x = pref->x_menu + x * SPRITE_SIZE;
-     buttonsPos.y = 0;
+               buttonsPos.x = pref->x_menu + x * SPRITE_SIZE;
+               buttonsPos.y = 0;
 
-     //fprintf(stderr,"found x:%d->%d y:%d->%d\n", x, buttonsPos.x, y, buttonsPos.y);
-     if (imageName != NO_IMAGE)
-         SDL_BlitSurface (tableSurface[imageName].image, NULL, screen,
-                          &buttonsPos);
+               //fprintf(stderr,"found x:%d->%d y:%d->%d\n", x, buttonsPos.x, y, buttonsPos.y);
+               if (imageName != NO_IMAGE)
+                   SDL_BlitSurface (tableSurface[imageName].image, NULL, screen,
+                                    &buttonsPos);
            }
         }
     }

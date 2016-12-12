@@ -131,7 +131,8 @@ void
 displayOpenMenuBackground (S_preferences * pref,
                            SDL_Surface * screen,
 			   Sprites tableSurface[NBR_OF_IMAGES],
-			   S_menuchoice menuChoice);
+			   S_menuchoice menuChoice,
+                           S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
 
 /* Display pattern over the text menu */
 void
