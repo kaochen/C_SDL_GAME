@@ -151,8 +151,6 @@ typedef struct
  int type;
  int text;
  int menu;
- int x;
- int y;
 }S_Menu;
 
 /*Struct to store menu status*/
@@ -182,6 +180,8 @@ typedef struct
  int x_menu; // menu position on x
  int y_menu; // menu position on y
  int h_menu_block; // menu height in block;
+ int menu_X_Blocks;
+ int menu_Y_Blocks;
 
  /* Level */
  int level;

@@ -30,28 +30,26 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <sys/stat.h>
 
 /* Init menu grid */
-S_Menu *
-initGridMenu(void){
+void
+gridMenu_init(S_preferences *pref,
+              S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
+{
+   for(int y=0; y < pref->menu_Y_Blocks; ++y)
+      for(int x=0; x< pref->menu_X_Blocks; ++x)
+      gridMenu[x][y] = (S_Menu) {.role=SUB_EMPTY, .type=SUB_EMPTY, .text=SUB_EMPTY, .menu=MC_TOPBAR};
 
-  S_Menu *gridMenu;
-  gridMenu = malloc (MENU_LINE * sizeof (S_Menu));
+    //place elements
+   gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR};
+   gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=SUB_EMPTY, .menu=MC_TOPBAR};
+   gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR};
+   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR};
+   gridMenu[1][1] = (S_Menu) {.role=M_INFO, .type=OPENMENU, .text=INFO, .menu=MC_INFO};
+   gridMenu[3][1] = (S_Menu) {.role=M_SHORTCUTS, .type=OPENMENU, .text=SHORTCUTS, .menu=MC_SHORTCUTS};
+   gridMenu[5][1] = (S_Menu) {.role=M_ABOUT, .type=OPENMENU, .text=ABOUT, .menu=MC_ABOUT};
+   gridMenu[7][1] = (S_Menu) {.role=M_FILE, .type=OPENMENU, .text=FILES, .menu=MC_FILE};
 
-   /* clean the array */
-      for(size_t l = 0; l < MENU_LINE; l++){
-      gridMenu[l] = (S_Menu) {.role=SUB_EMPTY, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .x=0, .y=0};
-      }
-   //place elements
-   gridMenu[0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .x=2, .y=0};
-   gridMenu[1] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=SUB_EMPTY, .menu=MC_TOPBAR, .x=7, .y=0};
-   gridMenu[2] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .x=8, .y=0};
-   gridMenu[3] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .x=9, .y=0};
-   gridMenu[4] = (S_Menu) {.role=M_INFO, .type=OPENMENU, .text=INFO, .menu=MC_INFO, .x=1, .y=1};
-   gridMenu[5] = (S_Menu) {.role=M_SHORTCUTS, .type=OPENMENU, .text=SHORTCUTS, .menu=MC_SHORTCUTS, .x=3, .y=1};
-   gridMenu[6] = (S_Menu) {.role=M_ABOUT, .type=OPENMENU, .text=ABOUT, .menu=MC_ABOUT, .x=5, .y=1};
-   gridMenu[7] = (S_Menu) {.role=M_FILE, .type=OPENMENU, .text=FILES, .menu=MC_FILE, .x=7, .y=1};
-
-   return gridMenu;
 }
+
 
 /* display Top Bar*/
 int
@@ -60,7 +58,7 @@ displayTopBar (S_preferences * pref,
 	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList,
 	       Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
-          S_Menu gridMenu[MENU_LINE])
+         S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
 {
   /* first add background */
   if (backgroundTopBar (pref, screen, tableSurface) == EXIT_FAILURE)
@@ -287,22 +285,23 @@ openMenu (S_preferences *pref,
 	        S_Text tableTextSurface[NBR_OF_TEXT],
           S_LevelList * levelList,
           S_menuchoice menuChoice,
-          S_Menu gridMenu[MENU_LINE])
+          S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
 {
   /* blit background */
   displayOpenMenuBackground (pref, screen, tableSurface, menuChoice);
   SDL_Rect pos;
-
-     for (size_t l = 0; l < MENU_LINE; l++){
-
-        if (gridMenu[l].type == OPENMENU && gridMenu[l].menu == menuChoice.tab){
+   int x = 0, y = 0;
+    for(y = 0; y < pref->menu_Y_Blocks; ++y){
+        for(x = 0; x< pref->menu_X_Blocks; ++x){
+          if (gridMenu[x][y].type == OPENMENU && gridMenu[x][y].menu == menuChoice.tab){
            /*blit text*/
            pos.x = pref->x_menu + SPRITE_SIZE;
            pos.y = 2 * SPRITE_SIZE + 10;
-           size_t surface = gridMenu[l].text;
+           size_t surface = gridMenu[x][y].text;
            SDL_BlitSurface (tableTextSurface[surface].textSurface, NULL, screen, &pos);
         }
-  }
+      }
+    }
 
   displaySubMenu (pref, screen, tableTextSurface, levelList, menuChoice);
   displayOverTextImage (pref, screen, tableSurface, menuChoice);
@@ -574,36 +573,45 @@ displayOverTextImage(S_preferences * pref,
 
 /* Display buttons on the top bar*/
 int
-displayTopBarButtons (S_preferences *pref,SDL_Surface * screen,
-		      Sprites tableSurface[NBR_OF_IMAGES], S_Menu gridMenu[MENU_LINE])
+displayTopBarButtons (S_preferences *pref,
+                      SDL_Surface * screen,
+		                  Sprites tableSurface[NBR_OF_IMAGES],
+                      S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
 {
   SDL_Rect buttonsPos;
-  size_t  i = 0;
+  int x = 0, y = 0;
 
-  for (size_t l = 0; l < MENU_LINE; l++){
-   size_t  imageName = NO_IMAGE;
-     switch (gridMenu[l].role)
-     {
-     case M_PREVIOUS :
-            imageName = BUTTON_ARROW_L;
-            break;
-     case M_NEXT :
-            imageName = BUTTON_ARROW_P;
-        break;
-     case M_RESET :
-            imageName = BUTTON_RESET;
-        break;
-     case M_BACKWARDS :
-            imageName = BUTTON_BACKWARDS;
-        break;
-     }
-     buttonsPos.x = pref->x_menu + gridMenu[l].x * SPRITE_SIZE;
-     buttonsPos.y = gridMenu[l].y + 1;
+
+  size_t  imageName = NO_IMAGE;
+    for(y = 0; y < pref->menu_Y_Blocks; ++y){
+        for(x = 0; x< pref->menu_X_Blocks; ++x){
+          if (gridMenu[x][y].type == TOPBAR){
+             switch (gridMenu[x][y].role)
+             {
+             case M_PREVIOUS :
+                    imageName = BUTTON_ARROW_L;
+                    break;
+             case M_NEXT :
+                    imageName = BUTTON_ARROW_P;
+                break;
+             case M_RESET :
+                    imageName = BUTTON_RESET;
+                break;
+             case M_BACKWARDS :
+                    imageName = BUTTON_BACKWARDS;
+                break;
+             }
+
+     buttonsPos.x = pref->x_menu + x * SPRITE_SIZE;
+     buttonsPos.y = 0;
+
+     //fprintf(stderr,"found x:%d->%d y:%d->%d\n", x, buttonsPos.x, y, buttonsPos.y);
      if (imageName != NO_IMAGE)
          SDL_BlitSurface (tableSurface[imageName].image, NULL, screen,
                           &buttonsPos);
-     i++;
-  }
+           }
+        }
+    }
   return EXIT_SUCCESS;
 }
 #endif

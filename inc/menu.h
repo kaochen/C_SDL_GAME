@@ -53,10 +53,11 @@ FILES1,FILES2,FILES3,FILES4
 };
 
 
-
 /* Init menu grid */
-S_Menu *
-initGridMenu(void);
+void
+gridMenu_init(S_preferences *pref,
+              S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
+
 
 /* display Top Bar*/
 int
@@ -65,7 +66,7 @@ displayTopBar (S_preferences * pref,
 	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList,
 	       Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
-               S_Menu gridMenu[MENU_LINE]);
+               S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
 
 /* display background of the top bar menu */
 int
@@ -114,7 +115,7 @@ openMenu (S_preferences *pref,
 	  S_Text tableTextSurface[NBR_OF_TEXT],
           S_LevelList * levelList,
           S_menuchoice menuChoice,
-          S_Menu gridMenu[MENU_LINE]);
+          S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
 
 /* display Sub menu */
 int
@@ -142,7 +143,7 @@ displayOverTextImage (S_preferences * pref,
 /* Display buttons on the top bar*/
 int
 displayTopBarButtons (S_preferences *pref,
-		      SDL_Surface * screen,
-		      Sprites tableSurface[NBR_OF_IMAGES],
-		      S_Menu gridMenu[MENU_LINE]);
+                      SDL_Surface * screen,
+ 	              Sprites tableSurface[NBR_OF_IMAGES],
+                      S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
 #endif

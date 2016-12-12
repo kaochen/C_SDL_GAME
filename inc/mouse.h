@@ -33,5 +33,5 @@ mouseMotion(S_preferences * pref,
             S_menuchoice *menuChoice,
             int xCursor,
             int yCursor,
-            S_Menu gridMenu[MENU_LINE]);
+            S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
 #endif

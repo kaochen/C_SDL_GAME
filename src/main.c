@@ -140,9 +140,9 @@ main (int argc, char *argv[])
   Square grid[pref->max_X_Blocks][pref->max_Y_Blocks];
   grid_init (pref, grid);
 
-   /* create a sub grid for dispatch items on the menu */
-   S_Menu *gridMenu = initGridMenu();
-
+  /* create a sub grid for dispatch items on the menu */
+  S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks];
+  gridMenu_init (pref, gridMenu);
 
   fprintf (stderr, "\n");
   /*List slc files from the levels/ folder */
@@ -287,7 +287,7 @@ main (int argc, char *argv[])
 
 	      xCursor = event.button.x;
 	      yCursor = event.button.y;
-         refresh = mouseMotion(pref, &menuChoice,xCursor,yCursor,gridMenu);
+         //refresh = mouseMotion(pref, &menuChoice,xCursor,yCursor,gridMenu);
 
 	      /*Do not move when level is finished */
 	      if (menuChoice.freeze == 1 )

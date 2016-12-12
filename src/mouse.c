@@ -30,35 +30,17 @@ mouseMotion(S_preferences * pref,
             S_menuchoice *menuChoice,
             int xCursor,
             int yCursor,
-            S_Menu gridMenu[MENU_LINE]){
+            S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]){
 
-    int xGrid = (xCursor-pref->x_menu)/SPRITE_SIZE;
-    int yGrid = yCursor/SPRITE_SIZE;
-    int ySub = yCursor/(SPRITE_SIZE-10);
-    if (menuChoice->open == 1){
-    /* tabs */
-    for (size_t i = 0; i < MENU_LINE; i++){   /*tabs or equal to 2 SPRITE_SIZE*/
-        int  x = xGrid;
-        //fprintf (stderr, "for %d:%d ", xGrid, yGrid);
-        /*use size of the buttons*/
-        if (gridMenu[i].type == OPENMENU || xGrid % 2 == 0)
-            x--;
-
-        //fprintf (stderr, "use %d:%d\n", x, yGrid);
-        if ((gridMenu[i].x == xGrid || gridMenu[i].x == x) && gridMenu[i].y == yGrid && gridMenu[i].type == OPENMENU){
-			    menuChoice->tab = gridMenu[i].menu;
-                //fprintf (stderr, "match for %d:%d\n", x, yGrid);
-                return 1; //refresh
-                }
-            }
-      /* Lines in the sub menu */
-    if(xGrid > 0 && xGrid < (MENU_WIDTH/SPRITE_SIZE) && ySub > 3 && ySub <= 4 + menuChoice->max ){
-        menuChoice->sub = ySub - 4;
-        //fprintf (stderr, "menuChoice : %d:%d\n", menuChoice->sub, ySub);
-        return 1; //refresh
+    int x = (xCursor-pref->x_menu)/SPRITE_SIZE;
+    int y = yCursor/SPRITE_SIZE;
+      if (menuChoice->open == 1){
+        if (gridMenu[x][y].role == OPENMENU){
+           menuChoice->tab = gridMenu[x][y].menu;
+           return 1; //refresh
         }
-    }
+      }
+
     return 0; //no refresh
 }
-
 #endif
