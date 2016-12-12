@@ -486,7 +486,6 @@ readLevelList (S_LevelList * levelList)
 /*Load slc level into the grid */
 int
 loadSlcLevel (S_preferences * pref,
-              int levelChoice,
               S_LevelList * levelList,
               Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
               S_menuchoice *menuChoice)
@@ -502,7 +501,7 @@ loadSlcLevel (S_preferences * pref,
   while (actual != NULL)
     {
       /* try to find the nameLevel into the list */
-      if (i == levelChoice)
+      if (i == pref->level)
 	{
 	  fprintf (stderr, "Found %s, %d:%d\n", actual->name,
 		   actual->width, actual->height);
@@ -629,7 +628,7 @@ loadSlcLevel (S_preferences * pref,
   /*refresh status*/
   menuChoice->freeze = 0;
   menuChoice->open = 0;
-  fprintf (stderr, "Level %d loaded\n", (levelChoice + 1));
+  fprintf (stderr, "Level %d loaded\n", (pref->level + 1));
 
 
   return EXIT_SUCCESS;

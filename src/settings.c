@@ -65,6 +65,9 @@ loadPrefStruct(void){
       pref->x_menu = (pref->window_width - MENU_WIDTH )/2;
       pref->y_menu = 0;
       pref->h_menu_block = 1;
+
+   /* Level */
+      pref->level = 0;
    /*framerate*/
     int fps = getPrefAsInt ("framerate");
         if (fps < 12)

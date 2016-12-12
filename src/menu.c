@@ -56,7 +56,6 @@ initGridMenu(void){
 /* display Top Bar*/
 int
 displayTopBar (S_preferences * pref,
-	       int levelNumber,
 	       SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList,
@@ -71,7 +70,7 @@ displayTopBar (S_preferences * pref,
     }
 
   /* display the level number */
-  if (levelMenu (pref, levelNumber, screen, levelList) == EXIT_FAILURE)
+  if (levelMenu (pref, screen, levelList) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("levelMenu failed.\n"));
       return EXIT_FAILURE;
@@ -285,10 +284,9 @@ void
 openMenu (S_preferences *pref,
           SDL_Surface * screen,
           Sprites tableSurface[NBR_OF_IMAGES],
-	       S_Text tableTextSurface[NBR_OF_TEXT],
+	        S_Text tableTextSurface[NBR_OF_TEXT],
           S_LevelList * levelList,
           S_menuchoice menuChoice,
-          int levelChoice,
           S_Menu gridMenu[MENU_LINE])
 {
   /* blit background */
@@ -306,8 +304,7 @@ openMenu (S_preferences *pref,
         }
   }
 
-  displaySubMenu (pref, screen, tableTextSurface, levelList, menuChoice,
-		  levelChoice);
+  displaySubMenu (pref, screen, tableTextSurface, levelList, menuChoice);
   displayOverTextImage (pref, screen, tableSurface, menuChoice);
 
 }
@@ -318,8 +315,7 @@ displaySubMenu (S_preferences * pref,
                 SDL_Surface * screen,
                 S_Text tableTextSurface[NBR_OF_TEXT],
                 S_LevelList * levelList,
-                S_menuchoice menuChoice,
-                int levelChoice )
+                S_menuchoice menuChoice)
 {
   /* blit text */
   //  fprintf (stderr, "menuChoice : %d\n", menuChoice.tab);
@@ -348,7 +344,7 @@ displaySubMenu (S_preferences * pref,
       while (actual != NULL)
 	{
 
-	  if (i == levelChoice)
+	  if (i == pref->level)
 	    {
 	      /*trunk long name */
 	      if (strlen (actual->name) > sizeMax)

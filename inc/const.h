@@ -180,6 +180,10 @@ typedef struct
  int x_menu; // menu position on x
  int y_menu; // menu position on y
  int h_menu_block; // menu height in block;
+
+ /* Level */
+ int level;
+
  int framerate;
 
 }S_preferences;

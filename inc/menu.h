@@ -61,7 +61,6 @@ initGridMenu(void);
 /* display Top Bar*/
 int
 displayTopBar (S_preferences * pref,
-	       int levelNumber,
 	       SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList,
@@ -112,10 +111,9 @@ void
 openMenu (S_preferences *pref,
           SDL_Surface * screen,
           Sprites tableSurface[NBR_OF_IMAGES],
-	       S_Text tableTextSurface[NBR_OF_TEXT],
+	  S_Text tableTextSurface[NBR_OF_TEXT],
           S_LevelList * levelList,
           S_menuchoice menuChoice,
-          int levelChoice,
           S_Menu gridMenu[MENU_LINE]);
 
 /* display Sub menu */
@@ -124,8 +122,7 @@ displaySubMenu (S_preferences * pref,
                 SDL_Surface * screen,
                 S_Text tableTextSurface[NBR_OF_TEXT],
                 S_LevelList * levelList,
-                S_menuchoice menuChoice,
-                int levelChoice );
+                S_menuchoice menuChoice);
 
 
 /* Display the background menu */
