@@ -34,9 +34,12 @@ mouseMotion(S_preferences * pref,
 
     int x = (xCursor-pref->x_menu)/SPRITE_SIZE;
     int y = yCursor/SPRITE_SIZE;
+          // fprintf (stderr, "menuChoice x:%d/y:%d\n", x,y);
       if (menuChoice->open == 1){
-        if (gridMenu[x][y].role == OPENMENU){
-           menuChoice->tab = gridMenu[x][y].menu;
+        if (gridMenu[x][y].type == TABS){
+           menuChoice->xPos = x;
+           menuChoice->yPos = 1;
+           menuChoice->tab = gridMenu[x][y].role;
            return 1; //refresh
         }
       }

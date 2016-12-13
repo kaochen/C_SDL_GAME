@@ -49,6 +49,8 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TEXT])
 		     G, B, A);
   loadTextAsSurface (FILES, tableTextSurface, gettext ("Files"), fontSize, R,
 		     G, B, A);
+  loadTextAsSurface (SETTINGS, tableTextSurface, gettext ("Settings"), fontSize, R,
+		     G, B, A);
 
   /* Init sub Menu */
   /*shortcuts */

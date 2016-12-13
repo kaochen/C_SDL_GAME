@@ -179,11 +179,13 @@ main (int argc, char *argv[])
 
   /*init Menu Choice*/
   S_menuchoice menuChoice;
-  menuChoice.tab = MC_INFO;
+  menuChoice.tab = M_INFO;
   menuChoice.sub = 0;
   menuChoice.max = 4;
   menuChoice.open = 0;
   menuChoice.freeze = 0;
+  menuChoice.xPos = 2;
+  menuChoice.yPos = 1;
 
   /*Load first game */
   pref->level = readLevelFromSetting (levelList);
@@ -248,16 +250,16 @@ main (int argc, char *argv[])
 	{
       switch (menuChoice.tab)
             {
-            case MC_INFO:
+            case M_INFO:
                 menuChoice.max = MENU_MAX_INFO;
                 break;
-            case MC_SHORTCUTS:
+            case M_SHORTCUTS:
                 menuChoice.max = MENU_MAX_SHORTCUTS;
                 break;
-            case MC_ABOUT:
+            case M_ABOUT:
                 menuChoice.max = MENU_MAX_ABOUT;
                 break;
-            case MC_FILE:
+            case M_FILE:
                 menuChoice.max = MENU_MAX_FILE;
                 break;
             }
@@ -284,10 +286,25 @@ main (int argc, char *argv[])
 		  }
 	      }
 	    case SDL_MOUSEMOTION:
+      /*get x cursor position */
+        if (event.button.x < 0)
+          xCursor = 0;
+        else if(event.button.x > pref->window_height)
+          xCursor = pref->window_height;
+        else
+	        xCursor = event.button.x;
 
-	      xCursor = event.button.x;
-	      yCursor = event.button.y;
-         //refresh = mouseMotion(pref, &menuChoice,xCursor,yCursor,gridMenu);
+      /*get y cursor position */
+        if (event.button.y < 0)
+          yCursor = 0;
+        else if(event.button.y > pref->window_width)
+          yCursor = pref->window_width;
+        else
+	        yCursor = event.button.y;
+
+        if (menuChoice.open == 1){
+        refresh = mouseMotion(pref, &menuChoice,xCursor,yCursor,gridMenu);
+        }
 
 	      /*Do not move when level is finished */
 	      if (menuChoice.freeze == 1 )
@@ -382,12 +399,13 @@ main (int argc, char *argv[])
 
 		  else
 		    {
-		      menuChoice.tab++;
+          menuChoice.xPos++;
 		      /* make circle */
-		      if (menuChoice.tab > MC_FILE)
+		      if (menuChoice.xPos > 6)
 			{
-			  menuChoice.tab = MC_INFO;
+			  menuChoice.xPos = 2;
 			}
+          menuChoice.tab = gridMenu[menuChoice.xPos][1].role;
 		      refresh = 1;
 		    }
 		  break;
@@ -404,12 +422,13 @@ main (int argc, char *argv[])
 		    }
 		  else
 		    {
-		      menuChoice.tab--;
+		      menuChoice.xPos--;
 		      /* make circle */
-		      if (menuChoice.tab < MC_INFO)
+		      if (menuChoice.xPos < 2)
 			{
-			  menuChoice.tab = MC_FILE;
+			  menuChoice.xPos = 6;
 			}
+          menuChoice.tab = gridMenu[menuChoice.xPos][1].role;
 		      refresh = 1;
 		    }
 		  break;

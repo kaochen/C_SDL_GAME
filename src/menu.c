@@ -36,17 +36,18 @@ gridMenu_init(S_preferences *pref,
 {
    for(int y=0; y < pref->menu_Y_Blocks; ++y)
       for(int x=0; x< pref->menu_X_Blocks; ++x)
-      gridMenu[x][y] = (S_Menu) {.role=SUB_EMPTY, .type=SUB_EMPTY, .text=SUB_EMPTY, .menu=MC_TOPBAR, .image=NO_IMAGE};
+      gridMenu[x][y] = (S_Menu) {.role=SUB_EMPTY, .type=SUB_EMPTY, .text=SUB_EMPTY, .image=NO_IMAGE, .nbr_of_lines = 1};
 
     //place elements
-   gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .image=BUTTON_ARROW_L};
-   gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=SUB_EMPTY, .menu=MC_TOPBAR, .image=BUTTON_ARROW_P};
-   gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .image=BUTTON_RESET};
-   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=SUB_EMPTY, .menu=MC_TOPBAR, .image=BUTTON_BACKWARDS};
-   gridMenu[1][1] = (S_Menu) {.role=M_INFO, .type=OPENMENU, .text=INFO, .menu=MC_INFO, .image=BUTTON_FILE};
-   gridMenu[3][1] = (S_Menu) {.role=M_SHORTCUTS, .type=OPENMENU, .text=SHORTCUTS, .menu=MC_SHORTCUTS, .image=BUTTON_FILE};
-   gridMenu[5][1] = (S_Menu) {.role=M_ABOUT, .type=OPENMENU, .text=ABOUT, .menu=MC_ABOUT, .image=BUTTON_FILE};
-   gridMenu[7][1] = (S_Menu) {.role=M_FILE, .type=OPENMENU, .text=FILES, .menu=MC_FILE, .image=BUTTON_FILE};
+   gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .text=SUB_EMPTY, .image=BUTTON_ARROW_L, .nbr_of_lines = 1};
+   gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=SUB_EMPTY, .image=BUTTON_ARROW_P, .nbr_of_lines = 1};
+   gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=SUB_EMPTY, .image=BUTTON_RESET, .nbr_of_lines = 1};
+   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=SUB_EMPTY, .image=BUTTON_BACKWARDS, .nbr_of_lines = 1};
+   gridMenu[2][1] = (S_Menu) {.role=M_INFO, .type=TABS, .text=INFO, .image=BUTTON_FILE, .nbr_of_lines = 5};
+   gridMenu[3][1] = (S_Menu) {.role=M_SHORTCUTS, .type=TABS, .text=SHORTCUTS, .image=BUTTON_FILE, .nbr_of_lines = 6};
+   gridMenu[4][1] = (S_Menu) {.role=M_ABOUT, .type=TABS, .text=ABOUT, .image=BUTTON_FILE, .nbr_of_lines = 4};
+   gridMenu[5][1] = (S_Menu) {.role=M_FILE, .type=TABS, .text=FILES,  .image=BUTTON_FILE, .nbr_of_lines = 4};
+   gridMenu[6][1] = (S_Menu) {.role=M_SETTINGS, .type=TABS, .text=SETTINGS,  .image=BUTTON_FILE, .nbr_of_lines = 2};
 
 }
 
@@ -289,19 +290,14 @@ openMenu (S_preferences *pref,
 {
   /* blit background */
   displayOpenMenuBackground (pref, screen, tableSurface, menuChoice, gridMenu);
+
+  /* add the tab name above tab icons */
   SDL_Rect pos;
-   int x = 0, y = 0;
-    for(y = 0; y < pref->menu_Y_Blocks; ++y){
-        for(x = 0; x< pref->menu_X_Blocks; ++x){
-          if (gridMenu[x][y].type == OPENMENU && gridMenu[x][y].menu == menuChoice.tab){
-           /*blit text*/
-           pos.x = pref->x_menu + SPRITE_SIZE;
-           pos.y = 2 * SPRITE_SIZE + 10;
-           size_t surface = gridMenu[x][y].text;
-           SDL_BlitSurface (tableTextSurface[surface].textSurface, NULL, screen, &pos);
-        }
-      }
-    }
+  /*blit text*/
+  pos.x = pref->x_menu + SPRITE_SIZE;
+  pos.y = 2 * SPRITE_SIZE + 10;
+  size_t surface = gridMenu[menuChoice.xPos][1].text;
+  SDL_BlitSurface (tableTextSurface[surface].textSurface, NULL, screen, &pos);
 
   displaySubMenu (pref, screen, tableTextSurface, levelList, menuChoice);
   displayOverTextImage (pref, screen, tableSurface, menuChoice);
@@ -389,18 +385,18 @@ displaySubMenu (S_preferences * pref,
    }
    j = 0;
    switch (menuChoice.tab){
-   case MC_INFO :
+   case M_INFO :
       nbr = 3;
       line[0] = INFO1;
       line[1] = INFO2;
       line[2] = INFO3;
       break;
-   case MC_ABOUT:
+   case M_ABOUT:
       nbr = 2;
       line[0] = ABOUT1;
       line[1] = ABOUT2;
       break;
-   case MC_SHORTCUTS:
+   case M_SHORTCUTS:
       nbr = 5;
       line[0] = SHORTCUTS1;
       line[1] = SHORTCUTS2;
@@ -435,22 +431,10 @@ displayOpenMenuBackground (S_preferences * pref,
 			                     S_menuchoice menuChoice,
                            S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
 {
-  int i = 0, size = 0;
-  switch (menuChoice.tab)
-    {
-    case MC_INFO:
-      size = 5;
-      break;
-    case MC_SHORTCUTS:
-      size = 6;
-      break;
-    case MC_ABOUT:
-      size = 4;
-      break;
-    case MC_FILE:
-      size = 4;
-      break;
-    }
+  int i = 0;
+  int xP = menuChoice.xPos , yP = menuChoice.yPos;
+  int size = gridMenu[xP][yP].nbr_of_lines;
+
 
   SDL_Rect subMenuPos;
   subMenuPos.x = pref->x_menu+ 20;
@@ -519,10 +503,10 @@ displayOpenMenuBackground (S_preferences * pref,
   }
   /* add highlight to tabs depending on the menuChoice*/
 
-  tabPos.x = pref->x_menu + SPRITE_SIZE + ((menuChoice.tab-1) * 2*SPRITE_SIZE) + 3;
+  tabPos.x = pref->x_menu +  menuChoice.xPos * SPRITE_SIZE + 3;
   for (size_t j = 0; j < 2; j++){
             SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen, &tabPos);
-            tabPos.x += 2*SPRITE_SIZE - 6;
+            tabPos.x += SPRITE_SIZE - 6;
   }
 
   /* add tab icons */
@@ -532,8 +516,8 @@ displayOpenMenuBackground (S_preferences * pref,
 
   for(int y=0; y < pref->menu_Y_Blocks; ++y){
       for(int x=0; x< pref->menu_X_Blocks; ++x){
-        if(gridMenu[x][y].type == OPENMENU){
-          iconPos.x = pref->x_menu + SPRITE_SIZE/2 + x*SPRITE_SIZE;
+        if(gridMenu[x][y].type == TABS){
+          iconPos.x = pref->x_menu + x*SPRITE_SIZE;
           // fprintf (stderr, "x: %d y:%d\n", iconPos.x,iconPos.y);
           SDL_BlitSurface (tableSurface[gridMenu[x][y].image].image, NULL, screen, &iconPos);
         }
@@ -541,7 +525,7 @@ displayOpenMenuBackground (S_preferences * pref,
     }
 }
 
-/* Display pattern over the text menu */
+/* Display pattern image over the text menu */
 void
 displayOverTextImage(S_preferences * pref,
                      SDL_Surface * screen,
@@ -549,7 +533,7 @@ displayOverTextImage(S_preferences * pref,
                      S_menuchoice menuChoice)
 {
   int x = 0, y = 0, xSize = 360 / SPRITE_SIZE, ySize = 0;
-  if (menuChoice.tab == MC_ABOUT)
+  if (menuChoice.tab == M_ABOUT)
     {
       ySize = 8;
     }

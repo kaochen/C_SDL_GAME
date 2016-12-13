@@ -152,6 +152,7 @@ typedef struct
  int text;
  int menu;
  int image;
+ int nbr_of_lines;
 }S_Menu;
 
 /*Struct to store menu status*/
@@ -162,6 +163,8 @@ typedef struct
  int max; //max lines in sub part
  int open; //the menu panel is open or not
  int freeze; //Freeze the gameplay when menu or congrats are open
+ int xPos;
+ int yPos;
 }S_menuchoice;
 
 /*Struct to store settings*/
