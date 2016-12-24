@@ -43,11 +43,11 @@ gridMenu_init(S_preferences *pref,
    gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=SUB_EMPTY, .image=BUTTON_ARROW_P, .nbr_of_lines = 1};
    gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=SUB_EMPTY, .image=BUTTON_RESET, .nbr_of_lines = 1};
    gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=SUB_EMPTY, .image=BUTTON_BACKWARDS, .nbr_of_lines = 1};
-   gridMenu[2][1] = (S_Menu) {.role=M_INFO, .type=TABS, .text=INFO, .image=BUTTON_FILE, .nbr_of_lines = 5};
-   gridMenu[3][1] = (S_Menu) {.role=M_SHORTCUTS, .type=TABS, .text=SHORTCUTS, .image=BUTTON_FILE, .nbr_of_lines = 6};
-   gridMenu[4][1] = (S_Menu) {.role=M_ABOUT, .type=TABS, .text=ABOUT, .image=BUTTON_FILE, .nbr_of_lines = 4};
+   gridMenu[2][1] = (S_Menu) {.role=M_INFO, .type=TABS, .text=INFO, .image=BUTTON_LEVELS, .nbr_of_lines = 5};
+   gridMenu[3][1] = (S_Menu) {.role=M_SHORTCUTS, .type=TABS, .text=SHORTCUTS, .image=BUTTON_SHORTCUTS, .nbr_of_lines = 6};
+   gridMenu[4][1] = (S_Menu) {.role=M_ABOUT, .type=TABS, .text=ABOUT, .image=BUTTON_ABOUT, .nbr_of_lines = 4};
    gridMenu[5][1] = (S_Menu) {.role=M_FILE, .type=TABS, .text=FILES,  .image=BUTTON_FILE, .nbr_of_lines = 4};
-   gridMenu[6][1] = (S_Menu) {.role=M_SETTINGS, .type=TABS, .text=SETTINGS,  .image=BUTTON_FILE, .nbr_of_lines = 2};
+   gridMenu[6][1] = (S_Menu) {.role=M_SETTINGS, .type=TABS, .text=SETTINGS,  .image=BUTTON_SETTINGS, .nbr_of_lines = 2};
 
 }
 

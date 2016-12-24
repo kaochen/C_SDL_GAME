@@ -111,6 +111,10 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[BUTTON_RESET], themePath, "button_reset.png");
   loadSprite (&tableSurface[BUTTON_BACKWARDS], themePath, "button_backwards.png");
   loadSprite (&tableSurface[BUTTON_FILE], themePath, "button_file.png");
+  loadSprite (&tableSurface[BUTTON_SETTINGS], themePath, "button_settings.png");
+  loadSprite (&tableSurface[BUTTON_SHORTCUTS], themePath, "button_shortcuts.png");
+  loadSprite (&tableSurface[BUTTON_LEVELS], themePath, "button_levels.png");
+  loadSprite (&tableSurface[BUTTON_ABOUT], themePath, "button_about.png");
 
 
   /* outside the wall */
