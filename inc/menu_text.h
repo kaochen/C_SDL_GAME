@@ -38,24 +38,24 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /* define images/sprites struct */
 typedef struct
 {
-  SDL_Surface *textSurface;
+  SDL_Surface *image;
+  size_t tabName;
+  size_t lineNbr;
 } S_Text;
 
 /*init the textSurface table */
 void
-tableTextSurface_init(S_Text tableTextSurface[NBR_OF_TEXT]);
+tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE]);
 
 /* free all text surfaces */
 void
-freeS_Text (S_Text tableTextSurface[NBR_OF_TEXT]);
+freeS_Text (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE]);
 
 /*make from a text a table and load it into the tableTextSurface*/
 void
-loadTextAsSurface(size_t t, S_Text tableTextSurface[NBR_OF_TEXT], char *text, size_t fontSize, size_t R, size_t G, size_t B, size_t A);
+loadTextAsSurface (size_t tab, size_t lineNbr, S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE], char *text,
+		   size_t fontSize, size_t R, size_t G, size_t B, size_t A);
 
-/* display shortcut in the menu */
-int
-displayShortcut (SDL_Surface * screen, S_Text tableTextSurface[NBR_OF_TEXT]);
 
 /* display the level number */
 int

@@ -133,7 +133,7 @@ main (int argc, char *argv[])
 
   /* load text into a table of struct */
 
-  S_Text tableTextSurface[NBR_OF_TEXT];
+  S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE];
   tableTextSurface_init (tableTextSurface);
 
   /* create a grid using the heigth and width form settings */

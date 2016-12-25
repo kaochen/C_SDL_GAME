@@ -40,14 +40,8 @@ enum
 
 
 
-enum {
-SUB_EMPTY, TOPBAR, TABS,
-INFO,SHORTCUTS,ABOUT,FILES,SETTINGS, //main menu
-INFO1,INFO2,INFO3,
-SHORTCUTS1,SHORTCUTS2,SHORTCUTS3,SHORTCUTS4,SHORTCUTS5,
-ABOUT1,ABOUT2,
-FILES1,FILES2,FILES3,FILES4
-};
+enum {MAIN_WINDOW, TOPBAR, TABS}; //Main elements of the interface
+enum {TAB_EMPTY, INFO,SHORTCUTS,ABOUT,FILES,SETTINGS}; //Different tabs
 
 
 /* Init menu grid */
@@ -109,7 +103,7 @@ void
 openMenu (S_preferences *pref,
           SDL_Surface * screen,
           Sprites tableSurface[NBR_OF_IMAGES],
-	  S_Text tableTextSurface[NBR_OF_TEXT],
+	  S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
           S_LevelList * levelList,
           S_menuchoice menuChoice,
           S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
@@ -118,7 +112,7 @@ openMenu (S_preferences *pref,
 int
 displaySubMenu (S_preferences * pref,
                 SDL_Surface * screen,
-                S_Text tableTextSurface[NBR_OF_TEXT],
+                S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
                 S_LevelList * levelList,
                 S_menuchoice menuChoice);
 

@@ -31,62 +31,63 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /*init the textSurface table */
 void
-tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TEXT])
+tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
 {
   /* Init all the table */
-  for (size_t i = 0; i < NBR_OF_TEXT; ++i)
-    tableTextSurface[i] = (S_Text)
-    {
-    .textSurface = NULL};
-
+  for (size_t i = 0; i < NBR_OF_TAB; ++i){
+    for (size_t j = 0; j < NBR_OF_TAB_LINE; ++j){
+      tableTextSurface[i][j] = (S_Text){ .image = NULL, .tabName = TAB_EMPTY, .lineNbr = 1};
+  }
+}
   /* Init main Menu */
   size_t fontSize = 18, R = 255, G = 255, B = 255, A = 255;
-  loadTextAsSurface (INFO, tableTextSurface, gettext ("Current Level Infos"), fontSize, R,
+  loadTextAsSurface (INFO,0, tableTextSurface, gettext ("Current Level Infos"), fontSize, R,
 		     G, B, A);
-  loadTextAsSurface (SHORTCUTS, tableTextSurface, gettext ("Shortcuts"), fontSize, R,
+  loadTextAsSurface (SHORTCUTS,0, tableTextSurface, gettext ("Shortcuts"), fontSize, R,
 		     G, B, A);
-  loadTextAsSurface (ABOUT, tableTextSurface, gettext ("About"), fontSize, R,
+  loadTextAsSurface (ABOUT,0, tableTextSurface, gettext ("About"), fontSize, R,
 		     G, B, A);
-  loadTextAsSurface (FILES, tableTextSurface, gettext ("Files"), fontSize, R,
+  loadTextAsSurface (FILES,0, tableTextSurface, gettext ("Files"), fontSize, R,
 		     G, B, A);
-  loadTextAsSurface (SETTINGS, tableTextSurface, gettext ("Settings"), fontSize, R,
+  loadTextAsSurface (SETTINGS,0, tableTextSurface, gettext ("Settings"), fontSize, R,
 		     G, B, A);
 
   /* Init sub Menu */
   /*shortcuts */
   size_t fontSizeSub = 18;
-  loadTextAsSurface (SHORTCUTS1, tableTextSurface,
+  loadTextAsSurface (SHORTCUTS,1, tableTextSurface,
 		     gettext ("m : open and close menu"), fontSizeSub, R, G,
 		     B, A);
-  loadTextAsSurface (SHORTCUTS2, tableTextSurface, gettext ("n : next level"),
+  loadTextAsSurface (SHORTCUTS,2, tableTextSurface, gettext ("n : next level"),
 		     fontSizeSub, R, G, B, A);
-  loadTextAsSurface (SHORTCUTS3, tableTextSurface,
+  loadTextAsSurface (SHORTCUTS,3, tableTextSurface,
 		     gettext ("p : previous level"), fontSizeSub, R, G, B, A);
-  loadTextAsSurface (SHORTCUTS4, tableTextSurface,
+  loadTextAsSurface (SHORTCUTS,4, tableTextSurface,
 		     gettext ("r : reset current level"), fontSizeSub, R, G,
 		     B, A);
-  loadTextAsSurface (SHORTCUTS5, tableTextSurface, gettext ("q : quit game"),
+  loadTextAsSurface (SHORTCUTS,5, tableTextSurface, gettext ("q : quit game"),
 		     fontSizeSub, R, G, B, A);
   /* Init sub Menu */
   /*about */
-  loadTextAsSurface (ABOUT1, tableTextSurface, gettext ("Website :"),
+  loadTextAsSurface (ABOUT,1, tableTextSurface, gettext ("Website :"),
 		     fontSizeSub, R, G, B, A);
-  loadTextAsSurface (ABOUT2, tableTextSurface,
+  loadTextAsSurface (ABOUT,2, tableTextSurface,
 		     gettext ("https://github.com/kaochen/SokoRobot"),
 		     fontSizeSub, R, G, B, A);
 }
 
 /* free all text surfaces */
 void
-freeS_Text (S_Text tableTextSurface[NBR_OF_TEXT])
+freeS_Text (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
 {
 
-  for (size_t i = 0; i < NBR_OF_TEXT; i++)
-    {
-      if (tableTextSurface[i].textSurface != NULL)
-	{
-	  SDL_FreeSurface (tableTextSurface[i].textSurface);
-	}
+  for (size_t i = 0; i < NBR_OF_TAB; i++){
+  for (size_t j = 0; j < NBR_OF_TAB_LINE; j++){
+      if (tableTextSurface[i][j].image != NULL)
+	      {
+	        SDL_FreeSurface (tableTextSurface[i][j].image);
+	      }
+    }
     }
   fprintf (stderr, gettext ("\tAll text surfaces are free %s\n"),
 	   SDL_GetError ());
@@ -94,7 +95,7 @@ freeS_Text (S_Text tableTextSurface[NBR_OF_TEXT])
 
 /*make from a text a table and load it into the tableTextSurface*/
 void
-loadTextAsSurface (size_t t, S_Text tableTextSurface[NBR_OF_TEXT], char *text,
+loadTextAsSurface (size_t tab, size_t lineNbr, S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE], char *text,
 		   size_t fontSize, size_t R, size_t G, size_t B, size_t A)
 {
   /* setup font */
@@ -105,8 +106,7 @@ loadTextAsSurface (size_t t, S_Text tableTextSurface[NBR_OF_TEXT], char *text,
 
 
   SDL_Color fontColor = { R, G, B, A };
-  tableTextSurface[t].textSurface =
-    TTF_RenderUTF8_Blended (font, text, fontColor);
+  tableTextSurface[tab][lineNbr].image =  TTF_RenderUTF8_Blended (font, text, fontColor);
   //clean
   TTF_CloseFont (font);
   font = NULL;

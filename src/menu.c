@@ -36,13 +36,13 @@ gridMenu_init(S_preferences *pref,
 {
    for(int y=0; y < pref->menu_Y_Blocks; ++y)
       for(int x=0; x< pref->menu_X_Blocks; ++x)
-      gridMenu[x][y] = (S_Menu) {.role=SUB_EMPTY, .type=SUB_EMPTY, .text=SUB_EMPTY, .image=NO_IMAGE, .nbr_of_lines = 1};
+      gridMenu[x][y] = (S_Menu) {.role=M_EMPTY, .type=MAIN_WINDOW, .text=TAB_EMPTY, .image=NO_IMAGE, .nbr_of_lines = 1};
 
     //place elements
-   gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .text=SUB_EMPTY, .image=BUTTON_ARROW_L, .nbr_of_lines = 1};
-   gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=SUB_EMPTY, .image=BUTTON_ARROW_P, .nbr_of_lines = 1};
-   gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=SUB_EMPTY, .image=BUTTON_RESET, .nbr_of_lines = 1};
-   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=SUB_EMPTY, .image=BUTTON_BACKWARDS, .nbr_of_lines = 1};
+   gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .text=TAB_EMPTY, .image=BUTTON_ARROW_L, .nbr_of_lines = 1};
+   gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=TAB_EMPTY, .image=BUTTON_ARROW_P, .nbr_of_lines = 1};
+   gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=TAB_EMPTY, .image=BUTTON_RESET, .nbr_of_lines = 1};
+   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=TAB_EMPTY, .image=BUTTON_BACKWARDS, .nbr_of_lines = 1};
    gridMenu[2][1] = (S_Menu) {.role=M_INFO, .type=TABS, .text=INFO, .image=BUTTON_LEVELS, .nbr_of_lines = 5};
    gridMenu[3][1] = (S_Menu) {.role=M_FILE, .type=TABS, .text=FILES,  .image=BUTTON_FILE, .nbr_of_lines = 4};
    gridMenu[4][1] = (S_Menu) {.role=M_SHORTCUTS, .type=TABS, .text=SHORTCUTS, .image=BUTTON_SHORTCUTS, .nbr_of_lines = 6};
@@ -283,7 +283,7 @@ void
 openMenu (S_preferences *pref,
           SDL_Surface * screen,
           Sprites tableSurface[NBR_OF_IMAGES],
-	        S_Text tableTextSurface[NBR_OF_TEXT],
+	        S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
           S_LevelList * levelList,
           S_menuchoice menuChoice,
           S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
@@ -296,8 +296,8 @@ openMenu (S_preferences *pref,
   /*blit text*/
   pos.x = pref->x_menu + SPRITE_SIZE;
   pos.y = 2 * SPRITE_SIZE + 10;
-  size_t surface = gridMenu[menuChoice.xPos][1].text;
-  SDL_BlitSurface (tableTextSurface[surface].textSurface, NULL, screen, &pos);
+  size_t tab = gridMenu[menuChoice.xPos][1].text;
+  SDL_BlitSurface (tableTextSurface[tab][0].image, NULL, screen, &pos);
 
   displaySubMenu (pref, screen, tableTextSurface, levelList, menuChoice);
   displayOverTextImage (pref, screen, tableSurface, menuChoice);
@@ -308,7 +308,7 @@ openMenu (S_preferences *pref,
 int
 displaySubMenu (S_preferences * pref,
                 SDL_Surface * screen,
-                S_Text tableTextSurface[NBR_OF_TEXT],
+                S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
                 S_LevelList * levelList,
                 S_menuchoice menuChoice)
 {
@@ -370,56 +370,51 @@ displaySubMenu (S_preferences * pref,
       free (actual);
 
      size_t fontSize = 18, R = 255, G = 255, B = 255, A = 255;
-     loadTextAsSurface (INFO1, tableTextSurface, nameLevel,
+     loadTextAsSurface (INFO,1, tableTextSurface, nameLevel,
 		     fontSize, R, G, B, A);
-     loadTextAsSurface (INFO2, tableTextSurface, gettext ("Authors:"),
+     loadTextAsSurface (INFO,2, tableTextSurface, gettext ("Authors:"),
 		     fontSize, R, G, B, A);
-     loadTextAsSurface (INFO3, tableTextSurface, nameFile,
+     loadTextAsSurface (INFO,3, tableTextSurface, nameFile,
 		     fontSize, R, G, B, A);
 
 
 
-   size_t nbr = 0, j = 0, size = 10, line[size];
-   for (j = 0; j < size; j++){
-      line[size] = SUB_EMPTY;
-   }
-   j = 0;
+   size_t nbr = 0, j = 0, tab = TAB_EMPTY;
+
    switch (menuChoice.tab){
    case M_INFO :
-      nbr = 3;
-      line[0] = INFO1;
-      line[1] = INFO2;
-      line[2] = INFO3;
+      nbr = MENU_MAX_INFO;
+      tab = INFO;
       break;
    case M_ABOUT:
-      nbr = 2;
-      line[0] = ABOUT1;
-      line[1] = ABOUT2;
+      nbr = MENU_MAX_ABOUT;
+      tab = ABOUT;
       break;
    case M_SHORTCUTS:
-      nbr = 5;
-      line[0] = SHORTCUTS1;
-      line[1] = SHORTCUTS2;
-      line[2] = SHORTCUTS3;
-      line[3] = SHORTCUTS4;
-      line[4] = SHORTCUTS5;
+      nbr = MENU_MAX_SHORTCUTS;
+      tab = SHORTCUTS;
+      break;
+   case M_FILE:
+      nbr = MENU_MAX_FILE;
+      tab = FILES;
+      break;
+   case M_SETTINGS:
+      nbr = MENU_MAX_SETTINGS;
       break;
    }
-   for (j = 0; j < nbr; j++ ){
-            if (line[j] != SUB_EMPTY){
-               //fprintf(stderr, "line%zu: %zu\n",j,line[j]);
-               linePos.y = 3*SPRITE_SIZE + 10 + j*30;
-               SDL_BlitSurface (tableTextSurface[line[j]].textSurface, NULL, screen, &linePos);
-            }
+   nbr++;
+   for (j = 1; j < nbr; j++ ){
+          //fprintf(stderr, "line%zu: %zu\n",j,line[j]);
+        if (tableTextSurface[tab][j].image != NULL){
+        linePos.y = 3*SPRITE_SIZE + 10 + (j-1)*30;
+        SDL_BlitSurface (tableTextSurface[tab][j].image, NULL, screen, &linePos);
+        }
    }
   /*clean*/
-  SDL_FreeSurface (tableTextSurface[INFO1].textSurface);
-  SDL_FreeSurface (tableTextSurface[INFO2].textSurface);
-  SDL_FreeSurface (tableTextSurface[INFO3].textSurface);
-  tableTextSurface[INFO1].textSurface = NULL;
-  tableTextSurface[INFO2].textSurface = NULL;
-  tableTextSurface[INFO3].textSurface = NULL;
-
+  for (size_t i = 1; i <= 3; i++ ){
+  SDL_FreeSurface (tableTextSurface[INFO][i].image);
+  tableTextSurface[INFO][i].image = NULL;
+  }
   return EXIT_SUCCESS;
 }
 
