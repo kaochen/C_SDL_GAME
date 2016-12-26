@@ -35,18 +35,18 @@ gridMenu_init(S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
 {
    for(int y=0; y < pref.menu_Y_Blocks; ++y)
       for(int x=0; x< pref.menu_X_Blocks; ++x)
-      gridMenu[x][y] = (S_Menu) {.role=M_EMPTY, .type=MAIN_WINDOW, .text=TAB_EMPTY, .image=NO_IMAGE, .nbr_of_lines = 1};
+      gridMenu[x][y] = (S_Menu) {.role=M_EMPTY, .type=MAIN_WINDOW, .tab=TAB_EMPTY, .image=NO_IMAGE};
 
     //place elements
-   gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .text=TAB_EMPTY, .image=BUTTON_ARROW_L, .nbr_of_lines = 1};
-   gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .text=TAB_EMPTY, .image=BUTTON_ARROW_P, .nbr_of_lines = 1};
-   gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .text=TAB_EMPTY, .image=BUTTON_RESET, .nbr_of_lines = 1};
-   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .text=TAB_EMPTY, .image=BUTTON_BACKWARDS, .nbr_of_lines = 1};
-   gridMenu[2][1] = (S_Menu) {.role=M_INFO, .type=TABS, .text=INFO, .image=BUTTON_LEVELS, .nbr_of_lines = 5};
-   gridMenu[3][1] = (S_Menu) {.role=M_FILE, .type=TABS, .text=FILES,  .image=BUTTON_FILE, .nbr_of_lines = 4};
-   gridMenu[4][1] = (S_Menu) {.role=M_SHORTCUTS, .type=TABS, .text=SHORTCUTS, .image=BUTTON_SHORTCUTS, .nbr_of_lines = 6};
-   gridMenu[5][1] = (S_Menu) {.role=M_SETTINGS, .type=TABS, .text=SETTINGS,  .image=BUTTON_SETTINGS, .nbr_of_lines = 2};
-   gridMenu[6][1] = (S_Menu) {.role=M_ABOUT, .type=TABS, .text=ABOUT, .image=BUTTON_ABOUT, .nbr_of_lines = 4};
+   gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .tab=0, .image=BUTTON_ARROW_L};
+   gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .tab=0, .image=BUTTON_ARROW_P};
+   gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .tab=0, .image=BUTTON_RESET};
+   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .tab=TAB_EMPTY, .image=BUTTON_BACKWARDS};
+   gridMenu[2][1] = (S_Menu) {.role=M_INFO, .type=TABS, .tab=1, .image=BUTTON_LEVELS};
+   gridMenu[3][1] = (S_Menu) {.role=M_FILE, .type=TABS, .tab=2,  .image=BUTTON_FILE};
+   gridMenu[4][1] = (S_Menu) {.role=M_SHORTCUTS, .type=TABS, .tab=3, .image=BUTTON_SHORTCUTS};
+   gridMenu[5][1] = (S_Menu) {.role=M_SETTINGS, .type=TABS, .tab=4,  .image=BUTTON_SETTINGS};
+   gridMenu[6][1] = (S_Menu) {.role=M_ABOUT, .type=TABS, .tab=5, .image=BUTTON_ABOUT};
 
 }
 
@@ -266,7 +266,7 @@ openCloseTheMenu(void){
             menuChoice.open = 0;
           }
 
-        //fprintf (stderr, "change to freeze: %d open:%d\n", menuChoice->freeze, menuChoice->freeze);
+        //fprintf (stderr, "change to freeze: %d open:%d\n", menuChoice.freeze, menuChoice.freeze);
         return 1;
 }
 
@@ -286,7 +286,8 @@ openMenu (SDL_Surface * screen,
   /*blit text*/
   pos.x = pref.x_menu + SPRITE_SIZE;
   pos.y = 2 * SPRITE_SIZE + 10;
-  size_t tab = gridMenu[menuChoice.xPos][1].text;
+  size_t tabChoice = gridMenu[menuChoice.xPos][1].tab;
+  size_t tab = menuChoice.tab[tabChoice].name;
   SDL_BlitSurface (tableTextSurface[tab][0].image, NULL, screen, &pos);
 
   displaySubMenu (screen, tableTextSurface, levelList);
@@ -301,7 +302,7 @@ displaySubMenu (SDL_Surface * screen,
                 S_LevelList * levelList)
 {
   /* blit text */
-  //  fprintf (stderr, "menuChoice : %d\n", menuChoice.tab);
+  //fprintf (stderr, "menuChoice : %d, %d\n", menuChoice.tabChoice, menuChoice.tab[menuChoice.tabChoice].nbrLines);
   SDL_Rect linePos;
 
   linePos.x = pref.x_menu + 40;
@@ -365,37 +366,13 @@ displaySubMenu (SDL_Surface * screen,
      loadTextAsSurface (INFO,3, tableTextSurface, nameFile,
 		     fontSize, R, G, B, A);
 
-
-
-   size_t nbr = 0, j = 0, tab = TAB_EMPTY;
-
-   switch (menuChoice.tab){
-   case M_INFO :
-      nbr = MENU_MAX_INFO;
-      tab = INFO;
-      break;
-   case M_ABOUT:
-      nbr = MENU_MAX_ABOUT;
-      tab = ABOUT;
-      break;
-   case M_SHORTCUTS:
-      nbr = MENU_MAX_SHORTCUTS;
-      tab = SHORTCUTS;
-      break;
-   case M_FILE:
-      nbr = MENU_MAX_FILE;
-      tab = FILES;
-      break;
-   case M_SETTINGS:
-      nbr = MENU_MAX_SETTINGS;
-      break;
-   }
-   nbr++;
+  /*print lines into tabs*/
+   int j = 0, tabChoice = menuChoice.tabChoice, nbr = menuChoice.tab[tabChoice].nbrLines + 1;
+   int tabName = menuChoice.tab[tabChoice].name;
    for (j = 1; j < nbr; j++ ){
-          //fprintf(stderr, "line%zu: %zu\n",j,line[j]);
-        if (tableTextSurface[tab][j].image != NULL){
+        if (tableTextSurface[tabName][j].image != NULL){
         linePos.y = 3*SPRITE_SIZE + 10 + (j-1)*30;
-        SDL_BlitSurface (tableTextSurface[tab][j].image, NULL, screen, &linePos);
+        SDL_BlitSurface (tableTextSurface[tabName][j].image, NULL, screen, &linePos);
         }
    }
   /*clean*/
@@ -413,9 +390,7 @@ displayOpenMenuBackground (SDL_Surface * screen,
                            S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
 {
   int i = 0;
-  int xP = menuChoice.xPos , yP = menuChoice.yPos;
-  int size = gridMenu[xP][yP].nbr_of_lines;
-
+  int size = menuChoice.tab[menuChoice.tabChoice].nbrLines + 1;
 
   SDL_Rect subMenuPos;
   subMenuPos.x = pref.x_menu+ 20;
@@ -471,7 +446,7 @@ displayOpenMenuBackground (SDL_Surface * screen,
 
   SDL_Rect hlPos;
   hlPos.x = pref.x_menu + SPRITE_SIZE - 10;
-  hlPos.y = 3*SPRITE_SIZE + 12 + menuChoice.sub*30;
+  hlPos.y = 3*SPRITE_SIZE + 12 + menuChoice.lineChoice*30;
   SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen, &hlPos);
 
   /* add highlight to tabs depending on the menuChoice*/
@@ -501,19 +476,11 @@ void
 displayOverTextImage(SDL_Surface * screen,
 		                 Sprites tableSurface[NBR_OF_IMAGES])
 {
-  int x = 0, y = 0, xSize = 360 / SPRITE_SIZE, ySize = 0;
-  if (menuChoice.tab == M_ABOUT)
-    {
-      ySize = 8;
-    }
-  else
-    {
-      ySize = 7;
-    }
+  int x = 0, y = 0, xSize = 360 / SPRITE_SIZE, ySize = menuChoice.tab[menuChoice.tabChoice].nbrLines + 2;
 
   SDL_Rect Pos;
   Pos.x = pref.x_menu + 20;
-
+  Pos.y = SPRITE_SIZE;
   for (x = 0; x < xSize; x++)
     {
       Pos.y = SPRITE_SIZE + 10;
@@ -535,7 +502,6 @@ displayTopBarButtons (SDL_Surface * screen,
 {
   SDL_Rect buttonsPos;
   int x = 0, y = 0;
-
 
   size_t  imageName = NO_IMAGE;
     for(y = 0; y < pref.menu_Y_Blocks; ++y){

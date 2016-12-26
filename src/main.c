@@ -179,13 +179,37 @@ main (int argc, char *argv[])
 
 
   /*init Menu Choice*/
-  menuChoice.tab = M_INFO;
-  menuChoice.sub = 0;
-  menuChoice.max = 4;
+  menuChoice.tabChoice = 1;
+  menuChoice.lineChoice = 0;
+  menuChoice.nbrTabs = NBR_OF_TAB - 1;
   menuChoice.open = 0;
   menuChoice.freeze = 0;
   menuChoice.xPos = 2;
   menuChoice.yPos = 1;
+
+  menuChoice.tab[0].role = M_EMPTY;
+  menuChoice.tab[0].nbrLines = 0;
+  menuChoice.tab[0].name = TAB_EMPTY ;
+
+  menuChoice.tab[1].role = M_INFO;
+  menuChoice.tab[1].nbrLines = MENU_MAX_INFO;
+  menuChoice.tab[1].name = INFO;
+
+  menuChoice.tab[2].role = M_FILE;
+  menuChoice.tab[2].nbrLines = MENU_MAX_FILE;
+  menuChoice.tab[2].name = FILES;
+
+  menuChoice.tab[3].role = M_SHORTCUTS;
+  menuChoice.tab[3].nbrLines = MENU_MAX_SHORTCUTS;
+  menuChoice.tab[3].name = SHORTCUTS;
+
+  menuChoice.tab[4].role = M_SETTINGS;
+  menuChoice.tab[4].nbrLines = MENU_MAX_SETTINGS;
+  menuChoice.tab[4].name = SETTINGS;
+
+  menuChoice.tab[5].role = M_ABOUT;
+  menuChoice.tab[5].nbrLines = MENU_MAX_ABOUT;
+  menuChoice.tab[5].name = ABOUT;
 
   /*Load first game */
   pref.level = readLevelFromSetting (levelList);
@@ -248,21 +272,6 @@ main (int argc, char *argv[])
       //SDL_WaitEvent(&event);
       while (SDL_PollEvent (&event))
 	{
-      switch (menuChoice.tab)
-            {
-            case M_INFO:
-                menuChoice.max = MENU_MAX_INFO;
-                break;
-            case M_SHORTCUTS:
-                menuChoice.max = MENU_MAX_SHORTCUTS;
-                break;
-            case M_ABOUT:
-                menuChoice.max = MENU_MAX_ABOUT;
-                break;
-            case M_FILE:
-                menuChoice.max = MENU_MAX_FILE;
-                break;
-            }
 	  switch (event.type)
 	    {
 	    case SDL_QUIT:
@@ -391,7 +400,7 @@ main (int argc, char *argv[])
 		    {
 		      /*Do not move when level is finished */
 		      if (menuChoice.freeze == 1)
-			break;
+			        break;
 
 		      refresh = movePlayer (xPlayer, yPlayer, RIGHT, grid);
 		      break;
@@ -400,12 +409,13 @@ main (int argc, char *argv[])
 		  else
 		    {
           menuChoice.xPos++;
-		      /* make circle */
-		      if (menuChoice.xPos > 6)
-			{
-			  menuChoice.xPos = 2;
-			}
-          menuChoice.tab = gridMenu[menuChoice.xPos][1].role;
+                     if (menuChoice.xPos > 6)
+                         menuChoice.xPos = 2;
+
+          menuChoice.tabChoice++;
+          if (menuChoice.tabChoice > menuChoice.nbrTabs)
+              menuChoice.tabChoice = 1;
+
 		      refresh = 1;
 		    }
 		  break;
@@ -422,13 +432,13 @@ main (int argc, char *argv[])
 		    }
 		  else
 		    {
-		      menuChoice.xPos--;
-		      /* make circle */
-		      if (menuChoice.xPos < 2)
-			{
-			  menuChoice.xPos = 6;
-			}
-          menuChoice.tab = gridMenu[menuChoice.xPos][1].role;
+          menuChoice.xPos--;
+          if (menuChoice.xPos < 2)
+              menuChoice.xPos = 6;
+
+          menuChoice.tabChoice--;
+          if (menuChoice.tabChoice < 1)
+              menuChoice.tabChoice = menuChoice.nbrTabs;
 		      refresh = 1;
 		    }
 		  break;
@@ -445,11 +455,11 @@ main (int argc, char *argv[])
 		    }
 		  else
 		    {
-		      menuChoice.sub--;
+		      menuChoice.lineChoice--;
 		      /* make circle */
-		      if (menuChoice.sub < 0)
+		      if (menuChoice.lineChoice < 0)
 			{
-			  menuChoice.sub = menuChoice.max;
+			  menuChoice.lineChoice = (menuChoice.tab[menuChoice.tabChoice].nbrLines);
 			}
 		      refresh = 1;
 		    }
@@ -468,11 +478,11 @@ main (int argc, char *argv[])
 
 		  else
 		    {
-		      menuChoice.sub++;
+		      menuChoice.lineChoice++;
 		      /* make circle */
-		      if (menuChoice.sub > menuChoice.max)
+		      if (menuChoice.lineChoice > menuChoice.tab[menuChoice.tabChoice].nbrLines)
 			{
-			  menuChoice.sub = 0;
+			  menuChoice.lineChoice = 0;
 			}
 		      refresh = 1;
 		    }

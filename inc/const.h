@@ -34,13 +34,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define MENU_WIDTH 400
 #define MENU_LINE 15
 #define MENU_ROW 15
-#define MENU_MAX_INFO 2
-#define MENU_MAX_SHORTCUTS 4
-#define MENU_MAX_ABOUT 1
-#define MENU_MAX_FILE 1
-#define MENU_MAX_SETTINGS 1
+#define MENU_MAX_INFO 3
+#define MENU_MAX_FILE 4
+#define MENU_MAX_SHORTCUTS 5
+#define MENU_MAX_SETTINGS 3
+#define MENU_MAX_ABOUT 3
 
-#define NBR_OF_TAB 5
+#define NBR_OF_TAB 6
 #define NBR_OF_TAB_LINE 10
 
 
@@ -102,8 +102,8 @@ enum
 	BUTTON_FILE,BUTTON_SETTINGS,BUTTON_SHORTCUTS,BUTTON_LEVELS,BUTTON_ABOUT,
 	BUTTON_HIGHLIGHT,
   OUTSIDE_IMAGE, OUTSIDE2_IMAGE, OUTSIDE3_IMAGE, OUTSIDE4_IMAGE,
-  CONGRATS
-};
+  CONGRATS};
+
 enum
 { FINISH, NOT_FINISHED };
 
@@ -155,18 +155,25 @@ typedef struct
 {
  int role;
  int type;
- int text;
+ int tab;
  int menu;
  int image;
- int nbr_of_lines;
 }S_Menu;
+
+typedef struct
+{
+  int role;
+  int name;
+  int nbrLines;
+}S_Tabs;
 
 /*Struct to store menu status*/
 typedef struct
 {
- int tab;
- int sub; //under tabs
- int max; //max lines in sub part
+ S_Tabs tab[NBR_OF_TAB];
+ int tabChoice;
+ int lineChoice;
+ int nbrTabs;
  int open; //the menu panel is open or not
  int freeze; //Freeze the gameplay when menu or congrats are open
  int xPos;

@@ -74,6 +74,14 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
   loadTextAsSurface (ABOUT,2, tableTextSurface,
 		     gettext ("https://github.com/kaochen/SokoRobot"),
 		     fontSizeSub, R, G, B, A);
+
+  /* Settings */
+  char text[MAX_CARACT] ="";
+  sprintf(text,gettext("Window: %dx%dpx %dhz"),
+                     pref.window_width, pref.window_height, pref.framerate);
+  loadTextAsSurface (SETTINGS,1, tableTextSurface,text,fontSizeSub, R, G, B, A);
+  loadTextAsSurface (SETTINGS,2, tableTextSurface,"theme",fontSizeSub, R, G, B, A);
+
 }
 
 /* free all text surfaces */

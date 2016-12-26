@@ -19,7 +19,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 /*This file handles the reading and decoding of the setting file "preference.ini".*/
 
 #ifndef SETTINGS_C
-#define SETIINGS_C
+#define SETTINGS_C
 
 #include "../inc/settings.h"
 #include "../inc/menu.h"
