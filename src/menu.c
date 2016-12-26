@@ -31,11 +31,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* Init menu grid */
 void
-gridMenu_init(S_preferences *pref,
-              S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
+gridMenu_init(S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
 {
-   for(int y=0; y < pref->menu_Y_Blocks; ++y)
-      for(int x=0; x< pref->menu_X_Blocks; ++x)
+   for(int y=0; y < pref.menu_Y_Blocks; ++y)
+      for(int x=0; x< pref.menu_X_Blocks; ++x)
       gridMenu[x][y] = (S_Menu) {.role=M_EMPTY, .type=MAIN_WINDOW, .text=TAB_EMPTY, .image=NO_IMAGE, .nbr_of_lines = 1};
 
     //place elements
@@ -54,36 +53,35 @@ gridMenu_init(S_preferences *pref,
 
 /* display Top Bar*/
 int
-displayTopBar (S_preferences * pref,
-	       SDL_Surface * screen,
-	       Sprites tableSurface[NBR_OF_IMAGES],
-	       S_LevelList * levelList,
-	       Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
-         S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
+displayTopBar (SDL_Surface * screen,
+	            Sprites tableSurface[NBR_OF_IMAGES],
+	            S_LevelList * levelList,
+	            Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
+              S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
 {
   /* first add background */
-  if (backgroundTopBar (pref, screen, tableSurface) == EXIT_FAILURE)
+  if (backgroundTopBar (screen, tableSurface) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("backgroundTopBar failed.\n"));
       return EXIT_FAILURE;
     }
 
   /* display the level number */
-  if (levelMenu (pref, screen, levelList) == EXIT_FAILURE)
+  if (levelMenu (screen, levelList) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("levelMenu failed.\n"));
       return EXIT_FAILURE;
     }
 
   /* display the buttons */
-  if (displayTopBarButtons (pref, screen, tableSurface, gridMenu) == EXIT_FAILURE)
+  if (displayTopBarButtons (screen, tableSurface, gridMenu) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("displayTopBarButtons() failed.\n"));
       return EXIT_FAILURE;
     }
 
   /* display the circle */
-  if (displayProgress (pref, grid, screen, tableSurface) == EXIT_FAILURE)
+  if (displayProgress (grid, screen, tableSurface) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("displayProgress failed.\n"));
       return EXIT_FAILURE;
@@ -91,7 +89,7 @@ displayTopBar (S_preferences * pref,
 
   /* display the player into the circle */
   SDL_Rect facePos;
-  facePos.x = pref->x_menu + 24;
+  facePos.x = pref.x_menu + 24;
   facePos.y = 12;
   SDL_BlitSurface (tableSurface[PLAYER_FRONT].image, NULL, screen, &facePos);
   return EXIT_SUCCESS;
@@ -100,8 +98,7 @@ displayTopBar (S_preferences * pref,
 
 /* display background of the top bar menu */
 int
-backgroundTopBar (S_preferences * pref,
-                  SDL_Surface * screen,
+backgroundTopBar (SDL_Surface * screen,
                   Sprites tableSurface[NBR_OF_IMAGES])
 {
   if (screen == NULL || tableSurface == NULL)
@@ -112,23 +109,21 @@ backgroundTopBar (S_preferences * pref,
     }
 
   SDL_Rect menuPos;
-  menuPos.x = pref->x_menu;
+  menuPos.x = pref.x_menu;
   menuPos.y = 0;
   SDL_BlitSurface (tableSurface[MENU_BAR].image, NULL, screen, &menuPos);
   return EXIT_SUCCESS;
-
 }
 
 
 /* count how many goals are need to complete the level */
 int
-goalLeft (S_preferences *pref,
-              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
+goalLeft (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   int x = 0, y = 0, nbrOfBoxOk = 0;
-  for (x = 0; x < pref->max_X_Blocks; x++)
+  for (x = 0; x < pref.max_X_Blocks; x++)
     {
-      for (y = 0; y < pref->max_Y_Blocks; y++)
+      for (y = 0; y < pref.max_Y_Blocks; y++)
 	{
 	  if (grid[x][y].mainRole == BOX && grid[x][y].goalRole == GOAL)
 	    nbrOfBoxOk += 1;
@@ -139,13 +134,12 @@ goalLeft (S_preferences *pref,
 
 /* count goals all ready achieve */
 int
-nbr_of_goals (S_preferences *pref,
-              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
+nbr_of_goals (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   int x = 0, y = 0, nbrOfGoal = 0;
-  for (x = 0; x < pref->x_Blocks; x++)
+  for (x = 0; x < pref.x_Blocks; x++)
     {
-      for (y = 0; y < pref->y_Blocks; y++)
+      for (y = 0; y < pref.y_Blocks; y++)
 	{
 	  if (grid[x][y].goalRole == GOAL)
 	    nbrOfGoal += 1;
@@ -156,9 +150,9 @@ nbr_of_goals (S_preferences *pref,
 
 /* Display Progress in the level */
 int
-displayProgress (S_preferences * pref,
-       Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
-		 SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES])
+displayProgress (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
+		            SDL_Surface * screen,
+                Sprites tableSurface[NBR_OF_IMAGES])
 {
   if (screen == NULL || grid == NULL || screen == NULL)
     {
@@ -169,11 +163,11 @@ displayProgress (S_preferences * pref,
 
   SDL_Rect circlePos;
   /*place progress.png in the circle */
-  circlePos.x = pref->x_menu + 16;
+  circlePos.x = pref.x_menu + 16;
   circlePos.y = 5;
 
   /* progress.png is a small part of 360° cirle */
-  int angle = (360 - goalLeft (pref, grid) * 360 / nbr_of_goals (pref, grid));
+  int angle = (360 - goalLeft (grid) * 360 / nbr_of_goals (grid));
   //fprintf(stderr,"Angle is %d\n", angle);
   int i = 0;
   /* blit progress circle size image is 56*56px */
@@ -182,7 +176,7 @@ displayProgress (S_preferences * pref,
       SDL_Surface *circle =
 	rotozoomSurface (tableSurface[PROGRESS].image, i, 1.0, 1);
 
-      circlePos.x = pref->x_menu + 16 + (56 - circle->w) / 2;
+      circlePos.x = pref.x_menu + 16 + (56 - circle->w) / 2;
       circlePos.y = 5 + (56 - circle->h) / 2;
       if (angle != 360)
 	{
@@ -195,12 +189,11 @@ displayProgress (S_preferences * pref,
 
 /* Victory or not ? */
 int
-levelFinished (S_preferences *pref,
-               Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
+levelFinished (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   /* get info */
-  int i = goalLeft (pref, grid);
-  int j = nbr_of_goals (pref, grid);
+  int i = goalLeft (grid);
+  int j = nbr_of_goals (grid);
 
   if (i == j)
     {
@@ -216,8 +209,7 @@ levelFinished (S_preferences *pref,
 
 /* display a congrats message to the winner */
 int
-displayCongrats (S_preferences *pref,
-                 SDL_Surface * screen,
+displayCongrats (SDL_Surface * screen,
                  Sprites tableSurface[NBR_OF_IMAGES])
 {
   SDL_Rect congratsPos;
@@ -225,8 +217,8 @@ displayCongrats (S_preferences *pref,
   int width = 320, height = 120;
 
   /* add a background */
-  congratsPos.x = (pref->window_width - width) / 2;
-  congratsPos.y = (pref->window_height - height) / 2;
+  congratsPos.x = (pref.window_width - width) / 2;
+  congratsPos.y = (pref.window_height - height) / 2;
   SDL_BlitSurface (tableSurface[CONGRATS].image, NULL, screen, &congratsPos);
 
   /* setup font */
@@ -248,8 +240,8 @@ displayCongrats (S_preferences *pref,
     TTF_RenderUTF8_Blended (font, congratsMessageText, fontColor);
 
   /* blit progress */
-  congratsMessagePos.x = (pref->window_width - congratsMessage->w) / 2;
-  congratsMessagePos.y = (pref->window_height - congratsMessage->h) / 2;
+  congratsMessagePos.x = (pref.window_width - congratsMessage->w) / 2;
+  congratsMessagePos.y = (pref.window_height - congratsMessage->h) / 2;
   SDL_BlitSurface (congratsMessage, NULL, screen, &congratsMessagePos);
 
   /* clean */
@@ -263,15 +255,15 @@ displayCongrats (S_preferences *pref,
 
 /* Open And close the menu */
 int
-openCloseTheMenu(S_menuchoice *menuChoice){
-		  if (menuChoice->open == 0)
+openCloseTheMenu(void){
+		  if (menuChoice.open == 0)
             {
-		    menuChoice->freeze = 1;
-            menuChoice->open = 1;
+		    menuChoice.freeze = 1;
+            menuChoice.open = 1;
             }
 		  else{
-		    menuChoice->freeze = 0;
-            menuChoice->open = 0;
+		    menuChoice.freeze = 0;
+            menuChoice.open = 0;
           }
 
         //fprintf (stderr, "change to freeze: %d open:%d\n", menuChoice->freeze, menuChoice->freeze);
@@ -280,33 +272,31 @@ openCloseTheMenu(S_menuchoice *menuChoice){
 
 /* Show menu List */
 void
-openMenu (S_preferences *pref,
-          SDL_Surface * screen,
+openMenu (SDL_Surface * screen,
           Sprites tableSurface[NBR_OF_IMAGES],
 	        S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
           S_LevelList * levelList,
-          S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
+          S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
 {
   /* blit background */
-  displayOpenMenuBackground (pref, screen, tableSurface, gridMenu);
+  displayOpenMenuBackground (screen, tableSurface, gridMenu);
 
   /* add the tab name above tab icons */
   SDL_Rect pos;
   /*blit text*/
-  pos.x = pref->x_menu + SPRITE_SIZE;
+  pos.x = pref.x_menu + SPRITE_SIZE;
   pos.y = 2 * SPRITE_SIZE + 10;
   size_t tab = gridMenu[menuChoice.xPos][1].text;
   SDL_BlitSurface (tableTextSurface[tab][0].image, NULL, screen, &pos);
 
-  displaySubMenu (pref, screen, tableTextSurface, levelList);
-  displayOverTextImage (pref, screen, tableSurface);
+  displaySubMenu (screen, tableTextSurface, levelList);
+  displayOverTextImage (screen, tableSurface);
 
 }
 
 /* display Sub menu */
 int
-displaySubMenu (S_preferences * pref,
-                SDL_Surface * screen,
+displaySubMenu (SDL_Surface * screen,
                 S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
                 S_LevelList * levelList)
 {
@@ -314,7 +304,7 @@ displaySubMenu (S_preferences * pref,
   //  fprintf (stderr, "menuChoice : %d\n", menuChoice.tab);
   SDL_Rect linePos;
 
-  linePos.x = pref->x_menu + 40;
+  linePos.x = pref.x_menu + 40;
 
       /*Level Info */
       int i = 0;
@@ -337,7 +327,7 @@ displaySubMenu (S_preferences * pref,
       while (actual != NULL)
 	{
 
-	  if (i == pref->level)
+	  if (i == pref.level)
 	    {
 	      /*trunk long name */
 	      if (strlen (actual->name) > sizeMax)
@@ -418,10 +408,9 @@ displaySubMenu (S_preferences * pref,
 
 /* Display the background menu */
 void
-displayOpenMenuBackground (S_preferences * pref,
-                           SDL_Surface * screen,
+displayOpenMenuBackground (SDL_Surface * screen,
 			                     Sprites tableSurface[NBR_OF_IMAGES],
-                           S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
+                           S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
 {
   int i = 0;
   int xP = menuChoice.xPos , yP = menuChoice.yPos;
@@ -429,7 +418,7 @@ displayOpenMenuBackground (S_preferences * pref,
 
 
   SDL_Rect subMenuPos;
-  subMenuPos.x = pref->x_menu+ 20;
+  subMenuPos.x = pref.x_menu+ 20;
   subMenuPos.y = SPRITE_SIZE;
   SDL_BlitSurface (tableSurface[MENU_RIBBON].image, NULL, screen,
 		   &subMenuPos);
@@ -459,7 +448,7 @@ displayOpenMenuBackground (S_preferences * pref,
 	{
 	  crossPos.y += 20;
 	}
-      crossPos.x = pref->x_menu + SPRITE_SIZE;
+      crossPos.x = pref.x_menu + SPRITE_SIZE;
       for (x = 0; x < 11; x++)
 	{
 	  SDL_BlitSurface (tableSurface[MENU_SQUARE].image, NULL, screen,
@@ -472,7 +461,7 @@ displayOpenMenuBackground (S_preferences * pref,
 
   /* add a separator line */
   SDL_Rect sepPos;
-  sepPos.x = pref->x_menu + 33;
+  sepPos.x = pref.x_menu + 33;
   sepPos.y = 2*SPRITE_SIZE;
   SDL_BlitSurface (tableSurface[MENU_SEPARATOR].image, NULL, screen, &sepPos);
   sepPos.y = 3*SPRITE_SIZE;
@@ -481,14 +470,14 @@ displayOpenMenuBackground (S_preferences * pref,
   /*highlight the sub menuChoice*/
 
   SDL_Rect hlPos;
-  hlPos.x = pref->x_menu + SPRITE_SIZE - 10;
+  hlPos.x = pref.x_menu + SPRITE_SIZE - 10;
   hlPos.y = 3*SPRITE_SIZE + 12 + menuChoice.sub*30;
   SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen, &hlPos);
 
   /* add highlight to tabs depending on the menuChoice*/
   SDL_Rect tabPos;
   tabPos.y = SPRITE_SIZE;
-  tabPos.x = pref->x_menu +  menuChoice.xPos * SPRITE_SIZE + 3;
+  tabPos.x = pref.x_menu +  menuChoice.xPos * SPRITE_SIZE + 3;
   SDL_BlitSurface (tableSurface[BUTTON_HIGHLIGHT].image, NULL, screen, &tabPos);
 
   /* add tab icons */
@@ -496,10 +485,10 @@ displayOpenMenuBackground (S_preferences * pref,
   SDL_Rect iconPos;
   iconPos.y = SPRITE_SIZE + 5;
 
-  for(int y=0; y < pref->menu_Y_Blocks; ++y){
-      for(int x=0; x< pref->menu_X_Blocks; ++x){
+  for(int y=0; y < pref.menu_Y_Blocks; ++y){
+      for(int x=0; x< pref.menu_X_Blocks; ++x){
         if(gridMenu[x][y].type == TABS){
-          iconPos.x = pref->x_menu + x*SPRITE_SIZE;
+          iconPos.x = pref.x_menu + x*SPRITE_SIZE;
           // fprintf (stderr, "x: %d y:%d\n", iconPos.x,iconPos.y);
           SDL_BlitSurface (tableSurface[gridMenu[x][y].image].image, NULL, screen, &iconPos);
         }
@@ -509,8 +498,7 @@ displayOpenMenuBackground (S_preferences * pref,
 
 /* Display pattern image over the text menu */
 void
-displayOverTextImage(S_preferences * pref,
-                     SDL_Surface * screen,
+displayOverTextImage(SDL_Surface * screen,
 		                 Sprites tableSurface[NBR_OF_IMAGES])
 {
   int x = 0, y = 0, xSize = 360 / SPRITE_SIZE, ySize = 0;
@@ -524,7 +512,7 @@ displayOverTextImage(S_preferences * pref,
     }
 
   SDL_Rect Pos;
-  Pos.x = pref->x_menu + 20;
+  Pos.x = pref.x_menu + 20;
 
   for (x = 0; x < xSize; x++)
     {
@@ -541,22 +529,21 @@ displayOverTextImage(S_preferences * pref,
 
 /* Display buttons on the top bar*/
 int
-displayTopBarButtons (S_preferences *pref,
-                      SDL_Surface * screen,
+displayTopBarButtons (SDL_Surface * screen,
 		                  Sprites tableSurface[NBR_OF_IMAGES],
-                      S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
+                      S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
 {
   SDL_Rect buttonsPos;
   int x = 0, y = 0;
 
 
   size_t  imageName = NO_IMAGE;
-    for(y = 0; y < pref->menu_Y_Blocks; ++y){
-        for(x = 0; x< pref->menu_X_Blocks; ++x){
+    for(y = 0; y < pref.menu_Y_Blocks; ++y){
+        for(x = 0; x< pref.menu_X_Blocks; ++x){
           if (gridMenu[x][y].type == TOPBAR){
               imageName = gridMenu[x][y].image;
 
-               buttonsPos.x = pref->x_menu + x * SPRITE_SIZE;
+               buttonsPos.x = pref.x_menu + x * SPRITE_SIZE;
                buttonsPos.y = 0;
 
                //fprintf(stderr,"found x:%d->%d y:%d->%d\n", x, buttonsPos.x, y, buttonsPos.y);

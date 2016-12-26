@@ -59,8 +59,7 @@ loadTextAsSurface (size_t tab, size_t lineNbr, S_Text tableTextSurface[NBR_OF_TA
 
 /* display the level number */
 int
-levelMenu (S_preferences * pref,
-           SDL_Surface * screen,
+levelMenu (SDL_Surface * screen,
            S_LevelList * levelList);
 
 #endif

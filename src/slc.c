@@ -264,8 +264,7 @@ addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
 
 /*Add a level in the list*/
 void
-addNewLevel (S_preferences *pref,
-             S_LevelList * levelList,
+addNewLevel (S_LevelList * levelList,
              char *fileName,
              char *name,
              int height,
@@ -278,7 +277,7 @@ addNewLevel (S_preferences *pref,
       exit (EXIT_FAILURE);
     }
   /* check size before add */
-  if (width <= pref->x_Blocks && height <= (pref->y_Blocks - pref->h_menu_block))
+  if (width <= pref.x_Blocks && height <= (pref.y_Blocks - pref.h_menu_block))
     {
         new->name = malloc(MAX_CARACT);
         new->fileName = malloc(MAX_CARACT);
@@ -367,8 +366,7 @@ getNbrOfLevels (S_LevelList * levelList)
 
 /*get levels infos from files */
 int
-readLevelsAttributs (S_preferences * pref,
-                     S_FilesList * filesList,
+readLevelsAttributs (S_FilesList * filesList,
                      S_LevelList * levelList)
 {
   S_Files *actualFile  = malloc (sizeof (*actualFile));
@@ -448,7 +446,7 @@ readLevelsAttributs (S_preferences * pref,
 	                }
 	              else
 	                {
-	                  addNewLevel (pref, levelList, actualFile->name, (char *) name,
+	                  addNewLevel (levelList, actualFile->name, (char *) name,
 			               atoi ((char *) height), atoi ((char *) width));
 	                }
 	              //printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
@@ -485,9 +483,8 @@ readLevelList (S_LevelList * levelList)
 
 /*Load slc level into the grid */
 int
-loadSlcLevel (S_preferences * pref,
-              S_LevelList * levelList,
-              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
+loadSlcLevel (S_LevelList * levelList,
+              Square grid[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   if (levelList == NULL)
     {
@@ -500,15 +497,15 @@ loadSlcLevel (S_preferences * pref,
   while (actual != NULL)
     {
       /* try to find the nameLevel into the list */
-      if (i == pref->level)
+      if (i == pref.level)
 	{
 	  fprintf (stderr, "Found %s, %d:%d\n", actual->name,
 		   actual->width, actual->height);
 	  nbr_of_lines = actual->height;
 	  nbr_of_columns = actual->width;
 	  /*Place the drawing into the center of the grid */
-	  firstLines = ((pref->y_Blocks - nbr_of_lines) / 2 + pref->h_menu_block);	// + menu
-	  firstColumn = (pref->x_Blocks - nbr_of_columns) / 2;
+	  firstLines = ((pref.y_Blocks - nbr_of_lines) / 2 + pref.h_menu_block);	// + menu
+	  firstColumn = (pref.x_Blocks - nbr_of_columns) / 2;
 
 	  break;
 	}
@@ -548,9 +545,9 @@ loadSlcLevel (S_preferences * pref,
     }
   /*Clean grid before */
   int y = 0, x = 0;
-  for (y = 0; y < pref->y_Blocks; y++)
+  for (y = 0; y < pref.y_Blocks; y++)
     {
-      for (x = 0; x < pref->x_Blocks; x++)
+      for (x = 0; x < pref.x_Blocks; x++)
 	{
 	  grid[x][y].mainRole = GROUND;
 	  grid[x][y].subRole = GROUND1;
@@ -612,11 +609,11 @@ loadSlcLevel (S_preferences * pref,
 	}
     }
 
-  randomGround (pref, grid);
-  randomWall (pref, grid);
+  randomGround (grid);
+  randomWall (grid);
   /* Change grounds that are outside the walls to the OUTSIDE flag */
-  detectOutside (pref, grid);
-  randomOutside (pref, grid);
+  detectOutside (grid);
+  randomOutside (grid);
 
 
   /* free memory */
@@ -627,7 +624,7 @@ loadSlcLevel (S_preferences * pref,
   /*refresh status*/
   menuChoice.freeze = 0;
   menuChoice.open = 0;
-  fprintf (stderr, "Level %d loaded\n", (pref->level + 1));
+  fprintf (stderr, "Level %d loaded\n", (pref.level + 1));
 
 
   return EXIT_SUCCESS;
@@ -635,18 +632,17 @@ loadSlcLevel (S_preferences * pref,
 
 /* Change GROUND that are outside the walls to OUTSIDE */
 void
-detectOutside (S_preferences *pref,
-              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]){
+detectOutside (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]){
   /*Read left to right */
   int x = 0, y = 0;
-  for (y = 0; y <= pref->y_Blocks; y++)
+  for (y = 0; y <= pref.y_Blocks; y++)
     {
-      for (x = 0; x <= pref->x_Blocks; x++)
+      for (x = 0; x <= pref.x_Blocks; x++)
 	{
 	  /*break if wall */
 	  if (grid[x][y].mainRole == WALL)
 	    {
-	      x = pref->x_Blocks + 1;
+	      x = pref.x_Blocks + 1;
 	    }
 	  else
 	    {
@@ -661,9 +657,9 @@ detectOutside (S_preferences *pref,
 
   /*Read right to left */
   x = 0, y = 0;
-  for (y = 0; y <= pref->y_Blocks; y++)
+  for (y = 0; y <= pref.y_Blocks; y++)
     {
-      for (x = pref->x_Blocks; x >= 0; x--)
+      for (x = pref.x_Blocks; x >= 0; x--)
 	{
 	  /*break if wall */
 	  if (grid[x][y].mainRole == WALL)
@@ -685,14 +681,14 @@ detectOutside (S_preferences *pref,
   /*Read Top to Bottom */
   x = 0;
   y = 0;
-  for (x = 0; x <= pref->x_Blocks; x++)
+  for (x = 0; x <= pref.x_Blocks; x++)
     {
-      for (y = 0; y <= pref->y_Blocks; y++)
+      for (y = 0; y <= pref.y_Blocks; y++)
 	{
 	  /*break if wall */
 	  if (grid[x][y].mainRole == WALL)
 	    {
-	      y = pref->y_Blocks + 1;
+	      y = pref.y_Blocks + 1;
 	    }
 	  else
 	    {
@@ -708,9 +704,9 @@ detectOutside (S_preferences *pref,
   /*Read Bottom to Top */
   x = 0;
   y = 0;
-  for (x = 0; x < pref->x_Blocks; x++)
+  for (x = 0; x < pref.x_Blocks; x++)
     {
-      for (y = pref->y_Blocks; y > 0; y--)
+      for (y = pref.y_Blocks; y > 0; y--)
 	{
 	  /*break if wall */
 	  if (grid[x][y].mainRole == WALL)

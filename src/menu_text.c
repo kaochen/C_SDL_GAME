@@ -116,8 +116,7 @@ loadTextAsSurface (size_t tab, size_t lineNbr, S_Text tableTextSurface[NBR_OF_TA
 
 /* display the level number */
 int
-levelMenu (S_preferences * pref,
-           SDL_Surface * screen,
+levelMenu (SDL_Surface * screen,
            S_LevelList * levelList)
 {
   if (screen == NULL || levelList == NULL)
@@ -142,12 +141,12 @@ levelMenu (S_preferences * pref,
   /* indicate level nbr */
   SDL_Surface *levelText = NULL;
   char text[20] = "";
-  sprintf (text, gettext ("Level: %d/%d"), pref->level, levelMax - 1);
+  sprintf (text, gettext ("Level: %d/%d"), pref.level, levelMax - 1);
   levelText = TTF_RenderUTF8_Blended (font, text, fontColor);
 
   /* blit the text */
   SDL_Rect pos;
-  pos.x = (pref->x_menu + ((MENU_WIDTH - levelText->w)/ 2));
+  pos.x = (pref.x_menu + ((MENU_WIDTH - levelText->w)/ 2));
   pos.y = (SPRITE_SIZE - levelText->h) / 2;
   SDL_BlitSurface (levelText, NULL, screen, &pos);
 

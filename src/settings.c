@@ -46,11 +46,9 @@ fclose(file);
 }
 
 /* load settings from pref file */
-S_preferences *
+int
 loadPrefStruct(SDL_DisplayMode current){
 
-  S_preferences *pref;
-  pref = malloc (MENU_LINE * sizeof (S_preferences));
   int i = 0;
   /*get infos from the current display */
   for(i = 0; i < SDL_GetNumVideoDisplays(); ++i){
@@ -67,32 +65,32 @@ loadPrefStruct(SDL_DisplayMode current){
 
    /* Main window */
       /* Window size */
-      pref->display_width = current.w;
-      pref->display_height = current.h;
+      pref.display_width = current.w;
+      pref.display_height = current.h;
 
-      pref->window_width = getWindow_width(pref);
-      pref->window_height = getWindow_height(pref);
+      pref.window_width = getWindow_width();
+      pref.window_height = getWindow_height();
    /* Number of blocks */
-      pref->x_Blocks = pref->window_width/SPRITE_SIZE;
-      pref->y_Blocks = pref->window_height/SPRITE_SIZE;
-      pref->max_X_Blocks =  pref->x_Blocks + 2;
-      pref->max_Y_Blocks =  pref->y_Blocks + 2;
+      pref.x_Blocks = pref.window_width/SPRITE_SIZE;
+      pref.y_Blocks = pref.window_height/SPRITE_SIZE;
+      pref.max_X_Blocks =  pref.x_Blocks + 2;
+      pref.max_Y_Blocks =  pref.y_Blocks + 2;
 
    /* Menu */
-      pref->x_menu = (pref->window_width - MENU_WIDTH )/2;
-      pref->y_menu = 0;
-      pref->h_menu_block = 1;
-      pref->menu_X_Blocks = 10;
-      pref->menu_Y_Blocks = 10;
+      pref.x_menu = (pref.window_width - MENU_WIDTH )/2;
+      pref.y_menu = 0;
+      pref.h_menu_block = 1;
+      pref.menu_X_Blocks = 10;
+      pref.menu_Y_Blocks = 10;
 
    /* Level */
-      pref->level = 0;
-      pref->level = 1;
+      pref.level = 0;
+      pref.level = 1;
 
    /*framerate*/
-      pref->display_framerate = current.refresh_rate;
-      pref->framerate = getWindow_framerate(pref);
-  return pref;
+      pref.display_framerate = current.refresh_rate;
+      pref.framerate = getWindow_framerate();
+  return 1;
 }
 
 /*get int value from the preference file */
@@ -206,42 +204,42 @@ getPrefChar(char * pref, const char *setting) {
 
 
 int
-getWindow_width (S_preferences * pref)
+getWindow_width (void)
 {
   int ret = getPrefAsInt ("window_width");
   if (ret < W_WIDTH)
     {
       ret = W_WIDTH;
     }
-  if (ret > pref->display_width){
-    ret = pref->display_width - 80;
+  if (ret > pref.display_width){
+    ret = pref.display_width - 80;
   }
   return ret;
 }
 
 int
-getWindow_height (S_preferences * pref)
+getWindow_height (void)
 {
   int ret = getPrefAsInt ("window_height");
   if (ret < W_HEIGHT)
     {
       ret = W_HEIGHT;
     }
-  if (ret > pref->display_height){
-    ret = pref->display_height - 80;
+  if (ret > pref.display_height){
+    ret = pref.display_height - 80;
   }
   return ret;
 }
 
 int
-getWindow_framerate (S_preferences * pref)
+getWindow_framerate (void)
 {
        int fps = getPrefAsInt ("framerate");
         if (fps < 12){
             fps = 12;
         }
-        if (fps > pref->display_framerate){
-          fps = pref->display_framerate;
+        if (fps > pref.display_framerate){
+          fps = pref.display_framerate;
         }
         return fps;
 }

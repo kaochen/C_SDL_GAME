@@ -29,8 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* blit borders on walls */
 int
-blitBorders (S_preferences *pref,
-             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
+blitBorders (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
              SDL_Surface * screen,
              Sprites tableSurface[NBR_OF_IMAGES])
 {
@@ -43,9 +42,9 @@ blitBorders (S_preferences *pref,
 
 
   SDL_Rect wallPos;
-  for (int y = 0; y < pref->y_Blocks; y++)
+  for (int y = 0; y < pref.y_Blocks; y++)
     {
-      for (int x = 0; x < pref->x_Blocks; x++)
+      for (int x = 0; x < pref.x_Blocks; x++)
 	{
 	  /* set position for wall blocks */
 	  wallPos.x = x * SPRITE_SIZE;
@@ -86,13 +85,12 @@ blitBorders (S_preferences *pref,
 
 /* add a more ground choice */
 int
-randomGround (S_preferences *pref,
-             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
+randomGround (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   int x = 0, y = 0, randomNumber = 0;
-  for (y = 0; y < pref->y_Blocks; y++)
+  for (y = 0; y < pref.y_Blocks; y++)
     {
-      for (x = 0; x < pref->x_Blocks; x++)
+      for (x = 0; x < pref.x_Blocks; x++)
 	{
 
 	  randomNumber = random_number (0, 100);
@@ -118,13 +116,12 @@ randomGround (S_preferences *pref,
 
 /* add a more wall choice */
 int
-randomWall (S_preferences *pref,
-             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
+randomWall (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   int x = 0, y = 0, randomNumber = 0;
-  for (y = 0; y < pref->y_Blocks; y++)
+  for (y = 0; y < pref.y_Blocks; y++)
     {
-      for (x = 0; x < pref->x_Blocks; x++)
+      for (x = 0; x < pref.x_Blocks; x++)
 	{
 
 	  randomNumber = random_number (0, 100);
@@ -156,13 +153,12 @@ randomWall (S_preferences *pref,
 
 /*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
 int
-randomOutside (S_preferences *pref,
-             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
+randomOutside (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   int x = 0, y = 0, randomNumber = 0;
-  for (y = 0; y < pref->y_Blocks; y++)
+  for (y = 0; y < pref.y_Blocks; y++)
     {
-      for (x = 0; x < pref->x_Blocks; x++)
+      for (x = 0; x < pref.x_Blocks; x++)
 	{
 	  if (grid[x][y].mainRole == OUTSIDE)
 	    {
@@ -199,16 +195,15 @@ random_number (int min, int max)
 
 /* blit corners */
 int
-blitCorners (S_preferences *pref,
-            Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
+blitCorners (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
             SDL_Surface * screen,
             Sprites tableSurface[NBR_OF_IMAGES])
 {
   SDL_Rect pos;
   int x = 1, y = 1;
-  for (y = 1; y < pref->y_Blocks; y++)
+  for (y = 1; y < pref.y_Blocks; y++)
     {
-      for (x = 1; x < pref->x_Blocks; x++)
+      for (x = 1; x < pref.x_Blocks; x++)
 	{
 	  pos.x = x * SPRITE_SIZE;
 	  pos.y = y * SPRITE_SIZE;

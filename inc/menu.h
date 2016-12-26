@@ -46,92 +46,80 @@ enum {TAB_EMPTY, INFO,SHORTCUTS,ABOUT,FILES,SETTINGS}; //Different tabs
 
 /* Init menu grid */
 void
-gridMenu_init(S_preferences *pref,
-              S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
+gridMenu_init(S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
 
 
 /* display Top Bar*/
 int
-displayTopBar (S_preferences * pref,
-	       SDL_Surface * screen,
+displayTopBar (SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList,
-	       Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
-               S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
+	       Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
+               S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
 
 /* display background of the top bar menu */
 int
-backgroundTopBar (S_preferences * pref,
-                  SDL_Surface * screen,
+backgroundTopBar (SDL_Surface * screen,
                   Sprites tableSurface[NBR_OF_IMAGES]);
 
 
 /* count how many goals are need to complete the level */
 int
-goalLeft (S_preferences *pref,
-              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+goalLeft (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* count goals all ready achieve */
 int
-nbr_of_goals (S_preferences *pref,
-              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+nbr_of_goals (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* Display Progress in the level */
 int
-displayProgress (S_preferences * pref,
-       Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
-       SDL_Surface * screen, Sprites tableSurface[NBR_OF_IMAGES]);
+displayProgress (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
+       		SDL_Surface * screen,
+		Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Victory or not ? */
 int
-levelFinished (S_preferences *pref,
-               Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+levelFinished (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* display a congrats message to the winner */
 int
-displayCongrats (S_preferences *pref,
-                 SDL_Surface * screen,
+displayCongrats (SDL_Surface * screen,
                  Sprites tableSurface[NBR_OF_IMAGES]);
 
 
 /* Open And close the menu */
 int
-openCloseTheMenu (S_menuchoice *menuChoice);
+openCloseTheMenu (void);
 
 /* Show menu List */
 void
-openMenu (S_preferences *pref,
-          SDL_Surface * screen,
+openMenu (SDL_Surface * screen,
           Sprites tableSurface[NBR_OF_IMAGES],
 	  S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
           S_LevelList * levelList,
-          S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
+          S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
 
 /* display Sub menu */
 int
-displaySubMenu (S_preferences * pref,
-                SDL_Surface * screen,
+displaySubMenu (SDL_Surface * screen,
                 S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
                 S_LevelList * levelList);
 
 
 /* Display the background menu */
 void
-displayOpenMenuBackground (S_preferences * pref,
-                           SDL_Surface * screen,
+displayOpenMenuBackground (SDL_Surface * screen,
 			   Sprites tableSurface[NBR_OF_IMAGES],
-                           S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
+                           S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
 
 /* Display pattern over the text menu */
 void
-displayOverTextImage (S_preferences * pref,
-                     SDL_Surface * screen,
+displayOverTextImage (SDL_Surface * screen,
 		     Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Display buttons on the top bar*/
 int
-displayTopBarButtons (S_preferences *pref,
-                      SDL_Surface * screen,
+displayTopBarButtons (SDL_Surface * screen,
  	              Sprites tableSurface[NBR_OF_IMAGES],
-                      S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
+                      S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
 #endif

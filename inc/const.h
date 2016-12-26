@@ -204,5 +204,6 @@ typedef struct
  int framerate;
 
 }S_preferences;
+S_preferences pref; //store all game settings and preferences
 
 #endif

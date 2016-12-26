@@ -29,11 +29,10 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* Init grid */
 void
-grid_init(S_preferences *pref,
-          Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
+grid_init(Square grid[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
-   for(int y=0; y < pref->max_Y_Blocks; ++y)
-      for(int x=0; x< pref->max_X_Blocks; ++x)
+   for(int y=0; y < pref.max_Y_Blocks; ++y)
+      for(int x=0; x< pref.max_X_Blocks; ++x)
       grid[x][y] = (Square) {.mainRole=GROUND, .subRole=EMPTY, .goalRole=EMPTY, .boxRole=EMPTY, .playerRole=EMPTY, .target=EMPTY };
 }
 
@@ -41,8 +40,7 @@ grid_init(S_preferences *pref,
 
 /* display level on the screen */
 int
-displayLevel (S_preferences *pref,
-              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
+displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
               SDL_Surface * screen,
               Sprites tableSurface[NBR_OF_IMAGES])
 {
@@ -59,9 +57,9 @@ displayLevel (S_preferences *pref,
   /* blit surfaces depending of its destiny */
   int x = 0, y = 0;
   /*first pass */
-  for (x = 0; x < pref->x_Blocks; x++)
+  for (x = 0; x < pref.x_Blocks; x++)
     {
-      for (y = 0; y < pref->y_Blocks; y++)
+      for (y = 0; y < pref.y_Blocks; y++)
 	{
 	  pos.x = x * SPRITE_SIZE;
 	  pos.y = y * SPRITE_SIZE;
@@ -177,13 +175,13 @@ displayLevel (S_preferences *pref,
 	}
 
     }
-  if (blitBorders (pref, grid, screen, tableSurface) == EXIT_FAILURE)
+  if (blitBorders (grid, screen, tableSurface) == EXIT_FAILURE)
     {
          fprintf (stderr, gettext("blitBorders failed.\n"));
          return EXIT_FAILURE;
     }
 
-   if (blitCorners (pref, grid, screen, tableSurface) == EXIT_FAILURE)
+   if (blitCorners (grid, screen, tableSurface) == EXIT_FAILURE)
     {
          fprintf (stderr, gettext("blitCorners failed.\n"));
          return EXIT_FAILURE;

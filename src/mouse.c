@@ -26,12 +26,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /*detect mouse motion*/
 int
-mouseMotion(S_preferences * pref,
-            int xCursor,
+mouseMotion(int xCursor,
             int yCursor,
-            S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]){
+            S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]){
 
-    int x = (xCursor-pref->x_menu)/SPRITE_SIZE;
+    int x = (xCursor-pref.x_menu)/SPRITE_SIZE;
     int y = yCursor/SPRITE_SIZE;
           // fprintf (stderr, "menuChoice x:%d/y:%d\n", x,y);
       if (menuChoice.open == 1){

@@ -83,17 +83,18 @@ main (int argc, char *argv[])
     }
 
   /*load preferences */
+  loadPrefStruct(current);
 
-  S_preferences *pref = loadPrefStruct(current);
+
   printf (gettext ("The window size request from settings is %dx%d\n"),
-	  pref->window_width, pref->window_height);
+	  pref.window_width, pref.window_height);
 
   /* Create the window game */
   SDL_Window *window = SDL_CreateWindow (GAME_NAME,
 					 SDL_WINDOWPOS_UNDEFINED,
 					 SDL_WINDOWPOS_UNDEFINED,
-					 pref->window_width,
-					 pref->window_height,
+					 pref.window_width,
+					 pref.window_height,
 					 SDL_WINDOW_MOUSE_FOCUS);
 
   /* Check window */
@@ -137,12 +138,12 @@ main (int argc, char *argv[])
   tableTextSurface_init (tableTextSurface);
 
   /* create a grid using the heigth and width form settings */
-  Square grid[pref->max_X_Blocks][pref->max_Y_Blocks];
-  grid_init (pref, grid);
+  Square grid[pref.max_X_Blocks][pref.max_Y_Blocks];
+  grid_init (grid);
 
   /* create a sub grid for dispatch items on the menu */
-  S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks];
-  gridMenu_init (pref, gridMenu);
+  S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks];
+  gridMenu_init (gridMenu);
 
   fprintf (stderr, "\n");
   /*List slc files from the levels/ folder */
@@ -166,7 +167,7 @@ main (int argc, char *argv[])
   /*Read level from slc file */
   S_LevelList *levelList = initLevelList ();
   //readLevelList(levelList);
-  if (readLevelsAttributs (pref, filesList, levelList) == EXIT_FAILURE)
+  if (readLevelsAttributs (filesList, levelList) == EXIT_FAILURE)
     {
       perror (gettext ("Error when loading levels attributs from files."));
     }
@@ -187,12 +188,12 @@ main (int argc, char *argv[])
   menuChoice.yPos = 1;
 
   /*Load first game */
-  pref->level = readLevelFromSetting (levelList);
-  pref->level_max = getNbrOfLevels (levelList);
+  pref.level = readLevelFromSetting (levelList);
+  pref.level_max = getNbrOfLevels (levelList);
 
   fprintf (stderr, gettext ("Loading first level.\n"));
 
-  if (loadSlcLevel (pref, levelList, grid) == EXIT_SUCCESS)
+  if (loadSlcLevel (levelList, grid) == EXIT_SUCCESS)
     {
       fprintf (stderr, gettext ("Level loaded.\n"));
     }
@@ -207,7 +208,7 @@ main (int argc, char *argv[])
   int yPlayer = 0;
 
   /* display the level using the grid */
-  if (displayLevel (pref, grid, screen, tableSurface) == EXIT_FAILURE)
+  if (displayLevel (grid, screen, tableSurface) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("first displayLevel() failed.\n"));
       exit (EXIT_FAILURE);
@@ -215,7 +216,7 @@ main (int argc, char *argv[])
 
   /* display the top bar  */
   if (displayTopBar
-      (pref, screen, tableSurface, levelList,
+      (screen, tableSurface, levelList,
        grid, gridMenu) == EXIT_FAILURE)
     {
       fprintf (stderr, gettext ("first displayTopBar() failed.\n"));
@@ -227,7 +228,7 @@ main (int argc, char *argv[])
   SDL_UpdateWindowSurface (window);
 
   /* display framerate from settings */
-  fprintf (stderr, "Framerate %d\n", pref->framerate);
+  fprintf (stderr, "Framerate %d\n", pref.framerate);
 
 /* wait for quit event */
 
@@ -288,21 +289,21 @@ main (int argc, char *argv[])
       /*get x cursor position */
         if (event.button.x < 0)
           xCursor = 0;
-        else if(event.button.x > pref->window_height)
-          xCursor = pref->window_height;
+        else if(event.button.x > pref.window_height)
+          xCursor = pref.window_height;
         else
 	        xCursor = event.button.x;
 
       /*get y cursor position */
         if (event.button.y < 0)
           yCursor = 0;
-        else if(event.button.y > pref->window_width)
-          yCursor = pref->window_width;
+        else if(event.button.y > pref.window_width)
+          yCursor = pref.window_width;
         else
 	        yCursor = event.button.y;
 
         if (menuChoice.open == 1){
-        refresh = mouseMotion(pref,xCursor,yCursor,gridMenu);
+        refresh = mouseMotion(xCursor,yCursor,gridMenu);
         }
 
 	      /*Do not move when level is finished */
@@ -312,13 +313,13 @@ main (int argc, char *argv[])
 	      if (menuChoice.open == 0)
 		{
 		  /*Place the target image between the cursor and the player to indicate the next move */
-		  getPosPlayer (pref, &xPlayer, &yPlayer, grid);
+		  getPosPlayer (&xPlayer, &yPlayer, grid);
 		  next_target =
 		    mouseMoveDirection (xPlayer, yPlayer, xCursor, yCursor);
 
 		  if (target != next_target)
 		    {
-		      moveTarget (pref, next_target, xPlayer, yPlayer, grid);
+		      moveTarget (next_target, xPlayer, yPlayer, grid);
 		      refresh = 1;
 		      target = next_target;
 		      break;
@@ -336,12 +337,12 @@ main (int argc, char *argv[])
 		  if (menuChoice.open == 1)
 		    {
 		      /*Clic outside the open menu to close it */
-		      if ((xCursor < pref->x_menu
-			   || xCursor > pref->x_menu + MENU_WIDTH)
+		      if ((xCursor < pref.x_menu
+			   || xCursor > pref.x_menu + MENU_WIDTH)
 			  || (yCursor < SPRITE_SIZE
 			      || yCursor > 7 * SPRITE_SIZE))
 			{
-              refresh = openCloseTheMenu(&menuChoice);
+              refresh = openCloseTheMenu();
 			  break;
 			}
 		    }
@@ -349,17 +350,17 @@ main (int argc, char *argv[])
 		  if (menuChoice.open == 0)
 		    {
 		      /*Clic on the top bar top open the menu */
-		      if (xCursor > pref->x_menu
-			  && xCursor < pref->x_menu + MENU_WIDTH)
+		      if (xCursor > pref.x_menu
+			  && xCursor < pref.x_menu + MENU_WIDTH)
 			{
 			  if (yCursor < SPRITE_SIZE)
 			    {
-                refresh = openCloseTheMenu(&menuChoice);
+                refresh = openCloseTheMenu();
 			    break;
 			    }
 			}
 
-		      getPosPlayer (pref, &xPlayer, &yPlayer, grid);
+		      getPosPlayer (&xPlayer, &yPlayer, grid);
 		      /*Do not move when level is finished */
 		      if (menuChoice.freeze == 1)
 			break;
@@ -369,7 +370,7 @@ main (int argc, char *argv[])
 					    yCursor);
 
 		      refresh =
-			movePlayer (pref, xPlayer, yPlayer, direction, grid);
+			movePlayer (xPlayer, yPlayer, direction, grid);
 		      //reset target status if move
 		      target = STILL;
 		    }
@@ -379,7 +380,7 @@ main (int argc, char *argv[])
 
 	    case SDL_KEYDOWN:
 	      /* Get the player position */
-	      getPosPlayer (pref, &xPlayer, &yPlayer, grid);
+	      getPosPlayer (&xPlayer, &yPlayer, grid);
 
 
 	      /* listen keyboard */
@@ -392,7 +393,7 @@ main (int argc, char *argv[])
 		      if (menuChoice.freeze == 1)
 			break;
 
-		      refresh = movePlayer (pref, xPlayer, yPlayer, RIGHT, grid);
+		      refresh = movePlayer (xPlayer, yPlayer, RIGHT, grid);
 		      break;
 		    }
 
@@ -416,7 +417,7 @@ main (int argc, char *argv[])
 		      if (menuChoice.freeze == 1)
 			break;
 
-		      refresh = movePlayer (pref, xPlayer, yPlayer, LEFT, grid);
+		      refresh = movePlayer (xPlayer, yPlayer, LEFT, grid);
 		      break;
 		    }
 		  else
@@ -439,7 +440,7 @@ main (int argc, char *argv[])
 		      if (menuChoice.freeze == 1)
 			break;
 
-		      refresh = movePlayer (pref, xPlayer, yPlayer, UP, grid);
+		      refresh = movePlayer (xPlayer, yPlayer, UP, grid);
 		      break;
 		    }
 		  else
@@ -461,7 +462,7 @@ main (int argc, char *argv[])
 		      if (menuChoice.freeze == 1)
 			break;
 
-		      refresh = movePlayer (pref, xPlayer, yPlayer, DOWN, grid);
+		      refresh = movePlayer (xPlayer, yPlayer, DOWN, grid);
 		      break;
 		    }
 
@@ -480,7 +481,7 @@ main (int argc, char *argv[])
 		  /* hit m to open or close the menu */
 
 		case SDLK_m:
-            refresh = openCloseTheMenu(&menuChoice);
+            refresh = openCloseTheMenu();
 		  break;
 
 
@@ -494,7 +495,7 @@ main (int argc, char *argv[])
 		  /* hit n to load the next level */
 		case SDLK_n:
 		  /* load next the level */
-		  pref->level += 1;
+		  pref.level += 1;
 		  reload = 1;
 		  refresh = 1;
 		  break;
@@ -502,7 +503,7 @@ main (int argc, char *argv[])
 		  /* hit p to load the previous level */
 		case SDLK_p:
 		  /* load previous level */
-		  pref->level -= 1;
+		  pref.level -= 1;
 
       reload = 1;
 		  refresh = 1;
@@ -512,7 +513,7 @@ main (int argc, char *argv[])
 		case SDLK_q:
 		  /* write last level name before closing */
 		  strcpy (levelName, "");
-		  getLevelName (pref->level, levelList, levelName);
+		  getLevelName (pref.level, levelList, levelName);
 		  writePrefChar ("LevelName", levelName);
 		  carryOn = 0;
 		  fprintf (stderr,
@@ -529,12 +530,12 @@ main (int argc, char *argv[])
     //reload the level from file if necessary
     if(reload == 1){
       //loop if level < 0 or > level_max
-      if (pref->level == -1)
-		    pref->level = pref->level_max - 1;
-		  else if (pref->level == pref->level_max)
-		    pref->level = 0;
+      if (pref.level == -1)
+		    pref.level = pref.level_max - 1;
+		  else if (pref.level == pref.level_max)
+		    pref.level = 0;
 
-      if (loadSlcLevel (pref, levelList, grid) ==
+      if (loadSlcLevel (levelList, grid) ==
 		      EXIT_FAILURE)
 		      perror ("Impossible to load the level. Perror");
       reload = 0;
@@ -542,22 +543,22 @@ main (int argc, char *argv[])
       if (refresh == 1)
 	{
 	  /* display the level using the grid */
-	  if (displayLevel (pref, grid, screen, tableSurface) == EXIT_FAILURE)
+	  if (displayLevel (grid, screen, tableSurface) == EXIT_FAILURE)
 	    {
 	      fprintf (stderr, gettext ("displayLevel() failed.\n"));
 	    }
 	  /*display congrats if the level is finished */
-	  if (levelFinished (pref, grid) == FINISH && menuChoice.open == 0)
+	  if (levelFinished (grid) == FINISH && menuChoice.open == 0)
 	    {
-	      displayCongrats (pref, screen, tableSurface);
+	      displayCongrats (screen, tableSurface);
 	      menuChoice.freeze = 1;
 	    }
 	  if (menuChoice.open == 1)
 	    {
-	      openMenu (pref, screen, tableSurface, tableTextSurface, levelList, gridMenu);
+	      openMenu (screen, tableSurface, tableTextSurface, levelList, gridMenu);
 	    }
 
-	  displayTopBar (pref, screen, tableSurface,
+	  displayTopBar (screen, tableSurface,
 			 levelList, grid, gridMenu);
 
 	  SDL_UpdateWindowSurface (window);
@@ -565,9 +566,9 @@ main (int argc, char *argv[])
 	}
       /* setup delay using framerate */
       currentTime = SDL_GetTicks ();
-      if ((currentTime - previousTime) < (unsigned) (1000 / pref->framerate))
+      if ((currentTime - previousTime) < (unsigned) (1000 / pref.framerate))
 	{
-	  SDL_Delay ((unsigned) (1000 / pref->framerate) - (currentTime - previousTime));
+	  SDL_Delay ((unsigned) (1000 / pref.framerate) - (currentTime - previousTime));
 
 	}
       else

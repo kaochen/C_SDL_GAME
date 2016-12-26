@@ -33,33 +33,28 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* blit borders on walls */
 int
-blitBorders (S_preferences *pref,
-             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
+blitBorders (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
              SDL_Surface * screen,
              Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* add a more ground choice */
 int
-randomGround (S_preferences *pref,
-             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+randomGround (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* add a more wall choice */
 int
-randomWall (S_preferences *pref,
-             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+randomWall (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /*change OUTSIDE subRole to get more choice between OUTSIDE, OUTSIDE2...*/
 int
-randomOutside (S_preferences *pref,
-             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+randomOutside (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* random number between two numbers */
 int random_number (int min, int max);
 
 /* blit corners */
 int
-blitCorners (S_preferences *pref,
-            Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
+blitCorners (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
             SDL_Surface * screen,
             Sprites tableSurface[NBR_OF_IMAGES]);
 

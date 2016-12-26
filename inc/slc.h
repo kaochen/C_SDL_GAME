@@ -69,14 +69,12 @@ S_LevelList *initLevelList ();
 
 /*get levels infos from files */
 int
-readLevelsAttributs (S_preferences * pref,
-                     S_FilesList * filesList,
+readLevelsAttributs (S_FilesList * filesList,
                      S_LevelList * levelList);
 
 /*Add a level in the list*/
 void
-addNewLevel (S_preferences *pref,
-             S_LevelList * levelList,
+addNewLevel (S_LevelList * levelList,
              char *fileName,
              char *name,
              int height,
@@ -93,16 +91,14 @@ void readLevelList (S_LevelList * levelList);
 
 /*Load slc level into the grid */
 int
-loadSlcLevel (S_preferences * pref,
-              S_LevelList * levelList,
-              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+loadSlcLevel (S_LevelList * levelList,
+              Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /*get levels infos from files */
 int getNbrOfLevels (S_LevelList * levelList);
 
 /* Change GROUND that are outside the walls to OUTSIDE */
 void
-detectOutside (S_preferences *pref,
-              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+detectOutside (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 #endif

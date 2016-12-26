@@ -29,27 +29,24 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /* move player and update object status" */
 int
-movePlayer (S_preferences *pref,
-            int xPlayer,
+movePlayer (int xPlayer,
             int yPlayer,
             int direction ,
-            Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+            Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /*Find the player on the grid*/
 void
-getPosPlayer(S_preferences *pref,
-             int *xPlayer,
+getPosPlayer(int *xPlayer,
              int *yPlayer,
-             Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+             Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 int
 mouseMoveDirection(int xPlayer, int yPlayer, int xCursor, int yCursor);
 
 /*choose where the target image will be displayed*/
 void
-moveTarget(S_preferences *pref,
-           int next_target,
+moveTarget(int next_target,
            int xPlayer,
            int yPlayer,
-           Square grid[pref->max_X_Blocks][pref->max_Y_Blocks]);
+           Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 #endif

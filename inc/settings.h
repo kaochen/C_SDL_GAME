@@ -33,7 +33,7 @@ void
 searchPrefFile(char * prefFile);
 
 /* load settings from pref file */
-S_preferences *
+int
 loadPrefStruct(SDL_DisplayMode current);
 
 /*read window height and width from the preference file */
@@ -43,14 +43,13 @@ int getPrefAsInt (const char *prefName);
 void getPrefChar(char * ret, const char *setting);
 
 int
-getWindow_width (S_preferences * pref);
+getWindow_width (void);
 
 int
-getWindow_height (S_preferences * pref);
-
+getWindow_height (void);
 
 int
-getWindow_framerate (S_preferences * pref);
+getWindow_framerate (void);
 
 
 /* write a pref char */
