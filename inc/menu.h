@@ -35,8 +35,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /*define menu object*/
 enum
-{M_EMPTY, M_PREVIOUS, M_NEXT, M_RESET, M_BACKWARDS, M_INFO, M_SHORTCUTS,
-	 M_ABOUT, M_FILE, M_SETTINGS};
+{M_EMPTY, M_PREVIOUS, M_NEXT, M_RESET, M_BACKWARDS};
 
 
 

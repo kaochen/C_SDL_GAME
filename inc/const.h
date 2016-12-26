@@ -162,7 +162,6 @@ typedef struct
 
 typedef struct
 {
-  int role;
   int name;
   int nbrLines;
 }S_Tabs;

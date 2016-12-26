@@ -41,12 +41,12 @@ gridMenu_init(S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
    gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .tab=0, .image=BUTTON_ARROW_L};
    gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .tab=0, .image=BUTTON_ARROW_P};
    gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .tab=0, .image=BUTTON_RESET};
-   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .tab=TAB_EMPTY, .image=BUTTON_BACKWARDS};
-   gridMenu[2][1] = (S_Menu) {.role=M_INFO, .type=TABS, .tab=1, .image=BUTTON_LEVELS};
-   gridMenu[3][1] = (S_Menu) {.role=M_FILE, .type=TABS, .tab=2,  .image=BUTTON_FILE};
-   gridMenu[4][1] = (S_Menu) {.role=M_SHORTCUTS, .type=TABS, .tab=3, .image=BUTTON_SHORTCUTS};
-   gridMenu[5][1] = (S_Menu) {.role=M_SETTINGS, .type=TABS, .tab=4,  .image=BUTTON_SETTINGS};
-   gridMenu[6][1] = (S_Menu) {.role=M_ABOUT, .type=TABS, .tab=5, .image=BUTTON_ABOUT};
+   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .tab=0, .image=BUTTON_BACKWARDS};
+   gridMenu[2][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=1, .image=BUTTON_LEVELS};
+   gridMenu[3][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=2,  .image=BUTTON_FILE};
+   gridMenu[4][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=3, .image=BUTTON_SHORTCUTS};
+   gridMenu[5][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=4,  .image=BUTTON_SETTINGS};
+   gridMenu[6][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=5, .image=BUTTON_ABOUT};
 
 }
 
