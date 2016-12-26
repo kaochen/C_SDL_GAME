@@ -173,6 +173,8 @@ typedef struct
  int yPos;
 }S_menuchoice;
 
+S_menuchoice menuChoice; //store current menu status as a  global struct
+
 /*Struct to store settings*/
 typedef struct
 {

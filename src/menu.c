@@ -285,11 +285,10 @@ openMenu (S_preferences *pref,
           Sprites tableSurface[NBR_OF_IMAGES],
 	        S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
           S_LevelList * levelList,
-          S_menuchoice menuChoice,
           S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
 {
   /* blit background */
-  displayOpenMenuBackground (pref, screen, tableSurface, menuChoice, gridMenu);
+  displayOpenMenuBackground (pref, screen, tableSurface, gridMenu);
 
   /* add the tab name above tab icons */
   SDL_Rect pos;
@@ -299,8 +298,8 @@ openMenu (S_preferences *pref,
   size_t tab = gridMenu[menuChoice.xPos][1].text;
   SDL_BlitSurface (tableTextSurface[tab][0].image, NULL, screen, &pos);
 
-  displaySubMenu (pref, screen, tableTextSurface, levelList, menuChoice);
-  displayOverTextImage (pref, screen, tableSurface, menuChoice);
+  displaySubMenu (pref, screen, tableTextSurface, levelList);
+  displayOverTextImage (pref, screen, tableSurface);
 
 }
 
@@ -309,8 +308,7 @@ int
 displaySubMenu (S_preferences * pref,
                 SDL_Surface * screen,
                 S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
-                S_LevelList * levelList,
-                S_menuchoice menuChoice)
+                S_LevelList * levelList)
 {
   /* blit text */
   //  fprintf (stderr, "menuChoice : %d\n", menuChoice.tab);
@@ -423,7 +421,6 @@ void
 displayOpenMenuBackground (S_preferences * pref,
                            SDL_Surface * screen,
 			                     Sprites tableSurface[NBR_OF_IMAGES],
-			                     S_menuchoice menuChoice,
                            S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks])
 {
   int i = 0;
@@ -514,8 +511,7 @@ displayOpenMenuBackground (S_preferences * pref,
 void
 displayOverTextImage(S_preferences * pref,
                      SDL_Surface * screen,
-		                 Sprites tableSurface[NBR_OF_IMAGES],
-                     S_menuchoice menuChoice)
+		                 Sprites tableSurface[NBR_OF_IMAGES])
 {
   int x = 0, y = 0, xSize = 360 / SPRITE_SIZE, ySize = 0;
   if (menuChoice.tab == M_ABOUT)

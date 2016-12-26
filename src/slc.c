@@ -487,8 +487,7 @@ readLevelList (S_LevelList * levelList)
 int
 loadSlcLevel (S_preferences * pref,
               S_LevelList * levelList,
-              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks],
-              S_menuchoice *menuChoice)
+              Square grid[pref->max_X_Blocks][pref->max_Y_Blocks])
 {
   if (levelList == NULL)
     {
@@ -626,8 +625,8 @@ loadSlcLevel (S_preferences * pref,
   xmlXPathFreeObject(xpathLevel);
 
   /*refresh status*/
-  menuChoice->freeze = 0;
-  menuChoice->open = 0;
+  menuChoice.freeze = 0;
+  menuChoice.open = 0;
   fprintf (stderr, "Level %d loaded\n", (pref->level + 1));
 
 

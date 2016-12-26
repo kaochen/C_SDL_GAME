@@ -178,7 +178,6 @@ main (int argc, char *argv[])
 
 
   /*init Menu Choice*/
-  S_menuchoice menuChoice;
   menuChoice.tab = M_INFO;
   menuChoice.sub = 0;
   menuChoice.max = 4;
@@ -193,7 +192,7 @@ main (int argc, char *argv[])
 
   fprintf (stderr, gettext ("Loading first level.\n"));
 
-  if (loadSlcLevel (pref, levelList, grid, &menuChoice) == EXIT_SUCCESS)
+  if (loadSlcLevel (pref, levelList, grid) == EXIT_SUCCESS)
     {
       fprintf (stderr, gettext ("Level loaded.\n"));
     }
@@ -303,7 +302,7 @@ main (int argc, char *argv[])
 	        yCursor = event.button.y;
 
         if (menuChoice.open == 1){
-        refresh = mouseMotion(pref, &menuChoice,xCursor,yCursor,gridMenu);
+        refresh = mouseMotion(pref,xCursor,yCursor,gridMenu);
         }
 
 	      /*Do not move when level is finished */
@@ -535,7 +534,7 @@ main (int argc, char *argv[])
 		  else if (pref->level == pref->level_max)
 		    pref->level = 0;
 
-      if (loadSlcLevel (pref, levelList, grid, &menuChoice) ==
+      if (loadSlcLevel (pref, levelList, grid) ==
 		      EXIT_FAILURE)
 		      perror ("Impossible to load the level. Perror");
       reload = 0;
@@ -555,8 +554,7 @@ main (int argc, char *argv[])
 	    }
 	  if (menuChoice.open == 1)
 	    {
-	      openMenu (pref, screen, tableSurface, tableTextSurface, levelList,
-			menuChoice,  gridMenu);
+	      openMenu (pref, screen, tableSurface, tableTextSurface, levelList, gridMenu);
 	    }
 
 	  displayTopBar (pref, screen, tableSurface,

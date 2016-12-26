@@ -105,7 +105,6 @@ openMenu (S_preferences *pref,
           Sprites tableSurface[NBR_OF_IMAGES],
 	  S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
           S_LevelList * levelList,
-          S_menuchoice menuChoice,
           S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
 
 /* display Sub menu */
@@ -113,8 +112,7 @@ int
 displaySubMenu (S_preferences * pref,
                 SDL_Surface * screen,
                 S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
-                S_LevelList * levelList,
-                S_menuchoice menuChoice);
+                S_LevelList * levelList);
 
 
 /* Display the background menu */
@@ -122,15 +120,13 @@ void
 displayOpenMenuBackground (S_preferences * pref,
                            SDL_Surface * screen,
 			   Sprites tableSurface[NBR_OF_IMAGES],
-			   S_menuchoice menuChoice,
                            S_Menu gridMenu[pref->menu_X_Blocks][pref->menu_Y_Blocks]);
 
 /* Display pattern over the text menu */
 void
 displayOverTextImage (S_preferences * pref,
                      SDL_Surface * screen,
-		     Sprites tableSurface[NBR_OF_IMAGES],
-                     S_menuchoice menuChoice);
+		     Sprites tableSurface[NBR_OF_IMAGES]);
 
 /* Display buttons on the top bar*/
 int
