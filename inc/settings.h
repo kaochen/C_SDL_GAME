@@ -55,4 +55,9 @@ getWindow_framerate (void);
 /* write a pref char */
 int
 writePrefChar (const char *prefName, const char *value);
+
+/*get the theme Path*/
+int
+getThemePath(void);
+
 #endif

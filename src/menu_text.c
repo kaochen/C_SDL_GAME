@@ -80,7 +80,9 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
   sprintf(text,gettext("Window: %dx%dpx %dhz"),
                      pref.window_width, pref.window_height, pref.framerate);
   loadTextAsSurface (SETTINGS,1, tableTextSurface,text,fontSizeSub, R, G, B, A);
-  loadTextAsSurface (SETTINGS,2, tableTextSurface,"theme",fontSizeSub, R, G, B, A);
+
+  sprintf(text,gettext("Theme: %s"), pref.themePath);
+  loadTextAsSurface (SETTINGS,2, tableTextSurface,text,fontSizeSub, R, G, B, A);
 
 }
 

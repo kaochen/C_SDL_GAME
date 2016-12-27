@@ -26,6 +26,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <string.h>
 #include <errno.h>
 
+#include <sys/stat.h>
 /* Searching for preferences.ini */
 void
 searchPrefFile(char * prefFile){
@@ -90,6 +91,10 @@ loadPrefStruct(SDL_DisplayMode current){
    /*framerate*/
       pref.display_framerate = current.refresh_rate;
       pref.framerate = getWindow_framerate();
+
+    /*Theme*/
+    getThemePath();
+
   return 1;
 }
 
@@ -291,4 +296,35 @@ writePrefChar (const char *prefName, const char *value)
 
   return EXIT_SUCCESS;
 }
+
+/*get the theme Path*/
+int
+getThemePath(void)
+{
+ /*read theme choice */
+  fprintf (stderr, "Loading Theme:\n");
+  char themePath[MAX_CARACT] = "";
+  char bufPath[MAX_CARACT] = "";
+  getPrefChar (bufPath, "theme");
+
+  sprintf (themePath, "img/%s/", bufPath);
+  fprintf (stderr, "Theme: %s\n", themePath);
+
+  /*test if folder exist */
+  struct stat file_stat;
+  if (stat (themePath, &file_stat) < 0)
+    {
+      printf ("The theme folder %s does not exist\n", themePath);
+      strcpy (themePath, "img/original/");
+      fprintf (stderr, "Change theme folder to default: %s\n\n", themePath);
+    }
+  else
+    {
+      printf ("The theme folder %s exist\n\n", themePath);
+    }
+  strcpy(pref.themePath, themePath);
+
+  return EXIT_SUCCESS;
+}
+
 #endif

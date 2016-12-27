@@ -33,99 +33,78 @@ int
 loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
 {
 
-  /*read theme choice */
-  fprintf (stderr, "Loading Theme:\n");
-  char themePath[MAX_CARACT] = "";
-  char bufPath[MAX_CARACT] = "";
-  getPrefChar (bufPath, "theme");
-
-  sprintf (themePath, "img/%s/", bufPath);
-  fprintf (stderr, "Theme: %s\n", themePath);
-
-  /*test if folder exist */
-  struct stat file_stat;
-  if (stat (themePath, &file_stat) < 0)
-    {
-      printf ("The theme folder %s does not exist\n", themePath);
-      strcpy (themePath, "img/original/");
-      fprintf (stderr, "Change theme folder to default: %s\n\n", themePath);
-    }
-  else
-    {
-      printf ("The theme folder %s exist\n\n", themePath);
-    }
 
 
   /* Player faces  */
-  loadSprite (&tableSurface[PLAYER_FRONT], themePath, "player_front.png");
-  loadSprite (&tableSurface[PLAYER_BACK], themePath, "player_back.png");
-  loadSprite (&tableSurface[PLAYER_LEFT], themePath, "player_left.png");
-  loadSprite (&tableSurface[PLAYER_RIGHT], themePath, "player_right.png");
+  loadSprite (&tableSurface[PLAYER_FRONT], pref.themePath, "player_front.png");
+  loadSprite (&tableSurface[PLAYER_BACK], pref.themePath, "player_back.png");
+  loadSprite (&tableSurface[PLAYER_LEFT], pref.themePath, "player_left.png");
+  loadSprite (&tableSurface[PLAYER_RIGHT], pref.themePath, "player_right.png");
 
   /* Target to blit over ground */
-  loadSprite (&tableSurface[TARGET_IMAGE], themePath, "target.png");
+  loadSprite (&tableSurface[TARGET_IMAGE], pref.themePath, "target.png");
 
   /* walls */
-  loadSprite (&tableSurface[WALL1_IMAGE], themePath, "wall1.png");
-  loadSprite (&tableSurface[WALL2_IMAGE], themePath, "wall2.png");
-  loadSprite (&tableSurface[WALL3_IMAGE], themePath, "wall3.png");
-  loadSprite (&tableSurface[WALL4_IMAGE], themePath, "wall4.png");
-  loadSprite (&tableSurface[WALL_LEFT], themePath, "wallBorderLeft.png");
-  loadSprite (&tableSurface[WALL_RIGHT], themePath, "wallBorderRight.png");
-  loadSprite (&tableSurface[WALL_TOP], themePath, "wallBorderTop.png");
-  loadSprite (&tableSurface[WALL_BOTTOM], themePath, "wallBorderBottom.png");
+  loadSprite (&tableSurface[WALL1_IMAGE], pref.themePath, "wall1.png");
+  loadSprite (&tableSurface[WALL2_IMAGE], pref.themePath, "wall2.png");
+  loadSprite (&tableSurface[WALL3_IMAGE], pref.themePath, "wall3.png");
+  loadSprite (&tableSurface[WALL4_IMAGE], pref.themePath, "wall4.png");
+  loadSprite (&tableSurface[WALL_LEFT], pref.themePath, "wallBorderLeft.png");
+  loadSprite (&tableSurface[WALL_RIGHT], pref.themePath, "wallBorderRight.png");
+  loadSprite (&tableSurface[WALL_TOP], pref.themePath, "wallBorderTop.png");
+  loadSprite (&tableSurface[WALL_BOTTOM], pref.themePath, "wallBorderBottom.png");
 
   /* walls */
-  loadSprite (&tableSurface[CORNER_TR], themePath, "cornerTop-Right.png");
-  loadSprite (&tableSurface[CORNER_TL], themePath, "cornerTop-Left.png");
-  loadSprite (&tableSurface[CORNER_BR], themePath, "cornerBottom-Right.png");
-  loadSprite (&tableSurface[CORNER_BL], themePath, "cornerBottom-Left.png");
+  loadSprite (&tableSurface[CORNER_TR], pref.themePath, "cornerTop-Right.png");
+  loadSprite (&tableSurface[CORNER_TL], pref.themePath, "cornerTop-Left.png");
+  loadSprite (&tableSurface[CORNER_BR], pref.themePath, "cornerBottom-Right.png");
+  loadSprite (&tableSurface[CORNER_BL], pref.themePath, "cornerBottom-Left.png");
 
   /* grounds */
-  loadSprite (&tableSurface[GROUND1_IMAGE], themePath, "tile1.png");
-  loadSprite (&tableSurface[GROUND2_IMAGE], themePath, "tile2.png");
-  loadSprite (&tableSurface[GROUND3_IMAGE], themePath, "tile3.png");
+  loadSprite (&tableSurface[GROUND1_IMAGE], pref.themePath, "tile1.png");
+  loadSprite (&tableSurface[GROUND2_IMAGE], pref.themePath, "tile2.png");
+  loadSprite (&tableSurface[GROUND3_IMAGE], pref.themePath, "tile3.png");
 
   /* boxes */
-  loadSprite (&tableSurface[BOX_IMAGE], themePath, "box.png");
-  loadSprite (&tableSurface[BOX_IMAGE_OK], themePath, "box_ok.png");
+  loadSprite (&tableSurface[BOX_IMAGE], pref.themePath, "box.png");
+  loadSprite (&tableSurface[BOX_IMAGE_OK], pref.themePath, "box_ok.png");
 
   /* goal */
-  loadSprite (&tableSurface[GOAL_IMAGE], themePath, "tile_goal.png");
+  loadSprite (&tableSurface[GOAL_IMAGE], pref.themePath, "tile_goal.png");
   /* top bar */
-  loadSprite (&tableSurface[PROGRESS], themePath, "progress.png");
-  loadSprite (&tableSurface[MENU_BAR], themePath, "menu_bar.png");
+  loadSprite (&tableSurface[PROGRESS], pref.themePath, "progress.png");
+  loadSprite (&tableSurface[MENU_BAR], pref.themePath, "menu_bar.png");
 
   /* menu */
-  loadSprite (&tableSurface[MENU_RIBBON], themePath, "menu_ribbon.png");
-  loadSprite (&tableSurface[MENU_BOTTOM], themePath, "menu_bottom.png");
-  loadSprite (&tableSurface[MENU_TOP_LIGHT], themePath, "menu_top_light.png");
-  loadSprite (&tableSurface[MENU_SQUARE], themePath, "menu_square.png");
-  loadSprite (&tableSurface[MENU_SEPARATOR], themePath, "menu_separator.png");
-  loadSprite (&tableSurface[MENU_OVERTEXT], themePath, "menu_overText.png");
-  loadSprite (&tableSurface[MENU_HIGHLIGHT], themePath, "menu_highlight.png");
+  loadSprite (&tableSurface[MENU_RIBBON], pref.themePath, "menu_ribbon.png");
+  loadSprite (&tableSurface[MENU_BOTTOM], pref.themePath, "menu_bottom.png");
+  loadSprite (&tableSurface[MENU_TOP_LIGHT], pref.themePath, "menu_top_light.png");
+  loadSprite (&tableSurface[MENU_SQUARE], pref.themePath, "menu_square.png");
+  loadSprite (&tableSurface[MENU_SEPARATOR], pref.themePath, "menu_separator.png");
+  loadSprite (&tableSurface[MENU_OVERTEXT], pref.themePath, "menu_overText.png");
+  loadSprite (&tableSurface[MENU_HIGHLIGHT], pref.themePath, "menu_highlight.png");
 
   /* buttons */
-  loadSprite (&tableSurface[BUTTON_ARROW_L], themePath, "button_arrow_l.png");
-  loadSprite (&tableSurface[BUTTON_ARROW_P], themePath, "button_arrow_p.png");
-  loadSprite (&tableSurface[BUTTON_RESET], themePath, "button_reset.png");
-  loadSprite (&tableSurface[BUTTON_BACKWARDS], themePath, "button_backwards.png");
-  loadSprite (&tableSurface[BUTTON_FILE], themePath, "button_file.png");
-  loadSprite (&tableSurface[BUTTON_SETTINGS], themePath, "button_settings.png");
-  loadSprite (&tableSurface[BUTTON_SHORTCUTS], themePath, "button_shortcuts.png");
-  loadSprite (&tableSurface[BUTTON_LEVELS], themePath, "button_levels.png");
-  loadSprite (&tableSurface[BUTTON_ABOUT], themePath, "button_about.png");
-  loadSprite (&tableSurface[BUTTON_HIGHLIGHT], themePath, "button_highlight.png");
+  loadSprite (&tableSurface[BUTTON_ARROW_L], pref.themePath, "button_arrow_l.png");
+  loadSprite (&tableSurface[BUTTON_ARROW_P], pref.themePath, "button_arrow_p.png");
+  loadSprite (&tableSurface[BUTTON_RESET], pref.themePath, "button_reset.png");
+  loadSprite (&tableSurface[BUTTON_BACKWARDS], pref.themePath, "button_backwards.png");
+  loadSprite (&tableSurface[BUTTON_FILE], pref.themePath, "button_file.png");
+  loadSprite (&tableSurface[BUTTON_SETTINGS], pref.themePath, "button_settings.png");
+  loadSprite (&tableSurface[BUTTON_SHORTCUTS], pref.themePath, "button_shortcuts.png");
+  loadSprite (&tableSurface[BUTTON_LEVELS], pref.themePath, "button_levels.png");
+  loadSprite (&tableSurface[BUTTON_ABOUT], pref.themePath, "button_about.png");
+  loadSprite (&tableSurface[BUTTON_HIGHLIGHT], pref.themePath, "button_highlight.png");
 
 
   /* outside the wall */
-  loadSprite (&tableSurface[OUTSIDE_IMAGE], themePath, "outside.png");
-  loadSprite (&tableSurface[OUTSIDE2_IMAGE], themePath, "outside2.png");
-  loadSprite (&tableSurface[OUTSIDE3_IMAGE], themePath, "outside3.png");
-  loadSprite (&tableSurface[OUTSIDE4_IMAGE], themePath, "outside4.png");
+  loadSprite (&tableSurface[OUTSIDE_IMAGE], pref.themePath, "outside.png");
+  loadSprite (&tableSurface[OUTSIDE2_IMAGE], pref.themePath, "outside2.png");
+  loadSprite (&tableSurface[OUTSIDE3_IMAGE], pref.themePath, "outside3.png");
+  loadSprite (&tableSurface[OUTSIDE4_IMAGE], pref.themePath, "outside4.png");
 
   /* Congrats */
-  loadSprite (&tableSurface[CONGRATS], themePath, "congrats_background.png");
+  loadSprite (&tableSurface[CONGRATS], pref.themePath, "congrats_background.png");
   return EXIT_SUCCESS;
 }
 

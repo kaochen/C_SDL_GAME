@@ -210,6 +210,9 @@ typedef struct
  int display_framerate;
  int framerate;
 
+ /* theme */
+  char themePath[MAX_CARACT];
+
 }S_preferences;
 S_preferences pref; //store all game settings and preferences
 
