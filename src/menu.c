@@ -396,7 +396,7 @@ displaySubMenu (SDL_Surface * screen,
 	}
       free (actual);
 
-     size_t fontSize = 18, R = 255, G = 255, B = 255, A = 255;
+     size_t fontSize = 20, R = 255, G = 255, B = 255, A = 255;
      loadTextAsSurface (INFO,1, tableTextSurface, nameLevel,
 		     fontSize, R, G, B, A);
      loadTextAsSurface (INFO,2, tableTextSurface, gettext ("Authors:"),
@@ -409,7 +409,7 @@ displaySubMenu (SDL_Surface * screen,
    int tabName = menuChoice.tab[tabChoice].name;
    for (j = 1; j < nbr; j++ ){
         if (tableTextSurface[tabName][j].image != NULL){
-        linePos.y = 3*SPRITE_SIZE + 10 + (j-1)*30;
+        linePos.y = 3*SPRITE_SIZE + 10 + (j-1)*SPRITE_SIZE;
         SDL_BlitSurface (tableTextSurface[tabName][j].image, NULL, screen, &linePos);
         }
    }
@@ -428,7 +428,7 @@ displayOpenMenuBackground (SDL_Surface * screen,
                            S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
 {
   int i = 0;
-  int size = menuChoice.tab[menuChoice.tabChoice].nbrLines + 1;
+  int size = menuChoice.tab[menuChoice.tabChoice].nbrLines + 2;
 
   SDL_Rect subMenuPos;
   subMenuPos.x = pref.x_menu+ 20;
@@ -484,7 +484,7 @@ displayOpenMenuBackground (SDL_Surface * screen,
 
   SDL_Rect hlPos;
   hlPos.x = pref.x_menu + SPRITE_SIZE - 10;
-  hlPos.y = 3*SPRITE_SIZE + 12 + menuChoice.lineChoice*30;
+  hlPos.y = 3*SPRITE_SIZE + 12 + menuChoice.lineChoice*SPRITE_SIZE;
   SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen, &hlPos);
 
   /* add highlight to tabs depending on the menuChoice*/
@@ -515,7 +515,7 @@ void
 displayOverTextImage(SDL_Surface * screen,
 		                 Sprites tableSurface[NBR_OF_IMAGES])
 {
-  int x = 0, y = 0, xSize = 360 / SPRITE_SIZE, ySize = menuChoice.tab[menuChoice.tabChoice].nbrLines + 2;
+  int x = 0, y = 0, xSize = 360 / SPRITE_SIZE, ySize = menuChoice.tab[menuChoice.tabChoice].nbrLines + 3;
 
   SDL_Rect Pos;
   Pos.x = pref.x_menu + 20;

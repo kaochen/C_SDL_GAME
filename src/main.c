@@ -428,7 +428,7 @@ main (int argc, char *argv[])
 		      /* make circle */
 		      if (menuChoice.lineChoice < 0)
 			{
-			  menuChoice.lineChoice = (menuChoice.tab[menuChoice.tabChoice].nbrLines);
+			  menuChoice.lineChoice = (menuChoice.tab[menuChoice.tabChoice].nbrLines - 1);
 			}
 		      refresh = 1;
 		    }
@@ -449,7 +449,7 @@ main (int argc, char *argv[])
 		    {
 		      menuChoice.lineChoice++;
 		      /* make circle */
-		      if (menuChoice.lineChoice > menuChoice.tab[menuChoice.tabChoice].nbrLines)
+		      if (menuChoice.lineChoice > menuChoice.tab[menuChoice.tabChoice].nbrLines - 1)
 			{
 			  menuChoice.lineChoice = 0;
 			}

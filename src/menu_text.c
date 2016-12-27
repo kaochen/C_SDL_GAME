@@ -40,7 +40,7 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
   }
 }
   /* Init main Menu */
-  size_t fontSize = 18, R = 255, G = 255, B = 255, A = 255;
+  size_t fontSize = 20, R = 255, G = 255, B = 255, A = 255;
   loadTextAsSurface (INFO,0, tableTextSurface, gettext ("Current Level Infos"), fontSize, R,
 		     G, B, A);
   loadTextAsSurface (SHORTCUTS,0, tableTextSurface, gettext ("Shortcuts"), fontSize, R,
@@ -54,7 +54,7 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
 
   /* Init sub Menu */
   /*shortcuts */
-  size_t fontSizeSub = 18;
+  size_t fontSizeSub = 20;
   loadTextAsSurface (SHORTCUTS,1, tableTextSurface,
 		     gettext ("m : open and close menu"), fontSizeSub, R, G,
 		     B, A);
@@ -73,7 +73,7 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
 		     fontSizeSub, R, G, B, A);
   loadTextAsSurface (ABOUT,2, tableTextSurface,
 		     gettext ("https://github.com/kaochen/SokoRobot"),
-		     fontSizeSub, R, G, B, A);
+		     18, R, G, B, A);
 
   /* Settings */
   char text[MAX_CARACT] ="";
