@@ -79,10 +79,9 @@ loadPrefStruct(SDL_DisplayMode current){
 
    /* Menu */
       pref.x_menu = (pref.window_width - MENU_WIDTH )/2;
+      pref.xb_menu = pref.x_menu/SPRITE_SIZE;
       pref.y_menu = 0;
       pref.h_menu_block = 1;
-      pref.menu_X_Blocks = 10;
-      pref.menu_Y_Blocks = 10;
 
    /* Level */
       pref.level = 0;

@@ -142,7 +142,7 @@ main (int argc, char *argv[])
   grid_init (grid);
 
   /* create a sub grid for dispatch items on the menu */
-  S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks];
+  S_Menu gridMenu[pref.x_Blocks][pref.y_Blocks];
   gridMenu_init (gridMenu);
 
   fprintf (stderr, "\n");
@@ -378,8 +378,8 @@ main (int argc, char *argv[])
 		  else
 		    {
           menuChoice.xPos++;
-                     if (menuChoice.xPos > 6)
-                         menuChoice.xPos = 2;
+                     if (menuChoice.xPos > (pref.xb_menu + 6))
+                         menuChoice.xPos = (pref.xb_menu + 2);
 
           menuChoice.tabChoice++;
           if (menuChoice.tabChoice > menuChoice.nbrTabs)
@@ -402,8 +402,8 @@ main (int argc, char *argv[])
 		  else
 		    {
           menuChoice.xPos--;
-          if (menuChoice.xPos < 2)
-              menuChoice.xPos = 6;
+          if (menuChoice.xPos < (pref.xb_menu + 2))
+              menuChoice.xPos = (pref.xb_menu + 6);
 
           menuChoice.tabChoice--;
           if (menuChoice.tabChoice < 1)

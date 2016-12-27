@@ -31,5 +31,5 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int
 mouseMotion(int xCursor,
             int yCursor,
-            S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
+            S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 #endif

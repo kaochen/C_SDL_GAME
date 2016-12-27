@@ -39,8 +39,8 @@ menuChoiceInit(void)
   menuChoice.nbrTabs = NBR_OF_TAB - 1;
   menuChoice.open = 0;
   menuChoice.freeze = 0;
-  menuChoice.xPos = 2;
-  menuChoice.yPos = 1;
+  menuChoice.xPos = pref.xb_menu + 2;
+  menuChoice.yPos = pref.xb_menu + 1;
 
   menuChoice.tab[0].nbrLines = 0;
   menuChoice.tab[0].name = TAB_EMPTY ;
@@ -70,22 +70,22 @@ menuChoiceInit(void)
 
 /* Init menu grid */
 void
-gridMenu_init(S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
+gridMenu_init(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
-   for(int y=0; y < pref.menu_Y_Blocks; ++y)
-      for(int x=0; x< pref.menu_X_Blocks; ++x)
+   for(int y=0; y < pref.max_Y_Blocks; ++y)
+      for(int x=0; x< pref.max_X_Blocks; ++x)
       gridMenu[x][y] = (S_Menu) {.role=M_EMPTY, .type=MAIN_WINDOW, .tab=TAB_EMPTY, .image=NO_IMAGE};
 
     //place elements
-   gridMenu[2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .tab=0, .image=BUTTON_ARROW_L};
-   gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .tab=0, .image=BUTTON_ARROW_P};
-   gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .tab=0, .image=BUTTON_RESET};
-   gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .tab=0, .image=BUTTON_BACKWARDS};
-   gridMenu[2][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=1, .image=NO_IMAGE};
-   gridMenu[3][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=2,  .image=NO_IMAGE};
-   gridMenu[4][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=3, .image=NO_IMAGE};
-   gridMenu[5][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=4,  .image=NO_IMAGE};
-   gridMenu[6][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=5, .image=NO_IMAGE};
+   gridMenu[pref.xb_menu + 2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .tab=0, .image=BUTTON_ARROW_L};
+   gridMenu[pref.xb_menu + 7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .tab=0, .image=BUTTON_ARROW_P};
+   gridMenu[pref.xb_menu + 8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .tab=0, .image=BUTTON_RESET};
+   gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .tab=0, .image=BUTTON_BACKWARDS};
+   gridMenu[pref.xb_menu + 2][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=1, .image=NO_IMAGE};
+   gridMenu[pref.xb_menu + 3][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=2,  .image=NO_IMAGE};
+   gridMenu[pref.xb_menu + 4][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=3, .image=NO_IMAGE};
+   gridMenu[pref.xb_menu + 5][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=4,  .image=NO_IMAGE};
+   gridMenu[pref.xb_menu + 6][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=5, .image=NO_IMAGE};
 }
 
 
@@ -95,7 +95,7 @@ displayTopBar (SDL_Surface * screen,
 	            Sprites tableSurface[NBR_OF_IMAGES],
 	            S_LevelList * levelList,
 	            Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
-              S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
+              S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   /* first add background */
   if (backgroundTopBar (screen, tableSurface) == EXIT_FAILURE)
@@ -314,7 +314,7 @@ openMenu (SDL_Surface * screen,
           Sprites tableSurface[NBR_OF_IMAGES],
 	        S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
           S_LevelList * levelList,
-          S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
+          S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   /* blit background */
   displayOpenMenuBackground (screen, tableSurface, gridMenu);
@@ -425,7 +425,7 @@ displaySubMenu (SDL_Surface * screen,
 void
 displayOpenMenuBackground (SDL_Surface * screen,
 			                     Sprites tableSurface[NBR_OF_IMAGES],
-                           S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
+                           S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   int i = 0;
   int size = menuChoice.tab[menuChoice.tabChoice].nbrLines + 2;
@@ -490,7 +490,7 @@ displayOpenMenuBackground (SDL_Surface * screen,
   /* add highlight to tabs depending on the menuChoice*/
   SDL_Rect tabPos;
   tabPos.y = SPRITE_SIZE;
-  tabPos.x = pref.x_menu +  menuChoice.xPos * SPRITE_SIZE + 3;
+  tabPos.x = menuChoice.xPos * SPRITE_SIZE + 3;
   SDL_BlitSurface (tableSurface[BUTTON_HIGHLIGHT].image, NULL, screen, &tabPos);
 
   /* add tab icons */
@@ -498,10 +498,10 @@ displayOpenMenuBackground (SDL_Surface * screen,
   SDL_Rect iconPos;
   iconPos.y = SPRITE_SIZE + 5;
 
-  for(int y=0; y < pref.menu_Y_Blocks; ++y){
-      for(int x=0; x< pref.menu_X_Blocks; ++x){
+  for(int y=0; y < pref.max_Y_Blocks; ++y){
+      for(int x=0; x< pref.max_X_Blocks; ++x){
         if(gridMenu[x][y].type == TABS){
-          iconPos.x = pref.x_menu + x*SPRITE_SIZE;
+          iconPos.x = x*SPRITE_SIZE;
           // fprintf (stderr, "x: %d y:%d\n", iconPos.x,iconPos.y);
           int tabImage = menuChoice.tab[gridMenu[x][y].tab].image;
           SDL_BlitSurface (tableSurface[tabImage].image, NULL, screen, &iconPos);
@@ -537,18 +537,18 @@ displayOverTextImage(SDL_Surface * screen,
 int
 displayTopBarButtons (SDL_Surface * screen,
 		                  Sprites tableSurface[NBR_OF_IMAGES],
-                      S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
+                      S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   SDL_Rect buttonsPos;
   int x = 0, y = 0;
 
   size_t  imageName = NO_IMAGE;
-    for(y = 0; y < pref.menu_Y_Blocks; ++y){
-        for(x = 0; x< pref.menu_X_Blocks; ++x){
+    for(y = 0; y < pref.max_Y_Blocks; ++y){
+        for(x = 0; x< pref.max_X_Blocks; ++x){
           if (gridMenu[x][y].type == TOPBAR){
               imageName = gridMenu[x][y].image;
 
-               buttonsPos.x = pref.x_menu + x * SPRITE_SIZE;
+               buttonsPos.x = x * SPRITE_SIZE;
                buttonsPos.y = 0;
 
                //fprintf(stderr,"found x:%d->%d y:%d->%d\n", x, buttonsPos.x, y, buttonsPos.y);

@@ -28,9 +28,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 int
 mouseMotion(int xCursor,
             int yCursor,
-            S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]){
+            S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]){
 
-    int x = (xCursor-pref.x_menu)/SPRITE_SIZE;
+    int x = xCursor/SPRITE_SIZE;
     int y = yCursor/SPRITE_SIZE;
           // fprintf (stderr, "menuChoice x:%d/y:%d\n", x,y);
       if (menuChoice.open == 1){

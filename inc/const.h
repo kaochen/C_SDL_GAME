@@ -197,10 +197,10 @@ typedef struct
 
  /*Menu */
  int x_menu; // menu position on x
+ int xb_menu; // menu position on x in blocks
  int y_menu; // menu position on y
  int h_menu_block; // menu height in block;
- int menu_X_Blocks;
- int menu_Y_Blocks;
+
 
  /* Level */
  int level;

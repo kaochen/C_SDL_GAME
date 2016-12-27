@@ -48,7 +48,7 @@ menuChoiceInit(void);
 
 /* Init menu grid */
 void
-gridMenu_init(S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
+gridMenu_init(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 
 /* display Top Bar*/
@@ -57,7 +57,7 @@ displayTopBar (SDL_Surface * screen,
 	       Sprites tableSurface[NBR_OF_IMAGES],
 	       S_LevelList * levelList,
 	       Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
-               S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
+               S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* display background of the top bar menu */
 int
@@ -99,7 +99,7 @@ openMenu (SDL_Surface * screen,
           Sprites tableSurface[NBR_OF_IMAGES],
 	  S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
           S_LevelList * levelList,
-          S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
+          S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* display Sub menu */
 int
@@ -112,7 +112,7 @@ displaySubMenu (SDL_Surface * screen,
 void
 displayOpenMenuBackground (SDL_Surface * screen,
 			   Sprites tableSurface[NBR_OF_IMAGES],
-                           S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
+                           S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* Display pattern over the text menu */
 void
@@ -123,5 +123,5 @@ displayOverTextImage (SDL_Surface * screen,
 int
 displayTopBarButtons (SDL_Surface * screen,
  	              Sprites tableSurface[NBR_OF_IMAGES],
-                      S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks]);
+                      S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 #endif
