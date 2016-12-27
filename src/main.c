@@ -177,33 +177,8 @@ main (int argc, char *argv[])
 	   ("The list of the possible levels has been generate from the content of the folder levels/.\n"));
   fprintf (stderr, "\n");
 
-
-  /*init Menu Choice*/
-  menuChoice.tabChoice = 1;
-  menuChoice.lineChoice = 0;
-  menuChoice.nbrTabs = NBR_OF_TAB - 1;
-  menuChoice.open = 0;
-  menuChoice.freeze = 0;
-  menuChoice.xPos = 2;
-  menuChoice.yPos = 1;
-
-  menuChoice.tab[0].nbrLines = 0;
-  menuChoice.tab[0].name = TAB_EMPTY ;
-
-  menuChoice.tab[1].nbrLines = MENU_MAX_INFO;
-  menuChoice.tab[1].name = INFO;
-
-  menuChoice.tab[2].nbrLines = MENU_MAX_FILE;
-  menuChoice.tab[2].name = FILES;
-
-  menuChoice.tab[3].nbrLines = MENU_MAX_SHORTCUTS;
-  menuChoice.tab[3].name = SHORTCUTS;
-
-  menuChoice.tab[4].nbrLines = MENU_MAX_SETTINGS;
-  menuChoice.tab[4].name = SETTINGS;
-
-  menuChoice.tab[5].nbrLines = MENU_MAX_ABOUT;
-  menuChoice.tab[5].name = ABOUT;
+  /* init menu choice,status*/
+  menuChoiceInit();
 
   /*Load first game */
   pref.level = readLevelFromSetting (levelList);

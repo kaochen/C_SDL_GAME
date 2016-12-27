@@ -164,6 +164,7 @@ typedef struct
 {
   int name;
   int nbrLines;
+  int image;
 }S_Tabs;
 
 /*Struct to store menu status*/

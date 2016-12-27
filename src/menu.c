@@ -29,6 +29,45 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #include <sys/stat.h>
 
+/* Init menu Choice */
+void
+menuChoiceInit(void)
+{
+/*init Menu Choice*/
+  menuChoice.tabChoice = 1;
+  menuChoice.lineChoice = 0;
+  menuChoice.nbrTabs = NBR_OF_TAB - 1;
+  menuChoice.open = 0;
+  menuChoice.freeze = 0;
+  menuChoice.xPos = 2;
+  menuChoice.yPos = 1;
+
+  menuChoice.tab[0].nbrLines = 0;
+  menuChoice.tab[0].name = TAB_EMPTY ;
+  menuChoice.tab[0].image=NO_IMAGE;
+
+  menuChoice.tab[1].nbrLines = MENU_MAX_INFO;
+  menuChoice.tab[1].name = INFO;
+  menuChoice.tab[1].image=BUTTON_LEVELS;
+
+  menuChoice.tab[2].nbrLines = MENU_MAX_FILE;
+  menuChoice.tab[2].name = FILES;
+  menuChoice.tab[2].image=BUTTON_FILE;
+
+  menuChoice.tab[3].nbrLines = MENU_MAX_SHORTCUTS;
+  menuChoice.tab[3].name = SHORTCUTS;
+  menuChoice.tab[3].image=BUTTON_SHORTCUTS;
+
+  menuChoice.tab[4].nbrLines = MENU_MAX_SETTINGS;
+  menuChoice.tab[4].name = SETTINGS;
+  menuChoice.tab[4].image=BUTTON_SETTINGS;
+
+  menuChoice.tab[5].nbrLines = MENU_MAX_ABOUT;
+  menuChoice.tab[5].name = ABOUT;
+  menuChoice.tab[5].image=BUTTON_ABOUT;
+
+}
+
 /* Init menu grid */
 void
 gridMenu_init(S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
@@ -42,12 +81,11 @@ gridMenu_init(S_Menu gridMenu[pref.menu_X_Blocks][pref.menu_Y_Blocks])
    gridMenu[7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .tab=0, .image=BUTTON_ARROW_P};
    gridMenu[8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .tab=0, .image=BUTTON_RESET};
    gridMenu[9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .tab=0, .image=BUTTON_BACKWARDS};
-   gridMenu[2][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=1, .image=BUTTON_LEVELS};
-   gridMenu[3][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=2,  .image=BUTTON_FILE};
-   gridMenu[4][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=3, .image=BUTTON_SHORTCUTS};
-   gridMenu[5][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=4,  .image=BUTTON_SETTINGS};
-   gridMenu[6][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=5, .image=BUTTON_ABOUT};
-
+   gridMenu[2][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=1, .image=NO_IMAGE};
+   gridMenu[3][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=2,  .image=NO_IMAGE};
+   gridMenu[4][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=3, .image=NO_IMAGE};
+   gridMenu[5][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=4,  .image=NO_IMAGE};
+   gridMenu[6][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=5, .image=NO_IMAGE};
 }
 
 
@@ -465,7 +503,8 @@ displayOpenMenuBackground (SDL_Surface * screen,
         if(gridMenu[x][y].type == TABS){
           iconPos.x = pref.x_menu + x*SPRITE_SIZE;
           // fprintf (stderr, "x: %d y:%d\n", iconPos.x,iconPos.y);
-          SDL_BlitSurface (tableSurface[gridMenu[x][y].image].image, NULL, screen, &iconPos);
+          int tabImage = menuChoice.tab[gridMenu[x][y].tab].image;
+          SDL_BlitSurface (tableSurface[tabImage].image, NULL, screen, &iconPos);
         }
       }
     }

@@ -42,6 +42,9 @@ enum
 enum {MAIN_WINDOW, TOPBAR, TABS}; //Main elements of the interface
 enum {TAB_EMPTY, INFO, SHORTCUTS, ABOUT, FILES, SETTINGS}; //Different tabs
 
+/* Init menu Choice */
+void
+menuChoiceInit(void);
 
 /* Init menu grid */
 void
