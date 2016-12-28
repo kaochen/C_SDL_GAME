@@ -142,7 +142,7 @@ main (int argc, char *argv[])
   grid_init (grid);
 
   /* create a sub grid for dispatch items on the menu */
-  S_Menu gridMenu[pref.x_Blocks][pref.y_Blocks];
+  S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks];
   gridMenu_init (gridMenu);
 
   fprintf (stderr, "\n");
@@ -311,32 +311,29 @@ main (int argc, char *argv[])
 		  xCursor = event.button.x;
 		  yCursor = event.button.y;
 		  /*Open and close the menu */
-
 		  if (menuChoice.open == 1)
 		    {
 		      /*Clic outside the open menu to close it */
-		      if ((xCursor < pref.x_menu
-			   || xCursor > pref.x_menu + MENU_WIDTH)
-			  || (yCursor < SPRITE_SIZE
-			      || yCursor > 7 * SPRITE_SIZE))
-			{
-              refresh = openCloseTheMenu(gridMenu);
-			  break;
-			}
-		    }
+		     if ((gridMenu[xCursor/SPRITE_SIZE][yCursor/SPRITE_SIZE].role == M_EMPTY &&
+             gridMenu[xCursor/SPRITE_SIZE][yCursor/SPRITE_SIZE].type == TOPBAR ) ||
+             gridMenu[xCursor/SPRITE_SIZE][yCursor/SPRITE_SIZE].type == MAIN_WINDOW)
+            {
+                refresh = openCloseTheMenu(gridMenu);
+                break;
+			      }
+        }
+
 
 		  if (menuChoice.open == 0)
 		    {
 		      /*Clic on the top bar top open the menu */
-		      if (xCursor > pref.x_menu
-			  && xCursor < pref.x_menu + MENU_WIDTH)
-			{
-			  if (yCursor < SPRITE_SIZE)
-			    {
+		     if (gridMenu[xCursor/SPRITE_SIZE][yCursor/SPRITE_SIZE].role == M_EMPTY &&
+             gridMenu[xCursor/SPRITE_SIZE][yCursor/SPRITE_SIZE].type == TOPBAR)
+             {
                 refresh = openCloseTheMenu(gridMenu);
-			    break;
-			    }
-			}
+                break;
+             }
+
 
 		      getPosPlayer (&xPlayer, &yPlayer, grid);
 		      /*Do not move when level is finished */

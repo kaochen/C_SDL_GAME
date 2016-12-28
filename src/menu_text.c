@@ -36,7 +36,7 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
   /* Init all the table */
   for (size_t i = 0; i < NBR_OF_TAB; ++i){
     for (size_t j = 0; j < NBR_OF_TAB_LINE; ++j){
-      tableTextSurface[i][j] = (S_Text){ .image = NULL, .tabName = TAB_EMPTY, .lineNbr = 1};
+      tableTextSurface[i][j] = (S_Text){ .image = NULL,  .lineNbr = 1};
   }
 }
   /* Init main Menu */

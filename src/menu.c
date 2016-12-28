@@ -74,7 +74,7 @@ gridMenu_init(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
    for(int y=0; y < pref.max_Y_Blocks; ++y)
       for(int x=0; x< pref.max_X_Blocks; ++x)
-      gridMenu[x][y] = (S_Menu) {.role=M_EMPTY, .type=MAIN_WINDOW, .tab=TAB_EMPTY, .image=NO_IMAGE};
+      gridMenu[x][y] = (S_Menu) {.role=M_EMPTY, .type=MAIN_WINDOW, .tab=0, .image=NO_IMAGE};
 
     //place elements
     gridMenu_initButtons(gridMenu);
@@ -87,6 +87,10 @@ gridMenu_init(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 void
 gridMenu_initButtons(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
+   for(int x=0; x< 10; ++x){
+      gridMenu[pref.xb_menu + x][0] = (S_Menu) {.role=M_EMPTY, .type=TOPBAR, .tab=0, .image=NO_IMAGE};
+   }
+
    gridMenu[pref.xb_menu + 2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .tab=0, .image=BUTTON_ARROW_L};
    gridMenu[pref.xb_menu + 7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .tab=0, .image=BUTTON_ARROW_P};
    gridMenu[pref.xb_menu + 8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .tab=0, .image=BUTTON_RESET};
@@ -561,7 +565,7 @@ displayTopBarButtons (SDL_Surface * screen,
   size_t  imageName = NO_IMAGE;
     for(y = 0; y < pref.max_Y_Blocks; ++y){
         for(x = 0; x< pref.max_X_Blocks; ++x){
-          if (gridMenu[x][y].type == TOPBAR){
+          if (gridMenu[x][y].type == TOPBAR && gridMenu[x][y].role != M_EMPTY ){
               imageName = gridMenu[x][y].image;
 
                buttonsPos.x = x * SPRITE_SIZE;
