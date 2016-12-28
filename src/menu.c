@@ -77,17 +77,32 @@ gridMenu_init(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
       gridMenu[x][y] = (S_Menu) {.role=M_EMPTY, .type=MAIN_WINDOW, .tab=TAB_EMPTY, .image=NO_IMAGE};
 
     //place elements
+    gridMenu_initButtons(gridMenu);
+    if (menuChoice.open == 1)
+      {
+      gridMenu_initTabs(gridMenu);
+      }
+}
+/*Declare topbar buttons into the gridMenu*/
+void
+gridMenu_initButtons(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
+{
    gridMenu[pref.xb_menu + 2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .tab=0, .image=BUTTON_ARROW_L};
    gridMenu[pref.xb_menu + 7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .tab=0, .image=BUTTON_ARROW_P};
    gridMenu[pref.xb_menu + 8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .tab=0, .image=BUTTON_RESET};
    gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .tab=0, .image=BUTTON_BACKWARDS};
+}
+
+/*Declare tabs and its content into the gridMenu*/
+void
+gridMenu_initTabs(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
+{
    gridMenu[pref.xb_menu + 2][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=1, .image=NO_IMAGE};
    gridMenu[pref.xb_menu + 3][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=2,  .image=NO_IMAGE};
    gridMenu[pref.xb_menu + 4][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=3, .image=NO_IMAGE};
    gridMenu[pref.xb_menu + 5][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=4,  .image=NO_IMAGE};
    gridMenu[pref.xb_menu + 6][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=5, .image=NO_IMAGE};
-}
-
+};
 
 /* display Top Bar*/
 int
@@ -293,7 +308,7 @@ displayCongrats (SDL_Surface * screen,
 
 /* Open And close the menu */
 int
-openCloseTheMenu(void){
+openCloseTheMenu(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]){
 		  if (menuChoice.open == 0)
             {
 		    menuChoice.freeze = 1;
@@ -303,6 +318,7 @@ openCloseTheMenu(void){
 		    menuChoice.freeze = 0;
             menuChoice.open = 0;
           }
+      gridMenu_init(gridMenu);
 
         //fprintf (stderr, "change to freeze: %d open:%d\n", menuChoice.freeze, menuChoice.freeze);
         return 1;

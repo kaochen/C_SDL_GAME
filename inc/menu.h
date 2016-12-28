@@ -51,6 +51,14 @@ void
 gridMenu_init(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 
+/*Declare topbar buttons into the gridMenu*/
+void
+gridMenu_initButtons(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
+
+/*Declare tabs and its content into the gridMenu*/
+void
+gridMenu_initTabs(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
+
 /* display Top Bar*/
 int
 displayTopBar (SDL_Surface * screen,
@@ -91,7 +99,7 @@ displayCongrats (SDL_Surface * screen,
 
 /* Open And close the menu */
 int
-openCloseTheMenu (void);
+openCloseTheMenu(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* Show menu List */
 void

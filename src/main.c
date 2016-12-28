@@ -320,7 +320,7 @@ main (int argc, char *argv[])
 			  || (yCursor < SPRITE_SIZE
 			      || yCursor > 7 * SPRITE_SIZE))
 			{
-              refresh = openCloseTheMenu();
+              refresh = openCloseTheMenu(gridMenu);
 			  break;
 			}
 		    }
@@ -333,7 +333,7 @@ main (int argc, char *argv[])
 			{
 			  if (yCursor < SPRITE_SIZE)
 			    {
-                refresh = openCloseTheMenu();
+                refresh = openCloseTheMenu(gridMenu);
 			    break;
 			    }
 			}
@@ -460,7 +460,7 @@ main (int argc, char *argv[])
 		  /* hit m to open or close the menu */
 
 		case SDLK_m:
-            refresh = openCloseTheMenu();
+            refresh = openCloseTheMenu(gridMenu);
 		  break;
 
 
