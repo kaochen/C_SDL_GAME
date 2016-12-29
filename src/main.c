@@ -310,25 +310,45 @@ main (int argc, char *argv[])
 		{
 		  xCursor = event.button.x;
 		  yCursor = event.button.y;
+      int xBCursor = xCursor/SPRITE_SIZE; //to get the block coordonate.
+      int yBCursor = yCursor/SPRITE_SIZE;
+
+      /*clic on buttons of the top bar */
+      if (gridMenu[xBCursor][yBCursor].role != M_EMPTY &&
+             gridMenu[xBCursor][yBCursor].type == TOPBAR ){
+            switch (gridMenu[xBCursor][yBCursor].role)
+              {
+              case M_PREVIOUS:
+                  refresh = changeLevel(-1);
+                break;
+              case M_NEXT:
+                  refresh = changeLevel(1);
+                break;
+              case M_RESET:
+                  refresh = changeLevel(0);
+                break;
+              }
+        break;
+        }
+
 		  /*Open and close the menu */
 		  if (menuChoice.open == 1)
 		    {
 		      /*Clic outside the open menu to close it */
-		     if ((gridMenu[xCursor/SPRITE_SIZE][yCursor/SPRITE_SIZE].role == M_EMPTY &&
-             gridMenu[xCursor/SPRITE_SIZE][yCursor/SPRITE_SIZE].type == TOPBAR ) ||
-             gridMenu[xCursor/SPRITE_SIZE][yCursor/SPRITE_SIZE].type == MAIN_WINDOW)
+		     if ((gridMenu[xBCursor][yBCursor].role == M_EMPTY &&
+             gridMenu[xBCursor][yBCursor].type == TOPBAR ) ||
+             gridMenu[xBCursor][yBCursor].type == MAIN_WINDOW)
             {
                 refresh = openCloseTheMenu(gridMenu);
                 break;
 			      }
         }
 
-
 		  if (menuChoice.open == 0)
 		    {
 		      /*Clic on the top bar top open the menu */
-		     if (gridMenu[xCursor/SPRITE_SIZE][yCursor/SPRITE_SIZE].role == M_EMPTY &&
-             gridMenu[xCursor/SPRITE_SIZE][yCursor/SPRITE_SIZE].type == TOPBAR)
+		     if (gridMenu[xBCursor][yBCursor].role == M_EMPTY &&
+             gridMenu[xBCursor][yBCursor].type == TOPBAR)
              {
                 refresh = openCloseTheMenu(gridMenu);
                 break;
@@ -464,25 +484,19 @@ main (int argc, char *argv[])
 		  /* hit r to reset the current level */
 		case SDLK_r:
 		  /* load the level */
-		  pref.reload = 1;
-		  refresh = 1;
+      refresh = changeLevel(0);
 		  break;
 
 		  /* hit n to load the next level */
 		case SDLK_n:
 		  /* load next the level */
-		  pref.level += 1;
-		  pref.reload = 1;
-		  refresh = 1;
+      refresh = changeLevel(1);
 		  break;
 
 		  /* hit p to load the previous level */
 		case SDLK_p:
 		  /* load previous level */
-		  pref.level -= 1;
-
-      pref.reload = 1;
-		  refresh = 1;
+      refresh = changeLevel(-1);
 		  break;
 
 		  /* hit q to quit */

@@ -47,4 +47,7 @@ int findLevelNumber (S_LevelList * levelList, char *levelName);
 /*get a levelchoice by reading the level name from the preference file*/
 int readLevelFromSetting (S_LevelList * levelList);
 
+/*force reload of a level*/
+int
+changeLevel(int i);
 #endif

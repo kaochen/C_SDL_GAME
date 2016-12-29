@@ -277,4 +277,13 @@ readLevelFromSetting (S_LevelList * levelList)
   fprintf (stderr, "levelchoice from file : %d\n ", ret);
   return ret;
 }
+
+/*force reload of a level*/
+int
+changeLevel(int i)
+{
+		  pref.level += i;
+      pref.reload = 1;
+  return 1; //refresh
+}
 #endif
