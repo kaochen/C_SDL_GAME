@@ -85,7 +85,8 @@ loadPrefStruct(SDL_DisplayMode current){
 
    /* Level */
       pref.level = 0;
-      pref.level = 1;
+      pref.level_max = 1;
+      pref.reload = 0;
 
    /*framerate*/
       pref.display_framerate = current.refresh_rate;

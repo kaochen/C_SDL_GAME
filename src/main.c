@@ -228,7 +228,7 @@ main (int argc, char *argv[])
   char levelName[MAX_CARACT] = "";
   Uint32 currentTime = 0;
   Uint32 previousTime = 0;
-  int carryOn = 1, refresh = 1, reload = 0, target = STILL, next_target = STILL;
+  int carryOn = 1, refresh = 1,  target = STILL, next_target = STILL;
 
 
   int xCursor = 0, yCursor = 0;
@@ -464,7 +464,7 @@ main (int argc, char *argv[])
 		  /* hit r to reset the current level */
 		case SDLK_r:
 		  /* load the level */
-		  reload = 1;
+		  pref.reload = 1;
 		  refresh = 1;
 		  break;
 
@@ -472,7 +472,7 @@ main (int argc, char *argv[])
 		case SDLK_n:
 		  /* load next the level */
 		  pref.level += 1;
-		  reload = 1;
+		  pref.reload = 1;
 		  refresh = 1;
 		  break;
 
@@ -481,7 +481,7 @@ main (int argc, char *argv[])
 		  /* load previous level */
 		  pref.level -= 1;
 
-      reload = 1;
+      pref.reload = 1;
 		  refresh = 1;
 		  break;
 
@@ -504,7 +504,7 @@ main (int argc, char *argv[])
 	}			// end of while(SDL_PollEvent(&event))
 
     //reload the level from file if necessary
-    if(reload == 1){
+    if(pref.reload == 1){
       //loop if level < 0 or > level_max
       if (pref.level == -1)
 		    pref.level = pref.level_max - 1;
@@ -514,7 +514,7 @@ main (int argc, char *argv[])
       if (loadSlcLevel (levelList, grid) ==
 		      EXIT_FAILURE)
 		      perror ("Impossible to load the level. Perror");
-      reload = 0;
+      pref.reload = 0;
     }
       if (refresh == 1)
 	{

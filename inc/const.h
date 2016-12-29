@@ -205,6 +205,7 @@ typedef struct
  /* Level */
  int level;
  int level_max;
+ int reload;
 
  /* framerate */
  int display_framerate;
