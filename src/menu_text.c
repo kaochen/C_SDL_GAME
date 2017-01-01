@@ -167,4 +167,36 @@ levelMenu (SDL_Surface * screen,
   return EXIT_SUCCESS;
 }
 
+
+/* Get the first five name files */
+int
+loadFileName( S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
+              S_FilesList *filesList)
+{
+  S_Files *actual = filesList->first;
+  if (filesList == NULL || actual == NULL)
+    {
+      return (EXIT_FAILURE);
+    }
+
+ size_t fontSize = 20, R = 255, G = 255, B = 255, A = 255;
+ char name[MAX_CARACT] = "";
+
+ for (size_t i = 0; i < MENU_MAX_FILE; i++)
+    {
+     sprintf (name, "\t\t\t\t%s",extractNameFile(actual->name));
+     loadTextAsSurface (FILES,(i+1), tableTextSurface, name, fontSize, R, G, B, A);
+     actual = actual->next;
+    }
+return (EXIT_SUCCESS);
+}
+
+/*get the file name from is path*/
+char *
+extractNameFile(char *path){
+ char *name = NULL;
+ char c = '/';
+ name = strrchr (path, c);
+ return name;
+}
 #endif

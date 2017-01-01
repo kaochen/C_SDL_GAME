@@ -61,4 +61,13 @@ int
 levelMenu (SDL_Surface * screen,
            S_LevelList * levelList);
 
+/* Get the first five name files */
+int
+loadFileName( S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
+              S_FilesList *filesList);
+
+/*get the file name from is path*/
+char *
+extractNameFile(char *path);
+
 #endif

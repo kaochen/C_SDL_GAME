@@ -160,7 +160,7 @@ main (int argc, char *argv[])
     {
       perror (gettext ("The level list cannot be verified."));
     }
-
+  loadFileName(tableTextSurface,filesList);
 
   fprintf (stderr, "\n");
 
