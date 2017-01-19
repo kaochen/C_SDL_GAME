@@ -258,15 +258,15 @@
      inkscape:window-maximized="1"
      inkscape:window-y="27"
      inkscape:window-x="0"
-     inkscape:window-height="836"
-     inkscape:window-width="1440"
+     inkscape:window-height="1016"
+     inkscape:window-width="1920"
      units="px"
      showgrid="false"
-     inkscape:current-layer="layer4"
+     inkscape:current-layer="layer12"
      inkscape:document-units="px"
-     inkscape:cy="487.20623"
-     inkscape:cx="153.76749"
-     inkscape:zoom="2"
+     inkscape:cy="480.31621"
+     inkscape:cx="154.449"
+     inkscape:zoom="2.6804065"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -399,11 +399,119 @@
      style="display:inline"
      sodipodi:insensitive="true">
     <path
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 31.014227,124 89.985753,0 19,6 117,0 16,-6 92,0"
-       id="path4251"
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cccccc"
+       id="path5273"
+       d="m 65.366361,79.052801 c 0,0 197.462529,0 299.735539,0"
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <path
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 43.000085,19.610583 c 0,0 0,134.718707 0,204.494417"
+       id="path5280"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <circle
+       cy="79"
+       cx="62.999985"
+       id="circle5318"
+       style="opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       r="4.3863497" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path5273-3"
+       d="m 121.00008,38.944708 c 0,0 0,25.106841 0,38.110585"
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.93022418;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path5309"
+       d="m 43.883937,66.136177 c 0,0 3.418648,12.757113 18.014448,13.018232"
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.967857;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <circle
+       r="4.3863497"
+       style="opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle5311"
+       cx="120.99998"
+       cy="79" />
+    <path
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 159.00008,40.070045 c 0,0 0,26.954829 0,40.915713"
+       id="path5313"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <circle
+       cy="79"
+       cx="158.99997"
+       id="circle5315"
+       style="opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       r="4.3863497" />
+    <circle
+       cy="65"
+       cx="43.999985"
+       id="circle5318-6"
+       style="display:inline;opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       r="4.3863497" />
+    <path
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 65.366361,119.0528 c 0,0 197.462529,0 299.735539,0"
+       id="path5347"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <circle
+       r="4.3863497"
+       style="opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle5349"
+       cx="62.999985"
+       cy="119" />
+    <path
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 43.900068,105.87322 c 0,0 3.465519,12.99904 18.261436,13.26511"
+       id="path5351"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <circle
+       r="4.3863497"
+       style="display:inline;opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="circle5356"
+       cx="43.999985"
+       cy="105" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_h_line.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path5358"
+       d="m 65.366361,159.0528 c 0,0 197.462529,0 299.735539,0"
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <path
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 65.366361,199.0528 c 0,0 197.462529,0 299.735539,0"
+       id="path5368"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
        inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
@@ -411,11 +519,68 @@
        inkscape:export-ydpi="90"
        inkscape:export-xdpi="90"
        inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       sodipodi:nodetypes="cccccc"
+       sodipodi:nodetypes="cc"
        inkscape:connector-curvature="0"
-       id="path5273"
-       d="m 31.014227,80 89.985753,0 19,6 117,0 16,-6 92,0"
+       id="path5378"
+       d="m 65.366361,239.0528 c 0,0 197.462529,0 299.735539,0"
        style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <circle
+       cy="239"
+       cx="62.999985"
+       id="circle5380"
+       style="opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       r="4.3863497" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path5382"
+       d="m 43.900068,225.87322 c 0,0 3.465519,12.99904 18.261436,13.26511"
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <circle
+       cy="225"
+       cx="43.999985"
+       id="circle5386"
+       style="display:inline;opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       r="4.3863497" />
+    <path
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 65.366361,279.0528 c 0,0 197.462529,0 299.735539,0"
+       id="path5388"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       inkscape:export-ydpi="90"
+       inkscape:export-xdpi="90"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       sodipodi:nodetypes="cc"
+       inkscape:connector-curvature="0"
+       id="path5398"
+       d="m 65.366361,319.0528 c 0,0 197.462529,0 299.735539,0"
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <path
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.93022418;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 121.00008,38.944708 c 0,0 0,25.106841 0,38.110585"
+       id="path5412"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <path
+       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.967857;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       d="m 81.883937,58.136177 c 0,0 3.418648,12.757113 18.014448,13.018232"
+       id="path5418"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_curve.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -440,7 +605,7 @@
      inkscape:groupmode="layer"
      id="layer15"
      inkscape:label="HighLigth"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <path
        style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.7550168;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -461,14 +626,14 @@
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="39.285698"
-       y="113.32142"
+       x="61.285698"
+       y="109.32142"
        id="text4163"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan4165"
-         x="39.285698"
-         y="113.32142"
+         x="61.285698"
+         y="109.32142"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1">Current Level Infos</tspan></text>
     <text
        sodipodi:linespacing="125%"
@@ -485,85 +650,73 @@
     <text
        sodipodi:linespacing="125%"
        id="text5696"
-       y="161.32141"
-       x="39.285698"
+       y="149.32141"
+       x="61.285698"
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1"
-         y="161.32141"
-         x="39.285698"
+         y="149.32141"
+         x="61.285698"
          id="tspan5698"
          sodipodi:role="line">Name: Level 0</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="39.785698"
-       y="189.32141"
+       x="61.785698"
+       y="187.32141"
        id="text5704"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5706"
-         x="39.785698"
-         y="189.32141"
+         x="61.785698"
+         y="187.32141"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1">Authors:</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="41.690319"
-       y="214.84863"
+       x="63.690323"
+       y="228.84863"
        id="text5704-3"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5706-5"
-         x="41.690319"
-         y="214.84863"
+         x="63.690323"
+         y="228.84863"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1">File:/SokoRobot.slc</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="39.285698"
-       y="245.32141"
-       id="text4937"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan4939"
-         x="39.285698"
-         y="245.32141"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1">foo-foo</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text4941"
-       y="273.32141"
-       x="39.785698"
+       y="267.32141"
+       x="61.785698"
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1"
-         y="273.32141"
-         x="39.785698"
+         y="267.32141"
+         x="61.785698"
          id="tspan4943"
          sodipodi:role="line">http://website/web.web</tspan></text>
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       x="39.785698"
-       y="301.32141"
+       x="61.785698"
+       y="307.32141"
        id="text5275"
        sodipodi:linespacing="125%"><tspan
          sodipodi:role="line"
          id="tspan5277"
-         x="39.785698"
-         y="301.32141"
+         x="61.785698"
+         y="307.32141"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1">myfile.slc</tspan></text>
     <text
        sodipodi:linespacing="125%"
        id="text5279"
-       y="329.32141"
-       x="39.785698"
+       y="345.32141"
+       x="61.785698"
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        xml:space="preserve"><tspan
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1"
-         y="329.32141"
-         x="39.785698"
+         y="345.32141"
+         x="61.785698"
          id="tspan5281"
          sodipodi:role="line">http://website/web.web</tspan></text>
   </g>
@@ -5248,7 +5401,7 @@
      inkscape:groupmode="layer"
      id="layer8"
      inkscape:label="Grid"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <g
        id="g5447">
