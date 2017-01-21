@@ -493,30 +493,38 @@ displayOpenMenuBackground (SDL_Surface * screen,
     }
 
   /* add a separator line */
-  SDL_Rect sepPos;
-  sepPos.x = pref.x_menu + 33;
-  sepPos.y = 2*SPRITE_SIZE;
-  SDL_BlitSurface (tableSurface[MENU_SEPARATOR].image, NULL, screen, &sepPos);
-  sepPos.y = 3*SPRITE_SIZE;
-  SDL_BlitSurface (tableSurface[MENU_SEPARATOR].image, NULL, screen, &sepPos);
+  SDL_Rect h_linePos;
+  h_linePos.x = pref.x_menu + SPRITE_SIZE + 10;
+  for (i = 2; i < size + 2; i++)
+    {
+       h_linePos.y = i*SPRITE_SIZE;
+       SDL_BlitSurface (tableSurface[MENU_H_LINE].image, NULL, screen, &h_linePos);
+    }
 
+  SDL_Rect v_linePos;
+  v_linePos.x = pref.x_menu + SPRITE_SIZE - 10;
+  for (i = 0; i <  menuChoice.lineChoice + 3; i++)
+    {
+        v_linePos.y =  (1+i)*SPRITE_SIZE - 13;
+       SDL_BlitSurface (tableSurface[MENU_V_LINE].image, NULL, screen, &v_linePos);
   /*highlight the sub menuChoice*/
-
+    }
   SDL_Rect hlPos;
   hlPos.x = pref.x_menu + SPRITE_SIZE - 10;
-  hlPos.y = 3*SPRITE_SIZE + 12 + menuChoice.lineChoice*SPRITE_SIZE;
-  SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen, &hlPos);
+  hlPos.y = (4 + menuChoice.lineChoice)*SPRITE_SIZE - 13;
+  SDL_BlitSurface (tableSurface[MENU_CURVE].image, NULL, screen, &hlPos);
 
-  /* add highlight to tabs depending on the menuChoice*/
-  SDL_Rect tabPos;
-  tabPos.y = SPRITE_SIZE;
-  tabPos.x = menuChoice.xPos * SPRITE_SIZE + 3;
-  SDL_BlitSurface (tableSurface[BUTTON_HIGHLIGHT].image, NULL, screen, &tabPos);
+
+  for (i = 0; i < 2; i++)
+    {
+    hlPos.y = (2 + i)*SPRITE_SIZE - 13;
+    SDL_BlitSurface (tableSurface[MENU_CURVE].image, NULL, screen, &hlPos);
+    }
+
 
   /* add tab icons */
-
   SDL_Rect iconPos;
-  iconPos.y = SPRITE_SIZE + 5;
+  iconPos.y = SPRITE_SIZE + 2;
 
   for(int y=0; y < pref.max_Y_Blocks; ++y){
       for(int x=0; x< pref.max_X_Blocks; ++x){
@@ -528,6 +536,14 @@ displayOpenMenuBackground (SDL_Surface * screen,
         }
       }
     }
+  // highlight selected tab //
+  SDL_Rect highlightPos;
+  for (i = 1; i< 3; i++)
+      {
+      highlightPos.y = SPRITE_SIZE;
+      highlightPos.x = pref.x_menu + (i + menuChoice.tabChoice)*SPRITE_SIZE;
+      SDL_BlitSurface (tableSurface[MENU_V_LINE].image, NULL, screen, &highlightPos);
+      }
 }
 
 /* Display pattern image over the text menu */

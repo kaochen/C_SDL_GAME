@@ -399,6 +399,7 @@ main (int argc, char *argv[])
                          menuChoice.xPos = (pref.xb_menu + 2);
 
           menuChoice.tabChoice++;
+			    menuChoice.lineChoice = 0;
           if (menuChoice.tabChoice > menuChoice.nbrTabs)
               menuChoice.tabChoice = 1;
 
@@ -423,6 +424,7 @@ main (int argc, char *argv[])
               menuChoice.xPos = (pref.xb_menu + 6);
 
           menuChoice.tabChoice--;
+			    menuChoice.lineChoice = 0;
           if (menuChoice.tabChoice < 1)
               menuChoice.tabChoice = menuChoice.nbrTabs;
 		      refresh = 1;

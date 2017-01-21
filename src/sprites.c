@@ -81,6 +81,10 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[MENU_TOP_LIGHT], pref.themePath, "menu_top_light.png");
   loadSprite (&tableSurface[MENU_SQUARE], pref.themePath, "menu_square.png");
   loadSprite (&tableSurface[MENU_SEPARATOR], pref.themePath, "menu_separator.png");
+  loadSprite (&tableSurface[MENU_H_LINE], pref.themePath, "menu_h_line.png");
+  loadSprite (&tableSurface[MENU_V_LINE], pref.themePath, "menu_v_line.png");
+  loadSprite (&tableSurface[MENU_CIRCLE], pref.themePath, "menu_circle.png");
+  loadSprite (&tableSurface[MENU_CURVE], pref.themePath, "menu_curve.png");
   loadSprite (&tableSurface[MENU_OVERTEXT], pref.themePath, "menu_overText.png");
   loadSprite (&tableSurface[MENU_HIGHLIGHT], pref.themePath, "menu_highlight.png");
 
