@@ -560,13 +560,13 @@ loadSlcLevel (S_LevelList * levelList,
     {
       int c = 0;
       y = 0, x = 0;
-      char line[MAX_CARACT] = "";
       xmlNodePtr n;
       for (y = 0; y < nbr_of_lines; y++)
 	{
 	  n = xpathLevel->nodesetval->nodeTab[y];
 	  if (n->type == XML_TEXT_NODE || n->type == XML_CDATA_SECTION_NODE)
 	    {
+        char line[MAX_CARACT] = "";
 	      strcpy (line, (char *) n->content);
 	      fprintf (stderr, "%s\n", n->content);
 	      /* load level into the grid */
