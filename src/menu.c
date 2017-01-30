@@ -35,7 +35,7 @@ menuChoiceInit(void)
 {
 /*init Menu Choice*/
   menuChoice.tabChoice = 1;
-  menuChoice.lineChoice = 0;
+  menuChoice.lineChoice = MENU_OFFSET;
   menuChoice.nbrTabs = NBR_OF_TAB - 1;
   menuChoice.open = 0;
   menuChoice.freeze = 0;
@@ -101,13 +101,34 @@ gridMenu_initButtons(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 void
 gridMenu_initTabs(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
-   gridMenu[pref.xb_menu + 2][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=1, .image=NO_IMAGE};
-   gridMenu[pref.xb_menu + 3][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=2,  .image=NO_IMAGE};
-   gridMenu[pref.xb_menu + 4][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=3, .image=NO_IMAGE};
-   gridMenu[pref.xb_menu + 5][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=4,  .image=NO_IMAGE};
-   gridMenu[pref.xb_menu + 6][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=5, .image=NO_IMAGE};
+   gridMenu[pref.xb_menu + 2][1] = (S_Menu) { .type=TABS, .tab=1};
+   gridMenu[pref.xb_menu + 3][1] = (S_Menu) { .type=TABS, .tab=2};
+   gridMenu[pref.xb_menu + 4][1] = (S_Menu) { .type=TABS, .tab=3};
+   gridMenu[pref.xb_menu + 5][1] = (S_Menu) { .type=TABS, .tab=4};
+   gridMenu[pref.xb_menu + 6][1] = (S_Menu) { .type=TABS, .tab=5};
 };
 
+/*Declare lines and its content into the gridMenu*/
+void
+gridMenu_initLines(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
+{
+  //first clean old TABS_LINE
+  for (int y = MENU_OFFSET; y < NBR_OF_TAB_LINE; y++)
+    {
+      for (int x = pref.xb_menu; x < pref.xb_menu + NBR_OF_TAB_LINE; x++)
+        {
+          gridMenu[x][y] = (S_Menu) {.type=MAIN_WINDOW, .tab= 0};
+        }
+    }
+  //then write TABS_LINE to the grid depending on the menuchoice[current tab]nbrLines value
+  for (int y = MENU_OFFSET; y < menuChoice.tab[menuChoice.tabChoice].nbrLines + MENU_OFFSET; y++)
+    {
+      for (int x = pref.xb_menu; x < pref.xb_menu + NBR_OF_TAB_LINE; x++)
+        {
+          gridMenu[x][y] = (S_Menu) {.type=TABS_LINE, .tab= menuChoice.tabChoice};
+        }
+    }
+}
 /* display Top Bar*/
 int
 displayTopBar (SDL_Surface * screen,
@@ -501,17 +522,11 @@ displayOpenMenuBackground (SDL_Surface * screen,
        SDL_BlitSurface (tableSurface[MENU_H_LINE].image, NULL, screen, &h_linePos);
     }
 
-  SDL_Rect v_linePos;
-  v_linePos.x = pref.x_menu + SPRITE_SIZE - 10;
-  for (i = 0; i <  menuChoice.lineChoice + 3; i++)
-    {
-        v_linePos.y =  (1+i)*SPRITE_SIZE - 13;
-       SDL_BlitSurface (tableSurface[MENU_V_LINE].image, NULL, screen, &v_linePos);
   /*highlight the sub menuChoice*/
-    }
+
   SDL_Rect hlPos;
   hlPos.x = pref.x_menu + SPRITE_SIZE - 10;
-  hlPos.y = (4 + menuChoice.lineChoice)*SPRITE_SIZE - 13;
+  hlPos.y = (1 + menuChoice.lineChoice)*SPRITE_SIZE - 13;
   SDL_BlitSurface (tableSurface[MENU_CURVE].image, NULL, screen, &hlPos);
 
 

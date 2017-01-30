@@ -39,7 +39,7 @@ enum
 
 
 
-enum {MAIN_WINDOW, TOPBAR, TABS}; //Main elements of the interface
+enum {MAIN_WINDOW, TOPBAR, TABS, TABS_LINE}; //Main elements of the interface
 enum {TAB_EMPTY, INFO, SHORTCUTS, ABOUT, FILES, SETTINGS}; //Different tabs
 
 /* Init menu Choice */
@@ -58,6 +58,10 @@ gridMenu_initButtons(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 /*Declare tabs and its content into the gridMenu*/
 void
 gridMenu_initTabs(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
+
+/*Declare lines and its content into the gridMenu*/
+void
+gridMenu_initLines(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* display Top Bar*/
 int

@@ -399,10 +399,11 @@ main (int argc, char *argv[])
                          menuChoice.xPos = (pref.xb_menu + 2);
 
           menuChoice.tabChoice++;
-			    menuChoice.lineChoice = 0;
+			    menuChoice.lineChoice = MENU_OFFSET;
           if (menuChoice.tabChoice > menuChoice.nbrTabs)
               menuChoice.tabChoice = 1;
 
+          gridMenu_initLines(gridMenu);
 		      refresh = 1;
 		    }
 		  break;
@@ -424,9 +425,11 @@ main (int argc, char *argv[])
               menuChoice.xPos = (pref.xb_menu + 6);
 
           menuChoice.tabChoice--;
-			    menuChoice.lineChoice = 0;
+			    menuChoice.lineChoice = MENU_OFFSET;
           if (menuChoice.tabChoice < 1)
               menuChoice.tabChoice = menuChoice.nbrTabs;
+
+          gridMenu_initLines(gridMenu);
 		      refresh = 1;
 		    }
 		  break;
@@ -445,9 +448,9 @@ main (int argc, char *argv[])
 		    {
 		      menuChoice.lineChoice--;
 		      /* make circle */
-		      if (menuChoice.lineChoice < 0)
+		      if (menuChoice.lineChoice < MENU_OFFSET)
 			{
-			  menuChoice.lineChoice = (menuChoice.tab[menuChoice.tabChoice].nbrLines - 1);
+			  menuChoice.lineChoice = (menuChoice.tab[menuChoice.tabChoice].nbrLines +2);
 			}
 		      refresh = 1;
 		    }
@@ -468,9 +471,9 @@ main (int argc, char *argv[])
 		    {
 		      menuChoice.lineChoice++;
 		      /* make circle */
-		      if (menuChoice.lineChoice > menuChoice.tab[menuChoice.tabChoice].nbrLines - 1)
+		      if (menuChoice.lineChoice > menuChoice.tab[menuChoice.tabChoice].nbrLines +2)
 			{
-			  menuChoice.lineChoice = 0;
+			  menuChoice.lineChoice = MENU_OFFSET;
 			}
 		      refresh = 1;
 		    }
@@ -480,6 +483,7 @@ main (int argc, char *argv[])
 
 		case SDLK_m:
             refresh = openCloseTheMenu(gridMenu);
+            gridMenu_initLines(gridMenu);
 		  break;
 
 
