@@ -513,11 +513,11 @@ displayOpenMenuBackground (SDL_Surface * screen,
 
     }
 
-  /* add a separator line */
+  /* add background to the menu lines */
   SDL_Rect h_linePos;
-  h_linePos.x = pref.x_menu + SPRITE_SIZE + 10;
-  for (i = 2; i < size + 2; i++)
+  for (i = 2; i < size + 1; i++)
     {
+       h_linePos.x = pref.x_menu + SPRITE_SIZE + 10;
        h_linePos.y = i*SPRITE_SIZE;
        SDL_BlitSurface (tableSurface[MENU_H_LINE].image, NULL, screen, &h_linePos);
     }
@@ -525,16 +525,12 @@ displayOpenMenuBackground (SDL_Surface * screen,
   /*highlight the sub menuChoice*/
 
   SDL_Rect hlPos;
-  hlPos.x = pref.x_menu + SPRITE_SIZE - 10;
-  hlPos.y = (1 + menuChoice.lineChoice)*SPRITE_SIZE - 13;
-  SDL_BlitSurface (tableSurface[MENU_CURVE].image, NULL, screen, &hlPos);
-
-
-  for (i = 0; i < 2; i++)
-    {
-    hlPos.y = (2 + i)*SPRITE_SIZE - 13;
-    SDL_BlitSurface (tableSurface[MENU_CURVE].image, NULL, screen, &hlPos);
-    }
+  hlPos.x = pref.x_menu + SPRITE_SIZE;
+  hlPos.y = (menuChoice.lineChoice)*SPRITE_SIZE + 1;
+       for (int j = 0; j < 8; j++){
+          SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen, &hlPos);
+          hlPos.x += SPRITE_SIZE;
+       }
 
 
   /* add tab icons */
@@ -553,12 +549,9 @@ displayOpenMenuBackground (SDL_Surface * screen,
     }
   // highlight selected tab //
   SDL_Rect highlightPos;
-  for (i = 1; i< 3; i++)
-      {
-      highlightPos.y = SPRITE_SIZE;
-      highlightPos.x = pref.x_menu + (i + menuChoice.tabChoice)*SPRITE_SIZE;
-      SDL_BlitSurface (tableSurface[MENU_V_LINE].image, NULL, screen, &highlightPos);
-      }
+  highlightPos.y = SPRITE_SIZE;
+  highlightPos.x = pref.x_menu + (1 + menuChoice.tabChoice)*SPRITE_SIZE;
+  SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen, &highlightPos);
 }
 
 /* Display pattern image over the text menu */

@@ -86,7 +86,7 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[MENU_CIRCLE], pref.themePath, "menu_circle.png");
   loadSprite (&tableSurface[MENU_CURVE], pref.themePath, "menu_curve.png");
   loadSprite (&tableSurface[MENU_OVERTEXT], pref.themePath, "menu_overText.png");
-  loadSprite (&tableSurface[MENU_HIGHLIGHT], pref.themePath, "menu_highlight.png");
+  loadSprite (&tableSurface[MENU_HIGHLIGHT], pref.themePath, "menu_highlighter.png");
 
   /* buttons */
   loadSprite (&tableSurface[BUTTON_ARROW_L], pref.themePath, "button_arrow_l.png");
