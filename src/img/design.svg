@@ -14,7 +14,7 @@
    inkscape:export-xdpi="90"
    inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/overText.png"
    sodipodi:docname="design.svg"
-   inkscape:version="0.91 r13725"
+   inkscape:version="0.92.0 r15299"
    version="1.1"
    id="svg2"
    viewBox="0 0 399.99998 600.00002"
@@ -264,9 +264,9 @@
      showgrid="false"
      inkscape:current-layer="layer12"
      inkscape:document-units="px"
-     inkscape:cy="480.31621"
-     inkscape:cx="154.449"
-     inkscape:zoom="2.6804065"
+     inkscape:cy="418.62838"
+     inkscape:cx="266.03785"
+     inkscape:zoom="1.3402033"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -347,7 +347,7 @@
        style="opacity:0.05;fill:url(#pattern5750);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
     <path
        style="opacity:1;fill:url(#linearGradient4186);fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:0.40830455"
-       d="m 19.999985,40.000923 359.999995,0 0,318.039597 -67.14168,0 -23.50311,10.01294 -182.14985,0 -26.297747,-10.01294 -60.907608,0 z"
+       d="M 19.999985,40.000923 H 379.99998 V 358.04052 H 312.8583 l -23.50311,10.01294 H 107.20534 L 80.907593,358.04052 H 19.999985 Z"
        id="rect4161"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="ccccccccc"
@@ -374,7 +374,7 @@
        inkscape:export-ydpi="90" />
     <path
        style="display:inline;fill:none;fill-rule:evenodd;stroke:#000000;stroke-width:3.05598092;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-       d="m 19.999985,357.18351 57.615291,0 29.784594,11.28812 181.28158,-0.70548 26.10748,-10.58238 65.21105,0"
+       d="m 19.999985,357.18351 h 57.615291 l 29.784594,11.28812 181.28158,-0.70548 26.10748,-10.58238 h 65.21105"
        id="path5006"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccccc"
@@ -396,182 +396,7 @@
      inkscape:groupmode="layer"
      id="layer12"
      inkscape:label="SeparatorMenu"
-     style="display:inline"
-     sodipodi:insensitive="true">
-    <path
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0"
-       id="path5273"
-       d="m 65.366361,79.052801 c 0,0 197.462529,0 299.735539,0"
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <path
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 43.000085,19.610583 c 0,0 0,134.718707 0,204.494417"
-       id="path5280"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <circle
-       cy="79"
-       cx="62.999985"
-       id="circle5318"
-       style="opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       r="4.3863497" />
-    <path
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0"
-       id="path5273-3"
-       d="m 121.00008,38.944708 c 0,0 0,25.106841 0,38.110585"
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.93022418;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <path
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0"
-       id="path5309"
-       d="m 43.883937,66.136177 c 0,0 3.418648,12.757113 18.014448,13.018232"
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.967857;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <circle
-       r="4.3863497"
-       style="opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="circle5311"
-       cx="120.99998"
-       cy="79" />
-    <path
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 159.00008,40.070045 c 0,0 0,26.954829 0,40.915713"
-       id="path5313"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <circle
-       cy="79"
-       cx="158.99997"
-       id="circle5315"
-       style="opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       r="4.3863497" />
-    <circle
-       cy="65"
-       cx="43.999985"
-       id="circle5318-6"
-       style="display:inline;opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       r="4.3863497" />
-    <path
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 65.366361,119.0528 c 0,0 197.462529,0 299.735539,0"
-       id="path5347"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <circle
-       r="4.3863497"
-       style="opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="circle5349"
-       cx="62.999985"
-       cy="119" />
-    <path
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 43.900068,105.87322 c 0,0 3.465519,12.99904 18.261436,13.26511"
-       id="path5351"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <circle
-       r="4.3863497"
-       style="display:inline;opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       id="circle5356"
-       cx="43.999985"
-       cy="105" />
-    <path
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_h_line.png"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0"
-       id="path5358"
-       d="m 65.366361,159.0528 c 0,0 197.462529,0 299.735539,0"
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <path
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 65.366361,199.0528 c 0,0 197.462529,0 299.735539,0"
-       id="path5368"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <path
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0"
-       id="path5378"
-       d="m 65.366361,239.0528 c 0,0 197.462529,0 299.735539,0"
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <circle
-       cy="239"
-       cx="62.999985"
-       id="circle5380"
-       style="opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       r="4.3863497" />
-    <path
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0"
-       id="path5382"
-       d="m 43.900068,225.87322 c 0,0 3.465519,12.99904 18.261436,13.26511"
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <circle
-       cy="225"
-       cx="43.999985"
-       id="circle5386"
-       style="display:inline;opacity:0.73400005;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:1.22730064;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       r="4.3863497" />
-    <path
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 65.366361,279.0528 c 0,0 197.462529,0 299.735539,0"
-       id="path5388"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
-    <path
-       inkscape:export-ydpi="90"
-       inkscape:export-xdpi="90"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       sodipodi:nodetypes="cc"
-       inkscape:connector-curvature="0"
-       id="path5398"
-       d="m 65.366361,319.0528 c 0,0 197.462529,0 299.735539,0"
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
-    <path
-       style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.93022418;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 121.00008,38.944708 c 0,0 0,25.106841 0,38.110585"
-       id="path5412"
-       inkscape:connector-curvature="0"
-       sodipodi:nodetypes="cc"
-       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_separator.png"
-       inkscape:export-xdpi="90"
-       inkscape:export-ydpi="90" />
+     style="display:inline">
     <path
        style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.967857;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
        d="m 81.883937,58.136177 c 0,0 3.418648,12.757113 18.014448,13.018232"
@@ -581,6 +406,73 @@
        inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_curve.png"
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90" />
+    <rect
+       ry="0"
+       rx="0"
+       y="40.280502"
+       x="120.28049"
+       height="39.438999"
+       width="39.438999"
+       id="rect5306"
+       style="opacity:0.1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.56100076;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       style="opacity:0.1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.66711891;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5308"
+       width="358.33289"
+       height="38.332882"
+       x="20.833559"
+       y="80.833565"
+       rx="0"
+       ry="0" />
+    <rect
+       ry="0"
+       rx="0"
+       y="160.83356"
+       x="20.833559"
+       height="38.332882"
+       width="358.33289"
+       id="rect5631"
+       style="opacity:0.1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.66711891;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       style="opacity:0.1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.66711891;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5633"
+       width="358.33289"
+       height="38.332882"
+       x="20.833559"
+       y="240.83356"
+       rx="0"
+       ry="0" />
+    <rect
+       style="opacity:0.1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.56100076;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5635"
+       width="39.438999"
+       height="39.438999"
+       x="120.28049"
+       y="40.280502"
+       rx="0"
+       ry="0"
+       transform="translate(301.72406,2.914252)" />
+    <rect
+       ry="0"
+       rx="0"
+       y="80.833565"
+       x="20.833559"
+       height="38.332882"
+       width="358.33289"
+       id="rect5637"
+       style="opacity:0.1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.66711891;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       style="opacity:0.1;fill:#ffffff;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:0.56100076;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect5654"
+       width="39.438999"
+       height="39.438999"
+       x="422.00455"
+       y="43.194756"
+       rx="0"
+       ry="0"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_ highlighter.png"
+       inkscape:export-xdpi="96"
+       inkscape:export-ydpi="96" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -609,7 +501,7 @@
      sodipodi:insensitive="true">
     <path
        style="display:inline;opacity:0.2;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.7550168;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 35.999985,74.25762 0,18.21612"
+       d="M 35.999985,74.25762 V 92.47374"
        id="path4251-3"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc"
@@ -621,22 +513,19 @@
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="TexteMenu"
-     style="display:inline"
-     sodipodi:insensitive="true">
+     style="display:inline">
     <text
        xml:space="preserve"
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="61.285698"
        y="109.32142"
-       id="text4163"
-       sodipodi:linespacing="125%"><tspan
+       id="text4163"><tspan
          sodipodi:role="line"
          id="tspan4165"
          x="61.285698"
          y="109.32142"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1;stroke:none;stroke-opacity:1">Current Level Infos</tspan></text>
     <text
-       sodipodi:linespacing="125%"
        id="text4188-7"
        y="90.622597"
        x="30.234282"
@@ -648,7 +537,6 @@
          id="tspan4190-5"
          sodipodi:role="line" /></text>
     <text
-       sodipodi:linespacing="125%"
        id="text5696"
        y="149.32141"
        x="61.285698"
@@ -664,8 +552,7 @@
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="61.785698"
        y="187.32141"
-       id="text5704"
-       sodipodi:linespacing="125%"><tspan
+       id="text5704"><tspan
          sodipodi:role="line"
          id="tspan5706"
          x="61.785698"
@@ -676,15 +563,13 @@
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="63.690323"
        y="228.84863"
-       id="text5704-3"
-       sodipodi:linespacing="125%"><tspan
+       id="text5704-3"><tspan
          sodipodi:role="line"
          id="tspan5706-5"
          x="63.690323"
          y="228.84863"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1">File:/SokoRobot.slc</tspan></text>
     <text
-       sodipodi:linespacing="125%"
        id="text4941"
        y="267.32141"
        x="61.785698"
@@ -700,25 +585,18 @@
        style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="61.785698"
        y="307.32141"
-       id="text5275"
-       sodipodi:linespacing="125%"><tspan
+       id="text5275"><tspan
          sodipodi:role="line"
          id="tspan5277"
          x="61.785698"
          y="307.32141"
          style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1">myfile.slc</tspan></text>
-    <text
-       sodipodi:linespacing="125%"
-       id="text5279"
-       y="345.32141"
-       x="61.785698"
-       style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
-       xml:space="preserve"><tspan
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:22.5px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#ffffff;fill-opacity:1"
-         y="345.32141"
-         x="61.785698"
-         id="tspan5281"
-         sodipodi:role="line">http://website/web.web</tspan></text>
+    <path
+       style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;stroke-miterlimit:4;stroke-dasharray:none;opacity:0.3"
+       d="m 39.999985,120 319.999995,0"
+       id="path5316"
+       inkscape:connector-curvature="0"
+       sodipodi:nodetypes="cc" />
   </g>
   <g
      inkscape:groupmode="layer"
@@ -730,14 +608,14 @@
        id="g5068"
        clip-path="url(#clipPath6091)">
       <g
-         transform="translate(170,0)"
+         transform="translate(170)"
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/overText.png"
          id="g5147">
         <g
            id="g4954"
-           transform="translate(-114,0)">
+           transform="translate(-114)">
           <g
              id="g4736">
             <g
@@ -754,9 +632,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -774,9 +652,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -794,9 +672,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -807,10 +685,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g4676">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -828,9 +706,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -848,9 +726,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -868,7 +746,7 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
             <g
@@ -877,7 +755,7 @@
               <g
                  id="g4708">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -895,9 +773,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -915,9 +793,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -935,11 +813,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g4722"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect4724"
@@ -949,9 +827,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -969,9 +847,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -989,9 +867,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -1004,7 +882,7 @@
             </g>
           </g>
           <g
-             transform="translate(-96,0)"
+             transform="translate(-96)"
              id="g4768">
             <g
                transform="translate(0,44)"
@@ -1012,7 +890,7 @@
               <g
                  id="g4772">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -1030,9 +908,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -1050,9 +928,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -1070,11 +948,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g4786"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect4788"
@@ -1084,9 +962,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -1104,9 +982,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -1124,9 +1002,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -1151,9 +1029,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -1171,9 +1049,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -1191,9 +1069,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -1204,10 +1082,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g4816">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -1225,9 +1103,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -1245,9 +1123,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -1265,14 +1143,14 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
           </g>
         </g>
         <g
            id="g5019"
-           transform="translate(78,0)">
+           transform="translate(78)">
           <g
              id="g5021">
             <g
@@ -1281,7 +1159,7 @@
               <g
                  id="g5025">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -1299,9 +1177,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -1319,9 +1197,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -1339,11 +1217,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g5041"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect5043"
@@ -1353,9 +1231,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -1373,9 +1251,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -1393,9 +1271,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -1420,9 +1298,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -1440,9 +1318,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -1460,9 +1338,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -1473,10 +1351,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g5071">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -1494,9 +1372,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -1514,9 +1392,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -1534,13 +1412,13 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
           </g>
           <g
              id="g5085"
-             transform="translate(-96,0)">
+             transform="translate(-96)">
             <g
                id="g5087"
                transform="translate(0,44)">
@@ -1555,9 +1433,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -1575,9 +1453,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -1595,9 +1473,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -1608,10 +1486,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g5103">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -1629,9 +1507,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -1649,9 +1527,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -1669,7 +1547,7 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
             <g
@@ -1678,7 +1556,7 @@
               <g
                  id="g5119">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -1696,9 +1574,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -1716,9 +1594,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -1736,11 +1614,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g5133"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect5135"
@@ -1750,9 +1628,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -1770,9 +1648,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -1790,9 +1668,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -1807,13 +1685,13 @@
         </g>
       </g>
       <g
-         transform="translate(-214,0)"
+         transform="translate(-214)"
          id="g4790"
          inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/overText.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <g
-           transform="translate(-114,0)"
+           transform="translate(-114)"
            id="g4792">
           <g
              id="g4794">
@@ -1823,7 +1701,7 @@
               <g
                  id="g4798">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -1841,9 +1719,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -1861,9 +1739,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -1881,11 +1759,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g4815"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect4817"
@@ -1895,9 +1773,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -1915,9 +1793,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -1935,9 +1813,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -1962,9 +1840,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -1982,9 +1860,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -2002,9 +1880,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -2015,10 +1893,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g4848">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -2036,9 +1914,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -2056,9 +1934,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -2076,13 +1954,13 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
           </g>
           <g
              id="g4862"
-             transform="translate(-96,0)">
+             transform="translate(-96)">
             <g
                id="g4864"
                transform="translate(0,44)">
@@ -2097,9 +1975,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -2117,9 +1995,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -2137,9 +2015,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -2150,10 +2028,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g4880">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -2171,9 +2049,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -2191,9 +2069,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -2211,7 +2089,7 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
             <g
@@ -2220,7 +2098,7 @@
               <g
                  id="g4896">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -2238,9 +2116,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -2258,9 +2136,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -2278,11 +2156,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g4910"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect4912"
@@ -2292,9 +2170,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -2312,9 +2190,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -2332,9 +2210,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -2348,7 +2226,7 @@
           </g>
         </g>
         <g
-           transform="translate(78,0)"
+           transform="translate(78)"
            id="g4924">
           <g
              id="g4926">
@@ -2366,9 +2244,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -2386,9 +2264,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -2406,9 +2284,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -2419,10 +2297,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g4944">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -2440,9 +2318,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -2460,9 +2338,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -2480,7 +2358,7 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
             <g
@@ -2489,7 +2367,7 @@
               <g
                  id="g4961">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -2507,9 +2385,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -2527,9 +2405,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -2547,11 +2425,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g4977"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect4979"
@@ -2561,9 +2439,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -2581,9 +2459,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -2601,9 +2479,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -2616,7 +2494,7 @@
             </g>
           </g>
           <g
-             transform="translate(-96,0)"
+             transform="translate(-96)"
              id="g4993">
             <g
                transform="translate(0,44)"
@@ -2624,7 +2502,7 @@
               <g
                  id="g4997">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -2642,9 +2520,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -2662,9 +2540,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -2682,11 +2560,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g5011"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect5013"
@@ -2696,9 +2574,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -2716,9 +2594,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -2736,9 +2614,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -2763,9 +2641,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -2783,9 +2661,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -2803,9 +2681,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -2816,10 +2694,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g5049">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -2837,9 +2715,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -2857,9 +2735,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -2877,7 +2755,7 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
           </g>
@@ -2893,7 +2771,7 @@
      sodipodi:insensitive="true">
     <path
        style="opacity:1;fill:#003551;fill-opacity:0.81660904;fill-rule:nonzero;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
-       d="m 1.4945718,0.49458514 397.0108282,0 0,21.43437386 c 0,10.291355 -8.22096,18.576454 -18.43264,18.576454 l -360.145543,0 c -10.2116852,0 -18.4326452,-8.285099 -18.4326452,-18.576454 0,-8.126479 0,-11.244639 0,-21.43437386 z"
+       d="M 1.4945718,0.49458514 H 398.5054 V 21.928959 c 0,10.291355 -8.22096,18.576454 -18.43264,18.576454 H 19.927217 c -10.2116852,0 -18.4326452,-8.285099 -18.4326452,-18.576454 0,-8.126479 0,-11.244639 0,-21.43437386 z"
        id="rect4339"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cccsscc"
@@ -2909,14 +2787,14 @@
        inkscape:export-xdpi="90"
        inkscape:export-ydpi="90">
       <g
-         transform="translate(170,0)"
+         transform="translate(170)"
          inkscape:export-ydpi="90"
          inkscape:export-xdpi="90"
          inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/overText.png"
          id="g5147-6">
         <g
            id="g4954-7"
-           transform="translate(-114,0)">
+           transform="translate(-114)">
           <g
              id="g4736-5">
             <g
@@ -2933,9 +2811,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -2953,9 +2831,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -2973,9 +2851,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -2986,10 +2864,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g4676-0">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -3007,9 +2885,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -3027,9 +2905,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -3047,7 +2925,7 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
             <g
@@ -3056,7 +2934,7 @@
               <g
                  id="g4708-1">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -3074,9 +2952,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -3094,9 +2972,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -3114,11 +2992,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g4722-3"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect4724-7"
@@ -3128,9 +3006,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -3148,9 +3026,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -3168,9 +3046,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -3183,7 +3061,7 @@
             </g>
           </g>
           <g
-             transform="translate(-96,0)"
+             transform="translate(-96)"
              id="g4768-9">
             <g
                transform="translate(0,44)"
@@ -3191,7 +3069,7 @@
               <g
                  id="g4772-3">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -3209,9 +3087,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -3229,9 +3107,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -3249,11 +3127,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g4786-9"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect4788-4"
@@ -3263,9 +3141,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -3283,9 +3161,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -3303,9 +3181,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -3330,9 +3208,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -3350,9 +3228,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -3370,9 +3248,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -3383,10 +3261,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g4816-6">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -3404,9 +3282,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -3424,9 +3302,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -3444,14 +3322,14 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
           </g>
         </g>
         <g
            id="g5019-5"
-           transform="translate(78,0)">
+           transform="translate(78)">
           <g
              id="g5021-6">
             <g
@@ -3460,7 +3338,7 @@
               <g
                  id="g5025-3">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -3478,9 +3356,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -3498,9 +3376,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -3518,11 +3396,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g5041-7"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect5043-4"
@@ -3532,9 +3410,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -3552,9 +3430,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -3572,9 +3450,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -3599,9 +3477,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -3619,9 +3497,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -3639,9 +3517,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -3652,10 +3530,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g5071-2">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -3673,9 +3551,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -3693,9 +3571,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -3713,13 +3591,13 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
           </g>
           <g
              id="g5085-6"
-             transform="translate(-96,0)">
+             transform="translate(-96)">
             <g
                id="g5087-4"
                transform="translate(0,44)">
@@ -3734,9 +3612,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -3754,9 +3632,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -3774,9 +3652,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -3787,10 +3665,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g5103-7">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -3808,9 +3686,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -3828,9 +3706,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -3848,7 +3726,7 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
             <g
@@ -3857,7 +3735,7 @@
               <g
                  id="g5119-6">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -3875,9 +3753,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -3895,9 +3773,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -3915,11 +3793,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g5133-9"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect5135-1"
@@ -3929,9 +3807,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -3949,9 +3827,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -3969,9 +3847,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -3986,13 +3864,13 @@
         </g>
       </g>
       <g
-         transform="translate(-214,0)"
+         transform="translate(-214)"
          id="g4790-9"
          inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/overText.png"
          inkscape:export-xdpi="90"
          inkscape:export-ydpi="90">
         <g
-           transform="translate(-114,0)"
+           transform="translate(-114)"
            id="g4792-7">
           <g
              id="g4794-7">
@@ -4002,7 +3880,7 @@
               <g
                  id="g4798-7">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -4020,9 +3898,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -4040,9 +3918,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -4060,11 +3938,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g4815-4"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect4817-8"
@@ -4074,9 +3952,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -4094,9 +3972,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -4114,9 +3992,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -4141,9 +4019,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -4161,9 +4039,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -4181,9 +4059,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -4194,10 +4072,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g4848-8">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -4215,9 +4093,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -4235,9 +4113,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -4255,13 +4133,13 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
           </g>
           <g
              id="g4862-8"
-             transform="translate(-96,0)">
+             transform="translate(-96)">
             <g
                id="g4864-4"
                transform="translate(0,44)">
@@ -4276,9 +4154,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -4296,9 +4174,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -4316,9 +4194,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -4329,10 +4207,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g4880-4">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -4350,9 +4228,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -4370,9 +4248,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -4390,7 +4268,7 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
             <g
@@ -4399,7 +4277,7 @@
               <g
                  id="g4896-9">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -4417,9 +4295,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -4437,9 +4315,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -4457,11 +4335,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g4910-7"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect4912-4"
@@ -4471,9 +4349,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -4491,9 +4369,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -4511,9 +4389,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -4527,7 +4405,7 @@
           </g>
         </g>
         <g
-           transform="translate(78,0)"
+           transform="translate(78)"
            id="g4924-5">
           <g
              id="g4926-3">
@@ -4545,9 +4423,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -4565,9 +4443,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -4585,9 +4463,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -4598,10 +4476,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g4944-3">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -4619,9 +4497,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -4639,9 +4517,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -4659,7 +4537,7 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
             <g
@@ -4668,7 +4546,7 @@
               <g
                  id="g4961-8">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -4686,9 +4564,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -4706,9 +4584,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -4726,11 +4604,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g4977-3"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect4979-0"
@@ -4740,9 +4618,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -4760,9 +4638,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -4780,9 +4658,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -4795,7 +4673,7 @@
             </g>
           </g>
           <g
-             transform="translate(-96,0)"
+             transform="translate(-96)"
              id="g4993-4">
             <g
                transform="translate(0,44)"
@@ -4803,7 +4681,7 @@
               <g
                  id="g4997-5">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -4821,9 +4699,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -4841,9 +4719,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -4861,11 +4739,11 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
               <g
                  id="g5011-4"
-                 transform="translate(24,0)">
+                 transform="translate(24)">
                 <rect
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
                    id="rect5013-7"
@@ -4875,9 +4753,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -4895,9 +4773,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -4915,9 +4793,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -4942,9 +4820,9 @@
                    y="244.38678"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="247.85089"
@@ -4962,9 +4840,9 @@
                    y="251.315"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="254.77911"
@@ -4982,9 +4860,9 @@
                    y="258.24323"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="261.70734"
@@ -4995,10 +4873,10 @@
                    style="opacity:0.21799999;fill:#33b8ab;fill-opacity:0.71959462;fill-rule:nonzero;stroke:none;stroke-width:1;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
               </g>
               <g
-                 transform="translate(24,0)"
+                 transform="translate(24)"
                  id="g5049-1">
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="244.38678"
@@ -5016,9 +4894,9 @@
                    y="247.85089"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="251.315"
@@ -5036,9 +4914,9 @@
                    y="254.77911"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
                 <rect
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)"
+                   transform="rotate(-60)"
                    ry="0"
                    rx="0"
                    y="258.24323"
@@ -5056,7 +4934,7 @@
                    y="261.70734"
                    rx="0"
                    ry="0"
-                   transform="matrix(0.5,-0.8660254,0.8660254,0.5,0,0)" />
+                   transform="rotate(-60)" />
               </g>
             </g>
           </g>
@@ -5117,11 +4995,11 @@
          sodipodi:nodetypes="ccc"
          inkscape:connector-curvature="0"
          id="path5135"
-         d="m 79.999985,10 20,0 0,20"
+         d="m 79.999985,10 h 20 v 20"
          style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          style="fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:2.00009513;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m 81.999985,14 14,0 0,14"
+         d="m 81.999985,14 h 14 v 14"
          id="path5137"
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="ccc" />
@@ -5214,7 +5092,7 @@
        transform="translate(1.9100148,-2.159996)">
       <path
          style="display:inline;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.39900005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
-         d="m 251.70941,56.106059 10.44884,0"
+         d="m 251.70941,56.106059 h 10.44884"
          id="path5303"
          inkscape:connector-curvature="0"
          sodipodi:nodetypes="cc" />
@@ -5222,7 +5100,7 @@
          sodipodi:nodetypes="cc"
          inkscape:connector-curvature="0"
          id="path5307"
-         d="m 251.70941,60.076854 10.44884,0"
+         d="m 251.70941,60.076854 h 10.44884"
          style="display:inline;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.39892745;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1" />
       <path
          style="display:inline;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.39892745;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -5240,7 +5118,7 @@
          sodipodi:nodetypes="sccssssss"
          inkscape:connector-curvature="0"
          id="rect5275"
-         d="m 248.74997,48.499996 14,0 4,4.5 0,18.5 c 0,1.108 -0.892,2 -2,2 l -16,0 c -1.108,0 -2,-0.892 -2,-2 l 0,-21 c 0,-1.108 0.892,-2 2,-2 z"
+         d="m 248.74997,48.499996 h 14 l 4,4.5 v 18.5 c 0,1.108 -0.892,2 -2,2 h -16 c -1.108,0 -2,-0.892 -2,-2 v -21 c 0,-1.108 0.892,-2 2,-2 z"
          style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.32000005;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
       <path
          style="display:inline;fill:none;fill-rule:evenodd;stroke:#ffffff;stroke-width:1.31200004;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
@@ -5338,8 +5216,7 @@
            style="font-style:normal;font-weight:normal;font-size:15.8837862px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
            x="95.359192"
            y="65.717484"
-           id="text5292"
-           sodipodi:linespacing="125%"><tspan
+           id="text5292"><tspan
              sodipodi:role="line"
              id="tspan5294"
              x="95.359192"
@@ -5352,8 +5229,7 @@
        style="font-style:normal;font-weight:normal;font-size:37.56359482px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="210.62436"
        y="71.798241"
-       id="text5308"
-       sodipodi:linespacing="125%"><tspan
+       id="text5308"><tspan
          sodipodi:role="line"
          id="tspan5310"
          x="210.62436"
@@ -5389,8 +5265,7 @@
        style="font-style:normal;font-weight:normal;font-size:19.11629105px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#ffffff;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="115.76012"
        y="30.367653"
-       id="text4184"
-       sodipodi:linespacing="125%"><tspan
+       id="text4184"><tspan
          sodipodi:role="line"
          id="tspan4186"
          x="115.76012"
