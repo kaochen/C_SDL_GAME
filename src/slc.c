@@ -229,7 +229,7 @@ initLevelList ()
 
 /*Add first level into an empty list */
 int
-addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
+addFirstLevel (S_LevelList * levelList, char *fileName, char *name, char *author,
 	       int height, int width)
 {
   S_Level *firstLevel = malloc (sizeof (S_Level));
@@ -240,6 +240,7 @@ addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
     }
         firstLevel->name = malloc(MAX_CARACT);
         firstLevel->fileName = malloc(MAX_CARACT);
+        firstLevel->author = malloc(MAX_CARACT);
 
            if (firstLevel->name == NULL || firstLevel->fileName == NULL  )
              {
@@ -249,6 +250,7 @@ addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
   /*update first file data */
   strcpy (firstLevel->name, name);
   strcpy (firstLevel->fileName, fileName);
+  strcpy (firstLevel->author, author);
   firstLevel->height = height;
   firstLevel->width = width;
 
@@ -267,6 +269,7 @@ void
 addNewLevel (S_LevelList * levelList,
              char *fileName,
              char *name,
+             char *author,
              int height,
              int width)
 {
@@ -281,6 +284,7 @@ addNewLevel (S_LevelList * levelList,
     {
         new->name = malloc(MAX_CARACT);
         new->fileName = malloc(MAX_CARACT);
+        new->author = malloc(MAX_CARACT);
 
            if (new->name == NULL || new->fileName == NULL  )
              {
@@ -290,6 +294,7 @@ addNewLevel (S_LevelList * levelList,
 
       strcpy (new->name, name);
       strcpy (new->fileName, fileName);
+      strcpy (new->author, author);
       new->height = height;
       new->width = width;
 
@@ -422,6 +427,9 @@ readLevelsAttributs (S_FilesList * filesList,
             xmlChar *name;
             xmlChar *width;
             xmlChar *height;
+            char author[MAX_CARACT] = "";
+            getCopyrightFromSLC(actualFile->name, author);
+
             /*Get the number of levels in a file */
             int levelCount = 0, i = 0;
             levelCount = xpathLevel->nodesetval->nodeNr;
@@ -441,12 +449,12 @@ readLevelsAttributs (S_FilesList * filesList,
 	              /*Load infos into the levelList */
 	              if (levelList->nbr_of_levels == 0)
 	                {
-	                  addFirstLevel (levelList, actualFile->name, (char *) name,
+	                  addFirstLevel (levelList, actualFile->name, (char *) name, author,
 			                 atoi ((char *) height), atoi ((char *) width));
 	                }
 	              else
 	                {
-	                  addNewLevel (levelList, actualFile->name, (char *) name,
+	                  addNewLevel (levelList, actualFile->name, (char *) name, author,
 			               atoi ((char *) height), atoi ((char *) width));
 	                }
 	              //printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
@@ -726,5 +734,35 @@ detectOutside (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]){
     }
 
 }
+
+/*get a specific attribut from slc file*/
+int
+getCopyrightFromSLC(char * docName, char * author)
+{
+  xmlDocPtr doc;
+  xmlNodePtr cur;
+  xmlChar *text;
+
+  doc = xmlParseFile(docName);
+  cur = xmlDocGetRootElement(doc);
+
+  cur = cur->xmlChildrenNode;
+
+  //printf("------------------------------------------------\n");
+  while (cur != NULL)
+    {
+      if ((!xmlStrcmp(cur->name,(const xmlChar *)"LevelCollection")))
+        {
+          text = xmlGetProp(cur,(const xmlChar *)"Copyright");
+          printf("Copyright: %s\n", text);
+          sprintf(author,"%s", text);
+          xmlFree(text);
+        }
+      cur = cur->next;
+    }
+  xmlFreeDoc(doc);
+  return (1);
+}
+
 
 #endif

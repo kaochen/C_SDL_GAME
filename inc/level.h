@@ -44,6 +44,10 @@ int getLevelName (S_LevelList * levelList, char *levelName);
 int
 getFileName (S_LevelList * levelList, char *fileName);
 
+/*get level current author*/
+int
+getAuthor (S_LevelList * levelList, char *author);
+
 /*Trunk long char*/
 int
 trunkLongChar(size_t size, char * text );

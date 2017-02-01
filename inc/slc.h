@@ -72,11 +72,17 @@ int
 readLevelsAttributs (S_FilesList * filesList,
                      S_LevelList * levelList);
 
+/*Add first level into an empty list */
+int
+addFirstLevel (S_LevelList * levelList, char *fileName, char *name, char *author,
+	       int height, int width);
+
 /*Add a level in the list*/
 void
 addNewLevel (S_LevelList * levelList,
              char *fileName,
              char *name,
+	     char *author,
              int height,
              int width);
 
@@ -101,4 +107,7 @@ int getNbrOfLevels (S_LevelList * levelList);
 void
 detectOutside (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
+/*get a specific attribut from slc file*/
+int
+getCopyrightFromSLC(char * docName, char * author);
 #endif

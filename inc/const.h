@@ -138,6 +138,7 @@ struct S_Level
 {
   char *name;
   char *fileName;
+  char *author;
   int height;
   int width;
   S_Level *next;

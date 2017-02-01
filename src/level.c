@@ -208,7 +208,7 @@ getLevelName (S_LevelList * levelList, char *levelName)
       /* try to find the nameLevel into the list */
       if (i == pref.level)
 	{
-	  fprintf (stderr, "Actual name Level \"%s\"\n", actual->name);
+	  //fprintf (stderr, "Actual name Level \"%s\"\n", actual->name);
 	  strcpy (levelName, actual->name);
 	  break;
 	}
@@ -234,8 +234,35 @@ getFileName (S_LevelList * levelList, char *fileName)
       /* try to find the nameLevel into the list */
       if (i == pref.level)
 	{
-	  fprintf (stderr, "Actual name Level \"%s\"\n", actual->fileName);
+	  //fprintf (stderr, "Actual name Level \"%s\"\n", actual->fileName);
 	  strcpy (fileName, actual->fileName);
+	  break;
+	}
+      i++;
+      actual = actual->next;
+    }
+  return EXIT_SUCCESS;
+}
+
+
+/*get level current author*/
+int
+getAuthor (S_LevelList * levelList, char *author)
+{
+  if (levelList == NULL)
+    {
+      return EXIT_FAILURE;
+    }
+  int i = 0;
+  S_Level *actual = levelList->first;
+  /* read the all chain list */
+  while (actual != NULL)
+    {
+      /* try to find the nameLevel into the list */
+      if (i == pref.level)
+	{
+	  //fprintf (stderr, "Actual Author \"%s\"\n", actual->author);
+	  strcpy (author, actual->author);
 	  break;
 	}
       i++;
