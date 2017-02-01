@@ -194,7 +194,7 @@ displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
 
 /*get level name*/
 int
-getLevelName (int levelChoice, S_LevelList * levelList, char *levelName)
+getLevelName (S_LevelList * levelList, char *levelName)
 {
   if (levelList == NULL)
     {
@@ -206,7 +206,7 @@ getLevelName (int levelChoice, S_LevelList * levelList, char *levelName)
   while (actual != NULL)
     {
       /* try to find the nameLevel into the list */
-      if (i == levelChoice)
+      if (i == pref.level)
 	{
 	  fprintf (stderr, "Actual name Level \"%s\"\n", actual->name);
 	  strcpy (levelName, actual->name);
@@ -216,6 +216,47 @@ getLevelName (int levelChoice, S_LevelList * levelList, char *levelName)
       actual = actual->next;
     }
   return EXIT_SUCCESS;
+}
+
+/*get level current filename*/
+int
+getFileName (S_LevelList * levelList, char *fileName)
+{
+  if (levelList == NULL)
+    {
+      return EXIT_FAILURE;
+    }
+  int i = 0;
+  S_Level *actual = levelList->first;
+  /* read the all chain list */
+  while (actual != NULL)
+    {
+      /* try to find the nameLevel into the list */
+      if (i == pref.level)
+	{
+	  fprintf (stderr, "Actual name Level \"%s\"\n", actual->fileName);
+	  strcpy (fileName, actual->fileName);
+	  break;
+	}
+      i++;
+      actual = actual->next;
+    }
+  return EXIT_SUCCESS;
+}
+
+/*Trunk long char*/
+int
+trunkLongChar(size_t size, char * text )
+{
+//  fprintf (stderr, "IN : %s\n", text);
+	if (strlen (text) > size)
+		{
+     char buf[MAX_CARACT]="";
+     strncat(buf,text,size);
+		 sprintf (text, "%s...", buf);
+		}
+//  fprintf (stderr, "OUT: %s\n", text);
+  return 1;
 }
 
 /*Found the level number with just the name*/

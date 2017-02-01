@@ -38,8 +38,15 @@ displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
               Sprites tableSurface[NBR_OF_IMAGES]);
 
 /*get level name*/
-int getLevelName (int levelChoice, S_LevelList * levelList, char *levelName);
+int getLevelName (S_LevelList * levelList, char *levelName);
 
+/*get level current filename*/
+int
+getFileName (S_LevelList * levelList, char *fileName);
+
+/*Trunk long char*/
+int
+trunkLongChar(size_t size, char * text );
 
 /*Found the level number with just the name*/
 int findLevelNumber (S_LevelList * levelList, char *levelName);

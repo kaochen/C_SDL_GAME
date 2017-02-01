@@ -509,7 +509,7 @@ main (int argc, char *argv[])
 		case SDLK_q:
 		  /* write last level name before closing */
 		  strcpy (levelName, "");
-		  getLevelName (pref.level, levelList, levelName);
+		  getLevelName (levelList, levelName);
 		  writePrefChar ("LevelName", levelName);
 		  carryOn = 0;
 		  fprintf (stderr,

@@ -387,55 +387,19 @@ displaySubMenu (SDL_Surface * screen,
   linePos.x = pref.x_menu + 40;
 
       /*Level Info */
-      int i = 0;
-      unsigned int sizeMax = 30;
+      size_t sizeMax = 30;
       char nameLevel[MAX_CARACT] = "";
-      strcpy (nameLevel, gettext ("Name: "));
+		  getLevelName(levelList, nameLevel);
+      strcpy (nameLevel, (gettext ("Name: %s"),nameLevel));
+      trunkLongChar(sizeMax, nameLevel);
 
       char nameFile[MAX_CARACT] = "";
-      strcpy (nameFile, gettext ("File: "));
+		  getFileName(levelList, nameFile);
+      strcpy (nameFile, (gettext ("File: %s"), nameFile));
+      trunkLongChar(sizeMax, nameFile);
 
-      char *pbuf;
-      S_Level *actual = malloc (sizeof (*actual));
-      if (actual == NULL)
-	{
-	  fprintf (stderr, gettext ("not enough memory"));
-	  exit (EXIT_FAILURE);
-	}
-
-      actual = levelList->first;
-      while (actual != NULL)
-	{
-
-	  if (i == pref.level)
-	    {
-	      /*trunk long name */
-	      if (strlen (actual->name) > sizeMax)
-		{
-		  sprintf (nameLevel, "%s...",
-			   strncat (nameLevel, actual->name, sizeMax));
-		}
-	      else
-		{
-		  sprintf (nameLevel, "%s", strcat (nameLevel, actual->name));
-		}
-
-	      /*trunk long file name */
-	      pbuf = strpbrk (actual->fileName, "/");
-	      if (strlen (pbuf) > sizeMax)
-		{
-		  sprintf (nameFile, gettext ("File: %s.."),
-			   strncat (nameFile, pbuf, sizeMax));
-		}
-	      else
-		{
-		  sprintf (nameFile, gettext ("File: %s"), pbuf);
-		}
-	    }
-	  actual = actual->next;
-	  i++;
-	}
-      free (actual);
+      fprintf (stderr, "nameLevel: %s\n", nameLevel);
+      fprintf (stderr, "nameFile: %s\n", nameFile);
 
      size_t fontSize = 20, R = 255, G = 255, B = 255, A = 255;
      loadTextAsSurface (INFO,1, tableTextSurface, nameLevel,
