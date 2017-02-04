@@ -363,7 +363,7 @@ openMenu (SDL_Surface * screen,
   /* add the tab name above tab icons */
   SDL_Rect pos;
   /*blit text*/
-  pos.x = pref.x_menu + SPRITE_SIZE;
+  pos.x = pref.x_menu + SPRITE_SIZE - 8;
   pos.y = 2 * SPRITE_SIZE + 10;
   size_t tabChoice = gridMenu[menuChoice.xPos][1].tab;
   size_t tab = menuChoice.tab[tabChoice].name;
@@ -487,7 +487,7 @@ displayOpenMenuBackground (SDL_Surface * screen,
   SDL_Rect h_linePos;
   for (i = 2; i < size + 1; i++)
     {
-       h_linePos.x = pref.x_menu + SPRITE_SIZE + 10;
+       h_linePos.x = pref.x_menu + 30;
        h_linePos.y = i*SPRITE_SIZE;
        SDL_BlitSurface (tableSurface[MENU_H_LINE].image, NULL, screen, &h_linePos);
     }
