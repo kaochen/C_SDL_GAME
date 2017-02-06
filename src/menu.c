@@ -388,24 +388,20 @@ displaySubMenu (SDL_Surface * screen,
 
       /*Level Info */
       size_t sizeMax = 30;
+      S_Level *current = malloc (sizeof (S_Level));
+      getCurrentLevelInfos(levelList, current);
+
       char nameLevel[MAX_CARACT] = "";
-      char buf1[MAX_CARACT] = "";
-		  getLevelName(levelList, buf1);
-      sprintf (nameLevel, gettext ("Name: %s"),buf1);
+      sprintf (nameLevel, gettext ("Name: %s"),current->name);
       trunkLongChar(sizeMax, nameLevel);
 
       char nameFile[MAX_CARACT] = "";
-      char buf2[MAX_CARACT] = "";
-		  getFileName(levelList, buf2);
-      sprintf (nameFile, gettext ("File: %s"), buf2);
+      sprintf (nameFile, gettext ("File: %s"), current->fileName);
       trunkLongChar(sizeMax, nameFile);
 
       char author[MAX_CARACT] = "";
-      char buf3[MAX_CARACT] = "";
-		  getAuthor(levelList, buf3);
-      sprintf (author, gettext ("Author: %s"), buf3);
+      sprintf (author, gettext ("Author: %s"), current->author);
       trunkLongChar(sizeMax, author);
-
 
      size_t fontSize = 20, R = 255, G = 255, B = 255, A = 255;
      loadTextAsSurface (INFO,1, tableTextSurface, nameLevel,

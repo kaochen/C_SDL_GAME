@@ -37,6 +37,10 @@ displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
               SDL_Surface * screen,
               Sprites tableSurface[NBR_OF_IMAGES]);
 
+/*Get current level information from the levelList*/
+int
+getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy);
+
 /*get level name*/
 int getLevelName (S_LevelList * levelList, char *levelName);
 

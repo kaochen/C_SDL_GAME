@@ -190,7 +190,37 @@ displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
   return EXIT_SUCCESS;
 }
 
-
+/*Get current level information from the levelList*/
+int
+getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy)
+{
+  if (levelList == NULL)
+    {
+      fprintf (stderr, gettext("getCurrentLevelInfos failed: %s\n"),
+	       SDL_GetError ());
+      return EXIT_FAILURE;
+    }
+  int i = 0;
+  S_Level *actual = levelList->first;
+  copy->name = malloc(MAX_CARACT);
+  copy->fileName = malloc(MAX_CARACT);
+  copy->author = malloc(MAX_CARACT);
+  /* read the all chain list */
+  while (actual != NULL)
+    {
+      /* try to find the nameLevel into the list */
+      if (i == pref.level)
+	{
+	  strcpy (copy->name, actual->name);
+	  strcpy (copy->fileName, actual->fileName);
+	  strcpy (copy->author, actual->author);
+	  break;
+	}
+      i++;
+      actual = actual->next;
+    }
+  return EXIT_SUCCESS;
+}
 
 /*get level name*/
 int
