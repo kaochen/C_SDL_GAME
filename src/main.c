@@ -225,7 +225,6 @@ main (int argc, char *argv[])
 
 /* wait for quit event */
 
-  char levelName[MAX_CARACT] = "";
   Uint32 currentTime = 0;
   Uint32 previousTime = 0;
   int carryOn = 1, refresh = 1,  target = STILL, next_target = STILL;
@@ -508,12 +507,7 @@ main (int argc, char *argv[])
 		  /* hit q to quit */
 		case SDLK_q:
 		  /* write last level name before closing */
-      ;
-		  S_Level *currentLevel = malloc (sizeof (S_Level));
-      getCurrentLevelInfos(levelList, currentLevel);
-      strcpy (levelName, currentLevel->name);
-		  writePrefChar ("LevelName", levelName);
-      free (currentLevel);
+
 		  carryOn = 0;
 		  fprintf (stderr,
 			   "\nThe quit command (q) has been pressed.\n");
@@ -576,7 +570,11 @@ main (int argc, char *argv[])
 	}
 
     }				// end of   while (carryOn)
-
+  //store the current level name before closing
+	S_Level *currentLevel = malloc (sizeof (S_Level));
+  getCurrentLevelInfos(levelList, currentLevel);
+	writePrefChar ("LevelName", currentLevel->name);
+  free (currentLevel);
 
   /* clean */
   fprintf (stderr, "- Destroying level list\n");
