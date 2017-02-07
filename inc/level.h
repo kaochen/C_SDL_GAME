@@ -41,9 +41,6 @@ displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
 int
 getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy);
 
-/*get level name*/
-int getLevelName (S_LevelList * levelList, char *levelName);
-
 /*Trunk long char*/
 int
 trunkLongChar(size_t size, char * text );

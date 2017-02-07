@@ -222,32 +222,6 @@ getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy)
   return EXIT_SUCCESS;
 }
 
-/*get level name*/
-int
-getLevelName (S_LevelList * levelList, char *levelName)
-{
-  if (levelList == NULL)
-    {
-      return EXIT_FAILURE;
-    }
-  int i = 0;
-  S_Level *actual = levelList->first;
-  /* read the all chain list */
-  while (actual != NULL)
-    {
-      /* try to find the nameLevel into the list */
-      if (i == pref.level)
-	{
-	  //fprintf (stderr, "Actual name Level \"%s\"\n", actual->name);
-	  strcpy (levelName, actual->name);
-	  break;
-	}
-      i++;
-      actual = actual->next;
-    }
-  return EXIT_SUCCESS;
-}
-
 
 /*Trunk long char*/
 int

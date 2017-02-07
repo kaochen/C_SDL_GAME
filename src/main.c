@@ -508,9 +508,12 @@ main (int argc, char *argv[])
 		  /* hit q to quit */
 		case SDLK_q:
 		  /* write last level name before closing */
-		  strcpy (levelName, "");
-		  getLevelName (levelList, levelName);
+      ;
+		  S_Level *currentLevel = malloc (sizeof (S_Level));
+      getCurrentLevelInfos(levelList, currentLevel);
+      strcpy (levelName, currentLevel->name);
 		  writePrefChar ("LevelName", levelName);
+      free (currentLevel);
 		  carryOn = 0;
 		  fprintf (stderr,
 			   "\nThe quit command (q) has been pressed.\n");

@@ -403,6 +403,8 @@ displaySubMenu (SDL_Surface * screen,
       sprintf (author, gettext ("Author: %s"), current->author);
       trunkLongChar(sizeMax, author);
 
+      free(current);
+
      size_t fontSize = 20, R = 255, G = 255, B = 255, A = 255;
      loadTextAsSurface (INFO,1, tableTextSurface, nameLevel,
 		     fontSize, R, G, B, A);
