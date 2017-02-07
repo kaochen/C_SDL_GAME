@@ -44,10 +44,6 @@ getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy);
 /*get level name*/
 int getLevelName (S_LevelList * levelList, char *levelName);
 
-/*get level current author*/
-int
-getAuthor (S_LevelList * levelList, char *author);
-
 /*Trunk long char*/
 int
 trunkLongChar(size_t size, char * text );
