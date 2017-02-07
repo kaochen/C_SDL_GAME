@@ -248,32 +248,6 @@ getLevelName (S_LevelList * levelList, char *levelName)
   return EXIT_SUCCESS;
 }
 
-/*get level current filename*/
-int
-getFileName (S_LevelList * levelList, char *fileName)
-{
-  if (levelList == NULL)
-    {
-      return EXIT_FAILURE;
-    }
-  int i = 0;
-  S_Level *actual = levelList->first;
-  /* read the all chain list */
-  while (actual != NULL)
-    {
-      /* try to find the nameLevel into the list */
-      if (i == pref.level)
-	{
-	  //fprintf (stderr, "Actual name Level \"%s\"\n", actual->fileName);
-	  strcpy (fileName, actual->fileName);
-	  break;
-	}
-      i++;
-      actual = actual->next;
-    }
-  return EXIT_SUCCESS;
-}
-
 
 /*get level current author*/
 int

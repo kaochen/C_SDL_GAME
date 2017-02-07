@@ -44,10 +44,6 @@ getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy);
 /*get level name*/
 int getLevelName (S_LevelList * levelList, char *levelName);
 
-/*get level current filename*/
-int
-getFileName (S_LevelList * levelList, char *fileName);
-
 /*get level current author*/
 int
 getAuthor (S_LevelList * levelList, char *author);
