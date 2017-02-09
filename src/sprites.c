@@ -80,11 +80,8 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[MENU_BOTTOM], pref.themePath, "menu_bottom.png");
   loadSprite (&tableSurface[MENU_TOP_LIGHT], pref.themePath, "menu_top_light.png");
   loadSprite (&tableSurface[MENU_SQUARE], pref.themePath, "menu_square.png");
-  loadSprite (&tableSurface[MENU_SEPARATOR], pref.themePath, "menu_separator.png");
   loadSprite (&tableSurface[MENU_H_LINE], pref.themePath, "menu_h_line.png");
-  loadSprite (&tableSurface[MENU_V_LINE], pref.themePath, "menu_v_line.png");
   loadSprite (&tableSurface[MENU_CIRCLE], pref.themePath, "menu_circle.png");
-  loadSprite (&tableSurface[MENU_CURVE], pref.themePath, "menu_curve.png");
   loadSprite (&tableSurface[MENU_OVERTEXT], pref.themePath, "menu_overText.png");
   loadSprite (&tableSurface[MENU_HIGHLIGHT], pref.themePath, "menu_highlighter.png");
 
@@ -98,7 +95,6 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[BUTTON_SHORTCUTS], pref.themePath, "button_shortcuts.png");
   loadSprite (&tableSurface[BUTTON_LEVELS], pref.themePath, "button_levels.png");
   loadSprite (&tableSurface[BUTTON_ABOUT], pref.themePath, "button_about.png");
-  loadSprite (&tableSurface[BUTTON_HIGHLIGHT], pref.themePath, "button_highlight.png");
 
 
   /* outside the wall */
