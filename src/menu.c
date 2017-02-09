@@ -382,48 +382,43 @@ displaySubMenu (SDL_Surface * screen,
 {
   /* blit text */
   //fprintf (stderr, "menuChoice : %d, %d\n", menuChoice.tabChoice, menuChoice.tab[menuChoice.tabChoice].nbrLines);
-  SDL_Rect linePos;
-
-  linePos.x = pref.x_menu + 40;
 
       /*Level Info */
       size_t sizeMax = 30;
+      int i = 0;
       S_Level *current = malloc (sizeof (S_Level));
       getCurrentLevelInfos(levelList, current);
 
-      char nameLevel[MAX_CARACT] = "";
-      sprintf (nameLevel, gettext ("Name: %s"),current->name);
-      trunkLongChar(sizeMax, nameLevel);
-
-      char nameFile[MAX_CARACT] = "";
-      sprintf (nameFile, gettext ("File: %s"), current->fileName);
-      trunkLongChar(sizeMax, nameFile);
-
-      char author[MAX_CARACT] = "";
-      sprintf (author, gettext ("Author: %s"), current->author);
-      trunkLongChar(sizeMax, author);
-
+      char line[MENU_MAX_INFO + 1 ][MAX_CARACT] = { 0 };
+      sprintf (line[1], gettext ("Name: %s"),current->name);
+      sprintf (line[2], gettext ("File: %s"), current->fileName);
+      sprintf (line[3], gettext ("Author: %s"), current->author);
+      sprintf (line[4], gettext ("Level size: %dx%d"), current->width, current->height);
       free(current);
 
      size_t fontSize = 20, R = 255, G = 255, B = 255, A = 255;
-     loadTextAsSurface (INFO,1, tableTextSurface, nameLevel,
+      for (i = 1; i <= MENU_MAX_INFO; i++)
+          {
+           trunkLongChar(sizeMax, line[i]);
+           loadTextAsSurface (INFO,i, tableTextSurface, line[i],
 		     fontSize, R, G, B, A);
-     loadTextAsSurface (INFO,2, tableTextSurface, author,
-		     fontSize, R, G, B, A);
-     loadTextAsSurface (INFO,3, tableTextSurface, nameFile,
-		     fontSize, R, G, B, A);
+          }
+
 
   /*print lines into tabs*/
-   int j = 0, tabChoice = menuChoice.tabChoice, nbr = menuChoice.tab[tabChoice].nbrLines + 1;
+   int tabChoice = menuChoice.tabChoice, nbr = menuChoice.tab[tabChoice].nbrLines + 1;
    int tabName = menuChoice.tab[tabChoice].name;
-   for (j = 1; j < nbr; j++ ){
-        if (tableTextSurface[tabName][j].image != NULL){
-        linePos.y = 3*SPRITE_SIZE + 10 + (j-1)*SPRITE_SIZE;
-        SDL_BlitSurface (tableTextSurface[tabName][j].image, NULL, screen, &linePos);
+   SDL_Rect linePos;
+   linePos.x = pref.x_menu + 40;
+
+   for (i = 1; i < nbr; i++ ){
+        if (tableTextSurface[tabName][i].image != NULL){
+        linePos.y = 3*SPRITE_SIZE + 10 + (i-1)*SPRITE_SIZE;
+        SDL_BlitSurface (tableTextSurface[tabName][i].image, NULL, screen, &linePos);
         }
    }
   /*clean*/
-  for (size_t i = 1; i <= 3; i++ ){
+  for ( i = 1; i <= MENU_MAX_INFO; i++ ){
   SDL_FreeSurface (tableTextSurface[INFO][i].image);
   tableTextSurface[INFO][i].image = NULL;
   }

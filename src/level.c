@@ -214,6 +214,8 @@ getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy)
 	  strcpy (copy->name, actual->name);
 	  strcpy (copy->fileName, actual->fileName);
 	  strcpy (copy->author, actual->author);
+    copy->height = actual->height;
+    copy->width = actual->width;
 	  break;
 	}
       i++;
