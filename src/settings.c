@@ -262,7 +262,7 @@ writePrefChar (const char *prefName, const char *value)
   char settingValue[MAX_CARACT] = "";
   strcpy (settingValue, value);
 
-  printf ("searching :%s = %s\n", settingName, value);
+  vbPrintf ("searching :%s = %s\n", settingName, value);
 
   FILE *prefFile = NULL;
   prefFile = fopen (PREF_FILE, "r+");

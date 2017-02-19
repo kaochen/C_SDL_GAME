@@ -201,7 +201,7 @@ readFilesList (S_FilesList * filesList)
   int i = 1;
   while (actual != NULL)
     {
-      fprintf (stderr, "File %d : %s\n", i, actual->name);
+      vbPrintf ("File %d : %s\n", i, actual->name);
       actual = actual->next;
       i++;
     }

@@ -192,11 +192,7 @@ main (int argc, char *argv[])
 
   fprintf (stderr, gettext ("Loading first level.\n"));
 
-  if (loadSlcLevel (levelList, grid) == EXIT_SUCCESS)
-    {
-      fprintf (stderr, gettext ("Level loaded.\n"));
-    }
-  else
+  if (loadSlcLevel (levelList, grid) == EXIT_FAILURE)
     {
       perror (gettext ("Cannot load the first level.\n"));
     }
@@ -227,7 +223,7 @@ main (int argc, char *argv[])
   SDL_UpdateWindowSurface (window);
 
   /* display framerate from settings */
-  fprintf (stderr, "Framerate %d\n", pref.framerate);
+  vbPrintf ("Framerate %d\n", pref.framerate);
 
 /* wait for quit event */
 
