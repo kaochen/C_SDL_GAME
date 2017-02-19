@@ -216,6 +216,9 @@ typedef struct
  /* theme */
   char themePath[MAX_CARACT];
 
+ /* program */
+  bool verbosity;
+
 }S_preferences;
 S_preferences pref; //store all game settings and preferences
 

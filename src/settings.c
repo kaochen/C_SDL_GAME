@@ -302,13 +302,13 @@ int
 getThemePath(void)
 {
  /*read theme choice */
-  fprintf (stderr, "Loading Theme:\n");
+  vbPrintf ("Loading Theme:\n");
   char themePath[MAX_CARACT] = "";
   char bufPath[MAX_CARACT] = "";
   getPrefChar (bufPath, "theme");
 
   sprintf (themePath, "img/%s/", bufPath);
-  fprintf (stderr, "Theme: %s\n", themePath);
+  vbPrintf ("Theme: %s\n", themePath);
 
   /*test if folder exist */
   struct stat file_stat;
@@ -320,11 +320,22 @@ getThemePath(void)
     }
   else
     {
-      printf ("The theme folder %s exist\n\n", themePath);
+      vbPrintf ("The theme folder %s exist\n\n", themePath);
     }
   strcpy(pref.themePath, themePath);
 
   return EXIT_SUCCESS;
 }
 
+// print only if verbose mode is on.
+void
+vbPrintf(const char *format, ...){
+
+  va_list args;
+  va_start(args, format);
+  if (pref.verbosity == true)
+    {
+      vfprintf(stderr, format, args);
+    }
+}
 #endif

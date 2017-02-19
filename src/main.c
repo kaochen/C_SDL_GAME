@@ -51,10 +51,21 @@ main (int argc, char *argv[])
 
   /*manage argument (not used for now) */
   int i;
+  bool vb = false;
 
   for (i = 1; i < argc; i++)
     {
-      printf (gettext ("Argument %d : %s \n"), i, argv[i]);
+      printf (gettext ("Argument %d :%s:\n"), i, argv[i]);
+      int test = strcmp(argv[i], "-v");
+      if (test == 0 ){
+          vb = true;
+          fprintf(stderr, gettext("Verbose mode is on\n"));
+      }
+      else
+        {
+          vb = false;
+          fprintf(stderr, gettext("Verbose mode is off\n"));
+        }
     }
 
   /* reset errors */
@@ -84,9 +95,10 @@ main (int argc, char *argv[])
 
   /*load preferences */
   loadPrefStruct(current);
+  pref.verbosity = vb;
 
 
-  printf (gettext ("The window size request from settings is %dx%d\n"),
+  vbPrintf (gettext ("The window size request from settings is %dx%d\n"),
 	  pref.window_width, pref.window_height);
 
   /* Create the window game */
@@ -120,9 +132,8 @@ main (int argc, char *argv[])
       exit (EXIT_FAILURE);
     }
 
-  fprintf (stderr, gettext ("The SDL window has been created.\n"));
+  vbPrintf (gettext ("The SDL window has been created.\n\n"));
 
-  fprintf (stderr, "\n");
   /* load images into a table of struct */
   Sprites tableSurface[NBR_OF_IMAGES];
 
@@ -145,24 +156,20 @@ main (int argc, char *argv[])
   S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks];
   gridMenu_init (gridMenu);
 
-  fprintf (stderr, "\n");
   /*List slc files from the levels/ folder */
   S_FilesList *filesList = initFilesList ();
   if (listSlcLevelFiles (filesList) == EXIT_FAILURE)
     {
       perror (gettext
-	      ("The level files cannot cannot be listed from the folder levels/."));
+	      ("The level files cannot be listed from the folder levels/."));
     }
 
-  fprintf (stderr, "\n");
   /*Read files name from the filesList to check */
   if (readFilesList (filesList) == EXIT_FAILURE)
     {
       perror (gettext ("The level list cannot be verified."));
     }
   loadFileName(tableTextSurface,filesList);
-
-  fprintf (stderr, "\n");
 
   /*Read level from slc file */
   S_LevelList *levelList = initLevelList ();
@@ -172,8 +179,7 @@ main (int argc, char *argv[])
       perror (gettext ("Error when loading levels attributs from files."));
     }
 
-  fprintf (stderr,
-	   gettext
+  vbPrintf (gettext
 	   ("The list of the possible levels has been generate from the content of the folder levels/.\n"));
   fprintf (stderr, "\n");
 
@@ -511,7 +517,6 @@ main (int argc, char *argv[])
 		  carryOn = 0;
 		  fprintf (stderr,
 			   "\nThe quit command (q) has been pressed.\n");
-		  fprintf (stderr, "Start ending programm:\n");
 		  break;
 
 		}		//end of  switch (event.type)
@@ -577,24 +582,24 @@ main (int argc, char *argv[])
   free (currentLevel);
 
   /* clean */
-  fprintf (stderr, "- Destroying level list\n");
+  vbPrintf ("- Destroying level list\n");
   destroy (levelList);
   free (levelList);
-  fprintf (stderr, "- Destroying file list\n");
+  vbPrintf ("- Destroying file list\n");
   destroyFileList (filesList);
   free (filesList);
-  fprintf (stderr, "-Freeing texts\n");
+  vbPrintf ("-Freeing texts\n");
   freeS_Text (tableTextSurface);
-  fprintf (stderr, "-Freeing Sprites\n");
+  vbPrintf ("-Freeing Sprites\n");
   freeSprites (tableSurface);
   SDL_FreeSurface (screen);
-  fprintf (stderr, "- Free SDL screen\n");
+  vbPrintf ("- Free SDL screen\n");
   SDL_DestroyWindow (window);
-  fprintf (stderr, "- Free SDL window\n");
+  vbPrintf ("- Free SDL window\n");
   TTF_Quit ();
-  fprintf (stderr, "- TFF is out\n");
+  vbPrintf ("- TFF is out\n");
   SDL_Quit ();
-  fprintf (stderr, "- SDL is out\n");
-  fprintf (stderr, "Everythings seems good, Bye\n");
+  vbPrintf ("- SDL is out\n");
+  fprintf (stderr, "Bye\n");
   return EXIT_SUCCESS;
 }

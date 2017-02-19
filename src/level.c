@@ -183,7 +183,7 @@ displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
 
    if (blitCorners (grid, screen, tableSurface) == EXIT_FAILURE)
     {
-         fprintf (stderr, gettext("blitCorners failed.\n"));
+         fprintf (stderr, gettext("blitCorners() failed.\n"));
          return EXIT_FAILURE;
     }
 
@@ -196,7 +196,7 @@ getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy)
 {
   if (levelList == NULL)
     {
-      fprintf (stderr, gettext("getCurrentLevelInfos failed: %s\n"),
+      fprintf (stderr, gettext("getCurrentLevelInfos() failed: %s\n"),
 	       SDL_GetError ());
       return EXIT_FAILURE;
     }
@@ -256,7 +256,7 @@ findLevelNumber (S_LevelList * levelList, char *levelName)
       /* try to find the nameLevel into the list */
       if (!strcmp (actual->name, levelName))
 	{
-	  fprintf (stderr, "I found the level %s : %d\n", actual->name, i);
+	  vbPrintf ("I found the level %s : %d\n", actual->name, i);
 	  return i;
 	  break;
 	}
@@ -276,7 +276,7 @@ readLevelFromSetting (S_LevelList * levelList)
   int i = 0, ret = 0;
   char levelName[MAX_CARACT] = "";
   getPrefChar (levelName, "LevelName");
-  fprintf (stderr, "First level to load is %s\n", levelName);
+  vbPrintf ("First level to load is %s\n", levelName);
 
   if (levelList == NULL)
     {
@@ -296,7 +296,7 @@ readLevelFromSetting (S_LevelList * levelList)
 	}
       actual = actual->next;
     }
-  fprintf (stderr, "levelchoice from file : %d\n ", ret);
+  vbPrintf ("levelchoice from file : %d\n ", ret);
   return ret;
 }
 

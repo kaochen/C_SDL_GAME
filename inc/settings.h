@@ -60,4 +60,7 @@ writePrefChar (const char *prefName, const char *value);
 int
 getThemePath(void);
 
+// print only if verbose mode is on.
+void
+vbPrintf(const char *format, ...);
 #endif

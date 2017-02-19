@@ -128,7 +128,7 @@ loadSprite (Sprites * sprites, const char *themePath, const char *imageName)
     }
   else
     {
-      printf (gettext ("%s exist\n"), filePath);
+      vbPrintf (gettext ("%s exist\n"), filePath);
     }
 
   sprites->image = IMG_Load (filePath);
@@ -153,7 +153,7 @@ freeSprites (Sprites tableSurface[NBR_OF_IMAGES])
 	  SDL_FreeSurface (tableSurface[i].image);
 	}
     }
-  fprintf (stderr, gettext ("\tAll surfaces are free %s\n"), SDL_GetError ());
+  vbPrintf (gettext ("\tAll surfaces are free %s\n"), SDL_GetError ());
 }
 
 
@@ -171,7 +171,7 @@ findFont (void)
 	{
 	  fprintf (stderr,
 		   gettext
-		   ("Roboto-Bold.ttf was not found. Install the fonts-roboto package\n"));
+		   ("Roboto-Bold.ttf was not found. You should install the fonts-roboto package\n"));
 	  exit (EXIT_FAILURE);
 	}
     }

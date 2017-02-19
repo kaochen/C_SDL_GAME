@@ -99,7 +99,7 @@ freeS_Text (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
 	      }
     }
     }
-  fprintf (stderr, gettext ("\tAll text surfaces are free %s\n"),
+  vbPrintf (gettext ("\tAll text surfaces are free %s\n"),
 	   SDL_GetError ());
 }
 
