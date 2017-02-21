@@ -40,7 +40,7 @@ loadPrefStruct(SDL_DisplayMode current);
 int getPrefAsInt (const char *prefName);
 
 /*get char value from the preference file */
-void getPrefChar(char * ret, const char *setting);
+void readChar(const char *fileName, char * ret, const char *setting);
 
 int
 getWindow_width (void);
@@ -54,7 +54,7 @@ getWindow_framerate (void);
 
 /* write a pref char */
 int
-writePrefChar (const char *prefName, const char *value);
+writeChar (const char *fileName ,const char *lineName, const char *value);
 
 /*get the theme Path*/
 int

@@ -574,7 +574,7 @@ main (int argc, char *argv[])
   //store the current level name before closing
 	S_Level *currentLevel = malloc (sizeof (S_Level));
   getCurrentLevelInfos(levelList, currentLevel);
-	writePrefChar ("LevelName", currentLevel->name);
+	writeChar (SESSION_FILE, "LevelName", currentLevel->name);
   free (currentLevel);
 
   /* clean */

@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define GAME_NAME "SokoRobot"
 
 #define PREF_FILE "preferences.ini"
+#define SESSION_FILE "session.ini"
 
 //Define Window size
 #define W_WIDTH  400
@@ -43,7 +44,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 #define NBR_OF_TAB 6
 #define NBR_OF_TAB_LINE 12
-
 
 //autorise 100 images max
 #define NBR_OF_IMAGES 50

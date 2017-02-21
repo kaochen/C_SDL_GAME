@@ -269,19 +269,26 @@ findLevelNumber (S_LevelList * levelList, char *levelName)
   return 0;
 }
 
-/*get a levelchoice by reading the level name from the preference file*/
+/*get a levelchoice by reading the level name from the session file*/
 int
 readLevelFromSetting (S_LevelList * levelList)
 {
-  int i = 0, ret = 0;
-  char levelName[MAX_CARACT] = "";
-  getPrefChar (levelName, "LevelName");
-  vbPrintf ("First level to load is %s\n", levelName);
-
   if (levelList == NULL)
     {
+      vbPrintf ("readLevelFromSetting() failed");
       exit (EXIT_FAILURE);
     }
+
+  int i = 0, ret = 0;
+  char levelName[MAX_CARACT] = "";
+  readChar (SESSION_FILE, levelName, "LevelName");
+  vbPrintf ("First level to load is %s\n", levelName);
+  //if no name
+  if (strcmp(levelName, "") == 0)
+    {
+      return 0;
+    }
+
   S_Level *actual = levelList->first;
   while (actual != NULL)
     {
