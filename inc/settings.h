@@ -36,8 +36,9 @@ searchPrefFile(char * prefFile);
 int
 loadPrefStruct(SDL_DisplayMode current);
 
-/*read window height and width from the preference file */
-int getPrefAsInt (const char *prefName);
+/*get int value from a ini file */
+int
+readInt (const char *fileName, const char *prefName);
 
 /*get char value from the preference file */
 void readChar(const char *fileName, char * ret, const char *setting);

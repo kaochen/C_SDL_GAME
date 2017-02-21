@@ -95,21 +95,17 @@ loadPrefStruct(SDL_DisplayMode current){
     /*Theme*/
     getThemePath();
 
-
   return 1;
 }
 
-/*get int value from the preference file */
+/*get int value from a ini file */
 int
-getPrefAsInt (const char *prefName)
+readInt (const char *fileName, const char *prefName)
 {
   FILE *prefFile = NULL;
   char line[MAX_CARACT] = "";
   char settingName[MAX_CARACT] = "";
   strcpy (settingName, prefName);
-
-  char fileName[MAX_CARACT]= "";
-  searchPrefFile(fileName);
 
   int ret = 0;
   prefFile = fopen (fileName, "r");
@@ -211,7 +207,7 @@ readChar(const char *fileName, char * pref, const char *setting) {
 int
 getWindow_width (void)
 {
-  int ret = getPrefAsInt ("window_width");
+  int ret = readInt (PREF_FILE, "window_width");
   if (ret < W_WIDTH)
     {
       ret = W_WIDTH;
@@ -225,7 +221,7 @@ getWindow_width (void)
 int
 getWindow_height (void)
 {
-  int ret = getPrefAsInt ("window_height");
+  int ret = readInt (PREF_FILE, "window_height");
   if (ret < W_HEIGHT)
     {
       ret = W_HEIGHT;
@@ -239,7 +235,7 @@ getWindow_height (void)
 int
 getWindow_framerate (void)
 {
-       int fps = getPrefAsInt ("framerate");
+       int fps = readInt (PREF_FILE,"framerate");
         if (fps < 12){
             fps = 12;
         }
