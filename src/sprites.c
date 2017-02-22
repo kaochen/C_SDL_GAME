@@ -95,6 +95,8 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[BUTTON_SHORTCUTS], pref.themePath, "button_shortcuts.png");
   loadSprite (&tableSurface[BUTTON_LEVELS], pref.themePath, "button_levels.png");
   loadSprite (&tableSurface[BUTTON_ABOUT], pref.themePath, "button_about.png");
+  loadSprite (&tableSurface[BUTTON_CHECK], pref.themePath, "button_check.png");
+  loadSprite (&tableSurface[BUTTON_CHECKED], pref.themePath, "button_checked.png");
 
 
   /* outside the wall */

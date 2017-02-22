@@ -258,15 +258,15 @@
      inkscape:window-maximized="1"
      inkscape:window-y="27"
      inkscape:window-x="0"
-     inkscape:window-height="1016"
-     inkscape:window-width="1920"
+     inkscape:window-height="836"
+     inkscape:window-width="1440"
      units="px"
      showgrid="false"
-     inkscape:current-layer="layer12"
+     inkscape:current-layer="layer7"
      inkscape:document-units="px"
-     inkscape:cy="426.55664"
-     inkscape:cx="84.957224"
-     inkscape:zoom="1.4142136"
+     inkscape:cy="304.679"
+     inkscape:cx="349.82894"
+     inkscape:zoom="1"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
@@ -396,7 +396,8 @@
      inkscape:groupmode="layer"
      id="layer12"
      inkscape:label="SeparatorMenu"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <rect
        ry="0"
        rx="0"
@@ -524,10 +525,11 @@
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="TexteMenu"
-     style="display:inline">
+     style="display:inline"
+     sodipodi:insensitive="true">
     <text
        xml:space="preserve"
-       style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#fdfdfd;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;"
+       style="font-style:normal;font-weight:normal;font-size:27.5px;line-height:125%;font-family:Sans;letter-spacing:0px;word-spacing:0px;display:inline;fill:#fdfdfd;fill-opacity:1;stroke:none;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1"
        x="35.285698"
        y="107.32142"
        id="text4163"><tspan
@@ -535,7 +537,7 @@
          id="tspan4165"
          x="35.285698"
          y="107.32142"
-         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#fdfdfd;fill-opacity:1;stroke:none;stroke-opacity:1;">Current Level Infos</tspan></text>
+         style="font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;font-size:25px;font-family:Sans;-inkscape-font-specification:'Sans Bold';fill:#fdfdfd;fill-opacity:1;stroke:none;stroke-opacity:1">Current Level Infos</tspan></text>
     <text
        id="text4188-7"
        y="90.622597"
@@ -5059,7 +5061,7 @@
          d="m 197.05921,63.448509 a 10.171439,10.171439 0 0 1 -7.79334,9.889531 10.171439,10.171439 0 0 1 -11.43753,-5.265156 10.171439,10.171439 0 0 1 2.44512,-12.351534 10.171439,10.171439 0 0 1 12.58087,-0.510458" />
     </g>
     <g
-       transform="matrix(-0.62095168,-0.24273702,0.24273702,-0.62095168,439.76912,105.5792)"
+       transform="matrix(-0.62095168,-0.24273702,0.24273702,-0.62095168,446.76912,68.3292)"
        id="g5613">
       <path
          style="opacity:1;fill:none;fill-opacity:0.96078431;fill-rule:nonzero;stroke:#ffffff;stroke-width:1.98099995;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
@@ -5245,10 +5247,21 @@
        id="rect6559"
        width="20"
        height="20"
-       x="329.5"
-       y="52.5"
+       x="333"
+       y="50.625"
        ry="6.1217918"
        rx="6.9387755" />
+    <g
+       transform="matrix(-0.62095168,-0.24273702,0.24273702,-0.62095168,441.01912,142.8292)"
+       id="g5659"
+       style="fill:#f7fcfc;fill-opacity:0.24324323">
+      <path
+         style="opacity:1;fill:#f7fcfc;fill-opacity:0.24324323;fill-rule:nonzero;stroke:none;stroke-width:5.60762739;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+         d="m 212.61934,98.50752 c -7.36074,0.149639 -14.92399,24.4229 -14.32274,25.52443 0,0 -3.30542,11.37494 -1.30247,11.26269 4.25501,-3.47461 11.76503,-36.265946 19.64876,-29.03801 7.88372,7.22795 9.19558,6.04808 6.95433,0.26574 -2.24123,-5.78234 -6.98888,-8.015939 -10.97789,-8.014967 z"
+         id="path5657"
+         inkscape:connector-curvature="0"
+         sodipodi:nodetypes="ccczzcc" />
+    </g>
   </g>
   <g
      inkscape:groupmode="layer"

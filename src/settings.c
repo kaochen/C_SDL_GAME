@@ -205,7 +205,8 @@ readChar(const char *fileName, char * pref, const char *setting) {
 
 //look at the session file if the current level has not been already achieved
 int
-testIfLevelAchieved(const char *levelName)
+testIfLevelAchieved(const char *levelName,
+                    S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
   {
       char lineName[MAX_CARACT]= "Finished";
       char line[MAX_CARACT]="";
@@ -226,16 +227,18 @@ testIfLevelAchieved(const char *levelName)
             if (i != 0)
               {
                 fprintf (stderr, "You have already succeed to finish this level\n");
+                gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECKED, .type=TOPBAR, .tab=0, .image=BUTTON_CHECKED};
                 return 1;
-              }
-	      }
-    else
-      {
-        fprintf (stderr, "Error opening %s: %s\n", SESSION_FILE, strerror (errno));
-        return EXIT_FAILURE;
-      }
+	            }
+        }
+      else
+        {
+          fprintf (stderr, "Error opening %s: %s\n", SESSION_FILE, strerror (errno));
+          return EXIT_FAILURE;
+        }
   fclose (file);
   fprintf (stderr, "You have never finished this level\n");
+  gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECK, .type=TOPBAR, .tab=0, .image=BUTTON_CHECK};
   return 0;
 }
 

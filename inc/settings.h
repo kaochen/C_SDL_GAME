@@ -45,7 +45,8 @@ void readChar(const char *fileName, char * ret, const char *setting);
 
 //look at the session file if the current level has not been already achieved
 int
-testIfLevelAchieved(const char *levelName);
+testIfLevelAchieved(const char *levelName,
+                    S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 int
 getWindow_width (void);

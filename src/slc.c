@@ -491,7 +491,8 @@ readLevelList (S_LevelList * levelList)
 /*Load slc level into the grid */
 int
 loadSlcLevel (S_LevelList * levelList,
-              Square grid[pref.max_X_Blocks][pref.max_Y_Blocks])
+              Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
+              S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   if (levelList == NULL)
     {
@@ -510,7 +511,10 @@ loadSlcLevel (S_LevelList * levelList,
 		   actual->width, actual->height);
 	  nbr_of_lines = actual->height;
 	  nbr_of_columns = actual->width;
-    testIfLevelAchieved(actual->name);
+    ///Update menu icon if the level is already achieved
+    pref.achieved = testIfLevelAchieved(actual->name, gridMenu);
+    vbPrintf ("pref.achieved %d\n", pref.achieved);
+
 	  /*Place the drawing into the center of the grid */
 	  firstLines = ((pref.y_Blocks - nbr_of_lines) / 2 + pref.h_menu_block);	// + menu
 	  firstColumn = (pref.x_Blocks - nbr_of_columns) / 2;

@@ -192,7 +192,7 @@ main (int argc, char *argv[])
 
   fprintf (stderr, gettext ("Loading first level.\n"));
 
-  if (loadSlcLevel (levelList, grid) == EXIT_FAILURE)
+  if (loadSlcLevel (levelList, grid, gridMenu) == EXIT_FAILURE)
     {
       perror (gettext ("Cannot load the first level.\n"));
     }
@@ -529,7 +529,7 @@ main (int argc, char *argv[])
 		  else if (pref.level == pref.level_max)
 		    pref.level = 0;
 
-      if (loadSlcLevel (levelList, grid) ==
+      if (loadSlcLevel (levelList, grid, gridMenu) ==
 		      EXIT_FAILURE)
 		      perror ("Impossible to load the level. Perror");
       pref.reload = 0;
@@ -545,6 +545,7 @@ main (int argc, char *argv[])
 	  if (levelFinished (grid) == FINISH && menuChoice.open == 0)
 	    {
 	      displayCongrats (screen, tableSurface);
+        gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECKED, .type=TOPBAR, .tab=0, .image=BUTTON_CHECKED};
         S_Level *current = malloc (sizeof (S_Level));
         getCurrentLevelInfos(levelList, current);
         storeLevelsFinished(SESSION_FILE, current->name);

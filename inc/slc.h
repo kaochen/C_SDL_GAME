@@ -98,7 +98,8 @@ void readLevelList (S_LevelList * levelList);
 /*Load slc level into the grid */
 int
 loadSlcLevel (S_LevelList * levelList,
-              Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
+              Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
+              S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /*get levels infos from files */
 int getNbrOfLevels (S_LevelList * levelList);
