@@ -510,6 +510,7 @@ loadSlcLevel (S_LevelList * levelList,
 		   actual->width, actual->height);
 	  nbr_of_lines = actual->height;
 	  nbr_of_columns = actual->width;
+    testIfLevelAchieved(actual->name);
 	  /*Place the drawing into the center of the grid */
 	  firstLines = ((pref.y_Blocks - nbr_of_lines) / 2 + pref.h_menu_block);	// + menu
 	  firstColumn = (pref.x_Blocks - nbr_of_columns) / 2;

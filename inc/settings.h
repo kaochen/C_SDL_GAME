@@ -43,6 +43,10 @@ readInt (const char *fileName, const char *prefName);
 /*get char value from the preference file */
 void readChar(const char *fileName, char * ret, const char *setting);
 
+//look at the session file if the current level has not been already achieved
+int
+testIfLevelAchieved(const char *levelName);
+
 int
 getWindow_width (void);
 

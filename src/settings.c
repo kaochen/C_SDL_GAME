@@ -203,6 +203,41 @@ readChar(const char *fileName, char * pref, const char *setting) {
         }
 }
 
+//look at the session file if the current level has not been already achieved
+int
+testIfLevelAchieved(const char *levelName)
+  {
+      char lineName[MAX_CARACT]= "Finished";
+      char line[MAX_CARACT]="";
+
+      FILE *file = NULL;
+      file = fopen (SESSION_FILE, "r");
+
+      int i = 0;
+      if (file != NULL)
+        {
+          while (fgets (line, MAX_CARACT, file) != NULL)
+	          {
+	            if (strstr (line, levelName) != NULL  && strstr (line, lineName) != NULL)
+                {
+                i++;
+                }
+            }
+            if (i != 0)
+              {
+                fprintf (stderr, "You have already succeed to finish this level\n");
+                return 1;
+              }
+	      }
+    else
+      {
+        fprintf (stderr, "Error opening %s: %s\n", SESSION_FILE, strerror (errno));
+        return EXIT_FAILURE;
+      }
+  fclose (file);
+  fprintf (stderr, "You have never finished this level\n");
+  return 0;
+}
 
 int
 getWindow_width (void)
