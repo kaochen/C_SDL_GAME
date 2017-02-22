@@ -338,4 +338,44 @@ vbPrintf(const char *format, ...){
       vfprintf(stderr, format, args);
     }
 }
+
+//store the names of the levels already achieved
+int
+storeLevelsFinished(const char *fileName, const char *levelName)
+{
+  char line[MAX_CARACT] = "";
+  char lineName[MAX_CARACT] = "Finished";
+
+  FILE *file = NULL;
+  file = fopen (fileName, "r+");
+  if (file == NULL)
+    {
+      file = fopen (fileName, "w+");
+    }
+
+  int i = 0;
+  if (file != NULL)
+    {
+      while (fgets (line, MAX_CARACT, file) != NULL)
+	      {
+	        if (strstr (line, levelName) != NULL  && strstr (line, lineName) != NULL)
+              {
+              i++;
+              }
+        }
+        if (i == 0)
+            {
+  	          fprintf (file, "%s = \"%s\"\n", lineName, levelName);
+            }
+	          //strcpy (line, "");	//empty the line buffer
+	      }
+    else
+      {
+        fprintf (stderr, "Error opening %s: %s\n", fileName, strerror (errno));
+        return EXIT_FAILURE;
+      }
+  fclose (file);
+  return EXIT_SUCCESS;
+}
+
 #endif

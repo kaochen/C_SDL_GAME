@@ -545,6 +545,10 @@ main (int argc, char *argv[])
 	  if (levelFinished (grid) == FINISH && menuChoice.open == 0)
 	    {
 	      displayCongrats (screen, tableSurface);
+        S_Level *current = malloc (sizeof (S_Level));
+        getCurrentLevelInfos(levelList, current);
+        storeLevelsFinished(SESSION_FILE, current->name);
+        free(current);
 	      menuChoice.freeze = 1;
 	    }
 	  if (menuChoice.open == 1)

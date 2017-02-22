@@ -64,4 +64,9 @@ getThemePath(void);
 // print only if verbose mode is on.
 void
 vbPrintf(const char *format, ...);
+
+//store the names of the levels already achieved
+int
+storeLevelsFinished(const char *fileName, const char *levelName);
+
 #endif
