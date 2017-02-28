@@ -104,10 +104,6 @@ loadSlcLevel (S_LevelList * levelList,
 /*get levels infos from files */
 int getNbrOfLevels (S_LevelList * levelList);
 
-/* Change GROUND that are outside the walls to OUTSIDE */
-void
-detectOutside (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
-
 /*get a specific attribut from slc file*/
 int
 getCopyrightFromSLC(char * docName, char * author);
