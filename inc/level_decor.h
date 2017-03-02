@@ -58,4 +58,7 @@ blitCorners (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
             SDL_Surface * screen,
             Sprites tableSurface[NBR_OF_IMAGES]);
 
+/* Change GROUND that are outside the walls to OUTSIDE */
+void
+detectOutside (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]);
 #endif

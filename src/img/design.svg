@@ -14,7 +14,7 @@
    inkscape:export-xdpi="90"
    inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/overText.png"
    sodipodi:docname="design.svg"
-   inkscape:version="0.92.0 r15299"
+   inkscape:version="0.92.1 r15371"
    version="1.1"
    id="svg2"
    viewBox="0 0 399.99998 600.00002"
@@ -252,27 +252,67 @@
          stdDeviation="2.7"
          id="feGaussianBlur6667" />
     </filter>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath6821-3">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/kao/Projects/SokoRobot/img/menuBack.png"
+         sodipodi:nodetypes="cccsscc"
+         inkscape:connector-curvature="0"
+         id="path6823-6"
+         d="m -193.50542,99.494599 h 397.01083 v 21.434371 c 0,10.29136 -8.22096,18.57646 -18.43264,18.57646 h -360.14554 c -10.21169,0 -18.43265,-8.2851 -18.43265,-18.57646 0,-8.12648 0,-11.24464 0,-21.434371 z"
+         style="opacity:1;fill:#003551;fill-opacity:0.81660904;fill-rule:nonzero;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath6821-6">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/kao/Projects/SokoRobot/img/menuBack.png"
+         sodipodi:nodetypes="cccsscc"
+         inkscape:connector-curvature="0"
+         id="path6823-4"
+         d="m -193.50542,99.494599 h 397.01083 v 21.434371 c 0,10.29136 -8.22096,18.57646 -18.43264,18.57646 h -360.14554 c -10.21169,0 -18.43265,-8.2851 -18.43265,-18.57646 0,-8.12648 0,-11.24464 0,-21.434371 z"
+         style="opacity:1;fill:#003551;fill-opacity:0.81660904;fill-rule:nonzero;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </clipPath>
+    <clipPath
+       clipPathUnits="userSpaceOnUse"
+       id="clipPath6821-0">
+      <path
+         inkscape:export-ydpi="90"
+         inkscape:export-xdpi="90"
+         inkscape:export-filename="/home/kao/Projects/SokoRobot/img/menuBack.png"
+         sodipodi:nodetypes="cccsscc"
+         inkscape:connector-curvature="0"
+         id="path6823-64"
+         d="m -193.50542,99.494599 h 397.01083 v 21.434371 c 0,10.29136 -8.22096,18.57646 -18.43264,18.57646 h -360.14554 c -10.21169,0 -18.43265,-8.2851 -18.43265,-18.57646 0,-8.12648 0,-11.24464 0,-21.434371 z"
+         style="opacity:1;fill:#003551;fill-opacity:0.81660904;fill-rule:nonzero;stroke:#000000;stroke-width:3;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    </clipPath>
   </defs>
   <sodipodi:namedview
      showguides="false"
      inkscape:window-maximized="1"
      inkscape:window-y="27"
      inkscape:window-x="0"
-     inkscape:window-height="836"
-     inkscape:window-width="1440"
+     inkscape:window-height="1016"
+     inkscape:window-width="1920"
      units="px"
      showgrid="false"
-     inkscape:current-layer="layer7"
+     inkscape:current-layer="layer9"
      inkscape:document-units="px"
-     inkscape:cy="304.679"
-     inkscape:cx="349.82894"
+     inkscape:cy="239.0962"
+     inkscape:cx="83.252944"
      inkscape:zoom="1"
      inkscape:pageshadow="2"
      inkscape:pageopacity="0.0"
      borderopacity="1.0"
      bordercolor="#666666"
      pagecolor="#ffffff"
-     id="base" />
+     id="base"
+     inkscape:snap-global="false" />
   <metadata
      id="metadata7">
     <rdf:RDF>
@@ -334,7 +374,7 @@
      inkscape:groupmode="layer"
      id="layer5"
      inkscape:label="MenuPanelOpen"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <rect
        ry="0"
@@ -396,7 +436,7 @@
      inkscape:groupmode="layer"
      id="layer12"
      inkscape:label="SeparatorMenu"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <rect
        ry="0"
@@ -525,7 +565,7 @@
      inkscape:groupmode="layer"
      id="layer6"
      inkscape:label="TexteMenu"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <text
        xml:space="preserve"
@@ -4971,6 +5011,139 @@
   </g>
   <g
      inkscape:groupmode="layer"
+     id="layer9"
+     inkscape:label="Congrats"
+     style="display:inline">
+    <rect
+       style="opacity:1;fill:#003551;fill-opacity:0.81568627;fill-rule:nonzero;stroke:#000000;stroke-width:3;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect8253"
+       width="296.83176"
+       height="76.831734"
+       x="61.5"
+       y="167.66827"
+       rx="20.5"
+       ry="15.999999"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/congrats_background.png"
+       inkscape:export-xdpi="96.050003"
+       inkscape:export-ydpi="96.050003" />
+    <ellipse
+       style="display:inline;opacity:1;fill:#ffffff;fill-opacity:0.99607843;fill-rule:nonzero;stroke:#000000;stroke-width:3.00767255;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4366-7"
+       ry="26.496164"
+       rx="26.496162"
+       cy="206.85806"
+       cx="94.832962"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_bar.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <circle
+       style="display:inline;opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#f5500d;stroke-width:2.68542194;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path4366-3-0"
+       transform="matrix(0,-1,-1,0,0,0)"
+       r="23.65729"
+       cy="-94.813889"
+       cx="-206.85806"
+       inkscape:export-filename="/home/kao/Projects/SokoRobot/img/original/menu_bar.png"
+       inkscape:export-xdpi="90"
+       inkscape:export-ydpi="90" />
+    <rect
+       ry="1.375"
+       rx="1.25"
+       y="85.557808"
+       x="-200.46521"
+       height="9.1313381"
+       width="10.614148"
+       id="rect8265"
+       style="opacity:1;fill:#f5500d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       transform="rotate(-90)" />
+    <rect
+       style="opacity:1;fill:#f5500d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.50492609;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect8255"
+       width="10.679182"
+       height="5.9950738"
+       x="97.622696"
+       y="201.72382"
+       rx="1.25"
+       ry="1.3749999" />
+    <rect
+       ry="1.375"
+       rx="1.25"
+       y="208.14337"
+       x="97.821152"
+       height="6.0380158"
+       width="10.171669"
+       id="rect8257"
+       style="opacity:1;fill:#f5500d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.46198443;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       style="opacity:1;fill:#f5500d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5815661;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect8259"
+       width="8.2218485"
+       height="5.9184337"
+       x="98.347153"
+       y="214.55804"
+       rx="1.25"
+       ry="1.375" />
+    <rect
+       transform="rotate(-99.878838)"
+       style="opacity:1;fill:#f5500d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect8418"
+       width="11.016424"
+       height="7.7570682"
+       x="-227.75577"
+       y="43.147572"
+       rx="1.25"
+       ry="1.3749999" />
+    <rect
+       ry="1.375"
+       rx="1.25"
+       y="68.396294"
+       x="-224.87863"
+       height="11.956456"
+       width="16.980307"
+       id="rect8279"
+       style="opacity:1;fill:#f5500d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       transform="rotate(-93.859588)" />
+    <path
+       inkscape:connector-curvature="0"
+       id="rect8267"
+       d="m 85.076905,219.92803 v -17.24107 c 0,-0.6925 0.61325,-1.25 1.375,-1.25 h 11.436886 c 0.76175,0 1.375,0.5575 1.375,1.25 v 17.24107 c 0,0.6925 -0.61325,1.25 -1.375,1.25 H 86.451905 c -0.76175,0 -1.375,-0.5575 -1.375,-1.25 z"
+       style="opacity:1;fill:#f5500d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <circle
+       style="opacity:1;fill:none;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="path8269"
+       cx="91.608208"
+       cy="211.35532"
+       r="4.0877757" />
+    <rect
+       ry="0.6875"
+       rx="0.625"
+       y="214.63486"
+       x="97.233688"
+       height="5.7796392"
+       width="3.3130615"
+       id="rect8273"
+       style="opacity:1;fill:#f5500d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+    <rect
+       style="opacity:1;fill:#f5500d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1"
+       id="rect8275"
+       width="3.3130615"
+       height="5.7796392"
+       x="97.285461"
+       y="208.16296"
+       rx="0.625"
+       ry="0.6875" />
+    <rect
+       ry="0.6875"
+       rx="0.625"
+       y="201.60046"
+       x="97.410461"
+       height="5.7796392"
+       width="3.3130615"
+       id="rect8277"
+       style="opacity:1;fill:#f5500d;fill-opacity:1;fill-rule:nonzero;stroke:#000000;stroke-width:0.5;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:4;stroke-dasharray:none;stroke-dashoffset:0;stroke-opacity:1" />
+  </g>
+  <g
+     inkscape:groupmode="layer"
      id="layer3"
      inkscape:label="Progress"
      style="display:inline"
@@ -4993,7 +5166,7 @@
      inkscape:groupmode="layer"
      id="layer7"
      inkscape:label="Buttons"
-     style="display:inline"
+     style="display:none"
      sodipodi:insensitive="true">
     <g
        id="g5139"

@@ -250,4 +250,100 @@ blitCorners (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
     }
   return EXIT_SUCCESS;
 }
+
+/* Change GROUND that are outside the walls to OUTSIDE */
+void
+detectOutside (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]){
+  /*Read left to right */
+  int x = 0, y = 0;
+  for (y = 0; y <= pref.y_Blocks; y++)
+    {
+      for (x = 0; x <= pref.x_Blocks; x++)
+	{
+	  /*break if wall */
+	  if (grid[x][y].mainRole == WALL)
+	    {
+	      x = pref.x_Blocks + 1;
+	    }
+	  else
+	    {
+	      /*Change GROUND to OUTSIDE */
+	      if (grid[x][y].mainRole == GROUND)
+		{
+		  grid[x][y].mainRole = OUTSIDE;
+		}
+	    }
+	}
+    }
+
+  /*Read right to left */
+  x = 0, y = 0;
+  for (y = 0; y <= pref.y_Blocks; y++)
+    {
+      for (x = pref.x_Blocks; x >= 0; x--)
+	{
+	  /*break if wall */
+	  if (grid[x][y].mainRole == WALL)
+	    {
+	      x = -1;
+	    }
+	  else
+	    {
+	      /*Change GROUND to OUTSIDE */
+	      if (grid[x][y].mainRole == GROUND)
+		{
+		  grid[x][y].mainRole = OUTSIDE;
+		}
+	    }
+
+	}
+    }
+
+  /*Read Top to Bottom */
+  x = 0;
+  y = 0;
+  for (x = 0; x <= pref.x_Blocks; x++)
+    {
+      for (y = 0; y <= pref.y_Blocks; y++)
+	{
+	  /*break if wall */
+	  if (grid[x][y].mainRole == WALL)
+	    {
+	      y = pref.y_Blocks + 1;
+	    }
+	  else
+	    {
+	      /*If a ground is outside the wall use OUTSIDE */
+	      if (grid[x][y].mainRole == GROUND)
+		{
+		  grid[x][y].mainRole = OUTSIDE;
+		}
+	    }
+	}
+    }
+
+  /*Read Bottom to Top */
+  x = 0;
+  y = 0;
+  for (x = 0; x < pref.x_Blocks; x++)
+    {
+      for (y = pref.y_Blocks; y > 0; y--)
+	{
+	  /*break if wall */
+	  if (grid[x][y].mainRole == WALL)
+	    {
+	      y = 0;
+	    }
+	  else
+	    {
+	      /*If a ground is outside the wall use OUTSIDE */
+	      if (grid[x][y].mainRole == GROUND)
+		{
+		  grid[x][y].mainRole = OUTSIDE;
+		}
+	    }
+
+	}
+    }
+}
 #endif

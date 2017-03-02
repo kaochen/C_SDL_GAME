@@ -301,11 +301,9 @@ displayCongrats (SDL_Surface * screen,
 {
   SDL_Rect congratsPos;
 
-  int width = 320, height = 120;
-
   /* add a background */
-  congratsPos.x = (pref.window_width - width) / 2;
-  congratsPos.y = (pref.window_height - height) / 2;
+  congratsPos.x = (pref.window_width - tableSurface[CONGRATS].image->w) / 2;
+  congratsPos.y = (pref.window_height - tableSurface[CONGRATS].image->h) / 2;
   SDL_BlitSurface (tableSurface[CONGRATS].image, NULL, screen, &congratsPos);
 
   /* setup font */
@@ -327,7 +325,7 @@ displayCongrats (SDL_Surface * screen,
     TTF_RenderUTF8_Blended (font, congratsMessageText, fontColor);
 
   /* blit progress */
-  congratsMessagePos.x = (pref.window_width - congratsMessage->w) / 2;
+  congratsMessagePos.x = (pref.window_width - congratsMessage->w) / 2 + 30;
   congratsMessagePos.y = (pref.window_height - congratsMessage->h) / 2;
   SDL_BlitSurface (congratsMessage, NULL, screen, &congratsMessagePos);
 
