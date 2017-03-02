@@ -1,5 +1,11 @@
 new
  *
+
+Fourth alpha v0.04
+ * add a new "congrats" background image
+ * added a session.ini to store the game history of the player.
+ * added  verbose mode with -v
+
 Third alpha v0.03
  * added tabs into the menu.
  * enabled mouse clic on the top bar buttons
