@@ -37,9 +37,13 @@ displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
               SDL_Surface * screen,
               Sprites tableSurface[NBR_OF_IMAGES]);
 
-/*get level name*/
-int getLevelName (int levelChoice, S_LevelList * levelList, char *levelName);
+/*Get current level information from the levelList*/
+int
+getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy);
 
+/*Trunk long char*/
+int
+trunkLongChar(size_t size, char * text );
 
 /*Found the level number with just the name*/
 int findLevelNumber (S_LevelList * levelList, char *levelName);

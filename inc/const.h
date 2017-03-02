@@ -23,6 +23,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define GAME_NAME "SokoRobot"
 
 #define PREF_FILE "preferences.ini"
+#define SESSION_FILE "session.ini"
 
 //Define Window size
 #define W_WIDTH  400
@@ -34,15 +35,15 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define MENU_WIDTH 400
 #define MENU_LINE 15
 #define MENU_ROW 15
-#define MENU_MAX_INFO 3
-#define MENU_MAX_FILE 4
+#define MENU_MAX_INFO 4
+#define MENU_MAX_FILE 8
 #define MENU_MAX_SHORTCUTS 5
 #define MENU_MAX_SETTINGS 2
 #define MENU_MAX_ABOUT 2
+#define MENU_OFFSET 3
 
 #define NBR_OF_TAB 6
-#define NBR_OF_TAB_LINE 10
-
+#define NBR_OF_TAB_LINE 12
 
 //autorise 100 images max
 #define NBR_OF_IMAGES 50
@@ -97,10 +98,11 @@ enum
   BOX_IMAGE, BOX_IMAGE_OK,
   GOAL_IMAGE,
   MENU_BAR, MENU_RIBBON, MENU_BOTTOM, MENU_TOP_LIGHT, PROGRESS, MENU_SQUARE,
-	MENU_SEPARATOR,MENU_OVERTEXT,MENU_HIGHLIGHT,
+	MENU_OVERTEXT,MENU_HIGHLIGHT,
+	MENU_CIRCLE,MENU_H_LINE,
   BUTTON_ARROW_P,BUTTON_ARROW_L,BUTTON_RESET,BUTTON_BACKWARDS,
 	BUTTON_FILE,BUTTON_SETTINGS,BUTTON_SHORTCUTS,BUTTON_LEVELS,BUTTON_ABOUT,
-	BUTTON_HIGHLIGHT,
+	BUTTON_CHECK,BUTTON_CHECKED,
   OUTSIDE_IMAGE, OUTSIDE2_IMAGE, OUTSIDE3_IMAGE, OUTSIDE4_IMAGE,
   CONGRATS};
 
@@ -136,6 +138,7 @@ struct S_Level
 {
   char *name;
   char *fileName;
+  char *author;
   int height;
   int width;
   S_Level *next;
@@ -205,6 +208,7 @@ typedef struct
  /* Level */
  int level;
  int level_max;
+ int achieved;
  int reload;
 
  /* framerate */
@@ -213,6 +217,9 @@ typedef struct
 
  /* theme */
   char themePath[MAX_CARACT];
+
+ /* program */
+  bool verbosity;
 
 }S_preferences;
 S_preferences pref; //store all game settings and preferences

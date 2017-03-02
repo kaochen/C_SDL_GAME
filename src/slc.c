@@ -142,7 +142,7 @@ destroyFileList (S_FilesList * filesList)
     {
       delFile (filesList);
     }
-  fprintf (stderr, "\tFiles list destroyed\n");
+  vbPrintf ("\tFiles list destroyed\n");
 }
 
 /*Load slc level into the grid */
@@ -173,8 +173,7 @@ listSlcLevelFiles (S_FilesList * filesList)
 	    {
 	      addNewFile (filesList, path);
 	    }
-	  fprintf (stderr, "Found file %d : %s\n",
-		   filesList->nbr_of_files, path);
+	  vbPrintf ("Found file %d : %s\n", filesList->nbr_of_files, path);
 	}
     }
 
@@ -193,16 +192,16 @@ readFilesList (S_FilesList * filesList)
     {
       return EXIT_FAILURE;
     }
-  fprintf (stderr, "Read Files List: \n");
+  vbPrintf ("Read Files List: \n");
   S_Files *actual = filesList->first;
-  fprintf (stderr, "The file list contain %d files\n",
+  vbPrintf ("The file list contain %d files\n",
 	   filesList->nbr_of_files);
 
   /*Read file one by one until you'll get a NULL */
   int i = 1;
   while (actual != NULL)
     {
-      fprintf (stderr, "File %d : %s\n", i, actual->name);
+      vbPrintf ("File %d : %s\n", i, actual->name);
       actual = actual->next;
       i++;
     }
@@ -229,7 +228,7 @@ initLevelList ()
 
 /*Add first level into an empty list */
 int
-addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
+addFirstLevel (S_LevelList * levelList, char *fileName, char *name, char *author,
 	       int height, int width)
 {
   S_Level *firstLevel = malloc (sizeof (S_Level));
@@ -240,6 +239,7 @@ addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
     }
         firstLevel->name = malloc(MAX_CARACT);
         firstLevel->fileName = malloc(MAX_CARACT);
+        firstLevel->author = malloc(MAX_CARACT);
 
            if (firstLevel->name == NULL || firstLevel->fileName == NULL  )
              {
@@ -249,6 +249,7 @@ addFirstLevel (S_LevelList * levelList, char *fileName, char *name,
   /*update first file data */
   strcpy (firstLevel->name, name);
   strcpy (firstLevel->fileName, fileName);
+  strcpy (firstLevel->author, author);
   firstLevel->height = height;
   firstLevel->width = width;
 
@@ -267,6 +268,7 @@ void
 addNewLevel (S_LevelList * levelList,
              char *fileName,
              char *name,
+             char *author,
              int height,
              int width)
 {
@@ -281,6 +283,7 @@ addNewLevel (S_LevelList * levelList,
     {
         new->name = malloc(MAX_CARACT);
         new->fileName = malloc(MAX_CARACT);
+        new->author = malloc(MAX_CARACT);
 
            if (new->name == NULL || new->fileName == NULL  )
              {
@@ -290,6 +293,7 @@ addNewLevel (S_LevelList * levelList,
 
       strcpy (new->name, name);
       strcpy (new->fileName, fileName);
+      strcpy (new->author, author);
       new->height = height;
       new->width = width;
 
@@ -340,7 +344,7 @@ destroy (S_LevelList * levelList)
     {
       delLevel (levelList);
     }
-  fprintf (stderr, "\tLevel list destroyed\n");
+  vbPrintf ("\tLevel list destroyed\n");
 }
 
 /*get levels infos from files */
@@ -388,7 +392,7 @@ readLevelsAttributs (S_FilesList * filesList,
 
             /* Read each level from each files */
 
-            fprintf (stderr, "Read levels from : %s\n", actualFile->name);
+            vbPrintf ("Read levels from : %s\n", actualFile->name);
 
             /* Open SLC/XML file */
             doc = xmlParseFile (actualFile->name);
@@ -422,10 +426,13 @@ readLevelsAttributs (S_FilesList * filesList,
             xmlChar *name;
             xmlChar *width;
             xmlChar *height;
+            char author[MAX_CARACT] = "";
+            getCopyrightFromSLC(actualFile->name, author);
+
             /*Get the number of levels in a file */
             int levelCount = 0, i = 0;
             levelCount = xpathLevel->nodesetval->nodeNr;
-            fprintf (stderr, "The files %s contain %d levels\n\n",
+            vbPrintf ( "The files %s contain %d levels\n\n",
 	             actualFile->name, levelCount);
             /*Add S_Level for each levels found */
             while (i < levelCount)
@@ -441,12 +448,12 @@ readLevelsAttributs (S_FilesList * filesList,
 	              /*Load infos into the levelList */
 	              if (levelList->nbr_of_levels == 0)
 	                {
-	                  addFirstLevel (levelList, actualFile->name, (char *) name,
+	                  addFirstLevel (levelList, actualFile->name, (char *) name, author,
 			                 atoi ((char *) height), atoi ((char *) width));
 	                }
 	              else
 	                {
-	                  addNewLevel (levelList, actualFile->name, (char *) name,
+	                  addNewLevel (levelList, actualFile->name, (char *) name, author,
 			               atoi ((char *) height), atoi ((char *) width));
 	                }
 	              //printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
@@ -475,7 +482,7 @@ readLevelList (S_LevelList * levelList)
   S_Level *actual = levelList->first;
   while (actual != NULL)
     {
-      fprintf (stderr, "%s, %d:%d\n", actual->name, actual->width,
+      vbPrintf ("%s, %d:%d\n", actual->name, actual->width,
 	       actual->height);
       actual = actual->next;
     }
@@ -484,7 +491,8 @@ readLevelList (S_LevelList * levelList)
 /*Load slc level into the grid */
 int
 loadSlcLevel (S_LevelList * levelList,
-              Square grid[pref.max_X_Blocks][pref.max_Y_Blocks])
+              Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
+              S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
   if (levelList == NULL)
     {
@@ -499,10 +507,14 @@ loadSlcLevel (S_LevelList * levelList,
       /* try to find the nameLevel into the list */
       if (i == pref.level)
 	{
-	  fprintf (stderr, "Found %s, %d:%d\n", actual->name,
+	  vbPrintf ("Found %s, %d:%d\n", actual->name,
 		   actual->width, actual->height);
 	  nbr_of_lines = actual->height;
 	  nbr_of_columns = actual->width;
+    ///Update menu icon if the level is already achieved
+    pref.achieved = testIfLevelAchieved(actual->name, gridMenu);
+    vbPrintf ("pref.achieved %d\n", pref.achieved);
+
 	  /*Place the drawing into the center of the grid */
 	  firstLines = ((pref.y_Blocks - nbr_of_lines) / 2 + pref.h_menu_block);	// + menu
 	  firstColumn = (pref.x_Blocks - nbr_of_columns) / 2;
@@ -560,13 +572,13 @@ loadSlcLevel (S_LevelList * levelList,
     {
       int c = 0;
       y = 0, x = 0;
-      char line[MAX_CARACT] = "";
       xmlNodePtr n;
       for (y = 0; y < nbr_of_lines; y++)
 	{
 	  n = xpathLevel->nodesetval->nodeTab[y];
 	  if (n->type == XML_TEXT_NODE || n->type == XML_CDATA_SECTION_NODE)
 	    {
+        char line[MAX_CARACT] = "";
 	      strcpy (line, (char *) n->content);
 	      fprintf (stderr, "%s\n", n->content);
 	      /* load level into the grid */
@@ -726,5 +738,35 @@ detectOutside (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks]){
     }
 
 }
+
+/*get a specific attribut from slc file*/
+int
+getCopyrightFromSLC(char * docName, char * author)
+{
+  xmlDocPtr doc;
+  xmlNodePtr cur;
+  xmlChar *text;
+
+  doc = xmlParseFile(docName);
+  cur = xmlDocGetRootElement(doc);
+
+  cur = cur->xmlChildrenNode;
+
+  //printf("------------------------------------------------\n");
+  while (cur != NULL)
+    {
+      if ((!xmlStrcmp(cur->name,(const xmlChar *)"LevelCollection")))
+        {
+          text = xmlGetProp(cur,(const xmlChar *)"Copyright");
+          //vbPrintf("Copyright: %s\n", text);
+          sprintf(author,"%s", text);
+          xmlFree(text);
+        }
+      cur = cur->next;
+    }
+  xmlFreeDoc(doc);
+  return (1);
+}
+
 
 #endif

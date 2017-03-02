@@ -37,9 +37,19 @@ mouseMotion(int xCursor,
         if (gridMenu[x][y].type == TABS){
            menuChoice.xPos = x;
            menuChoice.yPos = 1;
-           menuChoice.tabChoice = gridMenu[x][y].tab;
-           return 1; //refresh
+          if (menuChoice.tabChoice != gridMenu[x][y].tab)
+            {
+			        menuChoice.lineChoice = MENU_OFFSET;
+              menuChoice.tabChoice = gridMenu[x][y].tab;
+            }
+          gridMenu_initLines(gridMenu);
         }
+
+        if (gridMenu[x][y].type == TABS_LINE){
+            menuChoice.lineChoice = y;
+           //fprintf (stderr, "menuChoice x:%d/y:%d\n", x,y);
+            }
+           return 1; //refresh
       }
 
     return 0; //no refresh

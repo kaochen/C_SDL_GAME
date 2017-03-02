@@ -51,10 +51,21 @@ main (int argc, char *argv[])
 
   /*manage argument (not used for now) */
   int i;
+  bool vb = false;
 
   for (i = 1; i < argc; i++)
     {
-      printf (gettext ("Argument %d : %s \n"), i, argv[i]);
+      printf (gettext ("Argument %d :%s:\n"), i, argv[i]);
+      int test = strcmp(argv[i], "-v");
+      if (test == 0 ){
+          vb = true;
+          fprintf(stderr, gettext("Verbose mode is on\n"));
+      }
+      else
+        {
+          vb = false;
+          fprintf(stderr, gettext("Verbose mode is off\n"));
+        }
     }
 
   /* reset errors */
@@ -84,9 +95,10 @@ main (int argc, char *argv[])
 
   /*load preferences */
   loadPrefStruct(current);
+  pref.verbosity = vb;
 
 
-  printf (gettext ("The window size request from settings is %dx%d\n"),
+  vbPrintf (gettext ("The window size request from settings is %dx%d\n"),
 	  pref.window_width, pref.window_height);
 
   /* Create the window game */
@@ -120,9 +132,8 @@ main (int argc, char *argv[])
       exit (EXIT_FAILURE);
     }
 
-  fprintf (stderr, gettext ("The SDL window has been created.\n"));
+  vbPrintf (gettext ("The SDL window has been created.\n\n"));
 
-  fprintf (stderr, "\n");
   /* load images into a table of struct */
   Sprites tableSurface[NBR_OF_IMAGES];
 
@@ -145,24 +156,20 @@ main (int argc, char *argv[])
   S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks];
   gridMenu_init (gridMenu);
 
-  fprintf (stderr, "\n");
   /*List slc files from the levels/ folder */
   S_FilesList *filesList = initFilesList ();
   if (listSlcLevelFiles (filesList) == EXIT_FAILURE)
     {
       perror (gettext
-	      ("The level files cannot cannot be listed from the folder levels/."));
+	      ("The level files cannot be listed from the folder levels/."));
     }
 
-  fprintf (stderr, "\n");
   /*Read files name from the filesList to check */
   if (readFilesList (filesList) == EXIT_FAILURE)
     {
       perror (gettext ("The level list cannot be verified."));
     }
-
-
-  fprintf (stderr, "\n");
+  loadFileName(tableTextSurface,filesList);
 
   /*Read level from slc file */
   S_LevelList *levelList = initLevelList ();
@@ -172,8 +179,7 @@ main (int argc, char *argv[])
       perror (gettext ("Error when loading levels attributs from files."));
     }
 
-  fprintf (stderr,
-	   gettext
+  vbPrintf (gettext
 	   ("The list of the possible levels has been generate from the content of the folder levels/.\n"));
   fprintf (stderr, "\n");
 
@@ -186,11 +192,7 @@ main (int argc, char *argv[])
 
   fprintf (stderr, gettext ("Loading first level.\n"));
 
-  if (loadSlcLevel (levelList, grid) == EXIT_SUCCESS)
-    {
-      fprintf (stderr, gettext ("Level loaded.\n"));
-    }
-  else
+  if (loadSlcLevel (levelList, grid, gridMenu) == EXIT_FAILURE)
     {
       perror (gettext ("Cannot load the first level.\n"));
     }
@@ -221,11 +223,10 @@ main (int argc, char *argv[])
   SDL_UpdateWindowSurface (window);
 
   /* display framerate from settings */
-  fprintf (stderr, "Framerate %d\n", pref.framerate);
+  vbPrintf ("Framerate %d\n", pref.framerate);
 
 /* wait for quit event */
 
-  char levelName[MAX_CARACT] = "";
   Uint32 currentTime = 0;
   Uint32 previousTime = 0;
   int carryOn = 1, refresh = 1,  target = STILL, next_target = STILL;
@@ -399,9 +400,11 @@ main (int argc, char *argv[])
                          menuChoice.xPos = (pref.xb_menu + 2);
 
           menuChoice.tabChoice++;
+			    menuChoice.lineChoice = MENU_OFFSET;
           if (menuChoice.tabChoice > menuChoice.nbrTabs)
               menuChoice.tabChoice = 1;
 
+          gridMenu_initLines(gridMenu);
 		      refresh = 1;
 		    }
 		  break;
@@ -423,8 +426,11 @@ main (int argc, char *argv[])
               menuChoice.xPos = (pref.xb_menu + 6);
 
           menuChoice.tabChoice--;
+			    menuChoice.lineChoice = MENU_OFFSET;
           if (menuChoice.tabChoice < 1)
               menuChoice.tabChoice = menuChoice.nbrTabs;
+
+          gridMenu_initLines(gridMenu);
 		      refresh = 1;
 		    }
 		  break;
@@ -443,9 +449,9 @@ main (int argc, char *argv[])
 		    {
 		      menuChoice.lineChoice--;
 		      /* make circle */
-		      if (menuChoice.lineChoice < 0)
+		      if (menuChoice.lineChoice < MENU_OFFSET)
 			{
-			  menuChoice.lineChoice = (menuChoice.tab[menuChoice.tabChoice].nbrLines - 1);
+			  menuChoice.lineChoice = (menuChoice.tab[menuChoice.tabChoice].nbrLines +2);
 			}
 		      refresh = 1;
 		    }
@@ -466,9 +472,9 @@ main (int argc, char *argv[])
 		    {
 		      menuChoice.lineChoice++;
 		      /* make circle */
-		      if (menuChoice.lineChoice > menuChoice.tab[menuChoice.tabChoice].nbrLines - 1)
+		      if (menuChoice.lineChoice > menuChoice.tab[menuChoice.tabChoice].nbrLines +2)
 			{
-			  menuChoice.lineChoice = 0;
+			  menuChoice.lineChoice = MENU_OFFSET;
 			}
 		      refresh = 1;
 		    }
@@ -478,6 +484,7 @@ main (int argc, char *argv[])
 
 		case SDLK_m:
             refresh = openCloseTheMenu(gridMenu);
+            gridMenu_initLines(gridMenu);
 		  break;
 
 
@@ -502,13 +509,10 @@ main (int argc, char *argv[])
 		  /* hit q to quit */
 		case SDLK_q:
 		  /* write last level name before closing */
-		  strcpy (levelName, "");
-		  getLevelName (pref.level, levelList, levelName);
-		  writePrefChar ("LevelName", levelName);
+
 		  carryOn = 0;
 		  fprintf (stderr,
 			   "\nThe quit command (q) has been pressed.\n");
-		  fprintf (stderr, "Start ending programm:\n");
 		  break;
 
 		}		//end of  switch (event.type)
@@ -525,7 +529,7 @@ main (int argc, char *argv[])
 		  else if (pref.level == pref.level_max)
 		    pref.level = 0;
 
-      if (loadSlcLevel (levelList, grid) ==
+      if (loadSlcLevel (levelList, grid, gridMenu) ==
 		      EXIT_FAILURE)
 		      perror ("Impossible to load the level. Perror");
       pref.reload = 0;
@@ -541,6 +545,11 @@ main (int argc, char *argv[])
 	  if (levelFinished (grid) == FINISH && menuChoice.open == 0)
 	    {
 	      displayCongrats (screen, tableSurface);
+        gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECKED, .type=TOPBAR, .tab=0, .image=BUTTON_CHECKED};
+        S_Level *current = malloc (sizeof (S_Level));
+        getCurrentLevelInfos(levelList, current);
+        storeLevelsFinished(SESSION_FILE, current->name);
+        free(current);
 	      menuChoice.freeze = 1;
 	    }
 	  if (menuChoice.open == 1)
@@ -567,27 +576,31 @@ main (int argc, char *argv[])
 	}
 
     }				// end of   while (carryOn)
-
+  //store the current level name before closing
+	S_Level *currentLevel = malloc (sizeof (S_Level));
+  getCurrentLevelInfos(levelList, currentLevel);
+	writeChar (SESSION_FILE, "LevelName", currentLevel->name);
+  free (currentLevel);
 
   /* clean */
-  fprintf (stderr, "- Destroying level list\n");
+  vbPrintf ("- Destroying level list\n");
   destroy (levelList);
   free (levelList);
-  fprintf (stderr, "- Destroying file list\n");
+  vbPrintf ("- Destroying file list\n");
   destroyFileList (filesList);
   free (filesList);
-  fprintf (stderr, "-Freeing texts\n");
+  vbPrintf ("-Freeing texts\n");
   freeS_Text (tableTextSurface);
-  fprintf (stderr, "-Freeing Sprites\n");
+  vbPrintf ("-Freeing Sprites\n");
   freeSprites (tableSurface);
   SDL_FreeSurface (screen);
-  fprintf (stderr, "- Free SDL screen\n");
+  vbPrintf ("- Free SDL screen\n");
   SDL_DestroyWindow (window);
-  fprintf (stderr, "- Free SDL window\n");
+  vbPrintf ("- Free SDL window\n");
   TTF_Quit ();
-  fprintf (stderr, "- TFF is out\n");
+  vbPrintf ("- TFF is out\n");
   SDL_Quit ();
-  fprintf (stderr, "- SDL is out\n");
-  fprintf (stderr, "Everythings seems good, Bye\n");
+  vbPrintf ("- SDL is out\n");
+  fprintf (stderr, "Bye\n");
   return EXIT_SUCCESS;
 }

@@ -80,9 +80,10 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[MENU_BOTTOM], pref.themePath, "menu_bottom.png");
   loadSprite (&tableSurface[MENU_TOP_LIGHT], pref.themePath, "menu_top_light.png");
   loadSprite (&tableSurface[MENU_SQUARE], pref.themePath, "menu_square.png");
-  loadSprite (&tableSurface[MENU_SEPARATOR], pref.themePath, "menu_separator.png");
+  loadSprite (&tableSurface[MENU_H_LINE], pref.themePath, "menu_h_line.png");
+  loadSprite (&tableSurface[MENU_CIRCLE], pref.themePath, "menu_circle.png");
   loadSprite (&tableSurface[MENU_OVERTEXT], pref.themePath, "menu_overText.png");
-  loadSprite (&tableSurface[MENU_HIGHLIGHT], pref.themePath, "menu_highlight.png");
+  loadSprite (&tableSurface[MENU_HIGHLIGHT], pref.themePath, "menu_highlighter.png");
 
   /* buttons */
   loadSprite (&tableSurface[BUTTON_ARROW_L], pref.themePath, "button_arrow_l.png");
@@ -94,7 +95,8 @@ loadAllSprites (Sprites tableSurface[NBR_OF_IMAGES])
   loadSprite (&tableSurface[BUTTON_SHORTCUTS], pref.themePath, "button_shortcuts.png");
   loadSprite (&tableSurface[BUTTON_LEVELS], pref.themePath, "button_levels.png");
   loadSprite (&tableSurface[BUTTON_ABOUT], pref.themePath, "button_about.png");
-  loadSprite (&tableSurface[BUTTON_HIGHLIGHT], pref.themePath, "button_highlight.png");
+  loadSprite (&tableSurface[BUTTON_CHECK], pref.themePath, "button_check.png");
+  loadSprite (&tableSurface[BUTTON_CHECKED], pref.themePath, "button_checked.png");
 
 
   /* outside the wall */
@@ -128,7 +130,7 @@ loadSprite (Sprites * sprites, const char *themePath, const char *imageName)
     }
   else
     {
-      printf (gettext ("%s exist\n"), filePath);
+      vbPrintf (gettext ("%s exist\n"), filePath);
     }
 
   sprites->image = IMG_Load (filePath);
@@ -153,7 +155,7 @@ freeSprites (Sprites tableSurface[NBR_OF_IMAGES])
 	  SDL_FreeSurface (tableSurface[i].image);
 	}
     }
-  fprintf (stderr, gettext ("\tAll surfaces are free %s\n"), SDL_GetError ());
+  vbPrintf (gettext ("\tAll surfaces are free %s\n"), SDL_GetError ());
 }
 
 
@@ -171,7 +173,7 @@ findFont (void)
 	{
 	  fprintf (stderr,
 		   gettext
-		   ("Roboto-Bold.ttf was not found. Install the fonts-roboto package\n"));
+		   ("Roboto-Bold.ttf was not found. You should install the fonts-roboto package\n"));
 	  exit (EXIT_FAILURE);
 	}
     }

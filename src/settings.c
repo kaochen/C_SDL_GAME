@@ -98,17 +98,14 @@ loadPrefStruct(SDL_DisplayMode current){
   return 1;
 }
 
-/*get int value from the preference file */
+/*get int value from a ini file */
 int
-getPrefAsInt (const char *prefName)
+readInt (const char *fileName, const char *prefName)
 {
   FILE *prefFile = NULL;
   char line[MAX_CARACT] = "";
   char settingName[MAX_CARACT] = "";
   strcpy (settingName, prefName);
-
-  char fileName[MAX_CARACT]= "";
-  searchPrefFile(fileName);
 
   int ret = 0;
   prefFile = fopen (fileName, "r");
@@ -142,9 +139,8 @@ getPrefAsInt (const char *prefName)
 }
 
 void
-getPrefChar(char * pref, const char *setting) {
+readChar(const char *fileName, char * pref, const char *setting) {
 
-    FILE *prefFile = NULL;
     char line[MAX_CARACT] = "";
     char ret[MAX_CARACT] = "";
     char ret2[MAX_CARACT] = "";
@@ -153,65 +149,103 @@ getPrefChar(char * pref, const char *setting) {
     unsigned int i = 0 , size = 0;
     int j = -1;
 
-    char fileName[MAX_CARACT]= "";
-    searchPrefFile(fileName);
-
+    FILE *prefFile = NULL;
     prefFile = fopen (fileName, "r");
-      if (prefFile == NULL)
+    if (prefFile == NULL)
          {
-            fprintf (stderr, "Error opening %s: %s\n", PREF_FILE, strerror (errno));
-            exit(EXIT_FAILURE);
+            fprintf (stderr, "Error opening %s: %s\n", fileName, strerror (errno));
+            strcpy(pref, "");
          }
-      while (fgets (line, MAX_CARACT, prefFile) != NULL)
-	      {
-	        if (strstr (line, setting) != NULL)
-	          {
-                  if (strchr (line, '"') != NULL)
-		               {
-		                 test = strchr (line, '"');
-                       strcpy (ret, test);
-		               }
-	                     else
-		               {
-		                 strcpy (ret, "");
-		               }
+      else
+        {
+              while (fgets (line, MAX_CARACT, prefFile) != NULL)
+	              {
+	                if (strstr (line, setting) != NULL)
+	                  {
+                          if (strchr (line, '"') != NULL)
+		                       {
+		                         test = strchr (line, '"');
+                               strcpy (ret, test);
+		                       }
+	                             else
+		                       {
+		                         strcpy (ret, "");
+		                       }
 
-               /*dump quatation marks "" */
-	                  size = strlen (ret);
-	                  for (i = 0; i < size; i++)
-		                  {
-		                    if (ret[i] == '"')
-		                      {
-		                      }
-		                    else
-		                      {
-		                        j++;
-		                        ret2[j] = ret[i];
-		                      }
-		                  }
-                 strcpy (ret, ret2);
+                       /*dump quotation marks "" */
+	                          size = strlen (ret);
+	                          for (i = 0; i < size; i++)
+		                          {
+		                            if (ret[i] == '"')
+		                              {
+		                              }
+		                            else
+		                              {
+		                                j++;
+		                                ret2[j] = ret[i];
+		                              }
+		                          }
+                         strcpy (ret, ret2);
 
-	               /*dump \n */
-                  for(i = 0; i <= strlen (ret); i++ )
-                    {
-                    if (ret[i] == '\n')
-                      {
-                      ret[i] = '\0';
-                      }
+	                       /*dump \n */
+                          for(i = 0; i <= strlen (ret); i++ )
+                            {
+                            if (ret[i] == '\n')
+                              {
+                              ret[i] = '\0';
+                              }
+                             }
+                       	  //fprintf(stderr,"line: %s", ret);
+                          strcpy(pref, ret);
                      }
-               	//fprintf(stderr,"line: %s", ret);
-                  strcpy(pref, ret);
-             }
-
-         }
-      fclose (prefFile);
+                 }
+        fclose (prefFile);
+        }
 }
 
+//look at the session file if the current level has not been already achieved
+int
+testIfLevelAchieved(const char *levelName,
+                    S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
+  {
+      char lineName[MAX_CARACT]= "Finished";
+      char line[MAX_CARACT]="";
+
+      FILE *file = NULL;
+      file = fopen (SESSION_FILE, "r");
+
+      int i = 0;
+      if (file != NULL)
+        {
+          while (fgets (line, MAX_CARACT, file) != NULL)
+	          {
+	            if (strstr (line, levelName) != NULL  && strstr (line, lineName) != NULL)
+                {
+                i++;
+                }
+            }
+            if (i != 0)
+              {
+                fprintf (stderr, "You have already succeed to finish this level\n");
+                gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECKED, .type=TOPBAR, .tab=0, .image=BUTTON_CHECKED};
+                return 1;
+	            }
+        }
+      else
+        {
+          fprintf (stderr, "Error opening %s: %s\n", SESSION_FILE, strerror (errno));
+          return EXIT_FAILURE;
+        }
+  fclose (file);
+  fprintf (stderr, "You have never finished this level\n");
+  gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECK, .type=TOPBAR, .tab=0, .image=BUTTON_CHECK};
+  return 0;
+}
 
 int
 getWindow_width (void)
 {
-  int ret = getPrefAsInt ("window_width");
+  int ret = readInt (PREF_FILE, "window_width");
   if (ret < W_WIDTH)
     {
       ret = W_WIDTH;
@@ -225,7 +259,7 @@ getWindow_width (void)
 int
 getWindow_height (void)
 {
-  int ret = getPrefAsInt ("window_height");
+  int ret = readInt (PREF_FILE, "window_height");
   if (ret < W_HEIGHT)
     {
       ret = W_HEIGHT;
@@ -239,7 +273,7 @@ getWindow_height (void)
 int
 getWindow_framerate (void)
 {
-       int fps = getPrefAsInt ("framerate");
+       int fps = readInt (PREF_FILE,"framerate");
         if (fps < 12){
             fps = 12;
         }
@@ -253,30 +287,30 @@ getWindow_framerate (void)
 
 /* write a pref char */
 int
-writePrefChar (const char *prefName, const char *value)
+writeChar (const char *fileName ,const char *lineName, const char *value)
 {
-
   char line[MAX_CARACT] = "";
-  char settingName[MAX_CARACT] = "";
-  strcpy (settingName, prefName);
-  char settingValue[MAX_CARACT] = "";
-  strcpy (settingValue, value);
 
-  printf ("searching :%s = %s\n", settingName, value);
+  vbPrintf ("add to %s file : %s = %s\n", fileName, lineName, value);
 
   FILE *prefFile = NULL;
-  prefFile = fopen (PREF_FILE, "r+");
+  prefFile = fopen (fileName, "r+");
+  if (prefFile == NULL)
+    {
+      prefFile = fopen (fileName, "w+");
+    }
+
   FILE *tmpFile = NULL;
   tmpFile = fopen ("tmp.ini", "w+");
-
-  if (prefFile != NULL && prefFile != NULL)
+  int i = 0;
+  if (prefFile != NULL && tmpFile != NULL)
     {
-
       while (fgets (line, MAX_CARACT, prefFile) != NULL)
 	{
-	  if (strstr (line, settingName) != NULL)
+	  if (strstr (line, lineName) != NULL)
 	    {
-	      fprintf (tmpFile, "%s = \"%s\"\n", settingName, value);
+	      fprintf (tmpFile, "%s = \"%s\"\n", lineName, value);
+        i++;
 	      strcpy (line, "");	//empty the line buffer
 	    }
 	  else
@@ -284,15 +318,19 @@ writePrefChar (const char *prefName, const char *value)
 	      fprintf (tmpFile, "%s", line);
 	    }
 	}
+      if(i == 0)
+        {
+	      fprintf (tmpFile, "%s = \"%s\"\n", lineName, value);
+        }
     }
   else
     {
-      fprintf (stderr, "Error opening %s: %s\n", PREF_FILE, strerror (errno));
+      fprintf (stderr, "Error opening %s: %s\n", fileName, strerror (errno));
       return EXIT_FAILURE;
     }
   fclose (prefFile);
   fclose (tmpFile);
-  rename ("tmp.ini", PREF_FILE);
+  rename ("tmp.ini", fileName);
 
   return EXIT_SUCCESS;
 }
@@ -302,13 +340,13 @@ int
 getThemePath(void)
 {
  /*read theme choice */
-  fprintf (stderr, "Loading Theme:\n");
+  vbPrintf ("Loading Theme:\n");
   char themePath[MAX_CARACT] = "";
   char bufPath[MAX_CARACT] = "";
-  getPrefChar (bufPath, "theme");
+  readChar (PREF_FILE, bufPath, "theme");
 
   sprintf (themePath, "img/%s/", bufPath);
-  fprintf (stderr, "Theme: %s\n", themePath);
+  vbPrintf ("Theme: %s\n", themePath);
 
   /*test if folder exist */
   struct stat file_stat;
@@ -320,10 +358,61 @@ getThemePath(void)
     }
   else
     {
-      printf ("The theme folder %s exist\n\n", themePath);
+      vbPrintf ("The theme folder %s exist\n\n", themePath);
     }
   strcpy(pref.themePath, themePath);
 
+  return EXIT_SUCCESS;
+}
+
+// print only if verbose mode is on.
+void
+vbPrintf(const char *format, ...){
+
+  va_list args;
+  va_start(args, format);
+  if (pref.verbosity == true)
+    {
+      vfprintf(stderr, format, args);
+    }
+}
+
+//store the names of the levels already achieved
+int
+storeLevelsFinished(const char *fileName, const char *levelName)
+{
+  char line[MAX_CARACT] = "";
+  char lineName[MAX_CARACT] = "Finished";
+
+  FILE *file = NULL;
+  file = fopen (fileName, "r+");
+  if (file == NULL)
+    {
+      file = fopen (fileName, "w+");
+    }
+
+  int i = 0;
+  if (file != NULL)
+    {
+      while (fgets (line, MAX_CARACT, file) != NULL)
+	      {
+	        if (strstr (line, levelName) != NULL  && strstr (line, lineName) != NULL)
+              {
+              i++;
+              }
+        }
+        if (i == 0)
+            {
+  	          fprintf (file, "%s = \"%s\"\n", lineName, levelName);
+            }
+	          //strcpy (line, "");	//empty the line buffer
+	      }
+    else
+      {
+        fprintf (stderr, "Error opening %s: %s\n", fileName, strerror (errno));
+        return EXIT_FAILURE;
+      }
+  fclose (file);
   return EXIT_SUCCESS;
 }
 

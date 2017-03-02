@@ -41,15 +41,15 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
 }
   /* Init main Menu */
   size_t fontSize = 20, R = 255, G = 255, B = 255, A = 255;
-  loadTextAsSurface (INFO,0, tableTextSurface, gettext ("Current Level Infos"), fontSize, R,
+  loadTextAsSurface (INFO,0, tableTextSurface, gettext ("Current Level Infos:"), fontSize, R,
 		     G, B, A);
-  loadTextAsSurface (SHORTCUTS,0, tableTextSurface, gettext ("Shortcuts"), fontSize, R,
+  loadTextAsSurface (SHORTCUTS,0, tableTextSurface, gettext ("Shortcuts:"), fontSize, R,
 		     G, B, A);
-  loadTextAsSurface (ABOUT,0, tableTextSurface, gettext ("About"), fontSize, R,
+  loadTextAsSurface (ABOUT,0, tableTextSurface, gettext ("About:"), fontSize, R,
 		     G, B, A);
-  loadTextAsSurface (FILES,0, tableTextSurface, gettext ("Files"), fontSize, R,
+  loadTextAsSurface (FILES,0, tableTextSurface, gettext ("Files:"), fontSize, R,
 		     G, B, A);
-  loadTextAsSurface (SETTINGS,0, tableTextSurface, gettext ("Settings"), fontSize, R,
+  loadTextAsSurface (SETTINGS,0, tableTextSurface, gettext ("Settings:"), fontSize, R,
 		     G, B, A);
 
   /* Init sub Menu */
@@ -69,7 +69,7 @@ tableTextSurface_init (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
 		     fontSizeSub, R, G, B, A);
   /* Init sub Menu */
   /*about */
-  loadTextAsSurface (ABOUT,1, tableTextSurface, gettext ("Website :"),
+  loadTextAsSurface (ABOUT,1, tableTextSurface, gettext ("Website:"),
 		     fontSizeSub, R, G, B, A);
   loadTextAsSurface (ABOUT,2, tableTextSurface,
 		     gettext ("https://github.com/kaochen/SokoRobot"),
@@ -99,7 +99,7 @@ freeS_Text (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
 	      }
     }
     }
-  fprintf (stderr, gettext ("\tAll text surfaces are free %s\n"),
+  vbPrintf (gettext ("\tAll text surfaces are free %s\n"),
 	   SDL_GetError ());
 }
 
@@ -167,4 +167,36 @@ levelMenu (SDL_Surface * screen,
   return EXIT_SUCCESS;
 }
 
+
+/* Get the first five name files */
+int
+loadFileName( S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
+              S_FilesList *filesList)
+{
+  S_Files *actual = filesList->first;
+  if (filesList == NULL || actual == NULL)
+    {
+      return (EXIT_FAILURE);
+    }
+
+ size_t fontSize = 20, R = 255, G = 255, B = 255, A = 255;
+ char name[MAX_CARACT] = "";
+
+ for (size_t i = 0; i < MENU_MAX_FILE; i++)
+    {
+     sprintf (name, "\t\t\t\t%s",extractNameFile(actual->name));
+     loadTextAsSurface (FILES,(i+1), tableTextSurface, name, fontSize, R, G, B, A);
+     actual = actual->next;
+    }
+return (EXIT_SUCCESS);
+}
+
+/*get the file name from is path*/
+char *
+extractNameFile(char *path){
+ char *name = NULL;
+ char c = '/';
+ name = strrchr (path, c);
+ return name;
+}
 #endif

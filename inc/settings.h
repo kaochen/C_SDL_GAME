@@ -36,11 +36,17 @@ searchPrefFile(char * prefFile);
 int
 loadPrefStruct(SDL_DisplayMode current);
 
-/*read window height and width from the preference file */
-int getPrefAsInt (const char *prefName);
+/*get int value from a ini file */
+int
+readInt (const char *fileName, const char *prefName);
 
 /*get char value from the preference file */
-void getPrefChar(char * ret, const char *setting);
+void readChar(const char *fileName, char * ret, const char *setting);
+
+//look at the session file if the current level has not been already achieved
+int
+testIfLevelAchieved(const char *levelName,
+                    S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 int
 getWindow_width (void);
@@ -54,10 +60,18 @@ getWindow_framerate (void);
 
 /* write a pref char */
 int
-writePrefChar (const char *prefName, const char *value);
+writeChar (const char *fileName ,const char *lineName, const char *value);
 
 /*get the theme Path*/
 int
 getThemePath(void);
+
+// print only if verbose mode is on.
+void
+vbPrintf(const char *format, ...);
+
+//store the names of the levels already achieved
+int
+storeLevelsFinished(const char *fileName, const char *levelName);
 
 #endif

@@ -183,39 +183,61 @@ displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
 
    if (blitCorners (grid, screen, tableSurface) == EXIT_FAILURE)
     {
-         fprintf (stderr, gettext("blitCorners failed.\n"));
+         fprintf (stderr, gettext("blitCorners() failed.\n"));
          return EXIT_FAILURE;
     }
 
   return EXIT_SUCCESS;
 }
 
-
-
-/*get level name*/
+/*Get current level information from the levelList*/
 int
-getLevelName (int levelChoice, S_LevelList * levelList, char *levelName)
+getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy)
 {
   if (levelList == NULL)
     {
+      fprintf (stderr, gettext("getCurrentLevelInfos() failed: %s\n"),
+	       SDL_GetError ());
       return EXIT_FAILURE;
     }
   int i = 0;
   S_Level *actual = levelList->first;
+  copy->name = malloc(MAX_CARACT);
+  copy->fileName = malloc(MAX_CARACT);
+  copy->author = malloc(MAX_CARACT);
   /* read the all chain list */
   while (actual != NULL)
     {
       /* try to find the nameLevel into the list */
-      if (i == levelChoice)
+      if (i == pref.level)
 	{
-	  fprintf (stderr, "Actual name Level \"%s\"\n", actual->name);
-	  strcpy (levelName, actual->name);
+	  strcpy (copy->name, actual->name);
+	  strcpy (copy->fileName, actual->fileName);
+	  strcpy (copy->author, actual->author);
+    copy->height = actual->height;
+    copy->width = actual->width;
 	  break;
 	}
       i++;
       actual = actual->next;
     }
   return EXIT_SUCCESS;
+}
+
+
+/*Trunk long char*/
+int
+trunkLongChar(size_t size, char * text )
+{
+//  fprintf (stderr, "IN : %s\n", text);
+	if (strlen (text) > size)
+		{
+     char buf[MAX_CARACT]="";
+     strncat(buf,text,size);
+		 sprintf (text, "%s...", buf);
+		}
+//  fprintf (stderr, "OUT: %s\n", text);
+  return 1;
 }
 
 /*Found the level number with just the name*/
@@ -234,7 +256,7 @@ findLevelNumber (S_LevelList * levelList, char *levelName)
       /* try to find the nameLevel into the list */
       if (!strcmp (actual->name, levelName))
 	{
-	  fprintf (stderr, "I found the level %s : %d\n", actual->name, i);
+	  vbPrintf ("I found the level %s : %d\n", actual->name, i);
 	  return i;
 	  break;
 	}
@@ -247,19 +269,26 @@ findLevelNumber (S_LevelList * levelList, char *levelName)
   return 0;
 }
 
-/*get a levelchoice by reading the level name from the preference file*/
+/*get a levelchoice by reading the level name from the session file*/
 int
 readLevelFromSetting (S_LevelList * levelList)
 {
-  int i = 0, ret = 0;
-  char levelName[MAX_CARACT] = "";
-  getPrefChar (levelName, "LevelName");
-  fprintf (stderr, "First level to load is %s\n", levelName);
-
   if (levelList == NULL)
     {
+      vbPrintf ("readLevelFromSetting() failed");
       exit (EXIT_FAILURE);
     }
+
+  int i = 0, ret = 0;
+  char levelName[MAX_CARACT] = "";
+  readChar (SESSION_FILE, levelName, "LevelName");
+  vbPrintf ("First level to load is %s\n", levelName);
+  //if no name
+  if (strcmp(levelName, "") == 0)
+    {
+      return 0;
+    }
+
   S_Level *actual = levelList->first;
   while (actual != NULL)
     {
@@ -274,7 +303,7 @@ readLevelFromSetting (S_LevelList * levelList)
 	}
       actual = actual->next;
     }
-  fprintf (stderr, "levelchoice from file : %d\n ", ret);
+  vbPrintf ("levelchoice from file : %d\n ", ret);
   return ret;
 }
 

@@ -35,7 +35,7 @@ menuChoiceInit(void)
 {
 /*init Menu Choice*/
   menuChoice.tabChoice = 1;
-  menuChoice.lineChoice = 0;
+  menuChoice.lineChoice = MENU_OFFSET;
   menuChoice.nbrTabs = NBR_OF_TAB - 1;
   menuChoice.open = 0;
   menuChoice.freeze = 0;
@@ -94,20 +94,50 @@ gridMenu_initButtons(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
    gridMenu[pref.xb_menu + 2][0] = (S_Menu) {.role=M_PREVIOUS, .type=TOPBAR, .tab=0, .image=BUTTON_ARROW_L};
    gridMenu[pref.xb_menu + 7][0] = (S_Menu) {.role=M_NEXT, .type=TOPBAR,  .tab=0, .image=BUTTON_ARROW_P};
    gridMenu[pref.xb_menu + 8][0] = (S_Menu) {.role=M_RESET, .type=TOPBAR, .tab=0, .image=BUTTON_RESET};
-   gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_BACKWARDS, .type=TOPBAR, .tab=0, .image=BUTTON_BACKWARDS};
+
+    if(pref.achieved != 1)
+      {
+        gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECK, .type=TOPBAR, .tab=0, .image=BUTTON_CHECK};
+      }
+    else
+      {
+        gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECKED, .type=TOPBAR, .tab=0, .image=BUTTON_CHECKED};
+      }
+
 }
 
 /*Declare tabs and its content into the gridMenu*/
 void
 gridMenu_initTabs(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
 {
-   gridMenu[pref.xb_menu + 2][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=1, .image=NO_IMAGE};
-   gridMenu[pref.xb_menu + 3][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=2,  .image=NO_IMAGE};
-   gridMenu[pref.xb_menu + 4][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=3, .image=NO_IMAGE};
-   gridMenu[pref.xb_menu + 5][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=4,  .image=NO_IMAGE};
-   gridMenu[pref.xb_menu + 6][1] = (S_Menu) {.role=M_EMPTY, .type=TABS, .tab=5, .image=NO_IMAGE};
+   gridMenu[pref.xb_menu + 2][1] = (S_Menu) { .type=TABS, .tab=1};
+   gridMenu[pref.xb_menu + 3][1] = (S_Menu) { .type=TABS, .tab=2};
+   gridMenu[pref.xb_menu + 4][1] = (S_Menu) { .type=TABS, .tab=3};
+   gridMenu[pref.xb_menu + 5][1] = (S_Menu) { .type=TABS, .tab=4};
+   gridMenu[pref.xb_menu + 6][1] = (S_Menu) { .type=TABS, .tab=5};
 };
 
+/*Declare lines and its content into the gridMenu*/
+void
+gridMenu_initLines(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks])
+{
+  //first clean old TABS_LINE
+  for (int y = MENU_OFFSET; y < NBR_OF_TAB_LINE; y++)
+    {
+      for (int x = pref.xb_menu; x < pref.xb_menu + NBR_OF_TAB_LINE; x++)
+        {
+          gridMenu[x][y] = (S_Menu) {.type=MAIN_WINDOW, .tab= 0};
+        }
+    }
+  //then write TABS_LINE to the grid depending on the menuchoice[current tab]nbrLines value
+  for (int y = MENU_OFFSET; y < menuChoice.tab[menuChoice.tabChoice].nbrLines + MENU_OFFSET; y++)
+    {
+      for (int x = pref.xb_menu; x < pref.xb_menu + NBR_OF_TAB_LINE; x++)
+        {
+          gridMenu[x][y] = (S_Menu) {.type=TABS_LINE, .tab= menuChoice.tabChoice};
+        }
+    }
+}
 /* display Top Bar*/
 int
 displayTopBar (SDL_Surface * screen,
@@ -342,7 +372,7 @@ openMenu (SDL_Surface * screen,
   /* add the tab name above tab icons */
   SDL_Rect pos;
   /*blit text*/
-  pos.x = pref.x_menu + SPRITE_SIZE;
+  pos.x = pref.x_menu + SPRITE_SIZE - 8;
   pos.y = 2 * SPRITE_SIZE + 10;
   size_t tabChoice = gridMenu[menuChoice.xPos][1].tab;
   size_t tab = menuChoice.tab[tabChoice].name;
@@ -361,80 +391,43 @@ displaySubMenu (SDL_Surface * screen,
 {
   /* blit text */
   //fprintf (stderr, "menuChoice : %d, %d\n", menuChoice.tabChoice, menuChoice.tab[menuChoice.tabChoice].nbrLines);
-  SDL_Rect linePos;
-
-  linePos.x = pref.x_menu + 40;
 
       /*Level Info */
+      size_t sizeMax = 30;
       int i = 0;
-      unsigned int sizeMax = 30;
-      char nameLevel[MAX_CARACT] = "";
-      strcpy (nameLevel, gettext ("Name: "));
+      S_Level *current = malloc (sizeof (S_Level));
+      getCurrentLevelInfos(levelList, current);
 
-      char nameFile[MAX_CARACT] = "";
-      strcpy (nameFile, gettext ("File: "));
-
-      char *pbuf;
-      S_Level *actual = malloc (sizeof (*actual));
-      if (actual == NULL)
-	{
-	  fprintf (stderr, gettext ("not enough memory"));
-	  exit (EXIT_FAILURE);
-	}
-
-      actual = levelList->first;
-      while (actual != NULL)
-	{
-
-	  if (i == pref.level)
-	    {
-	      /*trunk long name */
-	      if (strlen (actual->name) > sizeMax)
-		{
-		  sprintf (nameLevel, "%s...",
-			   strncat (nameLevel, actual->name, sizeMax));
-		}
-	      else
-		{
-		  sprintf (nameLevel, "%s", strcat (nameLevel, actual->name));
-		}
-
-	      /*trunk long file name */
-	      pbuf = strpbrk (actual->fileName, "/");
-	      if (strlen (pbuf) > sizeMax)
-		{
-		  sprintf (nameFile, gettext ("File: %s.."),
-			   strncat (nameFile, pbuf, sizeMax));
-		}
-	      else
-		{
-		  sprintf (nameFile, gettext ("File: %s"), pbuf);
-		}
-	    }
-	  actual = actual->next;
-	  i++;
-	}
-      free (actual);
+      char line[MENU_MAX_INFO + 1 ][MAX_CARACT] = { 0 };
+      sprintf (line[1], gettext ("Name: %s"),current->name);
+      sprintf (line[2], gettext ("File: %s"), current->fileName);
+      sprintf (line[3], gettext ("Author: %s"), current->author);
+      sprintf (line[4], gettext ("Level size: %dx%d"), current->width, current->height);
+      free(current);
 
      size_t fontSize = 20, R = 255, G = 255, B = 255, A = 255;
-     loadTextAsSurface (INFO,1, tableTextSurface, nameLevel,
+      for (i = 1; i <= MENU_MAX_INFO; i++)
+          {
+           trunkLongChar(sizeMax, line[i]);
+           loadTextAsSurface (INFO,i, tableTextSurface, line[i],
 		     fontSize, R, G, B, A);
-     loadTextAsSurface (INFO,2, tableTextSurface, gettext ("Authors:"),
-		     fontSize, R, G, B, A);
-     loadTextAsSurface (INFO,3, tableTextSurface, nameFile,
-		     fontSize, R, G, B, A);
+          }
+
 
   /*print lines into tabs*/
-   int j = 0, tabChoice = menuChoice.tabChoice, nbr = menuChoice.tab[tabChoice].nbrLines + 1;
+   int tabChoice = menuChoice.tabChoice, nbr = menuChoice.tab[tabChoice].nbrLines + 1;
    int tabName = menuChoice.tab[tabChoice].name;
-   for (j = 1; j < nbr; j++ ){
-        if (tableTextSurface[tabName][j].image != NULL){
-        linePos.y = 3*SPRITE_SIZE + 10 + (j-1)*SPRITE_SIZE;
-        SDL_BlitSurface (tableTextSurface[tabName][j].image, NULL, screen, &linePos);
+   SDL_Rect linePos;
+   linePos.x = pref.x_menu + 40;
+
+   for (i = 1; i < nbr; i++ ){
+        if (tableTextSurface[tabName][i].image != NULL){
+        linePos.y = 3*SPRITE_SIZE + 10 + (i-1)*SPRITE_SIZE;
+        SDL_BlitSurface (tableTextSurface[tabName][i].image, NULL, screen, &linePos);
         }
    }
   /*clean*/
-  for (size_t i = 1; i <= 3; i++ ){
+  for ( i = 1; i <= MENU_MAX_INFO; i++ ){
   SDL_FreeSurface (tableTextSurface[INFO][i].image);
   tableTextSurface[INFO][i].image = NULL;
   }
@@ -492,31 +485,29 @@ displayOpenMenuBackground (SDL_Surface * screen,
 
     }
 
-  /* add a separator line */
-  SDL_Rect sepPos;
-  sepPos.x = pref.x_menu + 33;
-  sepPos.y = 2*SPRITE_SIZE;
-  SDL_BlitSurface (tableSurface[MENU_SEPARATOR].image, NULL, screen, &sepPos);
-  sepPos.y = 3*SPRITE_SIZE;
-  SDL_BlitSurface (tableSurface[MENU_SEPARATOR].image, NULL, screen, &sepPos);
+  /* add background to the menu lines */
+  SDL_Rect h_linePos;
+  for (i = 2; i < size + 1; i++)
+    {
+       h_linePos.x = pref.x_menu + 30;
+       h_linePos.y = i*SPRITE_SIZE;
+       SDL_BlitSurface (tableSurface[MENU_H_LINE].image, NULL, screen, &h_linePos);
+    }
 
   /*highlight the sub menuChoice*/
 
   SDL_Rect hlPos;
-  hlPos.x = pref.x_menu + SPRITE_SIZE - 10;
-  hlPos.y = 3*SPRITE_SIZE + 12 + menuChoice.lineChoice*SPRITE_SIZE;
-  SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen, &hlPos);
+  hlPos.x = pref.x_menu + SPRITE_SIZE;
+  hlPos.y = (menuChoice.lineChoice)*SPRITE_SIZE + 1;
+       for (int j = 0; j < 8; j++){
+          SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen, &hlPos);
+          hlPos.x += SPRITE_SIZE;
+       }
 
-  /* add highlight to tabs depending on the menuChoice*/
-  SDL_Rect tabPos;
-  tabPos.y = SPRITE_SIZE;
-  tabPos.x = menuChoice.xPos * SPRITE_SIZE + 3;
-  SDL_BlitSurface (tableSurface[BUTTON_HIGHLIGHT].image, NULL, screen, &tabPos);
 
   /* add tab icons */
-
   SDL_Rect iconPos;
-  iconPos.y = SPRITE_SIZE + 5;
+  iconPos.y = SPRITE_SIZE + 2;
 
   for(int y=0; y < pref.max_Y_Blocks; ++y){
       for(int x=0; x< pref.max_X_Blocks; ++x){
@@ -528,6 +519,11 @@ displayOpenMenuBackground (SDL_Surface * screen,
         }
       }
     }
+  // highlight selected tab //
+  SDL_Rect highlightPos;
+  highlightPos.y = SPRITE_SIZE;
+  highlightPos.x = pref.x_menu + (1 + menuChoice.tabChoice)*SPRITE_SIZE;
+  SDL_BlitSurface (tableSurface[MENU_HIGHLIGHT].image, NULL, screen, &highlightPos);
 }
 
 /* Display pattern image over the text menu */

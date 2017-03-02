@@ -28,6 +28,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL2_rotozoom.h>
 
 #include "const.h"
+#include "level.h"
 #include "level_decor.h"
 #include "menu_text.h"
 #include "settings.h"
@@ -35,11 +36,11 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 /*define menu object*/
 enum
-{M_EMPTY, M_PREVIOUS, M_NEXT, M_RESET, M_BACKWARDS};
+{M_EMPTY, M_PREVIOUS, M_NEXT, M_RESET, M_CHECK, M_CHECKED};
 
 
 
-enum {MAIN_WINDOW, TOPBAR, TABS}; //Main elements of the interface
+enum {MAIN_WINDOW, TOPBAR, TABS, TABS_LINE}; //Main elements of the interface
 enum {TAB_EMPTY, INFO, SHORTCUTS, ABOUT, FILES, SETTINGS}; //Different tabs
 
 /* Init menu Choice */
@@ -58,6 +59,10 @@ gridMenu_initButtons(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 /*Declare tabs and its content into the gridMenu*/
 void
 gridMenu_initTabs(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
+
+/*Declare lines and its content into the gridMenu*/
+void
+gridMenu_initLines(S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks]);
 
 /* display Top Bar*/
 int
