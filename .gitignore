@@ -2,7 +2,7 @@
 obj/
 bin/
 .buildconfig
-locale/fr/*.mo
+po/*.mo
 valgrind.log
 session.ini
 # Except this files

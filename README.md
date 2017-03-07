@@ -104,17 +104,17 @@ valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind.log ./bin/S
 ```
 #### Translate
 
-Edit or add a file named "sokorobot.po" in the "locale" folder (in french for example)
+Edit or add a file named "fr.po" in the "locale" folder (in french for example)
 ```
-locale/fr/sokorobot.po
+po/fr.po
 ```
 Compile it:
 ```
-msgfmt -o locale/fr/sokorobot.mo locale/fr/sokorobot.po
+msgfmt -o po/fr.mo po/fr.po
 ```
 copy the .mo file into /usr/share/locale/
 ```
-cp locale/fr/sokorobot.mo /usr/share/locale/fr/LC_MESSAGES/
+cp po/fr.mo /usr/share/locale/fr/LC_MESSAGES/sokorobot.mo
 ```
 run SokoRobot
 ```
