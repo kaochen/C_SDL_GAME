@@ -156,12 +156,12 @@ main (int argc, char *argv[])
   S_Menu gridMenu[pref.max_X_Blocks][pref.max_Y_Blocks];
   gridMenu_init (gridMenu);
 
-  /*List slc files from the levels/ folder */
+  /*List slc files from the LEVELS_FOLDER */
   S_FilesList *filesList = initFilesList ();
   if (listSlcLevelFiles (filesList) == EXIT_FAILURE)
     {
       perror (gettext
-	      ("The level files cannot be listed from the folder levels/."));
+	      ("The level files cannot be listed from the folder "LEVELS_FOLDER"."));
     }
 
   /*Read files name from the filesList to check */
@@ -180,7 +180,7 @@ main (int argc, char *argv[])
     }
 
   vbPrintf (gettext
-	   ("The list of the possible levels has been generate from the content of the folder levels/.\n"));
+	   ("The list of the possible levels has been generate from the content of the folder "LEVELS_FOLDER".\n"));
   fprintf (stderr, "\n");
 
   /* init menu choice,status*/

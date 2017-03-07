@@ -150,7 +150,7 @@ int
 listSlcLevelFiles (S_FilesList * filesList)
 {
   DIR *rep;
-  rep = opendir ("levels/");
+  rep = opendir (LEVELS_FOLDER);
   struct dirent *file = NULL;
   if (rep == NULL)
     {
@@ -164,7 +164,7 @@ listSlcLevelFiles (S_FilesList * filesList)
       if (strstr (file->d_name, ".slc") != NULL
 	  || strstr (file->d_name, ".SLC") != NULL)
 	{
-	  sprintf (path, "levels/%s", file->d_name);
+	  sprintf (path, ""LEVELS_FOLDER"%s", file->d_name);
 	  if (filesList->nbr_of_files == 0)
 	    {
 	      addFirstFile (filesList, path);
