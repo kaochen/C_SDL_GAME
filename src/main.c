@@ -118,7 +118,7 @@ main (int argc, char *argv[])
     }
 
   /* Set window icon */
-  SDL_SetWindowIcon (window, IMG_Load ("img/original/icon.png"));
+  SDL_SetWindowIcon (window, IMG_Load (""IMG_FOLDER"icon.png"));
 
   /* Create a surface from the window */
   SDL_Surface *screen = NULL;

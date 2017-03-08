@@ -345,7 +345,7 @@ getThemePath(void)
   char bufPath[MAX_CARACT] = "";
   readChar (PREF_FILE, bufPath, "theme");
 
-  sprintf (themePath, "img/%s/", bufPath);
+  sprintf (themePath, ""IMG_FOLDER"%s/", bufPath);
   vbPrintf ("Theme: %s\n", themePath);
 
   /*test if folder exist */
@@ -353,7 +353,7 @@ getThemePath(void)
   if (stat (themePath, &file_stat) < 0)
     {
       printf ("The theme folder %s does not exist\n", themePath);
-      strcpy (themePath, "img/original/");
+      strcpy (themePath, ""IMG_FOLDER"original/");
       fprintf (stderr, "Change theme folder to default: %s\n\n", themePath);
     }
   else

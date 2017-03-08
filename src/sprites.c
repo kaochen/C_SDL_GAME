@@ -123,7 +123,7 @@ loadSprite (Sprites * sprites, const char *themePath, const char *imageName)
   if (stat (filePath, &file_stat) < 0)
     {
       printf (gettext ("the file %s does not exist\n"), filePath);
-      strcpy (filePath, "img/original/");
+      strcpy (filePath, ""IMG_FOLDER"/original/");
       strcat (filePath, imageName);
       fprintf (stderr, gettext ("Load default image instead: %s\n\n"),
 	       filePath);
