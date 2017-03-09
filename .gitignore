@@ -1,8 +1,26 @@
 #Ignore this files
-obj/
+.gitignore.swp
+autom4te.cache
+aclocal.m4
+autoscan.log
+config.*
+install-sh
+missing
+stamp-h1
+Makefile
+Makefile.in
+configure
+depcomp
+compile
+src/*.o
+src/.deps/
+src/tags
+tags
+src/SokoRobot
 bin/
 .buildconfig
 po/*.mo
 valgrind.log
 session.ini
+INSTALL
 # Except this files
