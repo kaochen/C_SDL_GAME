@@ -35,23 +35,20 @@ git pull
 
 ### Compile
 ```
+./configure
 make
 ```
 
 ### Play
 ```
-./bin/SokoRobot
+./src/SokoRobot
 ```
 
 ### Clean install
-clean objects *.o:
 ```
 make clean
 ```
-Clean binaries:
-```
-make mrproper
-```
+
 
 ### Dev stuff
 Use the develop branch to get the lastest commits:
