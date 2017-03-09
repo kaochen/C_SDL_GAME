@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef MOVE_C
 #define MOVE_C
 
-#include "../inc/move.h"
+#include "move.h"
 #include <math.h>
 
 /* move player and update object status" */

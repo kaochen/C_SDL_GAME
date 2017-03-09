@@ -29,16 +29,16 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL_image.h>
 #include <SDL2/SDL_ttf.h>
 
-#include "../inc/const.h"
-#include "../inc/level.h"
-#include "../inc/level_decor.h"
-#include "../inc/menu.h"
-#include "../inc/menu_text.h"
-#include "../inc/mouse.h"
-#include "../inc/move.h"
-#include "../inc/settings.h"
-#include "../inc/sprites.h"
-#include "../inc/slc.h"
+#include "const.h"
+#include "level.h"
+#include "level_decor.h"
+#include "menu.h"
+#include "menu_text.h"
+#include "mouse.h"
+#include "move.h"
+#include "settings.h"
+#include "sprites.h"
+#include "slc.h"
 
 
 int

@@ -22,7 +22,7 @@
 #ifndef SPRITES_C
 #define SPRITES_C
 
-#include "../inc/sprites.h"
+#include "sprites.h"
 #include <libintl.h>
 #include <locale.h>
 

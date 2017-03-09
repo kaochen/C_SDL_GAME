@@ -21,8 +21,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef SETTINGS_C
 #define SETTINGS_C
 
-#include "../inc/settings.h"
-#include "../inc/menu.h"
+#include "settings.h"
+#include "menu.h"
 #include <string.h>
 #include <errno.h>
 

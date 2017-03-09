@@ -24,9 +24,9 @@ CFLAGS= -std=c11 -Wall -Wextra -g `sdl2-config --cflags --libs`  -lSDL2main -lSD
 LDFLAGS=
 OBJDIR=./obj/
 BINDIR=./bin/
+SRCDIR=./src/
 
 EXEC= SokoRobot
-DEPS= inc/const.h inc/level.h inc/level_decor.h inc/menu.h inc/menu_text.h inc/mouse.h inc/move.h inc/settings.h inc/sprites.h inc/slc.h
 OBJS= $(OBJDIR)level.o $(OBJDIR)level_decor.o $(OBJDIR)main.o $(OBJDIR)menu.o $(OBJDIR)menu_text.o $(OBJDIR)mouse.o $(OBJDIR)move.o $(OBJDIR)settings.o $(OBJDIR)sprites.o $(OBJDIR)slc.o
 
 #first create the obj folder to receive *.o files :
@@ -39,34 +39,34 @@ all: $(BINDIR)$(EXEC)
 $(BINDIR)$(EXEC): $(OBJS)
 	$(CC)  -o $@ $(OBJS) $(CFLAGS)
 
-$(OBJDIR)main.o: src/main.c $(DEPS)
+$(OBJDIR)main.o: $(SRCDIR)main.c $^
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
-$(OBJDIR)level.o: src/level.c $(DEPS)
+$(OBJDIR)level.o: $(SRCDIR)level.c $^
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
-$(OBJDIR)level_decor.o: src/level_decor.c $(DEPS)
+$(OBJDIR)level_decor.o: $(SRCDIR)level_decor.c $^
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
-$(OBJDIR)menu.o: src/menu.c $(DEPS)
+$(OBJDIR)menu.o: src/menu.c $^
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
-$(OBJDIR)menu_text.o: src/menu_text.c $(DEPS)
+$(OBJDIR)menu_text.o: src/menu_text.c $^
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
-$(OBJDIR)mouse.o: src/mouse.c $(DEPS)
+$(OBJDIR)mouse.o: src/mouse.c $^
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
-$(OBJDIR)move.o: src/move.c $(DEPS)
+$(OBJDIR)move.o: src/move.c $^
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
-$(OBJDIR)settings.o: src/settings.c $(DEPS)
+$(OBJDIR)settings.o: src/settings.c $^
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
-$(OBJDIR)sprites.o: src/sprites.c $(DEPS)
+$(OBJDIR)sprites.o: src/sprites.c $^
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
-$(OBJDIR)slc.o: src/slc.c $(DEPS)
+$(OBJDIR)slc.o: src/slc.c $^
 	$(CC) -o $@ -c $< -I inc $(CFLAGS)
 
 .PHONY: clean mrproper

@@ -22,7 +22,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef LEVEL_C
 #define LEVEL_C
 
-#include "../inc/level.h"
+#include "level.h"
 
 #include <libintl.h>
 #include <locale.h>
