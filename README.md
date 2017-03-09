@@ -35,6 +35,10 @@ git pull
 
 ### Compile
 ```
+aclocal
+autoheader
+autoconf
+automake
 ./configure
 make
 ```
