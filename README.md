@@ -35,10 +35,7 @@ git pull
 
 ### Compile
 ```
-aclocal
-autoheader
-autoconf
-automake
+./autogen.sh
 ./configure
 make
 ```
