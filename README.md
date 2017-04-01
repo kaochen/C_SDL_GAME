@@ -37,17 +37,23 @@ git pull
 ```
 ./autogen.sh
 ./configure
+#Or for a local install
+./configure --prefix ~/test/ 
 make
+make install
 ```
 
 ### Play
 ```
-./src/SokoRobot
+/usr/local/sokorobot/SokoRobot
+#Or
+~/test/sokorobot/SokoRobot
 ```
 
 ### Clean install
 ```
 make clean
+make uninstall
 ```
 
 
