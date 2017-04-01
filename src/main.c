@@ -94,6 +94,8 @@ main (int argc, char *argv[])
     }
 
   /*load preferences */
+  printf("current directory %s\n", argv[0]);
+  searchPrefFile(argv[0]);
   loadPrefStruct(current);
   pref.verbosity = vb;
 

@@ -52,7 +52,8 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #define NBR_OF_IMAGES 50
 #define NBR_OF_TEXT 20
 
-#define MAX_CARACT 200
+#define MAX_CARACT 255
+#define MAX_PATH 255
 
 #define PI 3.14159265
 
@@ -191,6 +192,10 @@ S_menuchoice menuChoice; //store current menu status as a  global struct
 /*Struct to store settings*/
 typedef struct
 {
+ char pgmPath[MAX_PATH];
+ char iniPath[MAX_PATH];
+ char imgPath[MAX_PATH];
+ char levelsPath[MAX_PATH];
  /* Main Window */
  int display_width;
  int display_height;

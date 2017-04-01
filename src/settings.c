@@ -25,22 +25,38 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "menu.h"
 #include <string.h>
 #include <errno.h>
-
+#include <sys/types.h>
+#include <unistd.h>
 #include <sys/stat.h>
+#include <stdio.h>
+#include <stdlib.h>
+
 /* Searching for preferences.ini */
 void
 searchPrefFile(char * prefFile){
 
 FILE *file = NULL;
-char path[MAX_CARACT]= "./";
+char path[MAX_PATH]= "";
+char *pLastWord = NULL;
+pLastWord = strrchr(prefFile, '/');
+size_t l = strlen(prefFile) - strlen(pLastWord) + 1;
+printf("lastword : %s\n", pLastWord);
+strncat(path, prefFile,l);
+strcpy (pref.pgmPath, path);
+sprintf (pref.imgPath, "%s"IMG_FOLDER"/",pref.pgmPath);
+sprintf (pref.levelsPath, "%s"LEVELS_FOLDER"/",pref.pgmPath);
+
+
 strcat(path,PREF_FILE);
 file = fopen(path, "r");
 
 if (file != NULL){
     strcpy(prefFile,path);
+    fprintf (stderr, "found %s\n", path);
+    strcpy(pref.iniPath, path);
     }
 else{
-      fprintf (stderr, "Error opening %s: %s\n", PREF_FILE, strerror (errno));
+      fprintf (stderr, "Error opening %s :: %s\n", path, strerror (errno));
       exit(EXIT_FAILURE);
     }
 fclose(file);
@@ -131,7 +147,7 @@ readInt (const char *fileName, const char *prefName)
     }
   else
     {
-      fprintf (stderr, "Error opening %s: %s\n", PREF_FILE, strerror (errno));
+      fprintf (stderr, "Error opening %s: %s\n", pref.iniPath, strerror (errno));
       exit(EXIT_FAILURE);
     }
   fclose (prefFile);
@@ -163,7 +179,7 @@ readChar(const char *fileName, char * pref, const char *setting) {
 	                if (strstr (line, setting) != NULL)
 	                  {
                           if (strchr (line, '"') != NULL)
-		                       {
+                           {
 		                         test = strchr (line, '"');
                                strcpy (ret, test);
 		                       }
@@ -245,7 +261,7 @@ testIfLevelAchieved(const char *levelName,
 int
 getWindow_width (void)
 {
-  int ret = readInt (PREF_FILE, "window_width");
+  int ret = readInt (pref.iniPath, "window_width");
   if (ret < W_WIDTH)
     {
       ret = W_WIDTH;
@@ -259,7 +275,7 @@ getWindow_width (void)
 int
 getWindow_height (void)
 {
-  int ret = readInt (PREF_FILE, "window_height");
+  int ret = readInt (pref.iniPath, "window_height");
   if (ret < W_HEIGHT)
     {
       ret = W_HEIGHT;
@@ -273,7 +289,7 @@ getWindow_height (void)
 int
 getWindow_framerate (void)
 {
-       int fps = readInt (PREF_FILE,"framerate");
+       int fps = readInt (pref.iniPath,"framerate");
         if (fps < 12){
             fps = 12;
         }
@@ -343,9 +359,9 @@ getThemePath(void)
   vbPrintf ("Loading Theme:\n");
   char themePath[MAX_CARACT] = "";
   char bufPath[MAX_CARACT] = "";
-  readChar (PREF_FILE, bufPath, "theme");
+  readChar (pref.iniPath, bufPath, "theme");
 
-  sprintf (themePath, ""IMG_FOLDER"%s/", bufPath);
+  sprintf (themePath, "%s"IMG_FOLDER"%s/",pref.pgmPath, bufPath);
   vbPrintf ("Theme: %s\n", themePath);
 
   /*test if folder exist */
