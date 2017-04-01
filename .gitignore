@@ -9,7 +9,6 @@ missing
 stamp-h1
 Makefile
 Makefile.in
-configure
 depcomp
 compile
 src/*.o

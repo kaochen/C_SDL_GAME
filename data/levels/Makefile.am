@@ -1,4 +1,4 @@
-levelsdir=$(datadir)/levels
+levelsdir = $(prefix)/@PACKAGE@/data/levels
 
 levels_DATA= Microban-1.slc \
 	Microban-2.slc \

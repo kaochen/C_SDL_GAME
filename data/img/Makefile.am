@@ -1,9 +1,6 @@
-imgdir=$(datadir)/img
-
-img_DATA= original/box_ok.png \
-	original/box_ok.png \
+img_dir = $(prefix)/@PACKAGE@/data/img/original
+img__DATA= original/box_ok.png \
 	original/box.png   \
-	original/box.png \
 	original/button_about.png \
 	original/button_arrow_l.png \
 	original/button_arrow_p.png \

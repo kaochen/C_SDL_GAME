@@ -1,8 +1,11 @@
-SUBDIRS = data src
+gameFiles_dir = $(prefix)/@PACKAGE@/
+gameFiles__DATA= preferences.ini
+
+
+SUBDIRS = data/img data/levels src
 DIST_SUBDIRS = $(SUBDIRS)
-bindir=$(prefix)
-datadir=$(prefix)/data
-createdirs:
-	mkdir $(topdir)/data
-	mkdir $(topdir)/data/levels
-	mkdir $(topdir)/data/img
+
+#createdirs:
+#	mkdir $(packagedir)/data
+#	mkdir $(packagedir)/data/levels
+#	mkdir $(packagedir)/data/img

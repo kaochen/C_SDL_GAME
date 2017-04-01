@@ -9,8 +9,12 @@ AC_CONFIG_HEADERS([config.h])
 
 # Checks for programs.
 AC_PROG_CC
+AC_PROG_INSTALL
+AC_PROG_LN_S
+AC_PROG_MAKE_SET
 
 # Checks for header files.
+AC_HEADER_STDC
 AC_CHECK_HEADERS(libintl.h locale.h stdlib.h string.h)
 
 # Checks for typedefs, structures, and compiler characteristics.
@@ -24,7 +28,6 @@ AC_CHECK_FUNCS([setlocale strchr strerror strpbrk strrchr strstr])
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
-	data/Makefile
 	data/img/Makefile
 	data/levels/Makefile
 ])
