@@ -139,7 +139,7 @@ main (int argc, char *argv[])
   /* load images into a table of struct */
   Sprites tableSurface[NBR_OF_IMAGES];
 
-  for (i = 0; i <= NBR_OF_IMAGES; i++)
+  for (i = 0; i < NBR_OF_IMAGES; i++)
     {
       tableSurface[i].image = 0;
     }
