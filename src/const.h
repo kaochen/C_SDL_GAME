@@ -225,6 +225,7 @@ typedef struct
 
  /* theme */
   char themePath[MAX_CARACT];
+  char themeName[MAX_CARACT];
 
  /* program */
   bool verbosity;

@@ -361,6 +361,7 @@ getThemePath(void)
   char bufPath[MAX_CARACT] = "";
   readChar (pref.iniPath, bufPath, "theme");
 
+  sprintf (pref.themeName, "%s", bufPath);
   sprintf (themePath, "%s"IMG_FOLDER"%s/",pref.pgmPath, bufPath);
   vbPrintf ("Theme: %s\n", themePath);
 
