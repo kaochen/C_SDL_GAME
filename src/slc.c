@@ -423,9 +423,9 @@ readLevelsAttributs (S_FilesList * filesList,
 	      }
 
             /*get attributs */
-            xmlChar *name;
-            xmlChar *width;
-            xmlChar *height;
+            xmlChar *name = NULL;
+            xmlChar *width = NULL;
+            xmlChar *height = NULL;
             char author[MAX_CARACT] = "";
             getCopyrightFromSLC(actualFile->name, author);
 
