@@ -28,9 +28,13 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <SDL2/SDL.h>
 #include "const.h"
 
-/* Searching for preferences.ini */
+/* Setup all paths */
 void
-searchPrefFile(char * prefFile);
+setupPath(char * argv0);
+
+//Try to find a user place to store SESSION_FILE
+void
+setupSessionFilePath();
 
 /* load settings from pref file */
 int

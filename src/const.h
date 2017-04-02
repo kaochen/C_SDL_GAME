@@ -194,6 +194,7 @@ typedef struct
 {
  char pgmPath[MAX_PATH];
  char iniPath[MAX_PATH];
+ char sessionPath[MAX_PATH];
  char imgPath[MAX_PATH];
  char levelsPath[MAX_PATH];
  /* Main Window */

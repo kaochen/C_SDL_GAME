@@ -95,7 +95,7 @@ main (int argc, char *argv[])
 
   /*load preferences */
   printf("current directory %s\n", argv[0]);
-  searchPrefFile(argv[0]);
+  setupPath(argv[0]);
   loadPrefStruct(current);
   pref.verbosity = vb;
 
@@ -550,7 +550,7 @@ main (int argc, char *argv[])
         gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECKED, .type=TOPBAR, .tab=0, .image=BUTTON_CHECKED};
         S_Level *current = malloc (sizeof (S_Level));
         getCurrentLevelInfos(levelList, current);
-        storeLevelsFinished(SESSION_FILE, current->name);
+        storeLevelsFinished(pref.sessionPath, current->name);
         free(current);
 	      menuChoice.freeze = 1;
 	    }
@@ -581,7 +581,7 @@ main (int argc, char *argv[])
   //store the current level name before closing
 	S_Level *currentLevel = malloc (sizeof (S_Level));
   getCurrentLevelInfos(levelList, currentLevel);
-	writeChar (SESSION_FILE, "LevelName", currentLevel->name);
+	writeChar (pref.sessionPath, "LevelName", currentLevel->name);
   free (currentLevel);
 
   /* clean */

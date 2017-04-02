@@ -30,28 +30,32 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include <sys/stat.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <pwd.h>
 
-/* Searching for preferences.ini */
+/* Setup all paths */
 void
-searchPrefFile(char * prefFile){
+setupPath(char * argv0){
 
 FILE *file = NULL;
 char path[MAX_PATH]= "";
 char *pLastWord = NULL;
-pLastWord = strrchr(prefFile, '/');
-size_t l = strlen(prefFile) - strlen(pLastWord) + 1;
+pLastWord = strrchr(argv0, '/');
+size_t l = strlen(argv0) - strlen(pLastWord) + 1;
 printf("lastword : %s\n", pLastWord);
-strncat(path, prefFile,l);
-strcpy (pref.pgmPath, path);
+strncat(path, argv0,l);
+
+// setup all folders paths
+strcpy (pref.pgmPath, path); // root program path
 sprintf (pref.imgPath, "%s"IMG_FOLDER"/",pref.pgmPath);
 sprintf (pref.levelsPath, "%s"LEVELS_FOLDER"/",pref.pgmPath);
+setupSessionFilePath();
 
-
+// check if PREF_FILE exist
 strcat(path,PREF_FILE);
 file = fopen(path, "r");
 
 if (file != NULL){
-    strcpy(prefFile,path);
+    strcpy(argv0,path);
     fprintf (stderr, "found %s\n", path);
     strcpy(pref.iniPath, path);
     }
@@ -61,6 +65,40 @@ else{
     }
 fclose(file);
 }
+
+//Try to find a user place to store SESSION_FILE
+void
+setupSessionFilePath(){
+  struct passwd *pwd = getpwuid(getuid());
+  char path[MAX_PATH];
+  if(pwd){
+    sprintf (path, "%s/.local/share/"GAME_NAME"/",pwd->pw_dir);
+  }
+  else{
+    sprintf (path, "%s/.local/share/"GAME_NAME"/",getenv("HOME"));
+  }
+  fprintf (stderr,"Session file will be at %s\n", pref.sessionPath);
+
+  //place SESSION_FILE into the user folder.
+  // Create a sub folder if necessary
+  struct stat st = {0};
+  if (stat(path, &st) == -1){
+    mkdir(path, 0755);
+  }
+
+  // Create SESSION_FILE if necessary
+  sprintf (pref.sessionPath, "%s/"SESSION_FILE"",path);
+
+  FILE *sessionFile;
+  sessionFile = fopen(pref.sessionPath, "rb+");
+  if (sessionFile == NULL)
+    {
+      sessionFile = fopen(pref.sessionPath, "wb");
+    }
+  fclose(sessionFile);
+
+}
+
 
 /* load settings from pref file */
 int
@@ -228,7 +266,7 @@ testIfLevelAchieved(const char *levelName,
       char line[MAX_CARACT]="";
 
       FILE *file = NULL;
-      file = fopen (SESSION_FILE, "r");
+      file = fopen (pref.sessionPath, "r");
 
       int i = 0;
       if (file != NULL)
@@ -249,7 +287,7 @@ testIfLevelAchieved(const char *levelName,
         }
       else
         {
-          fprintf (stderr, "Error opening %s: %s\n", SESSION_FILE, strerror (errno));
+          fprintf (stderr, "Error opening %s: %s\n", pref.sessionPath, strerror (errno));
           return EXIT_FAILURE;
         }
   fclose (file);

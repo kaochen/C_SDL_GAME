@@ -281,7 +281,7 @@ readLevelFromSetting (S_LevelList * levelList)
 
   int i = 0, ret = 0;
   char levelName[MAX_CARACT] = "";
-  readChar (SESSION_FILE, levelName, "LevelName");
+  readChar (pref.sessionPath, levelName, "LevelName");
   vbPrintf ("First level to load is %s\n", levelName);
   //if no name
   if (strcmp(levelName, "") == 0)
