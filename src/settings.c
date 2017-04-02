@@ -21,6 +21,9 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #ifndef SETTINGS_C
 #define SETTINGS_C
 
+#include <libintl.h>
+#include <locale.h>
+
 #include "settings.h"
 #include "menu.h"
 #include <string.h>
@@ -77,7 +80,6 @@ setupSessionFilePath(){
   else{
     sprintf (path, "%s/.local/share/"GAME_NAME"/",getenv("HOME"));
   }
-  fprintf (stderr,"Session file will be at %s\n", pref.sessionPath);
 
   //place SESSION_FILE into the user folder.
   // Create a sub folder if necessary
@@ -97,6 +99,7 @@ setupSessionFilePath(){
     }
   fclose(sessionFile);
 
+  vbPrintf (gettext ("Session File will be at %s\n"), pref.sessionPath);
 }
 
 
