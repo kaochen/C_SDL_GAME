@@ -120,7 +120,10 @@ main (int argc, char *argv[])
     }
 
   /* Set window icon */
-  SDL_SetWindowIcon (window, IMG_Load (""IMG_FOLDER"icon.png"));
+  char iconPath[MAX_PATH];
+  sprintf (iconPath, "%sicon.png",pref.imgPath);
+  fprintf (stderr, gettext ("icon path: %s\n"),iconPath);
+  SDL_SetWindowIcon (window, IMG_Load (iconPath));
 
   /* Create a surface from the window */
   SDL_Surface *screen = NULL;

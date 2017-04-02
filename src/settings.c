@@ -46,8 +46,8 @@ strncat(path, argv0,l);
 
 // setup all folders paths
 strcpy (pref.pgmPath, path); // root program path
-sprintf (pref.imgPath, "%s"IMG_FOLDER"/",pref.pgmPath);
-sprintf (pref.levelsPath, "%s"LEVELS_FOLDER"/",pref.pgmPath);
+sprintf (pref.imgPath, "%s"IMG_FOLDER"",pref.pgmPath);
+sprintf (pref.levelsPath, "%s"LEVELS_FOLDER"",pref.pgmPath);
 setupSessionFilePath();
 
 // check if PREF_FILE exist
@@ -87,7 +87,7 @@ setupSessionFilePath(){
   }
 
   // Create SESSION_FILE if necessary
-  sprintf (pref.sessionPath, "%s/"SESSION_FILE"",path);
+  sprintf (pref.sessionPath, "%s"SESSION_FILE"",path);
 
   FILE *sessionFile;
   sessionFile = fopen(pref.sessionPath, "rb+");
