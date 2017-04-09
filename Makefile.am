@@ -7,3 +7,10 @@ iconFile__DATA = data/img/icon.png
 SUBDIRS = data/img data/levels src
 DIST_SUBDIRS = $(SUBDIRS)
 
+uninstall-hook:
+	-rmdir ${gameFiles_dir}data/levels
+	-rmdir ${gameFiles_dir}data/img/original
+	-rmdir ${gameFiles_dir}data/img
+	-rmdir ${gameFiles_dir}data
+	-rmdir ${gameFiles_dir}
+

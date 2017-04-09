@@ -6,14 +6,14 @@ AM_LDFLAGS=
 BUILT_SOURCES= \
 	const.h \
 	level.h \
-        level_decor.h \
-        menu.h \
+	level_decor.h \
+	menu.h \
 	menu_text.h \
-        mouse.h \
+	mouse.h \
 	move.h \
-        settings.h \
+	settings.h \
 	slc.h \
-        sprites.h
+	sprites.h
 
 bindir=$(prefix)/@PACKAGE@/
 bin_PROGRAMS=SokoRobot
@@ -22,19 +22,19 @@ SokoRobot_SOURCES= \
 	level.c \
 	level.h \
 	level_decor.c  \
-        level_decor.h \
-        menu.c \
-        menu.h \
+	level_decor.h \
+	menu.c \
+	menu.h \
 	menu_text.c \
 	menu_text.h \
-        mouse.c \
-        mouse.h \
+	mouse.c \
+	mouse.h \
 	move.c \
 	move.h \
-        settings.c \
-        settings.h \
+	settings.c \
+	settings.h \
 	slc.c \
 	slc.h \
-        sprites.c \
-        sprites.h \
+	sprites.c \
+	sprites.h \
 	main.c 

@@ -12,7 +12,7 @@ img__DATA= original/box_ok.png \
 	original/button_reset.png \
 	original/button_settings.png \
 	original/button_shortcuts.png \
-        original/congrats_background.png \
+	original/congrats_background.png \
 	original/cornerBottom-Left.png  \
 	original/cornerBottom-Right.png \
 	original/cornerTop-Left.png \
