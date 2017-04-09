@@ -49,23 +49,17 @@ main (int argc, char *argv[])
   textdomain ("sokorobot");
   bindtextdomain ("sokorobot", "/usr/share/locale");
 
-  /*manage argument (not used for now) */
+  /*Manage Program Arguments */
   int i;
-  bool vb = false;
+  bool vb = false; //verbose mode
 
-  for (i = 1; i < argc; i++)
-    {
-      printf (gettext ("Argument %d :%s:\n"), i, argv[i]);
+  for (i = 1; i < argc; i++){
+      printf (gettext ("Options argv[%d]:%s \t"), i, argv[i]);
       int test = strcmp(argv[i], "-v");
       if (test == 0 ){
           vb = true;
           fprintf(stderr, gettext("Verbose mode is on\n"));
       }
-      else
-        {
-          vb = false;
-          fprintf(stderr, gettext("Verbose mode is off\n"));
-        }
     }
 
   /* reset errors */
@@ -94,7 +88,7 @@ main (int argc, char *argv[])
     }
 
   /*load preferences */
-  printf("current directory %s\n", argv[0]);
+  vbPrintf(gettext("Current directory %s\n"), argv[0]);
   setupPath(argv[0]);
   loadPrefStruct(current);
   pref.verbosity = vb;
@@ -122,7 +116,7 @@ main (int argc, char *argv[])
   /* Set window icon */
   char iconPath[MAX_PATH];
   sprintf (iconPath, "%sicon.png",pref.imgPath);
-  vbPrintf (gettext ("icon path: %s\n"),iconPath);
+  vbPrintf (gettext ("Game icon path: %s\n"),iconPath);
   SDL_SetWindowIcon (window, IMG_Load (iconPath));
 
   /* Create a surface from the window */
@@ -165,8 +159,8 @@ main (int argc, char *argv[])
   S_FilesList *filesList = initFilesList ();
   if (listSlcLevelFiles (filesList) == EXIT_FAILURE)
     {
-      perror (gettext
-	      ("The level files cannot be listed from the folder "LEVELS_FOLDER"."));
+      vbPrintf (gettext
+	      ("The level files cannot be listed from the folder %s."), pref.levelsPath);
     }
 
   /*Read files name from the filesList to check */
@@ -177,7 +171,7 @@ main (int argc, char *argv[])
   loadFileName(tableTextSurface,filesList);
 
   /*Read level from slc file */
-  S_LevelList *levelList = initLevelList ();
+  S_LevelList *levelList =initLevelList ();
   //readLevelList(levelList);
   if (readLevelsAttributs (filesList, levelList) == EXIT_FAILURE)
     {
@@ -516,8 +510,8 @@ main (int argc, char *argv[])
 		  /* write last level name before closing */
 
 		  carryOn = 0;
-		  fprintf (stderr,
-			   "\nThe quit command (q) has been pressed.\n");
+		  fprintf (stderr,gettext(
+			   "\nThe quit command (q) has been pressed.\n"));
 		  break;
 
 		}		//end of  switch (event.type)
@@ -536,7 +530,7 @@ main (int argc, char *argv[])
 
       if (loadSlcLevel (levelList, grid, gridMenu) ==
 		      EXIT_FAILURE)
-		      perror ("Impossible to load the level. Perror");
+		      perror (gettext("Impossible to load the level. Perror"));
       pref.reload = 0;
     }
       if (refresh == 1)
@@ -588,24 +582,16 @@ main (int argc, char *argv[])
   free (currentLevel);
 
   /* clean */
-  vbPrintf ("- Destroying level list\n");
   destroy (levelList);
   free (levelList);
-  vbPrintf ("- Destroying file list\n");
   destroyFileList (filesList);
   free (filesList);
-  vbPrintf ("-Freeing texts\n");
   freeS_Text (tableTextSurface);
-  vbPrintf ("-Freeing Sprites\n");
   freeSprites (tableSurface);
   SDL_FreeSurface (screen);
-  vbPrintf ("- Free SDL screen\n");
   SDL_DestroyWindow (window);
-  vbPrintf ("- Free SDL window\n");
   TTF_Quit ();
-  vbPrintf ("- TFF is out\n");
   SDL_Quit ();
-  vbPrintf ("- SDL is out\n");
-  fprintf (stderr, "Bye\n");
+  fprintf (stderr, gettext("Bye\n"));
   return EXIT_SUCCESS;
 }

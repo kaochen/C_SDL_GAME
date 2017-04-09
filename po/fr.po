@@ -6,8 +6,12 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-msgid "Argument %d : %s \n"
-msgstr "Argument %d : %s \n"
+##file : src/main.c
+msgid "Options argv[%d]:%s \t"
+msgstr "Options argv[%d]:%s \t"
+
+msgid "Verbose mode is on\n"
+msgstr "Mode verbeux activé\n"
 
 msgid "SDL initialization error: %s\n"
 msgstr "SDL initialization erreur: %s\n"
@@ -15,40 +19,73 @@ msgstr "SDL initialization erreur: %s\n"
 msgid "TTF_Init initialization error: %s\n"
 msgstr "TTF_Init initialization erreur: %s\n"
 
+msgid "Current directory %s\n"
+msgstr "Dossier courant %s\n"
+
 msgid "The window size request from settings is %dx%d\n"
 msgstr "La taille de la fenêtre demandé dans les préferences est de %dx%d\n"
 
 msgid "SDL_CreateWindow failed: %s\n"
-msgstr "SDL_CreateWindow a échoué: %s\n"
+msgstr "SDL_CreateWindow a échoué : %s\n"
+
+msgid "Game icon path: %s\n"
+msgstr "Chemin de l'icône du jeu : %s\n"
 
 msgid "SDL_GetWindowSurface failed: %s\n"
-msgstr "SDL_CreateWindow a échoué: %s\n"
+msgstr "SDL_GetWindowSurface a échoué : %s\n"
 
 msgid "The SDL window has been created.\n"
 msgstr "La fenêtre SDL a été créée.\n"
 
-msgid "The level files cannot from the folder levels/ be listed."
-msgstr "Impossible de lister les fichiers contenant les niveaux depuis le dossier levels/."
+msgid "The level files cannot be listed from the folder %s."
+msgstr "Impossible de lister les fichier de niveau depuis le dossier %s."
 
 msgid "The level list cannot be verified."
-msgstr "La liste des fichiers de niveaux ne peut être vérifier"
+msgstr "La liste des niveaux ne peut être vérifié"
 
 msgid "Error when loading levels attributs from files."
-msgstr "Une erreur a eu lieu lors du chargement, depuis les fichiers, des attributs"
-
-msgid "The list of the possible levels has been generate from the content of the folder levels/.\n"
-msgstr "La liste des niveaux possible a été généré à partir du contenu du dossier levels/.\n"
+msgstr "Erreur lors du chargement des attributs des niveaux depuis les fichier."
 
 msgid "Loading first level.\n"
-msgstr "Chargement du premier niveau.\n"
-
-msgid "Level loaded.\n"
-msgstr "Niveau chargé.\n"
+msgstr "Chargement du premier niveau. \n"
 
 msgid "Cannot load the first level.\n"
 msgstr "Impossible de charger le premier niveau.\n"
 
+msgid "first displayLevel() failed.\n"
+msgstr "Le permier displayLevel() a échoué.\n"
 
+msgid "first displayTopBar() failed.\n"
+msgstr "Le premier displayTopBar() a échoué.\n"
+
+msgid "Impossible to load the level. Perror"
+msgstr "Impossible de charger le niveau. Perror"
+
+msgid "displayTopBar() failed.\n"
+msgstr "displayTopBar() a échoué.\n"
+
+msgid "Destroying level list\n"
+msgstr "Destruction de la liste des niveaux\n"
+
+msgid "Destroying file list\n"
+msgstr "Destruction de la liste des fichiers\n"
+
+msgid "Bye\n"
+msgstr "Au revoir\n"
+
+##File src/??.c
+
+
+msgid "The level files cannot from the folder levels/ be listed."
+msgstr "Impossible de lister les fichiers contenant les niveaux depuis le dossier levels/."
+
+
+
+msgid "The list of the possible levels has been generate from the content of the folder levels/.\n"
+msgstr "La liste des niveaux possible a été généré à partir du contenu du dossier levels/.\n"
+
+msgid "Level loaded.\n"
+msgstr "Niveau chargé.\n"
 
 msgid "not enough memory"
 msgstr "pas assez de mémoire"
