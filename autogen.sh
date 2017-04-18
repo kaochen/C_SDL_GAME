@@ -12,4 +12,5 @@ fi
 aclocal \
 && autoheader \
 && automake --add-missing \
-&& autoconf
+&& autoconf \
+&& autoreconf --force --install || exit 1

@@ -1,154 +1,324 @@
+# French translations for sokorobot package
+# Traductions françaises du paquet sokorobot.
+# Copyright (C) 2017 kao_chen <kaochen2[at]gmail.com>
+# This file is distributed under the same license as the sokorobot package.
+# kao <kaochen2@gmail.com>, 2017.
+#
 msgid ""
 msgstr ""
+"Project-Id-Version: sokorobot 0.5\n"
+"Report-Msgid-Bugs-To: no_bug_report_for_now\n"
+"POT-Creation-Date: 2017-04-18 13:54+0200\n"
+"PO-Revision-Date: 2017-04-18 13:56+0200\n"
+"Last-Translator: kao <kaochen2@gmail.com>\n"
+"Language-Team: French\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-##file : src/main.c
-msgid "Options argv[%d]:%s \t"
-msgstr "Options argv[%d]:%s \t"
+#: src/level.c:49
+#, c-format
+msgid "init displayLevel failed: %s\n"
+msgstr ""
 
-msgid "Verbose mode is on\n"
-msgstr "Mode verbeux activé\n"
+#: src/level.c:180
+#, c-format
+msgid "blitBorders failed.\n"
+msgstr ""
 
-msgid "SDL initialization error: %s\n"
-msgstr "SDL initialization erreur: %s\n"
+#: src/level.c:186
+#, c-format
+msgid "blitCorners() failed.\n"
+msgstr ""
 
-msgid "TTF_Init initialization error: %s\n"
-msgstr "TTF_Init initialization erreur: %s\n"
+#: src/level.c:199
+#, c-format
+msgid "getCurrentLevelInfos() failed: %s\n"
+msgstr ""
 
-msgid "Current directory %s\n"
-msgstr "Dossier courant %s\n"
+#: src/level_decor.c:38
+#, c-format
+msgid "init blitBorders failed: %s\n"
+msgstr ""
 
-msgid "The window size request from settings is %dx%d\n"
-msgstr "La taille de la fenêtre demandé dans les préferences est de %dx%d\n"
+#: src/menu.c:152
+#, c-format
+msgid "backgroundTopBar failed.\n"
+msgstr ""
 
-msgid "SDL_CreateWindow failed: %s\n"
-msgstr "SDL_CreateWindow a échoué : %s\n"
+#: src/menu.c:159
+#, c-format
+msgid "levelMenu failed.\n"
+msgstr ""
 
-msgid "Game icon path: %s\n"
-msgstr "Chemin de l'icône du jeu : %s\n"
+#: src/menu.c:166
+#, c-format
+msgid "displayTopBarButtons() failed.\n"
+msgstr ""
 
-msgid "SDL_GetWindowSurface failed: %s\n"
-msgstr "SDL_GetWindowSurface a échoué : %s\n"
+#: src/menu.c:173
+#, c-format
+msgid "displayProgress failed.\n"
+msgstr ""
 
-msgid "The SDL window has been created.\n"
-msgstr "La fenêtre SDL a été créée.\n"
+#: src/menu.c:193
+#, c-format
+msgid "init backgroundTopBar failed: %s\n"
+msgstr ""
 
-msgid "The level files cannot be listed from the folder %s."
-msgstr "Impossible de lister les fichier de niveau depuis le dossier %s."
+#: src/menu.c:246
+#, c-format
+msgid "init displayProgress failed: %s\n"
+msgstr ""
 
-msgid "The level list cannot be verified."
-msgstr "La liste des niveaux ne peut être vérifié"
-
-msgid "Error when loading levels attributs from files."
-msgstr "Erreur lors du chargement des attributs des niveaux depuis les fichier."
-
-msgid "Loading first level.\n"
-msgstr "Chargement du premier niveau. \n"
-
-msgid "Cannot load the first level.\n"
-msgstr "Impossible de charger le premier niveau.\n"
-
-msgid "first displayLevel() failed.\n"
-msgstr "Le permier displayLevel() a échoué.\n"
-
-msgid "first displayTopBar() failed.\n"
-msgstr "Le premier displayTopBar() a échoué.\n"
-
-msgid "Impossible to load the level. Perror"
-msgstr "Impossible de charger le niveau. Perror"
-
-msgid "displayTopBar() failed.\n"
-msgstr "displayTopBar() a échoué.\n"
-
-msgid "Destroying level list\n"
-msgstr "Destruction de la liste des niveaux\n"
-
-msgid "Destroying file list\n"
-msgstr "Destruction de la liste des fichiers\n"
-
-msgid "Bye\n"
-msgstr "Au revoir\n"
-
-##File src/??.c
-
-
-msgid "The level files cannot from the folder levels/ be listed."
-msgstr "Impossible de lister les fichiers contenant les niveaux depuis le dossier levels/."
-
-
-
-msgid "The list of the possible levels has been generate from the content of the folder levels/.\n"
-msgstr "La liste des niveaux possible a été généré à partir du contenu du dossier levels/.\n"
-
-msgid "Level loaded.\n"
-msgstr "Niveau chargé.\n"
-
-msgid "not enough memory"
-msgstr "pas assez de mémoire"
-
-msgid "Level: %d/%d"
-msgstr "Niveau : %d/%d"
-
-msgid "The font file %s was not found.\n"
-msgstr "Impossible de trouver le fichier %s.\n"
-
+#: src/menu.c:322
 msgid "CONGRATS!!!"
-msgstr "FELICITATION!!!"
+msgstr ""
 
-msgid "Current Level Infos"
-msgstr "Information sur le niveau actuel"
+#: src/menu.c:400
+#, c-format
+msgid "Name: %s"
+msgstr ""
 
-msgid "Shortcuts"
-msgstr "Raccourcis"
-
-msgid "About"
-msgstr "A propos"
-
-msgid "Name: "
-msgstr "Nom : "
-
-msgid "File: "
-msgstr "Fichier : "
-
-msgid "File: %s..."
-msgstr "Fichier : %s..."
-
+#: src/menu.c:401
+#, c-format
 msgid "File: %s"
-msgstr "Fichier : %s"
+msgstr ""
 
-msgid "Authors:"
-msgstr "Auteurs : "
+#: src/menu.c:402
+#, c-format
+msgid "Author: %s"
+msgstr ""
 
+#: src/menu.c:403
+#, c-format
+msgid "Level size: %dx%d"
+msgstr ""
+
+#: src/menu_text.c:44
+msgid "Current Level Infos:"
+msgstr ""
+
+#: src/menu_text.c:46
+msgid "Shortcuts:"
+msgstr ""
+
+#: src/menu_text.c:48
+msgid "About:"
+msgstr ""
+
+#: src/menu_text.c:50
+msgid "Files:"
+msgstr ""
+
+#: src/menu_text.c:52
+msgid "Settings:"
+msgstr ""
+
+#: src/menu_text.c:59
 msgid "m : open and close menu"
-msgstr "m : ouvrir et fermer le menu"
+msgstr ""
 
+#: src/menu_text.c:61
 msgid "n : next level"
-msgstr "n : niveau suivant"
+msgstr ""
 
+#: src/menu_text.c:64
 msgid "p : previous level"
-msgstr "p : niveau précédent"
+msgstr ""
 
+#: src/menu_text.c:66
 msgid "r : reset current level"
-msgstr "r : remet à zéro le niveau actuel"
+msgstr ""
 
+#: src/menu_text.c:68
 msgid "q : quit game"
-msgstr "q : quitter le jeu"
+msgstr ""
 
+#: src/menu_text.c:72
+msgid "Website:"
+msgstr ""
+
+#: src/menu_text.c:75
+msgid "https://github.com/kaochen/SokoRobot"
+msgstr ""
+
+#: src/menu_text.c:80
+#, c-format
+msgid "Window: %dx%dpx %dhz"
+msgstr ""
+
+#: src/menu_text.c:84
+#, c-format
+msgid "Theme: %s"
+msgstr ""
+
+#: src/menu_text.c:102
+#, c-format
+msgid "\tAll text surfaces are free %s\n"
+msgstr ""
+
+#: src/menu_text.c:134
+#, c-format
+msgid "init levelMenu failed: %s\n"
+msgstr ""
+
+#: src/menu_text.c:154
+#, c-format
+msgid "Level: %d/%d"
+msgstr ""
+
+#: src/settings.c:102
+#, c-format
+msgid "Session File will be at %s\n"
+msgstr ""
+
+#: src/slc.c:118 src/slc.c:323
+#, c-format
+msgid "not enough memory"
+msgstr ""
+
+#: src/sprites.c:125
+#, c-format
 msgid "the file %s does not exist\n"
-msgstr "Le fichier %s n'existe pas\n"
+msgstr ""
 
-msgid "Load default image instead: %s\n\n"
-msgstr "Chargement de l'image par défaut à la place : %s\n\n"
+#: src/sprites.c:128
+#, c-format
+msgid ""
+"Load default image instead: %s\n"
+"\n"
+msgstr ""
 
+#: src/sprites.c:133
+#, c-format
 msgid "%s exist\n"
-msgstr "%s existe\n"
+msgstr ""
 
+#: src/sprites.c:139
+#, c-format
 msgid "IMG_Load %s failed: %s\n"
-msgstr "IMG_Load %s a échoué : %s\n"
+msgstr ""
 
+#: src/sprites.c:158
+#, c-format
 msgid "\tAll surfaces are free %s\n"
-msgstr "\tToutes les surfaces ont été libéré %s\n"
+msgstr ""
+
+#: src/sprites.c:176
+#, c-format
+msgid ""
+"Roboto-Bold.ttf was not found. You should install the fonts-roboto package\n"
+msgstr ""
+
+#: src/main.c:57
+#, c-format
+msgid "Options argv[%d]:%s \t"
+msgstr ""
+
+#: src/main.c:61
+#, c-format
+msgid "Verbose mode is on\n"
+msgstr ""
+
+#: src/main.c:77
+#, c-format
+msgid "SDL initialization error: %s\n"
+msgstr ""
+
+#: src/main.c:85
+#, c-format
+msgid "TTF_Init initialization error: %s\n"
+msgstr ""
+
+#: src/main.c:91
+#, c-format
+msgid "Current directory %s\n"
+msgstr ""
+
+#: src/main.c:97
+#, c-format
+msgid "The window size request from settings is %dx%d\n"
+msgstr ""
+
+#: src/main.c:111
+#, c-format
+msgid "SDL_CreateWindow failed: %s\n"
+msgstr ""
+
+#: src/main.c:119
+#, c-format
+msgid "Game icon path: %s\n"
+msgstr ""
+
+#: src/main.c:129
+#, c-format
+msgid "SDL_GetWindowSurface failed: %s\n"
+msgstr ""
+
+#: src/main.c:134
+msgid ""
+"The SDL window has been created.\n"
+"\n"
+msgstr ""
+
+#: src/main.c:163
+#, c-format
+msgid "The level files cannot be listed from the folder %s."
+msgstr ""
+
+#: src/main.c:169
+msgid "The level list cannot be verified."
+msgstr ""
+
+#: src/main.c:178
+msgid "Error when loading levels attributs from files."
+msgstr ""
+
+#: src/main.c:182
+msgid ""
+"The list of the possible levels has been generate from the content of the "
+"folder "
+msgstr ""
+
+#: src/main.c:192
+#, c-format
+msgid "Loading first level.\n"
+msgstr ""
+
+#: src/main.c:196
+msgid "Cannot load the first level.\n"
+msgstr ""
+
+#: src/main.c:207
+#, c-format
+msgid "first displayLevel() failed.\n"
+msgstr ""
+
+#: src/main.c:216
+#, c-format
+msgid "first displayTopBar() failed.\n"
+msgstr ""
+
+#: src/main.c:514
+#, c-format
+msgid ""
+"\n"
+"The quit command (q) has been pressed.\n"
+msgstr ""
+
+#: src/main.c:533
+msgid "Impossible to load the level. Perror"
+msgstr ""
+
+#: src/main.c:541
+#, c-format
+msgid "displayLevel() failed.\n"
+msgstr ""
+
+#: src/main.c:595
+#, c-format
+msgid "Bye\n"
+msgstr ""

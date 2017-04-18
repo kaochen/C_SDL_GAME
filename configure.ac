@@ -25,9 +25,14 @@ AC_TYPE_SIZE_T
 AC_FUNC_MALLOC
 AC_CHECK_FUNCS([setlocale strchr strerror strpbrk strrchr strstr])
 
+# Gettext
+AM_GNU_GETTEXT([external])
+AM_GNU_GETTEXT_VERSION([0.19])
+
 AC_CONFIG_FILES([
 	Makefile
 	src/Makefile
+	po/Makefile.in
 	data/img/Makefile
 	data/levels/Makefile
 ])

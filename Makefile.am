@@ -4,7 +4,7 @@ gameFiles__DATA= preferences.ini
 iconFile_dir = $(prefix)/@PACKAGE@/data/img/
 iconFile__DATA = data/img/icon.png
 
-SUBDIRS = data/img data/levels src
+SUBDIRS = data/img data/levels src po
 DIST_SUBDIRS = $(SUBDIRS)
 
 uninstall-hook:

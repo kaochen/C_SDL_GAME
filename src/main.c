@@ -47,7 +47,7 @@ main (int argc, char *argv[])
   /* Set up gettext for internationalisation */
   setlocale (LC_ALL, "");
   textdomain ("sokorobot");
-  bindtextdomain ("sokorobot", "/usr/share/locale");
+  bindtextdomain ("sokorobot", LOCALEDIR);
 
   /*Manage Program Arguments */
   int i;
