@@ -1,0 +1,9 @@
+[Desktop Entry]
+Version=1.0
+Type=Application
+Name=sokorobot
+Exec=sokorobot
+Comment=A sokoban game
+Icon=sokorobot
+Terminal=false
+Categories=Game

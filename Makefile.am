@@ -1,8 +1,12 @@
-gameFiles_dir = $(prefix)/@PACKAGE@/
-gameFiles__DATA= preferences.ini
+gameFilesdir = $(prefix)/games/@PACKAGE@/
+gameFiles_DATA= preferences.ini
 
-iconFile_dir = $(prefix)/@PACKAGE@/data/img/
-iconFile__DATA = data/img/icon.png
+iconFiledir = $(prefix)/games/@PACKAGE@/data/img/
+iconFile_DATA = data/img/icon.png
+
+desktopdir = $(datadir)/applications
+desktop_in_files = sokorobot.desktop.in
+desktop_DATA = data/$(desktop_in_files:.desktop.in=.desktop)
 
 SUBDIRS = data/img data/levels src po
 DIST_SUBDIRS = $(SUBDIRS)

@@ -16,9 +16,9 @@ BUILT_SOURCES= \
 	slc.h \
 	sprites.h
 
-bindir=$(prefix)/@PACKAGE@/
-bin_PROGRAMS=SokoRobot
-SokoRobot_SOURCES= \
+bindir=$(prefix)/games/@PACKAGE@/
+bin_PROGRAMS=sokorobot
+sokorobot_SOURCES= \
 	const.h \
 	level.c \
 	level.h \

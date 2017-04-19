@@ -1,4 +1,4 @@
-img_dir = $(prefix)/@PACKAGE@/data/img/original
+img_dir = $(prefix)/games/@PACKAGE@/data/img/original
 img__DATA= original/box_ok.png \
 	original/box.png   \
 	original/button_about.png \
