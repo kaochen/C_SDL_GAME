@@ -22,7 +22,7 @@ tags
 src/*.o
 src/.deps/
 src/tags
-src/SokoRobot
+src/sokorobot
 .buildconfig
 po/*.mo
 po/*.gmo
@@ -31,9 +31,11 @@ po/*.pot
 po/*.sin
 po/*.header
 po/stamp-h1
+po/POTFILES
+po/Makefile.in
 po/Makefile.in.in
 po/Makevars.template
 po/Rules-quot
 po/stamp-po
 # Except this files
-!po/Makefile.in
+
