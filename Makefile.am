@@ -4,8 +4,7 @@ gameFiles_DATA= preferences.ini
 iconFiledir = $(prefix)/games/@PACKAGE@/data/img/
 iconFile_DATA = data/img/icon.png
 
-
-desktopdir = $(datadir)/applications
+desktopdir = $(HOME)/.local/share/applications
 desktop_DATA = data/@PACKAGE@.desktop
 
 SUBDIRS = data/img data/levels src po
