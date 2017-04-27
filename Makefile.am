@@ -4,17 +4,21 @@ gameFiles_DATA= preferences.ini
 iconFiledir = $(prefix)/games/@PACKAGE@/data/img/
 iconFile_DATA = data/img/icon.png
 
+
 desktopdir = $(datadir)/applications
-desktop_in_files = sokorobot.desktop.in
-desktop_DATA = data/$(desktop_in_files:.desktop.in=.desktop)
+desktop_DATA = data/@PACKAGE@.desktop
 
 SUBDIRS = data/img data/levels src po
 DIST_SUBDIRS = $(SUBDIRS)
 
+install-data-hook:
+	sed -i "/^Exec=/s#exe_path#${gameFilesdir}@PACKAGE@#" ${desktopdir}/@PACKAGE@.desktop
+	sed -i "/^Icon=/s#icon_path#${iconFiledir}icon.png#" ${desktopdir}/@PACKAGE@.desktop
+
 uninstall-hook:
-	-rmdir ${gameFiles_dir}data/levels
-	-rmdir ${gameFiles_dir}data/img/original
-	-rmdir ${gameFiles_dir}data/img
-	-rmdir ${gameFiles_dir}data
-	-rmdir ${gameFiles_dir}
+	-rmdir ${gameFilesdir}data/levels
+	-rmdir ${gameFilesdir}data/img/original
+	-rmdir ${gameFilesdir}data/img
+	-rmdir ${gameFilesdir}data
+	-rmdir ${gameFilesdir}
 

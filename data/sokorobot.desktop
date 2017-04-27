@@ -2,8 +2,8 @@
 Version=1.0
 Type=Application
 Name=sokorobot
-Exec=sokorobot
+Exec=exe_path
 Comment=A sokoban game
-Icon=sokorobot
+Icon=icon_path
 Terminal=false
 Categories=Game
