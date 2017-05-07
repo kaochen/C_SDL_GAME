@@ -382,7 +382,7 @@ readLevelsAttributs (S_FilesList * filesList,
 
   /*Get files names */
    xmlDoc *doc = NULL;
-   xmlNode *Node = NULL;
+   xmlNode *cur = NULL;
 
    LIBXML_TEST_VERSION
 
@@ -391,7 +391,6 @@ readLevelsAttributs (S_FilesList * filesList,
     {
 
             /* Read each level from each files */
-
             vbPrintf ("Read levels from : %s\n", actualFile->name);
 
             /* Open SLC/XML file */
@@ -401,6 +400,20 @@ readLevelsAttributs (S_FilesList * filesList,
 	              fprintf (stderr, "%s not valid\n", actualFile->name);
 	              return EXIT_FAILURE;
 	            }
+           cur = xmlDocGetRootElement(doc);
+
+          if(cur == NULL){
+            fprintf(stderr,"%s is empty. \n", actualFile->name);
+            xmlFreeDoc(doc);
+            return 0;
+            }
+          char typeRootNodeName[MAX_CARACT] = "SokobanLevels";
+          if(xmlStrcmp(cur->name,(const xmlChar *) typeRootNodeName)) {
+            fprintf(stderr,"%s is a the wrong type, root node is not %s  \n", actualFile->name, typeRootNodeName);
+            xmlFreeDoc(doc);
+            return 0;
+            }
+
             // Start XPath
             xmlXPathInit ();
             // Create a context
@@ -413,21 +426,23 @@ readLevelsAttributs (S_FilesList * filesList,
 
             /* Read Level */
             xmlXPathObjectPtr xpathLevel =
-	      xmlXPathEvalExpression (BAD_CAST
-				      "/SokobanLevels/LevelCollection/Level",
-				      ctxt);
+	          xmlXPathEvalExpression (BAD_CAST
+				             "/SokobanLevels/LevelCollection/Level", ctxt);
             if (xpathLevel == NULL)
-	      {
-	        fprintf (stderr, "Error on the xPathLevel expression\n");
-	        return EXIT_FAILURE;
-	      }
+	            {
+	              fprintf (stderr, "Error on the xPathLevel expression\n");
+	              return EXIT_FAILURE;
+	            }
 
-            /*get attributs */
+
+            /*get copyright */
+            char copyright[MAX_CARACT] = "";
+            getAttributFromXML(cur, copyright, "LevelCollection", "Copyright" );
+
+            /*get specific attributs from each level*/
             xmlChar *name = NULL;
             xmlChar *width = NULL;
             xmlChar *height = NULL;
-            char author[MAX_CARACT] = "";
-            getCopyrightFromSLC(actualFile->name, author);
 
             /*Get the number of levels in a file */
             int levelCount = 0, i = 0;
@@ -437,26 +452,26 @@ readLevelsAttributs (S_FilesList * filesList,
             /*Add S_Level for each levels found */
             while (i < levelCount)
 	            {
-	              Node = xpathLevel->nodesetval->nodeTab[i];
-	              for (xmlAttrPtr attr = Node->properties; NULL != attr;
+	              cur = xpathLevel->nodesetval->nodeTab[i];
+	              for (xmlAttrPtr attr = cur->properties; NULL != attr;
 	                   attr = attr->next)
 	                {
-	                  name = xmlGetProp (Node, (const xmlChar *)"Id");
-	                  width = xmlGetProp (Node, (const xmlChar *)"Width");
-	                  height = xmlGetProp (Node, (const xmlChar *)"Height");
+	                  name = xmlGetProp (cur, (const xmlChar *)"Id");
+	                  width = xmlGetProp (cur, (const xmlChar *)"Width");
+	                  height = xmlGetProp (cur, (const xmlChar *)"Height");
 	                }
 	              /*Load infos into the levelList */
 	              if (levelList->nbr_of_levels == 0)
 	                {
-	                  addFirstLevel (levelList, actualFile->name, (char *) name, author,
+	                  addFirstLevel (levelList, actualFile->name, (char *) name, copyright,
 			                 atoi ((char *) height), atoi ((char *) width));
 	                }
 	              else
 	                {
-	                  addNewLevel (levelList, actualFile->name, (char *) name, author,
+	                  addNewLevel (levelList, actualFile->name, (char *) name, copyright,
 			               atoi ((char *) height), atoi ((char *) width));
 	                }
-	              //printf ("File: %s, name: %s, width: %s, height: %s\n",actualFile->name, name, width, height);
+	              //printf ("File: %s, name: %s, width: %s, height: %s, Copyright: %s\n",actualFile->name, name, width, height, copyright);
 	              i++;
 	            }
             /* free memory */
@@ -642,34 +657,24 @@ loadSlcLevel (S_LevelList * levelList,
   return EXIT_SUCCESS;
 }
 
-
 /*get a specific attribut from slc file*/
 int
-getCopyrightFromSLC(char * docName, char * author)
+getAttributFromXML(const xmlNode *cur, char *value, const char *nodeName, const char *attributName )
 {
-  xmlDocPtr doc;
-  xmlNodePtr cur;
-  xmlChar *text;
-
-  doc = xmlParseFile(docName);
-  cur = xmlDocGetRootElement(doc);
-
-  cur = cur->xmlChildrenNode;
-
-  //printf("------------------------------------------------\n");
-  while (cur != NULL)
-    {
-      if ((!xmlStrcmp(cur->name,(const xmlChar *)"LevelCollection")))
-        {
-          text = xmlGetProp(cur,(const xmlChar *)"Copyright");
-          //vbPrintf("Copyright: %s\n", text);
-          sprintf(author,"%s", text);
-          xmlFree(text);
-        }
-      cur = cur->next;
-    }
-  xmlFreeDoc(doc);
-  return (1);
+        xmlChar *buf = NULL;
+        cur = cur->xmlChildrenNode;
+        while (cur != NULL)
+          {
+            if ((!xmlStrcmp(cur->name,(const xmlChar *)nodeName)))
+              {
+                buf = xmlGetProp(cur,(const xmlChar *)attributName);
+                //vbPrintf("Copyright: %s\n", buf);
+                sprintf(value,"%s", buf);
+              }
+            cur = cur->next;
+          }
+          xmlFree(buf);
+  return 1;
 }
 
 

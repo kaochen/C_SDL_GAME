@@ -106,5 +106,8 @@ int getNbrOfLevels (S_LevelList * levelList);
 
 /*get a specific attribut from slc file*/
 int
-getCopyrightFromSLC(char * docName, char * author);
+getAttributFromXML(const xmlNode *cur,
+		   char *value,
+		   const char *nodeName,
+		   const char *attributName);
 #endif
