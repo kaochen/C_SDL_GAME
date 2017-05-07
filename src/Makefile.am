@@ -1,8 +1,16 @@
 AUTOMAKE_OPTIONS = gnu
 
 AM_CPPFLAGS = -DLOCALEDIR=\""$(localedir)"\"
-AM_CFLAGS= -std=c11 -Wall -Wextra -g `sdl2-config --cflags --libs`  -lSDL2main -lSDL2_image -lSDL2 -lSDL2_ttf `xml2-config --cflags` `xml2-config --libs` -lSDL2_gfx -lm
+AM_CFLAGS= -std=c11 -Wall -Wextra -g -lm
 AM_LDFLAGS=
+
+sdl_cflags= `pkg-config --cflags sdl2 SDL2_image SDL2_ttf SDL2_gfx`
+sdl_libs= `pkg-config --libs sdl2 SDL2_image SDL2_ttf SDL2_gfx`
+xml2_cflags= `pkg-config --cflags libxml-2.0 `
+xml2_libs= `pkg-config --libs libxml-2.0`
+
+override CFLAGS += $(sdl_cflags) $(xml2_cflags)
+override LIBS += $(sdl_libs) $(xml2_libs)
 
 BUILT_SOURCES= \
 	const.h \
