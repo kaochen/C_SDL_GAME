@@ -14,6 +14,7 @@ override LIBS += $(sdl_libs) $(xml2_libs) -lm
 
 BUILT_SOURCES= \
 	const.h \
+	files.h \
 	level.h \
 	level_decor.h \
 	menu.h \
@@ -28,6 +29,8 @@ bindir=$(prefix)/games/@PACKAGE@/
 bin_PROGRAMS=sokorobot
 sokorobot_SOURCES= \
 	const.h \
+	files.c \
+	files.h \
 	level.c \
 	level.h \
 	level_decor.c  \

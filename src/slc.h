@@ -29,6 +29,7 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 #include "level_decor.h"
 #include "settings.h"
 #include "menu.h"
+#include "files.h"
 
 
 //Read using libxml
@@ -40,28 +41,6 @@ Foundation, Inc., 59 Temple Place - Suite 330, Boston, MA  02111-1307, USA.
 
 
 /* Functions ============================================ */
-
-/* Files ========================================= */
-/* Initiatlize the list of files */
-S_FilesList *initFilesList ();
-
-/*Add the first file in a empty list*/
-int addFirstFile (S_FilesList * filesList, char *name);
-
-/*Add a new file in the list*/
-void addNewFile (S_FilesList * filesList, char *name);
-
-/*Erase a file in the list from start*/
-int delFile (S_FilesList * filesList);
-
-/* destroy file list */
-void destroyFileList (S_FilesList * filesList);
-
-/* list slc files from the levels folder */
-int listSlcLevelFiles (S_FilesList * filesList);
-
-/* Read the files list one element by one */
-int readFilesList (S_FilesList * filesList);
 
 /* Levels ========================================= */
 /* Initiatlize the list of levels */
