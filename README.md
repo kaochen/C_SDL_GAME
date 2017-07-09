@@ -110,7 +110,7 @@ valgrind --leak-check=full --show-leak-kinds=all --log-file=valgrind.log ./bin/S
 
 Edit or add a file named "fr.po" in the "locale" folder (in french for example)
 ```
-po/fr.po
+msginit --locale fr_FR.utf8
 ```
 Compile it:
 ```
