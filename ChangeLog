@@ -1,8 +1,16 @@
 new
  *
+Fifth alpha v0.05
+ * fixed some memory leaks
+ * added a desktop file
+ * added an indication when the player has already solved the level.
+ * added make install and uninstall
+ * moved to automake
+ * merge inc folder and src folder
+
 
 Fourth alpha v0.04
- * add a new "congrats" background image
+ * added a new "congrats" background image
  * added a session.ini to store the game history of the player.
  * added  verbose mode with -v
 
