@@ -46,7 +46,7 @@ displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
 {
  if (grid == NULL || screen == NULL || tableSurface == NULL)
     {
-      fprintf (stderr, gettext("init displayLevel failed: %s\n"),
+      fprintf (stderr, "displayLevel(init) failed: %s\n",
 	       SDL_GetError ());
       return EXIT_FAILURE;
     }
@@ -177,13 +177,13 @@ displayLevel (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
     }
   if (blitBorders (grid, screen, tableSurface) == EXIT_FAILURE)
     {
-         fprintf (stderr, gettext("blitBorders failed.\n"));
+         fprintf (stderr, "blitBorders() failed.\n");
          return EXIT_FAILURE;
     }
 
    if (blitCorners (grid, screen, tableSurface) == EXIT_FAILURE)
     {
-         fprintf (stderr, gettext("blitCorners() failed.\n"));
+         fprintf (stderr, "blitCorners() failed.\n");
          return EXIT_FAILURE;
     }
 
@@ -196,7 +196,7 @@ getCurrentLevelInfos (S_LevelList * levelList, S_Level * copy)
 {
   if (levelList == NULL)
     {
-      fprintf (stderr, gettext("getCurrentLevelInfos() failed: %s\n"),
+      fprintf (stderr, "getCurrentLevelInfos() failed: %s\n",
 	       SDL_GetError ());
       return EXIT_FAILURE;
     }
@@ -246,7 +246,7 @@ findLevelNumber (S_LevelList * levelList, char *levelName)
 {
   if (levelList == NULL)
     {
-      fprintf (stderr, "struct levelList does not exit");
+      fprintf (stderr, "findLevelNumber(init) failed");
     }
   int i = 0;
   S_Level *actual = levelList->first;
@@ -256,7 +256,7 @@ findLevelNumber (S_LevelList * levelList, char *levelName)
       /* try to find the nameLevel into the list */
       if (!strcmp (actual->name, levelName))
 	{
-	  vbPrintf ("I found the level %s : %d\n", actual->name, i);
+	  vbPrintf ("found level %s : %d\n", actual->name, i);
 	  return i;
 	  break;
 	}
@@ -275,14 +275,14 @@ readLevelFromSetting (S_LevelList * levelList)
 {
   if (levelList == NULL)
     {
-      vbPrintf ("readLevelFromSetting() failed");
+      fprintf (stderr, "readLevelFromSetting(init) failed");
       exit (EXIT_FAILURE);
     }
 
   int i = 0, ret = 0;
   char levelName[MAX_CARACT] = "";
   readChar (pref.sessionPath, levelName, "LevelName");
-  vbPrintf ("First level to load is %s\n", levelName);
+  vbPrintf ("The first level is %s\n", levelName);
   //if no name
   if (strcmp(levelName, "") == 0)
     {
@@ -303,7 +303,7 @@ readLevelFromSetting (S_LevelList * levelList)
 	}
       actual = actual->next;
     }
-  vbPrintf ("levelchoice from file : %d\n ", ret);
+  vbPrintf ("The level choice read from file is %d\n ", ret);
   return ret;
 }
 

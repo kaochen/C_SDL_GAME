@@ -36,6 +36,7 @@ initLevelList ()
   S_LevelList *levelList = malloc (sizeof (*levelList));
   if (levelList == NULL)
     {
+      fprintf (stderr, "levelList(init) failed\n");
       exit (EXIT_FAILURE);
     }
 
@@ -54,7 +55,7 @@ addFirstLevel (S_LevelList * levelList, char *fileName, char *name, char *author
   S_Level *firstLevel = malloc (sizeof (S_Level));
   if (firstLevel == NULL)
     {
-      fprintf (stderr, "Add first level failed\n");
+      fprintf (stderr, "firstLevel(init) failed\n");
       return EXIT_FAILURE;
     }
         firstLevel->name = malloc(MAX_CARACT);
@@ -95,7 +96,7 @@ addNewLevel (S_LevelList * levelList,
   S_Level *new = malloc (sizeof (S_Level));
   if (levelList == NULL || new == NULL)
     {
-      fprintf (stderr, "Add new level failed\n");
+      fprintf (stderr, "addNewLevel(init) failed\n");
       exit (EXIT_FAILURE);
     }
   /* check size before add */
@@ -107,7 +108,7 @@ addNewLevel (S_LevelList * levelList,
 
            if (new->name == NULL || new->fileName == NULL  )
              {
-               fprintf (stderr, "Add first level failed\n");
+               fprintf (stderr, "addNewFile(new) failed\n");
                exit(EXIT_FAILURE);
              }
 
@@ -140,7 +141,7 @@ delLevel (S_LevelList * levelList)
   S_Level *del_level = malloc (sizeof (S_Level));
   if(del_level == NULL)
         {
-         fprintf(stderr,gettext("not enough memory"));
+         fprintf(stderr,"delLevel(init) failed");
          exit(EXIT_FAILURE);
         }
   del_level = levelList->last;
@@ -164,7 +165,7 @@ destroy (S_LevelList * levelList)
     {
       delLevel (levelList);
     }
-  vbPrintf ("\tLevel list destroyed\n");
+  vbPrintf (gettext("\tLevel list destroyed\n"));
 }
 
 /*get levels infos from files */
@@ -175,7 +176,7 @@ getNbrOfLevels (S_LevelList * levelList)
   S_Level *actual = malloc (sizeof (S_Level));
   if (levelList == NULL || actual == NULL)
     {
-      perror ("getNbrOfLevels");
+      perror ("getNbrOfLevels() failed");
       exit (EXIT_FAILURE);
     }
   actual = levelList->first;
@@ -196,7 +197,7 @@ readLevelsAttributs (S_FilesList * filesList,
   S_Files *actualFile  = malloc (sizeof (*actualFile));
   if (filesList == NULL || levelList == NULL || actualFile == NULL)
     {
-      fprintf (stderr, "readLevelsAttributs failed\n");
+      fprintf (stderr, "readLevelsAttributs(init) failed\n");
       return EXIT_FAILURE;
     }
 
@@ -211,13 +212,13 @@ readLevelsAttributs (S_FilesList * filesList,
     {
 
             /* Read each level from each files */
-            vbPrintf ("Read levels from : %s\n", actualFile->name);
+            vbPrintf (gettext("Read levels from : %s\n"), actualFile->name);
 
             /* Open SLC/XML file */
             doc = xmlParseFile (actualFile->name);
             if (doc == NULL)
 	            {
-	              fprintf (stderr, "%s not valid\n", actualFile->name);
+	              fprintf (stderr, gettext("%s file is not valid\n"), actualFile->name);
 	              return EXIT_FAILURE;
 	            }
            cur = xmlDocGetRootElement(doc);
@@ -471,7 +472,7 @@ loadSlcLevel (S_LevelList * levelList,
   /*refresh status*/
   menuChoice.freeze = 0;
   menuChoice.open = 0;
-  fprintf (stderr, "Level %d loaded\n", (pref.level + 1));
+  fprintf (stderr, gettext("Level %d loaded\n"), (pref.level + 1));
 
 
   return EXIT_SUCCESS;

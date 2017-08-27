@@ -36,7 +36,7 @@ initFilesList ()
 
   if (filesList == NULL)
     {
-      fprintf (stderr, "Init files list failed\n");
+      fprintf (stderr, "initFilesList(init) failed\n");
       exit (EXIT_FAILURE);
     }
   filesList->first = NULL;
@@ -52,13 +52,13 @@ addFirstFile (S_FilesList * filesList, char *name)
   S_Files *firstFiles = malloc (sizeof (*firstFiles));
   if (filesList == NULL || firstFiles == NULL)
     {
-      fprintf (stderr, "Init first file failed\n");
+      fprintf (stderr, "addFirstFile(init) failed\n");
       return EXIT_FAILURE;
     }
      firstFiles->name = malloc(MAX_CARACT);
    if (firstFiles->name  == NULL )
       {
-         fprintf (stderr, "Add new file failed\n");
+         fprintf (stderr, "addFirstFile(add name) failed\n");
          exit(EXIT_FAILURE);
       }
 
@@ -85,13 +85,14 @@ addNewFile (S_FilesList * filesList, char *name)
   S_Files *new = malloc (sizeof (*new));
   if (filesList == NULL || new == NULL)
     {
+      fprintf (stderr, "addNewFile(init) failed\n");
       exit (EXIT_FAILURE);
     }
 
    new->name = malloc(MAX_CARACT);
    if (new->name  == NULL )
       {
-         fprintf (stderr, "Add new file failed\n");
+         fprintf (stderr, "addNewFile(add name) failed\n");
          exit(EXIT_FAILURE);
       }
 
@@ -115,7 +116,7 @@ delFile (S_FilesList * filesList)
   S_Files *del_file = malloc (sizeof (S_Files));
    if(del_file == NULL)
         {
-         fprintf(stderr,gettext("not enough memory"));
+         fprintf (stderr, "delFile(init) failed\n");
          exit(EXIT_FAILURE);
         }
 
@@ -137,12 +138,11 @@ delFile (S_FilesList * filesList)
 void
 destroyFileList (S_FilesList * filesList)
 {
-
   while (filesList->nbr_of_files > 0)
     {
       delFile (filesList);
     }
-  vbPrintf ("\tFiles list destroyed\n");
+  vbPrintf (gettext("\t destroyFileList() succeed\n"));
 }
 
 /*Load slc level into the grid */
@@ -154,6 +154,7 @@ listSlcLevelFiles (S_FilesList * filesList)
   struct dirent *file = NULL;
   if (rep == NULL)
     {
+      fprintf (stderr, "listSlcLevelFiles()-opendir() failed\n");
       return (EXIT_FAILURE);
     }
 
@@ -173,12 +174,13 @@ listSlcLevelFiles (S_FilesList * filesList)
 	    {
 	      addNewFile (filesList, path);
 	    }
-	  vbPrintf ("Found file %d : %s\n", filesList->nbr_of_files, path);
+	  vbPrintf (gettext("Found file %d : %s\n"), filesList->nbr_of_files, path);
 	}
     }
 
   if (closedir (rep) == EXIT_FAILURE)
     {
+      fprintf (stderr, "listSlcLevelFiles()-closedir() failed\n");
       return EXIT_FAILURE;
     }
   return EXIT_SUCCESS;
@@ -192,16 +194,16 @@ readFilesList (S_FilesList * filesList)
     {
       return EXIT_FAILURE;
     }
-  vbPrintf ("Read Files List: \n");
+  vbPrintf (gettext("Read Files List: \n"));
   S_Files *actual = filesList->first;
-  vbPrintf ("The file list contain %d files\n",
+  vbPrintf (gettext("The file list contain %d files\n"),
 	   filesList->nbr_of_files);
 
   /*Read file one by one until you'll get a NULL */
   int i = 1;
   while (actual != NULL)
     {
-      vbPrintf ("File %d : %s\n", i, actual->name);
+      vbPrintf (gettext("File %d : %s\n"), i, actual->name);
       actual = actual->next;
       i++;
     }
