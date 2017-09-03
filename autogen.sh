@@ -18,12 +18,12 @@ else
 fi
 
 #erase pot file in order to force automake to rebuild it
-potFile="po/sokorobot.pot"
-if [ -f "$potFile" ]
-then
-	echo "$potFile found."
-	rm $potFile
-fi
+#potFile="po/sokorobot.pot"
+#if [ -f "$potFile" ]
+#then
+#	echo "$potFile found."
+#	rm $potFile
+#fi
 aclocal \
 && autoheader \
 && automake --add-missing \
