@@ -99,7 +99,7 @@ freeS_Text (S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE])
 	      }
     }
     }
-  vbPrintf (gettext ("\tAll text surfaces are free %s\n"),
+  vbPrintf ("\t SDL_FreeSurface() succeed %s\n",
 	   SDL_GetError ());
 }
 
@@ -131,7 +131,7 @@ levelMenu (SDL_Surface * screen,
 {
   if (screen == NULL || levelList == NULL)
     {
-      fprintf (stderr, gettext ("init levelMenu failed: %s\n"),
+      fprintf (stderr, "levelMenu(ini) failed: %s\n",
 	       SDL_GetError ());
       return EXIT_FAILURE;
     }
@@ -176,6 +176,7 @@ loadFileName( S_Text tableTextSurface[NBR_OF_TAB][NBR_OF_TAB_LINE],
   S_Files *actual = filesList->first;
   if (filesList == NULL || actual == NULL)
     {
+      fprintf (stderr, "loadFileName(init) failed\n");
       return (EXIT_FAILURE);
     }
 

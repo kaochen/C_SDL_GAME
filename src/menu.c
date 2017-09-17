@@ -149,28 +149,28 @@ displayTopBar (SDL_Surface * screen,
   /* first add background */
   if (backgroundTopBar (screen, tableSurface) == EXIT_FAILURE)
     {
-      fprintf (stderr, gettext ("backgroundTopBar failed.\n"));
+      fprintf (stderr, "backgroundTopBar() failed.\n");
       return EXIT_FAILURE;
     }
 
   /* display the level number */
   if (levelMenu (screen, levelList) == EXIT_FAILURE)
     {
-      fprintf (stderr, gettext ("levelMenu failed.\n"));
+      fprintf (stderr, "levelMenu() failed.\n");
       return EXIT_FAILURE;
     }
 
   /* display the buttons */
   if (displayTopBarButtons (screen, tableSurface, gridMenu) == EXIT_FAILURE)
     {
-      fprintf (stderr, gettext ("displayTopBarButtons() failed.\n"));
+      fprintf (stderr, "displayTopBarButtons() failed.\n");
       return EXIT_FAILURE;
     }
 
   /* display the circle */
   if (displayProgress (grid, screen, tableSurface) == EXIT_FAILURE)
     {
-      fprintf (stderr, gettext ("displayProgress failed.\n"));
+      fprintf (stderr, "displayProgress() failed.\n");
       return EXIT_FAILURE;
     }
 
@@ -190,7 +190,7 @@ backgroundTopBar (SDL_Surface * screen,
 {
   if (screen == NULL || tableSurface == NULL)
     {
-      fprintf (stderr, gettext ("init backgroundTopBar failed: %s\n"),
+      fprintf (stderr, "backgroundTopBar(init) failed: %s\n",
 	       SDL_GetError ());
       return EXIT_FAILURE;
     }
@@ -243,7 +243,7 @@ displayProgress (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
 {
   if (screen == NULL || grid == NULL || screen == NULL)
     {
-      fprintf (stderr, gettext ("init displayProgress failed: %s\n"),
+      fprintf (stderr, "displayProgress(init) failed: %s\n",
 	       SDL_GetError ());
       return EXIT_FAILURE;
     }
@@ -319,7 +319,7 @@ displayCongrats (SDL_Surface * screen,
   SDL_Surface *congratsMessage = NULL;
   SDL_Rect congratsMessagePos;
   char congratsMessageText[100] = "";
-  strcpy (congratsMessageText, gettext ("CONGRATS!!!"));
+  strcpy (congratsMessageText, gettext ("Well done!"));
 
   congratsMessage =
     TTF_RenderUTF8_Blended (font, congratsMessageText, fontColor);

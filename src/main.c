@@ -74,7 +74,7 @@ main (int argc, char *argv[])
   /* Start and check if SDL start correctly */
   if (SDL_Init (SDL_INIT_VIDEO | SDL_INIT_TIMER) == -1)
     {
-      fprintf (stderr, gettext ("SDL initialization error: %s\n"),
+      fprintf (stderr, "SDL_Init() failed: %s\n",
 	       SDL_GetError ());
       exit (EXIT_FAILURE);
     }
@@ -82,7 +82,7 @@ main (int argc, char *argv[])
   /* Start SDL TTF */
   if (TTF_Init () == -1)
     {
-      fprintf (stderr, gettext ("TTF_Init initialization error: %s\n"),
+      fprintf (stderr, "TTF_Init() failed: %s\n",
 	       TTF_GetError ());
       exit (EXIT_FAILURE);
     }
@@ -108,7 +108,7 @@ main (int argc, char *argv[])
   /* Check window */
   if (window == NULL)
     {
-      fprintf (stderr, gettext ("SDL_CreateWindow failed: %s\n"),
+      fprintf (stderr, "SDL_CreateWindow() failed: %s\n",
 	       SDL_GetError ());
       exit (EXIT_FAILURE);
     }
@@ -126,7 +126,7 @@ main (int argc, char *argv[])
   /* Check if window and surface are created */
   if (screen == NULL)
     {
-      fprintf (stderr, gettext ("SDL_GetWindowSurface failed: %s\n"),
+      fprintf (stderr, "SDL_GetWindowSurface() failed: %s\n",
 	       SDL_GetError ());
       exit (EXIT_FAILURE);
     }
@@ -166,7 +166,7 @@ main (int argc, char *argv[])
   /*Read files name from the filesList to check */
   if (readFilesList (filesList) == EXIT_FAILURE)
     {
-      perror (gettext ("The level list cannot be verified."));
+      perror ("readFilesList() failed.");
     }
   loadFileName(tableTextSurface,filesList);
 
@@ -204,7 +204,7 @@ main (int argc, char *argv[])
   /* display the level using the grid */
   if (displayLevel (grid, screen, tableSurface) == EXIT_FAILURE)
     {
-      fprintf (stderr, gettext ("first displayLevel() failed.\n"));
+      fprintf (stderr, "first displayLevel() failed.\n");
       exit (EXIT_FAILURE);
     }
 
@@ -213,7 +213,7 @@ main (int argc, char *argv[])
       (screen, tableSurface, levelList,
        grid, gridMenu) == EXIT_FAILURE)
     {
-      fprintf (stderr, gettext ("first displayTopBar() failed.\n"));
+      fprintf (stderr, "first displayTopBar() failed.\n");
       exit (EXIT_FAILURE);
     }
 
@@ -222,7 +222,7 @@ main (int argc, char *argv[])
   SDL_UpdateWindowSurface (window);
 
   /* display framerate from settings */
-  vbPrintf ("Framerate %d\n", pref.framerate);
+  vbPrintf (gettext("Framerate %d\n"), pref.framerate);
 
 /* wait for quit event */
 
@@ -530,7 +530,7 @@ main (int argc, char *argv[])
 
       if (loadSlcLevel (levelList, grid, gridMenu) ==
 		      EXIT_FAILURE)
-		      perror (gettext("Impossible to load the level. Perror"));
+		      perror ("loadSlcLevel() failed. Perror");
       pref.reload = 0;
     }
       if (refresh == 1)
@@ -538,7 +538,7 @@ main (int argc, char *argv[])
 	  /* display the level using the grid */
 	  if (displayLevel (grid, screen, tableSurface) == EXIT_FAILURE)
 	    {
-	      fprintf (stderr, gettext ("displayLevel() failed.\n"));
+	      fprintf (stderr, "displayLevel() failed.\n");
 	    }
 	  /*display congrats if the level is finished */
 	  if (levelFinished (grid) == FINISH && menuChoice.open == 0)

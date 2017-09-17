@@ -283,7 +283,7 @@ testIfLevelAchieved(const char *levelName,
             }
             if (i != 0)
               {
-                fprintf (stderr, "You have already succeed to finish this level\n");
+                fprintf (stderr, gettext("You have already succeed to finish this level\n"));
                 gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECKED, .type=TOPBAR, .tab=0, .image=BUTTON_CHECKED};
                 return 1;
 	            }
@@ -294,7 +294,7 @@ testIfLevelAchieved(const char *levelName,
           return EXIT_FAILURE;
         }
   fclose (file);
-  fprintf (stderr, "You have never finished this level\n");
+  fprintf (stderr, gettext("You have not yet succeed to complete this level\n"));
   gridMenu[pref.xb_menu + 9][0] = (S_Menu) {.role=M_CHECK, .type=TOPBAR, .tab=0, .image=BUTTON_CHECK};
   return 0;
 }
@@ -397,7 +397,7 @@ int
 getThemePath(void)
 {
  /*read theme choice */
-  vbPrintf ("Loading Theme:\n");
+  vbPrintf (gettext("Loading Theme:\n"));
   char themePath[MAX_CARACT] = "";
   char bufPath[MAX_CARACT] = "";
   readChar (pref.iniPath, bufPath, "theme");
@@ -410,13 +410,13 @@ getThemePath(void)
   struct stat file_stat;
   if (stat (themePath, &file_stat) < 0)
     {
-      printf ("The theme folder %s does not exist\n", themePath);
+      printf (gettext("The theme folder %s does not exist\n"), themePath);
       strcpy (themePath, ""IMG_FOLDER"original/");
-      fprintf (stderr, "Change theme folder to default: %s\n\n", themePath);
+      fprintf (stderr, gettext("Change theme folder to default: %s\n\n"), themePath);
     }
   else
     {
-      vbPrintf ("The theme folder %s exist\n\n", themePath);
+      vbPrintf (gettext("The theme folder %s exist\n\n"), themePath);
     }
   strcpy(pref.themePath, themePath);
 
@@ -467,7 +467,7 @@ storeLevelsFinished(const char *fileName, const char *levelName)
 	      }
     else
       {
-        fprintf (stderr, "Error opening %s: %s\n", fileName, strerror (errno));
+        fprintf (stderr, gettext("Error opening %s: %s\n"), fileName, strerror (errno));
         return EXIT_FAILURE;
       }
   fclose (file);

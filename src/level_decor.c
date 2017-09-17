@@ -35,7 +35,7 @@ blitBorders (Square grid[pref.max_X_Blocks][pref.max_Y_Blocks],
 {
    if (grid == NULL || screen == NULL || tableSurface == NULL)
     {
-      fprintf (stderr, gettext("init blitBorders failed: %s\n"),
+      fprintf (stderr, "blitBorders(init) failed: %s\n",
 	       SDL_GetError ());
       return EXIT_FAILURE;
     }

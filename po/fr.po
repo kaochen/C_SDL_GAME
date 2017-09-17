@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: sokorobot 0.5\n"
 "Report-Msgid-Bugs-To: no_bug_report_for_now\n"
-"POT-Creation-Date: 2017-04-18 13:54+0200\n"
+"POT-Creation-Date: 2017-08-27 12:59+0200\n"
 "PO-Revision-Date: 2017-04-18 13:56+0200\n"
 "Last-Translator: kao <kaochen2@gmail.com>\n"
 "Language-Team: French\n"
@@ -18,63 +18,8 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
 
-#: src/level.c:49
-#, c-format
-msgid "init displayLevel failed: %s\n"
-msgstr ""
-
-#: src/level.c:180
-#, c-format
-msgid "blitBorders failed.\n"
-msgstr ""
-
-#: src/level.c:186
-#, c-format
-msgid "blitCorners() failed.\n"
-msgstr ""
-
-#: src/level.c:199
-#, c-format
-msgid "getCurrentLevelInfos() failed: %s\n"
-msgstr ""
-
-#: src/level_decor.c:38
-#, c-format
-msgid "init blitBorders failed: %s\n"
-msgstr ""
-
-#: src/menu.c:152
-#, c-format
-msgid "backgroundTopBar failed.\n"
-msgstr ""
-
-#: src/menu.c:159
-#, c-format
-msgid "levelMenu failed.\n"
-msgstr ""
-
-#: src/menu.c:166
-#, c-format
-msgid "displayTopBarButtons() failed.\n"
-msgstr ""
-
-#: src/menu.c:173
-#, c-format
-msgid "displayProgress failed.\n"
-msgstr ""
-
-#: src/menu.c:193
-#, c-format
-msgid "init backgroundTopBar failed: %s\n"
-msgstr ""
-
-#: src/menu.c:246
-#, c-format
-msgid "init displayProgress failed: %s\n"
-msgstr ""
-
 #: src/menu.c:322
-msgid "CONGRATS!!!"
+msgid "Well done!"
 msgstr ""
 
 #: src/menu.c:400
@@ -155,16 +100,6 @@ msgstr ""
 msgid "Theme: %s"
 msgstr ""
 
-#: src/menu_text.c:102
-#, c-format
-msgid "\tAll text surfaces are free %s\n"
-msgstr ""
-
-#: src/menu_text.c:134
-#, c-format
-msgid "init levelMenu failed: %s\n"
-msgstr ""
-
 #: src/menu_text.c:154
 #, c-format
 msgid "Level: %d/%d"
@@ -175,9 +110,61 @@ msgstr ""
 msgid "Session File will be at %s\n"
 msgstr ""
 
-#: src/slc.c:118 src/slc.c:323
+#: src/settings.c:286
 #, c-format
-msgid "not enough memory"
+msgid "You have already succeed to finish this level\n"
+msgstr ""
+
+#: src/settings.c:297
+#, c-format
+msgid "You have not yet succeed to complete this level\n"
+msgstr ""
+
+#: src/settings.c:400
+msgid "Loading Theme:\n"
+msgstr ""
+
+#: src/settings.c:413
+#, c-format
+msgid "The theme folder %s does not exist\n"
+msgstr ""
+
+#: src/settings.c:415
+#, c-format
+msgid ""
+"Change theme folder to default: %s\n"
+"\n"
+msgstr ""
+
+#: src/settings.c:419
+#, c-format
+msgid ""
+"The theme folder %s exist\n"
+"\n"
+msgstr ""
+
+#: src/settings.c:470
+#, c-format
+msgid "Error opening %s: %s\n"
+msgstr ""
+
+#: src/slc.c:168
+msgid "\tLevel list destroyed\n"
+msgstr ""
+
+#: src/slc.c:215
+#, c-format
+msgid "Read levels from : %s\n"
+msgstr ""
+
+#: src/slc.c:221
+#, c-format
+msgid "%s file is not valid\n"
+msgstr ""
+
+#: src/slc.c:475
+#, c-format
+msgid "Level %d loaded\n"
 msgstr ""
 
 #: src/sprites.c:125
@@ -223,16 +210,6 @@ msgstr ""
 msgid "Verbose mode is on\n"
 msgstr ""
 
-#: src/main.c:77
-#, c-format
-msgid "SDL initialization error: %s\n"
-msgstr ""
-
-#: src/main.c:85
-#, c-format
-msgid "TTF_Init initialization error: %s\n"
-msgstr ""
-
 #: src/main.c:91
 #, c-format
 msgid "Current directory %s\n"
@@ -243,19 +220,9 @@ msgstr ""
 msgid "The window size request from settings is %dx%d\n"
 msgstr ""
 
-#: src/main.c:111
-#, c-format
-msgid "SDL_CreateWindow failed: %s\n"
-msgstr ""
-
 #: src/main.c:119
 #, c-format
 msgid "Game icon path: %s\n"
-msgstr ""
-
-#: src/main.c:129
-#, c-format
-msgid "SDL_GetWindowSurface failed: %s\n"
 msgstr ""
 
 #: src/main.c:134
@@ -267,10 +234,6 @@ msgstr ""
 #: src/main.c:163
 #, c-format
 msgid "The level files cannot be listed from the folder %s."
-msgstr ""
-
-#: src/main.c:169
-msgid "The level list cannot be verified."
 msgstr ""
 
 #: src/main.c:178
@@ -292,14 +255,9 @@ msgstr ""
 msgid "Cannot load the first level.\n"
 msgstr ""
 
-#: src/main.c:207
+#: src/main.c:225
 #, c-format
-msgid "first displayLevel() failed.\n"
-msgstr ""
-
-#: src/main.c:216
-#, c-format
-msgid "first displayTopBar() failed.\n"
+msgid "Framerate %d\n"
 msgstr ""
 
 #: src/main.c:514
@@ -307,15 +265,6 @@ msgstr ""
 msgid ""
 "\n"
 "The quit command (q) has been pressed.\n"
-msgstr ""
-
-#: src/main.c:533
-msgid "Impossible to load the level. Perror"
-msgstr ""
-
-#: src/main.c:541
-#, c-format
-msgid "displayLevel() failed.\n"
 msgstr ""
 
 #: src/main.c:595
